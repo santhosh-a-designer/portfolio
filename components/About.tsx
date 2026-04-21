@@ -78,10 +78,10 @@ function BentoCard({ item, index }: { item: typeof timeline[0], index: number })
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: index * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={`relative group overflow-hidden border border-[#1e293b] bg-[#0c0e12] p-6 flex flex-col gap-4 ${item.span} transition-all duration-500 hover:border-[#FF7410]/30 hover:bg-[#0e1116]`}
@@ -194,14 +194,20 @@ export default function About() {
       <div className="sticky top-0 h-screen overflow-hidden">
         
         {/* Index strip stays at top */}
-        <div className="border-b border-[#1e293b] bg-[#08090b]/80 backdrop-blur-sm relative z-30">
+        <motion.div
+          className="border-b border-[#1e293b] bg-[#08090b]/80 backdrop-blur-sm relative z-30"
+          initial={{ opacity: 0, y: -12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div className="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569]">
             <span className="flex items-center gap-2">
               <IdentificationCard size={14} /> Index · 01 — Career Bento
             </span>
             <span style={{ color: "rgba(255,116,16,0.7)" }}>Scroll to Explore Full Journey</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* This container moves locally */}
         <motion.div 
@@ -210,7 +216,13 @@ export default function About() {
           className="max-w-6xl mx-auto px-6 py-16"
         >
           {/* Intro Header */}
-          <div className="max-w-2xl mb-16">
+          <motion.div
+            className="max-w-2xl mb-16"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
             <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#FF7410] mb-4">Journey Map</p>
             <h2 className="font-title text-4xl sm:text-5xl font-black text-white leading-[1.1] mb-6">
               Designing experiences that <span className="neon-text">move people</span>, building systems that scale.
@@ -218,7 +230,7 @@ export default function About() {
             <p className="font-description text-lg text-[#94a3b8] leading-relaxed">
               From government healthcare initiatives to hyper-local commerce apps, my career has been a pursuit of practical, visually stunning solutions.
             </p>
-          </div>
+          </motion.div>
 
           {/* Bento Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -227,7 +239,13 @@ export default function About() {
             ))}
 
             {/* Highlights */}
-            <div className="lg:col-span-1 border border-[#1e293b] bg-[#08090b] p-6 flex flex-col justify-center gap-6">
+            <motion.div
+              className="lg:col-span-1 border border-[#1e293b] bg-[#08090b] p-6 flex flex-col justify-center gap-6"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            >
               {highlights.map((h, i) => (
                  <div key={i} className="flex items-center gap-4">
                    <div className="w-10 h-10 rounded-full bg-[#1e293b]/30 flex items-center justify-center text-[#FF7410]">
@@ -239,15 +257,21 @@ export default function About() {
                    </div>
                  </div>
               ))}
-            </div>
+            </motion.div>
 
             {/* CTA / Education card */}
-            <div className="lg:col-span-1 border border-[#1e293b] bg-[#FF7410]/5 p-6 flex flex-col justify-center text-center">
-              < GraduationCap size={32} className="mx-auto mb-4 text-[#FF7410]" />
+            <motion.div
+              className="lg:col-span-1 border border-[#1e293b] bg-[#FF7410]/5 p-6 flex flex-col justify-center text-center"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: 0.12, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <GraduationCap size={32} className="mx-auto mb-4 text-[#FF7410]" />
               <h4 className="font-title text-lg font-black text-white mb-2">Constant Learner</h4>
               <p className="text-xs text-[#94a3b8] mb-4">Always expanding my toolkit with AI, Vibe Coding, and modern UX patterns.</p>
               <a href="mailto:santhosh.a.designer@gmail.com" className="text-[10px] font-mono uppercase tracking-widest text-[#FF7410] font-bold hover:underline">Get Full Resume</a>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>

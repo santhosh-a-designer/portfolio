@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 const uxSkills = [
   "User Research", "Wireframing", "Prototyping",
@@ -27,25 +26,32 @@ const methods = [
   "Info Architecture", "Cross-cultural UX",
 ];
 
-export default function Skills() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+const VP = { once: true, amount: 0.25 } as const;
+const ease = [0.22, 1, 0.36, 1] as const;
 
+export default function Skills() {
   return (
-    <section id="skills" ref={ref} className="relative">
+    <section id="skills" className="relative">
       {/* Section index strip */}
-      <div className="border-b border-[#1e293b] bg-[#08090b]/60">
+      <motion.div
+        className="border-b border-[#1e293b] bg-[#08090b]/60"
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VP}
+        transition={{ duration: 0.5, ease }}
+      >
         <div className="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569]">
           <span>Index · 03 — Skills</span>
           <span style={{ color: "rgba(255,116,16,0.7)" }}>UX · Dev · Vibe Coding</span>
         </div>
-      </div>
+      </motion.div>
 
       <div className="py-20 max-w-6xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.65 }}
+          initial={{ opacity: 0, y: 48 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP}
+          transition={{ duration: 0.8, ease }}
           className="mb-14"
         >
           <p className="section-tag mb-4">03 / Skills &amp; Tools</p>
@@ -60,9 +66,10 @@ export default function Skills() {
 
           {/* UX Skills */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.6 }}
+            initial={{ opacity: 0, y: 48 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VP}
+            transition={{ delay: 0.05, duration: 0.7, ease }}
             className="p-8 bg-[#0c0e12]"
             style={{ borderRight: "1px solid #1e293b" }}
           >
@@ -74,9 +81,10 @@ export default function Skills() {
               {uxSkills.map((skill, i) => (
                 <motion.span
                   key={skill}
-                  initial={{ opacity: 0 }}
-                  animate={inView ? { opacity: 1 } : {}}
-                  transition={{ delay: 0.15 + i * 0.045, duration: 0.3 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={VP}
+                  transition={{ delay: i * 0.05, duration: 0.4, ease }}
                   className="text-[12px] text-[#94a3b8] border border-[#1e293b] px-3 py-1.5 bg-[#08090b] hover:border-[#FF7410]/40 hover:text-white transition-colors cursor-default"
                 >
                   {skill}
@@ -87,9 +95,10 @@ export default function Skills() {
 
           {/* Dev Skills */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            initial={{ opacity: 0, y: 48 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VP}
+            transition={{ delay: 0.1, duration: 0.7, ease }}
             className="p-8 bg-[#0c0e12]"
             style={{ borderRight: "1px solid #1e293b" }}
           >
@@ -101,9 +110,10 @@ export default function Skills() {
               {devSkills.map((skill, i) => (
                 <motion.span
                   key={skill}
-                  initial={{ opacity: 0 }}
-                  animate={inView ? { opacity: 1 } : {}}
-                  transition={{ delay: 0.25 + i * 0.045, duration: 0.3 }}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={VP}
+                  transition={{ delay: i * 0.05, duration: 0.4, ease }}
                   className="text-[12px] text-[#94a3b8] border border-[#1e293b] px-3 py-1.5 bg-[#08090b] hover:border-[#FF7410]/40 hover:text-white transition-colors cursor-default"
                 >
                   {skill}
@@ -114,9 +124,10 @@ export default function Skills() {
 
           {/* Tools + Methods + Vibe coding */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            initial={{ opacity: 0, y: 48 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VP}
+            transition={{ delay: 0.15, duration: 0.7, ease }}
             className="p-8 bg-[#0c0e12] flex flex-col gap-6"
           >
             {/* Tools */}
@@ -126,9 +137,10 @@ export default function Skills() {
                 {tools.map((tag, i) => (
                   <motion.span
                     key={tag}
-                    initial={{ opacity: 0 }}
-                    animate={inView ? { opacity: 1 } : {}}
-                    transition={{ delay: 0.35 + i * 0.035, duration: 0.3 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={VP}
+                    transition={{ delay: i * 0.04, duration: 0.35, ease }}
                     className="px-2.5 py-1 text-[10px] font-mono text-[#94a3b8] border border-[#1e293b] hover:border-[#FF7410]/40 hover:text-[#FF7410] transition-colors cursor-default"
                   >
                     {tag}
@@ -144,9 +156,10 @@ export default function Skills() {
                 {methods.map((tag, i) => (
                   <motion.span
                     key={tag}
-                    initial={{ opacity: 0 }}
-                    animate={inView ? { opacity: 1 } : {}}
-                    transition={{ delay: 0.5 + i * 0.04, duration: 0.3 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={VP}
+                    transition={{ delay: i * 0.05, duration: 0.35, ease }}
                     className="px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider"
                     style={{
                       color: "#FF7410",
@@ -162,9 +175,10 @@ export default function Skills() {
 
             {/* Vibe coding callout */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.8, duration: 0.5 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VP}
+              transition={{ delay: 0.2, duration: 0.6, ease }}
               className="mt-auto p-5"
               style={{
                 background: "linear-gradient(135deg, rgba(255,116,16,0.08), rgba(255,116,16,0.03))",

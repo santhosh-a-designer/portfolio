@@ -5,6 +5,9 @@ import Lenis from "lenis";
 
 export default function SmoothScroll() {
   useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add("lenis", "lenis-smooth");
+
     const lenis = new Lenis({
       duration: 1.1,
       smoothWheel: true,
@@ -23,6 +26,7 @@ export default function SmoothScroll() {
     return () => {
       cancelAnimationFrame(frameId);
       lenis.destroy();
+      root.classList.remove("lenis", "lenis-smooth");
     };
   }, []);
 

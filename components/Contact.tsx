@@ -1,12 +1,13 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import { EnvelopeSimple, CheckCircle, ArrowSquareOut } from "@phosphor-icons/react";
 
+const VP = { once: true, amount: 0.2 } as const;
+const ease = [0.22, 1, 0.36, 1] as const;
+
 export default function Contact() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
   const [copied, setCopied] = useState(false);
 
   const copyEmail = () => {
@@ -16,9 +17,15 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={ref} className="relative">
+    <section id="contact" className="relative">
       {/* Section index strip */}
-      <div className="border-b border-[#1e293b] bg-[#08090b]/60">
+      <motion.div
+        className="border-b border-[#1e293b] bg-[#08090b]/60"
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VP}
+        transition={{ duration: 0.5, ease }}
+      >
         <div className="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569]">
           <span>Index · 06 — Contact</span>
           <div className="flex items-center gap-2">
@@ -26,14 +33,15 @@ export default function Contact() {
             <span style={{ color: "rgba(255,116,16,0.8)" }}>Available · &lt;24h response</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="py-20 max-w-6xl mx-auto px-6 relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.65 }}
+          initial={{ opacity: 0, y: 48 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP}
+          transition={{ duration: 0.8, ease }}
           className="mb-14"
         >
           <p className="section-tag mb-4">06 / Contact</p>
@@ -43,11 +51,12 @@ export default function Contact() {
           </h2>
         </motion.div>
 
-        {/* Contact layout — single column */}
+        {/* Contact panel */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.12, duration: 0.65 }}
+          initial={{ opacity: 0, y: 48 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP}
+          transition={{ delay: 0.1, duration: 0.8, ease }}
           className="border border-[#1e293b] overflow-hidden"
         >
           {/* Email */}
@@ -98,7 +107,7 @@ export default function Contact() {
             </div>
           </a>
 
-          {/* Currently open to — full-width row list */}
+          {/* Currently open to */}
           <div className="p-7 bg-[#0c0e12]">
             <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-5">Currently Open To</p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px border border-[#1e293b] overflow-hidden">
@@ -110,9 +119,13 @@ export default function Contact() {
                 "Mentorship Collaborations",
                 "Product Strategy",
               ].map((item, i) => (
-                <div
+                <motion.div
                   key={i}
-                  className="flex items-center justify-between px-4 py-3 bg-[#08090b] hover:bg-[#FF7410]/5 transition-colors text-[13px] text-[#94a3b8] border-[#1e293b]"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={VP}
+                  transition={{ delay: i * 0.07, duration: 0.5, ease }}
+                  className="flex items-center justify-between px-4 py-3 bg-[#08090b] hover:bg-[#FF7410]/5 transition-colors text-[13px] text-[#94a3b8]"
                   style={{
                     borderRight: (i + 1) % 3 !== 0 ? "1px solid #1e293b" : "none",
                     borderBottom: i < 3 ? "1px solid #1e293b" : "none",
@@ -120,7 +133,7 @@ export default function Contact() {
                 >
                   {item}
                   <span className="text-[#FF7410] text-xs ml-3 font-mono opacity-60">→</span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -128,9 +141,10 @@ export default function Contact() {
 
         {/* Availability note */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.4, duration: 0.5 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP}
+          transition={{ delay: 0.3, duration: 0.6, ease }}
           className="mt-6 flex items-center gap-3 text-[11px] text-[#334155] font-mono"
         >
           <div className="status-dot" />

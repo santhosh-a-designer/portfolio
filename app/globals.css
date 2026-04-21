@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "lenis/dist/lenis.css";
 
 /* ─── Typography variables (Next.js font injection) ─── */
 /* --font-title   = Space Grotesk */
@@ -26,11 +27,7 @@ p, .font-description {
   font-family: var(--font-description), 'DM Sans', var(--font-body), system-ui, sans-serif;
 }
 
-/* ─── Lenis smooth scroll ─── */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
+/* Lenis base styles come from lenis/dist/lenis.css (keep smooth native scroll off when Lenis is active). */
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }

@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Quotes } from "@phosphor-icons/react";
 
 const testimonials = [
@@ -47,25 +46,32 @@ const testimonials = [
   },
 ];
 
-export default function Testimonials() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+const VP = { once: true, amount: 0.2 } as const;
+const ease = [0.22, 1, 0.36, 1] as const;
 
+export default function Testimonials() {
   return (
-    <section id="testimonials" ref={ref} className="relative">
+    <section id="testimonials" className="relative">
       {/* Section index strip */}
-      <div className="border-b border-[#1e293b] bg-[#08090b]/60">
+      <motion.div
+        className="border-b border-[#1e293b] bg-[#08090b]/60"
+        initial={{ opacity: 0, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VP}
+        transition={{ duration: 0.5, ease }}
+      >
         <div className="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569]">
           <span>Index · 05 — Reviews</span>
           <span style={{ color: "rgba(255,116,16,0.7)" }}>4 Reviews · LinkedIn Verified</span>
         </div>
-      </div>
+      </motion.div>
 
       <div className="py-20 max-w-6xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.65 }}
+          initial={{ opacity: 0, y: 48 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP}
+          transition={{ duration: 0.8, ease }}
           className="mb-14"
         >
           <p className="section-tag mb-4">05 / Reviews</p>
@@ -79,9 +85,10 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 36 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 52 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VP}
+              transition={{ delay: i * 0.12, duration: 0.75, ease }}
               className="flex flex-col p-8 bg-[#0c0e12] hover:bg-[#FF7410]/5 transition-colors"
               style={{
                 borderRight: i % 2 === 0 ? "1px solid #1e293b" : "none",
@@ -110,11 +117,7 @@ export default function Testimonials() {
               <div className="flex items-center gap-3 pt-5 border-t border-[#1e293b]">
                 <div
                   className="w-9 h-9 flex items-center justify-center text-xs font-bold font-mono flex-shrink-0"
-                  style={{
-                    background: `${t.color}14`,
-                    border: `1px solid ${t.color}30`,
-                    color: t.color,
-                  }}
+                  style={{ background: `${t.color}14`, border: `1px solid ${t.color}30`, color: t.color }}
                 >
                   {t.avatar}
                 </div>

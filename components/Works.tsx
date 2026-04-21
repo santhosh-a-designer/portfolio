@@ -108,7 +108,7 @@ export default function Works() {
   });
 
   const contentTransition = {
-    type: "spring",
+    type: "spring" as const,
     stiffness: 100,
     damping: 20,
     mass: 1,

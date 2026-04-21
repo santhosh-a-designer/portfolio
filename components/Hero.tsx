@@ -1,32 +1,218 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowDown, FileDoc } from "@phosphor-icons/react";
+import { useEffect, useState, useRef, type ReactNode } from "react";
+import ResumeModal from "@/components/ResumeModal";
 
-/* Opacity stays at 1 so SSR + first paint are never a blank hero (opacity-0 was invisible until JS ran). */
+/* Opacity starts at 0 for a true "reveal" feel. */
 const fadeUp = {
-  hidden: { opacity: 1, y: 22 },
+  hidden: { opacity: 0, y: 32 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { delay: i * 0.12, duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
-const stats = [
-  { value: "5+", label: "Years" },
-  { value: "100K+", label: "Downloads" },
-  { value: "100+", label: "Mentored" },
-  { value: "3", label: "Shipped" },
+/** Order: experience → client markets → delivery volume → people → product reach */
+const STATS = [
+  { id: "years", kind: "number" as const, target: 5, suffix: "+", label: "Years" },
+  { id: "markets", kind: "text" as const, final: "US · UK", label: "Clients" },
+  { id: "projects", kind: "number" as const, target: 10, suffix: "+", label: "Projects" },
+  { id: "mentored", kind: "number" as const, target: 100, suffix: "+", label: "Mentored" },
+  { id: "downloads", kind: "number" as const, target: 10, suffix: "K+", label: "Downloads" },
 ];
+
+/** Buttery deceleration — quick sweep, soft landing (all columns share this) */
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+/** One shared run: fast enough to feel snappy, long enough to read smooth */
+const SLOT_DURATION_MS = 1450;
+const SLOT_START_DELAY_MS = 0;
+
+function useJackpotNumber(
+  target: number,
+  durationMs: number,
+  delayMs: number,
+  enabled: boolean
+) {
+  const [display, setDisplay] = useState(() => (enabled ? 0 : target));
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (!enabled) {
+      setDisplay(target);
+      return;
+    }
+
+    const start = performance.now() + delayMs;
+
+    const tick = (now: number) => {
+      if (now < start) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      const elapsed = now - start;
+      const t = Math.min(1, elapsed / durationMs);
+      const eased = easeOutCubic(t);
+      const next = t >= 1 ? target : Math.round(eased * target);
+
+      setDisplay(next);
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [target, durationMs, delayMs, enabled]);
+
+  return display;
+}
+
+function useJackpotText(finalText: string, durationMs: number, delayMs: number, enabled: boolean) {
+  const pool = ["US", "UK"];
+  const [display, setDisplay] = useState(() => (enabled ? (pool[0] ?? "US") : finalText));
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (!enabled) {
+      setDisplay(finalText);
+      return;
+    }
+
+    const start = performance.now() + delayMs;
+    const CYCLE_MS = 130;
+
+    const tick = (now: number) => {
+      if (now < start) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+      const elapsed = now - start;
+      const t = Math.min(1, elapsed / durationMs);
+
+      if (t >= 1) {
+        setDisplay(finalText);
+        return;
+      }
+
+      /* In sync with number reels: alternate, then ease to full label */
+      if (t > 0.68) {
+        setDisplay(finalText);
+      } else {
+        const step = Math.floor(elapsed / CYCLE_MS);
+        setDisplay(pool[step % pool.length] ?? "US");
+      }
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [finalText, durationMs, delayMs, enabled]);
+
+  return display;
+}
+
+function StatShell({
+  index,
+  label,
+  children,
+}: {
+  index: number;
+  label: string;
+  children: ReactNode;
+}) {
+  return (
+    <div
+      className="flex-1 min-w-[18%] text-center py-3 px-1 sm:px-2 bg-[#0c0e12]"
+      style={{ borderRight: index < STATS.length - 1 ? "1px solid #1e293b" : "none" }}
+    >
+      <div
+        className="font-title text-base sm:text-lg font-black tabular-nums leading-tight min-h-[1.75rem] flex items-center justify-center"
+        style={{ color: "#FF7410" }}
+      >
+        {children}
+      </div>
+      <div className="text-[8px] sm:text-[9px] text-[#475569] uppercase tracking-wider mt-0.5 leading-tight">
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function NumberStatCell({
+  target,
+  suffix,
+  label,
+  index,
+  reduceMotion,
+}: {
+  target: number;
+  suffix: string;
+  label: string;
+  index: number;
+  reduceMotion: boolean | null;
+}) {
+  const animate = reduceMotion !== true;
+
+  const n = useJackpotNumber(target, SLOT_DURATION_MS, SLOT_START_DELAY_MS, animate);
+
+  return (
+    <StatShell index={index} label={label}>
+      <>
+        {animate ? (
+          <>
+            {n}
+            {suffix}
+          </>
+        ) : (
+          <>
+            {target}
+            {suffix}
+          </>
+        )}
+      </>
+    </StatShell>
+  );
+}
+
+function TextStatCell({
+  finalText,
+  label,
+  index,
+  reduceMotion,
+}: {
+  finalText: string;
+  label: string;
+  index: number;
+  reduceMotion: boolean | null;
+}) {
+  const animate = reduceMotion !== true;
+
+  const text = useJackpotText(finalText, SLOT_DURATION_MS, SLOT_START_DELAY_MS, animate);
+
+  return (
+    <StatShell index={index} label={label}>
+      <span className="tracking-tight text-[clamp(0.7rem,2.5vw,1.125rem)]">{animate ? text : finalText}</span>
+    </StatShell>
+  );
+}
 
 export default function Hero() {
   const { scrollY } = useScroll();
   const bgY = useTransform(scrollY, [0, 600], [0, 140]);
   const contentY = useTransform(scrollY, [0, 600], [0, -60]);
+  const reduceMotion = useReducedMotion();
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden blueprint-grid border-b border-[#1e293b] pt-[clamp(6.5rem,14vh,9rem)] pb-10 sm:pb-14">
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
 
       {/* Parallax glow */}
       <motion.div
@@ -115,19 +301,30 @@ export default function Hero() {
           UX designer from Chennai focused on conversion-led products, practical systems, and clean handoffs.
         </motion.p>
 
-        {/* Stats strip */}
+        {/* Stats strip — jackpot count-up */}
         <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show"
-          className="flex items-center justify-center gap-px border border-[#1e293b] overflow-hidden max-w-sm mx-auto mb-10"
+          className="flex flex-wrap sm:flex-nowrap items-stretch justify-center gap-px border border-[#1e293b] overflow-hidden max-w-3xl mx-auto mb-10 w-full"
         >
-          {stats.map((s, i) => (
-            <div key={s.label}
-              className="flex-1 text-center py-3 px-2 bg-[#0c0e12]"
-              style={{ borderRight: i < stats.length - 1 ? "1px solid #1e293b" : "none" }}
-            >
-              <div className="font-title text-lg font-black" style={{ color: "#FF7410" }}>{s.value}</div>
-              <div className="text-[9px] text-[#475569] uppercase tracking-wider mt-0.5">{s.label}</div>
-            </div>
-          ))}
+          {STATS.map((stat, i) =>
+            stat.kind === "number" ? (
+              <NumberStatCell
+                key={stat.id}
+                target={stat.target}
+                suffix={stat.suffix}
+                label={stat.label}
+                index={i}
+                reduceMotion={reduceMotion}
+              />
+            ) : (
+              <TextStatCell
+                key={stat.id}
+                finalText={stat.final}
+                label={stat.label}
+                index={i}
+                reduceMotion={reduceMotion}
+              />
+            )
+          )}
         </motion.div>
 
         {/* CTAs — no LinkedIn */}
@@ -141,13 +338,14 @@ export default function Hero() {
             View Work
             <ArrowDown size={15} className="group-hover:translate-y-0.5 transition-transform" />
           </a>
-          <a
-            href="mailto:santhosh.a.designer@gmail.com"
+          <button
+            type="button"
+            onClick={() => setResumeOpen(true)}
             className="flex items-center gap-2 px-7 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#94a3b8] border border-[#334155] hover:border-[#FF7410]/50 hover:text-white transition-all active:scale-[0.98]"
           >
             Get Resume
             <FileDoc size={15} />
-          </a>
+          </button>
         </motion.div>
       </motion.div>
     </section>
