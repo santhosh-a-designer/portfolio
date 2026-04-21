@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import {
   ArrowSquareOut, ArrowRight, Lightning,
   GlobeHemisphereWest, DeviceMobile, Robot,
@@ -88,68 +88,80 @@ const statusLabel: Record<string, string> = {
 
 export default function Works() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [showContent, setShowContent] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end end"],
   });
 
-  /* ── White curtain rises from below ── */
-  const curtainY = useTransform(scrollYProgress, [0, 0.18], ["100%", "0%"]);
+  /* ── White curtain wipes up (Buffered to give Bento time) ── */
+  // It now wipes between 45% and 70% to ensure a 'blank canvas' exists before content appears
+  const curtainY = useTransform(scrollYProgress, [0.45, 0.70], ["100%", "0%"]);
 
-  /* ── Section header ── */
-  const headerOpacity = useTransform(scrollYProgress, [0.12, 0.26], [0, 1]);
-  const headerY       = useTransform(scrollYProgress, [0.12, 0.26], [36, 0]);
+  // Detect when wipe is complete enough to trigger automatic animations
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    // 1. Reveal content ONLY after curtain is 100% established (at v=0.70)
+    // 2. Hide content IMMEDIATELY when scrolling up (before curtain starts moving down)
+    if (v > 0.75) setShowContent(true);
+    else if (v < 0.72) setShowContent(false); 
+  });
 
-  /* ── Cards appear one by one ── */
-  const c0o = useTransform(scrollYProgress, [0.26, 0.40], [0, 1]);
-  const c0y = useTransform(scrollYProgress, [0.26, 0.40], [55, 0]);
-  const c1o = useTransform(scrollYProgress, [0.43, 0.57], [0, 1]);
-  const c1y = useTransform(scrollYProgress, [0.43, 0.57], [55, 0]);
-  const c2o = useTransform(scrollYProgress, [0.60, 0.74], [0, 1]);
-  const c2y = useTransform(scrollYProgress, [0.60, 0.74], [55, 0]);
-  const c3o = useTransform(scrollYProgress, [0.77, 0.91], [0, 1]);
-  const c3y = useTransform(scrollYProgress, [0.77, 0.91], [55, 0]);
-
-  const cardMotion = [
-    { opacity: c0o, y: c0y },
-    { opacity: c1o, y: c1y },
-    { opacity: c2o, y: c2y },
-    { opacity: c3o, y: c3y },
-  ];
+  const contentTransition = {
+    type: "spring",
+    stiffness: 100,
+    damping: 20,
+    mass: 1,
+  };
 
   return (
-    /* Tall section gives scroll budget */
-    <section id="works" ref={sectionRef} style={{ height: "520vh" }} className="relative">
+    /* High z-index and negative margin to overlap pinned About section */
+    <section 
+      id="works" 
+      ref={sectionRef} 
+      style={{ height: "200vh", marginTop: "-100vh" }} 
+      className="relative z-10"
+    >
 
       {/* Sticky viewport — stays fixed as user scrolls */}
-      <div className="sticky top-0 h-screen overflow-hidden">
+      <div className="sticky top-0 h-screen overflow-hidden pointer-events-none">
 
-        {/* Dark base layer (always behind) */}
-        <div className="absolute inset-0 bg-[#08090b]" />
+        {/* TRANSPARENT base layer (allows previous section to be seen during wipe) */}
+        <div className="absolute inset-0 bg-transparent" />
 
-        {/* White curtain that rises from bottom */}
+        {/* White curtain that wipes from bottom */}
         <motion.div
-          className="absolute inset-x-0 bottom-0"
+          className="absolute inset-x-0 bottom-0 pointer-events-auto"
           style={{ top: 0, y: curtainY, background: "#f5f0eb" }}
         />
 
         {/* ── Index strip ── */}
-        <div className="relative z-20 border-b border-[#e0d5c8]" style={{ background: "rgba(245,240,235,0.97)" }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 20, scale: 0.96 }}
+          animate={showContent ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.96 }}
+          transition={{ ...contentTransition, delay: 0.1 }}
+          className="relative z-20 border-b border-[#e0d5c8] pointer-events-auto"
+          style={{ background: showContent ? "rgba(245,240,235,0.97)" : "transparent" }}
+        >
           <div className="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em]">
             <span style={{ color: "#a89880" }}>Index · 02 — Works</span>
             <span style={{ color: "#c96010" }}>
               {projects.length} Projects — {projects.filter(p => p.status !== "in-progress").length} Shipped
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* ── Content area ── */}
-        <div className="relative z-10 flex flex-col" style={{ height: "calc(100vh - 35px)" }}>
+        <div className="relative z-10 flex flex-col pointer-events-auto" style={{ height: "calc(100vh - 35px)" }}>
           <div className="max-w-6xl mx-auto px-6 w-full flex flex-col h-full py-8 gap-6">
 
             {/* Header */}
-            <motion.div style={{ opacity: headerOpacity, y: headerY }} className="flex-shrink-0">
+            <motion.div 
+              initial={{ opacity: 0, y: 20, scale: 0.96 }}
+              animate={showContent ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.96 }}
+              transition={{ ...contentTransition, delay: 0.2 }}
+              className="flex-shrink-0"
+            >
               <p className="text-[10px] font-mono uppercase tracking-[0.26em] mb-3" style={{ color: "#c96010" }}>
                 02 / Selected Works
               </p>
@@ -169,13 +181,14 @@ export default function Works() {
                 return (
                   <motion.div
                     key={project.id}
+                    initial={{ opacity: 0, y: 30, scale: 0.92 }}
+                    animate={showContent ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.92 }}
+                    transition={{ ...contentTransition, delay: 0.3 + i * 0.05 }}
+                    className="flex flex-col p-5 bg-white hover:bg-[#fef9f5] transition-colors relative overflow-hidden"
                     style={{
-                      opacity: cardMotion[i].opacity,
-                      y: cardMotion[i].y,
                       borderRight: i % 2 === 0 ? "1px solid #ddd0c2" : "none",
                       borderBottom: i < 2 ? "1px solid #ddd0c2" : "none",
                     }}
-                    className="flex flex-col p-5 bg-white hover:bg-[#fef9f5] transition-colors relative overflow-hidden"
                   >
                     {/* Watermark number */}
                     <div

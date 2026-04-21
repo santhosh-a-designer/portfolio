@@ -1,8 +1,11 @@
 "use client";
 
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { MapPin, Briefcase, Code, Users } from "@phosphor-icons/react";
+import { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { 
+  MapPin, Briefcase, Code, Users, 
+  ArrowRight, IdentificationCard, GraduationCap 
+} from "@phosphor-icons/react";
 
 const timeline = [
   {
@@ -12,49 +15,54 @@ const timeline = [
     color: "#FF7410",
     current: true,
     expertise: ["Product Design", "UX Research", "Next.js", "Tailwind CSS", "Framer Motion", "Figma", "MCP / AI Integration"],
-    learned: ["End-to-end product delivery", "Vibe coding workflows", "Client scoping & management", "Shipping with modern stacks"],
+    learned: ["End-to-end product delivery", "Client scoping", "Vibe coding workflows", "Shipping with modern stacks"],
     clients: ["Rettakili Brand, Sivakasi", "FITA Academy", "Personal Projects"],
     projects: ["Vidya's Kitchen (PWA)", "CEaSS Pet Platform", "EZRA Dashboard"],
+    span: "lg:col-span-2 lg:row-span-2",
   },
   {
     year: "May 2024 – Sep 2025",
     role: "UX Designer",
     company: "Parla Retail (UK)",
     color: "#E06010",
-    expertise: ["Cross-cultural UX", "Enterprise Dashboards", "Ecommerce Flows", "Stakeholder Alignment", "Figma"],
-    learned: ["US/UK market nuances", "Large-scale design systems", "Enterprise workflow design", "Cross-timezone collaboration"],
-    clients: ["Parla Retail UK", "US Market Partners"],
-    projects: ["Show & Sell Platform", "Customer Scheduler Integration", "Retailer Dashboard"],
+    expertise: ["Cross-cultural UX", "Enterprise Dashboards", "Figma"],
+    learned: ["US/UK market nuances", "Enterprise design systems"],
+    clients: ["Parla Retail UK"],
+    projects: ["Show & Sell Platform", "Retailer Dashboard"],
+    span: "lg:col-span-1 lg:row-span-1",
   },
   {
     year: "Oct 2022 – Feb 2024",
     role: "Lead UX Designer",
     company: "Intellemo",
     color: "#B04C0A",
-    expertise: ["Product Strategy", "Conversion Optimization", "Team Leadership", "Usability Testing", "Figma", "Maze"],
-    learned: ["Leading a design team", "Data-driven UX decisions", "Paid conversion funnels", "OKR-aligned design"],
-    clients: ["Intellemo SaaS Users", "B2B Clients"],
-    projects: ["Intellemo Core Product", "Onboarding Redesign", "Analytics Dashboard"],
+    expertise: ["Product Strategy", "Conversion Optimization", "Figma"],
+    learned: ["Data-driven UX", "Leading design teams"],
+    clients: ["Intellemo SaaS Users"],
+    projects: ["Onboarding Redesign", "Analytics Dashboard"],
+    span: "lg:col-span-1 lg:row-span-1",
   },
   {
     year: "Dec 2020 – Oct 2022",
     role: "UX Designer",
     company: "Iconic Dream Focus",
     color: "#7A3008",
-    expertise: ["UI/UX Design", "Gov Project UX", "Mobile Design", "User Research", "Figma", "Adobe XD"],
-    learned: ["Government UX standards", "Mobile-first design", "Healthcare UX basics", "Research & validation"],
-    clients: ["Tamil Nadu Government", "DRMURS Users"],
-    projects: ["DRMURS App (100K+ downloads)", "TN Gov Healthcare Project"],
+    expertise: ["UI/UX Design", "Gov UX", "Mobile Design"],
+    learned: ["Mobile-first design", "Healthcare UX"],
+    clients: ["Tamil Nadu Government"],
+    projects: ["DRMURS App (100K+ downloads)"],
+    span: "lg:col-span-1 lg:row-span-1",
   },
   {
     year: "Aug 2020 – Nov 2020",
     role: "Software Developer Intern",
     company: "Iconic Dream Focus",
     color: "#4A5568",
-    expertise: ["HTML", "CSS", "JavaScript", "React Basics", "Git"],
-    learned: ["Front-end fundamentals", "Product development lifecycle", "Team collaboration", "Coding best practices"],
+    expertise: ["HTML", "CSS", "JS", "React Basics"],
+    learned: ["Front-end fundamentals", "Product lifecycle"],
     clients: ["Internal Projects"],
-    projects: ["Internal Web Tools", "Frontend Components"],
+    projects: ["Web Tools"],
+    span: "lg:col-span-1 lg:row-span-1",
   },
 ];
 
@@ -65,223 +73,183 @@ const highlights = [
   { icon: Users, label: "100+ Mentored", sub: "20+ placements" },
 ];
 
-function DetailPanel({ item }: { item: typeof timeline[0] }) {
+function BentoCard({ item, index }: { item: typeof timeline[0], index: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.div
-      key={item.year}
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -12 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="h-full flex flex-col gap-5 p-8"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`relative group overflow-hidden border border-[#1e293b] bg-[#0c0e12] p-6 flex flex-col gap-4 ${item.span} transition-all duration-500 hover:border-[#FF7410]/30 hover:bg-[#0e1116]`}
     >
-      {/* Role header */}
-      <div className="pb-5 border-b border-[#1e293b]">
-        <div className="text-[10px] font-mono uppercase tracking-widest text-[#475569] mb-2">{item.year}</div>
-        <h3 className="font-title text-2xl font-black text-white leading-tight">{item.role}</h3>
-        <p className="text-sm font-medium mt-1" style={{ color: item.color }}>{item.company}</p>
+      {/* Background Accent */}
+      <div 
+        className="absolute top-0 right-0 w-32 h-32 opacity-[0.03] transition-opacity duration-500 group-hover:opacity-[0.08]"
+        style={{ 
+          background: `radial-gradient(circle at top right, ${item.color}, transparent 70%)`,
+        }} 
+      />
+
+      {/* Card Header */}
+      <div className="relative z-10">
+        <div className="flex items-center justify-between gap-3 mb-2">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#475569]">{item.year}</span>
+          {item.current && <span className="badge px-2 py-0.5 text-[9px]">ACTIVE</span>}
+        </div>
+        <h3 className="font-title text-xl font-black text-white leading-tight group-hover:text-[#FF7410] transition-colors">{item.role}</h3>
+        <p className="text-sm font-medium mt-1 transition-colors" style={{ color: isHovered ? '#fff' : item.color }}>{item.company}</p>
       </div>
 
-      {/* Expertise */}
-      <div>
-        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-3">Expertise Used</div>
-        <div className="flex flex-wrap gap-1.5">
-          {item.expertise.map(e => (
-            <span key={e} className="text-[11px] text-[#94a3b8] border border-[#1e293b] px-2 py-1 bg-[#0c0e12]">
+      {/* Summary Content (Expertise) */}
+      <div className="flex-1 relative z-10">
+        <div className="flex flex-wrap gap-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
+          {item.expertise.slice(0, item.span.includes('col-span-2') ? 8 : 4).map(e => (
+            <span key={e} className="text-[10px] text-[#94a3b8] border border-[#1e293b] px-2 py-0.5 bg-[#08090b]">
               {e}
             </span>
           ))}
+          {item.expertise.length > (item.span.includes('col-span-2') ? 8 : 4) && (
+            <span className="text-[10px] text-[#475569] flex items-center">+ {item.expertise.length - (item.span.includes('col-span-2') ? 8 : 4)} more</span>
+          )}
         </div>
       </div>
 
-      {/* What I Learned */}
-      <div>
-        <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-3">What I Learned</div>
-        <div className="space-y-1.5">
-          {item.learned.map(l => (
-            <div key={l} className="flex items-center gap-2">
-              <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }} />
-              <span className="text-[12px] text-[#94a3b8]">{l}</span>
-            </div>
-          ))}
+      {/* Footer / Interaction Hint */}
+      <div className="mt-auto pt-4 border-t border-[#1e293b]/50 relative z-10 flex items-center justify-between">
+        <div className="flex -space-x-1">
+           {[1, 2, 3].map(i => (
+             <div key={i} className="w-1.5 h-1.5 rounded-full border border-[#1e293b]" style={{ backgroundColor: isHovered ? item.color : '#1e293b' }} />
+           ))}
+        </div>
+        <div className="flex items-center gap-2 text-[10px] uppercase font-mono tracking-widest text-[#475569] group-hover:text-white transition-colors">
+          View Detail <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        {/* Clients */}
-        <div>
-          <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-3">Clients</div>
-          <div className="space-y-1">
-            {item.clients.map(c => (
-              <div key={c} className="text-[12px] text-[#64748b]">{c}</div>
+      {/* Hover Overlay with deeper details */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        className="absolute inset-0 bg-[#0c0e12]/95 backdrop-blur-sm p-6 z-20 flex flex-col pointer-events-none"
+      >
+        <div className="mb-4">
+          <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#FF7410] mb-2">Key Outcomes</div>
+          <div className="space-y-2">
+            {item.learned.slice(0, 3).map(l => (
+              <div key={l} className="flex items-start gap-2">
+                <div className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: item.color }} />
+                <span className="text-[11px] text-[#94a3b8] leading-tight">{l}</span>
+              </div>
             ))}
           </div>
         </div>
-
-        {/* Projects */}
-        <div>
-          <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-3">Projects</div>
-          <div className="space-y-1">
-            {item.projects.map(p => (
-              <div key={p} className="text-[12px] text-[#64748b]">{p}</div>
-            ))}
-          </div>
+        
+        <div className="mt-auto">
+          <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-1">Select Clients</div>
+          <div className="text-[11px] text-[#64748b] truncate">{item.clients.join(" · ")}</div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
 
 export default function About() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [overflow, setOverflow] = useState(0);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 20 });
+  useEffect(() => {
+    const updateOverflow = () => {
+      if (contentRef.current) {
+        const contentHeight = contentRef.current.scrollHeight;
+        const viewportHeight = window.innerHeight;
+        // Subtract 64px for top padding/index strip safety and add a small buffer
+        const extra = Math.max(0, contentHeight - viewportHeight + 120); 
+        setOverflow(extra);
+      }
+    };
 
-  useMotionValueEvent(smoothProgress, "change", (v) => {
-    const idx = Math.max(0, Math.min(timeline.length - 1, Math.floor(v * timeline.length)));
-    setActiveIndex(idx);
-  });
+    updateOverflow();
+    window.addEventListener("resize", updateOverflow);
+    return () => window.removeEventListener("resize", updateOverflow);
+  }, []);
 
-  const lineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+  /* ── Internal Content Scroll ── */
+  // The content shifts upwards as the user scrolls within the pinned area
+  const contentY = useTransform(scrollYProgress, [0, 0.75], [0, -overflow]);
 
   return (
-    <section id="about" ref={sectionRef} style={{ height: `${100 + timeline.length * 60}vh` }}>
-
-      {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col">
-
-        {/* Index strip */}
-        <div className="border-b border-[#1e293b] bg-[#08090b]/80 backdrop-blur-sm flex-shrink-0">
+    <section id="about" ref={sectionRef} className="relative z-0" style={{ height: "350vh" }}>
+      
+      {/* Sticky container ensures Bento stays 'fixed' while Works wipes over it */}
+      <div className="sticky top-0 h-screen overflow-hidden">
+        
+        {/* Index strip stays at top */}
+        <div className="border-b border-[#1e293b] bg-[#08090b]/80 backdrop-blur-sm relative z-30">
           <div className="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569]">
-            <span>Index · 01 — About</span>
-            <span style={{ color: "rgba(255,116,16,0.7)" }}>Career · Expertise · Clients</span>
+            <span className="flex items-center gap-2">
+              <IdentificationCard size={14} /> Index · 01 — Career Bento
+            </span>
+            <span style={{ color: "rgba(255,116,16,0.7)" }}>Scroll to Explore Full Journey</span>
           </div>
         </div>
 
-        {/* Stat bar */}
-        <div className="flex-shrink-0 border-b border-[#1e293b]">
-          <div className="max-w-6xl mx-auto px-6">
-            <div className="grid grid-cols-4 divide-x divide-[#1e293b]">
-              {highlights.map((h) => (
-                <div key={h.label} className="flex items-center gap-3 py-4 px-4">
-                  <h.icon size={16} style={{ color: "#FF7410" }} />
-                  <div>
-                    <div className="text-sm font-title font-bold text-white">{h.label}</div>
-                    <div className="text-[10px] text-[#475569] uppercase tracking-wider">{h.sub}</div>
-                  </div>
-                </div>
+        {/* This container moves locally */}
+        <motion.div 
+          ref={contentRef}
+          style={{ y: contentY }}
+          className="max-w-6xl mx-auto px-6 py-16"
+        >
+          {/* Intro Header */}
+          <div className="max-w-2xl mb-16">
+            <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#FF7410] mb-4">Journey Map</p>
+            <h2 className="font-title text-4xl sm:text-5xl font-black text-white leading-[1.1] mb-6">
+              Designing experiences that <span className="neon-text">move people</span>, building systems that scale.
+            </h2>
+            <p className="font-description text-lg text-[#94a3b8] leading-relaxed">
+              From government healthcare initiatives to hyper-local commerce apps, my career has been a pursuit of practical, visually stunning solutions.
+            </p>
+          </div>
+
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {timeline.map((item, i) => (
+              <BentoCard key={i} item={item} index={i} />
+            ))}
+
+            {/* Highlights */}
+            <div className="lg:col-span-1 border border-[#1e293b] bg-[#08090b] p-6 flex flex-col justify-center gap-6">
+              {highlights.map((h, i) => (
+                 <div key={i} className="flex items-center gap-4">
+                   <div className="w-10 h-10 rounded-full bg-[#1e293b]/30 flex items-center justify-center text-[#FF7410]">
+                     <h.icon size={20} />
+                   </div>
+                   <div>
+                     <div className="text-sm font-title font-bold text-white">{h.label}</div>
+                     <div className="text-[10px] text-[#475569] uppercase tracking-wider">{h.sub}</div>
+                   </div>
+                 </div>
               ))}
             </div>
-          </div>
-        </div>
 
-        {/* Main two-column split */}
-        <div className="flex-1 min-h-0 border-b border-[#1e293b]">
-          <div className="max-w-6xl mx-auto px-6 h-full grid lg:grid-cols-[380px_1fr] divide-x divide-[#1e293b]">
-
-            {/* LEFT — Timeline */}
-            <div className="py-8 pr-8 overflow-y-auto">
-              <div className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#475569] mb-6">Career Journey</div>
-
-              <div className="relative">
-                {/* Static track */}
-                <div className="absolute left-[10px] top-3 bottom-3 w-px bg-[#1e293b]" />
-
-                {/* Animated fill line */}
-                <motion.div
-                  className="absolute left-[10px] top-3 w-px origin-top"
-                  style={{ height: lineHeight, backgroundColor: "#FF7410", opacity: 0.7 }}
-                />
-
-                <div className="space-y-0">
-                  {timeline.map((item, i) => {
-                    const isActive = i === activeIndex;
-                    const isPast = i < activeIndex;
-                    return (
-                      <motion.div
-                        key={i}
-                        className="flex gap-5 py-4 cursor-pointer"
-                        onClick={() => setActiveIndex(i)}
-                      >
-                        {/* Dot */}
-                        <div
-                          className="relative z-10 mt-1 flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-500"
-                          style={{
-                            borderColor: isActive ? item.color : (isPast ? item.color : "#334155"),
-                            backgroundColor: "#08090b",
-                            boxShadow: isActive ? `0 0 12px ${item.color}` : "none",
-                          }}
-                        >
-                          <motion.div
-                            className="w-2 h-2 rounded-full"
-                            animate={{ backgroundColor: isActive ? item.color : (isPast ? item.color : "#334155"), scale: isActive ? 1 : 0.7 }}
-                            transition={{ duration: 0.3 }}
-                          />
-                        </div>
-
-                        {/* Label */}
-                        <div className="flex-1 min-w-0">
-                          <div className="text-[10px] font-mono text-[#475569] uppercase tracking-wider mb-0.5">{item.year}</div>
-                          <div
-                            className="text-sm font-semibold transition-colors duration-300"
-                            style={{ color: isActive ? "#fff" : "#64748b" }}
-                          >
-                            {item.role}
-                          </div>
-                          <div
-                            className="text-[11px] font-medium transition-colors duration-300"
-                            style={{ color: isActive ? item.color : "#475569" }}
-                          >
-                            {item.company}
-                          </div>
-                          {item.current && (
-                            <span className="badge mt-1.5 inline-flex">Now</span>
-                          )}
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Scroll hint */}
-              <div className="mt-4 flex items-center gap-2 text-[10px] text-[#334155] font-mono uppercase tracking-widest">
-                <span>↓</span>
-                <span>Scroll to explore</span>
-              </div>
-            </div>
-
-            {/* RIGHT — Detail panel (client-only to avoid hydration mismatch) */}
-            <div className="overflow-hidden relative bg-[#0a0c0f]">
-              {(() => {
-                const safeIdx = Math.max(0, Math.min(activeIndex, timeline.length - 1));
-                const activeItem = timeline[safeIdx];
-                if (!activeItem) return null;
-                return mounted ? (
-                  <>
-                    <div
-                      className="absolute top-4 right-6 font-title font-black text-[6rem] leading-none select-none pointer-events-none opacity-[0.04]"
-                      style={{ color: activeItem.color }}
-                    >
-                      {String(safeIdx + 1).padStart(2, "0")}
-                    </div>
-                    <DetailPanel key={safeIdx} item={activeItem} />
-                  </>
-                ) : (
-                  <DetailPanel item={timeline[0]} />
-                );
-              })()}
+            {/* CTA / Education card */}
+            <div className="lg:col-span-1 border border-[#1e293b] bg-[#FF7410]/5 p-6 flex flex-col justify-center text-center">
+              < GraduationCap size={32} className="mx-auto mb-4 text-[#FF7410]" />
+              <h4 className="font-title text-lg font-black text-white mb-2">Constant Learner</h4>
+              <p className="text-xs text-[#94a3b8] mb-4">Always expanding my toolkit with AI, Vibe Coding, and modern UX patterns.</p>
+              <a href="mailto:santhosh.a.designer@gmail.com" className="text-[10px] font-mono uppercase tracking-widest text-[#FF7410] font-bold hover:underline">Get Full Resume</a>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
