@@ -1,26 +1,168 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ─── Typography variables (Next.js font injection) ─── */
+/* --font-title   = Space Grotesk */
+/* --font-body    = Poppins */
+/* --font-description = DM Sans */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #08090b;
+  color: #e8edf2;
+  font-family: var(--font-description), var(--font-body), 'DM Sans', system-ui, sans-serif;
+  overflow-x: hidden;
 }
+
+/* ─── Font stacks ─── */
+h1, h2, h3, h4, h5, h6,
+.font-title {
+  font-family: var(--font-title), 'Space Grotesk', system-ui, sans-serif;
+}
+
+p, .font-description {
+  font-family: var(--font-description), 'DM Sans', var(--font-body), system-ui, sans-serif;
+}
+
+/* ─── Lenis smooth scroll ─── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* ─── Blueprint grid ─── */
+.blueprint-page {
+  background-color: #08090b;
+  background-image:
+    linear-gradient(rgba(255, 116, 16, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 116, 16, 0.06) 1px, transparent 1px),
+    linear-gradient(rgba(255, 116, 16, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 116, 16, 0.022) 1px, transparent 1px);
+  background-size: 64px 64px, 64px 64px, 16px 16px, 16px 16px;
+  background-position: -1px -1px;
+}
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(255, 116, 16, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 116, 16, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(255, 116, 16, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 116, 16, 0.025) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+  background-position: -1px -1px;
+}
+
+/* ─── Neon orange (HARDCODED — no var() to avoid Tailwind v4 resolution issues) ─── */
+.neon-text {
+  color: #FF7410 !important;
+  text-shadow: 0 0 14px rgba(255, 116, 16, 0.6), 0 0 30px rgba(255, 116, 16, 0.28) !important;
+}
+
+.neon-border {
+  border-color: #FF7410;
+  box-shadow: 0 0 12px rgba(255, 116, 16, 0.35), inset 0 0 12px rgba(255, 116, 16, 0.06);
+}
+
+/* ─── Section index strip rule ─── */
+.section-rule {
+  border-top: 1px solid #1e293b;
+}
+
+/* ─── Section tag (mono label above headings) ─── */
+.section-tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #FF7410 !important;
+  font-weight: 600;
+  font-family: ui-monospace, 'Courier New', monospace;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #08090b; }
+::-webkit-scrollbar-thumb { background: rgba(255, 116, 16, 0.4); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #FF7410; }
+
+/* ─── Glass card ─── */
+.glass {
+  background: rgba(10, 14, 20, 0.84);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.glass-hover {
+  transition: all 0.28s ease;
+}
+.glass-hover:hover {
+  background: rgba(14, 20, 28, 0.92);
+  border-color: rgba(255, 116, 16, 0.32);
+  box-shadow: 0 10px 36px rgba(255, 116, 16, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ─── Badge (orange, monospace) ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.26rem 0.8rem;
+  background: rgba(255, 116, 16, 0.12) !important;
+  border: 1px solid rgba(255, 116, 16, 0.32) !important;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  color: #FF9038 !important;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+  font-family: ui-monospace, monospace;
+}
+
+/* ─── Status dot (orange pulse) ─── */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #FF7410 !important;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #FF7410 !important;
+  animation: pulse-dot 2s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px #FF7410; }
+  50%       { opacity: 0.6; box-shadow: 0 0 14px #FF7410; }
+}
+
+/* ─── Noise overlay ─── */
+.noise::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.025;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: rgba(255, 116, 16, 0.22);
+  color: #fff5eb;
+}
+
+/* ─── Animated underline ─── */
+.animated-underline { position: relative; }
+.animated-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: #FF7410;
+  transition: width 0.3s ease;
+}
+.animated-underline:hover::after { width: 100%; }
