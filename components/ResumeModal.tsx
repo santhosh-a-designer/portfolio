@@ -5,18 +5,18 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, DownloadSimple, ArrowSquareOut } from "@phosphor-icons/react";
 
 const DEFAULT_FILENAME = "Santhosh-A-Resume";
+const RESUME_PDF_PATH = "/Santhosh-A-Resume.pdf";
 
-function openForPrint() {
-  const win = window.open("/resume.html", "_blank", "noopener,noreferrer");
-  if (win) {
-    win.addEventListener("load", () => {
-      win.document.title = DEFAULT_FILENAME;
-      setTimeout(() => win.print(), 400);
-    });
-  }
+function downloadResumePdf() {
+  const a = document.createElement("a");
+  a.href = RESUME_PDF_PATH;
+  a.download = `${DEFAULT_FILENAME}.pdf`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 
-const SCALE = 0.58; // A4 = 794×1123 → 460×651 inside modal
+const SCALE = 0.51; // A4 = 794×1123 → 405×573 (keeps footer button visible)
 
 export default function ResumeModal({
   open,
@@ -28,9 +28,55 @@ export default function ResumeModal({
   /* Lock body scroll while modal is open */
   useEffect(() => {
     if (!open) return;
+    const scrollY = window.scrollY;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
     const prev = document.body.style.overflow;
+    const prevBodyPosition = document.body.style.position;
+    const prevBodyTop = document.body.style.top;
+    const prevBodyWidth = document.body.style.width;
+    const prevBodyLeft = document.body.style.left;
+    const prevBodyRight = document.body.style.right;
+    const prevHtmlOverscroll = document.documentElement.style.overscrollBehavior;
+    const prevBodyOverscroll = document.body.style.overscrollBehavior;
+    document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
-    return () => { document.body.style.overflow = prev; };
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.documentElement.style.overscrollBehavior = "none";
+    document.body.style.overscrollBehavior = "none";
+
+    const blockScroll = (e: Event) => {
+      e.preventDefault();
+    };
+
+    const blockScrollKeys = (e: KeyboardEvent) => {
+      if ([" ", "PageUp", "PageDown", "Home", "End", "ArrowUp", "ArrowDown"].includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener("wheel", blockScroll, { passive: false, capture: true });
+    window.addEventListener("touchmove", blockScroll, { passive: false, capture: true });
+    window.addEventListener("keydown", blockScrollKeys, { passive: false, capture: true });
+
+    return () => {
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prev;
+      document.body.style.position = prevBodyPosition;
+      document.body.style.top = prevBodyTop;
+      document.body.style.width = prevBodyWidth;
+      document.body.style.left = prevBodyLeft;
+      document.body.style.right = prevBodyRight;
+      document.documentElement.style.overscrollBehavior = prevHtmlOverscroll;
+      document.body.style.overscrollBehavior = prevBodyOverscroll;
+      window.removeEventListener("wheel", blockScroll, true);
+      window.removeEventListener("touchmove", blockScroll, true);
+      window.removeEventListener("keydown", blockScrollKeys, true);
+      window.scrollTo(0, scrollY);
+    };
   }, [open]);
 
   /* Escape to close */
@@ -47,8 +93,8 @@ export default function ResumeModal({
   /* ── Calculated iframe wrapper dimensions ── */
   const iframeW = 794;
   const iframeH = 1123;
-  const wrapW = Math.round(iframeW * SCALE); // 460
-  const wrapH = Math.round(iframeH * SCALE); // 651
+  const wrapW = Math.round(iframeW * SCALE); // 405
+  const wrapH = Math.round(iframeH * SCALE); // 573
 
   return (
     <AnimatePresence>
@@ -80,7 +126,7 @@ export default function ResumeModal({
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             className="relative z-10 flex flex-col border border-[#1e293b] bg-[#08090b] shadow-2xl shadow-black/60"
             style={{
-              width: `${wrapW + 120}px`,
+              width: `${wrapW + 180}px`,
               maxWidth: "calc(100vw - 32px)",
               maxHeight: "calc(100dvh - 32px)",
               overflow: "hidden",
@@ -150,7 +196,7 @@ export default function ResumeModal({
             <div className="border-t border-[#1e293b] px-4 py-4 flex-shrink-0 bg-[#08090b]" style={{ overflow: "hidden" }}>
               <button
                 type="button"
-                onClick={openForPrint}
+                onClick={downloadResumePdf}
                 className="flex items-center justify-center gap-2 w-full px-5 py-3 text-xs font-bold uppercase tracking-[0.12em] text-[#0a0908] bg-[#FF7410] hover:bg-[#FF8C30] transition-colors"
               >
                 <DownloadSimple size={17} weight="bold" />

@@ -5,13 +5,15 @@ import { ArrowDown, FileDoc } from "@phosphor-icons/react";
 import { useEffect, useState, useRef, type ReactNode } from "react";
 import ResumeModal from "@/components/ResumeModal";
 
+const HERO_REVEAL_DELAY = 0.55;
+
 /* Opacity starts at 0 for a true "reveal" feel. */
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { delay: HERO_REVEAL_DELAY + i * 0.12, duration: 0.75, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
@@ -211,8 +213,22 @@ export default function Hero() {
   const [resumeOpen, setResumeOpen] = useState(false);
 
   return (
-    <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden blueprint-grid border-b border-[#1e293b] pt-[clamp(6.5rem,14vh,9rem)] pb-10 sm:pb-14">
+    <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-[#08090b] border-b border-[#1e293b] pt-[clamp(6.5rem,14vh,9rem)] pb-10 sm:pb-14">
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
+
+      {/* Entry sequence: blueprint lines form first */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,116,16,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,116,16,0.08) 1px, transparent 1px), linear-gradient(rgba(255,116,16,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,116,16,0.03) 1px, transparent 1px)",
+          backgroundSize: "80px 80px, 80px 80px, 20px 20px, 20px 20px",
+          backgroundPosition: "-1px -1px",
+        }}
+        initial={{ opacity: 0, clipPath: "inset(0 100% 100% 0)" }}
+        animate={{ opacity: 1, clipPath: "inset(0 0 0 0)" }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      />
 
       {/* Parallax glow */}
       <motion.div
@@ -230,22 +246,25 @@ export default function Hero() {
       <div className="absolute bottom-12 right-6 w-10 h-10 border-b-2 border-r-2 border-[#FF7410]/20" />
 
       {/* Watermark */}
-      <div
+      <motion.div
         className="pointer-events-none absolute inset-0 flex items-center justify-center select-none font-title font-black uppercase leading-none tracking-tighter opacity-[0.032]"
         style={{ fontSize: "clamp(3rem,16vw,13rem)", color: "#FF7410" }}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 0.032, y: 0 }}
+        transition={{ delay: HERO_REVEAL_DELAY - 0.05, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         aria-hidden
       >
         PORT_FOLIO
-      </div>
+      </motion.div>
 
       {/* Blueprint coords */}
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.1, duration: 1 }}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: HERO_REVEAL_DELAY + 0.35, duration: 0.8 }}
         className="absolute top-[4.5rem] left-14 text-[9px] font-mono uppercase tracking-widest hidden lg:block"
         style={{ color: "rgba(255,116,16,0.3)" }}
       >
         ux.portfolio / v2026
       </motion.div>
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.3, duration: 1 }}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: HERO_REVEAL_DELAY + 0.5, duration: 0.8 }}
         className="absolute top-[4.5rem] right-14 text-[9px] font-mono uppercase tracking-widest hidden lg:block"
         style={{ color: "rgba(255,116,16,0.3)" }}
       >

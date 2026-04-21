@@ -69,7 +69,7 @@ export default function Mentorship() {
               className="p-6 text-base text-[#94a3b8] italic leading-relaxed"
               style={{ borderLeft: "3px solid #FF7410", background: "rgba(255,116,16,0.05)" }}
             >
-              &ldquo;Five years ago, I was nobody — zero knowledge, zero credibility. Just raw determination, passion towards design, and God&apos;s grace.&rdquo;
+              &ldquo;Five years ago, I stood unknown — no map, no credibility, only hunger. By God&apos;s blessings, I turned passion into purpose: designing with care, and developing what I design so people can use it better every day.&rdquo;
               <div className="mt-3 text-[11px] font-mono text-[#475569] not-italic uppercase tracking-widest">— Simon Santhosh</div>
             </blockquote>
           </motion.div>

@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { useRouter } from "next/navigation";
 import {
   ArrowSquareOut, ArrowRight, Lightning,
   GlobeHemisphereWest, DeviceMobile, Robot,
@@ -12,18 +13,19 @@ const projects = [
     id: 1, index: "01",
     tag: "Enterprise · Ecommerce",
     title: "Parla Retail",
-    subtitle: "Show & Sell Platform",
-    description: "Ecommerce platform connecting users with salespersons via intelligent call routing, chat handoffs, in-call product additions, and payment processing across US/UK markets.",
+    subtitle: "Show & Sell + Customer Scheduler",
+    description: "Built a CTA-led selling workflow for ecommerce stores: customer booking, video-call assisted selling, call-link automation, and in-call checkout. Customized scheduler flow for US client needs and improved usability for both shoppers and store teams.",
     stats: [
-      { value: "US/UK", label: "Markets" },
-      { value: "25%+", label: "Engagement" },
-      { value: "4", label: "Deliverables" },
+      { value: "US", label: "Primary Market" },
+      { value: "CTA", label: "Entry Point" },
+      { value: "Video", label: "Assisted Sales" },
       { value: "Shipped", label: "Status" },
     ],
-    tags: ["Figma", "Ecommerce", "Dashboard"],
+    tags: ["Figma", "CTA UX", "Scheduler", "Call Platform"],
     icon: GlobeHemisphereWest,
     accentColor: "#FF7410",
     status: "shipped",
+    slug: "parla-show-and-sell",
     link: null,
   },
   {
@@ -42,6 +44,7 @@ const projects = [
     icon: Robot,
     accentColor: "#FF7410",
     status: "live",
+    slug: "ezra-mentor-dashboard",
     link: "https://ezra-dashboard.vercel.app",
   },
   {
@@ -60,6 +63,7 @@ const projects = [
     icon: DeviceMobile,
     accentColor: "#E07010",
     status: "in-progress",
+    slug: "vidyas-kitchen-pwa",
     link: null,
   },
   {
@@ -78,6 +82,7 @@ const projects = [
     icon: Lightning,
     accentColor: "#EA580C",
     status: "in-progress",
+    slug: "ceass-pet-ecommerce",
     link: null,
   },
 ];
@@ -89,6 +94,7 @@ const statusLabel: Record<string, string> = {
 export default function Works() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [showContent, setShowContent] = useState(false);
+  const router = useRouter();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -184,7 +190,16 @@ export default function Works() {
                     initial={{ opacity: 0, y: 30, scale: 0.92 }}
                     animate={showContent ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.92 }}
                     transition={{ ...contentTransition, delay: 0.3 + i * 0.05 }}
-                    className="flex flex-col p-5 bg-white hover:bg-[#fef9f5] transition-colors relative overflow-hidden"
+                    className="flex flex-col p-5 bg-white hover:bg-[#fef9f5] transition-colors relative overflow-hidden cursor-pointer"
+                    onClick={() => router.push(`/case-studies/${project.slug}`)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        router.push(`/case-studies/${project.slug}`);
+                      }
+                    }}
+                    role="button"
+                    tabIndex={0}
                     style={{
                       borderRight: i % 2 === 0 ? "1px solid #ddd0c2" : "none",
                       borderBottom: i < 2 ? "1px solid #ddd0c2" : "none",
@@ -258,21 +273,23 @@ export default function Works() {
                           </span>
                         ))}
                       </div>
-                      {project.link ? (
-                        <a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider flex-shrink-0"
-                          style={{ color: project.accentColor }}
-                        >
-                          Live <ArrowSquareOut size={11} />
-                        </a>
-                      ) : (
-                        <span className="text-[9px] font-mono flex items-center gap-1 flex-shrink-0" style={{ color: "#c4b8a8" }}>
-                          <ArrowRight size={10} /> On request
+                      <div className="flex items-center gap-3 flex-shrink-0">
+                        {project.link ? (
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider"
+                            style={{ color: project.accentColor }}
+                          >
+                            Live <ArrowSquareOut size={11} />
+                          </a>
+                        ) : null}
+                        <span className="text-[9px] font-mono uppercase tracking-wider flex items-center gap-1" style={{ color: "#9c8b7a" }}>
+                          Case Study <ArrowRight size={10} />
                         </span>
-                      )}
+                      </div>
                     </div>
                   </motion.div>
                 );

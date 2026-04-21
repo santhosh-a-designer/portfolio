@@ -17,6 +17,22 @@ body {
   overflow-x: hidden;
 }
 
+/* ─── Pointer cursor for all interactive portfolio UI ─── */
+a,
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"] {
+  cursor: pointer;
+}
+
+/* Cards/tags with hover states should show pointer */
+.blueprint-page [class*="hover:"],
+.blueprint-page .glass-hover,
+.blueprint-page [class*="cursor-default"] {
+  cursor: pointer !important;
+}
+
 /* ─── Font stacks ─── */
 h1, h2, h3, h4, h5, h6,
 .font-title {
