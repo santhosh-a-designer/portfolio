@@ -83,30 +83,30 @@ const caseStudies: CaseStudy[] = [
   },
   {
     id: "03",
-    project: "Vidya's Kitchen — Hyper-local Catering PWA",
+    project: "Vidya's Kitchen — PWA, WhatsApp bot & kitchen ops",
     story:
-      "A lightweight experience designed for real people, not just perfect devices.",
+      "Social posts and reels drive leads into WhatsApp; a bot takes the order, Razorpay collects payment, and a dashboard runs the kitchen.",
     situation:
-      "Hyper-local users needed a simpler catering booking experience with low friction and clear mobile-first behavior.",
+      "A Sivakasi home cook wanted to grow beyond personal networks with a real system—no comparable premium home-catering product existed locally as a combined chat, pay, and ops experience.",
     task:
-      "Design and ship a minimal PWA flow that works smoothly for practical day-to-day usage.",
+      "Ship Instagram/video → WhatsApp funnel, conversational ordering, Razorpay, a premium PWA, and a dashboard for orders, menu updates, and drivers—aligned to a first-version business target and built in TypeScript + React.",
     action: [
-      "Mapped a low-friction booking flow for mobile-first users.",
-      "Prioritized clarity, speed, and readable UI patterns.",
-      "Aligned UX with progressive enhancement and practical reliability.",
+      "Framed the funnel and bot + PWA architecture for a single kitchen truth.",
+      "Designed Tamil-friendly, short-path ordering in WhatsApp with payment handoff.",
+      "Crafted the PWA shell and ops dashboard so the business can scale past DMs.",
     ],
     result: [
-      "Created a usable foundation for real-world local ordering behavior.",
-      "Reduced complexity for first-time and low-tech users.",
+      "One coherent story from ad to paid order to fulfillment—built for Sivakasi, not a generic template.",
+      "End-to-end ownership from UX through code; project ~80% complete with a clear path to fully live.",
     ],
     learnings: [
-      "Simplicity is a performance strategy in local commerce.",
+      "Local India often wins on social + chat + UPI before it wins on app installs.",
+      "Premium UI in SMB food is trust and calm as much as aesthetics.",
     ],
     screenSlots: [
-      "Home + menu browsing",
-      "Order and booking journey",
-      "Mobile interaction states",
-      "PWA-ready behavior snapshots",
+      "Intro gallery (PWA · bot · dashboard)",
+      "Journey map & SWOT",
+      "Process walkthrough",
     ],
   },
   {

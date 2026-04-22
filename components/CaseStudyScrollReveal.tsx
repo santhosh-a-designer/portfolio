@@ -8,8 +8,7 @@ import type { ReactNode, ComponentProps } from "react";
  * A tall block (e.g. full product deep dive) can never hit 20% visible at once, so animation
  * never runs and `initial={{ opacity: 0 }}` sticks — content looks missing after CTA.
  */
-const VIEWPORT = { once: true, amount: 0.01 } as const;
-const EASE = [0.22, 1, 0.36, 1] as const;
+const VIEWPORT = { once: true, amount: 0.03 } as const;
 
 const motionTag = {
   div: motion.div,
@@ -52,10 +51,10 @@ export function CaseStudyScrollReveal({ children, className, delay = 0, as: tag 
   return (
     <Motion
       className={className}
-      initial={{ opacity: 0, y: 36 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 64, scale: 0.985 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={VIEWPORT}
-      transition={{ delay, duration: 0.75, ease: EASE }}
+      transition={{ delay, type: "spring", stiffness: 52, damping: 18, mass: 1.1 }}
       {...(rest as object)}
     >
       {children}

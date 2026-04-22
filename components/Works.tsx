@@ -44,14 +44,14 @@ const projects: Project[] = [
     index: "02",
     tag: "EdTech · Automation",
     title: "Ezra Dashboard",
-    subtitle: "FITA Academy — Mentor Platform",
+    subtitle: "FITA Academy — mentors & students",
     description:
-      "Mentor dashboard for attendance, earnings, and batches. Telegram-driven alerts and one-click payment-release emails to cut manual work.",
+      "Attendance, hours, and pay on one system: the Ezra bot feeds a mentor dashboard, students see their own progress, and automations nudge at batch end—plus Gmail handoffs. I built it for my batches; paid pilots and an academy buy are in motion.",
     stats: [
-      { value: "100+", label: "Mentors" },
-      { value: "1-click", label: "Automation" },
-      { value: "Live", label: "Status" },
-      { value: "3", label: "Integrations" },
+      { value: "FITA", label: "Academy" },
+      { value: "₹50k", label: "Pilot rev." },
+      { value: "5", label: "Mentors" },
+      { value: "Live", label: "Build" },
     ],
     icon: Robot,
     accentColor: "#FF7410",
@@ -61,16 +61,16 @@ const projects: Project[] = [
   {
     id: 3,
     index: "03",
-    tag: "PWA · Hyper-local",
+    tag: "PWA · WhatsApp · Hyper-local",
     title: "Vidya's Kitchen",
     subtitle: "Home Catering — Sivakasi",
     description:
-      "PWA for a home kitchen: low-friction ordering, offline-first where it matters, Tamil support, and onboarding that works for real-world users.",
+      "First local home-catering stack with a premium PWA, WhatsApp bot ordering, Razorpay checkout, and an ops dashboard—IG and video ads feed leads into chat. ~80% built in TypeScript + React; I designed and shipped the product, not only the UI.",
     stats: [
-      { value: "PWA", label: "Stack" },
-      { value: "Tamil", label: "Language" },
-      { value: "Dev", label: "Status" },
-      { value: "0", label: "Friction" },
+      { value: "WA", label: "Orders" },
+      { value: "PWA", label: "Customer" },
+      { value: "~80%", label: "Built" },
+      { value: "TS", label: "Stack" },
     ],
     icon: DeviceMobile,
     accentColor: "#E07010",
@@ -119,6 +119,8 @@ function WorkProjectCard({
 }) {
   const Icon = project.icon;
   const [labelPos, setLabelPos] = useState<{ x: number; y: number } | null>(null);
+  const isCeass = project.slug === "ceass-pet-ecommerce";
+  const cursorHoverLabel = isCeass ? "In progress" : "View case study";
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -129,13 +131,16 @@ function WorkProjectCard({
       <Link
         href={`/case-studies/${project.slug}`}
         className="absolute inset-0 z-[2] block cursor-none max-sm:cursor-pointer"
-        aria-label={`View case study: ${project.title}`}
+        aria-label={isCeass ? `${project.title} — in progress` : `View case study: ${project.title}`}
         onMouseMove={(e) => {
           setLabelPos({ x: e.clientX, y: e.clientY });
         }}
         onMouseLeave={() => setLabelPos(null)}
       >
-        <span className="sr-only">View case study — {project.title}</span>
+        <span className="sr-only">
+          {isCeass ? "In progress — " : "View case study — "}
+          {project.title}
+        </span>
       </Link>
 
       {labelPos ? (
@@ -152,7 +157,7 @@ function WorkProjectCard({
             className="inline-block rounded-none border border-[#1a1510] bg-[#1a1510] px-2.5 py-1.5 text-[8px] font-mono font-bold uppercase tracking-[0.12em] text-white shadow-md"
             style={{ boxShadow: "0 4px 14px rgba(0,0,0,0.12)" }}
           >
-            View case study
+            {cursorHoverLabel}
           </span>
         </div>
       ) : null}
@@ -207,9 +212,9 @@ function WorkProjectCard({
           style={{ background: "#e6ded4" }}
         >
           {project.stats.map((stat, j) => (
-            <div key={j} className="min-w-0 bg-[#faf6f0] px-1.5 py-1.5 text-center sm:px-1.5 sm:py-2">
-              <p className="font-title text-[9px] font-black leading-tight text-[#130e08] sm:text-[10px]">{stat.value}</p>
-              <p className="mt-0.5 text-[5px] font-mono uppercase leading-tight tracking-wider text-[#8c7b6a] sm:mt-1 sm:text-[6px]">
+            <div key={j} className="min-w-0 bg-[#faf6f0] px-2 py-2 text-center sm:px-2.5 sm:py-2.5">
+              <p className="font-title text-[11px] font-black leading-tight text-[#130e08] sm:text-[12px]">{stat.value}</p>
+              <p className="mt-0.5 text-[7px] font-mono uppercase leading-tight tracking-wider text-[#8c7b6a] sm:mt-1 sm:text-[8px]">
                 {stat.label}
               </p>
             </div>

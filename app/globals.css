@@ -8,6 +8,12 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* legacy Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 body {
@@ -15,6 +21,12 @@ body {
   color: #e8edf2;
   font-family: var(--font-description), var(--font-body), 'DM Sans', system-ui, sans-serif;
   overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 /* ─── Pointer cursor for all interactive portfolio UI ─── */
@@ -179,3 +191,39 @@ p, .font-description {
   transition: width 0.3s ease;
 }
 .animated-underline:hover::after { width: 100%; }
+
+/* ─── Case study intro gallery: side cards slide in (CSS only, no layout reflow) ─── */
+@keyframes case-study-intro-slide-left {
+  from {
+    opacity: 0;
+    transform: translate3d(-1.75rem, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes case-study-intro-slide-right {
+  from {
+    opacity: 0;
+    transform: translate3d(1.75rem, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+.case-study-intro-side-left {
+  animation: case-study-intro-slide-left 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.case-study-intro-side-right {
+  animation: case-study-intro-slide-right 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .case-study-intro-side-left,
+  .case-study-intro-side-right {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

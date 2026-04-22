@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  /** Hides the dev-only blue top bar + route indicator (dev only; no effect in production). */
+  devIndicators: false,
 };
 
 export default nextConfig;

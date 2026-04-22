@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUp, StackSimple } from "@phosphor-icons/react/dist/ssr";
 import type { CaseStudy } from "@/lib/caseStudies";
-import BackToWorksLink from "@/components/BackToWorksLink";
 
 const cell = "flex min-h-[8.5rem] flex-col justify-center px-4 py-5 sm:min-h-[9rem] sm:px-6 sm:py-6";
 
@@ -54,10 +53,6 @@ export default function CaseStudyArticleFooter({
           <div
             className={`flex min-h-0 flex-col items-stretch justify-center gap-2.5 border-[#1e293b] bg-[#08090b]/80 px-4 py-5 sm:px-5 md:min-w-[11.5rem] md:border-x md:bg-[#08090b]/60`}
           >
-            <BackToWorksLink className="inline-flex w-full items-center justify-center gap-2 rounded-none border border-[rgba(255,116,16,0.55)] bg-[rgba(255,116,16,0.08)] px-3 py-2.5 text-center text-[10px] font-mono font-semibold uppercase tracking-[0.14em] text-[#e8edf2] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] transition hover:border-[#FF7410] hover:bg-[rgba(255,116,16,0.14)] hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7410]/40">
-              <ArrowLeft size={15} className="flex-shrink-0 text-[#FF7410]" aria-hidden />
-              Back to works
-            </BackToWorksLink>
             <a
               href="#case-study-top"
               className="inline-flex w-full items-center justify-center gap-2 rounded-none border border-[#334155] bg-transparent px-3 py-2.5 text-center text-[10px] font-mono font-semibold uppercase tracking-[0.14em] text-[#94a3b8] transition hover:border-[#FF7410]/60 hover:text-[#FF7410] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7410]/40"
