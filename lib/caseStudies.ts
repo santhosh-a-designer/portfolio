@@ -375,6 +375,31 @@ export const caseStudies: CaseStudy[] = [
           { label: "In-flow checkout", value: 8 },
         ],
       },
+      designSystem: {
+        blurb:
+          "Light-mode professional surface. Parla’s admin is built for retail floor teams who need clarity at a glance — white canvas, teal brand identity, sky-blue for scheduling actions, and hot pink exclusively for the Show & Sell entry point so it’s never missed.",
+        colors: [
+          { name: "Parla teal", hex: "#2DC8E8", use: "Brand logo, primary navigation identity" },
+          { name: "Sky blue", hex: "#1976D2", use: "Primary CTA buttons, Create Appointment, active tabs" },
+          { name: "Show & Sell pink", hex: "#E91E8C", use: "Show & Sell launch — the only pink in the UI, unmissable" },
+          { name: "White canvas", hex: "#FFFFFF", use: "Dashboard background — light-mode, familiar for retail teams" },
+          { name: "Success green", hex: "#22C55E", use: "Live toggle, store connected, in-progress appointment state" },
+          { name: "Danger red", hex: "#EF4444", use: "End Conversation button, urgent time alerts" },
+        ],
+        type: [
+          { role: "Dashboard headings / nav", family: "Inter", note: "Consistent clean weight — Appointments, Calls, CRM, Orders, Messages" },
+          { role: "Metric values / data", family: "Inter semibold", note: "241 calls, $22.4k — tabular weight for quick scanning" },
+          { role: "Status chips", family: "Inter medium", note: "In Progress · Scheduled · Waiting · Ended — short, high-contrast labels" },
+        ],
+        components: [
+          "Metric summary card", "Create Appointment card", "Show & Sell launch card", "Conversation list row", "Chat message thread", "CRM customer panel", "Store toggle row", "Performance tracker donut", "Status badge", "End Conversation button",
+        ],
+        principles: [
+          "Light-mode trust — retail floor teams expect a professional, familiar interface, not a dark-mode product tool",
+          "Colour hierarchy = action type — teal is brand, blue is schedule, pink is sell; the palette teaches the workflow",
+          "Context always visible — CRM panel stays docked beside the chat thread so reps never lose customer history mid-call",
+        ],
+      },
     },
     processSteps: [
       {
@@ -539,31 +564,6 @@ export const caseStudies: CaseStudy[] = [
             },
           ],
         },
-      },
-      designSystem: {
-        blurb:
-          "Light-mode professional surface. Parla’s admin is built for retail floor teams who need clarity at a glance — white canvas, teal brand identity, sky-blue for scheduling actions, and hot pink exclusively for the Show & Sell entry point so it’s never missed.",
-        colors: [
-          { name: "Parla teal", hex: "#2DC8E8", use: "Brand logo, primary navigation identity" },
-          { name: "Sky blue", hex: "#1976D2", use: "Primary CTA buttons, Create Appointment, active tabs" },
-          { name: "Show & Sell pink", hex: "#E91E8C", use: "Show & Sell launch — the only pink in the UI, unmissable" },
-          { name: "White canvas", hex: "#FFFFFF", use: "Dashboard background — light-mode, familiar for retail teams" },
-          { name: "Success green", hex: "#22C55E", use: "Live toggle, store connected, in-progress appointment state" },
-          { name: "Danger red", hex: "#EF4444", use: "End Conversation button, urgent time alerts" },
-        ],
-        type: [
-          { role: "Dashboard headings / nav", family: "Inter", note: "Consistent clean weight — Appointments, Calls, CRM, Orders, Messages" },
-          { role: "Metric values / data", family: "Inter semibold", note: "241 calls, $22.4k — tabular weight for quick scanning" },
-          { role: "Status chips", family: "Inter medium", note: "In Progress · Scheduled · Waiting · Ended — short, high-contrast labels" },
-        ],
-        components: [
-          "Metric summary card", "Create Appointment card", "Show & Sell launch card", "Conversation list row", "Chat message thread", "CRM customer panel", "Store toggle row", "Performance tracker donut", "Status badge", "End Conversation button",
-        ],
-        principles: [
-          "Light-mode trust — retail floor teams expect a professional, familiar interface, not a dark-mode product tool",
-          "Colour hierarchy = action type — teal is brand, blue is schedule, pink is sell; the palette teaches the workflow",
-          "Context always visible — CRM panel stays docked beside the chat thread so reps never lose customer history mid-call",
-        ],
       },
     },
   },
