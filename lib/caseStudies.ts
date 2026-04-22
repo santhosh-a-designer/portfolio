@@ -113,12 +113,12 @@ export const caseStudies: CaseStudy[] = [
           {
             label: "Video 01",
             caption: "CTA integrated inside merchant shoe-store website",
-            src: "/case-studies/parla/CTA-1.mov",
+            src: "/case-studies/parla/CTA-1.mp4",
           },
           {
             label: "Video 02",
             caption: "New Show Preview mode inside CTA video-call flow",
-            src: "/case-studies/parla/CTA-2.mov",
+            src: "/case-studies/parla/CTA-2.mp4",
           },
         ],
       },
