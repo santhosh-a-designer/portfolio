@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLenis, HEADER_SCROLL_OFFSET } from "@/components/LenisProvider";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -21,9 +22,60 @@ const sectionLabels: Record<string, string> = {
 };
 
 export default function Navigation() {
+  const lenis = useLenis();
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
+  function handleInPageNav(
+    e: MouseEvent<HTMLAnchorElement>,
+    { closeMenu }: { closeMenu?: boolean } = {}
+  ) {
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    if (href == null) return;
+
+    const afterNav = () => {
+      if (closeMenu) setMenuOpen(false);
+    };
+
+    if (href === "#" || href === "#top") {
+      if (lenis) {
+        lenis.scrollTo(0, { onComplete: afterNav });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        afterNav();
+      }
+      history.pushState(null, "", window.location.pathname);
+      return;
+    }
+
+    if (!href.startsWith("#")) {
+      afterNav();
+      return;
+    }
+
+    const id = href.slice(1);
+    const el = document.getElementById(id);
+    if (!el) {
+      afterNav();
+      return;
+    }
+
+    if (lenis) {
+      lenis.scrollTo(el, {
+        offset: HEADER_SCROLL_OFFSET,
+        duration: 0.85,
+        lerp: 0.12,
+        onStart: afterNav,
+      });
+    } else {
+      const y = el.getBoundingClientRect().top + window.scrollY + HEADER_SCROLL_OFFSET;
+      window.scrollTo({ top: y, left: 0, behavior: "smooth" });
+      afterNav();
+    }
+    history.pushState(null, "", href);
+  }
 
   useEffect(() => {
     const ids = ["about", "works", "skills", "mentorship", "contact"];
@@ -50,7 +102,7 @@ export default function Navigation() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 inset-x-0 z-[200] transition-all duration-500 ${
         scrolled ? "glass border-b border-[#1e293b]" : "bg-transparent"
       }`}
     >
@@ -69,7 +121,11 @@ export default function Navigation() {
       {/* ── Main nav row ── */}
       <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group flex-shrink-0">
+        <a
+          href="#"
+          onClick={(e) => handleInPageNav(e)}
+          className="flex items-center gap-2 group flex-shrink-0"
+        >
           <div
             className="w-7 h-7 flex items-center justify-center text-[9px] font-bold font-mono group-hover:shadow-[0_0_14px_#FF7410] transition-all duration-300"
             style={{ border: "1px solid rgba(255,116,16,0.55)", color: "#FF7410", background: "rgba(255,116,16,0.06)" }}
@@ -89,6 +145,7 @@ export default function Navigation() {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleInPageNav(e)}
                 className={`relative px-4 py-1.5 text-sm font-medium transition-colors duration-200 ${
                   isActive ? "text-[#FF7410]" : "text-[#5A7A9A] hover:text-white"
                 }`}
@@ -115,6 +172,7 @@ export default function Navigation() {
           </div>
           <a
             href="#contact"
+            onClick={(e) => handleInPageNav(e)}
             className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#0a0908] bg-[#FF7410] hover:bg-[#FF8C30] transition-colors"
           >
             Hire Me
@@ -123,14 +181,16 @@ export default function Navigation() {
 
         {/* Mobile toggle */}
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-[#5A7A9A] hover:text-white transition-colors"
-          aria-label="Toggle menu"
+          type="button"
+          onClick={() => setMenuOpen((o) => !o)}
+          className="md:hidden relative z-[210] -mr-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-sm text-[#5A7A9A] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF7410] transition-colors"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
         >
-          <div className="flex flex-col gap-1.5 w-5">
-            <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`h-px bg-current transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          <div className="flex w-5 flex-col gap-1.5" aria-hidden>
+            <span className={`h-0.5 w-full bg-current transition-all duration-300 ${menuOpen ? "translate-y-2 rotate-45" : ""}`} />
+            <span className={`h-0.5 w-full bg-current transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`h-0.5 w-full bg-current transition-all duration-300 ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
           </div>
         </button>
       </div>
@@ -143,14 +203,14 @@ export default function Navigation() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden glass border-t border-[#1e293b] overflow-hidden"
+            className="md:hidden relative z-[205] max-h-[min(70vh,28rem)] overflow-y-auto overscroll-contain glass border-t border-[#1e293b] shadow-lg"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => handleInPageNav(e, { closeMenu: true })}
                   className="py-2.5 text-sm text-[#5A7A9A] hover:text-white transition-colors"
                 >
                   {link.label}
@@ -158,7 +218,7 @@ export default function Navigation() {
               ))}
               <a
                 href="#contact"
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => handleInPageNav(e, { closeMenu: true })}
                 className="mt-2 py-2.5 text-center text-xs font-bold uppercase tracking-wider text-[#0a0908] bg-[#FF7410]"
               >
                 Hire Me

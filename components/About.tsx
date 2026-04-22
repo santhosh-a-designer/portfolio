@@ -77,6 +77,10 @@ const highlights = [
 
 function BentoCard({ item, index }: { item: typeof timeline[0], index: number }) {
   const [isHovered, setIsHovered] = useState(false);
+  /** Toggled by tap (mobile / touch) so details work without :hover. */
+  const [detailPinned, setDetailPinned] = useState(false);
+  const showDetail = isHovered || detailPinned;
+  const overlayPointerEvents = detailPinned ? "pointer-events-auto" : "pointer-events-none";
 
   return (
     <motion.div
@@ -103,7 +107,7 @@ function BentoCard({ item, index }: { item: typeof timeline[0], index: number })
           {item.current && <span className="badge px-2 py-0.5 text-[9px]">ACTIVE</span>}
         </div>
         <h3 className="font-title text-lg sm:text-xl font-black text-white leading-tight group-hover:text-[#FF7410] transition-colors">{item.role}</h3>
-        <p className="text-xs sm:text-sm font-medium mt-1 transition-colors" style={{ color: isHovered ? '#fff' : item.color }}>{item.company}</p>
+        <p className="text-xs sm:text-sm font-medium mt-1 transition-colors" style={{ color: showDetail ? '#fff' : item.color }}>{item.company}</p>
       </div>
 
       {/* Summary Content (Expertise) */}
@@ -150,20 +154,45 @@ function BentoCard({ item, index }: { item: typeof timeline[0], index: number })
       <div className="mt-auto pt-4 border-t border-[#1e293b]/50 relative z-10 flex items-center justify-between">
         <div className="flex -space-x-1">
            {[1, 2, 3].map(i => (
-             <div key={i} className="w-1.5 h-1.5 rounded-full border border-[#1e293b]" style={{ backgroundColor: isHovered ? item.color : '#1e293b' }} />
+             <div key={i} className="w-1.5 h-1.5 rounded-full border border-[#1e293b]" style={{ backgroundColor: showDetail ? item.color : '#1e293b' }} />
            ))}
         </div>
-        <div className="flex items-center gap-2 text-[10px] uppercase font-mono tracking-widest text-[#475569] group-hover:text-white transition-colors">
-          View Detail <ArrowRight size={10} className="group-hover:translate-x-1 transition-transform" />
-        </div>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            setDetailPinned((p) => !p);
+          }}
+          className="relative z-20 flex min-h-[2.5rem] cursor-pointer items-center gap-2 text-left text-[10px] font-mono uppercase tracking-widest text-[#475569] transition-colors group-hover:text-white active:text-white touch-manipulation"
+        >
+          {detailPinned ? "Close" : "View detail"}
+          <ArrowRight size={10} className={detailPinned ? "rotate-180 transition-transform" : "group-hover:translate-x-1 transition-transform"} />
+        </button>
       </div>
 
-      {/* Hover Overlay with deeper details */}
+      {/* Hover / tap overlay with deeper details */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0 }}
-        className="absolute inset-0 bg-[#0c0e12]/95 backdrop-blur-sm p-4 sm:p-6 z-20 flex flex-col pointer-events-none"
+        animate={{ opacity: showDetail ? 1 : 0 }}
+        className={`absolute inset-0 z-20 flex flex-col bg-[#0c0e12]/95 p-4 backdrop-blur-sm sm:p-6 ${overlayPointerEvents}`}
+        onClick={
+          detailPinned
+            ? (e) => {
+                if (e.target === e.currentTarget) setDetailPinned(false);
+              }
+            : undefined
+        }
       >
+        {detailPinned ? (
+          <button
+            type="button"
+            onClick={() => setDetailPinned(false)}
+            className="absolute right-2 top-2 z-30 flex min-h-9 min-w-9 items-center justify-center border border-[#334155] bg-[#0c0e12] text-lg leading-none text-white/90 active:bg-[#1e293b] sm:right-3 sm:top-3"
+            aria-label="Close details"
+          >
+            ×
+          </button>
+        ) : null}
         <div className="mb-4">
           <div className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#FF7410] mb-2">Key Outcomes</div>
           <div className="space-y-2">

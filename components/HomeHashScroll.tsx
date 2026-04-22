@@ -1,36 +1,41 @@
 "use client";
 
 import { useEffect } from "react";
+import { useLenis, HEADER_SCROLL_OFFSET } from "@/components/LenisProvider";
+
+function scheduleScroll(fn: () => void) {
+  fn();
+  requestAnimationFrame(fn);
+  setTimeout(fn, 120);
+  setTimeout(fn, 400);
+}
 
 /**
- * When landing on `/#works` (or using in-page #works), scroll the real Works anchor
- * into view. The anchor sits at `top: 100vh` inside the Works section to offset the
- * -100vh overlap layout; the sticky band also uses `top` below the fixed nav.
+ * When landing on `/#works`, match Navigation + Lenis offset after layout.
  */
-function scrollToWorksIfNeeded() {
-  if (window.location.hash !== "#works") return;
-  const el = document.getElementById("works");
-  if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({ top, left: 0, behavior: "auto" });
-}
-
-function scheduleScrollToWorks() {
-  scrollToWorksIfNeeded();
-  requestAnimationFrame(scrollToWorksIfNeeded);
-  setTimeout(scrollToWorksIfNeeded, 120);
-  setTimeout(scrollToWorksIfNeeded, 400);
-}
-
 export default function HomeHashScroll() {
+  const lenis = useLenis();
+
   useEffect(() => {
-    scheduleScrollToWorks();
+    const scrollToWorksIfNeeded = () => {
+      if (window.location.hash !== "#works") return;
+      const el = document.getElementById("works");
+      if (!el) return;
+      if (lenis) {
+        lenis.scrollTo(el, { offset: HEADER_SCROLL_OFFSET, immediate: true });
+      } else {
+        const y = el.getBoundingClientRect().top + window.scrollY + HEADER_SCROLL_OFFSET;
+        window.scrollTo({ top: y, left: 0, behavior: "auto" });
+      }
+    };
+
+    scheduleScroll(scrollToWorksIfNeeded);
     const onHash = () => {
-      if (window.location.hash === "#works") scheduleScrollToWorks();
+      if (window.location.hash === "#works") scheduleScroll(scrollToWorksIfNeeded);
     };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
-  }, []);
+  }, [lenis]);
 
   return null;
 }

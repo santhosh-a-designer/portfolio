@@ -7,13 +7,13 @@ import Mentorship from "@/components/Mentorship";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
+import LenisProvider from "@/components/LenisProvider";
 import HomeHashScroll from "@/components/HomeHashScroll";
 
 export default function Home() {
   return (
+    <LenisProvider>
     <main className="relative min-h-screen blueprint-page">
-      <SmoothScroll />
       <HomeHashScroll />
       <Navigation />
       <Hero />
@@ -25,5 +25,6 @@ export default function Home() {
       <Contact />
       <Footer />
     </main>
+    </LenisProvider>
   );
 }

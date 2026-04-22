@@ -232,6 +232,7 @@ export default function Works() {
   const curtainY = useTransform(scrollYProgress, [0.45, 0.7], ["100%", "0%"]);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) return;
     if (v > 0.75) setShowContent(true);
     else if (v < 0.72) setShowContent(false);
   });
@@ -245,22 +246,60 @@ export default function Works() {
 
   return (
     <section
+      id="works"
       ref={sectionRef}
-      style={{ height: "200vh", marginTop: "-100vh" }}
-      className="relative z-10"
+      className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[200vh] md:scroll-mt-0"
     >
-      <div
-        id="works"
-        className="pointer-events-none absolute left-0 top-[100vh] h-0 w-px overflow-hidden"
-        tabIndex={-1}
-        aria-hidden
-      />
+      {/* Mobile: full-page scroll only — no sticky, no inner overflow (prevents scroll trap with Lenis) */}
+      <div className="block bg-[#f5f0eb] md:hidden">
+        <div className="border-b border-[#e0d5c8] px-5 py-2 sm:px-7">
+          <div className="mx-auto flex max-w-6xl items-center justify-between text-[9px] font-mono uppercase tracking-[0.2em] sm:text-[10px]">
+            <span className="text-[#a89880]">Index · 02 — Works</span>
+            <span className="text-[#c96010]">
+              {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
+            </span>
+          </div>
+        </div>
+        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:gap-5 sm:px-7 sm:py-6">
+          <div>
+            <p className="mb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#c96010] sm:mb-2 sm:text-[10px] sm:tracking-[0.26em]">
+              02 / Selected works
+            </p>
+            <h2 className="font-title text-xl font-black leading-tight text-[#130e08] sm:text-2xl">
+              Problems solved, <span className="text-[#FF7410]">products shipped</span>
+            </h2>
+          </div>
+          <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4">
+            {projects.map((project, i) => {
+              const cellBorder =
+                i === 0
+                  ? "md:border-b md:border-r border-[#e3d8ce]"
+                  : i === 1
+                    ? "md:border-b border-[#e3d8ce]"
+                    : i === 2
+                      ? "md:border-r border-[#e3d8ce]"
+                      : "";
+              return (
+                <WorkProjectCard
+                  key={project.id}
+                  project={project}
+                  showContent
+                  i={i}
+                  contentTransition={contentTransition}
+                  borderClass={cellBorder}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
-      <div className="pointer-events-none sticky top-[5.75rem] flex h-[calc(100vh-5.75rem)] max-h-[calc(100vh-5.75rem)] flex-col overflow-hidden">
+      {/* Desktop: parallax + sticky (unchanged behavior) */}
+      <div className="pointer-events-none hidden md:sticky md:top-[5.75rem] md:flex md:h-[calc(100vh-5.75rem)] md:max-h-[calc(100vh-5.75rem)] md:min-h-0 md:w-full md:flex-col md:overflow-hidden">
         <div className="absolute inset-0 bg-transparent" />
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 pointer-events-auto"
+          className="absolute inset-x-0 bottom-0 z-0 pointer-events-auto"
           style={{ top: 0, y: curtainY, background: "#f5f0eb" }}
         />
 
@@ -297,26 +336,26 @@ export default function Works() {
 
             <div className="w-full min-w-0 shrink-0">
               <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:grid-rows-[auto_auto] md:items-start md:gap-0 md:overflow-hidden md:rounded-none md:border md:border-[#d0c3b6] md:shadow-[0_1px_0_0_rgba(0,0,0,0.04)]">
-              {projects.map((project, i) => {
-                const cellBorder =
-                  i === 0
-                    ? "md:border-b md:border-r border-[#e3d8ce]"
-                    : i === 1
-                      ? "md:border-b border-[#e3d8ce]"
-                      : i === 2
-                        ? "md:border-r border-[#e3d8ce]"
-                        : "";
-                return (
-                  <WorkProjectCard
-                    key={project.id}
-                    project={project}
-                    showContent={showContent}
-                    i={i}
-                    contentTransition={contentTransition}
-                    borderClass={cellBorder}
-                  />
-                );
-              })}
+                {projects.map((project, i) => {
+                  const cellBorder =
+                    i === 0
+                      ? "md:border-b md:border-r border-[#e3d8ce]"
+                      : i === 1
+                        ? "md:border-b border-[#e3d8ce]"
+                        : i === 2
+                          ? "md:border-r border-[#e3d8ce]"
+                          : "";
+                  return (
+                    <WorkProjectCard
+                      key={project.id}
+                      project={project}
+                      showContent={showContent}
+                      i={i}
+                      contentTransition={contentTransition}
+                      borderClass={cellBorder}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
