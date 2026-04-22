@@ -3,6 +3,11 @@ export type CaseStudy = {
   project: string;
   /** e.g. company / client name shown under the main title (Parla) */
   company?: string;
+  /**
+   * Optional preview at the top. With exactly 3 items: [0] = center hero, [1] = left (behind), [2] = right
+   * (behind); ~10% of each side image is visually tucked under the center.
+   */
+  introGallery?: Array<{ src: string; alt: string }>;
   subtitle: string;
   /** Optional subheading above STAR (e.g. “2.1” for process section) */
   processWalkthroughLabel?: string;
@@ -126,6 +131,20 @@ export const caseStudies: CaseStudy[] = [
     slug: "parla-show-and-sell",
     project: "Show & Sell + Customer Scheduler",
     company: "Parla Retail",
+    introGallery: [
+      {
+        src: "/case-studies/parla/Admin_Dashboard_Desktop.png",
+        alt: "Parla admin dashboard on desktop",
+      },
+      {
+        src: "/case-studies/parla/Messages_Desktop.png",
+        alt: "Parla messages workspace on desktop",
+      },
+      {
+        src: "/case-studies/parla/CRM_Order.png",
+        alt: "Parla CRM order view",
+      },
+    ],
     subtitle: "",
     processWalkthroughLabel: "2.1",
     summary:

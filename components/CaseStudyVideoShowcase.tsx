@@ -57,14 +57,14 @@ export default function CaseStudyVideoShowcase({
     <section
       className={
         showTopRule
-          ? `mt-12 border-t border-[#e7ddcf] pt-8 ${className}`.trim()
+          ? `mt-12 border-t border-[#1e293b] pt-8 ${className}`.trim()
           : `mt-0 border-0 p-0 ${className}`.trim()
       }
     >
       {title ? (
-        <h2 className="text-[12px] font-mono uppercase tracking-[0.2em] text-[#b45d14]">{title}</h2>
+        <h2 className="text-[12px] font-mono uppercase tracking-[0.2em] text-[#FF7410]">{title}</h2>
       ) : null}
-      {reason ? <p className="mt-3 text-[15px] text-[#4d4136] leading-relaxed">{reason}</p> : null}
+      {reason ? <p className="mt-3 text-[15px] text-[#cbd5e1] leading-relaxed">{reason}</p> : null}
 
       <div className="mt-5 grid w-full min-w-0 max-w-full items-stretch gap-3 md:grid-cols-2">
         {videos.map((video) => (
@@ -163,17 +163,17 @@ function VideoCard({
       : { aspectRatio: "16/9" };
 
   return (
-    <div className="min-w-0 border border-[#e7ddcf] bg-white p-3">
+    <div className="min-w-0 border border-[#1e293b] bg-[#0c1014] p-3">
       <div className="flex items-center justify-between gap-2 mb-2">
-        <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#8a7460]">{video.label}</div>
-        <div className="text-[10px] font-mono text-[#9a8a7a] truncate">{displayName}</div>
+        <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#64748b]">{video.label}</div>
+        <div className="text-[10px] font-mono text-[#64748b] truncate">{displayName}</div>
       </div>
 
       <button
         type="button"
         onClick={togglePlayback}
         style={aspectStyle}
-        className="group relative w-full min-w-0 max-w-full border border-dashed border-[#ccb9a6] bg-[#111] overflow-hidden text-left"
+        className="group relative w-full min-w-0 max-w-full border border-dashed border-[#475569] bg-[#111] overflow-hidden text-left"
         title={paused ? "Tap to play" : "Tap to pause"}
       >
         <video
@@ -203,7 +203,7 @@ function VideoCard({
         </video>
       </button>
 
-      <p className="mt-2 text-[12px] text-[#5d5145] leading-relaxed">{video.caption}</p>
+      <p className="mt-2 text-[12px] text-[#94a3b8] leading-relaxed">{video.caption}</p>
     </div>
   );
 }

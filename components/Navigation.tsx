@@ -3,6 +3,7 @@
 import { useState, useEffect, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLenis, HEADER_SCROLL_OFFSET } from "@/components/LenisProvider";
+import { scrollToWorksSection } from "@/lib/scrollToWorksSection";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -62,6 +63,12 @@ export default function Navigation() {
       return;
     }
 
+    if (id === "works") {
+      scrollToWorksSection(lenis, { onStart: afterNav });
+      history.pushState(null, "", href);
+      return;
+    }
+
     if (lenis) {
       lenis.scrollTo(el, {
         offset: HEADER_SCROLL_OFFSET,
@@ -85,7 +92,11 @@ export default function Navigation() {
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        const top = el.getBoundingClientRect().top + window.scrollY;
+        let top = el.getBoundingClientRect().top + window.scrollY;
+        // Match scroll target in scrollToWorksSection: #works layout top is one viewport above the visible band on md+.
+        if (id === "works" && window.matchMedia("(min-width: 768px)").matches) {
+          top += window.innerHeight;
+        }
         if (window.scrollY >= top - 140) current = id;
       }
       setActive(current);

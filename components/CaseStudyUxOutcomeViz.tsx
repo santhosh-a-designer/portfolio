@@ -6,7 +6,7 @@ type OutcomeItem = { label: string; value: number };
 
 function donutBackground(items: OutcomeItem[]) {
   const total = items.reduce((s, i) => s + i.value, 0);
-  if (total <= 0) return "conic-gradient(#e5dccf 0deg 360deg)";
+  if (total <= 0) return "conic-gradient(#334155 0deg 360deg)";
   let deg = 0;
   const stops: string[] = [];
   items.forEach((it, i) => {
@@ -26,9 +26,9 @@ export default function CaseStudyUxOutcomeViz({ study }: { study: CaseStudy }) {
   const avgLabel = Number.isInteger(avg) ? String(avg) : avg.toFixed(1);
 
   return (
-    <section className="mt-10 border border-[#e7ddcf] bg-white p-4 sm:p-6">
-      <h2 className="text-[12px] font-mono uppercase tracking-[0.2em] text-[#b45d14]">{v.title}</h2>
-      {v.blurb ? <p className="mt-2 text-[13px] leading-relaxed text-[#5d5145]">{v.blurb}</p> : null}
+    <section className="mt-10 border border-[#1e293b] bg-[#0c1014] p-4 sm:p-6">
+      <h2 className="text-[12px] font-mono uppercase tracking-[0.2em] text-[#FF7410]">{v.title}</h2>
+      {v.blurb ? <p className="mt-2 text-[13px] leading-relaxed text-[#94a3b8]">{v.blurb}</p> : null}
 
       {v.style === "donut" ? (
         <div className="mt-6 flex flex-col items-center gap-8 sm:flex-row sm:items-center sm:justify-center sm:gap-10">
@@ -41,21 +41,21 @@ export default function CaseStudyUxOutcomeViz({ study }: { study: CaseStudy }) {
               className="h-full w-full rounded-full"
               style={{ background: donutBackground(v.items) }}
             />
-            <div className="absolute inset-[22%] flex flex-col items-center justify-center rounded-full bg-white shadow-[inset_0_0_0_1px_rgba(201,96,16,0.12)]">
-              <span className="font-title text-3xl font-black tabular-nums text-[#c96010]">{avgLabel}</span>
-              <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#8a7460]">/ 10 avg</span>
+            <div className="absolute inset-[22%] flex flex-col items-center justify-center rounded-full bg-[#0c1014] shadow-[inset_0_0_0_1px_rgba(255,116,16,0.2)]">
+              <span className="font-title text-3xl font-black tabular-nums text-[#FF7410]">{avgLabel}</span>
+              <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#64748b]">/ 10 avg</span>
             </div>
           </div>
           <ul className="flex w-full max-w-sm flex-col gap-2.5" role="list">
             {v.items.map((row, i) => (
-              <li key={row.label} className="flex items-center gap-2.5 text-[13px] text-[#3f352b]">
+              <li key={row.label} className="flex items-center gap-2.5 text-[13px] text-[#cbd5e1]">
                 <span
                   className="h-2.5 w-2.5 shrink-0 rounded-sm"
                   style={{ backgroundColor: ACCENT[i % ACCENT.length] }}
                   aria-hidden
                 />
                 <span className="min-w-0 flex-1 leading-snug">{row.label}</span>
-                <span className="shrink-0 font-mono text-[12px] tabular-nums text-[#6b5a4a]">{row.value}</span>
+                <span className="shrink-0 font-mono text-[12px] tabular-nums text-[#94a3b8]">{row.value}</span>
               </li>
             ))}
           </ul>
@@ -64,11 +64,11 @@ export default function CaseStudyUxOutcomeViz({ study }: { study: CaseStudy }) {
         <div className="mt-5 max-w-md space-y-3">
           {v.items.map((row, i) => (
             <div key={row.label}>
-              <div className="flex justify-between gap-2 text-[12px] text-[#3f352b]">
+              <div className="flex justify-between gap-2 text-[12px] text-[#cbd5e1]">
                 <span className="min-w-0 leading-snug">{row.label}</span>
-                <span className="shrink-0 font-mono tabular-nums text-[#6b5a4a]">{row.value}/10</span>
+                <span className="shrink-0 font-mono tabular-nums text-[#94a3b8]">{row.value}/10</span>
               </div>
-              <div className="mt-1.5 h-2.5 w-full bg-[#eee4d8]">
+              <div className="mt-1.5 h-2.5 w-full bg-[#1e293b]">
                 <div
                   className="h-full"
                   style={{

@@ -19,8 +19,8 @@ function BusinessImpactMetricsList({
   metrics,
   listClassName,
   itemPad = "p-3.5",
-  valueClassName = "font-title text-[1.65rem] font-black tabular-nums leading-none tracking-tight text-[#c96010] sm:text-[1.75rem]",
-  labelClassName = "mt-2 text-[12px] leading-snug text-[#5d5145]",
+  valueClassName = "font-title text-[1.65rem] font-black tabular-nums leading-none tracking-tight text-[#FF7410] sm:text-[1.75rem]",
+  labelClassName = "mt-2 text-[12px] leading-snug text-[#94a3b8]",
 }: {
   metrics: NonNullable<Chapter["businessImpact"]>["metrics"];
   listClassName?: string;
@@ -33,7 +33,7 @@ function BusinessImpactMetricsList({
       {metrics.map((m) => (
         <li
           key={m.value + m.label}
-          className={`rounded-none border border-[#e7ddcf] bg-white/90 shadow-[0_1px_0_0_rgba(27,20,10,0.04)] ${itemPad}`}
+          className={`rounded-none border border-[#1e293b] bg-[#0c1014]/95 shadow-[0_1px_0_0_rgba(27,20,10,0.04)] ${itemPad}`}
         >
           <p className={valueClassName}>{m.value}</p>
           <p className={labelClassName}>{m.label}</p>
@@ -53,18 +53,18 @@ function BusinessImpactStrip({
 }: NonNullable<Chapter["businessImpact"]> & { className?: string; fillHeight?: boolean }) {
   return (
     <div
-      className={`rounded-none border border-[#e0d4c4] bg-gradient-to-b from-[#fdfaf5] to-[#f7f0e6] px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] sm:px-5 sm:py-5 ${fillHeight ? "flex h-full min-h-0 w-full min-w-0 flex-1 flex-col" : ""} ${className}`.trim()}
+      className={`rounded-none border border-[#334155] bg-gradient-to-b from-[#11161c] to-[#0a0d12] px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.04)] sm:px-5 sm:py-5 ${fillHeight ? "flex h-full min-h-0 w-full min-w-0 flex-1 flex-col" : ""} ${className}`.trim()}
     >
-      <p className="shrink-0 text-[10px] font-mono uppercase tracking-[0.2em] text-[#a87847]">{eyebrow}</p>
+      <p className="shrink-0 text-[10px] font-mono uppercase tracking-[0.2em] text-[#FF7410]">{eyebrow}</p>
       {intro ? (
-        <p className="mt-2.5 max-w-[72ch] shrink-0 text-[14px] leading-relaxed text-[#4a4036]">{intro}</p>
+        <p className="mt-2.5 max-w-[72ch] shrink-0 text-[14px] leading-relaxed text-[#cbd5e1]">{intro}</p>
       ) : null}
       <BusinessImpactMetricsList
         metrics={metrics}
         listClassName={`mt-4 grid list-none gap-3 sm:grid-cols-3 ${fillHeight ? "min-h-0 flex-1 content-start" : ""}`.trim()}
       />
       {footnote ? (
-        <p className="mt-4 shrink-0 border-t border-[#e7ddcf] pt-3 text-[10px] leading-relaxed text-[#8a7d6f]">{footnote}</p>
+        <p className="mt-4 shrink-0 border-t border-[#1e293b] pt-3 text-[10px] leading-relaxed text-[#64748b]">{footnote}</p>
       ) : null}
     </div>
   );
@@ -177,8 +177,8 @@ function InlineWalkthroughVideo({
       style={fillLike ? undefined : aspectStyle}
       className={
         fillLike
-          ? "relative h-full min-h-0 w-full min-w-0 max-w-full max-h-full flex-1 overflow-hidden rounded-none border border-dashed border-[#ccb9a6] bg-[#0c0c0c] text-left"
-          : "relative w-full min-w-0 max-w-full overflow-hidden rounded-none border border-dashed border-[#ccb9a6] bg-[#0c0c0c] text-left"
+          ? "relative h-full min-h-0 w-full min-w-0 max-w-full max-h-full flex-1 overflow-hidden rounded-none border border-dashed border-[#475569] bg-[#0c0c0c] text-left"
+          : "relative w-full min-w-0 max-w-full overflow-hidden rounded-none border border-dashed border-[#475569] bg-[#0c0c0c] text-left"
       }
       title={paused ? "Tap to play" : "Tap to pause"}
     >
@@ -212,7 +212,7 @@ function InlineWalkthroughVideo({
 
   const shellClass = [
     noTopMargin ? "mt-0" : "mt-5",
-    "min-w-0 border border-[#e7ddcf] bg-white p-3 shadow-sm",
+    "min-w-0 border border-[#1e293b] bg-[#0c1014] p-3 shadow-sm",
     sideBySideEqual
       ? "flex h-full min-h-0 w-full min-w-0 flex-col"
       : heightMode === "fill"
@@ -224,12 +224,12 @@ function InlineWalkthroughVideo({
 
   const headerBlock = (
     <div className="mb-2 flex shrink-0 items-center justify-between gap-2">
-      <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#8a7460]">{label}</span>
-      <span className="text-[10px] font-mono text-[#9a8a7a] truncate max-w-[55%]">{displayName}</span>
+      <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#64748b]">{label}</span>
+      <span className="text-[10px] font-mono text-[#64748b] truncate max-w-[55%]">{displayName}</span>
     </div>
   );
 
-  const captionBlock = <p className="mt-2.5 shrink-0 text-[12px] leading-relaxed text-[#5d5145]">{caption}</p>;
+  const captionBlock = <p className="mt-2.5 shrink-0 text-[12px] leading-relaxed text-[#94a3b8]">{caption}</p>;
 
   const fillVideoBlock = (
     <div
@@ -309,19 +309,19 @@ function SideBySideWalkthroughs({
   return (
     <div className="mt-5 min-w-0">
       {bridge ? (
-        <p className="text-center text-[14px] leading-relaxed text-[#4d4339] sm:text-left">
-          <span className="font-medium text-[#c96010]">One pipeline.</span> {bridge}
+        <p className="text-center text-[14px] leading-relaxed text-[#cbd5e1] sm:text-left">
+          <span className="font-medium text-[#FF7410]">One pipeline.</span> {bridge}
         </p>
       ) : null}
       <div className={bridge ? "mt-4 space-y-6 lg:hidden" : "space-y-6 lg:hidden"}>
         <div className="min-w-0">
-          <h4 className="font-title text-base font-bold text-[#1f1a15] sm:text-lg">{left.title}</h4>
-          <p className="mt-2 text-[14px] leading-relaxed text-[#43392f]">{left.body}</p>
+          <h4 className="font-title text-base font-bold text-[#f8fafc] sm:text-lg">{left.title}</h4>
+          <p className="mt-2 text-[14px] leading-relaxed text-[#cbd5e1]">{left.body}</p>
           <div className="mt-4 flex min-h-[280px] min-w-0 flex-col">{walkL}</div>
         </div>
         <div className="min-w-0">
-          <h4 className="font-title text-base font-bold text-[#1f1a15] sm:text-lg">{right.title}</h4>
-          <p className="mt-2 text-[14px] leading-relaxed text-[#43392f]">{right.body}</p>
+          <h4 className="font-title text-base font-bold text-[#f8fafc] sm:text-lg">{right.title}</h4>
+          <p className="mt-2 text-[14px] leading-relaxed text-[#cbd5e1]">{right.body}</p>
           <div className="mt-4 flex min-h-[280px] min-w-0 flex-col">{walkR}</div>
         </div>
       </div>
@@ -333,12 +333,12 @@ function SideBySideWalkthroughs({
         }
       >
         <div className="min-w-0 self-start">
-          <h4 className="font-title text-base font-bold text-[#1f1a15] sm:text-lg">{left.title}</h4>
-          <p className="mt-2 text-[14px] leading-relaxed text-[#43392f]">{left.body}</p>
+          <h4 className="font-title text-base font-bold text-[#f8fafc] sm:text-lg">{left.title}</h4>
+          <p className="mt-2 text-[14px] leading-relaxed text-[#cbd5e1]">{left.body}</p>
         </div>
         <div className="min-w-0 self-start">
-          <h4 className="font-title text-base font-bold text-[#1f1a15] sm:text-lg">{right.title}</h4>
-          <p className="mt-2 text-[14px] leading-relaxed text-[#43392f]">{right.body}</p>
+          <h4 className="font-title text-base font-bold text-[#f8fafc] sm:text-lg">{right.title}</h4>
+          <p className="mt-2 text-[14px] leading-relaxed text-[#cbd5e1]">{right.body}</p>
         </div>
         <div className="flex min-h-0 min-w-0 flex-col">{walkL}</div>
         <div className="flex min-h-0 min-w-0 flex-col">{walkR}</div>
@@ -401,12 +401,12 @@ function ResponsiveDesktopMobilePair({
 
   return (
     <div className="mt-5">
-      <p className="text-center text-[14px] leading-relaxed text-[#4d4339] sm:text-left">
-        <span className="font-medium text-[#c96010]">One journey.</span> {bridge}
+      <p className="text-center text-[14px] leading-relaxed text-[#cbd5e1] sm:text-left">
+        <span className="font-medium text-[#FF7410]">One journey.</span> {bridge}
       </p>
       <div className="mt-4 grid min-h-0 min-w-0 grid-cols-1 items-stretch gap-x-4 gap-y-2 lg:grid-cols-[1.2fr_0.62fr] lg:items-stretch lg:gap-y-0">
-        <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#8a7460] lg:col-start-1 lg:row-start-1">Desktop</p>
-        <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#8a7460] lg:col-start-2 lg:row-start-1">Mobile</p>
+        <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#64748b] lg:col-start-1 lg:row-start-1">Desktop</p>
+        <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#64748b] lg:col-start-2 lg:row-start-1">Mobile</p>
         <div className="flex h-full min-h-0 w-full min-w-0 flex-col self-stretch lg:col-start-1 lg:row-start-2">
           <InlineWalkthroughVideo
             noTopMargin
@@ -438,33 +438,33 @@ function ResponsiveDesktopMobilePair({
 
 export default function CustomerSchedulerStory({ story }: { story: Story }) {
   return (
-    <section className="mt-12 w-full min-w-0 border-t border-[#e7ddcf] pt-10">
-      <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#c96010]">{story.eyebrow}</p>
-      <h2 className="mt-2 font-title text-2xl sm:text-3xl font-black tracking-tight text-[#1a1510]">{story.title}</h2>
-      <p className="mt-4 max-w-[75ch] text-[16px] sm:text-[17px] leading-[1.75] text-[#4a4036]">{story.intro}</p>
+    <section className="mt-12 w-full min-w-0 border-t border-[#1e293b] pt-10">
+      <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-[#FF7410]">{story.eyebrow}</p>
+      <h2 className="mt-2 font-title text-2xl sm:text-3xl font-black tracking-tight text-[#f8fafc]">{story.title}</h2>
+      <p className="mt-4 max-w-[75ch] text-[16px] sm:text-[17px] leading-[1.75] text-[#cbd5e1]">{story.intro}</p>
 
       <div className="mt-10 space-y-14 sm:space-y-16">
         {story.chapters.map((ch, i) => (
           <article
             key={ch.badge + ch.title}
-            className="relative scroll-mt-8 rounded-none border border-[#ece4d8] bg-gradient-to-b from-white to-[#fbf7f0] p-4 sm:p-6 shadow-[0_1px_0_0_rgba(27,20,10,0.04)]"
+            className="relative scroll-mt-8 rounded-none border border-[#1e293b] bg-gradient-to-b from-[#121820] to-[#0c1014] p-4 sm:p-6 shadow-[0_1px_0_0_rgba(0,0,0,0.35)]"
           >
             <div
-              className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#c96010] via-[#e8954a] to-[#c96010] opacity-90 sm:left-0"
+              className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#FF7410] via-[#ff9a4d] to-[#FF7410] opacity-90 sm:left-0"
               aria-hidden
             />
             <div className="pl-3 sm:pl-4">
-              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#a87847]">
+              <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#FF7410]">
                 {ch.badge}
-                <span className="ml-2 text-[#b9a38d]">·</span>
-                <span className="ml-2 text-[#8a7460]">
+                <span className="ml-2 text-[#64748b]">·</span>
+                <span className="ml-2 text-[#64748b]">
                   Part {i + 1} of {story.chapters.length}
                 </span>
               </p>
-              <h3 className="mt-2 font-title text-lg sm:text-xl font-bold text-[#1f1a15]">{ch.title}</h3>
-              <p className="mt-3 text-[15px] sm:text-[16px] leading-[1.75] text-[#43392f]">{ch.body}</p>
+              <h3 className="mt-2 font-title text-lg sm:text-xl font-bold text-[#f8fafc]">{ch.title}</h3>
+              <p className="mt-3 text-[15px] sm:text-[16px] leading-[1.75] text-[#cbd5e1]">{ch.body}</p>
               {ch.footnote ? (
-                <p className="mt-3 border-l-2 border-[#e0cdb8] pl-3 text-[13px] italic leading-relaxed text-[#6b5d4e]">
+                <p className="mt-3 border-l-2 border-[#334155] pl-3 text-[13px] italic leading-relaxed text-[#94a3b8]">
                   {ch.footnote}
                 </p>
               ) : null}
