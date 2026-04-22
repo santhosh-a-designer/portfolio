@@ -1,116 +1,239 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import { useRouter } from "next/navigation";
-import {
-  ArrowSquareOut, ArrowRight, Lightning,
-  GlobeHemisphereWest, DeviceMobile, Robot,
-} from "@phosphor-icons/react";
+import Link from "next/link";
+import { Lightning, GlobeHemisphereWest, DeviceMobile, Robot } from "@phosphor-icons/react";
 
-const projects = [
+type Project = {
+  id: number;
+  index: string;
+  tag: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  stats: { value: string; label: string }[];
+  icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
+  accentColor: string;
+  status: "shipped" | "live" | "in-progress";
+  slug: string;
+};
+
+const projects: Project[] = [
   {
-    id: 1, index: "01",
+    id: 1,
+    index: "01",
     tag: "Enterprise · Ecommerce",
-    title: "Parla Retail",
-    subtitle: "Show & Sell + Customer Scheduler",
-    description: "Built a CTA-led selling workflow for ecommerce stores: customer booking, video-call assisted selling, call-link automation, and in-call checkout. Customized scheduler flow for US client needs and improved usability for both shoppers and store teams.",
+    title: "Show & Sell + Customer Scheduler",
+    subtitle: "Parla Retail",
+    description:
+      "CTA-led selling for ecommerce: booking, video-call assisted sales, call-link automation, and in-call checkout. Scheduler tuned for US retail and usable for both shoppers and store teams.",
     stats: [
-      { value: "US", label: "Primary Market" },
-      { value: "CTA", label: "Entry Point" },
-      { value: "Video", label: "Assisted Sales" },
+      { value: "US", label: "Primary market" },
+      { value: "CTA", label: "Entry" },
+      { value: "Video", label: "Assisted sales" },
       { value: "Shipped", label: "Status" },
     ],
-    tags: ["Figma", "CTA UX", "Scheduler", "Call Platform"],
     icon: GlobeHemisphereWest,
     accentColor: "#FF7410",
     status: "shipped",
     slug: "parla-show-and-sell",
-    link: null,
   },
   {
-    id: 2, index: "02",
+    id: 2,
+    index: "02",
     tag: "EdTech · Automation",
     title: "Ezra Dashboard",
     subtitle: "FITA Academy — Mentor Platform",
-    description: "Mentor intelligence dashboard with real-time attendance, earnings, and batch tracking. Telegram bot triggers attendance alerts and payment-release emails with a single click.",
+    description:
+      "Mentor dashboard for attendance, earnings, and batches. Telegram-driven alerts and one-click payment-release emails to cut manual work.",
     stats: [
       { value: "100+", label: "Mentors" },
       { value: "1-click", label: "Automation" },
       { value: "Live", label: "Status" },
       { value: "3", label: "Integrations" },
     ],
-    tags: ["Dashboard", "Automation", "EdTech"],
     icon: Robot,
     accentColor: "#FF7410",
     status: "live",
     slug: "ezra-mentor-dashboard",
-    link: "https://ezra-dashboard.vercel.app",
   },
   {
-    id: 3, index: "03",
+    id: 3,
+    index: "03",
     tag: "PWA · Hyper-local",
     title: "Vidya's Kitchen",
-    subtitle: "Home Catering App — Sivakasi",
-    description: "Progressive Web App for a home catering service in Sivakasi. Minimal UI for low digital literacy — offline-first, Tamil language support, accessible onboarding.",
+    subtitle: "Home Catering — Sivakasi",
+    description:
+      "PWA for a home kitchen: low-friction ordering, offline-first where it matters, Tamil support, and onboarding that works for real-world users.",
     stats: [
-      { value: "PWA", label: "Architecture" },
+      { value: "PWA", label: "Stack" },
       { value: "Tamil", label: "Language" },
       { value: "Dev", label: "Status" },
       { value: "0", label: "Friction" },
     ],
-    tags: ["PWA", "Mobile", "Accessibility"],
     icon: DeviceMobile,
     accentColor: "#E07010",
     status: "in-progress",
     slug: "vidyas-kitchen-pwa",
-    link: null,
   },
   {
-    id: 4, index: "04",
+    id: 4,
+    index: "04",
     tag: "AI · Commerce",
     title: "CEaSS",
     subtitle: "Community-Enabled Autonomous Sales",
-    description: "Autonomous sales platform for pet products combining community discovery with intelligent automation. Reduces friction from browsing to purchase for micro-sellers.",
+    description:
+      "Commerce for pet products: community discovery plus automation to get micro-sellers from browse to buy with less overhead.",
     stats: [
       { value: "AI", label: "Automation" },
       { value: "Community", label: "Discovery" },
       { value: "Dev", label: "Status" },
       { value: "1", label: "Niche" },
     ],
-    tags: ["AI", "Commerce", "Next.js"],
     icon: Lightning,
     accentColor: "#EA580C",
     status: "in-progress",
     slug: "ceass-pet-ecommerce",
-    link: null,
   },
 ];
 
-const statusLabel: Record<string, string> = {
-  shipped: "Shipped", live: "Live", "in-progress": "In Progress",
+const statusLabel: Record<Project["status"], string> = {
+  shipped: "Shipped",
+  live: "Live",
+  "in-progress": "In progress",
 };
+
+function WorkProjectCard({
+  project,
+  showContent,
+  i,
+  borderClass,
+  contentTransition,
+}: {
+  project: Project;
+  showContent: boolean;
+  i: number;
+  borderClass: string;
+  contentTransition: { type: "spring"; stiffness: number; damping: number; mass: number };
+}) {
+  const Icon = project.icon;
+  const [labelPos, setLabelPos] = useState<{ x: number; y: number } | null>(null);
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ ...contentTransition, delay: 0.28 + i * 0.05 }}
+      className={`relative flex h-auto min-h-0 flex-col border-[#e3d8ce] bg-white ${borderClass}`}
+    >
+      <Link
+        href={`/case-studies/${project.slug}`}
+        className="absolute inset-0 z-[2] block cursor-none max-sm:cursor-pointer"
+        aria-label={`View case study: ${project.title}`}
+        onMouseMove={(e) => {
+          setLabelPos({ x: e.clientX, y: e.clientY });
+        }}
+        onMouseLeave={() => setLabelPos(null)}
+      >
+        <span className="sr-only">View case study — {project.title}</span>
+      </Link>
+
+      {labelPos ? (
+        <div
+          className="pointer-events-none fixed z-[200] max-sm:hidden"
+          style={{
+            left: labelPos.x,
+            top: labelPos.y,
+            transform: "translate(14px, 14px)",
+          }}
+          aria-hidden
+        >
+          <span
+            className="inline-block rounded-none border border-[#1a1510] bg-[#1a1510] px-2.5 py-1.5 text-[8px] font-mono font-bold uppercase tracking-[0.12em] text-white shadow-md"
+            style={{ boxShadow: "0 4px 14px rgba(0,0,0,0.12)" }}
+          >
+            View case study
+          </span>
+        </div>
+      ) : null}
+
+      <div
+        className="pointer-events-none absolute right-2 top-1 font-title text-3xl font-black leading-none select-none sm:text-4xl"
+        style={{ color: project.accentColor, opacity: 0.08 }}
+        aria-hidden
+      >
+        {project.index}
+      </div>
+
+      <div className="relative z-[1] flex flex-col p-3 pointer-events-none sm:p-3.5 md:p-4">
+        <div className="mb-2 flex items-start justify-between gap-2">
+          <div
+            className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-sm"
+            style={{
+              background: `${project.accentColor}12`,
+              border: `1px solid ${project.accentColor}30`,
+            }}
+          >
+            <Icon size={17} style={{ color: project.accentColor }} />
+          </div>
+          <span
+            className="shrink-0 rounded-sm px-1.5 py-0.5 text-[7px] font-mono font-semibold uppercase tracking-widest sm:text-[8px]"
+            style={{
+              color: project.accentColor,
+              background: `${project.accentColor}0f`,
+              border: `1px solid ${project.accentColor}35`,
+            }}
+          >
+            {statusLabel[project.status]}
+          </span>
+        </div>
+
+        <p className="mb-0.5 text-[7px] font-mono uppercase leading-tight tracking-[0.15em] text-[#9a8a7a] sm:text-[8px]">
+          {project.tag}
+        </p>
+        <h3 className="font-title text-xs font-black leading-snug text-[#130e08] sm:text-sm md:leading-tight">
+          {project.title}
+        </h3>
+        <p className="mb-2 mt-0.5 text-[10px] font-medium leading-snug sm:mb-2.5 sm:text-[11px]" style={{ color: project.accentColor }}>
+          {project.subtitle}
+        </p>
+
+        <p className="mb-2 min-h-0 line-clamp-2 text-[9px] leading-[1.5] text-[#5a4a3d] sm:line-clamp-3 sm:text-[10px] sm:leading-relaxed">
+          {project.description}
+        </p>
+
+        <div
+          className="grid shrink-0 grid-cols-2 gap-px self-stretch border border-[#e6ded4] sm:grid-cols-4"
+          style={{ background: "#e6ded4" }}
+        >
+          {project.stats.map((stat, j) => (
+            <div key={j} className="min-w-0 bg-[#faf6f0] px-1.5 py-1.5 text-center sm:px-1.5 sm:py-2">
+              <p className="font-title text-[9px] font-black leading-tight text-[#130e08] sm:text-[10px]">{stat.value}</p>
+              <p className="mt-0.5 text-[5px] font-mono uppercase leading-tight tracking-wider text-[#8c7b6a] sm:mt-1 sm:text-[6px]">
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.article>
+  );
+}
 
 export default function Works() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [showContent, setShowContent] = useState(false);
-  const router = useRouter();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end end"],
   });
 
-  /* ── White curtain wipes up (Buffered to give Bento time) ── */
-  // It now wipes between 45% and 70% to ensure a 'blank canvas' exists before content appears
-  const curtainY = useTransform(scrollYProgress, [0.45, 0.70], ["100%", "0%"]);
+  const curtainY = useTransform(scrollYProgress, [0.45, 0.7], ["100%", "0%"]);
 
-  // Detect when wipe is complete enough to trigger automatic animations
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    // 1. Reveal content ONLY after curtain is 100% established (at v=0.70)
-    // 2. Hide content IMMEDIATELY when scrolling up (before curtain starts moving down)
     if (v > 0.75) setShowContent(true);
-    else if (v < 0.72) setShowContent(false); 
+    else if (v < 0.72) setShowContent(false);
   });
 
   const contentTransition = {
@@ -121,181 +244,81 @@ export default function Works() {
   };
 
   return (
-    /* High z-index and negative margin to overlap pinned About section */
-    <section 
-      id="works" 
-      ref={sectionRef} 
-      style={{ height: "200vh", marginTop: "-100vh" }} 
+    <section
+      ref={sectionRef}
+      style={{ height: "200vh", marginTop: "-100vh" }}
       className="relative z-10"
     >
+      <div
+        id="works"
+        className="pointer-events-none absolute left-0 top-[100vh] h-0 w-px overflow-hidden"
+        tabIndex={-1}
+        aria-hidden
+      />
 
-      {/* Sticky viewport — stays fixed as user scrolls */}
-      <div className="sticky top-0 h-screen overflow-hidden pointer-events-none">
-
-        {/* TRANSPARENT base layer (allows previous section to be seen during wipe) */}
+      <div className="pointer-events-none sticky top-[5.75rem] flex h-[calc(100vh-5.75rem)] max-h-[calc(100vh-5.75rem)] flex-col overflow-hidden">
         <div className="absolute inset-0 bg-transparent" />
 
-        {/* White curtain that wipes from bottom */}
         <motion.div
           className="absolute inset-x-0 bottom-0 pointer-events-auto"
           style={{ top: 0, y: curtainY, background: "#f5f0eb" }}
         />
 
-        {/* ── Index strip ── */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20, scale: 0.96 }}
-          animate={showContent ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.96 }}
-          transition={{ ...contentTransition, delay: 0.1 }}
-          className="relative z-20 border-b border-[#e0d5c8] pointer-events-auto"
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ ...contentTransition, delay: 0.08 }}
+          className="relative z-20 flex-shrink-0 border-b border-[#e0d5c8] pointer-events-auto"
           style={{ background: showContent ? "rgba(245,240,235,0.97)" : "transparent" }}
         >
-          <div className="max-w-6xl mx-auto px-6 py-2.5 flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.2em]">
-            <span style={{ color: "#a89880" }}>Index · 02 — Works</span>
-            <span style={{ color: "#c96010" }}>
-              {projects.length} Projects — {projects.filter(p => p.status !== "in-progress").length} Shipped
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-1.5 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] sm:py-2 md:px-8 lg:px-10">
+            <span className="text-[#a89880]">Index · 02 — Works</span>
+            <span className="text-[#c96010]">
+              {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
             </span>
           </div>
         </motion.div>
 
-        {/* ── Content area ── */}
-        <div className="relative z-10 flex flex-col pointer-events-auto" style={{ height: "calc(100vh - 35px)" }}>
-          <div className="max-w-6xl mx-auto px-6 w-full flex flex-col h-full py-8 gap-6">
-
-            {/* Header */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20, scale: 0.96 }}
-              animate={showContent ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.96 }}
-              transition={{ ...contentTransition, delay: 0.2 }}
-              className="flex-shrink-0"
+        <div className="relative z-10 flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto overscroll-y-contain pointer-events-auto">
+          <div className="mx-auto flex w-full min-h-0 min-w-0 max-w-6xl flex-1 flex-col justify-start gap-4 px-5 py-4 sm:gap-5 sm:px-7 sm:py-5 md:justify-center md:gap-6 md:px-8 md:py-4 lg:px-10">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={{ ...contentTransition, delay: 0.16 }}
+              className="w-full flex-shrink-0"
             >
-              <p className="text-[10px] font-mono uppercase tracking-[0.26em] mb-3" style={{ color: "#c96010" }}>
-                02 / Selected Works
+              <p className="mb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#c96010] sm:mb-2 sm:text-[10px] sm:tracking-[0.26em]">
+                02 / Selected works
               </p>
-              <h2 className="font-title text-3xl sm:text-4xl font-black leading-tight" style={{ color: "#130e08" }}>
-                Problems solved,{" "}
-                <span style={{ color: "#FF7410" }}>products shipped</span>
+              <h2 className="font-title text-xl font-black leading-tight text-[#130e08] sm:text-2xl md:text-3xl">
+                Problems solved, <span className="text-[#FF7410]">products shipped</span>
               </h2>
             </motion.div>
 
-            {/* 2×2 Card grid */}
-            <div
-              className="grid grid-cols-1 md:grid-cols-2 flex-1 min-h-0"
-              style={{ border: "1px solid #ddd0c2", overflow: "hidden" }}
-            >
+            <div className="w-full min-w-0 shrink-0">
+              <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:grid-rows-[auto_auto] md:items-start md:gap-0 md:overflow-hidden md:rounded-sm md:border md:border-[#d0c3b6] md:shadow-[0_1px_0_0_rgba(0,0,0,0.04)]">
               {projects.map((project, i) => {
-                const Icon = project.icon;
+                const cellBorder =
+                  i === 0
+                    ? "md:border-b md:border-r border-[#e3d8ce]"
+                    : i === 1
+                      ? "md:border-b border-[#e3d8ce]"
+                      : i === 2
+                        ? "md:border-r border-[#e3d8ce]"
+                        : "";
                 return (
-                  <motion.div
+                  <WorkProjectCard
                     key={project.id}
-                    initial={{ opacity: 0, y: 30, scale: 0.92 }}
-                    animate={showContent ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 30, scale: 0.92 }}
-                    transition={{ ...contentTransition, delay: 0.3 + i * 0.05 }}
-                    className="flex flex-col p-5 bg-white hover:bg-[#fef9f5] transition-colors relative overflow-hidden cursor-pointer"
-                    onClick={() => router.push(`/case-studies/${project.slug}`)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        router.push(`/case-studies/${project.slug}`);
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    style={{
-                      borderRight: i % 2 === 0 ? "1px solid #ddd0c2" : "none",
-                      borderBottom: i < 2 ? "1px solid #ddd0c2" : "none",
-                    }}
-                  >
-                    {/* Watermark number */}
-                    <div
-                      className="absolute top-3 right-4 font-title text-5xl font-black leading-none select-none pointer-events-none"
-                      style={{ color: project.accentColor, opacity: 0.06 }}
-                    >
-                      {project.index}
-                    </div>
-
-                    {/* Top row */}
-                    <div className="flex items-start justify-between gap-3 mb-3">
-                      <div
-                        className="w-8 h-8 flex items-center justify-center flex-shrink-0"
-                        style={{ background: `${project.accentColor}14`, border: `1px solid ${project.accentColor}28` }}
-                      >
-                        <Icon size={15} style={{ color: project.accentColor }} />
-                      </div>
-                      <div
-                        className="text-[9px] font-mono uppercase tracking-widest px-2 py-0.5"
-                        style={{ color: project.accentColor, background: `${project.accentColor}10`, border: `1px solid ${project.accentColor}22` }}
-                      >
-                        {statusLabel[project.status]}
-                      </div>
-                    </div>
-
-                    {/* Title */}
-                    <div className="mb-2">
-                      <div className="text-[9px] font-mono uppercase tracking-widest mb-1" style={{ color: "#a89880" }}>
-                        {project.tag}
-                      </div>
-                      <h3 className="font-title text-base font-black leading-tight" style={{ color: "#130e08" }}>
-                        {project.title}
-                      </h3>
-                      <p className="text-xs font-medium mt-0.5" style={{ color: project.accentColor }}>
-                        {project.subtitle}
-                      </p>
-                    </div>
-
-                    <p className="text-[11px] leading-relaxed flex-1 mb-3" style={{ color: "#6b5c4d" }}>
-                      {project.description}
-                    </p>
-
-                    {/* Stats strip */}
-                    <div className="grid grid-cols-4 gap-px mb-3" style={{ border: "1px solid #e6ddd2" }}>
-                      {project.stats.map((stat, j) => (
-                        <div
-                          key={j}
-                          className="px-2 py-2 text-center"
-                          style={{ background: "#faf6f1", borderRight: j < 3 ? "1px solid #e6ddd2" : "none" }}
-                        >
-                          <div className="text-[11px] font-black font-title" style={{ color: "#130e08" }}>{stat.value}</div>
-                          <div className="text-[8px] uppercase tracking-wider mt-0.5" style={{ color: "#9c8b7a" }}>{stat.label}</div>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Tags + link */}
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex flex-wrap gap-1">
-                        {project.tags.map(tag => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5 text-[9px] font-mono uppercase tracking-wider"
-                            style={{ color: "#7a6a5a", border: "1px solid #ddd0c2" }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-3 flex-shrink-0">
-                        {project.link ? (
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider"
-                            style={{ color: project.accentColor }}
-                          >
-                            Live <ArrowSquareOut size={11} />
-                          </a>
-                        ) : null}
-                        <span className="text-[9px] font-mono uppercase tracking-wider flex items-center gap-1" style={{ color: "#9c8b7a" }}>
-                          Case Study <ArrowRight size={10} />
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
+                    project={project}
+                    showContent={showContent}
+                    i={i}
+                    contentTransition={contentTransition}
+                    borderClass={cellBorder}
+                  />
                 );
               })}
+              </div>
             </div>
-
           </div>
         </div>
       </div>

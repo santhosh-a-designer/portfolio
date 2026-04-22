@@ -32,7 +32,9 @@ export default function Navigation() {
       let current = "";
       for (const id of ids) {
         const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 140) current = id;
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (window.scrollY >= top - 140) current = id;
       }
       setActive(current);
     };

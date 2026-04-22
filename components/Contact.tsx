@@ -83,61 +83,58 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VP}
           transition={{ delay: 0.1, duration: 0.8, ease }}
-          className="border border-[#1e293b] overflow-hidden"
+          className="border border-[#1e293b] overflow-hidden bg-[#0c0e12]"
         >
-          {/* Email */}
-          <button
-            onClick={copyEmail}
-            className="flex items-start gap-4 p-7 text-left border-b border-[#1e293b] hover:bg-[#FF7410]/5 transition-colors group w-full"
-          >
-            <div
-              className="w-10 h-10 flex items-center justify-center flex-shrink-0"
-              style={{ background: "rgba(255,116,16,0.1)", border: "1px solid rgba(255,116,16,0.22)" }}
+          <p className="px-5 pt-5 text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569] sm:px-7 sm:pt-6">
+            Get in touch
+          </p>
+          <div className="mt-3 grid grid-cols-1 border-b border-[#1e293b] sm:mt-4 md:grid-cols-2">
+            <button
+              onClick={copyEmail}
+              className="flex w-full items-start gap-3 border-b border-[#1e293b] p-5 text-left transition-colors hover:bg-[#FF7410]/5 group sm:gap-4 sm:p-6 md:border-b-0 md:border-r"
             >
-              {copied ? (
-                <CheckCircle size={18} style={{ color: "#FF7410" }} />
-              ) : (
-                <EnvelopeSimple size={18} style={{ color: "#FF7410" }} />
-              )}
-            </div>
-            <div className="flex-1">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-[#475569] mb-1">Email</div>
-              <div className="text-sm font-semibold text-white group-hover:text-[#FF7410] transition-colors">
-                santhosh.a.designer@gmail.com
+              <div
+                className="flex h-10 w-10 flex-shrink-0 items-center justify-center"
+                style={{ background: "rgba(255,116,16,0.1)", border: "1px solid rgba(255,116,16,0.22)" }}
+              >
+                {copied ? (
+                  <CheckCircle size={18} style={{ color: "#FF7410" }} />
+                ) : (
+                  <EnvelopeSimple size={18} style={{ color: "#FF7410" }} />
+                )}
               </div>
-              <div className="text-[11px] text-[#475569] mt-0.5">
-                {copied ? "✓ Copied to clipboard" : "Click to copy"}
+              <div className="min-w-0 flex-1">
+                <div className="mb-0.5 text-[10px] font-mono uppercase tracking-widest text-[#475569] sm:mb-1">Email</div>
+                <div className="text-sm font-semibold text-white transition-colors group-hover:text-[#FF7410]">
+                  santhosh.a.designer@gmail.com
+                </div>
+                <div className="mt-0.5 text-[11px] text-[#475569]">
+                  {copied ? "✓ Copied to clipboard" : "Click to copy"}
+                </div>
               </div>
-            </div>
-          </button>
-
-          {/* LinkedIn */}
-          <a
-            href="https://linkedin.com/in/santhosh-designer"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-start gap-4 p-7 border-b border-[#1e293b] hover:bg-[#FF7410]/5 transition-colors group"
-          >
-            <div
-              className="w-10 h-10 flex items-center justify-center flex-shrink-0"
-              style={{ background: "rgba(255,116,16,0.08)", border: "1px solid rgba(255,116,16,0.18)" }}
+            </button>
+            <a
+              href="https://linkedin.com/in/santhosh-designer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex w-full items-start gap-3 p-5 transition-colors hover:bg-[#FF7410]/5 sm:gap-4 sm:p-6"
             >
-              <ArrowSquareOut size={18} style={{ color: "#FF7410" }} />
-            </div>
-            <div className="flex-1">
-              <div className="text-[10px] font-mono uppercase tracking-widest text-[#475569] mb-1">LinkedIn</div>
-              <div className="text-sm font-semibold text-white group-hover:text-[#FF7410] transition-colors">
-                santhosh-designer
+              <div
+                className="flex h-10 w-10 flex-shrink-0 items-center justify-center"
+                style={{ background: "rgba(255,116,16,0.08)", border: "1px solid rgba(255,116,16,0.18)" }}
+              >
+                <ArrowSquareOut size={18} style={{ color: "#FF7410" }} />
               </div>
-              <div className="text-[11px] text-[#475569] mt-0.5">3K+ followers · Open to connect</div>
-            </div>
-          </a>
+              <div className="min-w-0 flex-1">
+                <div className="mb-0.5 text-[10px] font-mono uppercase tracking-widest text-[#475569] sm:mb-1">LinkedIn</div>
+                <div className="text-sm font-semibold text-white transition-colors group-hover:text-[#FF7410]">santhosh-designer</div>
+                <div className="mt-0.5 text-[11px] text-[#475569]">3K+ followers · Open to connect</div>
+              </div>
+            </a>
+          </div>
 
-          {/* Contact form */}
-          <div className="p-5 sm:p-7 bg-[#0c0e12]">
-            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-4">
-              Quick Project Brief
-            </p>
+          <div className="p-5 sm:p-7">
+            <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#475569] mb-4">Quick Project Brief</p>
             <form onSubmit={handleFormSubmit} className="grid gap-3 sm:gap-4">
               <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
                 <label className="block">

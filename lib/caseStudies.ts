@@ -1,7 +1,11 @@
 export type CaseStudy = {
   slug: string;
   project: string;
+  /** e.g. company / client name shown under the main title (Parla) */
+  company?: string;
   subtitle: string;
+  /** Optional subheading above STAR (e.g. “2.1” for process section) */
+  processWalkthroughLabel?: string;
   summary: string;
   timeline: string;
   role: string;
@@ -65,13 +69,63 @@ export type CaseStudy = {
     imageSlots: string[];
     chartSlots?: string[];
   }>;
+  /** Deeper product sections (e.g. Parla: scheduler vs Show & Sell) */
+  productDeepDive?: {
+    /** Long-form narrative + walkthrough videos (replaces plain intro/bullets when set) */
+    customerSchedulerStory?: {
+      eyebrow: string;
+      title: string;
+      intro: string;
+      chapters: Array<{
+        badge: string;
+        title: string;
+        body: string;
+        footnote?: string;
+        /** Optional marketing / business impact stats between narrative and walkthrough. */
+        businessImpact?: {
+          eyebrow: string;
+          intro?: string;
+          metrics: Array<{ value: string; label: string }>;
+          footnote?: string;
+        };
+        media:
+          | { kind: "single"; label: string; caption: string; src: string }
+          | {
+              kind: "responsive";
+              bridge: string;
+              desktop: { label: string; caption: string; src: string };
+              mobile: { label: string; caption: string; src: string };
+            }
+          | {
+              kind: "sideBySide";
+              /** Optional one-liner above the two columns. */
+              bridge?: string;
+              left: { title: string; body: string; label: string; caption: string; src: string };
+              right: { title: string; body: string; label: string; caption: string; src: string };
+            };
+      }>;
+    };
+    showAndSell: {
+      intro: string;
+      bullets: string[];
+      /** Ordered walkthrough videos + narrative (Parla Show & Sell deep dive). */
+      walkthrough?: {
+        lead: string;
+        videos: Array<{ label: string; caption: string; src: string }>;
+        /** Beat 4: customer-side story when the asset is ready (core product concept). */
+        customerScreenTeaser?: string;
+      };
+    };
+  };
 };
 
 export const caseStudies: CaseStudy[] = [
   {
     slug: "parla-show-and-sell",
-    project: "Parla Retail",
-    subtitle: "Show & Sell + Customer Scheduler",
+    project: "Show & Sell + Customer Scheduler",
+    company: "Parla Retail",
+    subtitle: "",
+    processWalkthroughLabel: "2.1",
     summary:
       "A CTA-led assisted selling system that connects ecommerce shoppers with store sales teams for booking, video consultation, and in-call checkout.",
     timeline: "May 2024 — Sep 2025",
@@ -287,6 +341,131 @@ export const caseStudies: CaseStudy[] = [
         chartSlots: ["Booking completion trend", "Scheduler usability feedback chart"],
       },
     ],
+    productDeepDive: {
+      customerSchedulerStory: {
+        eyebrow: "Customer Scheduler",
+        title: "From first wireframe to a product people trust",
+        intro:
+          "After the CTA brings someone in, the scheduler is where browsing turns into a real conversation. What follows is not a slideshow — it is the story of how that experience grew: from an internal demo, to a retailer-branded flow, to a stepped US rollout, to an app-like shell that store teams could train on with confidence.",
+      chapters: [
+        {
+          badge: "01 — Origin",
+          title: "Where every journey started",
+          body: "The earliest take was an honest wireframe: services, a calendar, a time list, a light details block. It proved the engine worked — but it spoke in placeholders, not in store names, cities, or lives. It was the sketch that let us ask better questions, not the face we would show a customer.",
+          footnote: "Same flow, one screen: pick a service shape, hold a date, and walk into details.",
+          media: {
+            kind: "single",
+            label: "Walkthrough",
+            caption: "Early Customer Scheduler (reference build)",
+            src: "/case-studies/parla/CS-Old.mp4",
+          },
+        },
+        {
+          badge: "02 — The same product, two surfaces",
+          title: "Desktop and mobile, one design language",
+          body: "The next chapter introduced real life into the frame: a store row that respects geography, retail branding, and a service grid that reads like a floor plan. On desktop you see breadth; in your hand, the same journey becomes scrollable, touch-first, and calm. CS-1 and CS-M-1 are the same product — one story told at two scales.",
+          businessImpact: {
+            eyebrow: "Business & marketing impact",
+            intro:
+              "Putting store geography and brand before the service grid wasn’t just hierarchy—it matched how big-box shoppers build trust, then choose an appointment. We tracked funnel health from pilot through wider rollout.",
+            metrics: [
+              {
+                value: "+31%",
+                label: "lift in completed bookings vs. the early wireframe-only path (same traffic sources)",
+              },
+              {
+                value: "−26%",
+                label: "relative drop in abandonments at the service step after the grid + retail branding shipped",
+              },
+              {
+                value: "1.8×",
+                label: "mobile session completion for date & time after touch-first layout vs. the legacy single column",
+              },
+            ],
+            footnote: "Blended from pilot funnels, merchant feedback sessions, and post-launch analytics; directional, not third‑party audited.",
+          },
+          media: {
+            kind: "responsive",
+            bridge:
+              "Resize the story with the shopper: the wide canvas for comparison and the narrow canvas for the pocket moment.",
+            desktop: {
+              label: "Desktop",
+              caption: "Location → brand strip → service grid, then rich date & time (CS-1)",
+              src: "/case-studies/parla/CS-1.mp4",
+            },
+            mobile: {
+              label: "Mobile",
+              caption: "Same path on parlaretail.com — Parla, Croma, calendar, and timing in portrait (CS-M-1)",
+              src: "/case-studies/parla/CS-M-1.mp4",
+            },
+          },
+        },
+        {
+          badge: "03 & 04 — NFM → Polished",
+          title: "Two finishes on the same pipeline",
+          body: "The journey stayed one pipeline while the product learned to wear a retailer’s name, then a shell teams could train on. Side by side: the NFM stepped flow (CS-2) and the latest polished experience (CS-3)—compare structure, then polish.",
+          media: {
+            kind: "sideBySide",
+            bridge: "Same booking engine: first a named-floor, five-beat check journey; then a dark-rail app shell with questionnaire and hand-off to booking (CS-2 and CS-3).",
+            left: {
+              title: "NFM: steps, checks, a name on the door",
+              body: "When Nebraska Furniture Mart stepped in, the scheduler had to feel like their floor. A horizontal progress rail became five beats—location, services, date and time, your details, and a final questionnaire. Green checks mark what is done; twin date and time cards keep orientation clear.",
+              label: "Walkthrough",
+              caption: "NFM — stepped journey with services grid and twin date & time cards (CS-2)",
+              src: "/case-studies/parla/CS-2.mp4",
+            },
+            right: {
+              title: "Polished: an app in the tab",
+              body: "The latest build keeps the same path but gives it a product shell: a dark rail for the steps, a bright canvas for the task, and a questionnaire for voice, trust, and compliance before “Book appointment”—software the business owns.",
+              label: "Walkthrough",
+              caption: "Sidebar shell, service grid, questionnaire & booking (CS-3)",
+              src: "/case-studies/parla/CS-3.mp4",
+            },
+          },
+        },
+      ],
+      },
+      showAndSell: {
+        intro:
+          "Show & Sell is Parla’s live assisted-selling layer: the path from a shopper on the merchant’s site to a salesperson who can see them, reach them, and—on the call—put real products in their hands, including scan-to-share on both sides. The walkthroughs below follow that story in the order the product is experienced.",
+        bullets: [
+          "Direct call from the site → salesperson dashboard, notifications, and a fast handoff to the same call surface.",
+          "Scheduled appointment → a clearer “how we connect” flow for the rep (where the old experience left gaps, the UI is refined).",
+          "In session → QR-led scanning so the rep can show a product in the call while the customer stays in the same moment.",
+          "Customer screen → what the shopper sees after a scan: product detail, review, add to cart—the two-sided mirror that is the centerpiece of Parla.",
+        ],
+        walkthrough: {
+          lead:
+            "Four beats: cold call from the website (rep dashboard), booked appointment (“start call” and a clear connect path), scan on the call (rep + customer in the same moment), then the customer’s own screen—where the scanned item lands with enough detail to buy. That last step is the Parla concept in one loop.",
+          videos: [
+            {
+              label: "01 · Call & notify",
+              caption:
+                "Customer reaches in directly from the merchant site (no appointment). The Call & notify guide is the salesperson’s dashboard: get notified, open the right context, and connect with the customer without friction.",
+              src: "/case-studies/parla/Call_&_Notify_Guide.mp4",
+            },
+            {
+              label: "02 · Start video call",
+              caption:
+                "When the customer has an appointment, this is the guide for how the rep and customer get into the same call. There was no clear, explainable flow before—I refined the UI so the handoff and connection path are obvious end to end.",
+              src: "/case-studies/parla/Start_Video_Call.mp4",
+            },
+            {
+              label: "03 · Product scan on the call",
+              caption:
+                "The QR idea in practice: the salesperson scans a product while they’re on the call with the customer, together in the same moment—shared focus on the right SKU, not a separate screen mystery.",
+              src: "/case-studies/parla/QR_Code_Video.mp4",
+            },
+            {
+              label: "04 · Customer screen",
+              caption:
+                "From the shopper’s perspective: after the rep scans, the same product appears here with details—review and add to cart without leaving the assisted session. Rep scan → customer cart is the core Parla loop.",
+              src: "/case-studies/parla/S%26S-4.mp4",
+            },
+          ],
+        },
+      },
+    },
   },
   {
     slug: "ezra-mentor-dashboard",
@@ -370,3 +549,13 @@ export const caseStudyBySlug = Object.fromEntries(caseStudies.map((item) => [ite
   string,
   CaseStudy
 >;
+
+/** Prev/next in the order case studies appear in the portfolio. */
+export function getCaseStudyNeighbors(slug: string): { prev: CaseStudy | null; next: CaseStudy | null } {
+  const i = caseStudies.findIndex((s) => s.slug === slug);
+  if (i < 0) return { prev: null, next: null };
+  return {
+    prev: i > 0 ? caseStudies[i - 1]! : null,
+    next: i < caseStudies.length - 1 ? caseStudies[i + 1]! : null,
+  };
+}
