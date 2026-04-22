@@ -8,13 +8,40 @@ import {
   useRef,
   useState,
   type CSSProperties,
-  type ReactNode,
   type Ref,
 } from "react";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 type Story = NonNullable<NonNullable<CaseStudy["productDeepDive"]>["customerSchedulerStory"]>;
 type Chapter = Story["chapters"][number];
+
+function BusinessImpactMetricsList({
+  metrics,
+  listClassName,
+  itemPad = "p-3.5",
+  valueClassName = "font-title text-[1.65rem] font-black tabular-nums leading-none tracking-tight text-[#c96010] sm:text-[1.75rem]",
+  labelClassName = "mt-2 text-[12px] leading-snug text-[#5d5145]",
+}: {
+  metrics: NonNullable<Chapter["businessImpact"]>["metrics"];
+  listClassName?: string;
+  itemPad?: string;
+  valueClassName?: string;
+  labelClassName?: string;
+}) {
+  return (
+    <ul className={listClassName ?? "mt-4 grid list-none gap-3 sm:grid-cols-3"} role="list">
+      {metrics.map((m) => (
+        <li
+          key={m.value + m.label}
+          className={`rounded-none border border-[#e7ddcf] bg-white/90 shadow-[0_1px_0_0_rgba(27,20,10,0.04)] ${itemPad}`}
+        >
+          <p className={valueClassName}>{m.value}</p>
+          <p className={labelClassName}>{m.label}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 function BusinessImpactStrip({
   eyebrow,
@@ -26,24 +53,19 @@ function BusinessImpactStrip({
 }: NonNullable<Chapter["businessImpact"]> & { className?: string; fillHeight?: boolean }) {
   return (
     <div
-      className={`rounded-sm border border-[#e0d4c4] bg-gradient-to-b from-[#fdfaf5] to-[#f7f0e6] px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] sm:px-5 sm:py-5 ${fillHeight ? "h-full min-h-0 flex flex-col" : ""} ${className}`.trim()}
+      className={`rounded-none border border-[#e0d4c4] bg-gradient-to-b from-[#fdfaf5] to-[#f7f0e6] px-4 py-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.7)] sm:px-5 sm:py-5 ${fillHeight ? "flex h-full min-h-0 w-full min-w-0 flex-1 flex-col" : ""} ${className}`.trim()}
     >
-      <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#a87847]">{eyebrow}</p>
-      {intro ? <p className="mt-2.5 max-w-[72ch] text-[14px] leading-relaxed text-[#4a4036]">{intro}</p> : null}
-      <ul className="mt-4 grid list-none gap-3 sm:grid-cols-3" role="list">
-        {metrics.map((m) => (
-          <li
-            key={m.value + m.label}
-            className="rounded-sm border border-[#e7ddcf] bg-white/90 p-3.5 shadow-[0_1px_0_0_rgba(27,20,10,0.04)]"
-          >
-            <p className="font-title text-[1.65rem] font-black tabular-nums leading-none tracking-tight text-[#c96010] sm:text-[1.75rem]">
-              {m.value}
-            </p>
-            <p className="mt-2 text-[12px] leading-snug text-[#5d5145]">{m.label}</p>
-          </li>
-        ))}
-      </ul>
-      {footnote ? <p className="mt-4 border-t border-[#e7ddcf] pt-3 text-[10px] leading-relaxed text-[#8a7d6f]">{footnote}</p> : null}
+      <p className="shrink-0 text-[10px] font-mono uppercase tracking-[0.2em] text-[#a87847]">{eyebrow}</p>
+      {intro ? (
+        <p className="mt-2.5 max-w-[72ch] shrink-0 text-[14px] leading-relaxed text-[#4a4036]">{intro}</p>
+      ) : null}
+      <BusinessImpactMetricsList
+        metrics={metrics}
+        listClassName={`mt-4 grid list-none gap-3 sm:grid-cols-3 ${fillHeight ? "min-h-0 flex-1 content-start" : ""}`.trim()}
+      />
+      {footnote ? (
+        <p className="mt-4 shrink-0 border-t border-[#e7ddcf] pt-3 text-[10px] leading-relaxed text-[#8a7d6f]">{footnote}</p>
+      ) : null}
     </div>
   );
 }
@@ -67,16 +89,6 @@ function InlineWalkthroughVideo({
   videoButtonRef,
   /** Fill mode: at lg+ in the pair, match this pixel height to the desktop dashed player. */
   maxFrameHeight,
-  /** Rendered after the video area, before the caption (e.g. business impact under desktop CS-1). */
-  belowVideo,
-  /**
-   * CS-1 pair (lg): stretch with mobile column; belowVideo grows to fill, matching mobile height.
-   */
-  stackStretch = false,
-  /**
-   * CS-1 mobile column (lg): card fills the row; spacer below fixed-height video + caption at bottom.
-   */
-  pairMobileStretch = false,
   /**
    * CS-2/CS-3 side-by-side row: card fills the grid cell; video flexes to available height.
    */
@@ -89,9 +101,6 @@ function InlineWalkthroughVideo({
   heightMode?: "intrinsic" | "fill";
   videoButtonRef?: Ref<HTMLButtonElement | null>;
   maxFrameHeight?: number | null;
-  belowVideo?: ReactNode;
-  stackStretch?: boolean;
-  pairMobileStretch?: boolean;
   sideBySideEqual?: boolean;
 }) {
   const refMain = useRef<HTMLVideoElement | null>(null);
@@ -168,8 +177,8 @@ function InlineWalkthroughVideo({
       style={fillLike ? undefined : aspectStyle}
       className={
         fillLike
-          ? "relative h-full min-h-0 w-full min-w-0 max-w-full max-h-full flex-1 overflow-hidden rounded-sm border border-dashed border-[#ccb9a6] bg-[#0c0c0c] text-left"
-          : "relative w-full min-w-0 max-w-full overflow-hidden rounded-sm border border-dashed border-[#ccb9a6] bg-[#0c0c0c] text-left"
+          ? "relative h-full min-h-0 w-full min-w-0 max-w-full max-h-full flex-1 overflow-hidden rounded-none border border-dashed border-[#ccb9a6] bg-[#0c0c0c] text-left"
+          : "relative w-full min-w-0 max-w-full overflow-hidden rounded-none border border-dashed border-[#ccb9a6] bg-[#0c0c0c] text-left"
       }
       title={paused ? "Tap to play" : "Tap to pause"}
     >
@@ -204,13 +213,11 @@ function InlineWalkthroughVideo({
   const shellClass = [
     noTopMargin ? "mt-0" : "mt-5",
     "min-w-0 border border-[#e7ddcf] bg-white p-3 shadow-sm",
-    sideBySideEqual || stackStretch
+    sideBySideEqual
       ? "flex h-full min-h-0 w-full min-w-0 flex-col"
-      : pairMobileStretch
-        ? "flex h-full min-h-0 w-full min-w-0 flex-col"
-        : heightMode === "fill"
-          ? "flex h-full min-h-0 w-full min-w-0 flex-1 flex-col"
-          : "",
+      : heightMode === "fill"
+        ? "flex min-h-0 w-full min-w-0 flex-col"
+        : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -228,11 +235,13 @@ function InlineWalkthroughVideo({
     <div
       className={
         maxFrameHeight != null && maxFrameHeight > 0
-          ? "flex min-h-0 min-w-0 flex-1 flex-col"
-          : "flex min-h-[200px] min-w-0 flex-1 flex-col"
+          ? "flex min-h-0 min-w-0 flex-shrink-0 flex-col overflow-hidden"
+          : "flex min-h-0 min-w-0 flex-shrink-0 flex-col overflow-hidden min-h-[180px] max-h-[min(80vh,640px)]"
       }
       style={
-        maxFrameHeight != null && maxFrameHeight > 0 ? { height: maxFrameHeight, minHeight: 0 } : undefined
+        maxFrameHeight != null && maxFrameHeight > 0
+          ? { height: maxFrameHeight, maxHeight: maxFrameHeight, minHeight: 0 }
+          : undefined
       }
     >
       {videoShell}
@@ -255,50 +264,10 @@ function InlineWalkthroughVideo({
     );
   }
 
-  if (stackStretch) {
-    return (
-      <div className={shellClass}>
-        {headerBlock}
-        <div className="w-full min-w-0 shrink-0">{videoShell}</div>
-        {belowVideo ? (
-          <div className="mt-3 flex min-h-0 min-w-0 flex-1 flex-col">
-            {belowVideo}
-          </div>
-        ) : null}
-        {captionBlock}
-      </div>
-    );
-  }
-
-  if (heightMode === "fill" && pairMobileStretch) {
-    return (
-      <div className={shellClass}>
-        {headerBlock}
-        <div
-          className={
-            maxFrameHeight != null && maxFrameHeight > 0
-              ? "flex min-h-0 w-full shrink-0 flex-col"
-              : "flex min-h-[200px] w-full shrink-0 flex-col"
-          }
-          style={
-            maxFrameHeight != null && maxFrameHeight > 0 ? { height: maxFrameHeight, minHeight: 0 } : undefined
-          }
-        >
-          <div className="flex h-full min-h-0 w-full min-w-0 flex-col">
-            {videoShell}
-          </div>
-        </div>
-        <div className="min-h-0 min-w-0 flex-1" aria-hidden />
-        {captionBlock}
-      </div>
-    );
-  }
-
   return (
     <div className={shellClass}>
       {headerBlock}
       {heightMode === "fill" ? fillVideoBlock : videoShell}
-      {belowVideo}
       {captionBlock}
     </div>
   );
@@ -379,8 +348,8 @@ function SideBySideWalkthroughs({
 }
 
 /**
- * Mobile video box height is capped to the **desktop** dashed player height (measured) so
- * it lines up with the left frame, not a taller stretched card.
+ * Desktop column is intrinsic; we measure that player’s height and set the mobile column’s
+ * fill height to 97% of that at lg+.
  */
 function ResponsiveDesktopMobilePair({
   bridge,
@@ -395,7 +364,9 @@ function ResponsiveDesktopMobilePair({
 }) {
   const desktopVideoBtnRef = useRef<HTMLButtonElement | null>(null);
   const [desktopFrameH, setDesktopFrameH] = useState<number | null>(null);
-  const [isLg, setIsLg] = useState(false);
+  const [isLg, setIsLg] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches,
+  );
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
@@ -406,50 +377,49 @@ function ResponsiveDesktopMobilePair({
   }, []);
 
   useLayoutEffect(() => {
+    if (!isLg) {
+      setDesktopFrameH(null);
+      return;
+    }
     const el = desktopVideoBtnRef.current;
     if (!el) return;
-    const set = () => setDesktopFrameH(el.getBoundingClientRect().height);
+    const set = () => {
+      const h = el.getBoundingClientRect().height;
+      if (h > 0) setDesktopFrameH(h);
+    };
     set();
     const ro = new ResizeObserver(() => set());
     ro.observe(el);
     return () => ro.disconnect();
-  }, [desktop.src]);
+  }, [desktop.src, isLg]);
 
+  /** Mobile fill height at lg+ — 97% of the measured desktop frame. */
   const mobileFrameH =
-    isLg && desktopFrameH != null && desktopFrameH > 0 ? desktopFrameH : null;
+    isLg && desktopFrameH != null && desktopFrameH > 0
+      ? Math.round(desktopFrameH * 0.97)
+      : null;
 
   return (
     <div className="mt-5">
       <p className="text-center text-[14px] leading-relaxed text-[#4d4339] sm:text-left">
         <span className="font-medium text-[#c96010]">One journey.</span> {bridge}
       </p>
-      <div className="mt-4 grid min-w-0 grid-cols-1 items-stretch gap-x-4 gap-y-2 lg:grid-cols-[1.2fr_0.62fr] lg:items-stretch lg:gap-y-0">
+      <div className="mt-4 grid min-h-0 min-w-0 grid-cols-1 items-stretch gap-x-4 gap-y-2 lg:grid-cols-[1.2fr_0.62fr] lg:items-stretch lg:gap-y-0">
         <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#8a7460] lg:col-start-1 lg:row-start-1">Desktop</p>
         <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#8a7460] lg:col-start-2 lg:row-start-1">Mobile</p>
-        <div className="flex h-full min-h-0 min-w-0 flex-col lg:col-start-1 lg:row-start-2">
+        <div className="flex h-full min-h-0 w-full min-w-0 flex-col self-stretch lg:col-start-1 lg:row-start-2">
           <InlineWalkthroughVideo
             noTopMargin
-            stackStretch={!!businessImpact}
             label={desktop.label}
             caption={desktop.caption}
             videoSrc={desktop.src}
             videoButtonRef={desktopVideoBtnRef}
-            belowVideo={
-              businessImpact ? (
-                <BusinessImpactStrip
-                  className="mt-0 min-h-0 flex-1"
-                  fillHeight
-                  {...businessImpact}
-                />
-              ) : null
-            }
           />
         </div>
-        <div className="flex h-full min-h-0 min-w-0 flex-col lg:col-start-2 lg:row-start-2">
+        <div className="flex min-h-0 w-full min-w-0 flex-col self-stretch lg:col-start-2 lg:row-start-2 lg:self-start">
           <InlineWalkthroughVideo
             noTopMargin
             heightMode="fill"
-            pairMobileStretch={isLg}
             label={mobile.label}
             caption={mobile.caption}
             videoSrc={mobile.src}
@@ -457,6 +427,11 @@ function ResponsiveDesktopMobilePair({
           />
         </div>
       </div>
+      {businessImpact ? (
+        <div className="mt-4 min-w-0 w-full sm:mt-5">
+          <BusinessImpactStrip className="mt-0" {...businessImpact} />
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -472,10 +447,10 @@ export default function CustomerSchedulerStory({ story }: { story: Story }) {
         {story.chapters.map((ch, i) => (
           <article
             key={ch.badge + ch.title}
-            className="relative scroll-mt-8 rounded-sm border border-[#ece4d8] bg-gradient-to-b from-white to-[#fbf7f0] p-4 sm:p-6 shadow-[0_1px_0_0_rgba(27,20,10,0.04)]"
+            className="relative scroll-mt-8 rounded-none border border-[#ece4d8] bg-gradient-to-b from-white to-[#fbf7f0] p-4 sm:p-6 shadow-[0_1px_0_0_rgba(27,20,10,0.04)]"
           >
             <div
-              className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#c96010] via-[#e8954a] to-[#c96010] opacity-90 sm:left-0 sm:rounded-l"
+              className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#c96010] via-[#e8954a] to-[#c96010] opacity-90 sm:left-0"
               aria-hidden
             />
             <div className="pl-3 sm:pl-4">

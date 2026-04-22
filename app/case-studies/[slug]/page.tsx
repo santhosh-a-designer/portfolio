@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle, Sparkle } from "@phosphor-icons/react/dist/ssr";
 import { caseStudyBySlug, getCaseStudyNeighbors, type CaseStudy } from "@/lib/caseStudies";
 import CaseStudyArticleFooter from "@/components/CaseStudyArticleFooter";
+import { CaseStudyScrollReveal } from "@/components/CaseStudyScrollReveal";
+import CaseStudyUxOutcomeViz from "@/components/CaseStudyUxOutcomeViz";
 import CaseStudyVideoShowcase from "@/components/CaseStudyVideoShowcase";
 import CustomerSchedulerStory from "@/components/CustomerSchedulerStory";
 
@@ -52,7 +54,9 @@ function SwotSection({ study }: { study: CaseStudy }) {
   if (!study.artifacts?.swot) return null;
   return (
     <section className="mt-10">
-      <h2 className={SECTION_H2}>SWOT Analysis</h2>
+      <CaseStudyScrollReveal>
+        <h2 className={SECTION_H2}>SWOT Analysis</h2>
+      </CaseStudyScrollReveal>
       <div className="mt-4 grid sm:grid-cols-2 gap-3">
         {(
           [
@@ -61,17 +65,19 @@ function SwotSection({ study }: { study: CaseStudy }) {
             ["Opportunities", study.artifacts.swot.opportunities],
             ["Threats", study.artifacts.swot.threats],
           ] as const
-        ).map(([title, points]) => (
-          <div key={title} className="border border-[#e7ddcf] bg-white p-4">
-            <h3 className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#8a7460]">{title}</h3>
-            <ul className="mt-2.5 space-y-2">
-              {points.map((point) => (
-                <li key={point} className="text-[13px] text-[#4d4136] leading-relaxed">
-                  • {point}
-                </li>
-              ))}
-            </ul>
-          </div>
+        ).map(([title, points], i) => (
+          <CaseStudyScrollReveal key={title} delay={i * 0.07}>
+            <div className="border border-[#e7ddcf] bg-white p-4 h-full">
+              <h3 className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#8a7460]">{title}</h3>
+              <ul className="mt-2.5 space-y-2">
+                {points.map((point) => (
+                  <li key={point} className="text-[13px] text-[#4d4136] leading-relaxed">
+                    • {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </CaseStudyScrollReveal>
         ))}
       </div>
     </section>
@@ -136,63 +142,28 @@ function UserFlowSection({ study }: { study: CaseStudy }) {
   if (!study.artifacts?.userFlows?.length) return null;
   return (
     <section className="mt-10">
-      <h2 className={SECTION_H2}>User Flow</h2>
+      <CaseStudyScrollReveal>
+        <h2 className={SECTION_H2}>User Flow</h2>
+      </CaseStudyScrollReveal>
       <div className="mt-4 grid lg:grid-cols-3 gap-3">
-        {study.artifacts.userFlows.map((flow) => (
-          <div key={flow.title} className="border border-[#e7ddcf] bg-white p-4">
-            <h3 className="text-[11px] font-mono uppercase tracking-[0.16em] text-[#8a7460] mb-3">{flow.title}</h3>
-            <div className="space-y-2">
-              {flow.steps.map((step, i) => (
-                <div key={step}>
-                  <div className="border border-[#dfcfbd] bg-[#faf8f4] px-3 py-2 text-[13px] text-[#4f4337] leading-relaxed">
-                    <span className="font-semibold text-[#2f2820]">{i + 1}.</span> {step}
+        {study.artifacts.userFlows.map((flow, i) => (
+          <CaseStudyScrollReveal key={flow.title} delay={i * 0.08}>
+            <div className="border border-[#e7ddcf] bg-white p-4 h-full">
+              <h3 className="text-[11px] font-mono uppercase tracking-[0.16em] text-[#8a7460] mb-3">{flow.title}</h3>
+              <div className="space-y-2">
+                {flow.steps.map((step, stepIndex) => (
+                  <div key={step}>
+                    <div className="border border-[#dfcfbd] bg-[#faf8f4] px-3 py-2 text-[13px] text-[#4f4337] leading-relaxed">
+                      <span className="font-semibold text-[#2f2820]">{stepIndex + 1}.</span> {step}
+                    </div>
+                    {stepIndex < flow.steps.length - 1 ? (
+                      <div className="text-center text-[#b99777] py-1 text-[12px]">↓</div>
+                    ) : null}
                   </div>
-                  {i < flow.steps.length - 1 ? (
-                    <div className="text-center text-[#b99777] py-1 text-[12px]">↓</div>
-                  ) : null}
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function UxScoreSection({ study }: { study: CaseStudy }) {
-  if (!study.artifacts?.uxScoreChart?.length) return null;
-  return (
-    <section className="mt-10 border border-[#e7ddcf] bg-white p-4 sm:p-6">
-      <h2 className={SECTION_H2}>UX Score Chart</h2>
-      <p className="mt-2 text-[13px] text-[#6d5d4e]">
-        Derived from design audit and implementation review across core journey checkpoints.
-      </p>
-      <div className="mt-4 space-y-3">
-        {study.artifacts.uxScoreChart.map((row) => (
-          <div key={row.metric} className="grid grid-cols-[140px_1fr] items-center gap-3">
-            <div className="text-[12px] text-[#3f352b]">{row.metric}</div>
-            <div className="space-y-1.5">
-              <div>
-                <div className="flex justify-between text-[10px] font-mono uppercase tracking-[0.12em] text-[#8a7460]">
-                  <span>Before</span>
-                  <span>{row.before}/10</span>
-                </div>
-                <div className="h-2 bg-[#eee4d8]">
-                  <div className="h-full bg-[#b78f6f]" style={{ width: `${row.before * 10}%` }} />
-                </div>
-              </div>
-              <div>
-                <div className="flex justify-between text-[10px] font-mono uppercase tracking-[0.12em] text-[#8a7460]">
-                  <span>After</span>
-                  <span>{row.after}/10</span>
-                </div>
-                <div className="h-2 bg-[#eee4d8]">
-                  <div className="h-full bg-[#c96010]" style={{ width: `${row.after * 10}%` }} />
-                </div>
+                ))}
               </div>
             </div>
-          </div>
+          </CaseStudyScrollReveal>
         ))}
       </div>
     </section>
@@ -203,45 +174,51 @@ function ProcessWalkthroughSection({ study }: { study: CaseStudy }) {
   if (!study.processSteps?.length) return null;
   return (
     <section className="mt-12 border-t border-[#e7ddcf] pt-8">
-      <h2 className={SECTION_H2}>
-        {study.processWalkthroughLabel ? (
-          <span className="text-[#8a7460]">{study.processWalkthroughLabel} · </span>
-        ) : null}
-        UX Process Walkthrough
-      </h2>
-      <p className="mt-3 text-[15px] text-[#5d5145] leading-relaxed">
-        Detailed flow from strategy to execution, including UX methods and content reasoning.
-      </p>
+      <CaseStudyScrollReveal>
+        <div>
+          <h2 className={SECTION_H2}>
+            {study.processWalkthroughLabel ? (
+              <span className="text-[#8a7460]">{study.processWalkthroughLabel} · </span>
+            ) : null}
+            UX Process Walkthrough
+          </h2>
+          <p className="mt-3 text-[15px] text-[#5d5145] leading-relaxed">
+            Detailed flow from strategy to execution, including UX methods and content reasoning.
+          </p>
+        </div>
+      </CaseStudyScrollReveal>
 
       <div className="mt-6 space-y-5">
-        {study.processSteps.map((step) => (
-          <div key={step.step} className="border border-[#e7ddcf] bg-white">
-            <div className="px-4 sm:px-5 py-3 border-b border-[#efe7dc] flex items-center justify-between gap-3">
-              <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#8a7460]">Step {step.step}</p>
-              <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#bf8c63]">UX execution</p>
-            </div>
-
-            <div className="p-4 sm:p-5">
-              <h3 className="font-title text-lg sm:text-xl font-black text-[#1b1712]">{step.title}</h3>
-              <p className="mt-2 text-[15px] text-[#4d4136] leading-relaxed">{step.content}</p>
-
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {step.uxMethods.map((method) => (
-                  <span
-                    key={method}
-                    className="text-[10px] font-mono uppercase tracking-[0.14em] px-2 py-1 border border-[#ddceb9] text-[#6f5e4d] bg-[#fbf8f3]"
-                  >
-                    {method}
-                  </span>
-                ))}
+        {study.processSteps.map((step, index) => (
+          <CaseStudyScrollReveal key={step.step} delay={index * 0.08}>
+            <div className="border border-[#e7ddcf] bg-white">
+              <div className="px-4 sm:px-5 py-3 border-b border-[#efe7dc] flex items-center justify-between gap-3">
+                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#8a7460]">Step {step.step}</p>
+                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#bf8c63]">UX execution</p>
               </div>
 
-              <div className="mt-4 border-l-2 border-[#d6ab84] pl-3">
-                <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#8a7460]">Outcome</p>
-                <p className="mt-1 text-[14px] text-[#4d4136] leading-relaxed">{step.outcome}</p>
+              <div className="p-4 sm:p-5">
+                <h3 className="font-title text-lg sm:text-xl font-black text-[#1b1712]">{step.title}</h3>
+                <p className="mt-2 text-[15px] text-[#4d4136] leading-relaxed">{step.content}</p>
+
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {step.uxMethods.map((method) => (
+                    <span
+                      key={method}
+                      className="text-[10px] font-mono uppercase tracking-[0.14em] px-2 py-1 border border-[#ddceb9] text-[#6f5e4d] bg-[#fbf8f3]"
+                    >
+                      {method}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-4 border-l-2 border-[#d6ab84] pl-3">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#8a7460]">Outcome</p>
+                  <p className="mt-1 text-[14px] text-[#4d4136] leading-relaxed">{step.outcome}</p>
+                </div>
               </div>
             </div>
-          </div>
+          </CaseStudyScrollReveal>
         ))}
       </div>
     </section>
@@ -298,38 +275,43 @@ export default async function CaseStudyPage({ params }: PageProps) {
   return (
     <main id="case-study-top" className="min-h-screen scroll-smooth bg-[#faf8f4] text-[#1d1b17]">
       <article className="w-[80vw] max-w-[1400px] mx-auto px-5 sm:px-7 py-10 sm:py-14">
-        <Link
-          href="/#works"
-          className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.18em] text-[#8a7460] hover:text-[#c96010] transition-colors"
-        >
-          <ArrowLeft size={14} /> Back to works
-        </Link>
+        <CaseStudyScrollReveal>
+          <div>
+            <Link
+              href="/#works"
+              className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.18em] text-[#8a7460] hover:text-[#c96010] transition-colors"
+            >
+              <ArrowLeft size={14} /> Back to works
+            </Link>
 
-        <header className="mt-8 border-b border-[#e7ddcf] pb-8">
-          <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#b69272]">Case study</p>
-          <h1 className="mt-3 font-title text-3xl sm:text-5xl font-black leading-tight text-[#15120d]">{study.project}</h1>
-          {study.company ? (
-            <p className="mt-2 text-sm sm:text-base font-medium text-[#3a332c]">{study.company}</p>
-          ) : null}
-          {study.subtitle && !study.company ? (
-            <p className="mt-2 text-lg sm:text-xl text-[#c96010] font-medium">{study.subtitle}</p>
-          ) : null}
-          <p className="mt-5 text-base text-[#4e4338] leading-relaxed">{study.summary}</p>
+            <header className="mt-8 border-b border-[#e7ddcf] pb-8">
+              <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#b69272]">Case study</p>
+              <h1 className="mt-3 font-title text-3xl sm:text-5xl font-black leading-tight text-[#15120d]">{study.project}</h1>
+              {study.company ? (
+                <p className="mt-2 text-sm sm:text-base font-medium text-[#3a332c]">{study.company}</p>
+              ) : null}
+              {study.subtitle && !study.company ? (
+                <p className="mt-2 text-lg sm:text-xl text-[#c96010] font-medium">{study.subtitle}</p>
+              ) : null}
+              <p className="mt-5 text-base text-[#4e4338] leading-relaxed">{study.summary}</p>
 
-          <div className="mt-6 grid sm:grid-cols-2 gap-3">
-            <div className="border border-[#e7ddcf] bg-white px-4 py-3">
-              <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#8a7460]">Timeline</div>
-              <div className="mt-1 text-sm font-semibold text-[#2b241d]">{study.timeline}</div>
-            </div>
-            <div className="border border-[#e7ddcf] bg-white px-4 py-3">
-              <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#8a7460]">Role</div>
-              <div className="mt-1 text-sm font-semibold text-[#2b241d]">{study.role}</div>
-            </div>
+              <div className="mt-6 grid sm:grid-cols-2 gap-3">
+                <div className="border border-[#e7ddcf] bg-white px-4 py-3">
+                  <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#8a7460]">Timeline</div>
+                  <div className="mt-1 text-sm font-semibold text-[#2b241d]">{study.timeline}</div>
+                </div>
+                <div className="border border-[#e7ddcf] bg-white px-4 py-3">
+                  <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#8a7460]">Role</div>
+                  <div className="mt-1 text-sm font-semibold text-[#2b241d]">{study.role}</div>
+                </div>
+              </div>
+            </header>
           </div>
-        </header>
+        </CaseStudyScrollReveal>
 
         {/* 1. STAR */}
-        <section className="mt-9 space-y-8">
+        <CaseStudyScrollReveal>
+          <section className="mt-9 space-y-8">
           <div>
             <h2 className={SECTION_H2}>Situation</h2>
             <p className="mt-3 text-[16px] text-[#3f352b] leading-relaxed">{study.situation}</p>
@@ -363,72 +345,89 @@ export default async function CaseStudyPage({ params }: PageProps) {
             </ul>
           </div>
         </section>
+        </CaseStudyScrollReveal>
 
         {/* 2.1 UX process walkthrough… */}
         <ProcessWalkthroughSection study={study} />
 
         {/* 3. Customer journey map */}
-        <JourneyMapSection study={study} />
+        <CaseStudyScrollReveal>
+          <JourneyMapSection study={study} />
+        </CaseStudyScrollReveal>
 
         {/* 4. SWOT */}
         <SwotSection study={study} />
 
         {/* 5. Information architecture */}
-        <InformationArchitectureSection study={study} />
+        <CaseStudyScrollReveal>
+          <InformationArchitectureSection study={study} />
+        </CaseStudyScrollReveal>
 
         {/* 6. User flow */}
         <UserFlowSection study={study} />
 
         {/* 7. CTA — explanation and videos */}
         {cta ? (
-          <section className="mt-12 w-full min-w-0 border-t border-[#e7ddcf] pt-8">
-            <h2 className={SECTION_H2}>CTA</h2>
-            <p className="mt-3 text-[16px] text-[#3f352b] leading-relaxed">{cta.reason}</p>
-            <CaseStudyVideoShowcase
-              showTopRule={false}
-              videos={cta.videos}
-              className="mt-5"
-            />
-          </section>
+          <CaseStudyScrollReveal>
+            <section className="mt-12 w-full min-w-0 border-t border-[#e7ddcf] pt-8">
+              <h2 className={SECTION_H2}>CTA</h2>
+              <p className="mt-3 text-[16px] text-[#3f352b] leading-relaxed">{cta.reason}</p>
+              <CaseStudyVideoShowcase
+                showTopRule={false}
+                videos={cta.videos}
+                className="mt-5"
+              />
+            </section>
+          </CaseStudyScrollReveal>
         ) : null}
 
         {/* 8. Customer scheduler + 9. Show & sell */}
-        <ProductDeepDiveSection study={study} />
+        <CaseStudyScrollReveal>
+          <ProductDeepDiveSection study={study} />
+        </CaseStudyScrollReveal>
 
-        {/* 10. UX score chart */}
-        <UxScoreSection study={study} />
+        {/* 10. UX outcome (donut or bars) */}
+        <CaseStudyScrollReveal>
+          <CaseStudyUxOutcomeViz study={study} />
+        </CaseStudyScrollReveal>
 
         {/* 11. Learnings */}
-        <section className="mt-10 border-t border-[#e7ddcf] pt-8">
-          <h2 className={`${SECTION_H2} flex items-center gap-2`}>
-            <Sparkle size={13} /> Learnings
-          </h2>
-          <ul className="mt-3 space-y-2">
-            {study.learnings.map((item) => (
-              <li key={item} className="text-[15px] text-[#3f352b] leading-relaxed">
-                • {item}
-              </li>
-            ))}
-          </ul>
-        </section>
+        <CaseStudyScrollReveal>
+          <section className="mt-10 border-t border-[#e7ddcf] pt-8">
+            <h2 className={`${SECTION_H2} flex items-center gap-2`}>
+              <Sparkle size={13} /> Learnings
+            </h2>
+            <ul className="mt-3 space-y-2">
+              {study.learnings.map((item) => (
+                <li key={item} className="text-[15px] text-[#3f352b] leading-relaxed">
+                  • {item}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </CaseStudyScrollReveal>
 
         {study.slug !== "parla-show-and-sell" && study.imageSlots.length ? (
-          <section className="mt-10 border border-[#e7ddcf] bg-white p-4 sm:p-6">
-            <h2 className={SECTION_H2}>Image slots (draft)</h2>
-            <div className="mt-4 grid sm:grid-cols-2 gap-2.5">
-              {study.imageSlots.map((slot) => (
-                <div
-                  key={slot}
-                  className="border border-dashed border-[#ccb9a6] bg-[#faf8f4] px-3 py-2.5 text-[12px] text-[#6b5a4a]"
-                >
-                  [Image] {slot}
-                </div>
-              ))}
-            </div>
-          </section>
+          <CaseStudyScrollReveal>
+            <section className="mt-10 border border-[#e7ddcf] bg-white p-4 sm:p-6">
+              <h2 className={SECTION_H2}>Image slots (draft)</h2>
+              <div className="mt-4 grid sm:grid-cols-2 gap-2.5">
+                {study.imageSlots.map((slot) => (
+                  <div
+                    key={slot}
+                    className="border border-dashed border-[#ccb9a6] bg-[#faf8f4] px-3 py-2.5 text-[12px] text-[#6b5a4a]"
+                  >
+                    [Image] {slot}
+                  </div>
+                ))}
+              </div>
+            </section>
+          </CaseStudyScrollReveal>
         ) : null}
 
-        <CaseStudyArticleFooter prev={prev} next={next} />
+        <CaseStudyScrollReveal>
+          <CaseStudyArticleFooter prev={prev} next={next} />
+        </CaseStudyScrollReveal>
       </article>
     </main>
   );

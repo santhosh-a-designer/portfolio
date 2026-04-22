@@ -96,7 +96,7 @@ export default function Navigation() {
                 {isActive && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-sm"
+                    className="absolute inset-0 rounded-none"
                     style={{ background: "rgba(255,116,16,0.08)", border: "1px solid rgba(255,116,16,0.2)" }}
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { DM_Sans, Poppins, Space_Grotesk } from "next/font/google";
+import { getSiteUrl } from "@/lib/siteUrl";
 import "./globals.css";
+
+const siteUrl = getSiteUrl();
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -19,6 +22,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Simon Santhosh — UX Designer & Vibe Coder",
   description:
     "5+ years crafting intuitive digital experiences. UX Designer, Mentor, and Front-end Developer based in Chennai, India.",
@@ -27,6 +31,10 @@ export const metadata: Metadata = {
     title: "Simon Santhosh — UX Designer & Vibe Coder",
     description: "Designing experiences that move people. 5+ years in UX, Mentor, Freelancer.",
     type: "website",
+    url: siteUrl,
+  },
+  alternates: {
+    canonical: "/",
   },
 };
 

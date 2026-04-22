@@ -193,7 +193,7 @@ export default function Contact() {
                     initial={{ opacity: 0, y: 10, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -6 }}
-                    className="inline-flex items-center gap-2 rounded-sm border border-emerald-500/35 bg-emerald-500/10 px-3 py-2 text-[11px] font-mono uppercase tracking-[0.12em] text-emerald-300"
+                    className="inline-flex items-center gap-2 rounded-none border border-emerald-500/35 bg-emerald-500/10 px-3 py-2 text-[11px] font-mono uppercase tracking-[0.12em] text-emerald-300"
                   >
                     <CheckCircle size={16} weight="fill" className="text-emerald-400" />
                     Successfully sent

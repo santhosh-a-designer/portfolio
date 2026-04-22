@@ -168,7 +168,7 @@ function WorkProjectCard({
       <div className="relative z-[1] flex flex-col p-3 pointer-events-none sm:p-3.5 md:p-4">
         <div className="mb-2 flex items-start justify-between gap-2">
           <div
-            className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-sm"
+            className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-none"
             style={{
               background: `${project.accentColor}12`,
               border: `1px solid ${project.accentColor}30`,
@@ -177,7 +177,7 @@ function WorkProjectCard({
             <Icon size={17} style={{ color: project.accentColor }} />
           </div>
           <span
-            className="shrink-0 rounded-sm px-1.5 py-0.5 text-[7px] font-mono font-semibold uppercase tracking-widest sm:text-[8px]"
+            className="shrink-0 rounded-none px-1.5 py-0.5 text-[7px] font-mono font-semibold uppercase tracking-widest sm:text-[8px]"
             style={{
               color: project.accentColor,
               background: `${project.accentColor}0f`,
@@ -296,7 +296,7 @@ export default function Works() {
             </motion.div>
 
             <div className="w-full min-w-0 shrink-0">
-              <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:grid-rows-[auto_auto] md:items-start md:gap-0 md:overflow-hidden md:rounded-sm md:border md:border-[#d0c3b6] md:shadow-[0_1px_0_0_rgba(0,0,0,0.04)]">
+              <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:grid-rows-[auto_auto] md:items-start md:gap-0 md:overflow-hidden md:rounded-none md:border md:border-[#d0c3b6] md:shadow-[0_1px_0_0_rgba(0,0,0,0.04)]">
               {projects.map((project, i) => {
                 const cellBorder =
                   i === 0

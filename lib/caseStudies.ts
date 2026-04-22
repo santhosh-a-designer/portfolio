@@ -54,11 +54,13 @@ export type CaseStudy = {
       node: string;
       children: string[];
     }>;
-    uxScoreChart?: Array<{
-      metric: string;
-      before: number;
-      after: number;
-    }>;
+    /** Single compact chart: donut (share) or simple horizontal bars (1–10). */
+    uxOutcomeViz?: {
+      title: string;
+      blurb?: string;
+      style: "donut" | "bars";
+      items: Array<{ label: string; value: number }>;
+    };
   };
   processSteps?: Array<{
     step: string;
@@ -294,12 +296,17 @@ export const caseStudies: CaseStudy[] = [
           children: ["In-call Product Guidance", "Order Confirmation", "Payment Completion"],
         },
       ],
-      uxScoreChart: [
-        { metric: "CTA Clarity", before: 4, after: 9 },
-        { metric: "Booking Usability", before: 3, after: 8 },
-        { metric: "Call Readiness", before: 4, after: 8 },
-        { metric: "Checkout Continuity", before: 5, after: 8 },
-      ],
+      uxOutcomeViz: {
+        title: "UX outcome",
+        blurb: "Heuristic scores 1–10. Ring segments scale with each area’s score relative to the total.",
+        style: "donut",
+        items: [
+          { label: "CTA & entry", value: 9 },
+          { label: "Scheduler (US context)", value: 8 },
+          { label: "Call & handoff", value: 9 },
+          { label: "In-flow checkout", value: 8 },
+        ],
+      },
     },
     processSteps: [
       {

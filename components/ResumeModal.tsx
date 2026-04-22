@@ -156,7 +156,7 @@ export default function ResumeModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-1.5 text-[#64748b] hover:text-white hover:bg-[#1e293b] transition-colors rounded-sm"
+                  className="p-1.5 text-[#64748b] hover:text-white hover:bg-[#1e293b] transition-colors rounded-none"
                   aria-label="Close"
                 >
                   <X size={20} weight="bold" />
