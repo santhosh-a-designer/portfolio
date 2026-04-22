@@ -118,7 +118,7 @@ export const caseStudies: CaseStudy[] = [
           {
             label: "Video 02",
             caption: "New Show Preview mode inside CTA video-call flow",
-            src: "/case-studies/parla/cta-show-preview-mode.mp4",
+            src: "/case-studies/parla/CTA-2.mov",
           },
         ],
       },
