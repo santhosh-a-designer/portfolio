@@ -587,7 +587,7 @@ export const caseStudies: CaseStudy[] = [
               label: "01 · Call & notify",
               caption:
                 "Customer reaches in directly from the merchant site (no appointment). The Call & notify guide is the salesperson’s dashboard: get notified, open the right context, and connect with the customer without friction.",
-              src: "/case-studies/parla/Call_&_Notify_Guide.mp4",
+              src: "/case-studies/parla/Call_%26_Notify_Guide.mp4",
             },
             {
               label: "02 · Start video call",
