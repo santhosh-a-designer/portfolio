@@ -32,9 +32,10 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Skills() {
   return (
     <section id="skills" className="relative overflow-hidden">
-      {/* Dot-grid + glow */}
+      {/* Dot-grid + dual glow (orange UX / purple dev) */}
       <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-40" aria-hidden />
       <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-[#FF7410] opacity-[0.07] blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -left-32 bottom-0 h-72 w-72 rounded-full bg-[#8B5CF6] opacity-[0.07] blur-3xl" aria-hidden />
       {/* Section index strip */}
       <motion.div
         className="border-b border-[#1e293b] bg-[#08090b]/60"
@@ -96,7 +97,7 @@ export default function Skills() {
             </div>
           </motion.div>
 
-          {/* Dev Skills */}
+          {/* Dev Skills — purple accent */}
           <motion.div
             initial={{ opacity: 0, y: 48 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -106,8 +107,8 @@ export default function Skills() {
             style={{ borderRight: "1px solid #1e293b" }}
           >
             <div className="flex items-center gap-2 mb-6">
-              <span style={{ color: "#FF7410" }}>⌥</span>
-              <h3 className="font-title font-bold text-white text-sm uppercase tracking-widest">Development</h3>
+              <span style={{ color: "#8B5CF6" }}>⌥</span>
+              <h3 className="font-title font-bold text-white text-sm uppercase tracking-widest" style={{ color: "#8B5CF6" }}>Development</h3>
             </div>
             <div className="flex flex-wrap gap-2">
               {devSkills.map((skill, i) => (
@@ -117,7 +118,7 @@ export default function Skills() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={VP}
                   transition={{ delay: i * 0.05, duration: 0.4, ease }}
-                  className="text-[12px] text-[#94a3b8] border border-[#1e293b] px-3 py-1.5 bg-[#08090b] hover:border-[#FF7410]/40 hover:text-white transition-colors cursor-default"
+                  className="text-[12px] text-[#94a3b8] border border-[#1e293b] px-3 py-1.5 bg-[#08090b] hover:border-[#8B5CF6]/40 hover:text-[#8B5CF6] transition-colors cursor-default"
                 >
                   {skill}
                 </motion.span>
@@ -176,19 +177,20 @@ export default function Skills() {
               </div>
             </div>
 
-            {/* Vibe coding callout */}
+            {/* Vibe coding callout — purple */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VP}
               transition={{ delay: 0.2, duration: 0.6, ease }}
-              className="mt-auto p-5"
+              className="relative mt-auto overflow-hidden p-5"
               style={{
-                background: "linear-gradient(135deg, rgba(255,116,16,0.08), rgba(255,116,16,0.03))",
-                border: "1px solid rgba(255,116,16,0.18)",
+                background: "linear-gradient(135deg, rgba(139,92,246,0.1), rgba(139,92,246,0.03))",
+                border: "1px solid rgba(139,92,246,0.25)",
               }}
             >
-              <div className="text-[10px] font-mono font-semibold uppercase tracking-widest mb-2" style={{ color: "#FF7410" }}>
+              <div className="pointer-events-none absolute -right-4 -top-4 h-16 w-16 rounded-full bg-[#8B5CF6] opacity-20 blur-2xl" aria-hidden />
+              <div className="text-[10px] font-mono font-semibold uppercase tracking-widest mb-2" style={{ color: "#8B5CF6" }}>
                 Vibe Coding ✦
               </div>
               <p className="text-[12px] text-[#64748b] leading-relaxed">

@@ -44,9 +44,10 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative overflow-hidden">
-      {/* Dot-grid + glow */}
+      {/* Dot-grid + dual glow */}
       <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-35" aria-hidden />
       <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-[#FF7410] opacity-[0.06] blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -right-32 -top-20 h-72 w-72 rounded-full bg-[#8B5CF6] opacity-[0.06] blur-3xl" aria-hidden />
       {/* Section index strip */}
       <motion.div
         className="border-b border-[#1e293b] bg-[#08090b]/60"

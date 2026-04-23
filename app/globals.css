@@ -88,6 +88,20 @@ p, .font-description {
   text-shadow: 0 0 14px rgba(255, 116, 16, 0.6), 0 0 30px rgba(255, 116, 16, 0.28) !important;
 }
 
+/* ─── Neon purple — secondary accent (dev / code / creative) ─── */
+.neon-text-purple {
+  color: #8B5CF6 !important;
+  text-shadow: 0 0 14px rgba(139, 92, 246, 0.6), 0 0 30px rgba(139, 92, 246, 0.28) !important;
+}
+.neon-border-purple {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.35), inset 0 0 12px rgba(139, 92, 246, 0.06);
+}
+.section-dot-grid-purple {
+  background-image: radial-gradient(circle at 1px 1px, rgba(139, 92, 246, 0.1) 0.5px, transparent 0);
+  background-size: 22px 22px;
+}
+
 .neon-border {
   border-color: #FF7410;
   box-shadow: 0 0 12px rgba(255, 116, 16, 0.35), inset 0 0 12px rgba(255, 116, 16, 0.06);

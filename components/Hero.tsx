@@ -297,7 +297,7 @@ export default function Hero() {
         >
           {["UX Designer", "Vibe Coder", "Mentor"].map((role, i, arr) => (
             <span key={role} className="flex items-center gap-3">
-              <span className="font-description text-base sm:text-lg text-[#64748b]">
+              <span className={`font-description text-base sm:text-lg ${role === "Vibe Coder" ? "neon-text-purple" : "text-[#64748b]"}`}>
                 {role}
               </span>
               {i < arr.length - 1 && <span className="text-[#334155]">×</span>}
@@ -360,7 +360,7 @@ export default function Hero() {
           <button
             type="button"
             onClick={() => setResumeOpen(true)}
-            className="flex items-center gap-2 px-7 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#94a3b8] border border-[#334155] hover:border-[#FF7410]/50 hover:text-white transition-all active:scale-[0.98]"
+            className="flex items-center gap-2 px-7 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#94a3b8] border border-[#334155] hover:border-[#8B5CF6]/60 hover:text-[#8B5CF6] transition-all active:scale-[0.98]"
           >
             Get Resume
             <FileDoc size={15} />
