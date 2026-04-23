@@ -2,8 +2,10 @@
 
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowDown, FileDoc } from "@phosphor-icons/react";
-import { useEffect, useState, useRef, type ReactNode } from "react";
+import { useEffect, useState, useRef, useCallback, type ReactNode } from "react";
 import ResumeModal from "@/components/ResumeModal";
+import { useLenis } from "@/components/LenisProvider";
+import { scrollToWorksSection } from "@/lib/scrollToWorksSection";
 
 const HERO_REVEAL_DELAY = 0.55;
 
@@ -211,6 +213,12 @@ export default function Hero() {
   const contentY = useTransform(scrollY, [0, 600], [0, -60]);
   const reduceMotion = useReducedMotion();
   const [resumeOpen, setResumeOpen] = useState(false);
+  const lenis = useLenis();
+
+  const handleViewWork = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    scrollToWorksSection(lenis);
+  }, [lenis]);
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-[#08090b] border-b border-[#1e293b] pt-[clamp(6.5rem,14vh,9rem)] pb-10 sm:pb-14">
@@ -352,6 +360,7 @@ export default function Hero() {
         >
           <a
             href="#works"
+            onClick={handleViewWork}
             className="group flex items-center gap-2 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-[#0a0908] bg-[#FF7410] hover:bg-[#FF8C30] transition-colors active:scale-[0.98]"
           >
             View Work

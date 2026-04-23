@@ -55,7 +55,7 @@ const projects: Project[] = [
       { value: "Live", label: "Build" },
     ],
     icon: Robot,
-    accentColor: "#06B6D4",
+    accentColor: "#2563EB",
     status: "live",
     slug: "ezra-mentor-dashboard",
   },
