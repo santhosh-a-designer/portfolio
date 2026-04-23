@@ -855,7 +855,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "vidyas-kitchen-pwa",
     project: "Vidya's Kitchen",
-    company: "Home catering · Sivakasi, Tamil Nadu",
+    company: "Home catering · Sivakasi",
     subtitle: "",
     liveUrl: "https://vidayskitchenhome.com",
     cinematicIntro: {
@@ -872,7 +872,7 @@ export const caseStudies: CaseStudy[] = [
       "Design and ship an end-to-end system: marketing touchpoints (Instagram, video ads) that push leads to WhatsApp; a bot that can take structured orders; Razorpay for payment; a PWA with installable, app-grade UI; and a dashboard to accept orders, update the menu, and track drivers. Align the first version to a business goal of roughly ₹1–2L/month as the offer stabilizes. For me, this was also the project where I moved from UX/UI alone into vibe-coding the product in React and TypeScript.",
     actions: [
       "Framed a hyper-local cloud-kitchen model: discovery off-platform (IG/reels) → high-intent chat on WhatsApp, plus a PWA for people who want a real app without an app store.",
-      "Designed the bot conversation: menu, quantities, notes, and payment handoff to Razorpay, keeping Tamil-first clarity and short paths for first-time food buyers.",
+      "Designed the bot conversation: menu, quantities, notes, and payment handoff to Razorpay, with short, plain steps for first-time food buyers.",
       "Built a premium, calm PWA skin (in progress) with ordering flows that feel like a product, not a website—large tap targets, obvious cart and schedule cues.",
       "Planned the ops dashboard: order pipeline, status updates, new dishes, and driver/route visibility so the kitchen is not run from scattered chats alone.",
       "Chose a TypeScript + React stack for maintainability and shared patterns between the PWA, dashboard, and future iterations.",
@@ -936,7 +936,7 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           stage: "Decide & order",
-          userGoal: "Order quickly on the phone, possibly in Tamil, with no confusion",
+          userGoal: "Order quickly on the phone with no confusion",
           painPoint: "Long text back-and-forth and missed payment details",
           uxIntervention: "Bot with guided steps, defaults, and Razorpay in-flow",
           impact: "Fewer abandoned threads and less manual follow-up for Vidya",
@@ -1024,7 +1024,7 @@ export const caseStudies: CaseStudy[] = [
         principles: [
           "One action only — every element on the page funnels to the WhatsApp bot CTA, nothing competes",
           "Food as trust signal — real photography builds appetite and credibility before any UI element",
-          "Tamil + English parity — short labels that read identically in both languages without layout shifts",
+          "Scannable copy — short steps and obvious next actions so the flow stays light on a phone",
         ],
       },
       uxOutcomeViz: {
@@ -1107,7 +1107,7 @@ export const caseStudies: CaseStudy[] = [
           "I sketched the bot as the spine for speed-to-order, the PWA as the ‘premium’ face of the same inventory, and Razorpay as the non-negotiable cleanmoney moment. TypeScript and React let me keep types aligned across the surfaces as they evolve—where I leaned into build, not just specs.",
         uxMethods: [
           "Conversational UX",
-          "Low-literacy and Tamil-first phrasing",
+          "Short, plain-language phrasing in chat",
           "Mobile PWA heuristics (thumb zones, load)",
           "Payment UX patterns (UPI, failure, retry)",
         ],

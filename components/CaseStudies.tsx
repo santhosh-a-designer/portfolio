@@ -92,7 +92,7 @@ const caseStudies: CaseStudy[] = [
       "Ship Instagram/video → WhatsApp funnel, conversational ordering, Razorpay, a premium PWA, and a dashboard for orders, menu updates, and drivers—aligned to a first-version business target and built in TypeScript + React.",
     action: [
       "Framed the funnel and bot + PWA architecture for a single kitchen truth.",
-      "Designed Tamil-friendly, short-path ordering in WhatsApp with payment handoff.",
+      "Designed short-path, scannable ordering in WhatsApp with payment handoff.",
       "Crafted the PWA shell and ops dashboard so the business can scale past DMs.",
     ],
     result: [
