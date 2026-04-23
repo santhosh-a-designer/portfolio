@@ -10,7 +10,7 @@ export default function IrstunnerUxShortView() {
     <>
       {/* Page-level header */}
       <div className="border-b border-[#1e293b] bg-[#08090b]">
-        <div className="mx-auto max-w-4xl px-5 pb-10 pt-12 sm:px-6 sm:pt-14 md:px-8 lg:pt-16">
+        <div className="mx-auto max-w-7xl px-5 pb-10 pt-12 sm:px-6 sm:pt-14 md:px-10 lg:pt-16">
           <p className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#FF7410]">
             02.1 / UX UI Shorts
           </p>
@@ -24,7 +24,7 @@ export default function IrstunnerUxShortView() {
       </div>
 
       {/* Article body */}
-      <div className="mx-auto max-w-4xl px-5 pb-28 pt-10 sm:px-6 sm:pt-12 md:px-8">
+      <div className="mx-auto max-w-7xl px-5 pb-28 pt-10 sm:px-6 sm:pt-12 md:px-10">
         <UxShortProjectCard data={IRSTUNNER_UX_SHORT} />
       </div>
 
