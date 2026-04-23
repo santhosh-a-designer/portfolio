@@ -57,6 +57,34 @@ export default function CaseStudyEzraShowcase({ data }: { data: EzraData }) {
         </section>
       </CaseStudyScrollReveal>
 
+      <CaseStudyScrollReveal delay={0.08}>
+        <section
+          className="mt-12 w-full min-w-0 border-t border-[#1e293b] pt-8"
+          aria-label={data.studentDashboard.title}
+        >
+          <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#94a3b8]">
+            {data.studentDashboard.eyebrow}
+          </p>
+          <h2 className="mt-2 text-left font-title text-2xl font-black text-[#f8fafc] sm:text-3xl">
+            {data.studentDashboard.title}
+          </h2>
+          <p className="mt-3 max-w-[75ch] text-pretty text-left text-[15px] leading-relaxed text-[#cbd5e1] sm:text-justify">
+            {data.studentDashboard.introLine1}
+          </p>
+          <p className="mt-2 max-w-[75ch] text-pretty text-left text-[15px] leading-relaxed text-[#b4c0ce] sm:text-justify">
+            {data.studentDashboard.introLine2}
+          </p>
+          <div className="mt-6 w-full min-w-0 max-w-5xl">
+            <DesktopPwaShowcase
+              textAlign="left"
+              label="EZ-2 · student dashboard"
+              caption={data.studentDashboard.caption}
+              src={data.studentDashboard.videoSrc}
+            />
+          </div>
+        </section>
+      </CaseStudyScrollReveal>
+
       <CaseStudyScrollReveal delay={0.1}>
         <section className="mt-10 border-t border-[#1e293b] pt-8">
           <h2 className={SECTION_H2}>{data.upcoming.title}</h2>

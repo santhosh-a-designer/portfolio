@@ -139,6 +139,15 @@ export type CaseStudy = {
         caption: string;
         videoSrc: string;
       };
+      /** After mentor dashboard: student view with one link per student. */
+      studentDashboard: {
+        eyebrow: string;
+        title: string;
+        introLine1: string;
+        introLine2: string;
+        caption: string;
+        videoSrc: string;
+      };
       upcoming: {
         title: string;
         body: string;
@@ -918,6 +927,17 @@ export const caseStudies: CaseStudy[] = [
           caption:
             "Batch cards, headcount, earned vs potential, and where to drill in — one calm read before any money conversation.",
           videoSrc: "/case-studies/ezra/EZ-1.mov",
+        },
+        studentDashboard: {
+          eyebrow: "Web · student view",
+          title: "Student dashboard",
+          introLine1:
+            "Each student gets their own link — a unique URL for their account only, so they can’t open another person’s page or read anyone else’s attendance and hours by guessing paths.",
+          introLine2:
+            "The student surface mirrors the truth the mentor sees: days completed, time left, and clear status for their batch — with no shared roster in the open.",
+          caption:
+            "Walkthrough: personal progress on the student link — the same data contract as the mentor view, without exposing other students.",
+          videoSrc: "/case-studies/ezra/EZ-2.mp4",
         },
         upcoming: {
           title: "Upcoming: subscription checkout with Razorpay",
