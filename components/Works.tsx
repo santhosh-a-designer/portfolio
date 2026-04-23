@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { Lightning, GlobeHemisphereWest, DeviceMobile, Robot } from "@phosphor-icons/react";
 
@@ -237,7 +237,13 @@ function WorkProjectCard({
 
 export default function Works() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [showContent, setShowContent] = useState(false);
+  /**
+   * Never gate the desktop 2×2 grid on `scrollYProgress`. Lenis/Framer progress often disagrees
+   * on jump-to-#works (or after URL/hash), so users saw only the parallax “sheet” (cream) with
+   * the cards still at `opacity: 0`. Content is always visible in the sticky band; the curtain
+   * behind it still parallax for polish.
+   */
+  const showContent = true;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -245,13 +251,6 @@ export default function Works() {
   });
 
   const curtainY = useTransform(scrollYProgress, [0.45, 0.7], ["100%", "0%"]);
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    if (typeof window !== "undefined" && window.innerWidth < 768) return;
-    /* Aligned with curtain (0.45–0.7) but forgiving for jump-scroll / #works deep-links */
-    if (v > 0.6) setShowContent(true);
-    else if (v < 0.55) setShowContent(false);
-  });
 
   const contentTransition = {
     type: "spring" as const,
