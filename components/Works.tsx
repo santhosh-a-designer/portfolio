@@ -266,6 +266,17 @@ export default function Works() {
       ref={sectionRef}
       className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[400vh] md:scroll-mt-0"
     >
+      {/*
+        Desktop: deep-link / nav uses Lenis scrollTo(HTMLElement). Manual scroll-Y math can drift
+        from Lenis/Framer; this anchor sits most of the way through the 400vh band so the grid
+        and index strip are fully in view. Hidden on small screens.
+      */}
+      <div
+        id="works-snap"
+        className="pointer-events-none absolute left-0 top-[88%] z-0 h-px w-px max-md:hidden"
+        aria-hidden
+      />
+
       {/* Mobile: full-page scroll only — no sticky, no inner overflow (prevents scroll trap with Lenis) */}
       <div className="block bg-[#f5f0eb] md:hidden">
         <div className="border-b border-[#e0d5c8] px-5 py-2 sm:px-7">

@@ -3,45 +3,68 @@ import { HEADER_SCROLL_OFFSET } from "@/components/LenisProvider";
 
 const MD_QUERY = "(min-width: 768px)";
 
+const scrollOpts = {
+  duration: 1.2,
+  lerp: 0.1 as const,
+};
+
 /**
- * Framer `useScroll` on `#works` uses `offset: ["start end", "end end"]`, so progress 0 is when
- * the section’s top hits the **bottom** of the viewport, and progress 1 is when the section’s
- * bottom does. That maps to scrollY ≈ `yDoc - vh + t * h` for progress `t` and section height `h`.
- * We don’t use a vh multiple — the section is `md:h-[400vh]`, so we scroll ~70–75% in so the grid
- * (`showContent` at 0.6) and the nav “Works” state read correctly.
+ * Scroll the page so **Selected works** (desktop) is the main view: Lenis resolves
+ * `scrollTo(HTMLElement)` from live layout (`rect.top + animatedScroll`), so it stays in sync
+ * with the 400vh section + parallax, unlike a hand-computed Y.
+ */
+export function scrollToWorksSection(lenis: Lenis | null, opts?: { onStart?: () => void }): void {
+  if (typeof window === "undefined") return;
+  const isMd = window.matchMedia(MD_QUERY).matches;
+  const snap = document.getElementById("works-snap");
+  const runStart = () => {
+    opts?.onStart?.();
+  };
+
+  if (isMd && snap) {
+    if (lenis) {
+      lenis.scrollTo(snap, {
+        ...scrollOpts,
+        offset: HEADER_SCROLL_OFFSET,
+        /** Ensure scroll even if a previous target matches (Lenis can no-op) */
+        force: true,
+        onStart: runStart,
+      });
+      return;
+    }
+    const y = snap.getBoundingClientRect().top + window.scrollY + HEADER_SCROLL_OFFSET;
+    runStart();
+    window.scrollTo({ top: Math.max(0, y), left: 0, behavior: "smooth" });
+    return;
+  }
+
+  const el = document.getElementById("works");
+  if (!el) return;
+  if (lenis) {
+    lenis.scrollTo(el, {
+      duration: 0.9,
+      lerp: 0.12,
+      offset: HEADER_SCROLL_OFFSET,
+      force: true,
+      onStart: runStart,
+    });
+  } else {
+    const y = el.getBoundingClientRect().top + window.scrollY + HEADER_SCROLL_OFFSET;
+    runStart();
+    window.scrollTo({ top: Math.max(0, y), left: 0, behavior: "smooth" });
+  }
+}
+
+/**
+ * @deprecated use {@link scrollToWorksSection} with Lenis + `#works-snap` only
  */
 export function computeWorksScrollTop(): number | null {
   if (typeof window === "undefined") return null;
+  const snap = document.getElementById("works-snap");
+  if (snap) {
+    return Math.max(0, snap.getBoundingClientRect().top + window.scrollY + HEADER_SCROLL_OFFSET);
+  }
   const el = document.getElementById("works");
   if (!el) return null;
-  const yDoc = el.getBoundingClientRect().top + window.scrollY;
-  const vh = window.innerHeight;
-  const h = el.offsetHeight || 0;
-  const isMd = window.matchMedia(MD_QUERY).matches;
-  if (!isMd) {
-    return Math.max(0, yDoc + HEADER_SCROLL_OFFSET);
-  }
-  /**
-   * t ∈ [0,1] along Works’ `scrollYProgress`. ~0.6 turns `showContent` on; use high t so the grid
-   * fills the sticky band (and nav reads “Works”), without overshooting a bogus `+ vh` multiple.
-   */
-  const t = 0.92;
-  const raw = h > 0 ? yDoc - vh + t * h + HEADER_SCROLL_OFFSET : yDoc - vh + 3.6 * vh + HEADER_SCROLL_OFFSET;
-  const maxY = document.documentElement.scrollHeight - vh;
-  return Math.max(0, Math.min(raw, maxY));
-}
-
-export function scrollToWorksSection(lenis: Lenis | null, opts?: { onStart?: () => void }): void {
-  const y = computeWorksScrollTop();
-  if (y == null) return;
-  if (lenis) {
-    lenis.scrollTo(y, {
-      duration: 0.9,
-      lerp: 0.12,
-      onStart: opts?.onStart,
-    });
-  } else {
-    opts?.onStart?.();
-    window.scrollTo({ top: y, left: 0, behavior: "smooth" });
-  }
+  return Math.max(0, el.getBoundingClientRect().top + window.scrollY + HEADER_SCROLL_OFFSET);
 }

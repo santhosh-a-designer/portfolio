@@ -95,11 +95,8 @@ export default function Navigation() {
         const docTop = el.getBoundingClientRect().top + window.scrollY;
         let top = docTop;
         if (id === "works" && window.matchMedia("(min-width: 768px)").matches) {
-          // Same geometry as useScroll: “entered Works” when past top of section − vh. Extra +0.1·h
-          // so “Works” wins over About in the long overlap, before Skills.
-          const h = el.offsetHeight;
-          const vh = window.innerHeight;
-          top = docTop - vh + 0.1 * (h > 0 ? h : 4 * vh);
+          // Framer Works progress ~0 when section top hits bottom of viewport → docTop − vh
+          top = docTop - window.innerHeight;
         }
         if (window.scrollY >= top - 140) current = id;
       }
