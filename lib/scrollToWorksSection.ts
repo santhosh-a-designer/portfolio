@@ -11,7 +11,7 @@ const scrollOpts = {
 /**
  * Scroll the page so **Selected works** (desktop) is the main view: Lenis resolves
  * `scrollTo(HTMLElement)` from live layout (`rect.top + animatedScroll`), so it stays in sync
- * with the 400vh section + parallax, unlike a hand-computed Y.
+ * with the Works section height, unlike a hand-computed Y.
  */
 export function scrollToWorksSection(lenis: Lenis | null, opts?: { onStart?: () => void }): void {
   if (typeof window === "undefined") return;

@@ -252,16 +252,15 @@ export default function Works() {
   return (
     <section
       id="works"
-      className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[400vh] md:scroll-mt-0"
+      className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[150vh] md:scroll-mt-0"
     >
       {/*
-        Desktop: deep-link / nav uses Lenis scrollTo(HTMLElement). Manual scroll-Y math can drift
-        from Lenis/Framer; this anchor sits most of the way through the 400vh band so the grid
-        and index strip are fully in view. Hidden on small screens.
+        Deep-link: anchor ~1/3 into the band (enough past About overlap) without a 300–400vh
+        “scroll pit” that took many wheel events to leave this section.
       */}
       <div
         id="works-snap"
-        className="pointer-events-none absolute left-0 top-[88%] z-0 h-px w-px max-md:hidden"
+        className="pointer-events-none absolute left-0 top-[38%] z-0 h-px w-px max-md:hidden"
         aria-hidden
       />
 
@@ -320,7 +319,7 @@ export default function Works() {
           className="relative z-20 flex-shrink-0 border-b border-[#e0d5c8] pointer-events-auto"
           style={{ background: showContent ? "rgba(245,240,235,0.97)" : "transparent" }}
         >
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-1.5 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] sm:py-2 md:px-8 lg:px-10">
+          <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-1 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] sm:py-1.5 md:px-8 lg:px-10">
             <span className="text-[#a89880]">Index · 02 — Works</span>
             <span className="text-[#c96010]">
               {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
@@ -329,7 +328,7 @@ export default function Works() {
         </motion.div>
 
         <div className="relative z-10 flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto overscroll-y-contain pointer-events-auto">
-          <div className="mx-auto flex w-full min-h-0 min-w-0 max-w-6xl flex-1 flex-col justify-start gap-4 px-5 py-4 sm:gap-5 sm:px-7 sm:py-5 md:justify-center md:gap-6 md:px-8 md:py-4 lg:px-10">
+          <div className="mx-auto flex w-full min-h-0 min-w-0 max-w-6xl flex-1 flex-col justify-start gap-3 px-5 py-3 sm:gap-4 sm:px-7 sm:py-4 md:gap-3 md:px-8 md:pt-0 md:pb-3 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
