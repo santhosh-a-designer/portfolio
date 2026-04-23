@@ -264,7 +264,7 @@ export default function Works() {
     <section
       id="works"
       ref={sectionRef}
-      className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[200vh] md:scroll-mt-0"
+      className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[400vh] md:scroll-mt-0"
     >
       {/* Mobile: full-page scroll only — no sticky, no inner overflow (prevents scroll trap with Lenis) */}
       <div className="block bg-[#f5f0eb] md:hidden">

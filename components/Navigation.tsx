@@ -93,9 +93,9 @@ export default function Navigation() {
         const el = document.getElementById(id);
         if (!el) continue;
         let top = el.getBoundingClientRect().top + window.scrollY;
-        // Match scroll target in scrollToWorksSection: #works layout top is one viewport above the visible band on md+.
+        // Match scroll target in scrollToWorksSection: #works uses extra scroll on md+ (400vh section).
         if (id === "works" && window.matchMedia("(min-width: 768px)").matches) {
-          top += window.innerHeight;
+          top += window.innerHeight * 2;
         }
         if (window.scrollY >= top - 140) current = id;
       }
