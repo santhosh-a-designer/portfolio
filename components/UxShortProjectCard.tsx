@@ -78,17 +78,17 @@ export default function UxShortProjectCard({ data }: { data: UxShortProjectConte
       {/* —— Packaging / product images — horizontal row, no containers —— */}
       <section className="mt-10 border-t border-[#1e293b] pt-8">
         <h3 className={`${SECTION_H} mb-6`}>Packaging &amp; product</h3>
-        <div className="grid w-full min-w-0 grid-cols-4 gap-2 sm:gap-3 md:gap-5">
+        <div className="grid w-full min-w-0 grid-cols-4 gap-0.5 sm:gap-1 md:gap-1.5">
           {data.packagingImages.map((img) => (
             <figure
               key={img.src}
-              className="flex min-w-0 flex-col items-center justify-end gap-1.5 sm:gap-2"
+              className="flex min-w-0 flex-col items-center justify-end gap-1 sm:gap-1.5"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={img.src}
                 alt={img.alt}
-                className="h-auto w-full max-h-28 object-contain sm:max-h-36 md:max-h-44 lg:max-h-52"
+                className="h-auto w-full max-h-40 object-contain sm:max-h-52 md:max-h-60 lg:max-h-72"
                 loading="lazy"
                 decoding="async"
               />
