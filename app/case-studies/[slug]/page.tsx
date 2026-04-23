@@ -547,7 +547,14 @@ function CaseStudyArticle({
               }
             >
               <p className="text-[10px] font-mono uppercase tracking-[0.22em] text-[#94a3b8]">Case study</p>
-              <h1 className="mt-3 font-title text-3xl sm:text-5xl font-black leading-tight text-[#f8fafc]">{study.project}</h1>
+              <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+                <h1 className="min-w-0 font-title text-3xl font-black leading-tight text-[#f8fafc] sm:text-5xl">
+                  {study.project}
+                </h1>
+                <p className="shrink-0 text-sm font-semibold whitespace-nowrap text-[#FF7410] sm:pt-1.5 sm:text-right">
+                  {study.timeline}
+                </p>
+              </div>
               {study.company ? (
                 <p className="mt-2 text-sm sm:text-base font-medium text-[#cbd5e1]">{study.company}</p>
               ) : null}
@@ -564,8 +571,10 @@ function CaseStudyArticle({
                 }
               >
                 <div className="border border-[#1e293b] bg-[#0c1014] px-4 py-3">
-                  <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#64748b]">Timeline</div>
-                  <div className="mt-1 text-sm font-semibold text-[#e2e8f0]">{study.timeline}</div>
+                  <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#64748b]">Tools &amp; languages</div>
+                  <div className="mt-1 text-sm font-semibold leading-snug text-[#e2e8f0]">
+                    {study.toolsAndLanguages}
+                  </div>
                 </div>
                 <div className="border border-[#1e293b] bg-[#0c1014] px-4 py-3">
                   <div className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#64748b]">Role</div>

@@ -15,7 +15,10 @@ export type CaseStudy = {
   /** Optional subheading above STAR (e.g. “2.1” for process section) */
   processWalkthroughLabel?: string;
   summary: string;
+  /** Shown in orange next to the project title (e.g. date range). */
   timeline: string;
+  /** First meta box: stack / tools (replaces a separate timeline-only box). */
+  toolsAndLanguages: string;
   role: string;
   situation: string;
   task: string;
@@ -198,8 +201,9 @@ export const caseStudies: CaseStudy[] = [
     processWalkthroughLabel: "2.1",
     summary:
       "A CTA-led assisted selling system that connects ecommerce shoppers with store sales teams for booking, video consultation, and in-call checkout.",
-    timeline: "May 2024 — Sep 2025",
-    role: "UX Designer",
+    timeline: "Mar 2026 — Present",
+    toolsAndLanguages: "Figma · Next.js · TypeScript · React",
+    role: "Design & Development (Full Stack)",
     situation:
       "Store owners needed a stronger way to convert website visitors who needed product guidance before making a purchase.",
     task:
@@ -574,8 +578,9 @@ export const caseStudies: CaseStudy[] = [
     subtitle: "Attendance, earnings, and trust on one system",
     summary:
       "Ezra is the product I designed and built to fix a very human problem: at FITA Academy, mentoring students meant fragile attendance sheets, easy to lose or “reinterpret,” and no single place for mentors and learners to share the same truth. I channelled that into a dashboard for mentors—fed by a bot I named Ezra—plus a student view for hours and daily attendance, automations for batch-end reminders, Gmail-backed payment handoffs, and a path to subscription. What started as a tool for my own batches is now in discussion for an org-wide buy, with paid pilots from other mentors along the way.",
-    timeline: "2024 — Ongoing · org rollout in discussion",
-    role: "Product, UX, and build (dashboard · Ezra bot · automations · Gmail integration)",
+    timeline: "Mar 2026 — Present",
+    toolsAndLanguages: "TypeScript · React · Vercel · WhatsApp · Automations · Gmail",
+    role: "Design & Development (Full Stack)",
     situation:
       "At FITA, attendance sheets went missing, numbers got disputed, and students forgot to mark leave. As a mentor myself, I was living in the gap—no single honest record, no fair way to track what I was owed. Spreadsheets and group chats couldn't scale.",
     task:
@@ -864,8 +869,9 @@ export const caseStudies: CaseStudy[] = [
     processWalkthroughLabel: "2.1",
     summary:
       "The first home-catering product in the region with a premium app-like PWA, a WhatsApp ordering bot, Razorpay checkout, and an operations dashboard—built so a Sivakasi home kitchen can scale beyond word-of-mouth like a small cloud kitchen.",
-    timeline: "2024 — 2025 · ~80% complete",
-    role: "UX/UI, product, and build (TypeScript · React · PWA · WhatsApp integration)",
+    timeline: "Mar 2026 — Present",
+    toolsAndLanguages: "TypeScript · React · PWA · WhatsApp Business · Razorpay",
+    role: "Design & Development (Full Stack)",
     situation:
       "A home cook in Sivakasi was already serving her network, but to grow she needed a real digital system—not a generic menu PDF. Nothing similar existed locally as a first-class experience: no regional benchmark for a premium UI, a WhatsApp-native path, and a way to run payments and delivery without turning the kitchen into an admin job.",
     task:
@@ -1133,7 +1139,8 @@ export const caseStudies: CaseStudy[] = [
     subtitle: "Pet Ecommerce with AI-assisted selling",
     summary:
       "A pet commerce platform in progress, designed from UX analysis to development with AI-agent support moments.",
-    timeline: "In Development",
+    timeline: "Mar 2026 — Present",
+    toolsAndLanguages: "Next.js · TypeScript · React · AI-assisted UX (in build)",
     role: "End-to-end Product Ownership",
     situation:
       "Pet buyers face overwhelming choices and low-confidence decision paths in typical commerce experiences.",
