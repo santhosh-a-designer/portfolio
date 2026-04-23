@@ -7,12 +7,32 @@ export type UxShortStatItem = {
 };
 
 export type UxShortShowreel = {
+  /** Fallback / secondary source (e.g. .mov) */
   src: string;
-  /** e.g. video/quicktime for .mov */
+  /** Preferred for the web (H.264 MP4) — try first; fixes Chrome/Edge vs QuickTime .mov */
+  mp4Src?: string;
+  /** e.g. video/quicktime for .mov in `src` */
   mimeType?: string;
   /** Section heading (default: Design walkthrough) */
   title?: string;
   poster?: string;
+};
+
+/** One video in a two-up row (same card pattern as {@link CaseStudyVideoShowcase}) */
+export type UxShortShowreelVideoItem = {
+  id: string;
+  /** Shown in the card header (e.g. Atm-1) */
+  label: string;
+  caption: string;
+  src: string;
+  mp4Src?: string;
+  mimeType?: string;
+};
+
+export type UxShortShowreelVideoSection = {
+  sectionTitle: string;
+  /** Usually two — rendered side by side on md+ */
+  videos: UxShortShowreelVideoItem[];
 };
 
 export type UxShortProjectContent = {
@@ -32,11 +52,18 @@ export type UxShortProjectContent = {
   /** One paragraph (~2–3 sentences) */
   uxUi: string;
   development: string;
+  /** Third prose column heading (default: “Development”) */
+  thirdBlockTitle?: string;
   overview: string;
   /** Marketing & sales / impact — small stat grid */
   marketingStats?: UxShortStatItem[];
-  /** Centered video (Figma walkthrough, screen recording) */
+  /** Centered single showreel */
   showreel?: UxShortShowreel;
+  /**
+   * Two-up video sections (e.g. Admin: Atm-1 + Atm-2, Loadman: Atm-3 + Atm-4).
+   * Shown after the single `showreel` block, if any.
+   */
+  showreelVideoPairs?: UxShortShowreelVideoSection[];
   packagingImages?: { src: string; alt: string; label?: string }[];
   accentColor?: string;
 };

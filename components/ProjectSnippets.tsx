@@ -94,9 +94,9 @@ export default function ProjectSnippets() {
 
               <h3 className="font-title text-lg font-bold leading-snug text-[#f1f5f9] sm:text-xl">UX UI Shorts!</h3>
               <p className="mt-3 flex-1 text-[14px] leading-relaxed text-[#94a3b8]">
-                Tight case-study-style write-ups: P1 <span className="text-[#e2e8f0]">IR Stunner</span> (web + packaging) and
-                P2 <span className="text-[#e2e8f0]">iRasus</span> (EV battery dashboard) — both on the same full page, stacked in
-                order. One click opens the full page (not a modal).
+                P1 <span className="text-[#e2e8f0]">IR Stunner</span>, P2 <span className="text-[#e2e8f0]">iRasus</span>, P3{" "}
+                <span className="text-[#e2e8f0]">IndiaOne ATM Manager</span> — one scroll, same template. One link opens the full
+                page.
               </p>
 
               <div className="mt-6 border-t border-[#1e293b] pt-5">
@@ -107,7 +107,7 @@ export default function ProjectSnippets() {
                     boxShadow: "inset 0 0 0 1px rgba(255,116,16,0.1), 0 8px 20px -12px rgba(255,116,16,0.35)",
                   }}
                 >
-                  <span className="min-w-0 text-[#FF7410]">View work · P1 &amp; P2</span>
+                  <span className="min-w-0 text-[#FF7410]">View work · P1–P3</span>
                   <span
                     className="flex h-8 w-8 shrink-0 items-center justify-center border border-[#1e293b] transition-transform duration-300 group-hover:translate-x-0.5"
                     style={{ background: "rgba(255,116,16,0.1)", borderColor: "rgba(255,116,16,0.3)" }}
@@ -115,7 +115,7 @@ export default function ProjectSnippets() {
                     <ArrowRight size={16} weight="bold" style={{ color: "#FF7410" }} aria-hidden />
                   </span>
                 </Link>
-                <p className="mt-2 text-[10px] text-[#64748b]">Scroll: IR Stunner first, then iRasus.</p>
+                <p className="mt-2 text-[10px] text-[#64748b]">Order: Stunner → iRasus → IndiaOne ATM.</p>
               </div>
             </div>
           </motion.article>
@@ -186,8 +186,7 @@ export default function ProjectSnippets() {
 
               <div className="mt-6 border-t border-[#1e293b] pt-5">
                 <Link
-                  href="/#contact"
-                  scroll
+                  href="/graphic-design"
                   className="inline-flex w-full items-center justify-between gap-3 border border-[#1e293b] bg-[#08090b] px-4 py-3 text-left text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#e2e8f0] transition-all duration-300 hover:border-[#334155] sm:w-auto"
                   style={{
                     boxShadow: "inset 0 0 0 1px rgba(224,112,16,0.12), 0 8px 20px -12px rgba(224,112,16,0.4)",
@@ -203,7 +202,7 @@ export default function ProjectSnippets() {
                     <ArrowRight size={16} weight="bold" style={{ color: "#E07010" }} aria-hidden />
                   </span>
                 </Link>
-                <p className="mt-2 text-[10px] text-[#64748b]">Open contact — we&apos;ll line up a graphic brief.</p>
+                <p className="mt-2 text-[10px] text-[#64748b]">Page is getting built.</p>
               </div>
             </div>
           </motion.article>

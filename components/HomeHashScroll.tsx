@@ -2,7 +2,10 @@
 
 import { useEffect } from "react";
 import { useLenis } from "@/components/LenisProvider";
-import { SCROLL_TO_WORKS_STORAGE_KEY } from "@/lib/scrollToWorks";
+import {
+  SCROLL_TO_SNIPPETS_STORAGE_KEY,
+  SCROLL_TO_WORKS_STORAGE_KEY,
+} from "@/lib/scrollToWorks";
 import { scrollToWorksSection } from "@/lib/scrollToWorksSection";
 
 function scheduleScroll(fn: () => void) {
@@ -15,10 +18,10 @@ function scheduleScroll(fn: () => void) {
   setTimeout(fn, 1200);
 }
 
-function consumeScrollToWorksFromStorage(): boolean {
+function consumeStorageFlag(key: string): boolean {
   try {
-    if (sessionStorage.getItem(SCROLL_TO_WORKS_STORAGE_KEY) === "1") {
-      sessionStorage.removeItem(SCROLL_TO_WORKS_STORAGE_KEY);
+    if (sessionStorage.getItem(key) === "1") {
+      sessionStorage.removeItem(key);
       return true;
     }
   } catch {
@@ -35,6 +38,32 @@ export default function HomeHashScroll() {
   const lenis = useLenis();
 
   useEffect(() => {
+    const scrollToSnippets = () => {
+      const el = document.getElementById("snippets");
+      if (!el) return;
+      try {
+        if (window.location.hash !== "#snippets") {
+          history.replaceState(
+            null,
+            "",
+            `${window.location.pathname}${window.location.search}#snippets`
+          );
+        }
+      } catch {
+        /* */
+      }
+      if (lenis) {
+        lenis.scrollTo(el, {
+          offset: 0,
+          duration: 0.9,
+          lerp: 0.12,
+          force: true,
+        });
+      } else {
+        window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
+      }
+    };
+
     const scrollToWorks = () => {
       if (!document.getElementById("works")) return;
       try {
@@ -51,17 +80,30 @@ export default function HomeHashScroll() {
       scrollToWorksSection(lenis);
     };
 
-    const shouldScroll = () => window.location.hash === "#works" || consumeScrollToWorksFromStorage();
-
     const run = () => {
-      if (!shouldScroll()) return;
-      scheduleScroll(scrollToWorks);
+      if (
+        window.location.hash === "#snippets" ||
+        consumeStorageFlag(SCROLL_TO_SNIPPETS_STORAGE_KEY)
+      ) {
+        scheduleScroll(scrollToSnippets);
+        return;
+      }
+      if (
+        window.location.hash === "#works" ||
+        consumeStorageFlag(SCROLL_TO_WORKS_STORAGE_KEY)
+      ) {
+        scheduleScroll(scrollToWorks);
+      }
     };
 
     run();
 
     const onHash = () => {
-      if (window.location.hash === "#works") scheduleScroll(scrollToWorks);
+      if (window.location.hash === "#snippets") {
+        scheduleScroll(scrollToSnippets);
+      } else if (window.location.hash === "#works") {
+        scheduleScroll(scrollToWorks);
+      }
     };
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);

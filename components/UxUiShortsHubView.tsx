@@ -7,13 +7,15 @@ import BackToWorksLink from "@/components/BackToWorksLink";
 import UxShortProjectCard from "@/components/UxShortProjectCard";
 import { IRSTUNNER_UX_SHORT } from "@/lib/uxShortProjects/irStunner";
 import { IRASUS_UX_SHORT } from "@/lib/uxShortProjects/irasus";
+import { INDIAONE_ATM_UX_SHORT } from "@/lib/uxShortProjects/indiaOneAtm";
 
 function ScrollToProject() {
   const sp = useSearchParams();
 
   useEffect(() => {
     const p = sp.get("p");
-    const id = p === "2" ? "project-2" : p === "1" ? "project-1" : null;
+    const id =
+      p === "3" ? "project-3" : p === "2" ? "project-2" : p === "1" ? "project-1" : null;
     if (!id) return;
     const el = document.getElementById(id);
     if (!el) return;
@@ -27,7 +29,7 @@ function ScrollToProject() {
 }
 
 /**
- * One scroll page: Project 1 (IR Stunner), then Project 2 (iRasus) — same as Project Snippets / UX UI Shorts.
+ * One page: P1 IR Stunner, P2 iRasus, P3 IndiaOne ATM Manager.
  */
 export default function UxUiShortsHubView() {
   return (
@@ -45,7 +47,7 @@ export default function UxUiShortsHubView() {
             UX UI Shorts
           </h1>
           <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-[#94a3b8]">
-            Project 1 and Project 2 on one page — same template, stacked below.
+            Project 1, 2, and 3 on one page — same template, stacked in order.
           </p>
         </div>
       </div>
@@ -63,10 +65,17 @@ export default function UxUiShortsHubView() {
         <section id="project-2" className="scroll-mt-24">
           <UxShortProjectCard data={IRASUS_UX_SHORT} />
         </section>
+
+        <div className="my-14 border-t border-[#1e293b] md:my-20" aria-hidden />
+
+        <section id="project-3" className="scroll-mt-24">
+          <UxShortProjectCard data={INDIAONE_ATM_UX_SHORT} />
+        </section>
       </div>
 
       <BackToWorksLink
         aria-label="Back to home"
+        href="/#snippets"
         className="group fixed bottom-5 right-5 z-[260] inline-flex h-12 w-12 items-center overflow-hidden rounded-none border border-[#FF7410] bg-[#FF7410] px-3 text-[#0a0908] shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out hover:w-44 hover:border-[#FF8C30] hover:bg-[#FF8C30] focus-visible:w-44 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7410]/50"
       >
         <ArrowLeft size={18} className="shrink-0 text-[#0a0908]" aria-hidden />

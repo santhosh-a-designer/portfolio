@@ -2,6 +2,7 @@
 
 import { ArrowSquareOut } from "@phosphor-icons/react";
 import type { UxShortProjectContent } from "@/lib/uxShortProjectTypes";
+import { UxShortDesktopVideoCard, UxShortPhoneVideoCard } from "@/components/UxShortVideoCards";
 
 const SECTION_H = "text-[11px] font-mono uppercase tracking-[0.2em] text-[#FF7410]";
 
@@ -25,6 +26,8 @@ export default function UxShortProjectCard({ data }: { data: UxShortProjectConte
     stats.length > 4
       ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
       : "grid-cols-2 sm:grid-cols-2 lg:grid-cols-4";
+  const videoPairSections = data.showreelVideoPairs ?? [];
+  const thirdProseTitle = data.thirdBlockTitle ?? "Development";
 
   return (
     <article className="w-full min-w-0">
@@ -74,21 +77,21 @@ export default function UxShortProjectCard({ data }: { data: UxShortProjectConte
           <div className="border-b border-[#1e293b] px-4 py-3">
             <span className={SECTION_H}>Project overview</span>
           </div>
-          <p className="p-4 text-[14px] leading-relaxed text-[#94a3b8]">{data.overview}</p>
+          <p className="whitespace-pre-line p-4 text-[14px] leading-relaxed text-[#94a3b8]">{data.overview}</p>
         </div>
 
         <div className="border border-[#1e293b] bg-[#0c1014]">
           <div className="border-b border-[#1e293b] px-4 py-3">
             <span className={SECTION_H}>UX &amp; UI</span>
           </div>
-          <p className="p-4 text-[14px] leading-relaxed text-[#94a3b8]">{data.uxUi}</p>
+          <p className="whitespace-pre-line p-4 text-[14px] leading-relaxed text-[#94a3b8]">{data.uxUi}</p>
         </div>
 
         <div className="border border-[#1e293b] bg-[#0c1014]">
           <div className="border-b border-[#1e293b] px-4 py-3">
-            <span className={SECTION_H}>Development</span>
+            <span className={SECTION_H}>{thirdProseTitle}</span>
           </div>
-          <p className="p-4 text-[14px] leading-relaxed text-[#94a3b8]">{data.development}</p>
+          <p className="whitespace-pre-line p-4 text-[14px] leading-relaxed text-[#94a3b8]">{data.development}</p>
         </div>
       </div>
 
@@ -111,27 +114,46 @@ export default function UxShortProjectCard({ data }: { data: UxShortProjectConte
 
       {/* —— Centered showreel —— */}
       {data.showreel ? (
-        <section className="mt-10 border-t border-[#1e293b] pt-8">
-          <h3 className={`${SECTION_H} mb-5 text-center`}>
-            {data.showreel.title ?? "Design walkthrough"}
-          </h3>
-          <div className="mx-auto flex w-full max-w-4xl justify-center">
-            <video
-              className="w-full max-w-full border border-[#1e293b] bg-[#0c1014] shadow-[0_0_0_1px_rgba(15,23,42,0.4)]"
-              controls
-              playsInline
-              preload="metadata"
-              poster={data.showreel.poster}
-            >
-              {data.showreel.mimeType ? (
-                <source src={data.showreel.src} type={data.showreel.mimeType} />
-              ) : (
-                <source src={data.showreel.src} />
-              )}
-              <a href={data.showreel.src} className="text-[#FF7410] underline">
-                Download / open video
-              </a>
-            </video>
+        <section className="mt-10 w-full min-w-0 border-t border-[#1e293b] pt-8">
+          <div className="mx-auto w-full max-w-3xl md:max-w-4xl">
+            <UxShortDesktopVideoCard
+              label={data.showreel.title ?? "Design walkthrough"}
+              caption="Figma / screen capture — client work is internal; not a public live product."
+              src={data.showreel.mp4Src ?? data.showreel.src}
+              textAlign="center"
+            />
+          </div>
+        </section>
+      ) : null}
+
+      {videoPairSections.length > 0 ? (
+        <section className="mt-10 w-full min-w-0 border-t border-[#1e293b] pt-8">
+          <div className="grid w-full min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-5">
+            {videoPairSections.map((section) => (
+              <section
+                key={section.sectionTitle}
+                className="min-w-0 border border-[#1e293b] bg-[#0c1014] p-3 sm:p-4"
+                aria-label={section.sectionTitle}
+              >
+                <h2 className="text-[12px] font-mono uppercase tracking-[0.2em] text-[#FF7410]">
+                  {section.sectionTitle}
+                </h2>
+                <div className="mt-4 mx-auto grid w-fit min-w-0 grid-cols-1 gap-2 md:grid-cols-2 md:gap-2">
+                  {section.videos.map((v) => (
+                    <div
+                      key={v.id}
+                      className="w-[230px] sm:w-[250px] md:w-[270px]"
+                    >
+                      <UxShortPhoneVideoCard
+                        label={v.label}
+                        caption={v.caption}
+                        src={v.mp4Src ?? v.src}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </section>
+            ))}
           </div>
         </section>
       ) : null}

@@ -1,17 +1,17 @@
 import type { UxShortProjectContent } from "@/lib/uxShortProjectTypes";
 
-/** Walkthrough you provided; lives under public. */
-const SHOWREEL = "/case-studies/parla/Irasus.mov";
+const SHOWREEL_MOV = "/case-studies/parla/Irasus.mov";
+const SHOWREEL_MP4 = "/case-studies/parla/Irasus.mp4";
 
-/** Public scale metrics from [irasus.com](https://irasus.com/) (dashboard work is private; NDA). */
+/** iRasus scale metrics (publicly reported). No outbound link in the portfolio info bar. */
 export const IRASUS_UX_SHORT = {
   projectLabel: "Project 2",
   projectTitle: "iRasus",
+  thirdBlockTitle: "Design",
   tools: "Figma",
   duration: "Sept 2024 — Dec 2024",
-  thirdInfoLabel: "Company site",
-  liveUrl: "https://irasus.com/",
-  liveUrlDisplay: "irasus.com",
+  thirdInfoLabel: "Client link",
+  thirdInfoFallback: "— (no public URL for this work)",
   overview:
     "iRasus builds AI-driven battery intelligence for e-mobility, stationary storage, and manufacturing — the Preksha platform and related apps help fleets and operators see packs in real time, catch faults early, and extend life. I supported a dashboard revamp: competitor and landscape analysis, then cleaner tables, layouts, and real-time vehicle monitoring so heavy telemetry stays legible in operations.",
   uxUi:
@@ -26,7 +26,8 @@ export const IRASUS_UX_SHORT = {
     { label: "Buses & vehicles", value: "2,000+" },
   ],
   showreel: {
-    src: SHOWREEL,
+    src: SHOWREEL_MOV,
+    mp4Src: SHOWREEL_MP4,
     mimeType: "video/quicktime",
     title: "Design walkthrough",
   },
