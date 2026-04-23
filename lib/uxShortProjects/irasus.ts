@@ -3,16 +3,13 @@ import type { UxShortProjectContent } from "@/lib/uxShortProjectTypes";
 /** Walkthrough you provided; lives under public. */
 const SHOWREEL = "/case-studies/parla/Irasus.mov";
 
-/**
- * [iRasus](https://irasus.com/) — public metrics; dashboard work is private.
- * Source for headline figures: company site.
- */
+/** Public scale metrics from [irasus.com](https://irasus.com/) (dashboard work is private; NDA). */
 export const IRASUS_UX_SHORT = {
   projectLabel: "Project 2",
   projectTitle: "iRasus",
   tools: "Figma",
   duration: "Sept 2024 — Dec 2024",
-  thirdInfoLabel: "Reference (public site)",
+  thirdInfoLabel: "Company site",
   liveUrl: "https://irasus.com/",
   liveUrlDisplay: "irasus.com",
   overview:

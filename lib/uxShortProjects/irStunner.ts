@@ -16,6 +16,7 @@ export const IRSTUNNER_UX_SHORT = {
   overview:
     "A powder you mix with paint so factory and home roofs act as a thermal shield — cutting radiant heat before it enters the building. The design goal was trust: credible numbers, a consult-first CTA, and packaging that reads cleanly in-store and in photos.",
   marketingStats: [
+    { label: "Sales growth (summer, WhatsApp-led)", value: "15% → 40%" },
     { label: "Core CTA", value: "WhatsApp + on-site / audit" },
     { label: "Split positioning", value: "Industrial · CHILL HOME" },
     { label: "Sales motion", value: "Specifiers → field trials" },
