@@ -4,21 +4,31 @@ import { HEADER_SCROLL_OFFSET } from "@/components/LenisProvider";
 const MD_QUERY = "(min-width: 768px)";
 
 /**
- * Document Y to scroll so the **visible** Works band is in view.
- * On `md+`, `#works` uses `margin-top: -100vh` (overlap with About). One viewport is not enough:
- * the desktop grid stays hidden until `scrollYProgress` in Works exceeds ~0.75, so we must scroll
- * far enough into the (400vh) section for the parallax + cards to turn on.
+ * Framer `useScroll` on `#works` uses `offset: ["start end", "end end"]`, so progress 0 is when
+ * the section’s top hits the **bottom** of the viewport, and progress 1 is when the section’s
+ * bottom does. That maps to scrollY ≈ `yDoc - vh + t * h` for progress `t` and section height `h`.
+ * We don’t use a vh multiple — the section is `md:h-[400vh]`, so we scroll ~70–75% in so the grid
+ * (`showContent` at 0.6) and the nav “Works” state read correctly.
  */
 export function computeWorksScrollTop(): number | null {
   if (typeof window === "undefined") return null;
   const el = document.getElementById("works");
   if (!el) return null;
-  const sectionTop = el.getBoundingClientRect().top + window.scrollY;
-  const isMd = window.matchMedia(MD_QUERY).matches;
+  const yDoc = el.getBoundingClientRect().top + window.scrollY;
   const vh = window.innerHeight;
-  /** Scaled for md:h-[400vh] (2× former 200vh): overlap + move into range where `showContent` flips on */
-  const pastOverlap = isMd ? vh * 3.36 : 0;
-  return Math.max(0, sectionTop + pastOverlap + HEADER_SCROLL_OFFSET);
+  const h = el.offsetHeight || 0;
+  const isMd = window.matchMedia(MD_QUERY).matches;
+  if (!isMd) {
+    return Math.max(0, yDoc + HEADER_SCROLL_OFFSET);
+  }
+  /**
+   * t ∈ [0,1] along Works’ `scrollYProgress`. ~0.6 turns `showContent` on; use high t so the grid
+   * fills the sticky band (and nav reads “Works”), without overshooting a bogus `+ vh` multiple.
+   */
+  const t = 0.92;
+  const raw = h > 0 ? yDoc - vh + t * h + HEADER_SCROLL_OFFSET : yDoc - vh + 3.6 * vh + HEADER_SCROLL_OFFSET;
+  const maxY = document.documentElement.scrollHeight - vh;
+  return Math.max(0, Math.min(raw, maxY));
 }
 
 export function scrollToWorksSection(lenis: Lenis | null, opts?: { onStart?: () => void }): void {

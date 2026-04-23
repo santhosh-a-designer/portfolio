@@ -92,10 +92,14 @@ export default function Navigation() {
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        let top = el.getBoundingClientRect().top + window.scrollY;
-        // Match scroll target in scrollToWorksSection: #works uses extra scroll on md+ (400vh section).
+        const docTop = el.getBoundingClientRect().top + window.scrollY;
+        let top = docTop;
         if (id === "works" && window.matchMedia("(min-width: 768px)").matches) {
-          top += window.innerHeight * 2;
+          // Same geometry as useScroll: “entered Works” when past top of section − vh. Extra +0.1·h
+          // so “Works” wins over About in the long overlap, before Skills.
+          const h = el.offsetHeight;
+          const vh = window.innerHeight;
+          top = docTop - vh + 0.1 * (h > 0 ? h : 4 * vh);
         }
         if (window.scrollY >= top - 140) current = id;
       }
