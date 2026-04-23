@@ -27,6 +27,7 @@ export default function CaseStudyCinematicIntro({
   const doneRef = useRef(false);
   const reduce = useReducedMotion();
   const [phase, setPhase] = useState<Phase>(reduce ? "ready" : "playing");
+  const [videoReady, setVideoReady] = useState<boolean>(Boolean(reduce));
   const hideOverlay = reduce || phase === "ready";
 
   useLayoutEffect(() => {
@@ -138,15 +139,29 @@ export default function CaseStudyCinematicIntro({
               ref={videoRef}
               src={config.src}
               poster={config.poster}
-              className="h-full w-full min-h-[100dvh] object-cover"
+              className={`h-full w-full min-h-[100dvh] object-cover transition-opacity duration-200 ${
+                videoReady ? "opacity-100" : "opacity-0"
+              }`}
               autoPlay
               playsInline
               muted
+              preload="auto"
               onLoadedMetadata={applyPlaybackRate}
               onPlay={applyPlaybackRate}
+              onCanPlay={() => setVideoReady(true)}
+              onLoadedData={() => setVideoReady(true)}
               onTimeUpdate={onTimeUpdate}
               onEnded={onVideoEnded}
             />
+            {!videoReady ? (
+              <div className="pointer-events-none absolute inset-0 z-[510] flex items-center justify-center">
+                <div
+                  className="h-10 w-10 animate-spin rounded-full border-2 border-[#334155] border-t-[#FF7410]"
+                  aria-label="Loading intro video"
+                  role="status"
+                />
+              </div>
+            ) : null}
           </div>
           {phase === "playing" ? (
             <button

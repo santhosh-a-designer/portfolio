@@ -33,7 +33,13 @@ export default function BackToWorksLink({ href = "/#works", onClick, ...rest }: 
         } catch {
           /* private / blocked storage */
         }
-        router.push("/");
+        // Cross-route hash scroll can be flaky with soft navigation; force a full nav so
+        // HomeHashScroll + hash always run from a clean page load.
+        if (typeof window !== "undefined") {
+          window.location.assign(href);
+        } else {
+          router.push("/");
+        }
       }}
     />
   );
