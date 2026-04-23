@@ -46,13 +46,15 @@ export default function CaseStudyEzraShowcase({ data }: { data: EzraData }) {
           <p className="mt-2 max-w-[75ch] text-pretty text-left text-[15px] leading-relaxed text-[#b4c0ce] sm:text-justify">
             {data.dashboard.introLine2}
           </p>
-          <div className="mt-6 w-full min-w-0 max-w-5xl">
-            <DesktopPwaShowcase
-              textAlign="left"
-              label="EZ-M · screen recording"
-              caption={data.dashboard.caption}
-              src={data.dashboard.videoSrc}
-            />
+          <div className="mt-6 flex w-full min-w-0 justify-center">
+            <div className="w-full max-w-5xl">
+              <DesktopPwaShowcase
+                textAlign="center"
+                label="EZ-M · screen recording"
+                caption={data.dashboard.caption}
+                src={data.dashboard.videoSrc}
+              />
+            </div>
           </div>
         </section>
       </CaseStudyScrollReveal>
@@ -74,13 +76,15 @@ export default function CaseStudyEzraShowcase({ data }: { data: EzraData }) {
           <p className="mt-2 max-w-[75ch] text-pretty text-left text-[15px] leading-relaxed text-[#b4c0ce] sm:text-justify">
             {data.studentDashboard.introLine2}
           </p>
-          <div className="mt-6 w-full min-w-0 max-w-5xl">
-            <DesktopPwaShowcase
-              textAlign="left"
-              label="EZ-2 · student dashboard"
-              caption={data.studentDashboard.caption}
-              src={data.studentDashboard.videoSrc}
-            />
+          <div className="mt-6 flex w-full min-w-0 justify-center">
+            <div className="w-full max-w-5xl">
+              <DesktopPwaShowcase
+                textAlign="center"
+                label="EZ-2 · student dashboard"
+                caption={data.studentDashboard.caption}
+                src={data.studentDashboard.videoSrc}
+              />
+            </div>
           </div>
         </section>
       </CaseStudyScrollReveal>
