@@ -11,14 +11,16 @@ type EzraData = NonNullable<NonNullable<CaseStudy["artifacts"]>["ezraShowcase"]>
 export default function CaseStudyEzraShowcase({ data }: { data: EzraData }) {
   return (
     <>
+      {/* Same structure as Vidya WhatsApp row: eyebrow, title, two intro paragraphs, 3-col grid (2 clips = same column width as Vidya phones). */}
       <CaseStudyScrollReveal>
-        <section className="mt-5 w-full min-w-0 sm:mt-6" aria-label={data.mobile.title}>
+        <section className="mt-12 w-full min-w-0 border-t border-[#1e293b] pt-8" aria-label={data.mobile.title}>
           <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#94a3b8]">{data.mobile.eyebrow}</p>
           <h2 className="mt-2 font-title text-2xl font-black text-[#f8fafc] sm:text-3xl">{data.mobile.title}</h2>
-          <p className="mt-3 max-w-[75ch] text-pretty text-[15px] leading-relaxed text-[#cbd5e1] sm:text-justify">
-            {data.mobile.lead}
+          <p className="mt-3 w-full text-pretty text-[15px] leading-relaxed text-[#cbd5e1] sm:text-justify">{data.mobile.lead}</p>
+          <p className="mt-2 w-full text-pretty text-[13px] leading-relaxed text-[#94a3b8] sm:text-justify">
+            {data.mobile.contextAfter}
           </p>
-          <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-3">
             {data.mobile.clips.map((c) => (
               <PhoneWalkthroughCard key={c.videoSrc} label={c.label} caption={c.caption} src={c.videoSrc} />
             ))}
@@ -26,16 +28,26 @@ export default function CaseStudyEzraShowcase({ data }: { data: EzraData }) {
         </section>
       </CaseStudyScrollReveal>
 
+      {/* Desktop: match Vidya Pwa block rhythm; title + centered two-line intro + centered video column. */}
       <CaseStudyScrollReveal delay={0.06}>
         <section className="mt-12 w-full min-w-0 border-t border-[#1e293b] pt-8" aria-label={data.dashboard.title}>
           <p className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#94a3b8]">{data.dashboard.eyebrow}</p>
-          <h2 className="mt-2 font-title text-2xl font-black text-[#f8fafc] sm:text-3xl">{data.dashboard.title}</h2>
-          <div className="mt-6 w-full min-w-0 max-w-4xl">
-            <DesktopPwaShowcase
-              label="EZ-M · screen recording"
-              caption={data.dashboard.caption}
-              src={data.dashboard.videoSrc}
-            />
+          <h2 className="mt-2 text-center font-title text-2xl font-black text-[#f8fafc] sm:text-3xl">{data.dashboard.title}</h2>
+          <p className="mx-auto mt-3 max-w-[52ch] text-pretty text-center text-[15px] leading-relaxed text-[#cbd5e1]">
+            {data.dashboard.introLine1}
+          </p>
+          <p className="mx-auto mt-2 max-w-[52ch] text-pretty text-center text-[15px] leading-relaxed text-[#b4c0ce]">
+            {data.dashboard.introLine2}
+          </p>
+          <div className="mt-6 flex w-full min-w-0 justify-center">
+            <div className="w-full max-w-5xl">
+              <DesktopPwaShowcase
+                textAlign="center"
+                label="EZ-M · screen recording"
+                caption={data.dashboard.caption}
+                src={data.dashboard.videoSrc}
+              />
+            </div>
           </div>
         </section>
       </CaseStudyScrollReveal>

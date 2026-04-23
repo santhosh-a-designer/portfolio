@@ -601,10 +601,6 @@ function CaseStudyArticle({
           </div>
         </CaseStudyScrollReveal>
 
-        {study.slug === "ezra-mentor-dashboard" && study.artifacts?.ezraShowcase ? (
-          <CaseStudyEzraShowcase data={study.artifacts.ezraShowcase} />
-        ) : null}
-
         {/* 1. STAR */}
         <section className="mt-10 border-t border-[#1e293b] pt-8">
           <div className="grid gap-3 md:grid-cols-2">
@@ -694,6 +690,10 @@ function CaseStudyArticle({
 
         {/* 6. User flow */}
         <UserFlowSection study={study} />
+
+        {study.slug === "ezra-mentor-dashboard" && study.artifacts?.ezraShowcase ? (
+          <CaseStudyEzraShowcase data={study.artifacts.ezraShowcase} />
+        ) : null}
 
         <VidyasShowcaseSection study={study} />
 

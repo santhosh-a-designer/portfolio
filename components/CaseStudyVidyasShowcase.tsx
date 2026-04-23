@@ -155,7 +155,18 @@ export function PhoneWalkthroughCard({
 }
 
 /** Desktop 16:9 (or source ratio): looping strip, no controls, no play/pause interaction. */
-export function DesktopPwaShowcase({ label, caption, src }: { label: string; caption: string; src: string }) {
+export function DesktopPwaShowcase({
+  label,
+  caption,
+  src,
+  textAlign = "left",
+}: {
+  label: string;
+  caption: string;
+  src: string;
+  /** `center` for centered label + caption (e.g. Ezra dashboard). */
+  textAlign?: "left" | "center";
+}) {
   const refMain = useRef<HTMLVideoElement | null>(null);
   const refFill = useRef<HTMLVideoElement | null>(null);
   const lastSync = useRef(0);
@@ -201,9 +212,10 @@ export function DesktopPwaShowcase({ label, caption, src }: { label: string; cap
     };
   }, [src]);
 
+  const cap = textAlign === "center" ? " text-center" : "";
   return (
-    <div className="min-w-0 border border-[#1e293b] bg-[#0c1014] p-3 sm:p-4">
-      <div className="mb-2 text-[10px] font-mono uppercase tracking-[0.16em] text-[#64748b]">{label}</div>
+    <div className={`min-w-0 border border-[#1e293b] bg-[#0c1014] p-3 sm:p-4${cap}`}>
+      <div className={`mb-2 text-[10px] font-mono uppercase tracking-[0.16em] text-[#64748b]${cap}`}>{label}</div>
       <div
         className="relative w-full min-w-0 max-w-full overflow-hidden border border-dashed border-[#475569] bg-[#111] pointer-events-none select-none"
         style={aspect}
@@ -234,7 +246,7 @@ export function DesktopPwaShowcase({ label, caption, src }: { label: string; cap
           {videoSources(src)}
         </video>
       </div>
-      <p className="mt-3 text-[12px] leading-relaxed text-[#94a3b8]">{caption}</p>
+      <p className={`mt-3 text-[12px] leading-relaxed text-[#94a3b8]${cap}`}>{caption}</p>
     </div>
   );
 }

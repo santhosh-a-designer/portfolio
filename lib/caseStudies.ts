@@ -126,11 +126,16 @@ export type CaseStudy = {
         eyebrow: string;
         title: string;
         lead: string;
+        /** Second paragraph under lead — same role as vidyaShowcase WhatsApp `contextAfterUserFlow`. */
+        contextAfter: string;
         clips: Array<{ label: string; caption: string; videoSrc: string }>;
       };
       dashboard: {
         eyebrow: string;
         title: string;
+        /** Two lines above the video, centered (desktop walkthrough). */
+        introLine1: string;
+        introLine2: string;
         caption: string;
         videoSrc: string;
       };
@@ -888,6 +893,8 @@ export const caseStudies: CaseStudy[] = [
           title: "Two touchpoints the product runs on every week",
           lead:
             "Short vertical clips: lock attendance when the session is still fresh, and add a new student in Ezra so the same row appears in the web dashboard with no second data entry pass.",
+          contextAfter:
+            "Same phone canvas mentors already use after class: quick taps, no context switch to a laptop until they want the full batch and money view in one place.",
           clips: [
             {
               label: "EZ-M-1 · Marking attendance",
@@ -904,8 +911,12 @@ export const caseStudies: CaseStudy[] = [
         dashboard: {
           eyebrow: "Web · live overview",
           title: "EZ-M · dashboard for the mentor",
+          introLine1:
+            "The web surface is where batches, money, and alerts meet — one pass before you talk to a student or send a payment follow-up.",
+          introLine2:
+            "Screen recording from the live product: day switches, headcount, earned vs potential, and which slot is asking for attention.",
           caption:
-            "Batch cards, headcount, earned vs potential, and where to drill in—one calm surface for the day’s truth before any money conversation.",
+            "Batch cards, headcount, earned vs potential, and where to drill in — one calm read before any money conversation.",
           videoSrc: "/case-studies/ezra/EZ-1.mov",
         },
         upcoming: {
