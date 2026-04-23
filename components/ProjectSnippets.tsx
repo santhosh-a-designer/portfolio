@@ -1,237 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useId, useState } from "react";
-import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Stack, Swatches, X } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
+import { ArrowRight, Stack, Swatches } from "@phosphor-icons/react";
 
 const VP = { once: true, amount: 0.08 } as const;
 const spring = { type: "spring" as const, stiffness: 55, damping: 18, mass: 1.1 };
 
-const IRSTUNNER_FACES = [
-  { src: "/project-snippets/irstunner/front.png", label: "Front" },
-  { src: "/project-snippets/irstunner/back.png", label: "Back" },
-  { src: "/project-snippets/irstunner/left.png", label: "Left" },
-  { src: "/project-snippets/irstunner/right.png", label: "Right" },
-] as const;
-
-function PackagingFace({
-  src,
-  label,
-  accent,
-}: {
-  src: string;
-  label: string;
-  accent: string;
-}) {
-  const [status, setStatus] = useState<"loading" | "ready" | "error">("loading");
-
-  return (
-    <figure className="relative overflow-hidden border border-[#1e293b] bg-[#0a0c10]">
-      <div className="relative aspect-[3/4] w-full sm:aspect-[4/5]">
-        {status === "loading" && (
-          <div className="absolute inset-0 z-[1] overflow-hidden" aria-hidden>
-            <div
-              className="irstunner-skeleton-shimmer absolute inset-0 bg-[#111820]"
-              style={{
-                backgroundImage: `linear-gradient(90deg, transparent 0%, ${accent}18 40%, ${accent}30 50%, ${accent}18 60%, transparent 100%)`,
-              }}
-            />
-            <div
-              className="absolute inset-0 opacity-[0.12]"
-              style={{
-                backgroundImage: `radial-gradient(circle at 1px 1px, ${accent} 0.5px, transparent 0)`,
-                backgroundSize: "14px 14px",
-              }}
-            />
-          </div>
-        )}
-        {status === "error" ? (
-          <div className="absolute inset-0 z-[2] flex flex-col items-center justify-center gap-1.5 p-3 text-center">
-            <span className="text-[9px] font-mono uppercase tracking-wider text-[#64748b]">Image</span>
-            <span className="text-[10px] text-[#475569]">Add {label.toLowerCase()}.png</span>
-          </div>
-        ) : (
-          <Image
-            src={src}
-            alt={`IRSTUNNER packaging — ${label} face`}
-            fill
-            className={`object-contain p-2 transition-opacity duration-500 sm:p-3 ${
-              status === "ready" ? "opacity-100" : "opacity-0"
-            }`}
-            sizes="(max-width: 640px) 50vw, 25vw"
-            onLoadingComplete={() => setStatus((s) => (s === "error" ? s : "ready"))}
-            onError={() => setStatus("error")}
-          />
-        )}
-      </div>
-      <figcaption className="border-t border-[#1e293b] bg-[#08090b]/80 px-2 py-1.5 text-center text-[9px] font-mono font-semibold uppercase tracking-[0.14em] text-[#94a3b8]">
-        {label}
-      </figcaption>
-    </figure>
-  );
-}
-
-function IrstunnerWorkModalContent({ onClose }: { onClose: () => void }) {
-  return (
-    <>
-      <div
-        className="mt-1 border border-dashed border-[#334155] bg-[#08090b]/50 p-4 sm:p-5"
-        style={{ boxShadow: "inset 0 0 0 1px rgba(255,116,16,0.08)" }}
-      >
-        <p className="font-title text-xs font-black uppercase tracking-[0.18em] text-[#FF7410] sm:text-sm">IRSTUNNER</p>
-        <a
-          href="https://irstunner.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-1 inline-flex items-center gap-1.5 text-[12px] font-mono text-[#94a3b8] underline decoration-[#334155] underline-offset-4 transition-colors hover:text-[#e2e8f0] hover:decoration-[#FF7410]/60"
-        >
-          irstunner.com
-          <ArrowRight size={12} className="translate-y-px text-[#FF7410]" weight="bold" />
-        </a>
-        <p className="mt-3 text-[13px] leading-relaxed text-[#94a3b8] sm:text-[14px]">
-          Client work for a roof-coating line: a powder you mix with paint so treated roofs act like a{" "}
-          <span className="text-[#e2e8f0]">thermal shield</span>—cutting heavy UV and infrared gain so less heat
-          radiates into the space below. Positioned for factories and homes (including the{" "}
-          <span className="text-[#e2e8f0]">CHILL HOME</span> line): cooler rooms, less ceiling heat, and a clearer story
-          on <span className="text-[#e2e8f0]">infrared heat rejection</span> and roof performance in peak sun.
-        </p>
-        <ul className="mt-3 space-y-1.5 border-t border-[#1e293b]/80 pt-3 text-[12px] leading-relaxed text-[#94a3b8] sm:text-[13px]">
-          <li className="flex gap-2">
-            <span className="mt-0.5 shrink-0 text-[#FF7410]">·</span>
-            <span>
-              <span className="text-[#e2e8f0]">WhatsApp-first community</span> for technical Q&amp;A and quick
-              guidance—same motion as the site’s consult flow, so interest turns into conversation and orders.
-            </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="mt-0.5 shrink-0 text-[#FF7410]">·</span>
-            <span>
-              <span className="text-[#e2e8f0]">Summer-led push</span> when roof heat is undeniable—timed reminders and
-              stories while buyers feel the problem, not only read specs.
-            </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="mt-0.5 shrink-0 text-[#FF7410]">·</span>
-            <span>
-              Community + seasonality fed <span className="text-[#e2e8f0]">stronger sales</span> through the hot months:
-              more qualified chats, more closes after install stories spread in the group.
-            </span>
-          </li>
-        </ul>
-      </div>
-
-      <p className="mb-1 mt-6 text-[10px] font-mono uppercase tracking-[0.12em] text-[#64748b]">Packaging — box faces</p>
-      <div className="grid grid-cols-2 gap-2 sm:gap-3">
-        {IRSTUNNER_FACES.map((face) => (
-          <PackagingFace key={face.label} src={face.src} label={face.label} accent="#FF7410" />
-        ))}
-      </div>
-
-      <div className="mt-6 border-t border-[#1e293b] pt-4">
-        <Link
-          href="/#works"
-          scroll
-          onClick={onClose}
-          className="inline-flex w-full items-center justify-center gap-2 border border-[#1e293b] bg-[#08090b] px-4 py-3 text-center text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#e2e8f0] transition-all duration-300 hover:border-[#334155] sm:w-auto"
-          style={{
-            boxShadow: "inset 0 0 0 1px rgba(255,116,16,0.1), 0 8px 20px -12px rgba(255,116,16,0.35)",
-          }}
-        >
-          <span className="text-[#FF7410]">Go to Selected Works</span>
-          <ArrowRight size={16} weight="bold" style={{ color: "#FF7410" }} aria-hidden />
-        </Link>
-        <p className="mt-2 text-center text-[10px] text-[#64748b] sm:text-left">Full case studies on the main timeline.</p>
-      </div>
-    </>
-  );
-}
-
 export default function ProjectSnippets() {
-  const [shortsModalOpen, setShortsModalOpen] = useState(false);
-  const [portalReady, setPortalReady] = useState(false);
-  const titleId = useId();
-
-  useEffect(() => {
-    setPortalReady(true);
-  }, []);
-
-  useEffect(() => {
-    if (!shortsModalOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setShortsModalOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [shortsModalOpen]);
-
-  const modal = (
-    <AnimatePresence>
-      {shortsModalOpen && (
-        <motion.div
-          key="irstunner-shorts-dialog"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby={titleId}
-          className="fixed inset-0 z-[320] flex items-center justify-center p-3 sm:p-5"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <button
-            type="button"
-            className="absolute inset-0 bg-[#020203]/80 backdrop-blur-[2px]"
-            aria-label="Close dialog"
-            onClick={() => setShortsModalOpen(false)}
-          />
-          <motion.div
-            className="relative z-[1] w-full max-w-2xl max-h-[min(90dvh,880px)] overflow-y-auto border border-[#1e293b] bg-[#0c1014] shadow-[0_32px_80px_-32px_rgba(0,0,0,0.9)]"
-            initial={{ opacity: 0, y: 20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 320, damping: 28 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="sticky top-0 z-[2] flex items-start justify-between gap-3 border-b border-[#1e293b] bg-[#0a0d12]/95 px-4 py-3 backdrop-blur-sm sm:px-5">
-              <div>
-                <p className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#64748b]">UX UI Shorts</p>
-                <h2 id={titleId} className="font-title text-base font-bold text-[#f1f5f9] sm:text-lg">
-                  IRSTUNNER — view work
-                </h2>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShortsModalOpen(false)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center border border-[#1e293b] text-[#94a3b8] transition-colors hover:border-[#334155] hover:text-white"
-                aria-label="Close"
-              >
-                <X size={18} weight="bold" />
-              </button>
-            </div>
-            <div className="p-4 pb-6 sm:p-5 sm:pb-8">
-              <IrstunnerWorkModalContent onClose={() => setShortsModalOpen(false)} />
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-
   return (
     <section
       id="snippets"
       className="relative z-10 border-t border-[#1e293b] bg-[#08090b]"
     >
-      {portalReady && typeof document !== "undefined" ? createPortal(modal, document.body) : null}
-
       <div className="border-b border-[#1e293b] px-5 py-2 sm:px-7 md:px-10">
         <div className="mx-auto flex max-w-6xl items-center justify-between text-[9px] font-mono uppercase tracking-[0.2em] sm:text-[10px]">
           <span className="text-[#475569]">Index · 02.1 — Project snippets</span>
@@ -254,7 +35,7 @@ export default function ProjectSnippets() {
         </motion.header>
 
         <div className="grid gap-5 sm:gap-6 md:grid-cols-2 md:items-start">
-          {/* UX UI Shorts — teaser + opens modal */}
+          {/* UX UI Shorts — teaser + link to dedicated page */}
           <motion.article
             initial={{ opacity: 0, y: 48, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -314,14 +95,13 @@ export default function ProjectSnippets() {
               <h3 className="font-title text-lg font-bold leading-snug text-[#f1f5f9] sm:text-xl">UX UI Shorts!</h3>
               <p className="mt-3 flex-1 text-[14px] leading-relaxed text-[#94a3b8]">
                 Tight product stories in a small footprint. First out: <span className="text-[#e2e8f0]">IRSTUNNER</span>{" "}
-                — web positioning + packaging. Use{" "}
-                <span className="text-[#e2e8f0]">View work</span> to read the full block and see all four box faces.
+                — web positioning + packaging. <span className="text-[#e2e8f0]">View work</span> opens a full page (like a
+                case study) with the story and all four box faces.
               </p>
 
               <div className="mt-6 border-t border-[#1e293b] pt-5">
-                <button
-                  type="button"
-                  onClick={() => setShortsModalOpen(true)}
+                <Link
+                  href="/ux-ui-shorts/irstunner"
                   className="inline-flex w-full items-center justify-between gap-3 border border-[#1e293b] bg-[#08090b] px-4 py-3 text-left text-[11px] font-mono font-bold uppercase tracking-[0.16em] text-[#e2e8f0] transition-all duration-300 hover:border-[#334155] sm:w-auto"
                   style={{
                     boxShadow: "inset 0 0 0 1px rgba(255,116,16,0.1), 0 8px 20px -12px rgba(255,116,16,0.35)",
@@ -334,8 +114,8 @@ export default function ProjectSnippets() {
                   >
                     <ArrowRight size={16} weight="bold" style={{ color: "#FF7410" }} aria-hidden />
                   </span>
-                </button>
-                <p className="mt-2 text-[10px] text-[#64748b]">Opens project detail — copy, bullets, and packaging art.</p>
+                </Link>
+                <p className="mt-2 text-[10px] text-[#64748b]">Full write-up and packaging on a dedicated page.</p>
               </div>
             </div>
           </motion.article>

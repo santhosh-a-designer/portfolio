@@ -8,6 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: base, lastModified, changeFrequency: "monthly", priority: 1 },
+    {
+      url: `${base}/ux-ui-shorts/irstunner`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
   ];
 
   const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((study) => ({
