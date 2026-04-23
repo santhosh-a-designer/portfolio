@@ -1,5 +1,10 @@
 import type Lenis from "lenis";
-import { HEADER_SCROLL_OFFSET } from "@/components/LenisProvider";
+
+/**
+ * Works should open as a full-view section with no dark strip above it.
+ * Keep this local offset separate from the global nav offset.
+ */
+const WORKS_SCROLL_OFFSET = 0;
 
 /**
  * Scroll to Works top with the shared header offset.
@@ -17,13 +22,13 @@ export function scrollToWorksSection(lenis: Lenis | null, opts?: { onStart?: () 
     lenis.scrollTo(el, {
       duration: 0.85,
       lerp: 0.12,
-      offset: HEADER_SCROLL_OFFSET,
+      offset: WORKS_SCROLL_OFFSET,
       force: true,
       onStart: runStart,
     });
     return;
   } else {
-    const y = el.getBoundingClientRect().top + window.scrollY + HEADER_SCROLL_OFFSET;
+    const y = el.getBoundingClientRect().top + window.scrollY + WORKS_SCROLL_OFFSET;
     runStart();
     window.scrollTo({ top: Math.max(0, y), left: 0, behavior: "smooth" });
   }
@@ -36,5 +41,5 @@ export function computeWorksScrollTop(): number | null {
   if (typeof window === "undefined") return null;
   const el = document.getElementById("works");
   if (!el) return null;
-  return Math.max(0, el.getBoundingClientRect().top + window.scrollY + HEADER_SCROLL_OFFSET);
+  return Math.max(0, el.getBoundingClientRect().top + window.scrollY + WORKS_SCROLL_OFFSET);
 }
