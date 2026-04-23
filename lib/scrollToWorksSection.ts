@@ -4,7 +4,7 @@ import type Lenis from "lenis";
  * Works should open as a full-view section with no dark strip above it.
  * Keep this local offset separate from the global nav offset.
  */
-const WORKS_SCROLL_OFFSET = 0;
+const WORKS_SCROLL_OFFSET = 120;
 
 /**
  * Scroll to Works top with the shared header offset.

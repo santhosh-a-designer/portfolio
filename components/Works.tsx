@@ -126,7 +126,7 @@ function WorkProjectCard({
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: false, amount: 0.25 }}
       transition={{ ...contentTransition, delay: 0.14 + i * 0.05 }}
-      className={`relative flex h-auto min-h-[17.5rem] flex-col border-[#e3d8ce] bg-[#faf6f0] ${borderClass}`}
+      className={`relative flex h-auto min-h-[16.5rem] flex-col border-[#e3d8ce] bg-[#faf6f0] ${borderClass}`}
     >
       <Link
         href={`/case-studies/${project.slug}`}
@@ -263,13 +263,13 @@ export default function Works() {
         </div>
       </motion.div>
 
-      <div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-7 sm:py-12 md:px-8 md:pt-12 md:pb-12 lg:px-10">
+      <div className="mx-auto w-full max-w-6xl px-5 py-8 sm:px-7 sm:py-9 md:px-8 md:pt-6 md:pb-8 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.28 }}
           transition={{ ...contentTransition, delay: 0.12 }}
-          className="mb-6 sm:mb-8"
+          className="mb-4 sm:mb-6"
         >
           <p className="mb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#c96010] sm:text-[10px] sm:tracking-[0.26em]">
             02 / Selected works
