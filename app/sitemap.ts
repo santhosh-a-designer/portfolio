@@ -14,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
+    {
+      url: `${base}/ux-ui-shorts/irasus`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    },
   ];
 
   const caseStudyPages: MetadataRoute.Sitemap = caseStudies.map((study) => ({

@@ -15,6 +15,12 @@ export const IRSTUNNER_UX_SHORT = {
     "Static-first, mobile-optimised build with lazy images and clear heading hierarchy. Handoff included UI tokens and packaging dimensions so marketing updates stay low-friction.",
   overview:
     "A powder you mix with paint so factory and home roofs act as a thermal shield — cutting radiant heat before it enters the building. The design goal was trust: credible numbers, a consult-first CTA, and packaging that reads cleanly in-store and in photos.",
+  marketingStats: [
+    { label: "Core CTA", value: "WhatsApp + on-site / audit" },
+    { label: "Split positioning", value: "Industrial · CHILL HOME" },
+    { label: "Sales motion", value: "Specifiers → field trials" },
+    { label: "Channel focus", value: "Consult-led, not paint upsell" },
+  ],
   packagingImages: [
     { src: `${PACK}/front.png`, alt: "IR STUNNER box — front", label: "Front" },
     { src: `${PACK}/back.png`, alt: "IR STUNNER box — back", label: "Back" },
