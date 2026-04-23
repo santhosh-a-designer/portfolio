@@ -96,7 +96,7 @@ export default function CaseStudyArticleFooter({
                     <span className="inline-flex items-start justify-end gap-2 text-right">
                       <span className="min-w-0 line-clamp-3">{next.project}</span>
                       <ArrowRight
-                        className="mt-0.5 flex-shrink-0 text-[#64748b] transition-colors group-hover:text-[#FF7410]"
+                        className="mt-0.5 flex-shrink-0 text-[#64748b] transition-colors group-hover:text-[#FF7410] arrow-slide"
                         size={18}
                         weight="bold"
                         aria-hidden

@@ -355,7 +355,7 @@ export default function Hero() {
             className="group flex items-center gap-2 px-8 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-[#0a0908] bg-[#FF7410] hover:bg-[#FF8C30] transition-colors active:scale-[0.98]"
           >
             View Work
-            <ArrowDown size={15} className="group-hover:translate-y-0.5 transition-transform" />
+            <ArrowDown size={15} className="arrow-slide-down" />
           </a>
           <button
             type="button"

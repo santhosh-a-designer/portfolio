@@ -180,6 +180,28 @@ p, .font-description {
   color: #fff5eb;
 }
 
+/* ─── Section dot-grid overlay (add to any dark section as an absolute child) ─── */
+.section-dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 116, 16, 0.09) 0.5px, transparent 0);
+  background-size: 22px 22px;
+}
+
+/* ─── Arrow slide — apply to the icon inside a group parent ─── */
+.arrow-slide {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .arrow-slide,
+.group:focus-visible .arrow-slide {
+  transform: translateX(3px);
+}
+.arrow-slide-down {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .arrow-slide-down,
+.group:focus-visible .arrow-slide-down {
+  transform: translateY(3px);
+}
+
 /* ─── Animated underline ─── */
 .animated-underline { position: relative; }
 .animated-underline::after {

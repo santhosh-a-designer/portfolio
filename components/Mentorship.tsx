@@ -35,7 +35,10 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Mentorship() {
   return (
-    <section id="mentorship" className="relative">
+    <section id="mentorship" className="relative overflow-hidden">
+      {/* Dot-grid + glow */}
+      <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-35" aria-hidden />
+      <div className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-[#FF7410] opacity-[0.06] blur-3xl" aria-hidden />
       {/* Section index strip */}
       <motion.div
         className="border-b border-[#1e293b] bg-[#08090b]/60"
@@ -81,10 +84,10 @@ export default function Mentorship() {
               return (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, x: 48 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 40, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={VP}
-                  transition={{ delay: i * 0.15, duration: 0.75, ease }}
+                  transition={{ type: "spring", stiffness: 55, damping: 18, mass: 1.1, delay: i * 0.1 }}
                   className="p-7 bg-[#0c0e12]"
                   style={{ borderBottom: i === 0 ? "1px solid #1e293b" : "none" }}
                 >

@@ -51,7 +51,10 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="relative">
+    <section id="testimonials" className="relative overflow-hidden">
+      {/* Dot-grid + glow */}
+      <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-35" aria-hidden />
+      <div className="pointer-events-none absolute right-0 bottom-0 h-96 w-96 rounded-full bg-[#FF7410] opacity-[0.06] blur-3xl" aria-hidden />
       {/* Section index strip */}
       <motion.div
         className="border-b border-[#1e293b] bg-[#08090b]/60"
@@ -85,10 +88,10 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 52 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 48, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={VP}
-              transition={{ delay: i * 0.12, duration: 0.75, ease }}
+              transition={{ type: "spring", stiffness: 55, damping: 18, mass: 1.1, delay: i * 0.08 }}
               className="flex flex-col p-8 bg-[#0c0e12] hover:bg-[#FF7410]/5 transition-colors"
               style={{
                 borderRight: i % 2 === 0 ? "1px solid #1e293b" : "none",

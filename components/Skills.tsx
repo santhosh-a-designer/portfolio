@@ -31,7 +31,10 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative">
+    <section id="skills" className="relative overflow-hidden">
+      {/* Dot-grid + glow */}
+      <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-40" aria-hidden />
+      <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-[#FF7410] opacity-[0.07] blur-3xl" aria-hidden />
       {/* Section index strip */}
       <motion.div
         className="border-b border-[#1e293b] bg-[#08090b]/60"

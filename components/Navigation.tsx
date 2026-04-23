@@ -222,9 +222,10 @@ export default function Navigation() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleInPageNav(e, { closeMenu: true })}
-                  className="py-2.5 text-sm text-[#5A7A9A] hover:text-white transition-colors"
+                  className="group flex items-center justify-between py-2.5 text-sm text-[#5A7A9A] hover:text-white transition-colors"
                 >
                   {link.label}
+                  <span className="text-[#334155] opacity-0 group-hover:opacity-100 arrow-slide transition-opacity">→</span>
                 </a>
               ))}
               <a

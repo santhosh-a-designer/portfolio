@@ -43,7 +43,10 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative">
+    <section id="contact" className="relative overflow-hidden">
+      {/* Dot-grid + glow */}
+      <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-35" aria-hidden />
+      <div className="pointer-events-none absolute -left-40 bottom-0 h-[28rem] w-[28rem] rounded-full bg-[#FF7410] opacity-[0.06] blur-3xl" aria-hidden />
       {/* Section index strip */}
       <motion.div
         className="border-b border-[#1e293b] bg-[#08090b]/60"
@@ -176,14 +179,14 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={submitState === "sending"}
-                className="mt-1 inline-flex w-full sm:w-auto items-center justify-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-[#0a0908] bg-[#FF7410] hover:bg-[#FF8C30] transition-colors"
-              >
-                {submitState === "sending" ? "Sending..." : "Send Brief"}
-                {submitState === "sending" ? (
-                  <span className="w-3.5 h-3.5 rounded-full border-2 border-[#0a0908]/40 border-t-[#0a0908] animate-spin" />
-                ) : (
-                  <PaperPlaneRight size={16} weight="bold" />
-                )}
+              className="group mt-1 inline-flex w-full sm:w-auto items-center justify-center gap-2 px-5 py-3 text-xs font-bold uppercase tracking-[0.14em] text-[#0a0908] bg-[#FF7410] hover:bg-[#FF8C30] transition-colors"
+            >
+              {submitState === "sending" ? "Sending..." : "Send Brief"}
+              {submitState === "sending" ? (
+                <span className="w-3.5 h-3.5 rounded-full border-2 border-[#0a0908]/40 border-t-[#0a0908] animate-spin" />
+              ) : (
+                <PaperPlaneRight size={16} weight="bold" className="arrow-slide" />
+              )}
               </button>
 
               <AnimatePresence mode="wait">
