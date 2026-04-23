@@ -27,7 +27,7 @@ const projects: Project[] = [
     title: "Show & Sell + Customer Scheduler",
     subtitle: "Parla Retail",
     description:
-      "CTA-led selling for ecommerce: booking, video-call assisted sales, call-link automation, and in-call checkout. Scheduler tuned for US retail and usable for both shoppers and store teams.",
+      "CTA-led selling for ecommerce: booking, video-call assisted sales, call-link automation, and in-call checkout. The scheduler is tuned for US retail so shoppers and store teams can move from interest to order without added friction.",
     stats: [
       { value: "US", label: "Primary market" },
       { value: "CTA", label: "Entry" },
@@ -46,7 +46,7 @@ const projects: Project[] = [
     title: "Ezra Dashboard",
     subtitle: "FITA Academy — mentors & students",
     description:
-      "Attendance, hours, and pay on one system: the Ezra bot feeds a mentor dashboard, students see their own progress, and automations nudge at batch end—plus Gmail handoffs. I built it for my batches; paid pilots and an academy buy are in motion.",
+      "One system for attendance, hours, and pay: the Ezra bot powers a mentor dashboard, students see their own progress, and automations nudge at batch end with Gmail handoffs. Built for my FITA batches, with paid pilots and an academy path in motion.",
     stats: [
       { value: "FITA", label: "Academy" },
       { value: "₹50k", label: "Pilot rev." },
@@ -65,7 +65,7 @@ const projects: Project[] = [
     title: "Vidya's Kitchen",
     subtitle: "Home Catering — Sivakasi",
     description:
-      "First local home-catering stack with a premium PWA, WhatsApp bot ordering, Razorpay checkout, and an ops dashboard—IG and video ads feed leads into chat. ~80% built in TypeScript + React; I designed and shipped the product, not only the UI.",
+      "A local home-catering stack: premium PWA, WhatsApp bot orders, Razorpay checkout, and an ops dashboard, with IG and video ads feeding leads into chat. ~80% TypeScript and React, with the full product designed and shipped—not only the interface layer.",
     stats: [
       { value: "WA", label: "Orders" },
       { value: "PWA", label: "Customer" },
@@ -84,7 +84,7 @@ const projects: Project[] = [
     title: "CEaSS",
     subtitle: "Community-Enabled Autonomous Sales",
     description:
-      "Commerce for pet products: community discovery plus automation to get micro-sellers from browse to buy with less overhead.",
+      "AI-assisted commerce for pet products: community discovery, light storefronts, and automation that moves micro-sellers from browse to buy with less overhead. The product is aimed at how small sellers and buyers actually transact in chat and on social, not a generic big-box flow.",
     stats: [
       { value: "AI", label: "Automation" },
       { value: "Community", label: "Discovery" },
