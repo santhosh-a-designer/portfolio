@@ -107,13 +107,11 @@ const statusLabel: Record<Project["status"], string> = {
 
 function WorkProjectCard({
   project,
-  showContent,
   i,
   borderClass,
   contentTransition,
 }: {
   project: Project;
-  showContent: boolean;
   i: number;
   borderClass: string;
   contentTransition: { type: "spring"; stiffness: number; damping: number; mass: number };
@@ -124,9 +122,10 @@ function WorkProjectCard({
   const cursorHoverLabel = isCeass ? "In progress" : "View case study";
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ ...contentTransition, delay: 0.28 + i * 0.05 }}
+      initial={{ opacity: 0, y: 24, scale: 0.985 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: false, amount: 0.25 }}
+      transition={{ ...contentTransition, delay: 0.14 + i * 0.05 }}
       className={`relative flex h-auto min-h-0 flex-col border-[#e3d8ce] bg-[#faf6f0] ${borderClass}`}
     >
       <Link
@@ -236,12 +235,6 @@ function WorkProjectCard({
 }
 
 export default function Works() {
-  /**
-   * Never gate the desktop 2×2 grid on `scrollYProgress` (see history). Parchment base is
-   * solid; we removed the Y-translate “curtain” that could slide the fill out of the frame.
-   */
-  const showContent = true;
-
   const contentTransition = {
     type: "spring" as const,
     stiffness: 100,
@@ -252,7 +245,7 @@ export default function Works() {
   return (
     <section
       id="works"
-      className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[150vh] md:scroll-mt-0"
+      className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[125vh] md:scroll-mt-0"
     >
       {/*
         Deep-link: anchor ~1/3 into the band (enough past About overlap) without a 300–400vh
@@ -260,7 +253,7 @@ export default function Works() {
       */}
       <div
         id="works-snap"
-        className="pointer-events-none absolute left-0 top-[38%] z-0 h-px w-px max-md:hidden"
+        className="pointer-events-none absolute left-0 top-[22%] z-0 h-px w-px max-md:hidden"
         aria-hidden
       />
 
@@ -297,7 +290,6 @@ export default function Works() {
                 <WorkProjectCard
                   key={project.id}
                   project={project}
-                  showContent
                   i={i}
                   contentTransition={contentTransition}
                   borderClass={cellBorder}
@@ -314,10 +306,11 @@ export default function Works() {
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
-          animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.4 }}
           transition={{ ...contentTransition, delay: 0.08 }}
           className="relative z-20 flex-shrink-0 border-b border-[#e0d5c8] pointer-events-auto"
-          style={{ background: showContent ? "rgba(245,240,235,0.97)" : "transparent" }}
+          style={{ background: "rgba(245,240,235,0.97)" }}
         >
           <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-1 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] sm:py-1.5 md:px-8 lg:px-10">
             <span className="text-[#a89880]">Index · 02 — Works</span>
@@ -327,11 +320,12 @@ export default function Works() {
           </div>
         </motion.div>
 
-        <div className="relative z-10 flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto overscroll-y-contain pointer-events-auto">
-          <div className="mx-auto flex w-full min-h-0 min-w-0 max-w-6xl flex-1 flex-col justify-start gap-3 px-5 py-3 sm:gap-4 sm:px-7 sm:py-4 md:gap-3 md:px-8 md:pt-0 md:pb-3 lg:px-10">
+        <div className="relative z-10 pointer-events-auto">
+          <div className="mx-auto flex w-full max-w-6xl flex-col justify-start gap-3 px-5 py-2 sm:gap-4 sm:px-7 sm:py-3 md:gap-3 md:px-8 md:pt-0 md:pb-2 lg:px-10">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
-              animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.35 }}
               transition={{ ...contentTransition, delay: 0.16 }}
               className="w-full flex-shrink-0"
             >
@@ -358,7 +352,6 @@ export default function Works() {
                     <WorkProjectCard
                       key={project.id}
                       project={project}
-                      showContent={showContent}
                       i={i}
                       contentTransition={contentTransition}
                       borderClass={cellBorder}
