@@ -92,12 +92,7 @@ export default function Navigation() {
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
-        const docTop = el.getBoundingClientRect().top + window.scrollY;
-        let top = docTop;
-        if (id === "works" && window.matchMedia("(min-width: 768px)").matches) {
-          // Framer Works progress ~0 when section top hits bottom of viewport → docTop − vh
-          top = docTop - window.innerHeight;
-        }
+        const top = el.getBoundingClientRect().top + window.scrollY;
         if (window.scrollY >= top - 140) current = id;
       }
       setActive(current);

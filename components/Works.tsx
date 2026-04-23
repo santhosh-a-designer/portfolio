@@ -245,122 +245,60 @@ export default function Works() {
   return (
     <section
       id="works"
-      className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[125vh] md:scroll-mt-0"
+      className="relative z-10 scroll-mt-24 border-t border-[#e0d5c8] bg-[#f5f0eb]"
     >
-      {/*
-        Deep-link: anchor ~1/3 into the band (enough past About overlap) without a 300–400vh
-        “scroll pit” that took many wheel events to leave this section.
-      */}
-      <div
-        id="works-snap"
-        className="pointer-events-none absolute left-0 top-[22%] z-0 h-px w-px max-md:hidden"
-        aria-hidden
-      />
-
-      {/* Mobile: full-page scroll only — no sticky, no inner overflow (prevents scroll trap with Lenis) */}
-      <div className="block bg-[#f5f0eb] md:hidden">
-        <div className="border-b border-[#e0d5c8] px-5 py-2 sm:px-7">
-          <div className="mx-auto flex max-w-6xl items-center justify-between text-[9px] font-mono uppercase tracking-[0.2em] sm:text-[10px]">
-            <span className="text-[#a89880]">Index · 02 — Works</span>
-            <span className="text-[#c96010]">
-              {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
-            </span>
-          </div>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.35 }}
+        transition={{ ...contentTransition, delay: 0.06 }}
+        className="border-b border-[#e0d5c8]"
+        style={{ background: "rgba(245,240,235,0.97)" }}
+      >
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-1.5 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] md:px-8 lg:px-10">
+          <span className="text-[#a89880]">Index · 02 — Works</span>
+          <span className="text-[#c96010]">
+            {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
+          </span>
         </div>
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-5 sm:gap-5 sm:px-7 sm:py-6">
-          <div>
-            <p className="mb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#c96010] sm:mb-2 sm:text-[10px] sm:tracking-[0.26em]">
-              02 / Selected works
-            </p>
-            <h2 className="font-title text-xl font-black leading-tight text-[#130e08] sm:text-2xl">
-              Problems solved, <span className="text-[#FF7410]">products shipped</span>
-            </h2>
-          </div>
-          <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4">
-            {projects.map((project, i) => {
-              const cellBorder =
-                i === 0
-                  ? "md:border-b md:border-r border-[#e3d8ce]"
-                  : i === 1
-                    ? "md:border-b border-[#e3d8ce]"
-                    : i === 2
-                      ? "md:border-r border-[#e3d8ce]"
-                      : "";
-              return (
-                <WorkProjectCard
-                  key={project.id}
-                  project={project}
-                  i={i}
-                  contentTransition={contentTransition}
-                  borderClass={cellBorder}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      </motion.div>
 
-      {/* Desktop: sticky “paper” band – solid fill so the parallax cream never vacates the frame */}
-      <div className="pointer-events-none hidden md:sticky md:top-[5.75rem] md:flex md:h-[calc(100vh-5.75rem)] md:max-h-[calc(100vh-5.75rem)] md:min-h-0 md:w-full md:flex-col md:overflow-hidden md:bg-[#f5f0eb]">
-        <div className="absolute inset-0 z-0 bg-[#f5f0eb]" />
-
+      <div className="mx-auto w-full max-w-6xl px-5 py-4 sm:px-7 sm:py-5 md:px-8 md:pt-3 md:pb-4 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.4 }}
-          transition={{ ...contentTransition, delay: 0.08 }}
-          className="relative z-20 flex-shrink-0 border-b border-[#e0d5c8] pointer-events-auto"
-          style={{ background: "rgba(245,240,235,0.97)" }}
+          viewport={{ once: false, amount: 0.28 }}
+          transition={{ ...contentTransition, delay: 0.12 }}
+          className="mb-3 sm:mb-4"
         >
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-1 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] sm:py-1.5 md:px-8 lg:px-10">
-            <span className="text-[#a89880]">Index · 02 — Works</span>
-            <span className="text-[#c96010]">
-              {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
-            </span>
-          </div>
+          <p className="mb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#c96010] sm:text-[10px] sm:tracking-[0.26em]">
+            02 / Selected works
+          </p>
+          <h2 className="font-title text-xl font-black leading-tight text-[#130e08] sm:text-2xl md:text-3xl">
+            Problems solved, <span className="text-[#FF7410]">products shipped</span>
+          </h2>
         </motion.div>
 
-        <div className="relative z-10 pointer-events-auto">
-          <div className="mx-auto flex w-full max-w-6xl flex-col justify-start gap-3 px-5 py-2 sm:gap-4 sm:px-7 sm:py-3 md:gap-3 md:px-8 md:pt-0 md:pb-2 lg:px-10">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.35 }}
-              transition={{ ...contentTransition, delay: 0.16 }}
-              className="w-full flex-shrink-0"
-            >
-              <p className="mb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#c96010] sm:mb-2 sm:text-[10px] sm:tracking-[0.26em]">
-                02 / Selected works
-              </p>
-              <h2 className="font-title text-xl font-black leading-tight text-[#130e08] sm:text-2xl md:text-3xl">
-                Problems solved, <span className="text-[#FF7410]">products shipped</span>
-              </h2>
-            </motion.div>
-
-            <div className="w-full min-w-0 shrink-0">
-              <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:grid-rows-[auto_auto] md:items-start md:gap-0 md:overflow-hidden md:rounded-none md:border md:border-[#d0c3b6] md:shadow-[0_1px_0_0_rgba(0,0,0,0.04)]">
-                {projects.map((project, i) => {
-                  const cellBorder =
-                    i === 0
-                      ? "md:border-b md:border-r border-[#e3d8ce]"
-                      : i === 1
-                        ? "md:border-b border-[#e3d8ce]"
-                        : i === 2
-                          ? "md:border-r border-[#e3d8ce]"
-                          : "";
-                  return (
-                    <WorkProjectCard
-                      key={project.id}
-                      project={project}
-                      i={i}
-                      contentTransition={contentTransition}
-                      borderClass={cellBorder}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+        <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:grid-rows-[auto_auto] md:gap-0 md:overflow-hidden md:border md:border-[#d0c3b6] md:shadow-[0_1px_0_0_rgba(0,0,0,0.04)]">
+          {projects.map((project, i) => {
+            const cellBorder =
+              i === 0
+                ? "md:border-b md:border-r border-[#e3d8ce]"
+                : i === 1
+                  ? "md:border-b border-[#e3d8ce]"
+                  : i === 2
+                    ? "md:border-r border-[#e3d8ce]"
+                    : "";
+            return (
+              <WorkProjectCard
+                key={project.id}
+                project={project}
+                i={i}
+                contentTransition={contentTransition}
+                borderClass={cellBorder}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
