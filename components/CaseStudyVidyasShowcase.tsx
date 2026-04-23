@@ -46,7 +46,7 @@ function videoSources(src: string) {
 type BotData = NonNullable<NonNullable<CaseStudy["artifacts"]>["vidyaShowcase"]>["whatsappBot"];
 type PwaData = NonNullable<NonNullable<CaseStudy["artifacts"]>["vidyaShowcase"]>["pwa"];
 
-function PhoneWalkthroughCard({
+export function PhoneWalkthroughCard({
   label,
   caption,
   src,
@@ -155,7 +155,7 @@ function PhoneWalkthroughCard({
 }
 
 /** Desktop 16:9 (or source ratio): looping strip, no controls, no play/pause interaction. */
-function DesktopPwaShowcase({ label, caption, src }: { label: string; caption: string; src: string }) {
+export function DesktopPwaShowcase({ label, caption, src }: { label: string; caption: string; src: string }) {
   const refMain = useRef<HTMLVideoElement | null>(null);
   const refFill = useRef<HTMLVideoElement | null>(null);
   const lastSync = useRef(0);

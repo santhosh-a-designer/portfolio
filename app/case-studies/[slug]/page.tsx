@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import BackToWorksLink from "@/components/BackToWorksLink";
 import CaseStudyCinematicIntro from "@/components/CaseStudyCinematicIntro";
+import CaseStudyEzraShowcase from "@/components/CaseStudyEzraShowcase";
 import { VidyasAfterCinematicBlock, VidyasShowcaseSection } from "@/components/CaseStudyVidyasShowcase";
 import { ArrowLeft, ArrowRight, ArrowSquareOut, CheckCircle, Sparkle, Warning, Lightbulb, ArrowFatRight } from "@phosphor-icons/react/dist/ssr";
 import { caseStudyBySlug, getCaseStudyNeighbors, type CaseStudy } from "@/lib/caseStudies";
@@ -599,6 +600,10 @@ function CaseStudyArticle({
             </header>
           </div>
         </CaseStudyScrollReveal>
+
+        {study.slug === "ezra-mentor-dashboard" && study.artifacts?.ezraShowcase ? (
+          <CaseStudyEzraShowcase data={study.artifacts.ezraShowcase} />
+        ) : null}
 
         {/* 1. STAR */}
         <section className="mt-10 border-t border-[#1e293b] pt-8">

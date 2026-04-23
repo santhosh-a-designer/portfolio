@@ -120,6 +120,31 @@ export type CaseStudy = {
         desktop: { label: string; caption: string; videoSrc: string };
       };
     };
+    /** Ezra: two mobile flows, then desktop mentor dashboard, roadmap + business narrative. */
+    ezraShowcase?: {
+      mobile: {
+        eyebrow: string;
+        title: string;
+        lead: string;
+        clips: Array<{ label: string; caption: string; videoSrc: string }>;
+      };
+      dashboard: {
+        eyebrow: string;
+        title: string;
+        caption: string;
+        videoSrc: string;
+      };
+      upcoming: {
+        title: string;
+        body: string;
+      };
+      growth: {
+        title: string;
+        marketing: string[];
+        revenueHeadline: string;
+        revenueDetail: string;
+      };
+    };
   };
   processSteps?: Array<{
     step: string;
@@ -185,6 +210,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "parla-show-and-sell",
     project: "Show & Sell + Customer Scheduler",
     company: "Parla Retail",
+    timeline: "2024 — 2025",
     introGallery: [
       {
         src: "/case-studies/parla/Admin_Dashboard_Desktop.png",
@@ -203,7 +229,6 @@ export const caseStudies: CaseStudy[] = [
     processWalkthroughLabel: "2.1",
     summary:
       "A CTA-led assisted selling system that connects ecommerce shoppers with store sales teams for booking, video consultation, and in-call checkout.",
-    timeline: "Mar 2026 — Present",
     toolsAndLanguages: "Figma",
     role: "UX Designer",
     situation:
@@ -578,9 +603,9 @@ export const caseStudies: CaseStudy[] = [
     project: "Ezra Dashboard",
     company: "FITA Academy — mentors & students",
     subtitle: "Attendance, earnings, and trust on one system",
+    timeline: "2025 — Present",
     summary:
       "Ezra is the product I designed and built to fix a very human problem: at FITA Academy, mentoring students meant fragile attendance sheets, easy to lose or “reinterpret,” and no single place for mentors and learners to share the same truth. I channelled that into a dashboard for mentors—fed by a bot I named Ezra—plus a student view for hours and daily attendance, automations for batch-end reminders, Gmail-backed payment handoffs, and a path to subscription. What started as a tool for my own batches is now in discussion for an org-wide buy, with paid pilots from other mentors along the way.",
-    timeline: "Mar 2026 — Present",
     toolsAndLanguages: "Figma · TypeScript · React · Vercel · WhatsApp · Automations · Gmail",
     role: "UX Design & Development",
     situation:
@@ -856,6 +881,50 @@ export const caseStudies: CaseStudy[] = [
           { label: "Automation fit (nudges, Gmail)", value: 7 },
           { label: "Readiness for org / subscription", value: 6 },
         ],
+      },
+      ezraShowcase: {
+        mobile: {
+          eyebrow: "Mobile · mentor flows",
+          title: "Two touchpoints the product runs on every week",
+          lead:
+            "Short vertical clips: lock attendance when the session is still fresh, and add a new student in Ezra so the same row appears in the web dashboard with no second data entry pass.",
+          clips: [
+            {
+              label: "EZ-M-1 · Marking attendance",
+              caption: "End-of-class path to record who was in the room — before the day turns into a spreadsheet rescue.",
+              videoSrc: "/case-studies/ezra/EZ-M-1.mp4",
+            },
+            {
+              label: "EZ-M-2 · Adding a new student",
+              caption: "Capture name, course, and slot in flow; the roster updates for earnings and follow-up the same night.",
+              videoSrc: "/case-studies/ezra/EZ-M-2.mp4",
+            },
+          ],
+        },
+        dashboard: {
+          eyebrow: "Web · live overview",
+          title: "EZ-M · dashboard for the mentor",
+          caption:
+            "Batch cards, headcount, earned vs potential, and where to drill in—one calm surface for the day’s truth before any money conversation.",
+          videoSrc: "/case-studies/ezra/EZ-1.mov",
+        },
+        upcoming: {
+          title: "Upcoming: subscription checkout with Razorpay",
+          body:
+            "A subscription layer is in the roadmap so mentors (and the academy) can pay for Ezra on a clear plan — Razorpay for checkout, renewals, and less manual back-and-forth for access. Same product story: from pilot users to an org-wide seat model without a new spreadsheet for every invoice.",
+        },
+        growth: {
+          title: "Go-to-market plans & revenue to date",
+          marketing: [
+            "Live demos with mentors between batches—dashboard on a real afternoon, not a static deck.",
+            "Time-to-close attendance as the before/after story in coordinator channels.",
+            "Short screen recordings for approvers who need a two-minute yes from leadership.",
+            "Founder-mentor positioning: the roadmap is tied to the same class hours as users.",
+          ],
+          revenueHeadline: "₹50k+ from 5 paid pilots; academy-wide deal in active discussion",
+          revenueDetail:
+            "Rolling access fees from other mentors over several months proved willingness to pay before any enterprise pitch. The next jump is a packaged subscription (with Razorpay) and a cleaner seat model for the academy buy—so revenue scales without billing work scaling with it.",
+        },
       },
     },
   },
