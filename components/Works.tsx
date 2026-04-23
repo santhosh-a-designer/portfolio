@@ -126,7 +126,7 @@ function WorkProjectCard({
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: false, amount: 0.25 }}
       transition={{ ...contentTransition, delay: 0.14 + i * 0.05 }}
-      className={`relative flex h-auto min-h-0 flex-col border-[#e3d8ce] bg-[#faf6f0] ${borderClass}`}
+      className={`relative flex h-auto min-h-[17.5rem] flex-col border-[#e3d8ce] bg-[#faf6f0] ${borderClass}`}
     >
       <Link
         href={`/case-studies/${project.slug}`}
@@ -170,7 +170,7 @@ function WorkProjectCard({
         {project.index}
       </div>
 
-      <div className="relative z-[1] flex flex-col p-3 pointer-events-none sm:p-3.5 md:p-4">
+      <div className="relative z-[1] flex flex-col p-4 pointer-events-none sm:p-5 md:p-6">
         <div className="mb-2 flex items-start justify-between gap-2">
           <div
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-none"
@@ -193,17 +193,17 @@ function WorkProjectCard({
           </span>
         </div>
 
-        <p className="mb-0.5 text-[7px] font-mono uppercase leading-tight tracking-[0.15em] text-[#9a8a7a] sm:text-[8px]">
+        <p className="mb-0.5 text-[8px] font-mono uppercase leading-tight tracking-[0.15em] text-[#9a8a7a] sm:text-[9px]">
           {project.tag}
         </p>
-        <h3 className="font-title text-xs font-black leading-snug text-[#130e08] sm:text-sm md:leading-tight">
+        <h3 className="font-title text-sm font-black leading-snug text-[#130e08] sm:text-base md:leading-tight">
           {project.title}
         </h3>
-        <p className="mb-2 mt-0.5 text-[10px] font-medium leading-snug sm:mb-2.5 sm:text-[11px]" style={{ color: project.accentColor }}>
+        <p className="mb-3 mt-1 text-[11px] font-medium leading-snug sm:mb-3 sm:text-[12px]" style={{ color: project.accentColor }}>
           {project.subtitle}
         </p>
 
-        <p className="mb-2 min-h-[4.2em] line-clamp-3 text-[9px] leading-[1.5] text-[#5a4a3d] sm:text-[10px] sm:leading-relaxed">
+        <p className="mb-3 min-h-[4.6em] line-clamp-3 text-[10px] leading-[1.5] text-[#5a4a3d] sm:text-[11px] sm:leading-relaxed">
           {project.description}
         </p>
 
@@ -245,41 +245,41 @@ export default function Works() {
   return (
     <section
       id="works"
-      className="relative z-10 scroll-mt-24 border-t border-[#e0d5c8] bg-[#f5f0eb]"
+      className="relative z-10 min-h-[112vh] scroll-mt-24 border-t border-[#1e293b] bg-[#08090b]"
     >
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.35 }}
         transition={{ ...contentTransition, delay: 0.06 }}
-        className="border-b border-[#e0d5c8]"
-        style={{ background: "rgba(245,240,235,0.97)" }}
+        className="border-b border-[#1e293b]"
+        style={{ background: "rgba(8,9,11,0.94)" }}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-1.5 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] md:px-8 lg:px-10">
-          <span className="text-[#a89880]">Index · 02 — Works</span>
-          <span className="text-[#c96010]">
+          <span className="text-[#64748b]">Index · 02 — Works</span>
+          <span className="text-[#FF7410]">
             {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
           </span>
         </div>
       </motion.div>
 
-      <div className="mx-auto w-full max-w-6xl px-5 py-4 sm:px-7 sm:py-5 md:px-8 md:pt-3 md:pb-4 lg:px-10">
+      <div className="mx-auto w-full max-w-6xl px-5 py-10 sm:px-7 sm:py-12 md:px-8 md:pt-12 md:pb-12 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.28 }}
           transition={{ ...contentTransition, delay: 0.12 }}
-          className="mb-3 sm:mb-4"
+          className="mb-6 sm:mb-8"
         >
           <p className="mb-1.5 text-[9px] font-mono uppercase tracking-[0.22em] text-[#c96010] sm:text-[10px] sm:tracking-[0.26em]">
             02 / Selected works
           </p>
-          <h2 className="font-title text-xl font-black leading-tight text-[#130e08] sm:text-2xl md:text-3xl">
+          <h2 className="font-title text-2xl font-black leading-tight text-[#f8fafc] sm:text-3xl md:text-4xl">
             Problems solved, <span className="text-[#FF7410]">products shipped</span>
           </h2>
         </motion.div>
 
-        <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:grid-rows-[auto_auto] md:gap-0 md:overflow-hidden md:border md:border-[#d0c3b6] md:shadow-[0_1px_0_0_rgba(0,0,0,0.04)]">
+        <div className="grid w-full min-w-0 auto-rows-auto grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:grid-rows-[auto_auto] md:gap-0 md:overflow-hidden md:border md:border-[#334155] md:shadow-[0_10px_40px_-24px_rgba(0,0,0,0.65)]">
           {projects.map((project, i) => {
             const cellBorder =
               i === 0
