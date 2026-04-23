@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowLeft } from "@phosphor-icons/react";
 import BackToWorksLink from "@/components/BackToWorksLink";
 import UxShortProjectCard from "@/components/UxShortProjectCard";
@@ -9,7 +8,7 @@ import { IRSTUNNER_UX_SHORT } from "@/lib/uxShortProjects/irStunner";
 export default function IrstunnerUxShortView() {
   return (
     <>
-      {/* Page-level header — outside the card, matches case study hero strip */}
+      {/* Page-level header */}
       <div className="border-b border-[#1e293b] bg-[#08090b]">
         <div className="mx-auto max-w-4xl px-5 pb-10 pt-12 sm:px-6 sm:pt-14 md:px-8 lg:pt-16">
           <p className="text-[10px] font-mono uppercase tracking-[0.24em] text-[#FF7410]">
@@ -21,16 +20,6 @@ export default function IrstunnerUxShortView() {
           <p className="mt-3 max-w-xl text-[14px] leading-relaxed text-[#94a3b8]">
             Client-sized stories — one page per project, same format every time.
           </p>
-
-          <div className="mt-6">
-            <Link
-              href="/#snippets"
-              className="inline-flex items-center gap-2 text-[11px] font-mono font-semibold uppercase tracking-[0.12em] text-[#94a3b8] transition-colors hover:text-[#FF7410]"
-            >
-              <ArrowLeft size={14} className="text-[#FF7410]" weight="bold" aria-hidden />
-              Project snippets
-            </Link>
-          </div>
         </div>
       </div>
 

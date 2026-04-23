@@ -75,27 +75,22 @@ export default function UxShortProjectCard({ data }: { data: UxShortProjectConte
         </div>
       </div>
 
-      {/* —— Packaging / product images — centered 2×2 grid like case studies —— */}
+      {/* —— Packaging / product images — horizontal row, no containers —— */}
       <section className="mt-10 border-t border-[#1e293b] pt-8">
-        <h3 className={`${SECTION_H} mb-5`}>Packaging &amp; product</h3>
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+        <h3 className={`${SECTION_H} mb-6`}>Packaging &amp; product</h3>
+        <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
           {data.packagingImages.map((img) => (
-            <figure
-              key={img.src}
-              className="relative flex flex-col overflow-hidden border border-[#1e293b] bg-[#0c1014]"
-            >
-              <div className="relative aspect-[3/4] w-full">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="absolute inset-0 h-full w-full object-contain p-4 sm:p-6"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
+            <figure key={img.src} className="flex flex-col items-center gap-2">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="h-40 w-auto object-contain sm:h-52 md:h-64"
+                loading="lazy"
+                decoding="async"
+              />
               {img.label && (
-                <figcaption className="border-t border-[#1e293b] bg-[#08090b]/60 px-3 py-2 text-center text-[9px] font-mono font-semibold uppercase tracking-[0.14em] text-[#94a3b8]">
+                <figcaption className="text-[9px] font-mono font-semibold uppercase tracking-[0.14em] text-[#64748b]">
                   {img.label}
                 </figcaption>
               )}

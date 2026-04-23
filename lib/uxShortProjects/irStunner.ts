@@ -5,8 +5,8 @@ const PACK = "/project-snippets/irstunner";
 export const IRSTUNNER_UX_SHORT = {
   projectLabel: "Project 1",
   projectTitle: "IR Stunner",
-  tools: "Figma · Web layout · Brand & packaging",
-  duration: "Mar 2025 — Mar 2026",
+  tools: "Figma · HTML · CSS · JS",
+  duration: "Mar 2026",
   liveUrl: "https://irstunner.com",
   liveUrlDisplay: "irstunner.com",
   uxUi:
