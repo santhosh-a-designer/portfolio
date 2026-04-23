@@ -1,45 +1,35 @@
 import type Lenis from "lenis";
 
 /**
- * Works should open as a full-view section with no dark strip above it.
- * Keep this local offset separate from the global nav offset.
- */
-const WORKS_SCROLL_OFFSET = 120;
-
-/**
- * Scroll to Works top with the shared header offset.
- * Works is now normal page flow (no deep snap anchor / scroll trap).
+ * Scroll so that the Works section top edge sits flush at the viewport top.
+ *
+ * With Works having `md:mt-[-100vh]`, its layout offsetTop equals exactly the
+ * scroll position where its top edge meets the viewport top — no extra offset
+ * needed. Lenis offset: 0 places the element top at y=0 in the viewport.
  */
 export function scrollToWorksSection(lenis: Lenis | null, opts?: { onStart?: () => void }): void {
   if (typeof window === "undefined") return;
   const el = document.getElementById("works");
   if (!el) return;
-  const runStart = () => {
-    opts?.onStart?.();
-  };
+
+  opts?.onStart?.();
 
   if (lenis) {
     lenis.scrollTo(el, {
-      duration: 0.85,
+      offset: 0,
+      duration: 0.9,
       lerp: 0.12,
-      offset: WORKS_SCROLL_OFFSET,
       force: true,
-      onStart: runStart,
     });
-    return;
   } else {
-    const y = el.getBoundingClientRect().top + window.scrollY + WORKS_SCROLL_OFFSET;
-    runStart();
-    window.scrollTo({ top: Math.max(0, y), left: 0, behavior: "smooth" });
+    window.scrollTo({ top: el.offsetTop, behavior: "smooth" });
   }
 }
 
-/**
- * Legacy helper retained for compatibility.
- */
+/** Retained for any call sites that still use the computed value. */
 export function computeWorksScrollTop(): number | null {
   if (typeof window === "undefined") return null;
   const el = document.getElementById("works");
   if (!el) return null;
-  return Math.max(0, el.getBoundingClientRect().top + window.scrollY + WORKS_SCROLL_OFFSET);
+  return el.offsetTop;
 }
