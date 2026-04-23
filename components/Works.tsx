@@ -244,13 +244,13 @@ export default function Works() {
        * Desktop: negative top margin overlaps with About's sticky zone — Works slides over it.
        * Mobile: normal block flow, no overlap.
        */
-      className="relative z-10 bg-[#08090b] max-md:border-t max-md:border-[#1e293b] max-md:scroll-mt-20 md:mt-[-100vh]"
+      className="relative z-10 bg-white max-md:border-t max-md:border-[#e2e8f0] max-md:scroll-mt-20 md:mt-[-100vh]"
     >
       {/* index strip */}
-      <div className="border-b border-[#1e293b] bg-[#08090b]">
+      <div className="border-b border-[#e2e8f0] bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-2 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] md:px-8 lg:px-10">
-          <span className="text-[#475569]">Index · 02 — Works</span>
-          <span style={{ color: "rgba(255,116,16,0.8)" }}>
+          <span className="text-[#94a3b8]">Index · 02 — Works</span>
+          <span style={{ color: "rgba(255,116,16,0.9)" }}>
             {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
           </span>
         </div>
@@ -268,13 +268,13 @@ export default function Works() {
           <p className="mb-2 text-[9px] font-mono uppercase tracking-[0.24em] text-[#FF7410] sm:text-[10px]">
             02 / Selected works
           </p>
-          <h2 className="font-title text-2xl font-black leading-tight text-[#f8fafc] sm:text-3xl md:text-4xl">
+          <h2 className="font-title text-2xl font-black leading-tight text-[#0a0908] sm:text-3xl md:text-4xl">
             Problems solved,{" "}
-            <span className="neon-text">products shipped</span>
+            <span style={{ color: "#FF7410" }}>products shipped</span>
           </h2>
         </motion.div>
 
-        <div className="grid w-full auto-rows-auto grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-0 md:overflow-hidden md:border md:border-[#334155]">
+        <div className="grid w-full auto-rows-auto grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-0 md:overflow-hidden md:border md:border-[#e2e8f0] md:shadow-[0_8px_40px_-16px_rgba(0,0,0,0.12)]">
           {projects.map((project, i) => {
             const borderClass =
               i === 0
