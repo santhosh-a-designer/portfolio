@@ -14,6 +14,7 @@ type Project = {
   description: string;
   stats: { value: string; label: string }[];
   icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
+  /** Primary UI / brand color from each product’s case-study design system */
   accentColor: string;
   status: "shipped" | "live" | "in-progress";
   slug: string;
@@ -35,7 +36,7 @@ const projects: Project[] = [
       { value: "Shipped", label: "Status" },
     ],
     icon: GlobeHemisphereWest,
-    accentColor: "#FF7410",
+    accentColor: "#2DC8E8",
     status: "shipped",
     slug: "parla-show-and-sell",
   },
@@ -54,7 +55,7 @@ const projects: Project[] = [
       { value: "Live", label: "Build" },
     ],
     icon: Robot,
-    accentColor: "#FF7410",
+    accentColor: "#06B6D4",
     status: "live",
     slug: "ezra-mentor-dashboard",
   },
@@ -73,7 +74,7 @@ const projects: Project[] = [
       { value: "TS", label: "Stack" },
     ],
     icon: DeviceMobile,
-    accentColor: "#E07010",
+    accentColor: "#CC1C1C",
     status: "in-progress",
     slug: "vidyas-kitchen-pwa",
   },
@@ -92,7 +93,7 @@ const projects: Project[] = [
       { value: "1", label: "Niche" },
     ],
     icon: Lightning,
-    accentColor: "#EA580C",
+    accentColor: "#F97316",
     status: "in-progress",
     slug: "ceass-pet-ecommerce",
   },
@@ -208,13 +209,22 @@ function WorkProjectCard({
         </p>
 
         <div
-          className="grid shrink-0 grid-cols-2 gap-px self-stretch border border-[#e6ded4] sm:grid-cols-4"
-          style={{ background: "#e6ded4" }}
+          className="grid shrink-0 grid-cols-2 gap-px self-stretch sm:grid-cols-4"
+          style={{
+            background: `${project.accentColor}2e`,
+            boxShadow: `inset 0 0 0 1px ${project.accentColor}40`,
+          }}
         >
           {project.stats.map((stat, j) => (
-            <div key={j} className="min-w-0 bg-[#faf6f0] px-2 py-2 text-center sm:px-2.5 sm:py-2.5">
+            <div
+              key={j}
+              className="min-w-0 px-2 py-2 text-center sm:px-2.5 sm:py-2.5"
+              style={{
+                background: `color-mix(in srgb, ${project.accentColor} 7%, #faf6f0)`,
+              }}
+            >
               <p className="font-title text-[11px] font-black leading-tight text-[#130e08] sm:text-[12px]">{stat.value}</p>
-              <p className="mt-0.5 text-[7px] font-mono uppercase leading-tight tracking-wider text-[#8c7b6a] sm:mt-1 sm:text-[8px]">
+              <p className="mt-0.5 text-[7px] font-mono uppercase leading-tight tracking-wider text-[#6b5d4d] sm:mt-1 sm:text-[8px]">
                 {stat.label}
               </p>
             </div>
