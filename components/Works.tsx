@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { Lightning, GlobeHemisphereWest, DeviceMobile, Robot } from "@phosphor-icons/react";
 
@@ -127,7 +127,7 @@ function WorkProjectCard({
       initial={{ opacity: 0, y: 20 }}
       animate={showContent ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ ...contentTransition, delay: 0.28 + i * 0.05 }}
-      className={`relative flex h-auto min-h-0 flex-col border-[#e3d8ce] bg-white ${borderClass}`}
+      className={`relative flex h-auto min-h-0 flex-col border-[#e3d8ce] bg-[#faf6f0] ${borderClass}`}
     >
       <Link
         href={`/case-studies/${project.slug}`}
@@ -236,21 +236,11 @@ function WorkProjectCard({
 }
 
 export default function Works() {
-  const sectionRef = useRef<HTMLDivElement>(null);
   /**
-   * Never gate the desktop 2×2 grid on `scrollYProgress`. Lenis/Framer progress often disagrees
-   * on jump-to-#works (or after URL/hash), so users saw only the parallax “sheet” (cream) with
-   * the cards still at `opacity: 0`. Content is always visible in the sticky band; the curtain
-   * behind it still parallax for polish.
+   * Never gate the desktop 2×2 grid on `scrollYProgress` (see history). Parchment base is
+   * solid; we removed the Y-translate “curtain” that could slide the fill out of the frame.
    */
   const showContent = true;
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end end"],
-  });
-
-  const curtainY = useTransform(scrollYProgress, [0.45, 0.7], ["100%", "0%"]);
 
   const contentTransition = {
     type: "spring" as const,
@@ -262,7 +252,6 @@ export default function Works() {
   return (
     <section
       id="works"
-      ref={sectionRef}
       className="relative z-10 max-md:scroll-mt-24 max-md:border-t max-md:border-[#1e293b] md:mt-[-100vh] md:h-[400vh] md:scroll-mt-0"
     >
       {/*
@@ -320,14 +309,9 @@ export default function Works() {
         </div>
       </div>
 
-      {/* Desktop: parallax + sticky (unchanged behavior) */}
-      <div className="pointer-events-none hidden md:sticky md:top-[5.75rem] md:flex md:h-[calc(100vh-5.75rem)] md:max-h-[calc(100vh-5.75rem)] md:min-h-0 md:w-full md:flex-col md:overflow-hidden">
-        <div className="absolute inset-0 bg-transparent" />
-
-        <motion.div
-          className="absolute inset-x-0 bottom-0 z-0 pointer-events-auto"
-          style={{ top: 0, y: curtainY, background: "#f5f0eb" }}
-        />
+      {/* Desktop: sticky “paper” band – solid fill so the parallax cream never vacates the frame */}
+      <div className="pointer-events-none hidden md:sticky md:top-[5.75rem] md:flex md:h-[calc(100vh-5.75rem)] md:max-h-[calc(100vh-5.75rem)] md:min-h-0 md:w-full md:flex-col md:overflow-hidden md:bg-[#f5f0eb]">
+        <div className="absolute inset-0 z-0 bg-[#f5f0eb]" />
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
