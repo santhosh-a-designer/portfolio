@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { Lightning, GlobeHemisphereWest, DeviceMobile, Robot } from "@phosphor-icons/react";
+import SelectedWorkProjectCard from "@/components/SelectedWorkProjectCard";
+import { IR_STUNNER_SELECTED_WORK } from "@/lib/irStunnerSelectedWork";
 
 type Project = {
   id: number;
@@ -21,8 +23,8 @@ type Project = {
 
 const projects: Project[] = [
   {
-    id: 1,
-    index: "01",
+    id: 2,
+    index: "02",
     tag: "Enterprise · Ecommerce",
     title: "Show & Sell + Customer Scheduler",
     subtitle: "Parla Retail",
@@ -40,8 +42,8 @@ const projects: Project[] = [
     slug: "parla-show-and-sell",
   },
   {
-    id: 2,
-    index: "02",
+    id: 3,
+    index: "03",
     tag: "EdTech · Automation",
     title: "Ezra Dashboard",
     subtitle: "FITA Academy — mentors & students",
@@ -59,8 +61,8 @@ const projects: Project[] = [
     slug: "ezra-mentor-dashboard",
   },
   {
-    id: 3,
-    index: "03",
+    id: 4,
+    index: "04",
     tag: "PWA · WhatsApp · Hyper-local",
     title: "Vidya's Kitchen",
     subtitle: "Home Catering — Sivakasi",
@@ -78,8 +80,8 @@ const projects: Project[] = [
     slug: "vidyas-kitchen-pwa",
   },
   {
-    id: 4,
-    index: "04",
+    id: 5,
+    index: "05",
     tag: "AI · Commerce",
     title: "CEaSS",
     subtitle: "Community-Enabled Autonomous Sales",
@@ -105,6 +107,28 @@ const statusLabel: Record<Project["status"], string> = {
 };
 
 const cardSpring = { type: "spring" as const, stiffness: 80, damping: 18, mass: 0.9 };
+
+const WORK_ITEM_COUNT = 1 + projects.length;
+/** IR Stunner + other non–in-progress case studies in the list */
+const SHIPPED_COUNT =
+  1 + projects.filter((p) => p.status !== "in-progress").length;
+
+function selectedWorksCellBorderClass(i: number) {
+  switch (i) {
+    case 0:
+      return "md:border-b md:border-r border-[#e3d8ce]";
+    case 1:
+      return "md:border-b border-[#e3d8ce]";
+    case 2:
+      return "md:border-b md:border-r border-[#e3d8ce]";
+    case 3:
+      return "md:border-b border-[#e3d8ce]";
+    case 4:
+      return "md:col-span-2 md:mx-auto md:max-w-2xl md:w-full border-t border-[#e3d8ce]";
+    default:
+      return "border-[#e3d8ce]";
+  }
+}
 
 function WorkProjectCard({
   project,
@@ -251,7 +275,7 @@ export default function Works() {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-2 text-[9px] font-mono uppercase tracking-[0.2em] sm:px-7 sm:text-[10px] md:px-8 lg:px-10">
           <span className="text-[#94a3b8]">Index · 02 — Works</span>
           <span style={{ color: "rgba(255,116,16,0.9)" }}>
-            {projects.length} projects — {projects.filter((p) => p.status !== "in-progress").length} shipped
+            {WORK_ITEM_COUNT} projects — {SHIPPED_COUNT} shipped
           </span>
         </div>
       </div>
@@ -275,19 +299,19 @@ export default function Works() {
         </motion.div>
 
         <div className="grid w-full auto-rows-auto grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:gap-0 md:overflow-hidden md:border md:border-[#e2e8f0] md:shadow-[0_8px_40px_-16px_rgba(0,0,0,0.12)]">
-          {projects.map((project, i) => {
-            const borderClass =
-              i === 0
-                ? "md:border-b md:border-r border-[#e3d8ce]"
-                : i === 1
-                  ? "md:border-b border-[#e3d8ce]"
-                  : i === 2
-                    ? "md:border-r border-[#e3d8ce]"
-                    : "";
-            return (
-              <WorkProjectCard key={project.id} project={project} i={i} borderClass={borderClass} />
-            );
-          })}
+          <SelectedWorkProjectCard
+            data={IR_STUNNER_SELECTED_WORK}
+            i={0}
+            borderClass={selectedWorksCellBorderClass(0)}
+          />
+          {projects.map((project, j) => (
+            <WorkProjectCard
+              key={project.id}
+              project={project}
+              i={j + 1}
+              borderClass={selectedWorksCellBorderClass(j + 1)}
+            />
+          ))}
         </div>
       </div>
     </motion.section>
