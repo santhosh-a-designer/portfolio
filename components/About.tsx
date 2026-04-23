@@ -267,11 +267,6 @@ export default function About() {
       className="relative z-0"
       style={{ height: isDesktop ? "350vh" : "auto" }}
     >
-      {/* Dot-grid + dual glow */}
-      <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-30 z-[1]" aria-hidden />
-      <div className="pointer-events-none absolute -right-40 top-40 h-[28rem] w-[28rem] rounded-full bg-[#8B5CF6] opacity-[0.05] blur-3xl z-[1]" aria-hidden />
-      <div className="pointer-events-none absolute -left-32 bottom-40 h-80 w-80 rounded-full bg-[#FF7410] opacity-[0.05] blur-3xl z-[1]" aria-hidden />
-
       {/* Sticky container ensures Bento stays 'fixed' while Works wipes over it */}
       <div className={isDesktop ? "sticky top-0 h-screen overflow-hidden" : "relative"}>
         
@@ -307,8 +302,7 @@ export default function About() {
           >
             <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#FF7410] mb-4">Journey Map</p>
             <h2 className="font-title text-4xl sm:text-5xl font-black text-white leading-[1.1] mb-6">
-              Designing experiences that <span className="neon-text">move people</span>,{" "}
-              <span className="neon-text-purple">building systems</span> that scale.
+              Designing experiences that <span className="neon-text">move people</span>, building systems that scale.
             </h2>
             <p className="font-description text-lg text-[#94a3b8] leading-relaxed">
               From enterprise ecommerce and SaaS products to hyper-local digital experiences, my journey has centered on practical UX thinking, clear outcomes, and people-first execution.

@@ -5,8 +5,9 @@ const MD_QUERY = "(min-width: 768px)";
 
 /**
  * Document Y to scroll so the **visible** Works band is in view.
- * On `md+`, `#works` uses `margin-top: -100vh` (overlap with About); scrolling to the section’s
- * layout top leaves you in the overlap — add one viewport height past that edge.
+ * On `md+`, `#works` uses `margin-top: -100vh` (overlap with About). One viewport is not enough:
+ * the desktop grid stays hidden until `scrollYProgress` in Works exceeds ~0.75, so we must scroll
+ * far enough into the 200vh section for the parallax + cards to turn on.
  */
 export function computeWorksScrollTop(): number | null {
   if (typeof window === "undefined") return null;
@@ -14,7 +15,9 @@ export function computeWorksScrollTop(): number | null {
   if (!el) return null;
   const sectionTop = el.getBoundingClientRect().top + window.scrollY;
   const isMd = window.matchMedia(MD_QUERY).matches;
-  const pastOverlap = isMd ? window.innerHeight : 0;
+  const vh = window.innerHeight;
+  /** ~1 vh for About overlap + ~0.7 vh so Works `showContent` (progress > 0.75) triggers */
+  const pastOverlap = isMd ? vh * 1.68 : 0;
   return Math.max(0, sectionTop + pastOverlap + HEADER_SCROLL_OFFSET);
 }
 

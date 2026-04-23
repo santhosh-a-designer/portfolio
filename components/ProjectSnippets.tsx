@@ -22,7 +22,7 @@ const blocks = [
     title: "Graphic design",
     body:
       "Poster design, logos, and business cards we’ve shipped for different clients — print-first and brand touchpoints beyond product UI.",
-    accent: "#8B5CF6",
+    accent: "#E07010",
     href: "/#contact",
     viewLabel: "View",
     chip: "Print & brand",

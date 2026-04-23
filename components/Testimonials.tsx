@@ -10,7 +10,6 @@ const testimonials = [
     location: "UK",
     avatar: "DF",
     color: "#FF7410",
-    accentColor: "#FF7410",
     headline: "Reliable, creative, and thoughtful in every way",
     text: "He quickly proved himself to be reliable, creative, and thoughtful in his approach to design. His work always balanced good design with practical implementation, making it easy for developers and product managers to move projects forward. He was a supportive teammate — open to feedback, collaborative, and always positive to work with.",
     highlight: "reliable, creative, and thoughtful",
@@ -20,8 +19,7 @@ const testimonials = [
     role: "Designer · Direct Report",
     location: "India",
     avatar: "RK",
-    color: "#8B5CF6",
-    accentColor: "#8B5CF6",
+    color: "#E06010",
     headline: "A visionary leader who consistently elevates",
     text: "Reporting directly to Santhosh was an absolute privilege. His positive mindset and exceptional design skills have been a constant source of inspiration. Santhosh is a visionary leader who consistently elevates our projects. His strategic use of UX methodologies has set a new standard for our product's success.",
     highlight: "visionary leader who consistently elevates",
@@ -32,7 +30,6 @@ const testimonials = [
     location: "UK",
     avatar: "AG",
     color: "#FF7410",
-    accentColor: "#FF7410",
     headline: "Bridges the gap between design and development effortlessly",
     text: "Working alongside Santhosh has been exceptional. His designs are not just beautiful, they are developer-friendly and thoughtful. He bridges the gap between design and development effortlessly, always considering technical constraints while maintaining creative excellence. His collaborative approach and clear communication made our workflow seamless. Santhosh truly understands how to create designs that developers love to implement.",
     highlight: "developer-friendly and thoughtful",
@@ -42,8 +39,7 @@ const testimonials = [
     role: "Vice President · Intellemo.AI",
     location: "India",
     avatar: "CK",
-    color: "#8B5CF6",
-    accentColor: "#8B5CF6",
+    color: "#E06010",
     headline: "His impact on our revenue growth has been profound",
     text: "Honouring Santhosh, our exceptional UX Designer! In just a year, he has revolutionised our approach with rapid design, innovative ideas, and user-centric solutions. His impact on our revenue growth has been profound, solidifying his position as a key player in our success story. Additionally, his exceptional communication skills and ability to translate ideas into tangible results make him an invaluable asset to any team.",
     highlight: "impact on our revenue growth has been profound",
@@ -56,10 +52,9 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Testimonials() {
   return (
     <section id="testimonials" className="relative overflow-hidden">
-      {/* Dot-grid + dual glow */}
+      {/* Dot-grid + glow */}
       <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-35" aria-hidden />
       <div className="pointer-events-none absolute right-0 bottom-0 h-96 w-96 rounded-full bg-[#FF7410] opacity-[0.06] blur-3xl" aria-hidden />
-      <div className="pointer-events-none absolute -left-24 top-20 h-72 w-72 rounded-full bg-[#8B5CF6] opacity-[0.06] blur-3xl" aria-hidden />
       {/* Section index strip */}
       <motion.div
         className="border-b border-[#1e293b] bg-[#08090b]/60"
@@ -97,9 +92,7 @@ export default function Testimonials() {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={VP}
               transition={{ type: "spring", stiffness: 55, damping: 18, mass: 1.1, delay: i * 0.08 }}
-              className="flex flex-col p-8 bg-[#0c0e12] transition-colors"
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = `color-mix(in srgb, ${t.color} 5%, #0c0e12)`; }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "#0c0e12"; }}
+              className="flex flex-col p-8 bg-[#0c0e12] hover:bg-[#FF7410]/5 transition-colors"
               style={{
                 borderRight: i % 2 === 0 ? "1px solid #1e293b" : "none",
                 borderBottom: i < 2 ? "1px solid #1e293b" : "none",

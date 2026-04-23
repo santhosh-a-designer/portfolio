@@ -248,8 +248,9 @@ export default function Works() {
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     if (typeof window !== "undefined" && window.innerWidth < 768) return;
-    if (v > 0.75) setShowContent(true);
-    else if (v < 0.72) setShowContent(false);
+    /* Aligned with curtain (0.45–0.7) but forgiving for jump-scroll / #works deep-links */
+    if (v > 0.6) setShowContent(true);
+    else if (v < 0.55) setShowContent(false);
   });
 
   const contentTransition = {

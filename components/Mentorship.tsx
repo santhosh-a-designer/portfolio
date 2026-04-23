@@ -26,7 +26,7 @@ const cards = [
       { value: "Chennai", label: "Reach" },
       { value: "Active", label: "Status" },
     ],
-    color: "#8B5CF6",
+    color: "#CC5A0C",
   },
 ];
 
@@ -36,10 +36,9 @@ const ease = [0.22, 1, 0.36, 1] as const;
 export default function Mentorship() {
   return (
     <section id="mentorship" className="relative overflow-hidden">
-      {/* Dot-grid + dual glow */}
+      {/* Dot-grid + glow */}
       <div className="pointer-events-none absolute inset-0 section-dot-grid opacity-35" aria-hidden />
       <div className="pointer-events-none absolute -left-32 top-20 h-96 w-96 rounded-full bg-[#FF7410] opacity-[0.06] blur-3xl" aria-hidden />
-      <div className="pointer-events-none absolute -right-32 bottom-10 h-72 w-72 rounded-full bg-[#8B5CF6] opacity-[0.07] blur-3xl" aria-hidden />
       {/* Section index strip */}
       <motion.div
         className="border-b border-[#1e293b] bg-[#08090b]/60"
