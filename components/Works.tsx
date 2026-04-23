@@ -203,7 +203,7 @@ function WorkProjectCard({
           {project.subtitle}
         </p>
 
-        <p className="mb-2 min-h-0 line-clamp-2 text-[9px] leading-[1.5] text-[#5a4a3d] sm:line-clamp-3 sm:text-[10px] sm:leading-relaxed">
+        <p className="mb-2 min-h-[4.2em] line-clamp-3 text-[9px] leading-[1.5] text-[#5a4a3d] sm:text-[10px] sm:leading-relaxed">
           {project.description}
         </p>
 
