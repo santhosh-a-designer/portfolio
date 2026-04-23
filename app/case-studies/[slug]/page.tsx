@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import BackToWorksLink from "@/components/BackToWorksLink";
+import CaseStudyScrollToTop from "@/components/CaseStudyScrollToTop";
 import CaseStudyCinematicIntro from "@/components/CaseStudyCinematicIntro";
 import CaseStudyEzraShowcase from "@/components/CaseStudyEzraShowcase";
 import { VidyasAfterCinematicBlock, VidyasShowcaseSection } from "@/components/CaseStudyVidyasShowcase";
@@ -809,6 +810,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
   if (study.cinematicIntro) {
     return (
       <main id="case-study-top" className={mainClass}>
+        <CaseStudyScrollToTop />
         <CaseStudyCinematicIntro config={study.cinematicIntro}>
           <CaseStudyArticle study={study} prev={prev} next={next} />
         </CaseStudyCinematicIntro>
@@ -819,6 +821,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   return (
     <main id="case-study-top" className={mainClass}>
+      <CaseStudyScrollToTop />
       <CaseStudyArticle study={study} prev={prev} next={next} />
       {backLink}
     </main>
