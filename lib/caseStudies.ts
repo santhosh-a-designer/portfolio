@@ -20,6 +20,8 @@ export type CaseStudy = {
   /** First meta box: stack / tools (replaces a separate timeline-only box). */
   toolsAndLanguages: string;
   role: string;
+  /** When set, footer "Next" shows this case study as non-clickable (not ready). */
+  caseStudyComingSoon?: boolean;
   situation: string;
   task: string;
   actions: string[];
@@ -202,8 +204,8 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "A CTA-led assisted selling system that connects ecommerce shoppers with store sales teams for booking, video consultation, and in-call checkout.",
     timeline: "Mar 2026 — Present",
-    toolsAndLanguages: "Figma · Next.js · TypeScript · React",
-    role: "Design & Development (Full Stack)",
+    toolsAndLanguages: "Figma",
+    role: "UX Designer",
     situation:
       "Store owners needed a stronger way to convert website visitors who needed product guidance before making a purchase.",
     task:
@@ -579,8 +581,8 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "Ezra is the product I designed and built to fix a very human problem: at FITA Academy, mentoring students meant fragile attendance sheets, easy to lose or “reinterpret,” and no single place for mentors and learners to share the same truth. I channelled that into a dashboard for mentors—fed by a bot I named Ezra—plus a student view for hours and daily attendance, automations for batch-end reminders, Gmail-backed payment handoffs, and a path to subscription. What started as a tool for my own batches is now in discussion for an org-wide buy, with paid pilots from other mentors along the way.",
     timeline: "Mar 2026 — Present",
-    toolsAndLanguages: "TypeScript · React · Vercel · WhatsApp · Automations · Gmail",
-    role: "Design & Development (Full Stack)",
+    toolsAndLanguages: "Figma · TypeScript · React · Vercel · WhatsApp · Automations · Gmail",
+    role: "UX Design & Development",
     situation:
       "At FITA, attendance sheets went missing, numbers got disputed, and students forgot to mark leave. As a mentor myself, I was living in the gap—no single honest record, no fair way to track what I was owed. Spreadsheets and group chats couldn't scale.",
     task:
@@ -870,8 +872,8 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "The first home-catering product in the region with a premium app-like PWA, a WhatsApp ordering bot, Razorpay checkout, and an operations dashboard—built so a Sivakasi home kitchen can scale beyond word-of-mouth like a small cloud kitchen.",
     timeline: "Mar 2026 — Present",
-    toolsAndLanguages: "TypeScript · React · PWA · WhatsApp Business · Razorpay",
-    role: "Design & Development (Full Stack)",
+    toolsAndLanguages: "Figma · Meta Business · TypeScript · React · PWA · WhatsApp Business · Razorpay",
+    role: "UX Design & Development",
     situation:
       "A home cook in Sivakasi was already serving her network, but to grow she needed a real digital system—not a generic menu PDF. Nothing similar existed locally as a first-class experience: no regional benchmark for a premium UI, a WhatsApp-native path, and a way to run payments and delivery without turning the kitchen into an admin job.",
     task:
@@ -1136,6 +1138,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "ceass-pet-ecommerce",
     project: "CEaSS",
+    caseStudyComingSoon: true,
     subtitle: "Pet Ecommerce with AI-assisted selling",
     summary:
       "A pet commerce platform in progress, designed from UX analysis to development with AI-agent support moments.",

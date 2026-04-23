@@ -65,23 +65,46 @@ export default function CaseStudyArticleFooter({
           {/* Next */}
           <div className={`${cell} min-w-0`}>
             {next ? (
-              <Link
-                href={`/case-studies/${next.slug}`}
-                className="group -m-1 flex h-full min-h-0 flex-col items-end justify-center gap-2 rounded-none p-1 text-right transition-colors hover:bg-[#FF7410]/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7410]/50"
-              >
-                <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-[#64748b]">Next</span>
-                <span className="font-title text-[15px] font-bold leading-snug text-[#f1f5f9] group-hover:text-[#FF7410] sm:text-base">
-                  <span className="inline-flex items-start justify-end gap-2 text-right">
-                    <span className="min-w-0 line-clamp-3">{next.project}</span>
-                    <ArrowRight
-                      className="mt-0.5 flex-shrink-0 text-[#64748b] transition-colors group-hover:text-[#FF7410]"
-                      size={18}
-                      weight="bold"
-                      aria-hidden
-                    />
+              next.caseStudyComingSoon ? (
+                <div
+                  className="flex h-full min-h-0 flex-col items-end justify-center gap-2 text-right opacity-60"
+                  aria-label={`Next case study ${next.project} is not available yet`}
+                >
+                  <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-[#64748b]">Next</span>
+                  <span className="font-title text-[15px] font-bold leading-snug text-[#94a3b8] sm:text-base">
+                    <span className="inline-flex items-start justify-end gap-2 text-right">
+                      <span className="min-w-0 line-clamp-3">{next.project}</span>
+                      <ArrowRight
+                        className="mt-0.5 flex-shrink-0 text-[#475569]"
+                        size={18}
+                        weight="bold"
+                        aria-hidden
+                      />
+                    </span>
                   </span>
-                </span>
-              </Link>
+                  <p className="max-w-[22ch] text-[11px] leading-snug text-[#64748b]">
+                    Case study in build — not available to open yet.
+                  </p>
+                </div>
+              ) : (
+                <Link
+                  href={`/case-studies/${next.slug}`}
+                  className="group -m-1 flex h-full min-h-0 flex-col items-end justify-center gap-2 rounded-none p-1 text-right transition-colors hover:bg-[#FF7410]/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7410]/50"
+                >
+                  <span className="text-[9px] font-mono font-semibold uppercase tracking-[0.2em] text-[#64748b]">Next</span>
+                  <span className="font-title text-[15px] font-bold leading-snug text-[#f1f5f9] group-hover:text-[#FF7410] sm:text-base">
+                    <span className="inline-flex items-start justify-end gap-2 text-right">
+                      <span className="min-w-0 line-clamp-3">{next.project}</span>
+                      <ArrowRight
+                        className="mt-0.5 flex-shrink-0 text-[#64748b] transition-colors group-hover:text-[#FF7410]"
+                        size={18}
+                        weight="bold"
+                        aria-hidden
+                      />
+                    </span>
+                  </span>
+                </Link>
+              )
             ) : (
               <div className="flex h-full flex-col items-center justify-center gap-2 text-center md:items-end md:text-right">
                 <div
