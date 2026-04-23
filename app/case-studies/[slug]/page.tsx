@@ -754,7 +754,7 @@ function CaseStudyArticle({
           </div>
         </section>
 
-        {study.slug !== "parla-show-and-sell" && study.imageSlots.length ? (
+        {study.slug !== "parla-show-and-sell" && study.slug !== "ezra-mentor-dashboard" && study.imageSlots.length ? (
           <CaseStudyScrollReveal>
             <section className="mt-10 border border-[#1e293b] bg-[#0c1014] p-4 sm:p-6">
               <h2 className={SECTION_H2}>Image slots (draft)</h2>

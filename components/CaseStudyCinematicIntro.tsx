@@ -3,7 +3,7 @@
 import { useLayoutEffect, useRef, useState, type ReactNode, type TransitionEvent } from "react";
 import { useReducedMotion } from "framer-motion";
 
-type CinematicConfig = { src: string; poster?: string };
+type CinematicConfig = { src: string; poster?: string; playbackRate?: number };
 
 /** Overlay opacity transition — shorter = snappier handoff to the page. */
 const FADE_MS = 450;
@@ -82,6 +82,13 @@ export default function CaseStudyCinematicIntro({
     goFade({ pause: false });
   };
 
+  const applyPlaybackRate = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    const r = config.playbackRate;
+    if (typeof r === "number" && r > 0 && r <= 4) v.playbackRate = r;
+  };
+
   const onTimeUpdate = () => {
     if (phase !== "playing") return;
     const v = videoRef.current;
@@ -135,6 +142,8 @@ export default function CaseStudyCinematicIntro({
               autoPlay
               playsInline
               muted
+              onLoadedMetadata={applyPlaybackRate}
+              onPlay={applyPlaybackRate}
               onTimeUpdate={onTimeUpdate}
               onEnded={onVideoEnded}
             />

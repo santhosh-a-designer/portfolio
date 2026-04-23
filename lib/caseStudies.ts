@@ -9,7 +9,7 @@ export type CaseStudy = {
    */
   introGallery?: Array<{ src: string; alt: string }>;
   /** Fullscreen video first, then tucks to top; same <video> instance (no Parla / Show & Sell). */
-  cinematicIntro?: { src: string; poster?: string };
+  cinematicIntro?: { src: string; poster?: string; /** >1 = faster intro (e.g. 1.2) */ playbackRate?: number };
   liveUrl?: string;
   subtitle: string;
   /** Optional subheading above STAR (e.g. “2.1” for process section) */
@@ -967,6 +967,7 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: "https://vidayskitchenhome.com",
     cinematicIntro: {
       src: "/case-studies/vidyas-kitchen/hero-intro.mov",
+      playbackRate: 1.2,
     },
     processWalkthroughLabel: "2.1",
     summary:
