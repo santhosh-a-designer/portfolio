@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /** Hides the dev-only blue top bar + route indicator (dev only; no effect in production). */
   devIndicators: false,
+  images: {
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; frame-src 'none'; sandbox;",
+  },
   async redirects() {
     return [
       { source: "/ux-ui-shorts/irstunner", destination: "/ux-ui-shorts?p=1", permanent: true },

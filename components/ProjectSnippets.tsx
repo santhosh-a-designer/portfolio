@@ -202,7 +202,7 @@ export default function ProjectSnippets() {
                     <ArrowRight size={16} weight="bold" style={{ color: "#E07010" }} aria-hidden />
                   </span>
                 </Link>
-                <p className="mt-2 text-[10px] text-[#64748b]">Page is getting built.</p>
+                <p className="mt-2 text-[10px] text-[#64748b]">P1–P4 — same page style as UX UI Shorts.</p>
               </div>
             </div>
           </motion.article>
