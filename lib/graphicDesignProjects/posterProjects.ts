@@ -55,8 +55,8 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
     thirdPanel: {
       src: `${POSTERS}/Key_Sign_Board.png`,
       alt: "The Key exterior sign board",
-      intrinsicWidth: 9000,
-      intrinsicHeight: 12000,
+      intrinsicWidth: 1920,
+      intrinsicHeight: 2560,
     },
     businessCardPair: {
       blockTitle: "Business card",
