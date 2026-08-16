@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import { ArrowLeft } from "@phosphor-icons/react";
 import BackToWorksLink from "@/components/BackToWorksLink";
 import UxShortProjectCard from "@/components/UxShortProjectCard";
-import { IRSTUNNER_UX_SHORT } from "@/lib/uxShortProjects/irStunner";
 import { IRASUS_UX_SHORT } from "@/lib/uxShortProjects/irasus";
 import { INDIAONE_ATM_UX_SHORT } from "@/lib/uxShortProjects/indiaOneAtm";
 
@@ -15,7 +14,7 @@ function ScrollToProject() {
   useEffect(() => {
     const p = sp.get("p");
     const id =
-      p === "3" ? "project-3" : p === "2" ? "project-2" : p === "1" ? "project-1" : null;
+      p === "2" ? "project-2" : p === "1" ? "project-1" : null;
     if (!id) return;
     const el = document.getElementById(id);
     if (!el) return;
@@ -29,7 +28,7 @@ function ScrollToProject() {
 }
 
 /**
- * One page: P1 IR Stunner, P2 iRasus, P3 IndiaOne ATM Manager.
+ * One page: P1 iRasus, P2 IndiaOne ATM Manager.
  */
 export default function UxUiShortsHubView() {
   return (
@@ -47,29 +46,20 @@ export default function UxUiShortsHubView() {
             UX UI Shorts
           </h1>
           <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-[#94a3b8]">
-            Project 1, 2, and 3 on one page — same template, stacked in order.
+            Project 1 and 2 on one page — same template, stacked in order.
           </p>
         </div>
       </div>
 
       <div className="mx-auto max-w-7xl px-5 pb-28 pt-10 sm:px-6 sm:pt-12 md:px-10">
         <section id="project-1" className="scroll-mt-24">
-          <UxShortProjectCard data={IRSTUNNER_UX_SHORT} />
-        </section>
-
-        <div
-          className="my-14 border-t border-[#1e293b] md:my-20"
-          aria-hidden
-        />
-
-        <section id="project-2" className="scroll-mt-24">
-          <UxShortProjectCard data={IRASUS_UX_SHORT} />
+          <UxShortProjectCard data={{ ...IRASUS_UX_SHORT, projectLabel: "Project 1" }} />
         </section>
 
         <div className="my-14 border-t border-[#1e293b] md:my-20" aria-hidden />
 
-        <section id="project-3" className="scroll-mt-24">
-          <UxShortProjectCard data={INDIAONE_ATM_UX_SHORT} />
+        <section id="project-2" className="scroll-mt-24">
+          <UxShortProjectCard data={{ ...INDIAONE_ATM_UX_SHORT, projectLabel: "Project 2" }} />
         </section>
       </div>
 

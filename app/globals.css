@@ -268,3 +268,16 @@ p, .font-description {
     animation: none;
   }
 }
+
+/* Generic Next/Image: shimmer until decode, then crossfade in {@link components/FadeInImage.tsx} */
+.image-load-shimmer {
+  background: linear-gradient(105deg, #0a0c0f 0%, #131920 42%, #0a0c0f 100%);
+  background-size: 200% 100%;
+  animation: irstunner-shimmer 1.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .image-load-shimmer {
+    animation: none;
+    background: #0c1014;
+  }
+}

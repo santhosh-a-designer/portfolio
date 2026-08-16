@@ -6,13 +6,15 @@ import CaseStudyScrollToTop from "@/components/CaseStudyScrollToTop";
 import CaseStudyCinematicIntro from "@/components/CaseStudyCinematicIntro";
 import CaseStudyEzraShowcase from "@/components/CaseStudyEzraShowcase";
 import { VidyasAfterCinematicBlock, VidyasShowcaseSection } from "@/components/CaseStudyVidyasShowcase";
-import { ArrowLeft, ArrowRight, ArrowSquareOut, CheckCircle, Sparkle, Warning, Lightbulb, ArrowFatRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowRight, ArrowSquareOut, CheckCircle, Sparkle, Warning, Lightbulb } from "@phosphor-icons/react/dist/ssr";
 import { caseStudyBySlug, getCaseStudyNeighbors, type CaseStudy } from "@/lib/caseStudies";
 import CaseStudyArticleFooter from "@/components/CaseStudyArticleFooter";
 import { CaseStudyScrollReveal } from "@/components/CaseStudyScrollReveal";
 import CaseStudyUxOutcomeViz from "@/components/CaseStudyUxOutcomeViz";
 import CaseStudyVideoShowcase from "@/components/CaseStudyVideoShowcase";
 import CustomerSchedulerStory from "@/components/CustomerSchedulerStory";
+import PageEntryAnimation from "@/components/PageEntryAnimation";
+import CaseStudyMakeonShowcase from "@/components/CaseStudyMakeonShowcase";
 
 const SECTION_H2 = "text-[12px] font-mono uppercase tracking-[0.2em] text-[#FF7410]";
 
@@ -698,6 +700,12 @@ function CaseStudyArticle({
 
         <VidyasShowcaseSection study={study} />
 
+        {study.slug === "makeon-builder-ecosystem" ? (
+          <div className="mt-12 border-t border-[#1e293b] pt-8">
+            <CaseStudyMakeonShowcase />
+          </div>
+        ) : null}
+
         {/* 7. CTA — explanation and videos */}
         {cta ? (
           <CaseStudyScrollReveal>
@@ -811,9 +819,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
     return (
       <main id="case-study-top" className={mainClass}>
         <CaseStudyScrollToTop />
-        <CaseStudyCinematicIntro config={study.cinematicIntro}>
-          <CaseStudyArticle study={study} prev={prev} next={next} />
-        </CaseStudyCinematicIntro>
+        <PageEntryAnimation>
+          <CaseStudyCinematicIntro config={study.cinematicIntro}>
+            <CaseStudyArticle study={study} prev={prev} next={next} />
+          </CaseStudyCinematicIntro>
+        </PageEntryAnimation>
         {backLink}
       </main>
     );
@@ -822,7 +832,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
   return (
     <main id="case-study-top" className={mainClass}>
       <CaseStudyScrollToTop />
-      <CaseStudyArticle study={study} prev={prev} next={next} />
+      <PageEntryAnimation>
+        <CaseStudyArticle study={study} prev={prev} next={next} />
+      </PageEntryAnimation>
       {backLink}
     </main>
   );

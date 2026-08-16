@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { Lightning, GlobeHemisphereWest, DeviceMobile, Robot } from "@phosphor-icons/react";
+import { GlobeHemisphereWest, DeviceMobile, Robot, Cpu } from "@phosphor-icons/react";
 
 type Project = {
   id: number;
@@ -80,21 +80,21 @@ const projects: Project[] = [
   {
     id: 4,
     index: "04",
-    tag: "AI · Commerce",
-    title: "CEaSS",
-    subtitle: "Community-Enabled Autonomous Sales",
+    tag: "STEM · Ecosystem · AI",
+    title: "Makeon",
+    subtitle: "Builder-Learning Ecosystem & AI Studio",
     description:
-      "AI-assisted commerce for pet products: community discovery, light storefronts, and automation that moves micro-sellers from browse to buy with less overhead. The product is aimed at how small sellers and buyers actually transact in chat and on social, not a generic big-box flow.",
+      "India's builder-learning ecosystem: structured academic learning through hands-on making, evidence-based portfolios, and visible confidence. Connecting schools, learning centres, and young builders with a repeatable 7-step engineering loop and upcoming AI diagnostic agents.",
     stats: [
-      { value: "AI", label: "Automation" },
-      { value: "Community", label: "Discovery" },
-      { value: "Dev", label: "Status" },
-      { value: "1", label: "Niche" },
+      { value: "500+", label: "Student builds" },
+      { value: "4 Tracks", label: "Ages 5–18" },
+      { value: "7-Beat", label: "Build Loop" },
+      { value: "Live", label: "makeon.build" },
     ],
-    icon: Lightning,
-    accentColor: "#F97316",
-    status: "in-progress",
-    slug: "ceass-pet-ecommerce",
+    icon: Cpu,
+    accentColor: "#FF2A2A",
+    status: "live",
+    slug: "makeon-builder-ecosystem",
   },
 ];
 
@@ -117,7 +117,6 @@ function WorkProjectCard({
 }) {
   const Icon = project.icon;
   const [labelPos, setLabelPos] = useState<{ x: number; y: number } | null>(null);
-  const isCeass = project.slug === "ceass-pet-ecommerce";
 
   return (
     <motion.article
@@ -130,13 +129,12 @@ function WorkProjectCard({
       <Link
         href={`/case-studies/${project.slug}`}
         className="absolute inset-0 z-[2] block cursor-none max-sm:cursor-pointer"
-        aria-label={isCeass ? `${project.title} — in progress` : `View case study: ${project.title}`}
+        aria-label={`View case study: ${project.title}`}
         onMouseMove={(e) => setLabelPos({ x: e.clientX, y: e.clientY })}
         onMouseLeave={() => setLabelPos(null)}
       >
         <span className="sr-only">
-          {isCeass ? "In progress — " : "View case study — "}
-          {project.title}
+          View case study — {project.title}
         </span>
       </Link>
 
@@ -147,7 +145,7 @@ function WorkProjectCard({
           aria-hidden
         >
           <span className="inline-block border border-[#1a1510] bg-[#1a1510] px-2.5 py-1.5 text-[8px] font-mono font-bold uppercase tracking-[0.12em] text-white">
-            {isCeass ? "In progress" : "View case study"}
+            View case study
           </span>
         </div>
       )}

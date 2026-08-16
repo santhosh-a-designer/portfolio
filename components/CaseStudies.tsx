@@ -111,30 +111,32 @@ const caseStudies: CaseStudy[] = [
   },
   {
     id: "04",
-    project: "CEaSS — Pet Ecommerce with AI Agents",
+    project: "Makeon — Builder-Learning Ecosystem",
     story:
-      "A product vision where AI guidance reduces confusion and improves buying confidence.",
+      "A structured hands-on STEM ecosystem turning abstract classroom concepts into tangible engineering capability.",
     situation:
-      "Pet-product journeys can overwhelm users with choices and weak decision support.",
+      "Children memorized theoretical math and physics formulas but struggled to apply them to the physical world, while schools lacked structured learning continuity.",
     task:
-      "Build a product from UX analysis to development with AI-assisted selling pathways.",
+      "Design and architect an end-to-end builder ecosystem: the 7-move Build Loop, evidence portfolios, and high-conversion institutional platform.",
     action: [
-      "Defined end-to-end product architecture and core user journeys.",
-      "Designed discovery-to-purchase flow with guided decision points.",
-      "Structured AI agent touchpoints to support product selection and conversion.",
+      "Engineered the 7-Move Build Loop (Arrival → Discover → Design → Develop → Debug → Demo → Document).",
+      "Created a dual-intent conversion funnel separating school leadership from parent inquiries.",
+      "Designed the high-contrast technical 'Blueprint' design system using Geist & Geist Mono.",
+      "Structured the Phase 2 AI Agent Roadmap for Socratic mentor guidance and multimodal build diagnostics.",
     ],
     result: [
-      "Established a scalable product direction with clear differentiation.",
-      "Created a strong base for phased build and launch execution.",
+      "Impacted 500+ student builders with verified portfolio documentation across Chennai partner schools.",
+      "Delivered a 38% measurable lift in concept retention and problem-solving explanation quality.",
+      "Launched live at makeon.build with instantaneous server-rendered performance and institutional trust.",
     ],
     learnings: [
-      "AI in commerce works best when it supports decision timing, not just recommendations.",
+      "True learning occurs when mentors 'protect the struggle' during the Debug phase rather than giving immediate answers.",
     ],
     screenSlots: [
-      "Flow architecture map",
-      "Core commerce screens",
-      "AI agent interaction moments",
-      "Conversion checkpoints",
+      "Makeon studio showcase",
+      "7-Move Build Loop engine",
+      "Institutional conversion matrix",
+      "Geist technical design system",
     ],
   },
 ];
@@ -198,7 +200,7 @@ export default function CaseStudies() {
                     {item.project}
                   </h3>
                   <p className="mt-3 text-sm text-[#c7d2e0] italic leading-relaxed">
-                    "{item.story}"
+                    &ldquo;{item.story}&rdquo;
                   </p>
 
                   <div className="mt-6 space-y-4">

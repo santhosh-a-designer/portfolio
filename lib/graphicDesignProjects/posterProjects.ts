@@ -1,6 +1,7 @@
 import type { GraphicDesignPosterProject } from "@/lib/graphicDesignTypes";
 
 const POSTERS = "/graphic-design/posters";
+const IRSTUNNER = "/project-snippets/irstunner";
 
 export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
   {
@@ -107,4 +108,37 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
       },
     },
   },
+  {
+    id: "project-5",
+    projectLabel: "Project 5",
+    projectTitle: "IR Stunner",
+    tagline: "Packaging design · thermal shield powder for factory & home roofs",
+    overview:
+      "A powder mixed with paint so factory and home roofs act as a thermal shield — cutting radiant heat before it enters the building. The design goal was trust: credible numbers, a consult-first CTA, and packaging that reads cleanly in-store and in photos. Two distinct entry points — Industrial and CHILL HOME residential — so each audience sees only the story relevant to their roof.",
+    imagePairTitle: "Packaging — all four sides",
+    hideImageBlock: true,
+    // beforeAfter is required by type but hidden via hideImageBlock — use front as placeholder
+    beforeAfter: {
+      oldSrc: `${IRSTUNNER}/front.png`,
+      newSrc: `${IRSTUNNER}/back.png`,
+      oldAlt: "IR Stunner box — front",
+      newAlt: "IR Stunner box — back",
+      intrinsicWidth: 800,
+      intrinsicHeight: 800,
+    },
+    packagingImages: [
+      { src: `${IRSTUNNER}/front.png`, alt: "IR STUNNER box — front", label: "Front" },
+      { src: `${IRSTUNNER}/back.png`, alt: "IR STUNNER box — back", label: "Back" },
+      { src: `${IRSTUNNER}/left.png`, alt: "IR STUNNER box — left", label: "Left" },
+      { src: `${IRSTUNNER}/right.png`, alt: "IR STUNNER box — right", label: "Right" },
+    ],
+    marketingStats: [
+      { label: "Sales growth (summer, WhatsApp-led)", value: "15% → 40%" },
+      { label: "Core CTA", value: "WhatsApp + on-site audit" },
+      { label: "Split positioning", value: "Industrial · CHILL HOME" },
+      { label: "Sales motion", value: "Specifiers → field trials" },
+      { label: "Channel focus", value: "Consult-led, not paint upsell" },
+    ],
+  },
 ];
+

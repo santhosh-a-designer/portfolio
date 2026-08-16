@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import CaseStudyScrollToTop from "@/components/CaseStudyScrollToTop";
 import GraphicDesignHubView from "@/components/GraphicDesignHubView";
+import PageWrapper from "@/components/PageWrapper";
 import { getSiteUrl } from "@/lib/siteUrl";
 
 const path = "/graphic-design";
@@ -21,9 +21,10 @@ export const metadata: Metadata = {
 
 export default function GraphicDesignPage() {
   return (
-    <main className="min-h-screen overflow-x-hidden blueprint-page text-[#e8edf2]">
-      <CaseStudyScrollToTop />
-      <GraphicDesignHubView />
-    </main>
+    <PageWrapper>
+      <main className="min-h-screen overflow-x-hidden blueprint-page text-[#e8edf2]">
+        <GraphicDesignHubView />
+      </main>
+    </PageWrapper>
   );
 }

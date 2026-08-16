@@ -21,7 +21,7 @@ const timeline = [
       "Balancing design quality with practical, production-ready implementation",
     ],
     clients: ["Independent freelance projects", "Founder-led product teams", "Community-first products"],
-    projects: ["Vidya's Kitchen (PWA)", "CEaSS Pet Ecommerce", "Irasus AI Battery Dashboard", "One India ATM App"],
+    projects: ["Vidya's Kitchen (PWA)", "Makeon Builder Ecosystem", "Irasus AI Battery Dashboard", "One India ATM App"],
     span: "lg:col-span-2 lg:row-span-2",
   },
   {
@@ -237,8 +237,8 @@ export default function About() {
 
   useEffect(() => {
     if (!isDesktop) {
-      setOverflow(0);
-      return;
+      const id = setTimeout(() => setOverflow(0), 0);
+      return () => clearTimeout(id);
     }
 
     const updateOverflow = () => {

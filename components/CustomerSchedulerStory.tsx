@@ -378,8 +378,8 @@ function ResponsiveDesktopMobilePair({
 
   useLayoutEffect(() => {
     if (!isLg) {
-      setDesktopFrameH(null);
-      return;
+      const id = setTimeout(() => setDesktopFrameH(null), 0);
+      return () => clearTimeout(id);
     }
     const el = desktopVideoBtnRef.current;
     if (!el) return;

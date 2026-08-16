@@ -34,6 +34,7 @@ export default function LenisProvider({ children }: Props) {
       },
     });
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: one-time init from external system (Lenis)
     setLenis(instance);
 
     let frameId = 0;
@@ -47,7 +48,8 @@ export default function LenisProvider({ children }: Props) {
       cancelAnimationFrame(frameId);
       instance.destroy();
       root.classList.remove("lenis", "lenis-smooth");
-      setLenis(null);
+      // defer to avoid synchronous setState inside cleanup
+      setTimeout(() => setLenis(null), 0);
     };
   }, []);
 

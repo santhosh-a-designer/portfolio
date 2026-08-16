@@ -21,24 +21,30 @@ export default function Contact() {
 
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitState("idle");
+    setSubmitState("sending");
     setErrorText("");
 
     try {
-      const subject = encodeURIComponent(`Portfolio enquiry from ${form.name}`);
-      const body = encodeURIComponent(
-        `Hi Simon,\n\n${form.project}\n\nThanks.`
-      );
-      const to = encodeURIComponent("santhosh.a.designer@gmail.com");
-      const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${subject}&body=${body}`;
-      window.location.assign(gmailComposeUrl);
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setSubmitState("error");
+        setErrorText(data.error ?? "Something went wrong. Please try again.");
+        return;
+      }
 
       setSubmitState("success");
       setForm({ name: "", email: "", project: "" });
       setTimeout(() => setSubmitState("idle"), 3200);
-    } catch (error) {
+    } catch {
       setSubmitState("error");
-      setErrorText(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+      setErrorText("Network error. Please check your connection and try again.");
     }
   };
 

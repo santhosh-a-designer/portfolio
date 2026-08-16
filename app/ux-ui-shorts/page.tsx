@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import CaseStudyScrollToTop from "@/components/CaseStudyScrollToTop";
 import UxUiShortsHubView from "@/components/UxUiShortsHubView";
+import PageWrapper from "@/components/PageWrapper";
 import { getSiteUrl } from "@/lib/siteUrl";
 
 const path = "/ux-ui-shorts";
@@ -21,9 +21,10 @@ export const metadata: Metadata = {
 
 export default function UxUiShortsPage() {
   return (
-    <main className="min-h-screen blueprint-page text-[#e8edf2]">
-      <CaseStudyScrollToTop />
-      <UxUiShortsHubView />
-    </main>
+    <PageWrapper>
+      <main className="min-h-screen blueprint-page text-[#e8edf2]">
+        <UxUiShortsHubView />
+      </main>
+    </PageWrapper>
   );
 }

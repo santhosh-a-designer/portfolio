@@ -46,7 +46,8 @@ export default function CaseStudyCinematicIntro({
     if (typeof window === "undefined") return;
     if (window.matchMedia("(max-width: 767px)").matches) {
       doneRef.current = true;
-      setPhase("ready");
+      const id = setTimeout(() => setPhase("ready"), 0);
+      return () => clearTimeout(id);
     }
   }, [reduce]);
 

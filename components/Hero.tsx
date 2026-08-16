@@ -48,8 +48,9 @@ function useJackpotNumber(
 
   useEffect(() => {
     if (!enabled) {
-      setDisplay(target);
-      return;
+      // use a zero-delay timeout so setState isn't called synchronously inside the effect body
+      const id = setTimeout(() => setDisplay(target), 0);
+      return () => clearTimeout(id);
     }
 
     const start = performance.now() + delayMs;
@@ -85,8 +86,8 @@ function useJackpotText(finalText: string, durationMs: number, delayMs: number, 
 
   useEffect(() => {
     if (!enabled) {
-      setDisplay(finalText);
-      return;
+      const id = setTimeout(() => setDisplay(finalText), 0);
+      return () => clearTimeout(id);
     }
 
     const start = performance.now() + delayMs;
@@ -117,6 +118,8 @@ function useJackpotText(finalText: string, durationMs: number, delayMs: number, 
 
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
+  // pool is defined inline — stable, no need in deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finalText, durationMs, delayMs, enabled]);
 
   return display;

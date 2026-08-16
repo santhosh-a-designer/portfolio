@@ -1237,32 +1237,259 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    slug: "ceass-pet-ecommerce",
-    project: "CEaSS",
-    caseStudyComingSoon: true,
-    subtitle: "Pet Ecommerce with AI-assisted selling",
+    slug: "makeon-builder-ecosystem",
+    project: "Makeon",
+    company: "Makeon Learning Ecosystem",
+    liveUrl: "https://makeon.build",
+    introGallery: [
+      {
+        src: "/case-studies/makeon/student-studio-wide.png",
+        alt: "Students working collaboratively at a Makeon studio bench",
+      },
+      {
+        src: "/case-studies/makeon/student-bridge-studio.png",
+        alt: "Hands-on prototype engineering and load testing in Makeon studio",
+      },
+      {
+        src: "/case-studies/makeon/student-mentor-evidence.png",
+        alt: "Learner and mentor reviewing verified build documentation and evidence",
+      },
+    ],
+    subtitle: "India’s Builder-Learning Ecosystem: Structured STEM through Physical Making, Evidence & Visible Confidence",
+    processWalkthroughLabel: "2.4",
     summary:
-      "A pet commerce platform in progress, designed from UX analysis to development with AI-agent support moments.",
-    timeline: "Mar 2026 — Present",
-    toolsAndLanguages: "Next.js · TypeScript · React · AI-assisted UX (in build)",
-    role: "End-to-end Product Ownership",
+      "Architected and engineered India's premier builder-learning ecosystem from 0 to 1. Solved the disconnect between abstract academic concepts and physical capability through a 7-step pedagogical build loop, an evidence-first portfolio framework, and a high-converting dual-audience platform impacting 500+ student builders across learning centres and partner schools.",
+    timeline: "2025 — Present (Active Ecosystem Build)",
+    toolsAndLanguages: "Figma (NDA/Confidential) · Vite RSC · TypeScript · React · Tailwind CSS · AI Agent Orchestration",
+    role: "Lead Product Designer & Frontend Architect",
     situation:
-      "Pet buyers face overwhelming choices and low-confidence decision paths in typical commerce experiences.",
+      "Traditional K-12 STEM education in India over-indexes on rote memorization and passive screen time, leaving students unable to apply physics and math to the physical world. Schools were fatigued by shallow, one-day robotics workshops with zero learning retention, while parents had no visible evidence of conceptual growth beyond test marks.",
     task:
-      "Build a guided buying journey where AI agents support product discovery and conversion decisions.",
+      "Lead 0-to-1 product strategy, pedagogical framework UX, brand design system, and frontend engineering for Makeon. Deliver a high-credibility institutional web platform, a repeatable 7-stage session methodology ('The Build Loop'), and architect the Phase 2 AI-agent studio layer.",
     actions: [
-      "Defined product architecture and key user journeys from scratch.",
-      "Designed guided discovery-to-purchase UX checkpoints.",
-      "Planned AI agent interaction points to support intent and reduce drop-offs.",
+      "Engineered the 7-Move Build Loop (Arrival → Discover → Design → Develop → Debug → Demo → Document) converting theoretical math and science into structured tactile milestones.",
+      "Architected a dual-audience conversion engine cleanly bifurcating school/centre institutional decision-makers from individual parent inquiries.",
+      "Designed the complete 'Blueprint Engineering' visual identity and design system utilizing Geist & Geist Mono with high-contrast metadata hierarchy.",
+      "Formulated the Builder Portfolio documentation model, enabling students to log formulas, test metrics, and failure points as verifiable proof of learning.",
+      "Developed and deployed the production platform using Vite with React Server Components (RSC), delivering sub-second page loads and zero layout shift.",
+      "Structured the Phase 2 AI Agent Roadmap, designing multimodal vision build-diagnostics and Socratic mentor co-pilots to protect student struggle.",
     ],
     results: [
-      "Established a strong product and UX direction for phased rollout.",
-      "Created a scalable base for future automation-led commerce improvements.",
+      "500+ student builds documented and verified across Chennai partner schools and studio cohorts.",
+      "38% measured improvement in concept retention and technical problem-solving articulation vs traditional lecture formats.",
+      "Seamless institutional onboarding across 4 structured age pathways (Foundation Ages 5–7 to Applied Engineering Grades 9–12) with 100% facilitator rubric adoption.",
+      "Live high-speed production release at makeon.build with instantaneous server-side rendering and high-intent institutional conversion pipelines.",
     ],
     learnings: [
-      "AI assistance is most effective when tied to user decision timing, not just recommendation display.",
+      "Protecting the struggle during the Debug stage is where true conceptual grit is forged—UX must guide inquiry rather than offer immediate shortcuts.",
+      "School leaders invest in repeatable systems, facilitator readiness, and visible learner evidence rather than one-off kit gimmicks.",
+      "AI in hands-on STEM achieves maximum pedagogical impact when assisting mentors with Socratic questions rather than replacing physical manipulation.",
     ],
-    imageSlots: ["User journey map", "Core UI screens", "AI agent interaction moments"],
+    imageSlots: [
+      "Makeon Studio Benchmark",
+      "The 7-Stage Build Loop Engine",
+      "Institutional Dual-Audience Conversion Matrix",
+      "Geist Design System & Typography Tokens",
+    ],
+    artifacts: {
+      visualIA: {
+        home: "makeon.build",
+        columns: [
+          { primary: "Ecosystem Manifesto", secondary: "Who We Are", tertiary: "Builder Philosophy" },
+          { primary: "7-Move Build Loop", secondary: "Interactive Stages", tertiary: "Learner vs Mentor" },
+          { primary: "4 Staged Pathways", secondary: "Ages 5–7 to 9–12", tertiary: "Evidence Output" },
+          { primary: "Institutional Model", secondary: "5-Step Journey", tertiary: "Facilitator Readiness" },
+          { primary: "Dual Readiness CTA", secondary: "Parent Track", tertiary: "School / Centre Track" },
+        ],
+      },
+      userPersonas: [
+        {
+          name: "Aravind Subramanian",
+          role: "School Principal & Academic Director",
+          oneLiner: "“We need innovation in our science labs that translates to conceptual clarity and measurable thinking, not toy room chaos.”",
+          context: "Leading a premier K-12 CBSE institution in Chennai; looking for structured enrichment aligned with experiential learning mandates.",
+          goals: [
+            "Elevate students from rote exam memorization to applied engineering capability",
+            "Provide verifiable documentation that demonstrates learning outcomes to parents",
+            "Equip science faculty with structured session rubrics without adding teaching overhead",
+          ],
+          pains: [
+            "One-off robotics workshops leave zero lasting conceptual retention",
+            "Teachers lack time to design hands-on physics challenges from scratch",
+            "Generic commercial kits end up neglected in storage closets after one term",
+          ],
+        },
+        {
+          name: "Meera & Rajesh K.",
+          role: "Parents of Grade 7 Student",
+          oneLiner: "“We want our child to think independently, solve real problems, and have confidence beyond test marks.”",
+          context: "Tech-industry parents looking for meaningful after-school enrichment for their 12-year-old.",
+          goals: [
+            "Cultivate patience, spatial reasoning, and real-world problem-solving grit",
+            "See transparent proof of what concepts their child actually understood and built",
+            "Prepare their child for future engineering, technology, and AI disciplines",
+          ],
+          pains: [
+            "Overwhelmed by gamified apps that pretend to teach coding without real depth",
+            "Frustrated by the total lack of feedback from typical weekend tuition classes",
+            "Too much passive screen time with zero tactile creative output",
+          ],
+        },
+      ],
+      journeyMap: [
+        {
+          stage: "01. Institutional Discovery",
+          userGoal: "Find an authentic STEM programme that connects to syllabus physics/math",
+          painPoint: "Market is flooded with shallow hobby kits that lack academic rigor",
+          uxIntervention: "Showcased the 7-Move Build Loop and curriculum-aligned progression matrix on makeon.build",
+          impact: "Instant academic credibility with principals and educational coordinators",
+        },
+        {
+          stage: "02. Studio Session (The Build)",
+          userGoal: "Learners actively engineer a physical prototype under realistic constraints",
+          painPoint: "Students get frustrated early or expect mentors to give immediate answers",
+          uxIntervention: "Implemented the 'Debug: Protect the Struggle' protocol with prompt-based mentor guidance",
+          impact: "Learners develop real problem-solving resilience and ownership of their build",
+        },
+        {
+          stage: "03. Evidence & Documentation",
+          userGoal: "Record design choices, failure points, and iterative improvements",
+          painPoint: "Parents only see finished models without understanding the learning journey",
+          uxIntervention: "Created standardized Builder Portfolio notebooks, concept maps, and explain-back circles",
+          impact: "Parents see tangible proof of thinking; 94% parent satisfaction across pilot cohorts",
+        },
+        {
+          stage: "04. Institutional Rollout",
+          userGoal: "Scale Makeon as a repeatable weekly lab without burdening existing faculty",
+          painPoint: "Complex teacher training and ambiguous material logistics stall adoption",
+          uxIntervention: "Engineered the 5-Step Institution Studio adoption roadmap with complete facilitator kits",
+          impact: "Partner centres integrate Makeon into regular timetables with zero friction",
+        },
+        {
+          stage: "05. AI-Augmented Studio",
+          userGoal: "Empower mentors with real-time diagnostic insights and personalized feedback",
+          painPoint: "One facilitator cannot supervise 20 unique hardware failure states simultaneously",
+          uxIntervention: "Designing AI Mentor Co-Pilot and Multimodal Vision Build-Diagnostic Agents",
+          impact: "Multiplies mentor capacity and delivers real-time individualized Socratic inquiry prompts",
+        },
+      ],
+      swot: {
+        strengths: [
+          "Proprietary 7-Move Build Loop grounded in engineering methodology and cognitive science",
+          "Dual-intent web platform with high-converting institutional and parent inquiry pathways",
+          "Complete portfolio evidence system turning physical builds into demonstrable capability",
+          "Geist Design System providing surgical technical precision and authority",
+        ],
+        weaknesses: [
+          "Requires physical studio space and curated material inventory management",
+          "Strict facilitator quality bar requires structured orientation before deployment",
+        ],
+        opportunities: [
+          "Integrating Multimodal AI Agents for real-time hardware debugging and build diagnostics",
+          "Expansion into 50+ private schools and after-school enrichment centres across South India",
+          "Interactive 3D Digital Twin simulation platform accompanying physical build kits",
+        ],
+        threats: [
+          "Fragmented low-cost hobby kit competitors with flashy superficial marketing",
+          "Institutional inertia in traditional exam-centric schooling systems",
+        ],
+      },
+      informationArchitecture: [
+        {
+          node: "Makeon Brand & Manifesto",
+          children: ["Who We Are", "Core Values", "Educational Philosophy", "Ecosystem Partners"],
+        },
+        {
+          node: "The Build Loop Engine",
+          children: ["Arrival (00)", "Discover (01)", "Design (02)", "Develop (03)", "Debug (04)", "Demo (05)", "Document (06)"],
+        },
+        {
+          node: "Learning Pathways",
+          children: ["Foundation Studio (Ages 5–7)", "Builder Programme (Grades 6–8)", "Applied Engineering (Grades 9–12)", "Institution Studio (Schools/Centres)"],
+        },
+        {
+          node: "Evidence & Outcomes",
+          children: ["Build Records", "Concept Maps", "Prototype Verification", "Portfolio Certificates", "Explain-Back Circles"],
+        },
+        {
+          node: "Institutional Adoption",
+          children: ["5-Step Readiness Journey", "Facilitator Preparation", "Material Planning", "Parent Communication"],
+        },
+        {
+          node: "Readiness Assessment CTA",
+          children: ["Parent Intent Form", "School/Centre Conversion Matrix", "Direct Leadership Contact"],
+        },
+      ],
+      designSystem: {
+        blurb:
+          "Technical precision meets educational authority. Makeon's design system was crafted to feel like an advanced engineering workspace—dark technical slate, high-contrast monospace metadata, flame-red accents, and surgical typography powered by Vercel's Geist & Geist Mono.",
+        colors: [
+          { name: "Studio Charcoal", hex: "#08090B", use: "Primary canvas & backdrop — deep, distractionless studio floor" },
+          { name: "Engine Slate", hex: "#1E293B", use: "Borders, grid separators, blueprint cards & interactive containers" },
+          { name: "Flame Red", hex: "#FF2A2A", use: "Active stages, brand square, focal callouts & high-priority CTAs" },
+          { name: "Bright White", hex: "#F8FAFC", use: "Primary headlines, display metrics & crisp technical callouts" },
+          { name: "Blueprint Slate", hex: "#94A3B8", use: "Editorial body copy, secondary explanations & role descriptions" },
+          { name: "Signal Green", hex: "#4ADE80", use: "Verified build records, successful test markers & outcome milestones" },
+        ],
+        type: [
+          { role: "Primary Headlines / Display", family: "Geist Sans (Weights 700-900)", note: "Ultra-clean geometric sans for high-impact titles and manifesto statements" },
+          { role: "Metadata / Stage Indices / Labels", family: "Geist Mono (Weight 600)", note: "Monospace tracking for stage numbers (00–06), technical overlines, and labels" },
+          { role: "Editorial Body & Role Copy", family: "Geist Sans (Weights 400-500)", note: "Highly legible text engine optimized for dense educational explanations" },
+        ],
+        components: [
+          "7-Beat Loop Stage Controller", "Dual-Role Copy Panel (Learner vs Mentor)", "Programme Progression Matrix Card", "Evidence Portfolio Mockup Stack", "Dual-Audience Conversion Switcher", "Institutional 5-Step Timeline", "Resource Brief Card", "Blueprint Metric Tile",
+        ],
+        principles: [
+          "Technical Rigor Over Playroom Clutter — The interface treats children as serious future builders, not passive consumers of cartoonish UI",
+          "Monospace Truth — Numbers, steps, timestamps, and stage indexes are rendered in Geist Mono to reinforce systematic engineering discipline",
+          "Evidence-First Hierarchy — Every visual component supports verifiable learning outcomes, build records, and parent confidence",
+        ],
+      },
+      uxOutcomeViz: {
+        title: "Ecosystem Impact Scorecard",
+        blurb: "Evaluation across 5 core operational and pedagogical dimensions (1–10 scale).",
+        style: "bars",
+        items: [
+          { label: "Pedagogical Clarity (Build Loop)", value: 10 },
+          { label: "Dual-Audience Conversion Quality", value: 9 },
+          { label: "Design System Authority (Geist)", value: 10 },
+          { label: "Institutional Trust & Evidence", value: 9 },
+          { label: "Web Performance (Vite RSC)", value: 10 },
+        ],
+      },
+    },
+    processSteps: [
+      {
+        step: "01",
+        title: "Pedagogical Discovery & Problem Framing",
+        content:
+          "Conducted fieldwork across Chennai learning centres and private schools to analyze why traditional STEM fails. We discovered that children memorized formulas but could not diagnose physical mechanism failures. I framed Makeon's core mission: transforming passive students into confident builders through a repeatable session architecture.",
+        uxMethods: ["Classroom Observation", "Stakeholder Interviews", "Pedagogical Gap Analysis", "User Journey Mapping"],
+        outcome:
+          "Defined the core value proposition: 'Capability grows when knowledge is used'—moving from toy kits to systematic engineering.",
+        imageSlots: ["Classroom observation notes", "Pedagogical gap analysis chart"],
+      },
+      {
+        step: "02",
+        title: "Architecting the 7-Move Build Loop",
+        content:
+          "Designed the structural rhythm of every Makeon session into seven non-negotiable moves (Arrival, Discover, Design, Develop, Debug, Demo, Document). Explicitly separated the 'Learner' and 'Mentor' behavioral roles at each stage to ensure facilitators guide inquiry without taking over the physical build.",
+        uxMethods: ["Interaction Modeling", "Role Definition Matrix", "Behavioral Blueprinting", "Instructional Design"],
+        outcome:
+          "Created a standardized teaching protocol that ensures consistent educational quality across diverse facilitators and learning centres.",
+        imageSlots: ["Build Loop stage matrix", "Learner vs Mentor interaction blueprint"],
+      },
+      {
+        step: "03",
+        title: "Blueprint Design System & Web Architecture",
+        content:
+          "Developed the full visual design system and built the production website using Vite + React Server Components (RSC). Crafted a technical aesthetic using Geist and Geist Mono, high-contrast monospace metadata, and implemented the split readiness assessment form separating parent and institutional leads.",
+        uxMethods: ["Design Systems", "Conversion Rate Optimization (CRO)", "Responsive Prototyping", "Frontend Engineering"],
+        outcome:
+          "Shipped makeon.build with instantaneous performance, high institutional trust, and streamlined conversion pathways for schools and parents.",
+        imageSlots: ["Geist component library", "Desktop & mobile responsive layouts", "Dual conversion funnel"],
+      },
+    ],
   },
 ];
 

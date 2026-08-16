@@ -34,6 +34,17 @@ export type GraphicDesignBusinessCardPair = {
   };
 };
 
+export type GraphicDesignStatItem = {
+  label: string;
+  value: string;
+};
+
+export type GraphicDesignPackagingImage = {
+  src: string;
+  alt: string;
+  label?: string;
+};
+
 export type GraphicDesignPosterProject = {
   id: string;
   projectLabel: string;
@@ -51,4 +62,10 @@ export type GraphicDesignPosterProject = {
   thirdPanel?: GraphicDesignThirdPanel;
   /** Optional: second row within the same project (e.g. business cards). */
   businessCardPair?: GraphicDesignBusinessCardPair;
+  /** Optional: packaging / product images (4-up grid — used by IR Stunner). */
+  packagingImages?: GraphicDesignPackagingImage[];
+  /** Optional: marketing & sales impact stats shown below packaging. */
+  marketingStats?: GraphicDesignStatItem[];
+  /** When true, the beforeAfter image block is hidden (project has no before/after — only packaging). */
+  hideImageBlock?: boolean;
 };
