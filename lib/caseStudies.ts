@@ -1243,16 +1243,16 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: "https://makeon.build",
     introGallery: [
       {
-        src: "/case-studies/makeon/student-studio-wide.png",
-        alt: "Students working collaboratively at a Makeon studio bench",
+        src: "/case-studies/makeon/makeon-hero-desktop.png",
+        alt: "Makeon live website desktop hero experience",
       },
       {
-        src: "/case-studies/makeon/student-bridge-studio.png",
-        alt: "Hands-on prototype engineering and load testing in Makeon studio",
+        src: "/case-studies/makeon/makeon-build-loop.png",
+        alt: "The 7-Move Build Loop methodology section on makeon.build",
       },
       {
-        src: "/case-studies/makeon/student-mentor-evidence.png",
-        alt: "Learner and mentor reviewing verified build documentation and evidence",
+        src: "/case-studies/makeon/makeon-programmes.png",
+        alt: "Makeon 4-staged learning pathways on makeon.build",
       },
     ],
     subtitle: "India’s Builder-Learning Ecosystem: Structured STEM through Physical Making, Evidence & Visible Confidence",

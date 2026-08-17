@@ -38,7 +38,7 @@ function IntroGallerySection({ study }: { study: CaseStudy }) {
               src={left.src}
               alt={left.alt}
               fill
-              className="object-contain object-top"
+              className="object-cover object-top"
               sizes="(max-width: 640px) 52vw, 32vw"
             />
           </figure>
@@ -47,7 +47,7 @@ function IntroGallerySection({ study }: { study: CaseStudy }) {
               src={center.src}
               alt={center.alt}
               fill
-              className="object-contain object-top"
+              className="object-cover object-top"
               sizes="(max-width: 640px) 85vw, 52vw"
               priority
             />
@@ -59,7 +59,7 @@ function IntroGallerySection({ study }: { study: CaseStudy }) {
               src={right.src}
               alt={right.alt}
               fill
-              className="object-contain object-top"
+              className="object-cover object-top"
               sizes="(max-width: 640px) 52vw, 32vw"
             />
           </figure>
@@ -763,7 +763,7 @@ function CaseStudyArticle({
           </div>
         </section>
 
-        {study.slug !== "parla-show-and-sell" && study.slug !== "ezra-mentor-dashboard" && study.imageSlots.length ? (
+        {study.slug !== "parla-show-and-sell" && study.slug !== "ezra-mentor-dashboard" && study.slug !== "makeon-builder-ecosystem" && study.imageSlots.length ? (
           <CaseStudyScrollReveal>
             <section className="mt-10 border border-[#1e293b] bg-[#0c1014] p-4 sm:p-6">
               <h2 className={SECTION_H2}>Image slots (draft)</h2>

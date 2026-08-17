@@ -150,32 +150,32 @@ export default function CaseStudyMakeonShowcase() {
             <div className="relative overflow-hidden border border-[#1e293b] bg-[#0c1014]">
               <div className="relative aspect-[16/10] w-full">
                 <Image
-                  src="/case-studies/makeon/student-bridge-studio.png"
-                  alt="Students testing a handmade bridge prototype under real load in Makeon studio"
+                  src="/case-studies/makeon/makeon-hero.png"
+                  alt="Makeon web platform hero and manifesto interface"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className="border-t border-[#1e293b] p-3.5">
-                <p className="text-[9px] font-mono uppercase tracking-[0.14em] text-[#FF7410]">Studio In Action</p>
-                <p className="mt-1 text-[12px] text-[#cbd5e1]">Testing physical truss deflection &amp; load thresholds in real-time.</p>
+                <p className="text-[9px] font-mono uppercase tracking-[0.14em] text-[#FF7410]">Live Web Platform</p>
+                <p className="mt-1 text-[12px] text-[#cbd5e1]">Server-rendered Vite RSC architecture with sub-second performance.</p>
               </div>
             </div>
 
             <div className="relative overflow-hidden border border-[#1e293b] bg-[#0c1014]">
               <div className="relative aspect-[16/10] w-full">
                 <Image
-                  src="/case-studies/makeon/student-mentor-evidence.png"
-                  alt="Student and mentor reviewing sketches, formulas, and verified build records"
+                  src="/case-studies/makeon/makeon-conversion.png"
+                  alt="Makeon dual-audience institutional conversion and parent assessment form"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className="border-t border-[#1e293b] p-3.5">
-                <p className="text-[9px] font-mono uppercase tracking-[0.14em] text-[#FF7410]">Evidence Verification</p>
-                <p className="mt-1 text-[12px] text-[#cbd5e1]">Turning hands-on iterations into verifiable learner portfolio artifacts.</p>
+                <p className="text-[9px] font-mono uppercase tracking-[0.14em] text-[#FF7410]">Dual Conversion Funnel</p>
+                <p className="mt-1 text-[12px] text-[#cbd5e1]">Bifurcated lead capture separating school leadership from parent inquiries.</p>
               </div>
             </div>
           </div>
