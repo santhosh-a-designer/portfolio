@@ -15,6 +15,7 @@ import CaseStudyVideoShowcase from "@/components/CaseStudyVideoShowcase";
 import CustomerSchedulerStory from "@/components/CustomerSchedulerStory";
 import PageEntryAnimation from "@/components/PageEntryAnimation";
 import CaseStudyMakeonShowcase from "@/components/CaseStudyMakeonShowcase";
+import CaseStudyLaptopMockup from "@/components/CaseStudyLaptopMockup";
 
 const SECTION_H2 = "text-[12px] font-mono uppercase tracking-[0.2em] text-[#FF7410]";
 
@@ -25,6 +26,20 @@ type PageProps = {
 function IntroGallerySection({ study }: { study: CaseStudy }) {
   const items = study.introGallery;
   if (!items?.length) return null;
+
+  if (items.length === 1) {
+    const single = items[0]!;
+    return (
+      <div className="-mt-4 mb-6 w-full min-w-0" aria-label="Case study desktop preview">
+        <CaseStudyLaptopMockup
+          src={single.src}
+          alt={single.alt}
+          url={study.liveUrl ?? "https://makeon.build"}
+          priority
+        />
+      </div>
+    );
+  }
 
   if (items.length === 3) {
     const [center, left, right] = [items[0]!, items[1]!, items[2]!];

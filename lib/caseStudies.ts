@@ -1244,15 +1244,7 @@ export const caseStudies: CaseStudy[] = [
     introGallery: [
       {
         src: "/case-studies/makeon/makeon-hero-desktop.png",
-        alt: "Makeon live website desktop hero experience",
-      },
-      {
-        src: "/case-studies/makeon/makeon-build-loop.png",
-        alt: "The 7-Move Build Loop methodology section on makeon.build",
-      },
-      {
-        src: "/case-studies/makeon/makeon-programmes.png",
-        alt: "Makeon 4-staged learning pathways on makeon.build",
+        alt: "Makeon Builder-Learning Ecosystem — live desktop website preview",
       },
     ],
     subtitle: "India’s Builder-Learning Ecosystem: Structured STEM through Physical Making, Evidence & Visible Confidence",
