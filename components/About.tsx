@@ -9,19 +9,35 @@ import {
 const timeline = [
   {
     year: "Oct 2025 – Present",
-    role: "Freelance UX Designer & Dev",
-    company: "Independent",
+    role: "Head of Product Design & AI",
+    company: "Commerce Agents",
     color: "#FF7410",
     current: true,
-    expertise: ["Product Design", "UX Research", "Next.js", "Tailwind CSS", "Framer Motion", "Figma", "MCP / AI Integration", "AI Agent Workflows"],
-    learned: [
-      "Delivering end-to-end UX + frontend for ecommerce, EdTech, and community products",
-      "Handling full lifecycle from client scoping to handoff and deployment",
-      "Using AI-assisted workflows for faster and cleaner production builds",
-      "Balancing design quality with practical, production-ready implementation",
+    expertise: [
+      "AI Agent Interaction Design",
+      "Product Design & Systems",
+      "UX Research & Personas",
+      "Figma",
+      "Next.js & Frontend",
+      "Multimodal Agent Workflows",
     ],
-    clients: ["Independent freelance projects", "Founder-led product teams", "Community-first products"],
-    projects: ["Vidya's Kitchen (PWA)", "Makeon Builder Ecosystem", "Irasus AI Battery Dashboard", "One India ATM App"],
+    learned: [
+      "Leading 0-to-1 product design, user research, and autonomous AI agent interaction models",
+      "Designing multi-agent workflows, human-in-the-loop interfaces, and complex web ecosystems",
+      "Bridging high-level UX strategy with production-ready design systems and frontend code",
+      "Directing end-to-end product delivery across AI, EdTech, and Commerce platforms",
+    ],
+    clients: [
+      "Commerce Agents (Core Team)",
+      "Makeon Learning Ecosystem",
+      "Founder-led AI Ventures",
+    ],
+    projects: [
+      "Commerce Agents AI Studio",
+      "Makeon Builder Ecosystem",
+      "Vidya's Kitchen (PWA)",
+      "Irasus AI Battery Dashboard",
+    ],
     span: "lg:col-span-2 lg:row-span-2",
   },
   {
