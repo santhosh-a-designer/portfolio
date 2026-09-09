@@ -60,20 +60,6 @@ const experiences: ExperienceItem[] = [
     ],
     skills: ["SaaS Design", "Conversion (CRO)", "Information Architecture", "Prototyping", "A/B Testing"],
   },
-  {
-    num: "04",
-    role: "UX MENTOR & LEAD",
-    company: "FITA ACADEMY & PIXEL SOCIETY",
-    period: "2023 – PRESENT",
-    location: "CHENNAI, INDIA",
-    description: "Mentoring 100+ designers in design systems, portfolio craft, and modern AI-augmented frontend development workflows.",
-    highlights: [
-      "Trained 100+ students with 20+ placed in high-growth product teams",
-      "Organized design thinking workshops and community hackathons",
-      "Championed vibe coding and AI-accelerated workflows with Cursor & MCP",
-    ],
-    skills: ["Mentorship", "Design Thinking", "Community", "Vibe Coding", "Workshops"],
-  },
 ];
 
 export default function ExperienceSectionV2() {
@@ -113,7 +99,7 @@ export default function ExperienceSectionV2() {
                 </span>
                 <span className="text-zinc-300">/</span>
                 <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
-                  4 MILESTONES
+                  3 MILESTONES
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-sans mb-3">
@@ -139,20 +125,15 @@ export default function ExperienceSectionV2() {
 
         </div>
 
-        {/* ─── 3-Column Experience Grid: Each Experience in its Own Separate Grid Box ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black border-b-0 bg-white">
-          {experiences.map((exp, idx) => {
+        {/* ─── 3-Column Experience Grid: 3 Clean Grid Boxes ─── */}
+        <div className="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black border-b-0 bg-white">
+          {experiences.map((exp) => {
             const isHighlight = exp.isHighlight;
-            const isLast = idx === experiences.length - 1;
 
             return (
               <div
                 key={exp.num}
-                className={`flex flex-col justify-between p-6 sm:p-8 bg-white hover:bg-zinc-50/70 transition-colors group relative ${
-                  idx > 0 && idx % 3 === 0 ? "lg:border-t-2 lg:border-black" : ""
-                } ${idx >= 2 ? "md:border-t-2 md:border-black" : ""} ${
-                  isLast ? "md:col-span-2 lg:col-span-1" : ""
-                }`}
+                className="flex flex-col justify-between p-6 sm:p-8 bg-white hover:bg-zinc-50/70 transition-colors group relative"
               >
                 {/* Top Number & Period Header */}
                 <div>
