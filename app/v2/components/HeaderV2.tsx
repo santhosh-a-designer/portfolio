@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { DownloadSimple } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
+import ResumeModal from "@/components/ResumeModal";
 
 function NavItem({ label, href }: { label: string; href: string }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -41,6 +42,8 @@ function NavItem({ label, href }: { label: string; href: string }) {
 }
 
 export default function HeaderV2() {
+  const [resumeOpen, setResumeOpen] = useState(false);
+
   const navItems = [
     { label: "WORK", href: "#work" },
     { label: "EXPERIENCE", href: "#experience" },
@@ -51,6 +54,8 @@ export default function HeaderV2() {
 
   return (
     <header className="w-full bg-[#F4F4F0] border-b-2 border-black sticky top-0 z-50">
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
+      
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black flex items-stretch min-h-[56px] md:min-h-[64px] bg-white">
         {/* Logo / Brand Name */}
         <div className="flex items-center px-4 sm:px-6 md:px-8 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors">
@@ -69,11 +74,10 @@ export default function HeaderV2() {
         </nav>
 
         {/* Download Resume - Highlight Button */}
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-between gap-3 px-5 sm:px-7 md:px-8 bg-[#FAED00] border-l-2 md:border-l-0 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-xs md:text-sm tracking-wider uppercase transition-colors ml-auto select-none group"
+        <button
+          type="button"
+          onClick={() => setResumeOpen(true)}
+          className="flex items-center justify-between gap-3 px-5 sm:px-7 md:px-8 bg-[#FAED00] border-l-2 md:border-l-0 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-xs md:text-sm tracking-wider uppercase transition-colors ml-auto select-none group cursor-pointer"
         >
           <span className="leading-tight text-left">
             DOWNLOAD<br />RESUME
@@ -82,7 +86,7 @@ export default function HeaderV2() {
             weight="bold"
             className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
           />
-        </a>
+        </button>
       </div>
 
       {/* Mobile Secondary Navigation Row (for smaller screens) */}

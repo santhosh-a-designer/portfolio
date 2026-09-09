@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { ArrowUpRight, ArrowRight, Plus, Minus } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
+import ResumeModal from "@/components/ResumeModal";
 
 interface ExperienceItem {
   num: string;
@@ -64,6 +65,7 @@ const experiences: ExperienceItem[] = [
 
 export default function ExperienceSectionV2() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [resumeOpen, setResumeOpen] = useState(false);
 
   const toggleExperience = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -71,6 +73,8 @@ export default function ExperienceSectionV2() {
 
   return (
     <section id="experience" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20">
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
+
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">
         
         {/* ─── Top Header Strip: Yellow Stats Box + Track Record Headline & Resume Link ─── */}
@@ -111,15 +115,14 @@ export default function ExperienceSectionV2() {
             </div>
 
             <div className="shrink-0 pt-2 lg:pt-0">
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={() => setResumeOpen(true)}
                 className="inline-flex items-center gap-3 px-6 py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs font-black tracking-widest uppercase select-none group cursor-pointer"
               >
                 <span>VIEW FULL RESUME</span>
                 <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+              </button>
             </div>
           </div>
 
