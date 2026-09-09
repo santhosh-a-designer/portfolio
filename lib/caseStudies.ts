@@ -964,7 +964,7 @@ export const caseStudies: CaseStudy[] = [
     project: "Vidya's Kitchen",
     company: "Home catering · Sivakasi",
     subtitle: "",
-    liveUrl: "https://vidayskitchenhome.com",
+    liveUrl: "https://www.vidyaskitchenhome.com/",
     cinematicIntro: {
       src: "/case-studies/vidyas-kitchen/hero-intro.mov",
       playbackRate: 1.2,

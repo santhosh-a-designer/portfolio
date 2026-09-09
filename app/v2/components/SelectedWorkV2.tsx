@@ -46,7 +46,7 @@ export default function SelectedWorkV2() {
       title: "VIDYA'S KITCHEN",
       category: "PWA / WHATSAPP ORDERING",
       href: "/case-studies/vidyas-kitchen-pwa",
-      liveUrl: "https://vidayskitchenhome.com/",
+      liveUrl: "https://www.vidyaskitchenhome.com/",
       isHighlight: true,
       image: "/case-studies/vidyas-kitchen/VK-M-1.png",
       mockupType: "forma",
@@ -106,11 +106,6 @@ export default function SelectedWorkV2() {
                 </div>
               ))}
             </motion.div>
-          </div>
-
-          {/* Right End Indicator Dot */}
-          <div className="px-5 sm:px-7 h-full flex items-center justify-center shrink-0 border-l-2 border-black bg-white z-10">
-            <div className="w-3.5 h-3.5 rounded-full bg-black shrink-0" />
           </div>
 
         </div>
