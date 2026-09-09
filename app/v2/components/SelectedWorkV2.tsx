@@ -73,7 +73,7 @@ export default function SelectedWorkV2() {
           {/* Static Title Label with Separator */}
           <div className="px-5 sm:px-8 md:px-10 h-full flex items-center shrink-0 border-r-2 border-black bg-white z-10 select-none">
             <span className="text-xs sm:text-sm md:text-base font-black uppercase tracking-wider text-black whitespace-nowrap">
-              CLIENTS & WORK
+              CLIENTS & COMPANIES
             </span>
           </div>
 
