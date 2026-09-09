@@ -87,42 +87,49 @@ export default function ExperienceSectionV2() {
     <section id="experience" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20">
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">
         
-        {/* ─── 4-Column Layout Matching Reference Exactly ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-12 border-b-0 bg-white">
+        {/* ─── Top Header Strip: Yellow Stats Box + Track Record Headline & Resume Link ─── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 border-b-2 border-black bg-white">
           
-          {/* Column 1: Yellow Block with Geometric Brutalist Badge / Icon */}
-          <div className="md:col-span-3 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 md:p-10 flex flex-col items-center justify-center min-h-[220px] md:min-h-[320px]">
-            <div className="flex flex-col items-center justify-center text-center">
-              <span className="text-5xl sm:text-6xl md:text-7xl font-black font-mono tracking-tighter text-black leading-none mb-2">
-                04+
-              </span>
-              <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-black font-mono">
-                YEARS EXP.
-              </span>
-              <div className="w-12 h-1 bg-black mt-3 mb-2" />
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-black/80">
-                PROVEN IMPACT
-              </span>
-            </div>
+          {/* Left Block: Yellow 04+ Years Exp */}
+          <div className="md:col-span-4 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 flex flex-col items-center justify-center text-center select-none">
+            <span className="text-5xl sm:text-6xl font-black font-mono tracking-tighter text-black leading-none mb-1">
+              04+
+            </span>
+            <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-black font-mono">
+              YEARS EXP.
+            </span>
+            <div className="w-12 h-1 bg-black mt-2.5 mb-1.5" />
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-black/80">
+              PROVEN IMPACT
+            </span>
           </div>
 
-          {/* Column 2: "TRACK RECORD." + Summary + "VIEW FULL RESUME ↗" */}
-          <div className="md:col-span-4 lg:col-span-4 p-6 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-black bg-white">
-            <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-black leading-[0.95] font-sans mb-6">
-                TRACK<br />RECORD.
+          {/* Middle & Right Block: Track Record Statement + View Resume */}
+          <div className="md:col-span-8 lg:col-span-9 p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 bg-white">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#FF462D]">
+                  CAREER &amp; TRACK RECORD
+                </span>
+                <span className="text-zinc-300">/</span>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
+                  4 MILESTONES
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-sans mb-3">
+                TRACK RECORD.
               </h2>
-              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black leading-relaxed max-w-sm mb-6">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-700 leading-relaxed">
                 FROM 0-TO-1 VENTURES TO GLOBAL ENTERPRISES. BUILDING SCALABLE DESIGN SYSTEMS, DIGITAL PLATFORMS, AND INTELLIGENT AI EXPERIENCES.
               </p>
             </div>
 
-            <div>
+            <div className="shrink-0 pt-2 lg:pt-0">
               <a
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group"
+                className="inline-flex items-center gap-3 px-6 py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs font-black tracking-widest uppercase select-none group cursor-pointer"
               >
                 <span>VIEW FULL RESUME</span>
                 <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -130,107 +137,93 @@ export default function ExperienceSectionV2() {
             </div>
           </div>
 
-          {/* Column 3: Narrow Vertical "EXPERIENCE →" Divider */}
-          <div className="md:col-span-1 lg:col-span-1 hidden md:flex flex-col items-center justify-between py-8 px-1 border-r-2 border-black bg-white select-none">
-            <span className="text-[11px] font-black tracking-[0.25em] uppercase text-black rotate-90 origin-center whitespace-nowrap mt-10">
-              EXPERIENCE
-            </span>
-            <ArrowRight weight="bold" className="w-5 h-5 text-black mb-6" />
-          </div>
+        </div>
 
-          {/* Column 4: 4 Experience Accordion Rows */}
-          <div className="md:col-span-4 lg:col-span-4 flex flex-col divide-y-2 divide-black bg-white">
-            {experiences.map((exp, idx) => {
-              const isOpen = openIndex === idx;
-              const isHighlight = exp.isHighlight;
+        {/* ─── 3-Column Experience Grid: Each Experience in its Own Separate Grid Box ─── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black border-b-0 bg-white">
+          {experiences.map((exp, idx) => {
+            const isHighlight = exp.isHighlight;
+            const isLast = idx === experiences.length - 1;
 
-              return (
-                <div key={exp.num} className="flex flex-col">
-                  <button
-                    type="button"
-                    onClick={() => toggleExperience(idx)}
-                    className="w-full px-5 py-5 sm:px-6 sm:py-6 flex items-center justify-between bg-white hover:bg-zinc-50 transition-colors text-left group min-h-[70px] sm:min-h-[80px] cursor-pointer"
-                  >
-                    <div className="flex items-center gap-5 sm:gap-6 min-w-0 pr-2">
-                      <span className="text-xs sm:text-sm font-black tracking-wider text-black font-mono select-none shrink-0">
-                        {exp.num}
+            return (
+              <div
+                key={exp.num}
+                className={`flex flex-col justify-between p-6 sm:p-8 bg-white hover:bg-zinc-50/70 transition-colors group relative ${
+                  idx > 0 && idx % 3 === 0 ? "lg:border-t-2 lg:border-black" : ""
+                } ${idx >= 2 ? "md:border-t-2 md:border-black" : ""} ${
+                  isLast ? "md:col-span-2 lg:col-span-1" : ""
+                }`}
+              >
+                {/* Top Number & Period Header */}
+                <div>
+                  <div className="flex items-center justify-between gap-4 pb-4 mb-5 border-b-2 border-black">
+                    <span className="text-3xl sm:text-4xl font-black font-mono tracking-tighter text-black">
+                      {exp.num}
+                    </span>
+                    <div className="flex flex-col items-end text-right">
+                      <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-wider text-black">
+                        {exp.period}
                       </span>
-                      <div className="flex flex-col min-w-0">
-                        <span
-                          className={`text-xs sm:text-sm font-black uppercase tracking-tight truncate transition-colors ${
-                            isHighlight ? "text-[#FF462D]" : "text-black group-hover:text-[#FF462D]"
-                          }`}
-                        >
-                          {exp.role}
-                        </span>
-                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 truncate">
-                          {exp.company} · {exp.period}
-                        </span>
-                      </div>
+                      <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
+                        {exp.location}
+                      </span>
                     </div>
+                  </div>
 
-                    <div
-                      className={`w-6 h-6 flex items-center justify-center shrink-0 transition-colors ${
+                  {/* Role Title & Company */}
+                  <div className="mb-4">
+                    <h3
+                      className={`text-base sm:text-lg font-black uppercase tracking-tight leading-snug mb-1 transition-colors ${
                         isHighlight ? "text-[#FF462D]" : "text-black group-hover:text-[#FF462D]"
                       }`}
                     >
-                      {isOpen ? (
-                        <Minus weight="bold" className="w-4 h-4 sm:w-5 sm:h-5" />
-                      ) : (
-                        <Plus weight="bold" className="w-4 h-4 sm:w-5 sm:h-5" />
-                      )}
-                    </div>
-                  </button>
+                      {exp.role}
+                    </h3>
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-600 block">
+                      {exp.company}
+                    </span>
+                  </div>
 
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden bg-[#fafafa] border-t-2 border-black"
-                      >
-                        <div className="p-5 sm:p-6 flex flex-col gap-4 text-black">
-                          <p className="text-xs sm:text-sm font-bold uppercase tracking-wide text-zinc-800 leading-relaxed">
-                            {exp.description}
-                          </p>
+                  {/* Description */}
+                  <p className="text-xs font-bold uppercase tracking-wide text-zinc-800 leading-relaxed mb-6">
+                    {exp.description}
+                  </p>
 
-                          {/* Key achievements */}
-                          <div className="space-y-2 pt-2 border-t border-zinc-200">
-                            <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500 block">
-                              KEY ACHIEVEMENTS
-                            </span>
-                            <ul className="space-y-1.5">
-                              {exp.highlights.map((h, i) => (
-                                <li key={i} className="text-xs font-semibold text-zinc-700 flex items-start gap-2">
-                                  <span className="text-[#FF462D] font-bold mt-0.5">●</span>
-                                  <span>{h}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-
-                          {/* Skills tags */}
-                          <div className="pt-2 flex flex-wrap gap-1.5">
-                            {exp.skills.map((s) => (
-                              <span
-                                key={s}
-                                className="text-[10px] font-mono font-bold px-2 py-0.5 bg-white border border-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                              >
-                                {s}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {/* Key Achievements Bullet Points */}
+                  <div className="space-y-2.5 pt-4 border-t-2 border-black/10 mb-6">
+                    <span className="text-[9px] font-mono font-black uppercase tracking-widest text-zinc-500 block">
+                      KEY ACHIEVEMENTS
+                    </span>
+                    <ul className="space-y-2">
+                      {exp.highlights.map((h, i) => (
+                        <li key={i} className="text-xs font-medium text-zinc-800 flex items-start gap-2 leading-snug">
+                          <span className="text-[#FF462D] font-bold text-sm leading-none mt-0.5">■</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              );
-            })}
-          </div>
 
+                {/* Skills Tags Bottom Row */}
+                <div className="pt-4 border-t-2 border-black/10 mt-auto">
+                  <span className="text-[9px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-2">
+                    CORE EXPERTISE
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {exp.skills.map((s) => (
+                      <span
+                        key={s}
+                        className="text-[10px] font-mono font-bold px-2 py-1 bg-white border border-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:border-[#FF462D] transition-colors"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
       </div>
