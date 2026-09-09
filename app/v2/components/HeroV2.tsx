@@ -1,11 +1,48 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowUpRight, MapPin } from "@phosphor-icons/react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+const aboutSlides = [
+  {
+    category: "ABOUT & CRAFT",
+    headline: "CRAFTING INTUITIVE DIGITAL PRODUCTS & INTERACTIVE SYSTEMS.",
+    detail: "FOCUSED ON CONVERSION-LED PRODUCTS, PRACTICAL UX ARCHITECTURE & CLEAN HANDOFFS.",
+  },
+  {
+    category: "01 · CURRENT LEADERSHIP",
+    headline: "HEAD OF PRODUCT DESIGN & AI AT COMMERCE AGENTS.",
+    detail: "DIRECTING 0-TO-1 MULTI-AGENT INTERACTION MODELS & ENTERPRISE WEB ECOSYSTEMS.",
+  },
+  {
+    category: "02 · FEATURED CLIENTS",
+    headline: "NEBRASKA FURNITURE MART · PARLA (UK) · URBAN COMPANY.",
+    detail: "SERVED CLIENTS ACROSS US, UK & INDIA MARKETS ON MISSION-CRITICAL PLATFORMS.",
+  },
+  {
+    category: "03 · SHIPPED PRODUCTS",
+    headline: "SHOW & SELL · VIDYA'S KITCHEN · MAKEON BUILDER.",
+    detail: "FROM ENTERPRISE SCHEDULERS & PWAS TO INTERACTIVE STEM LEARNING APPS.",
+  },
+  {
+    category: "04 · CORE TOOLKIT",
+    headline: "FIGMA · NEXT.JS · TYPESCRIPT · TAILWIND · AI WORKFLOWS.",
+    detail: "BRIDGING PRODUCT DESIGN, RESEARCH & PRODUCTION-READY CODE AS A VIBE CODER.",
+  },
+];
 
 export default function HeroV2() {
+  const [currentAboutIdx, setCurrentAboutIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentAboutIdx((prev) => (prev + 1) % aboutSlides.length);
+    }, 4200);
+    return () => clearInterval(timer);
+  }, []);
+
   const stats = [
     { value: "5+", label: "Years" },
     { value: "US · UK", label: "Clients" },
@@ -65,12 +102,43 @@ export default function HeroV2() {
             
             <div className="flex items-stretch border-b-2 lg:border-b-0 border-black bg-white min-h-[140px] h-full">
               
-              {/* Text statement */}
-              <div className="flex-1 p-6 sm:p-8 md:p-10 flex flex-col justify-center">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#FF462D] mb-2">ABOUT &amp; CRAFT</span>
-                <p className="text-sm sm:text-base md:text-lg font-black uppercase tracking-tight text-black leading-snug">
-                  CRAFTING INTUITIVE DIGITAL PRODUCTS, SCALABLE DESIGN SYSTEMS &amp; INTERACTIVE EXPERIENCES THAT DRIVE REAL CONVERSIONS.
-                </p>
+              {/* Text statement with sequential animated transitions */}
+              <div className="flex-1 p-6 sm:p-8 md:p-10 flex flex-col justify-center overflow-hidden">
+                <div className="flex items-center justify-between gap-2 mb-2.5">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-[#FF462D]">
+                    {aboutSlides[currentAboutIdx].category}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    {aboutSlides.map((_, i) => (
+                      <span
+                        key={i}
+                        className={`h-1.5 transition-all duration-300 ${
+                          i === currentAboutIdx ? "w-4 bg-[#FF462D]" : "w-1.5 bg-black/20"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="relative min-h-[96px] sm:min-h-[105px] flex items-center">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentAboutIdx}
+                      initial={{ opacity: 0, y: 14 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -14 }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className="w-full flex flex-col justify-center"
+                    >
+                      <h2 className="text-sm sm:text-base md:text-[17px] font-black uppercase tracking-tight text-black leading-snug mb-1.5">
+                        {aboutSlides[currentAboutIdx].headline}
+                      </h2>
+                      <p className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-zinc-600 leading-normal">
+                        {aboutSlides[currentAboutIdx].detail}
+                      </p>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
               </div>
 
               {/* Right icon & status column */}
