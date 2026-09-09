@@ -45,16 +45,16 @@ export default function HeroV2() {
               </div>
             </div>
 
-            {/* View Work Action Box */}
+            {/* View Work Action Box with Yellow Offset Drop-Shadow matching Send Brief style */}
             <div className="pt-2">
               <Link
                 href="#work"
-                className="inline-flex items-center justify-between gap-6 px-6 py-3.5 border-2 border-black bg-white hover:bg-black hover:text-white transition-colors text-xs sm:text-sm font-black tracking-wider uppercase select-none group min-w-[200px]"
+                className="inline-flex items-center justify-between gap-6 px-8 py-4 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[6px_6px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1.5 hover:translate-y-1.5 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group min-w-[210px] cursor-pointer"
               >
                 <span>VIEW WORK</span>
                 <ArrowUpRight
                   weight="bold"
-                  className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                  className="w-4 h-4 text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                 />
               </Link>
             </div>

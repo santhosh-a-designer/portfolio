@@ -1,6 +1,44 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import { DownloadSimple } from "@phosphor-icons/react/dist/ssr";
+import { DownloadSimple } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
+
+function NavItem({ label, href }: { label: string; href: string }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <Link
+      href={href}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative flex-1 flex items-center justify-center px-3 lg:px-6 border-r-2 border-black text-xs md:text-sm font-black tracking-wider uppercase bg-white select-none text-center overflow-hidden group cursor-pointer"
+    >
+      {/* Background slide-fill that reveals automatically on hover/drag */}
+      <motion.div
+        className="absolute inset-0 bg-black pointer-events-none origin-left z-0"
+        initial={{ scaleX: 0 }}
+        animate={{
+          scaleX: isHovered ? 1 : 0,
+        }}
+        transition={{
+          duration: 0.38,
+          ease: [0.25, 1, 0.5, 1], // fluid cubic-bezier easing for smooth slide-fill
+        }}
+      />
+
+      {/* Text layer with smooth color transition */}
+      <span
+        className={`relative z-10 transition-colors duration-300 ease-out ${
+          isHovered ? "text-white" : "text-black"
+        }`}
+      >
+        {label}
+      </span>
+    </Link>
+  );
+}
 
 export default function HeaderV2() {
   const navItems = [
@@ -23,16 +61,10 @@ export default function HeaderV2() {
           </Link>
         </div>
 
-        {/* Navigation Items */}
+        {/* Navigation Items with Slide-Fill Interaction */}
         <nav className="hidden md:flex items-stretch flex-1">
           {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="flex-1 flex items-center justify-center px-3 lg:px-6 border-r-2 border-black text-xs md:text-sm font-black tracking-wider uppercase text-black bg-white hover:bg-black hover:text-white transition-colors select-none text-center"
-            >
-              {item.label}
-            </Link>
+            <NavItem key={item.label} label={item.label} href={item.href} />
           ))}
         </nav>
 

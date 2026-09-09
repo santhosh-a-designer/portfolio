@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, ArrowRight, ArrowDown } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
 
 interface ProjectItem {
   id: string;
@@ -11,10 +12,20 @@ interface ProjectItem {
   title: string;
   category: string;
   href: string;
+  liveUrl?: string;
   isHighlight?: boolean;
   image?: string;
   mockupType: "parla" | "ezra" | "forma";
 }
+
+const clientLogos = [
+  { name: "Makeon", src: "/clients/makeon-norm.png", widthClass: "w-36 sm:w-44 md:w-48", heightClass: "h-8 sm:h-9 md:h-10" },
+  { name: "Parla", src: "/clients/parla-norm.png", widthClass: "w-36 sm:w-44 md:w-50", heightClass: "h-7 sm:h-8 md:h-9" },
+  { name: "Nebraska Furniture Mart", src: "/clients/nfm-norm.png", widthClass: "w-36 sm:w-44 md:w-48", heightClass: "h-9 sm:h-10 md:h-12" },
+  { name: "iRasus", src: "/clients/irasus-norm.png", widthClass: "w-36 sm:w-44 md:w-48", heightClass: "h-9 sm:h-10 md:h-12" },
+  { name: "Intellemo", src: "/clients/intellemo-full.png", widthClass: "w-36 sm:w-44 md:w-48", heightClass: "h-9 sm:h-10 md:h-12" },
+  { name: "We Two Pets", src: "/clients/wetwopets-norm.png", widthClass: "w-28 sm:w-34 md:w-38", heightClass: "h-9 sm:h-10 md:h-12" },
+];
 
 export default function SelectedWorkV2() {
   const [activeItem, setActiveItem] = useState<string>("02");
@@ -32,12 +43,13 @@ export default function SelectedWorkV2() {
     {
       id: "02",
       num: "02",
-      title: "EZRA DASHBOARD",
-      category: "EDTECH / AUTOMATION",
-      href: "/case-studies/ezra-mentor-dashboard",
+      title: "VIDYA'S KITCHEN",
+      category: "PWA / WHATSAPP ORDERING",
+      href: "/case-studies/vidyas-kitchen-pwa",
+      liveUrl: "https://vidayskitchenhome.com/",
       isHighlight: true,
-      image: "/case-studies/parla/Messages_Desktop.png",
-      mockupType: "ezra",
+      image: "/case-studies/vidyas-kitchen/VK-M-1.png",
+      mockupType: "forma",
     },
     {
       id: "03",
@@ -45,7 +57,8 @@ export default function SelectedWorkV2() {
       title: "MAKEON BUILDER",
       category: "STEM / AI ECOSYSTEM",
       href: "/case-studies/makeon-builder-ecosystem",
-      image: "/case-studies/parla/CRM_Order.png",
+      liveUrl: "https://makeon.build/",
+      image: "/case-studies/makeon/makeon-hero-desktop.png",
       mockupType: "forma",
     },
   ];
@@ -54,54 +67,64 @@ export default function SelectedWorkV2() {
     <section id="work" className="w-full bg-[#F4F4F0] border-b-2 border-black">
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
         
-        {/* Top Header Row of Selected Work */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-black">
+        {/* Top Header Row of Selected Work: Clean White Loop Container with Uniform Logo Scaling */}
+        <div className="border-b-2 border-black bg-white overflow-hidden flex items-center h-16 sm:h-20 md:h-24 relative">
           
-          {/* Year Box */}
-          <div className="lg:col-span-1 border-b-2 lg:border-b-0 lg:border-r-2 border-black p-4 flex items-center justify-center bg-white">
-            <span className="text-xs sm:text-sm font-black text-black tracking-widest font-mono select-none">
-              (2026)
+          {/* Static Title Label with Separator */}
+          <div className="px-5 sm:px-8 md:px-10 h-full flex items-center shrink-0 border-r-2 border-black bg-white z-10 select-none">
+            <span className="text-xs sm:text-sm md:text-base font-black uppercase tracking-wider text-black whitespace-nowrap">
+              CLIENTS & WORK
             </span>
           </div>
 
-          {/* Statement Banner */}
-          <div className="lg:col-span-8 border-b-2 lg:border-b-0 lg:border-r-2 border-black p-4 sm:px-8 flex items-center justify-between bg-white">
-            <p className="text-xs sm:text-sm md:text-base font-black uppercase tracking-tight text-black leading-snug">
-              WE DON&apos;T FOLLOW TRENDS.<br />
-              WE SET DIRECTIONS.
-            </p>
-            <ArrowRight weight="bold" className="w-5 h-5 md:w-6 md:h-6 text-black hidden sm:block shrink-0" />
+          {/* Smooth Continuous Looping Marquee with Uniform Visual Scaling Matching iRasus */}
+          <div className="flex-1 overflow-hidden h-full flex items-center relative bg-white">
+            <motion.div
+              className="flex items-center gap-12 sm:gap-16 md:gap-20 shrink-0 pr-12 sm:pr-16 md:pr-20"
+              animate={{
+                x: ["0%", "-50%"],
+              }}
+              transition={{
+                repeat: Infinity,
+                ease: "linear",
+                duration: 22,
+              }}
+            >
+              {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((logo, idx) => (
+                <div
+                  key={`${logo.name}-${idx}`}
+                  className="flex items-center justify-center shrink-0 h-full py-2 px-3"
+                >
+                  <div className={`relative ${logo.heightClass} ${logo.widthClass} flex items-center justify-center`}>
+                    <Image
+                      src={logo.src}
+                      alt={logo.name}
+                      fill
+                      className="object-contain filter contrast-110"
+                    />
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
-          {/* Available for New Projects Yellow Badge */}
-          <div className="lg:col-span-3 bg-[#FAED00] p-4 sm:px-6 flex items-center justify-between">
-            <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-black leading-tight">
-              AVAILABLE<br />FOR NEW<br />PROJECTS
-            </span>
-            <div className="w-4 h-4 rounded-full bg-black shrink-0" />
+          {/* Right End Indicator Dot */}
+          <div className="px-5 sm:px-7 h-full flex items-center justify-center shrink-0 border-l-2 border-black bg-white z-10">
+            <div className="w-3.5 h-3.5 rounded-full bg-black shrink-0" />
           </div>
+
         </div>
 
         {/* Main 2-Column Content Grid: Left Sidebar + Right 3-Row Projects List */}
         <div className="grid grid-cols-1 lg:grid-cols-12">
           
-          {/* Left Column: SELECTED WORK + Arrow Down + SEE ALL WORK */}
+          {/* Left Column: SELECTED WORK + Arrow Down */}
           <div className="lg:col-span-3 border-b-2 lg:border-b-0 lg:border-r-2 border-black p-6 sm:p-8 md:p-10 flex flex-col justify-between bg-white">
             <div>
               <h2 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-black leading-tight mb-6">
                 SELECTED<br />WORK
               </h2>
               <ArrowDown weight="bold" className="w-6 h-6 text-black mb-8" />
-            </div>
-
-            <div className="pt-8">
-              <Link
-                href="/case-studies/parla-show-and-sell"
-                className="inline-flex items-center gap-3 text-xs sm:text-sm font-black tracking-wider uppercase text-black hover:text-[#FF462D] transition-colors group"
-              >
-                <span>SEE ALL WORK</span>
-                <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
             </div>
           </div>
 
@@ -157,21 +180,33 @@ export default function SelectedWorkV2() {
                             className="object-cover contrast-110 group-hover:scale-105 transition-transform duration-500"
                           />
                           <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-                          <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between bg-black/80 backdrop-blur-sm p-2 border border-white/20">
+                          <Link
+                            href={item.liveUrl || item.href}
+                            target={item.liveUrl ? "_blank" : undefined}
+                            rel={item.liveUrl ? "noopener noreferrer" : undefined}
+                            onClick={(e) => e.stopPropagation()}
+                            className="absolute bottom-3 left-3 right-3 flex items-center justify-between bg-black/80 hover:bg-black backdrop-blur-sm p-2 border border-white/20 transition-colors z-10"
+                          >
                             <span className="text-[10px] font-mono font-bold text-white uppercase tracking-wider truncate">
                               {item.title}
                             </span>
                             <ArrowUpRight weight="bold" className="w-3.5 h-3.5 text-white shrink-0" />
-                          </div>
+                          </Link>
                         </div>
                       ) : (
                         <div className="w-full h-full bg-zinc-950 p-4 flex flex-col justify-between text-white">
                           <span className="text-xs font-mono uppercase tracking-widest text-zinc-400">
                             {item.title}
                           </span>
-                          <span className="text-xs font-black uppercase text-[#FAED00]">
-                            VIEW CASE STUDY ↗
-                          </span>
+                          <Link
+                            href={item.liveUrl || item.href}
+                            target={item.liveUrl ? "_blank" : undefined}
+                            rel={item.liveUrl ? "noopener noreferrer" : undefined}
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-xs font-black uppercase text-[#FAED00] hover:underline"
+                          >
+                            {item.liveUrl ? "VISIT LIVE SITE ↗" : "VIEW CASE STUDY ↗"}
+                          </Link>
                         </div>
                       )}
                     </div>

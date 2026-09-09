@@ -1,6 +1,8 @@
 import HeaderV2 from "./components/HeaderV2";
 import HeroV2 from "./components/HeroV2";
 import SelectedWorkV2 from "./components/SelectedWorkV2";
+import ExperienceSectionV2 from "./components/ExperienceSectionV2";
+import ServicesAndFooterV2 from "./components/ServicesAndFooterV2";
 
 export const metadata = {
   title: "Simon Santhosh — Portfolio V2",
@@ -16,8 +18,15 @@ export default function V2Page() {
       {/* Hero Section */}
       <HeroV2 />
 
-      {/* Selected Work Section based on reference */}
+      {/* Selected Work Section */}
       <SelectedWorkV2 />
+
+      {/* Experience Section in exact wireframe layout */}
+      <ExperienceSectionV2 />
+
+      {/* Built to Disrupt / Services & Contact Footer Section */}
+      <ServicesAndFooterV2 />
     </main>
   );
 }
+
