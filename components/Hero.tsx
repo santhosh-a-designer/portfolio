@@ -126,7 +126,6 @@ function useJackpotText(finalText: string, durationMs: number, delayMs: number, 
 }
 
 function StatShell({
-  index,
   label,
   children,
 }: {
@@ -135,17 +134,14 @@ function StatShell({
   children: ReactNode;
 }) {
   return (
-    <div
-      className="flex-1 min-w-[18%] text-center py-3 px-1 sm:px-2 bg-[#0c0e12]"
-      style={{ borderRight: index < STATS.length - 1 ? "1px solid #1e293b" : "none" }}
-    >
+    <div className="flex flex-col items-center justify-center py-2.5 sm:py-3 px-0.5 sm:px-2 bg-[#0c0e12] min-w-0">
       <div
-        className="font-title text-base sm:text-lg font-black tabular-nums leading-tight min-h-[1.75rem] flex items-center justify-center"
+        className="font-title text-sm sm:text-base md:text-lg font-black tabular-nums leading-tight min-h-[1.5rem] sm:min-h-[1.75rem] flex items-center justify-center"
         style={{ color: "#FF7410" }}
       >
         {children}
       </div>
-      <div className="text-[8px] sm:text-[9px] text-[#475569] uppercase tracking-wider mt-0.5 leading-tight">
+      <div className="text-[7.5px] sm:text-[9px] text-[#475569] uppercase tracking-wider mt-0.5 leading-tight truncate max-w-full">
         {label}
       </div>
     </div>
@@ -333,7 +329,7 @@ export default function Hero() {
 
         {/* Stats strip — jackpot count-up */}
         <motion.div custom={5} variants={fadeUp} initial="hidden" animate="show"
-          className="flex flex-wrap sm:flex-nowrap items-stretch justify-center gap-px border border-[#1e293b] overflow-hidden max-w-3xl mx-auto mb-10 w-full"
+          className="grid grid-cols-5 divide-x divide-[#1e293b] border border-[#1e293b] overflow-hidden max-w-3xl mx-auto mb-10 w-full bg-[#0c0e12]"
         >
           {STATS.map((stat, i) =>
             stat.kind === "number" ? (

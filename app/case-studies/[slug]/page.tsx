@@ -550,8 +550,8 @@ function CaseStudyArticle({
       id="case-study-article"
       tabIndex={-1}
       className={
-        "w-[80vw] max-w-[1400px] mx-auto px-5 sm:px-7 outline-none focus:outline-none " +
-        (study.cinematicIntro ? "pt-4 sm:pt-6 pb-10 sm:pb-14" : "py-10 sm:py-14")
+        "w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 outline-none focus:outline-none " +
+        (study.cinematicIntro ? "pt-4 sm:pt-6 pb-10 sm:pb-14" : "py-8 sm:py-14")
       }
     >
         <CaseStudyScrollReveal>

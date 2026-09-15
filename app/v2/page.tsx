@@ -16,7 +16,7 @@ export default function V2Page() {
     <LenisProvider>
       {/* White smoke dissolve intro */}
       <PageReveal />
-      <main className="min-h-screen bg-[#F4F4F0] text-black antialiased font-sans selection:bg-black selection:text-[#FAED00]">
+      <main className="min-h-screen bg-[#F4F4F0] text-black antialiased font-sans selection:bg-black selection:text-[#FAED00] w-full max-w-full overflow-x-hidden">
         {/* Header */}
         <HeaderV2 />
 

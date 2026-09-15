@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Poppins, Space_Grotesk, JetBrains_Mono, Silkscreen } from "next/font/google";
 import { getSiteUrl } from "@/lib/siteUrl";
 import "./globals.css";
@@ -32,6 +32,13 @@ const silkscreen = Silkscreen({
   weight: ["400", "700"],
   variable: "--font-pixel",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#08090b",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
