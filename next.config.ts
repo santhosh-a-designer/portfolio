@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  /** Allow access from local network IP and tunnel domains */
+  allowedDevOrigins: ["192.168.29.16", "localhost:3000", "*.localtunnel.me", "*.loca.lt", "*.lhr.life", "*.ngrok-free.app"],
   /** Hides the dev-only blue top bar + route indicator (dev only; no effect in production). */
   devIndicators: false,
   images: {

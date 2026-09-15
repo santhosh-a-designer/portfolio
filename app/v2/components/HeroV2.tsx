@@ -731,7 +731,7 @@ function DesignToCodeMorphingCard() {
   let charCounter = 0;
 
   return (
-    <div ref={cardContainerRef} className="w-full h-full grid grid-rows-[1fr_36px_1fr] border-b-2 lg:border-b-0 border-black bg-white select-none relative overflow-hidden">
+    <div ref={cardContainerRef} className="w-full h-full grid grid-rows-[1.15fr_36px_0.85fr] border-b-2 lg:border-b-0 border-black bg-white select-none relative overflow-hidden">
 
       {/* ── TOP HALF: Design UI Mockup ── */}
       <div className="w-full h-full min-h-0 bg-white border-b-2 border-black flex flex-col relative overflow-hidden">
@@ -754,7 +754,7 @@ function DesignToCodeMorphingCard() {
 
         {/* Technical Grid Background Layer — clean grid lines with drafting crosshairs */}
         <div
-          className="flex-1 min-h-0 relative overflow-hidden bg-[#F8F9FA] p-3 sm:p-4 flex flex-col justify-start"
+          className="flex-1 min-h-0 relative overflow-hidden bg-[#F8F9FA] p-2.5 sm:p-3.5 flex items-center justify-center"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgba(0,0,0,0.07) 1px, transparent 1px),
@@ -764,10 +764,10 @@ function DesignToCodeMorphingCard() {
           }}
         >
           {/* Subtle corner registration crosshairs */}
-          <span className="absolute top-2.5 left-2.5 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
-          <span className="absolute top-2.5 right-2.5 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
-          <span className="absolute bottom-2.5 left-2.5 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
-          <span className="absolute bottom-2.5 right-2.5 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
+          <span className="absolute top-2 left-2 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
+          <span className="absolute top-2 right-2 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
+          <span className="absolute bottom-2 left-2 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
+          <span className="absolute bottom-2 right-2 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
 
           <div
             style={{
@@ -775,12 +775,12 @@ function DesignToCodeMorphingCard() {
               opacity: 1,
               willChange: "transform",
             }}
-            className="w-full bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative z-10"
+            className="relative max-h-full max-w-full aspect-[5224/3396] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden z-10 flex items-center justify-center"
           >
             <img
               src="/login_website.png"
               alt="Oracle Fusion Login UI Design"
-              className="w-full h-auto object-cover block brightness-[1.1] contrast-[1.04]"
+              className="w-full h-full object-contain block brightness-[1.04] contrast-[1.03]"
             />
           </div>
         </div>

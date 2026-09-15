@@ -82,7 +82,7 @@ export default function ExperienceSectionV2() {
         {/* ─── Top Header Strip: Yellow Stats Box + Track Record Headline & Resume Link ─── */}
         <div className="grid grid-cols-1 md:grid-cols-12 border-b-2 border-black bg-white">
           
-          {/* Left Block: Yellow 04+ Years Exp */}
+          {/* Left Block: Yellow 05+ Years Exp */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -91,7 +91,7 @@ export default function ExperienceSectionV2() {
             className="md:col-span-4 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 flex flex-col items-center justify-center text-center select-none"
           >
             <span className="text-5xl sm:text-6xl font-black font-mono tracking-tighter text-black leading-none mb-1">
-              04+
+              05+
             </span>
             <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-black font-mono">
               YEARS EXP.
