@@ -22,15 +22,16 @@ export default function LenisProvider({ children }: Props) {
     root.classList.add("lenis", "lenis-smooth");
 
     const instance = new Lenis({
-      duration: 1.1,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // ultra-smooth exponential inertia decay
       smoothWheel: true,
-      wheelMultiplier: 0.85,
-      touchMultiplier: 1.2,
-      lerp: 0.085,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
+      lerp: 0.08,
       anchors: {
         offset: HEADER_SCROLL_OFFSET,
-        duration: 0.8,
-        lerp: 0.12,
+        duration: 0.9,
+        lerp: 0.1,
       },
     });
 

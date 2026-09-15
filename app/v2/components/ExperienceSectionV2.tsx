@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { ArrowUpRight, ArrowRight, Plus, Minus } from "@phosphor-icons/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import ResumeModal from "@/components/ResumeModal";
 
 interface ExperienceItem {
@@ -66,6 +66,8 @@ const experiences: ExperienceItem[] = [
 export default function ExperienceSectionV2() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const toggleExperience = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -81,7 +83,13 @@ export default function ExperienceSectionV2() {
         <div className="grid grid-cols-1 md:grid-cols-12 border-b-2 border-black bg-white">
           
           {/* Left Block: Yellow 04+ Years Exp */}
-          <div className="md:col-span-4 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 flex flex-col items-center justify-center text-center select-none">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-4 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 flex flex-col items-center justify-center text-center select-none"
+          >
             <span className="text-5xl sm:text-6xl font-black font-mono tracking-tighter text-black leading-none mb-1">
               04+
             </span>
@@ -92,12 +100,21 @@ export default function ExperienceSectionV2() {
             <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-black/80">
               PROVEN IMPACT
             </span>
-          </div>
+          </motion.div>
 
           {/* Middle & Right Block: Track Record Statement + View Resume */}
-          <div className="md:col-span-8 lg:col-span-9 p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 bg-white">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-8 lg:col-span-9 p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 bg-white relative"
+          >
+            <span className="absolute top-2 right-4 text-[10px] font-mono text-zinc-400 italic">
+              <span className="text-[#FF462D] not-italic font-bold">//</span> TRACK_RECORD_INDEX
+            </span>
             <div className="max-w-2xl">
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center gap-3 mb-2 font-mono">
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#FF462D]">
                   CAREER &amp; TRACK RECORD
                 </span>
@@ -106,11 +123,11 @@ export default function ExperienceSectionV2() {
                   3 MILESTONES
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-sans mb-3">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-mono mb-3">
                 TRACK RECORD.
               </h2>
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-700 leading-relaxed">
-                FROM 0-TO-1 VENTURES TO GLOBAL ENTERPRISES. BUILDING SCALABLE DESIGN SYSTEMS, DIGITAL PLATFORMS, AND INTELLIGENT AI EXPERIENCES.
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-700 leading-relaxed font-sans">
+                FROM 0-TO-1 VENTURES TO GLOBAL ENTERPRISES. BUILDING SCALABLE DESIGN SYSTEMS, DIGITAL PLATFORMS, AND INTELLIGENT AI EXPERIENCES AS A DESIGN ENGINEER.
               </p>
             </div>
 
@@ -124,18 +141,22 @@ export default function ExperienceSectionV2() {
                 <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
             </div>
-          </div>
+          </motion.div>
 
         </div>
 
         {/* ─── 3-Column Experience Grid: 3 Clean Grid Boxes ─── */}
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black border-b-0 bg-white">
-          {experiences.map((exp) => {
+          {experiences.map((exp, idx) => {
             const isHighlight = exp.isHighlight;
 
             return (
-              <div
+              <motion.div
                 key={exp.num}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, delay: idx * 0.09, ease: [0.22, 1, 0.36, 1] }}
                 className="flex flex-col justify-between p-6 sm:p-8 bg-white hover:bg-zinc-50/70 transition-colors group relative"
               >
                 {/* Top Number & Period Header */}
@@ -199,13 +220,14 @@ export default function ExperienceSectionV2() {
                       <span
                         key={s}
                         className="text-[10px] font-mono font-bold px-2 py-1 bg-white border border-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:border-[#FF462D] transition-colors"
+                        title={`<skill type="${s.toLowerCase().replace(/ /g, '-')}" />`}
                       >
                         {s}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

@@ -53,7 +53,12 @@ export default function HeaderV2() {
   ];
 
   return (
-    <header className="w-full bg-[#F4F4F0] border-b-2 border-black sticky top-0 z-50">
+    <motion.header
+      initial={{ opacity: 0, y: -30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+      className="w-full bg-[#F4F4F0] border-b-2 border-black sticky top-0 z-50"
+    >
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
       
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black flex items-stretch min-h-[56px] md:min-h-[64px] bg-white">
@@ -101,6 +106,6 @@ export default function HeaderV2() {
           </Link>
         ))}
       </div>
-    </header>
+    </motion.header>
   );
 }

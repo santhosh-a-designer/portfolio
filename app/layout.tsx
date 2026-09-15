@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, Poppins, Space_Grotesk } from "next/font/google";
+import { DM_Sans, Poppins, Space_Grotesk, JetBrains_Mono, Silkscreen } from "next/font/google";
 import { getSiteUrl } from "@/lib/siteUrl";
 import "./globals.css";
 
@@ -21,15 +21,27 @@ const dmSans = DM_Sans({
   variable: "--font-description",
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-mono",
+});
+
+const silkscreen = Silkscreen({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-pixel",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Simon Santhosh — UX Designer & Vibe Coder",
+  title: "Simon Santhosh — UX Designer & Design Engineer",
   description:
-    "5+ years crafting intuitive digital experiences. UX Designer, Mentor, and Front-end Developer based in Chennai, India.",
-  keywords: ["UX Designer", "UI Design", "Product Design", "Chennai", "Simon Santhosh"],
+    "5+ years crafting intuitive digital experiences. UX Designer, Mentor, and Design Engineer based in Chennai, India.",
+  keywords: ["UX Designer", "Design Engineer", "Product Design", "Chennai", "Simon Santhosh"],
   openGraph: {
-    title: "Simon Santhosh — UX Designer & Vibe Coder",
-    description: "Designing experiences that move people. 5+ years in UX, Mentor, Freelancer.",
+    title: "Simon Santhosh — UX Designer & Design Engineer",
+    description: "Designing experiences that move people. 5+ years in UX, Design Systems, Front-end Engineering.",
     type: "website",
     url: siteUrl,
   },
@@ -45,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${spaceGrotesk.variable} ${poppins.variable} ${dmSans.variable} antialiased noise`}>
+      <body className={`${spaceGrotesk.variable} ${poppins.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${silkscreen.variable} antialiased noise`}>
         {children}
       </body>
     </html>

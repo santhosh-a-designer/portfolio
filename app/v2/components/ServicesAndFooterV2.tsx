@@ -125,38 +125,56 @@ export default function ServicesAndFooterV2() {
         <div className="grid grid-cols-1 md:grid-cols-12 border-b-2 border-black">
           
           {/* Column 1: Yellow Square Box (2.5 / 12 cols) */}
-          <div className="md:col-span-3 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 md:p-10 flex items-center justify-center min-h-[220px] md:min-h-[320px]">
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-3 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 md:p-10 flex items-center justify-center min-h-[220px] md:min-h-[320px]"
+          >
+          </motion.div>
 
-          {/* Column 2: "BUILT TO DISRUPT." + Summary + "READ OUR STORY ↗" (4 / 12 cols) */}
-          <div className="md:col-span-4 lg:col-span-4 p-6 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-black bg-white">
+          {/* Column 2: "ENGINEERING PRODUCT EXPERIENCES." + Summary + "READ OUR STORY ↗" (4 / 12 cols) */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="md:col-span-4 lg:col-span-4 p-6 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-black bg-white"
+          >
             <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-black leading-[0.95] font-sans mb-6">
-                BUILT TO<br />DISRUPT.
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-[0.98] font-mono mb-6">
+                ENGINEERING<br />PRODUCT<br />EXPERIENCES.
               </h2>
-              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black leading-relaxed max-w-sm mb-6">
-                WE COMBINE STRATEGY, DESIGN AND TECHNOLOGY TO CREATE DIGITAL EXPERIENCES THAT CHALLENGE THE ORDINARY AND DELIVER REAL IMPACT.
+              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black leading-relaxed max-w-sm mb-6 font-sans">
+                BRIDGING END-TO-END PRODUCT DESIGN, INTERACTION ARCHITECTURE, AND PRODUCTION-READY FRONTEND CODE FOR VENTURES &amp; ENTERPRISES.
               </p>
             </div>
 
             <div>
               <Link
                 href="#experience"
-                className="inline-flex items-center gap-3 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group"
+                className="inline-flex items-center gap-3 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group font-mono"
               >
-                <span>READ OUR STORY</span>
+                <span>EXPLORE TRACK RECORD</span>
                 <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           {/* Column 3: Narrow Vertical "OUR SERVICES →" Divider (1 / 12 cols) */}
-          <div className="md:col-span-1 lg:col-span-1 hidden md:flex flex-col items-center justify-between py-8 px-1 border-r-2 border-black bg-white select-none">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.4, delay: 0.12 }}
+            className="md:col-span-1 lg:col-span-1 hidden md:flex flex-col items-center justify-between py-8 px-1 border-r-2 border-black bg-white select-none"
+          >
             <span className="text-[11px] font-black tracking-[0.25em] uppercase text-black rotate-90 origin-center whitespace-nowrap mt-10">
               OUR SERVICES
             </span>
             <ArrowRight weight="bold" className="w-5 h-5 text-black mb-6" />
-          </div>
+          </motion.div>
 
           {/* Column 4: 4 Service Rows (4 / 12 cols) */}
           <div className="md:col-span-4 lg:col-span-4 flex flex-col divide-y-2 divide-black bg-white">
@@ -165,7 +183,14 @@ export default function ServicesAndFooterV2() {
               const isDev = svc.num === "03";
 
               return (
-                <div key={svc.num} className="flex flex-col">
+                <motion.div
+                  key={svc.num}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.45, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col"
+                >
                   <button
                     type="button"
                     onClick={() => toggleService(idx)}
@@ -283,14 +308,14 @@ export default function ServicesAndFooterV2() {
                               </div>
                             </div>
 
-                            {/* Vibe Coding ✦ */}
+                            {/* Design Engineering ✦ */}
                             <div className="p-4 bg-[#FAED00] border-2 border-black flex flex-col gap-1.5 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                               <div className="text-[11px] font-black uppercase tracking-wider text-black flex items-center gap-1.5 font-mono">
-                                <span>VIBE CODING</span>
+                                <span>DESIGN ENGINEERING</span>
                                 <span>✦</span>
                               </div>
-                              <p className="text-xs font-bold uppercase tracking-wide text-black leading-relaxed">
-                                Using <strong className="font-black underline decoration-2">Cursor + MCP + Figma</strong> to ship pixel-perfect Next.js — faster than any traditional handoff.
+                              <p className="text-xs font-bold uppercase tracking-wide text-black leading-relaxed font-sans">
+                                Using <strong className="font-black underline decoration-2">Figma + Next.js + TypeScript + Cursor</strong> to build scalable design tokens and production-ready web apps.
                               </p>
                             </div>
 
@@ -303,7 +328,7 @@ export default function ServicesAndFooterV2() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -314,17 +339,23 @@ export default function ServicesAndFooterV2() {
         <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 bg-white scroll-mt-20">
           
           {/* Left Column: Bold Red Box "LET'S CREATE SOMETHING DIFFERENT." + Direct Contact Cards */}
-          <div className="lg:col-span-4 bg-[#FF462D] p-6 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black text-black">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-4 bg-[#FF462D] p-6 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black text-black"
+          >
             <div>
               <div className="flex items-center justify-end mb-8">
                 <ArrowUpRight weight="bold" className="w-7 h-7 stroke-[3px]" />
               </div>
 
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight leading-[1.0] font-sans mb-6 text-black">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight leading-[1.0] font-mono mb-6 text-black">
                 LET&apos;S CREATE<br />SOMETHING<br />DIFFERENT.
               </h3>
 
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wide text-black/90 leading-relaxed mb-8">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wide text-black/90 leading-relaxed mb-8 font-sans">
                 HAVE A PROJECT, CHALLENGE OR OPPORTUNITY? DROP ME A LINE AND LET&apos;S BUILD SOMETHING EXTRAORDINARY TOGETHER.
               </p>
             </div>
@@ -348,7 +379,7 @@ export default function ServicesAndFooterV2() {
                     <EnvelopeSimple size={18} weight="bold" />
                   )}
                 </div>
-                <div className="min-w-0 flex-1">
+                <div className="min-w-0 flex-1 font-mono">
                   <span className="text-[9px] font-mono uppercase tracking-widest text-zinc-600 block">
                     EMAIL
                   </span>
@@ -366,7 +397,7 @@ export default function ServicesAndFooterV2() {
                 href="https://linkedin.com/in/santhosh-designer"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full p-3.5 bg-white hover:bg-yellow-50 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-left flex items-center gap-3 transition-transform active:translate-x-0.5 active:translate-y-0.5 group"
+                className="w-full p-3.5 bg-white hover:bg-yellow-50 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-left flex items-center gap-3 transition-transform active:translate-x-0.5 active:translate-y-0.5 group font-mono"
               >
                 <div className="w-8 h-8 rounded-none border border-black bg-[#FAED00] flex items-center justify-center shrink-0 text-black">
                   <ArrowSquareOut size={18} weight="bold" />
@@ -384,28 +415,34 @@ export default function ServicesAndFooterV2() {
                 </div>
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Quick Project Brief Form with Extended Height and Generous Width */}
-          <div className="lg:col-span-8 p-6 sm:p-8 md:p-10 flex flex-col justify-between bg-white">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-8 p-6 sm:p-8 md:p-10 flex flex-col justify-between bg-white"
+          >
             <div>
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b-2 border-black gap-2">
                 <div>
-                  <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-black font-sans block">
+                  <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-black font-mono block">
                     QUICK PROJECT BRIEF
                   </span>
-                  <p className="text-[11px] font-bold uppercase tracking-wide text-zinc-500">
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-zinc-500 font-sans">
                     Fill in your details below for a prompt response within 24 hours.
                   </p>
                 </div>
 
                 {/* Follow Us Social Shortcuts */}
-                <div className="flex items-center gap-4 text-xs font-black uppercase tracking-wider text-black">
+                <div className="flex items-center gap-4 text-xs font-black uppercase tracking-wider text-black font-mono">
                   <span className="text-[10px] text-zinc-400 font-mono">FOLLOW:</span>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">IG.</a>
-                  <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">BE.</a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">LI.</a>
-                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">TW.</a>
+                  <a href="https://instagram.com/designbysanthosh" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">IG.</a>
+                  <a href="https://behance.net/santhosh-designer" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">BE.</a>
+                  <a href="https://linkedin.com/in/santhosh-designer" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">LI.</a>
+                  <a href="https://x.com/designbysanthosh" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">TW.</a>
                 </div>
               </div>
 
@@ -499,9 +536,29 @@ export default function ServicesAndFooterV2() {
                 </AnimatePresence>
               </form>
             </div>
-          </div>
+          </motion.div>
 
         </div>
+
+        {/* ─── Terminal Footer Strip ─── */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="border-t-2 border-black bg-[#0D1117] px-6 sm:px-8 md:px-10 py-3 flex items-center justify-between"
+        >
+          <span className="font-mono text-[11px] text-emerald-400 font-bold">
+            santhosh@portfolio:~$
+            <span className="terminal-prompt" />
+          </span>
+          <span className="font-mono text-[10px] text-zinc-600 italic">
+            <span className="text-[#FF462D] not-italic font-bold">/*</span> ALL RIGHTS RESERVED · {new Date().getFullYear()} <span className="text-[#FF462D] not-italic font-bold">*/</span>
+          </span>
+          <span className="font-mono text-[10px] text-zinc-600">
+            DESIGNED + BUILT BY <span className="text-[#FAED00] font-bold">SANTHOSH</span>
+          </span>
+        </motion.div>
 
       </div>
     </section>

@@ -9,7 +9,7 @@ import {
 const timeline = [
   {
     year: "Oct 2025 – Present",
-    role: "Head of Product Design & AI",
+    role: "Design Engineer",
     company: "Commerce Agents",
     color: "#FF7410",
     current: true,
