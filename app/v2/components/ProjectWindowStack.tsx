@@ -100,7 +100,7 @@ function WindowCard({
 
   return (
     <div
-      className="sticky w-full mb-8 sm:mb-12 last:mb-0 transition-all origin-top"
+      className="sticky w-full mb-10 sm:mb-16 last:mb-0"
       style={{
         top: `${stickyTop}px`,
         zIndex: index + 10,
@@ -110,7 +110,7 @@ function WindowCard({
         style={{
           opacity,
         }}
-        className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
+        className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
       >
         {/* ─── Browser / Window Titlebar Header (Fixed Height) ─── */}
         <div className="h-[42px] shrink-0 px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
@@ -293,7 +293,7 @@ export default function ProjectWindowStack({ projects }: { projects: ProjectItem
   });
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-[1320px] mx-auto p-4 sm:p-6 md:p-8 lg:p-10 pb-20 sm:pb-24">
+    <div ref={containerRef} className="relative w-full max-w-[1320px] mx-auto p-4 sm:p-6 md:p-8 lg:p-10 pb-36 sm:pb-48">
       {projects.map((project, idx) => (
         <WindowCard
           key={project.id}
