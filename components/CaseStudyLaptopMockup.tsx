@@ -162,7 +162,7 @@ export default function CaseStudyLaptopMockup({
         </div>
 
         {/* ─── MacBook Base / Keyboard Deck Lip ─── */}
-        <div className="relative -mt-0.5 h-3.5 sm:h-5 w-[103%] sm:w-[104%] rounded-b-[14px] sm:rounded-b-[18px] border-t border-[#3f3f46] bg-gradient-to-b from-[#27272a] via-[#18181b] to-[#09090b] shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
+        <div className="relative -mt-0.5 -left-[1%] sm:-left-[2%] h-3.5 sm:h-5 w-[102%] sm:w-[104%] rounded-b-[14px] sm:rounded-b-[18px] border-t border-[#3f3f46] bg-gradient-to-b from-[#27272a] via-[#18181b] to-[#09090b] shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
           {/* Center thumb groove for opening lid */}
           <div className="absolute left-1/2 top-0 h-1.5 w-16 sm:w-24 -translate-x-1/2 rounded-b-[6px] bg-[#09090b] border-b border-[#3f3f46]/50" />
         </div>

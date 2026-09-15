@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Poppins, Space_Grotesk } from "next/font/google";
 import { getSiteUrl } from "@/lib/siteUrl";
 import "./globals.css";
@@ -20,6 +20,13 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-description",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#08090b",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

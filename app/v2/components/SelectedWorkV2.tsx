@@ -68,19 +68,19 @@ export default function SelectedWorkV2() {
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
         
         {/* Top Header Row of Selected Work: Clean White Loop Container with Uniform Logo Scaling */}
-        <div className="border-b-2 border-black bg-white overflow-hidden flex items-center h-16 sm:h-20 md:h-24 relative">
+        <div className="border-b-2 border-black bg-white overflow-hidden flex items-center h-14 sm:h-20 md:h-24 relative">
           
           {/* Static Title Label with Separator */}
-          <div className="px-5 sm:px-8 md:px-10 h-full flex items-center shrink-0 border-r-2 border-black bg-white z-10 select-none">
-            <span className="text-xs sm:text-sm md:text-base font-black uppercase tracking-wider text-black whitespace-nowrap">
-              CLIENTS & COMPANIES
+          <div className="px-3 sm:px-8 md:px-10 h-full flex items-center shrink-0 border-r-2 border-black bg-white z-10 select-none">
+            <span className="text-[10px] sm:text-sm md:text-base font-black uppercase tracking-wider text-black whitespace-nowrap">
+              CLIENTS &amp; COMPANIES
             </span>
           </div>
 
           {/* Smooth Continuous Looping Marquee with Uniform Visual Scaling Matching iRasus */}
           <div className="flex-1 overflow-hidden h-full flex items-center relative bg-white">
             <motion.div
-              className="flex items-center gap-12 sm:gap-16 md:gap-20 shrink-0 pr-12 sm:pr-16 md:pr-20"
+              className="flex items-center gap-8 sm:gap-16 md:gap-20 shrink-0 pr-8 sm:pr-16 md:pr-20"
               animate={{
                 x: ["0%", "-50%"],
               }}
@@ -93,7 +93,7 @@ export default function SelectedWorkV2() {
               {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((logo, idx) => (
                 <div
                   key={`${logo.name}-${idx}`}
-                  className="flex items-center justify-center shrink-0 h-full py-2 px-3"
+                  className="flex items-center justify-center shrink-0 h-full py-1.5 px-2 sm:py-2 sm:px-3"
                 >
                   <div className={`relative ${logo.heightClass} ${logo.widthClass} flex items-center justify-center`}>
                     <Image
@@ -114,13 +114,13 @@ export default function SelectedWorkV2() {
         <div className="grid grid-cols-1 lg:grid-cols-12">
           
           {/* Left Column: SELECTED WORK + Arrow Down */}
-          <div className="lg:col-span-3 border-b-2 lg:border-b-0 lg:border-r-2 border-black p-6 sm:p-8 md:p-10 flex flex-col justify-between bg-white">
+          <div className="lg:col-span-3 border-b-2 lg:border-b-0 lg:border-r-2 border-black p-4 sm:p-8 md:p-10 flex flex-row lg:flex-col items-center lg:items-start justify-between bg-white">
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-black leading-tight mb-6">
-                SELECTED<br />WORK
+              <h2 className="text-lg sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-black leading-tight lg:mb-6">
+                SELECTED WORK
               </h2>
-              <ArrowDown weight="bold" className="w-6 h-6 text-black mb-8" />
             </div>
+            <ArrowDown weight="bold" className="w-5 h-5 sm:w-6 sm:h-6 text-black" />
           </div>
 
           {/* Right Column: 3 Project Rows */}
@@ -137,10 +137,10 @@ export default function SelectedWorkV2() {
                   }`}
                 >
                   {/* Big Number (01, 02, 03) */}
-                  <div className={`md:col-span-3 p-6 sm:p-8 flex items-center justify-center md:justify-start border-b-2 md:border-b-0 md:border-r-2 ${
+                  <div className={`md:col-span-3 p-4 sm:p-8 flex items-center justify-start border-b-2 md:border-b-0 md:border-r-2 ${
                     isSelected ? "border-black" : "border-black"
                   }`}>
-                    <span className={`text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none font-sans select-none ${
+                    <span className={`text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none font-sans select-none ${
                       isSelected ? "text-black" : "text-black"
                     }`}>
                       {item.num}
@@ -148,15 +148,15 @@ export default function SelectedWorkV2() {
                   </div>
 
                   {/* Title & Category Info */}
-                  <div className={`md:col-span-4 p-6 sm:p-8 flex flex-col justify-center border-b-2 md:border-b-0 md:border-r-2 ${
+                  <div className={`md:col-span-4 p-4 sm:p-8 flex flex-col justify-center border-b-2 md:border-b-0 md:border-r-2 ${
                     isSelected ? "border-black" : "border-black"
                   }`}>
-                    <h3 className={`text-lg sm:text-xl md:text-2xl font-black uppercase tracking-tight leading-snug mb-2 ${
+                    <h3 className={`text-base sm:text-xl md:text-2xl font-black uppercase tracking-tight leading-snug mb-1.5 sm:mb-2 ${
                       isSelected ? "text-black" : "text-black"
                     }`}>
                       {item.title}
                     </h3>
-                    <p className={`text-[10px] sm:text-xs font-black uppercase tracking-wider ${
+                    <p className={`text-[9.5px] sm:text-xs font-black uppercase tracking-wider ${
                       isSelected ? "text-black/80" : "text-zinc-600"
                     }`}>
                       {item.category}

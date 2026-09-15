@@ -59,10 +59,10 @@ export default function HeroV2() {
         <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-black">
           
           {/* Left Column: Big Headline & Intro */}
-          <div className="lg:col-span-7 flex flex-col justify-between p-6 sm:p-10 md:p-12 lg:p-14 border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white">
+          <div className="lg:col-span-7 flex flex-col justify-between p-5 sm:p-10 md:p-12 lg:p-14 border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white">
             <div>
-              {/* Roles Badge / Pill - Increased size */}
-              <div className="flex items-center gap-2.5 sm:gap-3 text-base sm:text-lg md:text-xl font-black tracking-wider uppercase text-black mb-5">
+              {/* Roles Badge / Pill - Flexible for mobile */}
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-base md:text-xl font-black tracking-wider uppercase text-black mb-4 sm:mb-5">
                 <span>UX DESIGNER</span>
                 <span className="text-[#FF462D]">×</span>
                 <span>VIBE CODER</span>
@@ -70,14 +70,14 @@ export default function HeroV2() {
                 <span>MENTOR</span>
               </div>
 
-              {/* Headline - Reduced/refined size */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-[1.15] tracking-tight uppercase text-black select-none font-sans mb-6">
+              {/* Headline - Responsive clamp */}
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-[1.15] tracking-tight uppercase text-black select-none font-sans mb-5 sm:mb-6">
                 I design experiences people <span className="text-[#FF462D]">feel</span> — then build them.
               </h1>
 
               {/* Sub-description with yellow accent square */}
-              <div className="flex items-start gap-2.5 text-xs sm:text-sm font-bold tracking-wide uppercase text-zinc-800 mb-8 max-w-xl">
-                <span className="w-3.5 h-3.5 bg-[#FAED00] border border-black inline-block shrink-0 mt-0.5" />
+              <div className="flex items-start gap-2.5 text-[11px] sm:text-sm font-bold tracking-wide uppercase text-zinc-800 mb-6 sm:mb-8 max-w-xl leading-relaxed">
+                <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 bg-[#FAED00] border border-black inline-block shrink-0 mt-0.5" />
                 <span>UX DESIGNER FROM CHENNAI FOCUSED ON CONVERSION-LED PRODUCTS, PRACTICAL SYSTEMS, AND CLEAN HANDOFFS.</span>
               </div>
             </div>
@@ -86,12 +86,12 @@ export default function HeroV2() {
             <div className="pt-2">
               <Link
                 href="#work"
-                className="inline-flex items-center justify-between gap-6 px-8 py-4 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[6px_6px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1.5 hover:translate-y-1.5 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group min-w-[210px] cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-between gap-4 sm:gap-6 px-6 sm:px-8 py-3.5 sm:py-4 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group min-w-0 sm:min-w-[210px] cursor-pointer"
               >
                 <span>VIEW WORK</span>
                 <ArrowUpRight
                   weight="bold"
-                  className="w-4 h-4 text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                  className="w-4 h-4 text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 shrink-0"
                 />
               </Link>
             </div>
@@ -100,27 +100,27 @@ export default function HeroV2() {
           {/* Right Column: Statement, Top-Right Location Badge */}
           <div className="lg:col-span-5 flex flex-col justify-between bg-[#F4F4F0]">
             
-            <div className="flex items-stretch border-b-2 lg:border-b-0 border-black bg-white min-h-[140px] h-full">
+            <div className="flex items-stretch border-b-2 lg:border-b-0 border-black bg-white min-h-[130px] sm:min-h-[140px] h-full">
               
               {/* Text statement with sequential animated transitions */}
-              <div className="flex-1 p-6 sm:p-8 md:p-10 flex flex-col justify-center overflow-hidden">
-                <div className="flex items-center justify-between gap-2 mb-2.5">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#FF462D]">
+              <div className="flex-1 p-4 sm:p-8 md:p-10 flex flex-col justify-center overflow-hidden">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-[#FF462D] truncate">
                     {aboutSlides[currentAboutIdx].category}
                   </span>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 shrink-0">
                     {aboutSlides.map((_, i) => (
                       <span
                         key={i}
                         className={`h-1.5 transition-all duration-300 ${
-                          i === currentAboutIdx ? "w-4 bg-[#FF462D]" : "w-1.5 bg-black/20"
+                          i === currentAboutIdx ? "w-3 sm:w-4 bg-[#FF462D]" : "w-1.5 bg-black/20"
                         }`}
                       />
                     ))}
                   </div>
                 </div>
 
-                <div className="relative min-h-[96px] sm:min-h-[105px] flex items-center">
+                <div className="relative min-h-[90px] sm:min-h-[105px] flex items-center">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentAboutIdx}
@@ -130,10 +130,10 @@ export default function HeroV2() {
                       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                       className="w-full flex flex-col justify-center"
                     >
-                      <h2 className="text-sm sm:text-base md:text-[17px] font-black uppercase tracking-tight text-black leading-snug mb-1.5">
+                      <h2 className="text-xs sm:text-base md:text-[17px] font-black uppercase tracking-tight text-black leading-snug mb-1">
                         {aboutSlides[currentAboutIdx].headline}
                       </h2>
-                      <p className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-zinc-600 leading-normal">
+                      <p className="text-[9px] sm:text-xs font-mono font-bold uppercase tracking-wider text-zinc-600 leading-normal">
                         {aboutSlides[currentAboutIdx].detail}
                       </p>
                     </motion.div>
@@ -142,10 +142,10 @@ export default function HeroV2() {
               </div>
 
               {/* Right icon & status column */}
-              <div className="flex flex-col items-stretch border-l-2 border-black w-24 sm:w-28 md:w-32 shrink-0">
+              <div className="flex flex-col items-stretch border-l-2 border-black w-20 sm:w-28 md:w-32 shrink-0">
                 {/* Green Status Box with Available text */}
-                <div className="flex-1 flex flex-col items-center justify-center p-3 sm:p-4 border-b-2 border-black bg-[#10B981] hover:bg-[#059669] transition-colors">
-                  <span className="text-[10px] sm:text-[11px] md:text-xs font-black uppercase tracking-wider text-center text-black leading-tight select-none">
+                <div className="flex-1 flex flex-col items-center justify-center p-2 sm:p-4 border-b-2 border-black bg-[#10B981] hover:bg-[#059669] transition-colors">
+                  <span className="text-[8.5px] sm:text-[11px] md:text-xs font-black uppercase tracking-wider text-center text-black leading-tight select-none">
                     AVAILABLE<br />FOR<br />FULL-TIME
                   </span>
                 </div>

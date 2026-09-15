@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, DownloadSimple, ArrowSquareOut } from "@phosphor-icons/react";
 
@@ -16,7 +16,7 @@ function downloadResumePdf() {
   a.remove();
 }
 
-const SCALE = 0.51; // A4 = 794×1123 → 405×573 (keeps footer button visible)
+const DEFAULT_SCALE = 0.51; // A4 = 794×1123 → 405×573
 
 export default function ResumeModal({
   open,
@@ -25,6 +25,25 @@ export default function ResumeModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const [scale, setScale] = useState(DEFAULT_SCALE);
+
+  useEffect(() => {
+    if (!open) return;
+    function updateScale() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      // Calculate max width for the iframe preview
+      const maxAvailableW = Math.max(260, Math.min(vw - 64, 460));
+      const maxAvailableH = Math.max(300, vh - 180);
+      const scaleByW = maxAvailableW / 794;
+      const scaleByH = maxAvailableH / 1123;
+      const newScale = Math.min(scaleByW, scaleByH, DEFAULT_SCALE);
+      setScale(Math.max(0.3, newScale));
+    }
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, [open]);
   /* Lock body scroll while modal is open */
   useEffect(() => {
     if (!open) return;
@@ -93,8 +112,8 @@ export default function ResumeModal({
   /* ── Calculated iframe wrapper dimensions ── */
   const iframeW = 794;
   const iframeH = 1123;
-  const wrapW = Math.round(iframeW * SCALE); // 405
-  const wrapH = Math.round(iframeH * SCALE); // 573
+  const wrapW = Math.round(iframeW * scale);
+  const wrapH = Math.round(iframeH * scale);
 
   return (
     <AnimatePresence>
@@ -107,7 +126,7 @@ export default function ResumeModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.18 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center"
+          className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-4"
           style={{ overflow: "hidden" }}
         >
           {/* Backdrop */}
@@ -124,30 +143,29 @@ export default function ResumeModal({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.97 }}
             transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 flex flex-col border border-[#1e293b] bg-[#08090b] shadow-2xl shadow-black/60"
+            className="relative z-10 flex flex-col border border-[#1e293b] bg-[#08090b] shadow-2xl shadow-black/60 max-w-full"
             style={{
-              width: `${wrapW + 180}px`,
-              maxWidth: "calc(100vw - 32px)",
-              maxHeight: "calc(100dvh - 32px)",
+              width: `${Math.min(wrapW + 32, 540)}px`,
+              maxHeight: "calc(100dvh - 24px)",
               overflow: "hidden",
               scrollbarWidth: "none",
             }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header bar */}
-            <div className="flex items-center justify-between border-b border-[#1e293b] px-4 py-3 flex-shrink-0 bg-[#08090b]">
-              <div className="flex items-center gap-3">
-                <h2 id="resume-modal-title" className="font-title text-sm font-bold text-white tracking-tight">
+            <div className="flex items-center justify-between border-b border-[#1e293b] px-3 sm:px-4 py-2.5 sm:py-3 flex-shrink-0 bg-[#08090b]">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <h2 id="resume-modal-title" className="font-title text-xs sm:text-sm font-bold text-white tracking-tight">
                   Preview
                 </h2>
-                <span className="text-[9px] font-mono uppercase tracking-widest text-[#475569]">A4 · 1 page</span>
+                <span className="text-[8px] sm:text-[9px] font-mono uppercase tracking-widest text-[#475569]">A4 · 1 page</span>
               </div>
               <div className="flex items-center gap-2">
                 <a
                   href="/resume.html"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#94a3b8] border border-[#334155] hover:border-[#FF7410]/50 hover:text-white transition-colors"
+                  className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.12em] text-[#94a3b8] border border-[#334155] hover:border-[#FF7410]/50 hover:text-white transition-colors"
                   title="Open in new tab"
                 >
                   <ArrowSquareOut size={13} />
@@ -156,16 +174,16 @@ export default function ResumeModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-1.5 text-[#64748b] hover:text-white hover:bg-[#1e293b] transition-colors rounded-none"
+                  className="p-1 sm:p-1.5 text-[#64748b] hover:text-white hover:bg-[#1e293b] transition-colors rounded-none"
                   aria-label="Close"
                 >
-                  <X size={20} weight="bold" />
+                  <X size={18} weight="bold" />
                 </button>
               </div>
             </div>
 
             {/* Resume preview — scaled A4 iframe */}
-            <div className="flex-shrink-0 bg-[#c8c8c8] flex items-start justify-center p-3" style={{ overflow: "hidden" }}>
+            <div className="flex-1 bg-[#c8c8c8] flex items-center justify-center p-2 sm:p-3 overflow-hidden">
               <div
                 style={{
                   width: `${wrapW}px`,
@@ -182,7 +200,7 @@ export default function ResumeModal({
                   style={{
                     width: `${iframeW}px`,
                     height: `${iframeH}px`,
-                    transform: `scale(${SCALE})`,
+                    transform: `scale(${scale})`,
                     transformOrigin: "top left",
                     border: "none",
                     pointerEvents: "none",

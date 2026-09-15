@@ -125,16 +125,16 @@ export default function ServicesAndFooterV2() {
         <div className="grid grid-cols-1 md:grid-cols-12 border-b-2 border-black">
           
           {/* Column 1: Yellow Square Box (2.5 / 12 cols) */}
-          <div className="md:col-span-3 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 md:p-10 flex items-center justify-center min-h-[220px] md:min-h-[320px]">
+          <div className="md:col-span-3 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-4 sm:p-8 md:p-10 flex items-center justify-center min-h-[60px] sm:min-h-[120px] md:min-h-[320px]">
           </div>
 
           {/* Column 2: "BUILT TO DISRUPT." + Summary + "READ OUR STORY ↗" (4 / 12 cols) */}
-          <div className="md:col-span-4 lg:col-span-4 p-6 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-black bg-white">
+          <div className="md:col-span-4 lg:col-span-4 p-5 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 md:border-b-0 md:border-r-2 border-black bg-white">
             <div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-black leading-[0.95] font-sans mb-6">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-black leading-[0.95] font-sans mb-4 sm:mb-6">
                 BUILT TO<br />DISRUPT.
               </h2>
-              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black leading-relaxed max-w-sm mb-6">
+              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black leading-relaxed max-w-sm mb-5 sm:mb-6">
                 WE COMBINE STRATEGY, DESIGN AND TECHNOLOGY TO CREATE DIGITAL EXPERIENCES THAT CHALLENGE THE ORDINARY AND DELIVER REAL IMPACT.
               </p>
             </div>
@@ -142,7 +142,7 @@ export default function ServicesAndFooterV2() {
             <div>
               <Link
                 href="#experience"
-                className="inline-flex items-center gap-3 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group"
+                className="inline-flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group"
               >
                 <span>READ OUR STORY</span>
                 <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -314,23 +314,23 @@ export default function ServicesAndFooterV2() {
         <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 bg-white scroll-mt-20">
           
           {/* Left Column: Bold Red Box "LET'S CREATE SOMETHING DIFFERENT." + Direct Contact Cards */}
-          <div className="lg:col-span-4 bg-[#FF462D] p-6 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black text-black">
+          <div className="lg:col-span-4 bg-[#FF462D] p-5 sm:p-8 md:p-10 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black text-black">
             <div>
-              <div className="flex items-center justify-end mb-8">
-                <ArrowUpRight weight="bold" className="w-7 h-7 stroke-[3px]" />
+              <div className="flex items-center justify-end mb-6 sm:mb-8">
+                <ArrowUpRight weight="bold" className="w-6 h-6 sm:w-7 sm:h-7 stroke-[3px]" />
               </div>
 
-              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight leading-[1.0] font-sans mb-6 text-black">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight leading-[1.0] font-sans mb-4 sm:mb-6 text-black">
                 LET&apos;S CREATE<br />SOMETHING<br />DIFFERENT.
               </h3>
 
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wide text-black/90 leading-relaxed mb-8">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-wide text-black/90 leading-relaxed mb-6 sm:mb-8">
                 HAVE A PROJECT, CHALLENGE OR OPPORTUNITY? DROP ME A LINE AND LET&apos;S BUILD SOMETHING EXTRAORDINARY TOGETHER.
               </p>
             </div>
 
             {/* GET IN TOUCH Contact Cards in Brutalist Frame */}
-            <div className="flex flex-col gap-3 pt-6 border-t-2 border-black">
+            <div className="flex flex-col gap-2.5 sm:gap-3 pt-5 sm:pt-6 border-t-2 border-black">
               <span className="text-[10px] font-mono font-black uppercase tracking-widest text-black">
                 GET IN TOUCH
               </span>
@@ -339,23 +339,23 @@ export default function ServicesAndFooterV2() {
               <button
                 type="button"
                 onClick={copyEmail}
-                className="w-full p-3.5 bg-white hover:bg-yellow-50 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-left flex items-center gap-3 transition-transform active:translate-x-0.5 active:translate-y-0.5 cursor-pointer group"
+                className="w-full p-3 sm:p-3.5 bg-white hover:bg-yellow-50 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-left flex items-center gap-2.5 sm:gap-3 transition-transform active:translate-x-0.5 active:translate-y-0.5 cursor-pointer group"
               >
-                <div className="w-8 h-8 rounded-none border border-black bg-[#FAED00] flex items-center justify-center shrink-0 text-black">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-none border border-black bg-[#FAED00] flex items-center justify-center shrink-0 text-black">
                   {copied ? (
-                    <CheckCircle size={18} weight="fill" className="text-black" />
+                    <CheckCircle size={16} weight="fill" className="text-black" />
                   ) : (
-                    <EnvelopeSimple size={18} weight="bold" />
+                    <EnvelopeSimple size={16} weight="bold" />
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-zinc-600 block">
+                  <span className="text-[8.5px] sm:text-[9px] font-mono uppercase tracking-widest text-zinc-600 block">
                     EMAIL
                   </span>
                   <span className="text-xs font-black text-black truncate block">
                     santhosh.a.designer@gmail.com
                   </span>
-                  <span className="text-[9px] font-bold text-zinc-500 block">
+                  <span className="text-[8.5px] sm:text-[9px] font-bold text-zinc-500 block">
                     {copied ? "✓ Copied to clipboard" : "Click to copy"}
                   </span>
                 </div>
@@ -366,19 +366,19 @@ export default function ServicesAndFooterV2() {
                 href="https://linkedin.com/in/santhosh-designer"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full p-3.5 bg-white hover:bg-yellow-50 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-left flex items-center gap-3 transition-transform active:translate-x-0.5 active:translate-y-0.5 group"
+                className="w-full p-3 sm:p-3.5 bg-white hover:bg-yellow-50 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-left flex items-center gap-2.5 sm:gap-3 transition-transform active:translate-x-0.5 active:translate-y-0.5 group"
               >
-                <div className="w-8 h-8 rounded-none border border-black bg-[#FAED00] flex items-center justify-center shrink-0 text-black">
-                  <ArrowSquareOut size={18} weight="bold" />
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-none border border-black bg-[#FAED00] flex items-center justify-center shrink-0 text-black">
+                  <ArrowSquareOut size={16} weight="bold" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <span className="text-[9px] font-mono uppercase tracking-widest text-zinc-600 block">
+                  <span className="text-[8.5px] sm:text-[9px] font-mono uppercase tracking-widest text-zinc-600 block">
                     LINKEDIN
                   </span>
                   <span className="text-xs font-black text-black group-hover:underline truncate block">
                     santhosh-designer
                   </span>
-                  <span className="text-[9px] font-bold text-zinc-500 block">
+                  <span className="text-[8.5px] sm:text-[9px] font-bold text-zinc-500 block">
                     3K+ followers · Open to connect
                   </span>
                 </div>
@@ -387,20 +387,20 @@ export default function ServicesAndFooterV2() {
           </div>
 
           {/* Right Column: Quick Project Brief Form with Extended Height and Generous Width */}
-          <div className="lg:col-span-8 p-6 sm:p-8 md:p-10 flex flex-col justify-between bg-white">
+          <div className="lg:col-span-8 p-5 sm:p-8 md:p-10 flex flex-col justify-between bg-white">
             <div>
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 mb-6 border-b-2 border-black gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 sm:pb-6 mb-5 sm:mb-6 border-b-2 border-black gap-2">
                 <div>
                   <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-black font-sans block">
                     QUICK PROJECT BRIEF
                   </span>
-                  <p className="text-[11px] font-bold uppercase tracking-wide text-zinc-500">
+                  <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-zinc-500">
                     Fill in your details below for a prompt response within 24 hours.
                   </p>
                 </div>
 
                 {/* Follow Us Social Shortcuts */}
-                <div className="flex items-center gap-4 text-xs font-black uppercase tracking-wider text-black">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-black uppercase tracking-wider text-black">
                   <span className="text-[10px] text-zinc-400 font-mono">FOLLOW:</span>
                   <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">IG.</a>
                   <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">BE.</a>
@@ -410,10 +410,10 @@ export default function ServicesAndFooterV2() {
               </div>
 
               {/* Form inputs */}
-              <form onSubmit={handleFormSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <form onSubmit={handleFormSubmit} className="space-y-4 sm:space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                   <div>
-                    <label className="text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-2">
+                    <label className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-1.5 sm:mb-2">
                       NAME *
                     </label>
                     <input
@@ -422,11 +422,11 @@ export default function ServicesAndFooterV2() {
                       placeholder="Your name"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#fafafa] border-2 border-black text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all"
                     />
                   </div>
                   <div>
-                    <label className="text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-2">
+                    <label className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-1.5 sm:mb-2">
                       EMAIL *
                     </label>
                     <input
@@ -435,30 +435,30 @@ export default function ServicesAndFooterV2() {
                       placeholder="your@email.com"
                       value={form.email}
                       onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#fafafa] border-2 border-black text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-2">
+                  <label className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-1.5 sm:mb-2">
                     PROJECT BRIEF *
                   </label>
                   <textarea
                     required
-                    rows={5}
+                    rows={4}
                     placeholder="Tell me what you're building and where you need help..."
                     value={form.project}
                     onChange={(e) => setForm({ ...form, project: e.target.value })}
-                    className="w-full px-4 py-3 bg-[#fafafa] border-2 border-black text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all resize-y min-h-[140px]"
+                    className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all resize-y min-h-[110px] sm:min-h-[140px]"
                   />
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 pt-1 sm:pt-2">
                   <button
                     type="submit"
                     disabled={submitState === "sending"}
-                    className="px-8 py-4 bg-black hover:bg-zinc-800 active:bg-zinc-900 text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all cursor-pointer disabled:opacity-60"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-black hover:bg-zinc-800 active:bg-zinc-900 text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all cursor-pointer disabled:opacity-60"
                   >
                     <span>{submitState === "sending" ? "SENDING BRIEF..." : "SEND BRIEF"}</span>
                     {submitState === "sending" ? (
@@ -468,7 +468,7 @@ export default function ServicesAndFooterV2() {
                     )}
                   </button>
 
-                  <span className="text-[11px] font-mono font-bold text-zinc-500 text-right">
+                  <span className="text-[10px] sm:text-[11px] font-mono font-bold text-zinc-500 text-center sm:text-right">
                     ● Responds within 24 hours
                   </span>
                 </div>

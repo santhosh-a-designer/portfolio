@@ -58,9 +58,9 @@ export default function HeaderV2() {
       
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black flex items-stretch min-h-[56px] md:min-h-[64px] bg-white">
         {/* Logo / Brand Name */}
-        <div className="flex items-center px-4 sm:px-6 md:px-8 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors">
+        <div className="flex items-center px-3 sm:px-6 md:px-8 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
           <Link href="/v2" className="inline-block">
-            <span className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none">
+            <span className="text-base sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none">
               SIMON SANTHOSH
             </span>
           </Link>
@@ -77,14 +77,14 @@ export default function HeaderV2() {
         <button
           type="button"
           onClick={() => setResumeOpen(true)}
-          className="flex items-center justify-between gap-3 px-5 sm:px-7 md:px-8 bg-[#FAED00] border-l-2 md:border-l-0 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-xs md:text-sm tracking-wider uppercase transition-colors ml-auto select-none group cursor-pointer"
+          className="flex items-center justify-between gap-1.5 sm:gap-3 px-3.5 sm:px-7 md:px-8 bg-[#FAED00] border-l-2 md:border-l-0 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[10px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors ml-auto select-none group cursor-pointer shrink-0"
         >
           <span className="leading-tight text-left">
             DOWNLOAD<br />RESUME
           </span>
           <DownloadSimple
             weight="bold"
-            className="w-5 h-5 md:w-6 md:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
+            className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
           />
         </button>
       </div>
@@ -95,7 +95,7 @@ export default function HeaderV2() {
           <Link
             key={item.label}
             href={item.href}
-            className="flex-1 min-w-[75px] py-2.5 px-2 flex items-center justify-center border-r-2 last:border-r-0 border-black text-[11px] font-black tracking-wider uppercase text-black hover:bg-black hover:text-white transition-colors text-center whitespace-nowrap"
+            className="flex-1 min-w-[65px] sm:min-w-[75px] py-2 sm:py-2.5 px-1 sm:px-2 flex items-center justify-center border-r-2 last:border-r-0 border-black text-[10px] sm:text-[11px] font-black tracking-wider uppercase text-black hover:bg-black hover:text-white transition-colors text-center whitespace-nowrap"
           >
             {item.label}
           </Link>
