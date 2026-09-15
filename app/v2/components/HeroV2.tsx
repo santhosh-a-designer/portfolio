@@ -91,32 +91,32 @@ export default function HeroV2() {
             className="lg:col-span-7 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white h-full max-h-full min-h-0 overflow-hidden"
           >
             {/* Top text block */}
-            <div className="flex flex-col p-4 sm:p-6 md:p-8 lg:p-12 flex-1 min-h-0 overflow-hidden justify-between gap-3 sm:gap-4 lg:gap-0">
+            <div className="flex flex-col p-4 sm:p-6 md:p-8 lg:p-12 lg:justify-between lg:h-full gap-4 sm:gap-5 lg:gap-0">
               {/* Role badges */}
               <motion.div
                 variants={itemVariants}
-                className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-base md:text-xl font-black tracking-wider uppercase text-black mb-1 sm:mb-2 lg:mb-4 font-sans flex-wrap shrink-0"
+                className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-base md:text-xl font-black tracking-wider uppercase text-black mb-0 lg:mb-4 font-sans flex-wrap shrink-0"
               >
                 <span className="text-[#FF462D]">DESIGN ENGINEER</span>
                 <span className="text-[#FF462D]">×</span>
                 <span className="text-black">MENTOR</span>
               </motion.div>
 
-              {/* Headline Auto-Rotating Carousel — compact on mobile to eliminate whitespace gap */}
+              {/* Headline Auto-Rotating Carousel */}
               <motion.div
                 variants={itemVariants}
-                className="relative flex flex-col justify-between mb-2 sm:mb-3 lg:mb-5 min-h-[110px] sm:min-h-[130px] md:h-[200px] lg:h-[260px] overflow-hidden shrink-0"
+                className="relative flex flex-col mb-1 sm:mb-2 lg:mb-5"
                 onMouseEnter={() => setIsHeadlinePaused(true)}
                 onMouseLeave={() => setIsHeadlinePaused(false)}
               >
-                <div className="relative w-full flex-1 overflow-hidden flex items-start">
+                <div className="relative w-full min-h-[55px] sm:min-h-[70px] md:min-h-[85px] lg:min-h-[140px] flex items-start overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.h1
                       key={currentSlide}
-                      initial={{ opacity: 0, y: 16 }}
+                      initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -16 }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      exit={{ opacity: 0, y: -12 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                       className="text-lg sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] font-black leading-[1.2] sm:leading-[1.15] tracking-tight uppercase text-black select-none font-sans hero-heading"
                     >
                       {headlineSlides[currentSlide].content}
@@ -124,8 +124,8 @@ export default function HeroV2() {
                   </AnimatePresence>
                 </div>
 
-                {/* Pagination Dots with manual click navigation */}
-                <div className="flex items-center gap-2 mt-2 sm:mt-3 select-none shrink-0">
+                {/* Pagination Dots directly below headline */}
+                <div className="flex items-center gap-2 mt-2.5 sm:mt-3 select-none shrink-0">
                   {headlineSlides.map((slide, idx) => (
                     <button
                       key={slide.id}
@@ -148,7 +148,7 @@ export default function HeroV2() {
               {/* Subtitle */}
               <motion.div
                 variants={itemVariants}
-                className="flex items-start gap-2 sm:gap-2.5 text-[11px] sm:text-xs md:text-sm font-bold tracking-wide uppercase text-zinc-700 mb-3 sm:mb-4 lg:mb-5 max-w-xl leading-relaxed"
+                className="flex items-start gap-2 sm:gap-2.5 text-[11px] sm:text-xs md:text-sm font-bold tracking-wide uppercase text-zinc-700 mb-1 sm:mb-2 lg:mb-5 max-w-xl leading-relaxed"
               >
                 <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 bg-[#FAED00] border border-black inline-block shrink-0 mt-0.5" />
                 <span>
@@ -156,7 +156,7 @@ export default function HeroV2() {
                 </span>
               </motion.div>
 
-              {/* VIEW WORK — moved up directly below subtitle */}
+              {/* VIEW WORK */}
               <motion.div variants={itemVariants}>
                 <Link
                   href="#work"
