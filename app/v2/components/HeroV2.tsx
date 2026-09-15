@@ -81,7 +81,7 @@ export default function HeroV2() {
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
 
         {/* ─── Main Hero Grid — locked to desktop viewport height to prevent all layout shifts ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-black lg:h-[calc(100vh-64px)] lg:max-h-[calc(100vh-64px)] min-h-[520px] overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-black lg:h-[calc(100vh-64px)] lg:max-h-[calc(100vh-64px)] min-h-0 overflow-hidden">
 
           {/* ─────────── LEFT COLUMN ─────────── */}
           <motion.div
@@ -91,21 +91,21 @@ export default function HeroV2() {
             className="lg:col-span-7 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white h-full max-h-full min-h-0 overflow-hidden"
           >
             {/* Top text block */}
-            <div className="flex flex-col p-6 sm:p-8 md:p-10 lg:p-12 flex-1 min-h-0 overflow-hidden justify-between">
+            <div className="flex flex-col p-4 sm:p-6 md:p-8 lg:p-12 flex-1 min-h-0 overflow-hidden justify-between gap-3 sm:gap-4 lg:gap-0">
               {/* Role badges */}
               <motion.div
                 variants={itemVariants}
-                className="flex items-center gap-2.5 sm:gap-3 text-base sm:text-lg md:text-xl font-black tracking-wider uppercase text-black mb-4 font-sans flex-wrap shrink-0"
+                className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-base md:text-xl font-black tracking-wider uppercase text-black mb-1 sm:mb-2 lg:mb-4 font-sans flex-wrap shrink-0"
               >
                 <span className="text-[#FF462D]">DESIGN ENGINEER</span>
                 <span className="text-[#FF462D]">×</span>
                 <span className="text-black">MENTOR</span>
               </motion.div>
 
-              {/* Headline Auto-Rotating Carousel — fixed height prevents any vertical movement of content below */}
+              {/* Headline Auto-Rotating Carousel — compact on mobile to eliminate whitespace gap */}
               <motion.div
                 variants={itemVariants}
-                className="relative flex flex-col justify-between mb-4 sm:mb-5 h-[230px] sm:h-[240px] md:h-[250px] lg:h-[260px] overflow-hidden shrink-0"
+                className="relative flex flex-col justify-between mb-2 sm:mb-3 lg:mb-5 min-h-[110px] sm:min-h-[130px] md:h-[200px] lg:h-[260px] overflow-hidden shrink-0"
                 onMouseEnter={() => setIsHeadlinePaused(true)}
                 onMouseLeave={() => setIsHeadlinePaused(false)}
               >
@@ -117,7 +117,7 @@ export default function HeroV2() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -16 }}
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="text-2xl sm:text-3xl md:text-4xl lg:text-[34px] xl:text-[38px] font-black leading-[1.15] tracking-tight uppercase text-black select-none font-sans hero-heading line-clamp-4"
+                      className="text-lg sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] font-black leading-[1.2] sm:leading-[1.15] tracking-tight uppercase text-black select-none font-sans hero-heading"
                     >
                       {headlineSlides[currentSlide].content}
                     </motion.h1>
@@ -125,7 +125,7 @@ export default function HeroV2() {
                 </div>
 
                 {/* Pagination Dots with manual click navigation */}
-                <div className="flex items-center gap-2 mt-3 select-none shrink-0">
+                <div className="flex items-center gap-2 mt-2 sm:mt-3 select-none shrink-0">
                   {headlineSlides.map((slide, idx) => (
                     <button
                       key={slide.id}
@@ -134,7 +134,7 @@ export default function HeroV2() {
                       aria-label={`Go to slide ${idx + 1}`}
                       className={`h-2 transition-all duration-300 rounded-none border border-black ${
                         currentSlide === idx
-                          ? "w-8 bg-[#FF462D] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                          ? "w-7 sm:w-8 bg-[#FF462D] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                           : "w-2.5 bg-zinc-200 hover:bg-zinc-400 opacity-60 hover:opacity-100 cursor-pointer"
                       }`}
                     />
@@ -148,9 +148,9 @@ export default function HeroV2() {
               {/* Subtitle */}
               <motion.div
                 variants={itemVariants}
-                className="flex items-start gap-2.5 text-xs sm:text-sm font-bold tracking-wide uppercase text-zinc-700 mb-5 max-w-xl"
+                className="flex items-start gap-2 sm:gap-2.5 text-[11px] sm:text-xs md:text-sm font-bold tracking-wide uppercase text-zinc-700 mb-3 sm:mb-4 lg:mb-5 max-w-xl leading-relaxed"
               >
-                <span className="w-3.5 h-3.5 bg-[#FAED00] border border-black inline-block shrink-0 mt-0.5" />
+                <span className="w-3 h-3 sm:w-3.5 sm:h-3.5 bg-[#FAED00] border border-black inline-block shrink-0 mt-0.5" />
                 <span>
                   UX DESIGNER FROM CHENNAI FOCUSED ON CONVERSION-LED PRODUCTS, PRACTICAL SYSTEMS, AND CLEAN HANDOFFS.
                 </span>
@@ -160,7 +160,7 @@ export default function HeroV2() {
               <motion.div variants={itemVariants}>
                 <Link
                   href="#work"
-                  className="inline-flex items-center justify-between gap-6 px-7 py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[5px_5px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group min-w-[200px] cursor-pointer font-mono scanline-btn"
+                  className="w-full sm:w-auto inline-flex items-center justify-between gap-4 sm:gap-6 px-5 py-3 sm:px-7 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] sm:shadow-[5px_5px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group min-w-0 sm:min-w-[200px] cursor-pointer font-mono scanline-btn"
                 >
                   <span>VIEW WORK</span>
                   <ArrowUpRight
