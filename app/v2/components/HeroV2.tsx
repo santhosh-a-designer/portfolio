@@ -157,15 +157,15 @@ export default function HeroV2() {
               </motion.div>
 
               {/* VIEW WORK */}
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} className="mt-1 sm:mt-0">
                 <Link
                   href="#work"
-                  className="w-full sm:w-auto inline-flex items-center justify-between gap-4 sm:gap-6 px-5 py-3 sm:px-7 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] sm:shadow-[5px_5px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group min-w-0 sm:min-w-[200px] cursor-pointer font-mono scanline-btn"
+                  className="inline-flex items-center justify-center gap-3 sm:gap-5 px-4 py-2 sm:px-7 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] sm:shadow-[5px_5px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-[11px] sm:text-sm font-black tracking-widest uppercase select-none group w-auto cursor-pointer font-mono scanline-btn"
                 >
                   <span>VIEW WORK</span>
                   <ArrowUpRight
                     weight="bold"
-                    className="w-4 h-4 text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                   />
                 </Link>
               </motion.div>
