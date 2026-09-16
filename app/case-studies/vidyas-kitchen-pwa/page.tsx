@@ -4,6 +4,8 @@ import HeaderV2 from '@/app/v2/components/HeaderV2';
 import FloatingActionTriggers from '@/app/v2/components/FloatingActionTriggers';
 import LenisProvider from '@/components/LenisProvider';
 
+import Image from 'next/image';
+
 export const metadata = {
   title: "Vidya's Kitchen — A full-stack ordering system for a home chef business | Simon Santhosh",
   description: "A full-stack ordering system for a home chef business — Customer App, Admin Dashboard, Driver App & WhatsApp Bot.",
@@ -36,11 +38,18 @@ export default function VidyasKitchenCaseStudyPage() {
               A full-stack ordering system for a home chef business
             </h3>
 
-            {/* Hero image placeholder */}
-            <div className="py-12 border-y border-black/15 text-center my-8">
-              <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                [IMAGE: Hero shot — customer app home screen or a nice mockup collage of all 4 surfaces (Customer app, Dashboard, Driver app, WhatsApp chat)]
-              </p>
+            {/* Hero image */}
+            <div className="py-6 border-y border-black/15 my-8 flex justify-center">
+              <div className="w-full max-w-sm overflow-hidden rounded-2xl border border-black/10 shadow-sm">
+                <Image
+                  src="/case-studies/vidyas-kitchen/customer-menu.png"
+                  alt="Vidya's Kitchen Customer App - Browse Menu"
+                  width={600}
+                  height={1200}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+              </div>
             </div>
 
             {/* Metadata list */}
