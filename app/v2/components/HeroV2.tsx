@@ -176,10 +176,10 @@ export default function HeroV2() {
               variants={itemVariants}
               className="grid grid-cols-3 grid-rows-2 border-t-2 border-black bg-white select-none"
             >
-              {/* Row 1, Col 1: 5+ YEARS */}
+              {/* Row 1, Col 1: 6+ YEARS */}
               <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-b-2 border-black min-h-[72px] sm:min-h-[88px]">
                 <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
-                  5+
+                  6+
                 </span>
                 <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
                   YEARS

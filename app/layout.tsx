@@ -44,11 +44,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Simon Santhosh — UX Designer & Design Engineer",
   description:
-    "5+ years crafting intuitive digital experiences. UX Designer, Mentor, and Design Engineer based in Chennai, India.",
+    "6+ years crafting intuitive digital experiences. UX Designer, Mentor, and Design Engineer based in Chennai, India.",
   keywords: ["UX Designer", "Design Engineer", "Product Design", "Chennai", "Simon Santhosh"],
   openGraph: {
     title: "Simon Santhosh — UX Designer & Design Engineer",
-    description: "Designing experiences that move people. 5+ years in UX, Design Systems, Front-end Engineering.",
+    description: "Designing experiences that move people. 6+ years in UX, Design Systems, Front-end Engineering.",
     type: "website",
     url: siteUrl,
   },

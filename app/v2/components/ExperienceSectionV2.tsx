@@ -12,6 +12,7 @@ interface ExperienceItem {
   period: string;
   location: string;
   isHighlight?: boolean;
+  isCurrent?: boolean;
   description: string;
   highlights: string[];
   skills: string[];
@@ -20,11 +21,12 @@ interface ExperienceItem {
 const experiences: ExperienceItem[] = [
   {
     num: "01",
-    role: "HEAD OF PRODUCT DESIGN & AI",
+    role: "DESIGN ENGINEER / HEAD OF PRODUCT DESIGN",
     company: "COMMERCE AGENTS",
     period: "2025 – PRESENT",
     location: "GLOBAL / REMOTE",
     isHighlight: true,
+    isCurrent: true,
     description: "Leading 0-to-1 product strategy, multi-agent AI workflow design, and high-performance design systems for venture-backed AI platforms.",
     highlights: [
       "Architected autonomous agent interaction models & multimodal AI workflows",
@@ -56,10 +58,24 @@ const experiences: ExperienceItem[] = [
     description: "Spearheaded design and UI architecture for SaaS marketing automation tools, increasing activation and user retention.",
     highlights: [
       "Redesigned SaaS navigation architecture and campaign generation wizard",
+      "Scaled app downloads from 1K to 10K+ through usability and onboarding redesign",
       "Improved subscription and checkout conversion by 26%",
-      "Mentored junior designers and established standard Figma workflow guidelines",
     ],
     skills: ["SaaS Design", "Conversion (CRO)", "Information Architecture", "Prototyping", "A/B Testing"],
+  },
+  {
+    num: "04",
+    role: "UX DESIGNER",
+    company: "ICONIC DREAM FOCUS",
+    period: "2020 – 2022",
+    location: "CHENNAI, INDIA",
+    description: "Led design and early web development for a growing agency — shipped a social networking app and won a competitive government digital project.",
+    highlights: [
+      "Won a Tamil Nadu government project, boosting company opportunities by 30%",
+      "Designed and shipped DRMURS, a social networking & goal-achieving app",
+      "Reduced project delivery time by 25% as team lead",
+    ],
+    skills: ["User Research", "Cross-functional Leadership", "Figma", "HTML/CSS/JS", "Usability Testing"],
   },
 ];
 
@@ -91,7 +107,7 @@ export default function ExperienceSectionV2() {
             className="md:col-span-4 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center text-center select-none"
           >
             <span className="text-4xl min-[360px]:text-5xl sm:text-6xl font-black font-mono tracking-tighter text-black leading-none mb-1">
-              05+
+              06+
             </span>
             <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-black font-mono">
               YEARS EXP.
@@ -120,7 +136,7 @@ export default function ExperienceSectionV2() {
                 </span>
                 <span className="text-zinc-300">/</span>
                 <span className="text-[9.5px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
-                  3 MILESTONES
+                  4 MILESTONES
                 </span>
               </div>
               <h2 className="text-xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-mono mb-2 sm:mb-3">
@@ -145,10 +161,11 @@ export default function ExperienceSectionV2() {
 
         </div>
 
-        {/* ─── 3-Column Experience Grid: 3 Clean Grid Boxes ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black border-b-0 bg-white">
+        {/* ─── 4-Column Experience Grid: 4 Clean Grid Boxes ─── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b-0 bg-white">
           {experiences.map((exp, idx) => {
             const isHighlight = exp.isHighlight;
+            const isCurrent = exp.isCurrent;
 
             return (
               <motion.div
@@ -156,20 +173,42 @@ export default function ExperienceSectionV2() {
                 initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.55, delay: idx * 0.09, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col justify-between p-4 sm:p-6 md:p-8 bg-white hover:bg-zinc-50/70 transition-colors group relative"
+                transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className={`flex flex-col justify-between p-4 sm:p-6 md:p-7 transition-colors group relative border-b-2 lg:border-b-0 ${
+                  idx % 2 === 0 ? "md:border-r-2" : "md:border-r-0"
+                } ${
+                  idx < 3 ? "lg:border-r-2" : "lg:border-r-0"
+                } ${
+                  idx < 2 ? "md:border-b-2 lg:border-b-0" : "md:border-b-0"
+                } ${
+                  idx === 3 ? "border-b-0" : ""
+                } border-black ${
+                  isCurrent
+                    ? "bg-[#0FE0E3] hover:bg-[#0cd0d3] text-black"
+                    : "bg-white hover:bg-zinc-50/70 text-black"
+                }`}
               >
                 {/* Top Number & Period Header */}
                 <div>
-                  <div className="flex items-center justify-between gap-4 pb-4 mb-5 border-b-2 border-black">
-                    <span className="text-3xl sm:text-4xl font-black font-mono tracking-tighter text-black">
+                  <div className="flex items-start justify-between gap-4 pb-4 mb-5 border-b-2 border-black">
+                    <span className="text-3xl sm:text-4xl font-black font-mono tracking-tighter text-black leading-none">
                       {exp.num}
                     </span>
-                    <div className="flex flex-col items-end text-right">
-                      <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-wider text-black">
-                        {exp.period}
-                      </span>
-                      <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
+                    <div className="flex flex-col items-end text-right gap-1">
+                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                        {isCurrent && (
+                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-black text-[#0FE0E3] font-mono text-[9px] font-black uppercase tracking-wider border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse" />
+                            CURRENT
+                          </span>
+                        )}
+                        <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-wider text-black">
+                          {exp.period}
+                        </span>
+                      </div>
+                      <span className={`text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider ${
+                        isCurrent ? "text-black/80" : "text-zinc-600"
+                      }`}>
                         {exp.location}
                       </span>
                     </div>
@@ -179,30 +218,42 @@ export default function ExperienceSectionV2() {
                   <div className="mb-4">
                     <h3
                       className={`text-base sm:text-lg font-black uppercase tracking-tight leading-snug mb-1 transition-colors ${
-                        isHighlight ? "text-[#FF462D]" : "text-black group-hover:text-[#FF462D]"
+                        isCurrent
+                          ? "text-black"
+                          : isHighlight
+                          ? "text-[#FF462D]"
+                          : "text-black group-hover:text-[#FF462D]"
                       }`}
                     >
                       {exp.role}
                     </h3>
-                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-600 block">
+                    <span className={`text-xs font-mono font-bold uppercase tracking-wider block ${
+                      isCurrent ? "text-black/80" : "text-zinc-600"
+                    }`}>
                       {exp.company}
                     </span>
                   </div>
 
                   {/* Description */}
-                  <p className="text-xs font-bold uppercase tracking-wide text-zinc-800 leading-relaxed mb-6">
+                  <p className={`text-xs font-bold uppercase tracking-wide leading-relaxed mb-6 ${
+                    isCurrent ? "text-black" : "text-zinc-800"
+                  }`}>
                     {exp.description}
                   </p>
 
                   {/* Key Achievements Bullet Points */}
-                  <div className="space-y-2.5 pt-4 border-t-2 border-black/10 mb-6">
-                    <span className="text-[9px] font-mono font-black uppercase tracking-widest text-zinc-500 block">
+                  <div className={`space-y-2.5 pt-4 border-t-2 ${isCurrent ? "border-black/20" : "border-black/10"} mb-6`}>
+                    <span className={`text-[9px] font-mono font-black uppercase tracking-widest block ${
+                      isCurrent ? "text-black/80" : "text-zinc-500"
+                    }`}>
                       KEY ACHIEVEMENTS
                     </span>
                     <ul className="space-y-2">
                       {exp.highlights.map((h, i) => (
-                        <li key={i} className="text-xs font-medium text-zinc-800 flex items-start gap-2 leading-snug">
-                          <span className="text-[#FF462D] font-bold text-sm leading-none mt-0.5">■</span>
+                        <li key={i} className={`text-xs font-medium flex items-start gap-2 leading-snug ${
+                          isCurrent ? "text-black font-semibold" : "text-zinc-800"
+                        }`}>
+                          <span className={`${isCurrent ? "text-black" : "text-[#FF462D]"} font-bold text-sm leading-none mt-0.5 shrink-0`}>■</span>
                           <span>{h}</span>
                         </li>
                       ))}
@@ -211,15 +262,21 @@ export default function ExperienceSectionV2() {
                 </div>
 
                 {/* Skills Tags Bottom Row */}
-                <div className="pt-4 border-t-2 border-black/10 mt-auto">
-                  <span className="text-[9px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-2">
+                <div className={`pt-4 border-t-2 ${isCurrent ? "border-black/20" : "border-black/10"} mt-auto`}>
+                  <span className={`text-[9px] font-mono font-black uppercase tracking-widest block mb-2 ${
+                    isCurrent ? "text-black/80" : "text-zinc-500"
+                  }`}>
                     CORE EXPERTISE
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {exp.skills.map((s) => (
                       <span
                         key={s}
-                        className="text-[10px] font-mono font-bold px-2 py-1 bg-white border border-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:border-[#FF462D] transition-colors"
+                        className={`text-[10px] font-mono font-bold px-2 py-1 border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-colors select-none ${
+                          isCurrent
+                            ? "bg-white text-black hover:bg-zinc-100"
+                            : "bg-white text-black group-hover:border-[#FF462D]"
+                        }`}
                         title={`<skill type="${s.toLowerCase().replace(/ /g, '-')}" />`}
                       >
                         {s}
