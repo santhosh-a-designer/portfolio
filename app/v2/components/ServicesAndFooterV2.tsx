@@ -75,11 +75,17 @@ export default function ServicesAndFooterV2() {
   };
 
   const toggleService = (idx: number) => {
-    setOpenIndex(openIndex === idx ? null : idx);
-    // Smoothly scroll to the yellow details box after React state update
-    requestAnimationFrame(() => {
-      setTimeout(scrollToYellowBox, 40);
-    });
+    const isOpening = openIndex !== idx;
+    const nextIndex = isOpening ? idx : null;
+
+    setOpenIndex(nextIndex);
+
+    // Only scroll if OPENING an item; do NOT scroll when closing
+    if (isOpening) {
+      requestAnimationFrame(() => {
+        setTimeout(scrollToYellowBox, 50);
+      });
+    }
   };
 
   const copyEmail = () => {
