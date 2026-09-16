@@ -155,14 +155,14 @@ function VidyasKitchenDualDeviceMockup() {
             </div>
 
             {/* Laptop Screen Display */}
-            <div className="relative w-full aspect-[16/10] bg-black rounded-t-[8px] sm:rounded-t-[11px] overflow-hidden border border-black">
+            <div className="relative w-full aspect-[1024/567] bg-[#0A0D12] rounded-t-[8px] sm:rounded-t-[11px] overflow-hidden border border-black flex items-center justify-center">
               <Image
                 src="/case-studies/vidyas-kitchen/vidyas-kitchen-admin-dashboard.png"
                 alt="Vidya's Kitchen Admin Dashboard"
                 fill
                 unoptimized
                 sizes="(max-width: 640px) 300px, (max-width: 1024px) 420px, 500px"
-                className="object-cover object-top filter contrast-[1.02]"
+                className="object-contain filter contrast-[1.02]"
                 priority
               />
               {/* Screen Glare Overlay */}
