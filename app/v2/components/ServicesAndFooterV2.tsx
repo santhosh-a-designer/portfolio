@@ -487,7 +487,6 @@ export default function ServicesAndFooterV2() {
                   <span className="text-[10px] font-mono font-black uppercase tracking-widest text-black/70">
                     // OUTCOME
                   </span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-black animate-pulse" />
                 </div>
                 <div className="text-2xl sm:text-3xl lg:text-[28px] font-black text-black font-mono tracking-tight leading-tight">
                   PLACED IN TECH
