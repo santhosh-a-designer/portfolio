@@ -47,7 +47,7 @@ export default function VidyasKitchenCaseStudyPage() {
             <div className="space-y-1.5 text-sm sm:text-base font-normal text-gray-900 pt-2">
               <p><strong>Role:</strong> Product Designer &amp; Developer (solo)</p>
               <p><strong>Timeline:</strong> ~6 months</p>
-              <p><strong>Stack:</strong> Next.js 14, TypeScript, Supabase, Framer Motion, Razorpay, WhatsApp Cloud API</p>
+              <p><strong>Stack:</strong> Figma, Next.js 14, TypeScript, Supabase, Framer Motion, Razorpay, WhatsApp Cloud API</p>
             </div>
           </header>
 
