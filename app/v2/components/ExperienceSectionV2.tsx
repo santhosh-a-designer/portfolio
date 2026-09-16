@@ -216,15 +216,22 @@ export default function ExperienceSectionV2() {
                     CORE EXPERTISE
                   </span>
                   <div className="flex flex-wrap gap-1.5">
-                    {exp.skills.map((s) => (
-                      <span
-                        key={s}
-                        className="text-[10px] font-mono font-bold px-2 py-1 bg-white border border-black text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] group-hover:border-[#FF462D] transition-colors"
-                        title={`<skill type="${s.toLowerCase().replace(/ /g, '-')}" />`}
-                      >
-                        {s}
-                      </span>
-                    ))}
+                    {exp.skills.map((s, sIdx) => {
+                      const isYellow = sIdx % 2 === 0;
+                      return (
+                        <span
+                          key={s}
+                          className={`text-[10px] font-mono font-black uppercase px-2 py-1 border-2 border-black transition-transform hover:-translate-y-0.5 select-none ${
+                            isYellow
+                              ? "bg-[#FAED00] text-black shadow-[2px_2px_0px_0px_#FF462D]"
+                              : "bg-[#FF462D] text-black shadow-[2px_2px_0px_0px_#FAED00]"
+                          }`}
+                          title={`<skill type="${s.toLowerCase().replace(/ /g, '-')}" />`}
+                        >
+                          {s}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               </motion.div>
