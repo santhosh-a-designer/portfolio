@@ -26,34 +26,19 @@ export default function BackToWorksLink({ href = "/#works", onClick, ...rest }: 
         onClick?.(e);
         if (e.defaultPrevented) return;
         e.preventDefault();
-
-        // Check if user came from /v2 or has v2 origin flag
-        let isFromV2 = false;
-        try {
-          if (
-            sessionStorage.getItem("origin_version") === "v2" ||
-            document.referrer.includes("/v2")
-          ) {
-            isFromV2 = true;
-          }
-        } catch {
-          /* ignore */
-        }
-
-        const targetHref = isFromV2 ? "/v2#work" : href;
-
         try {
           const targetKey =
-            targetHref.includes("#snippets") ? SCROLL_TO_SNIPPETS_STORAGE_KEY : SCROLL_TO_WORKS_STORAGE_KEY;
+            href.includes("#snippets") ? SCROLL_TO_SNIPPETS_STORAGE_KEY : SCROLL_TO_WORKS_STORAGE_KEY;
           sessionStorage.setItem(targetKey, "1");
         } catch {
           /* private / blocked storage */
         }
-
+        // Cross-route hash scroll can be flaky with soft navigation; force a full nav so
+        // HomeHashScroll + hash always run from a clean page load.
         if (typeof window !== "undefined") {
-          window.location.assign(targetHref);
+          window.location.assign(href);
         } else {
-          router.push(targetHref);
+          router.push("/");
         }
       }}
     />
