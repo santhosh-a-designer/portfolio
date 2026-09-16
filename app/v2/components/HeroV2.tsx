@@ -198,7 +198,6 @@ export default function HeroV2() {
 
               {/* Row 1, Col 3: Green Box - Available for full-time */}
               <div className="border-b-2 border-black bg-[#00C16A] p-2 min-[360px]:p-2.5 sm:p-4 md:p-5 flex flex-col items-center justify-center group cursor-default h-full min-h-[72px] sm:min-h-[88px]">
-                <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-black mb-1 sm:mb-2" />
                 <span className="text-black font-black text-[8.5px] min-[360px]:text-[9.5px] min-[400px]:text-[10.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-center leading-tight font-mono">
                   AVAILABLE<br />FOR FULL-TIME
                 </span>
