@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Terminal } from "@phosphor-icons/react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, MotionValue } from "framer-motion";
 
 export interface ProjectItem {
   id: string;
@@ -20,9 +20,54 @@ export interface ProjectItem {
   description?: string;
 }
 
+const vidyasMobileScreens = [
+  {
+    step: "01",
+    title: "LOGIN / WELCOME",
+    src: "/case-studies/vidyas-kitchen/screens/01-welcome-login.png",
+    alt: "Vidya's Kitchen Welcome & Login Screen",
+  },
+  {
+    step: "02",
+    title: "OTP VERIFICATION",
+    src: "/case-studies/vidyas-kitchen/screens/02-otp-verify.png",
+    alt: "Vidya's Kitchen OTP Verification Screen",
+  },
+  {
+    step: "03",
+    title: "MAP & LOCATION",
+    src: "/case-studies/vidyas-kitchen/screens/03-location-map.png",
+    alt: "Vidya's Kitchen Live Location & Map Screen",
+  },
+  {
+    step: "04",
+    title: "HOME & FEED",
+    src: "/case-studies/vidyas-kitchen/screens/04-home-feed.png",
+    alt: "Vidya's Kitchen Home Dashboard Screen",
+  },
+  {
+    step: "05",
+    title: "BROWSE MENU",
+    src: "/case-studies/vidyas-kitchen/screens/05-browse-menu.png",
+    alt: "Vidya's Kitchen Browse Menu Catalog Screen",
+  },
+];
+
 function VidyasKitchenDualDeviceMockup() {
+  const [activeScreenIndex, setActiveScreenIndex] = useState(0);
+
+  // Auto-cycle through the 5 screens every 3.2 seconds
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveScreenIndex((prev) => (prev + 1) % vidyasMobileScreens.length);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, []);
+
+  const currentScreen = vidyasMobileScreens[activeScreenIndex];
+
   return (
-    <div className="w-full h-full min-h-[220px] sm:min-h-[280px] md:min-h-[320px] lg:max-h-[420px] bg-[#0A0D12] border-2 border-black p-3 sm:p-5 flex items-center justify-center relative overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] select-none">
+    <div className="w-full h-full min-h-[260px] sm:min-h-[300px] md:min-h-[340px] lg:max-h-[440px] bg-[#0A0D12] border-2 border-black p-3 sm:p-5 flex flex-col justify-center items-center relative overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] select-none">
       {/* Subtle grid pattern background */}
       <div 
         className="absolute inset-0 opacity-[0.07] pointer-events-none"
@@ -33,44 +78,74 @@ function VidyasKitchenDualDeviceMockup() {
       />
 
       {/* Dual Devices Composition: iPhone (Left) + MacBook (Right) */}
-      <div className="relative z-10 w-full flex flex-row items-center justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-8 max-w-[560px] mx-auto pb-6 sm:pb-8">
+      <div className="relative z-10 w-full flex flex-row items-center justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-8 max-w-[560px] mx-auto pb-7 sm:pb-9">
         
         {/* ─── LEFT: iPhone / Mobile Mockup (Silver Edition) ─── */}
-        <div className="relative w-[30%] max-w-[145px] shrink-0 transform -rotate-1 sm:-rotate-2 hover:rotate-0 transition-transform duration-300 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
+        <div className="relative w-[34%] sm:w-[32%] max-w-[155px] shrink-0 transform -rotate-1 sm:-rotate-2 hover:rotate-0 transition-transform duration-300 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
           {/* iPhone Silver Titanium / Aluminum Chassis */}
-          <div className="relative bg-gradient-to-br from-[#F1F5F9] via-[#E2E8F0] to-[#CBD5E1] p-[3px] sm:p-[4.5px] rounded-[18px] sm:rounded-[22px] border-[2px] border-[#94A3B8] shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_4px_12px_rgba(0,0,0,0.4)]">
+          <div className="relative bg-gradient-to-br from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[3px] sm:p-[4.5px] rounded-[20px] sm:rounded-[24px] border-[2px] border-[#94A3B8] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_6px_16px_rgba(0,0,0,0.5)]">
             
             {/* Dynamic Island / Speaker Notch Pill */}
             <div className="absolute top-[6px] sm:top-[8px] left-1/2 -translate-x-1/2 w-8 sm:w-10 h-2 sm:h-2.5 bg-[#09090b] rounded-full z-20 flex items-center justify-end pr-1 border border-black/40">
               <div className="w-1 h-1 rounded-full bg-[#1c3d5a]/70" />
             </div>
 
-            {/* Screen Bezel & Container */}
-            <div className="relative w-full aspect-[9/18.5] bg-black rounded-[14px] sm:rounded-[18px] overflow-hidden border border-black/80">
-              <Image
-                src="/case-studies/vidyas-kitchen/VK-M-1.png"
-                alt="Vidya's Kitchen Mobile PWA Experience"
-                fill
-                sizes="(max-width: 640px) 120px, 150px"
-                className="object-cover object-top"
-                priority
-              />
+            {/* Screen Bezel & Container displaying the 5 high-res screens */}
+            <div className="relative w-full aspect-[9/18.5] bg-black rounded-[16px] sm:rounded-[20px] overflow-hidden border border-black/80">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentScreen.src}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 1.02 }}
+                  transition={{ duration: 0.35, ease: "easeOut" }}
+                  className="relative w-full h-full"
+                >
+                  <Image
+                    src={currentScreen.src}
+                    alt={currentScreen.alt}
+                    fill
+                    unoptimized
+                    sizes="(max-width: 640px) 180px, 220px"
+                    className="object-cover object-top filter contrast-[1.03] brightness-[1.01]"
+                    priority
+                  />
+                </motion.div>
+              </AnimatePresence>
+
               {/* Gloss Reflection Overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.08] to-transparent pointer-events-none" />
             </div>
 
             {/* Bottom Home Indicator Line */}
-            <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-10 sm:w-12 h-[2.5px] bg-white/50 rounded-full z-20 pointer-events-none" />
+            <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-10 sm:w-12 h-[2.5px] bg-white/60 rounded-full z-20 pointer-events-none" />
           </div>
 
-          {/* Badge: MOBILE PWA */}
-          <div className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-[#00C16A] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
-            MOBILE PWA
+          {/* Interactive Screen Step Dots */}
+          <div className="flex items-center justify-center gap-1 mt-1.5 z-20">
+            {vidyasMobileScreens.map((s, idx) => (
+              <button
+                key={s.step}
+                type="button"
+                onClick={() => setActiveScreenIndex(idx)}
+                aria-label={`Show ${s.title}`}
+                className={`h-1.5 transition-all duration-300 rounded-full border border-black cursor-pointer ${
+                  activeScreenIndex === idx
+                    ? "w-4 bg-[#00C16A]"
+                    : "w-1.5 bg-white/40 hover:bg-white"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Badge: MOBILE PWA + Current Screen Title */}
+          <div className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-[#00C16A] text-black font-mono font-black text-[7px] sm:text-[8px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
+            {currentScreen.step} // {currentScreen.title}
           </div>
         </div>
 
         {/* ─── RIGHT: MacBook / Desktop Mockup (Silver Aluminum Edition) ─── */}
-        <div className="relative w-[65%] max-w-[340px] shrink-0 drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-transform duration-300">
+        <div className="relative w-[62%] sm:w-[64%] max-w-[340px] shrink-0 drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-transform duration-300">
           {/* MacBook Top Lid Display in Silver Anodized Finish */}
           <div className="relative bg-gradient-to-b from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[3.5px] sm:p-[5px] rounded-t-[10px] sm:rounded-t-[14px] border-[2px] border-b-0 border-[#94A3B8] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9)]">
             
@@ -85,8 +160,9 @@ function VidyasKitchenDualDeviceMockup() {
                 src="/case-studies/vidyas-kitchen/vidyas-kitchen-thumb.png"
                 alt="Vidya's Kitchen Desktop Experience"
                 fill
+                unoptimized
                 sizes="(max-width: 640px) 240px, (max-width: 1024px) 340px, 400px"
-                className="object-cover object-top"
+                className="object-cover object-top filter contrast-[1.03]"
                 priority
               />
               {/* Screen Glare Overlay */}
