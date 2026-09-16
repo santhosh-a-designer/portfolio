@@ -20,52 +20,9 @@ export interface ProjectItem {
   description?: string;
 }
 
-const vidyasMobileScreens = [
-  {
-    step: "01",
-    title: "LOGIN / WELCOME",
-    src: "/case-studies/vidyas-kitchen/screens/01-welcome-login.png",
-    alt: "Vidya's Kitchen Welcome & Login Screen",
-  },
-  {
-    step: "02",
-    title: "OTP VERIFICATION",
-    src: "/case-studies/vidyas-kitchen/screens/02-otp-verify.png",
-    alt: "Vidya's Kitchen OTP Verification Screen",
-  },
-  {
-    step: "03",
-    title: "MAP & LOCATION",
-    src: "/case-studies/vidyas-kitchen/screens/03-location-map.png",
-    alt: "Vidya's Kitchen Live Location & Map Screen",
-  },
-  {
-    step: "04",
-    title: "HOME & FEED",
-    src: "/case-studies/vidyas-kitchen/screens/04-home-feed.png",
-    alt: "Vidya's Kitchen Home Dashboard Screen",
-  },
-  {
-    step: "05",
-    title: "BROWSE MENU",
-    src: "/case-studies/vidyas-kitchen/screens/05-browse-menu.png",
-    alt: "Vidya's Kitchen Browse Menu Catalog Screen",
-  },
-];
+
 
 function VidyasKitchenDualDeviceMockup() {
-  const [activeScreenIndex, setActiveScreenIndex] = useState(0);
-
-  // Auto-cycle through the 5 screens every 3.2 seconds
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveScreenIndex((prev) => (prev + 1) % vidyasMobileScreens.length);
-    }, 3200);
-    return () => clearInterval(timer);
-  }, []);
-
-  const currentScreen = vidyasMobileScreens[activeScreenIndex];
-
   return (
     <div className="w-full h-full min-h-[260px] sm:min-h-[300px] md:min-h-[340px] lg:max-h-[440px] bg-[#0A0D12] border-2 border-black p-3 sm:p-5 flex flex-col justify-center items-center relative overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] select-none">
       {/* Subtle grid pattern background */}
@@ -90,28 +47,17 @@ function VidyasKitchenDualDeviceMockup() {
               <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-[#1c3d5a]/70" />
             </div>
 
-            {/* Screen Bezel & Container displaying the 5 high-res screens */}
-            <div className="relative w-full aspect-[9/18.5] bg-black rounded-[13px] sm:rounded-[16px] overflow-hidden border border-black/80">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentScreen.src}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 1.02 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="relative w-full h-full"
-                >
-                  <Image
-                    src={currentScreen.src}
-                    alt={currentScreen.alt}
-                    fill
-                    unoptimized
-                    sizes="(max-width: 640px) 130px, 160px"
-                    className="object-cover object-top filter contrast-[1.03] brightness-[1.01]"
-                    priority
-                  />
-                </motion.div>
-              </AnimatePresence>
+            {/* Screen Bezel & Container displaying the exact Browse Menu screen */}
+            <div className="relative w-full aspect-[438/956] bg-black rounded-[13px] sm:rounded-[16px] overflow-hidden border border-black/80">
+              <Image
+                src="/case-studies/vidyas-kitchen/vidyas-kitchen-mobile-menu.png"
+                alt="Vidya's Kitchen Browse Menu Mobile App"
+                fill
+                unoptimized
+                sizes="(max-width: 640px) 130px, 160px"
+                className="object-cover object-top filter contrast-[1.02]"
+                priority
+              />
 
               {/* Gloss Reflection Overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.08] to-transparent pointer-events-none" />
@@ -121,26 +67,9 @@ function VidyasKitchenDualDeviceMockup() {
             <div className="absolute bottom-[5px] left-1/2 -translate-x-1/2 w-8 sm:w-10 h-[2px] bg-white/60 rounded-full z-20 pointer-events-none" />
           </div>
 
-          {/* Interactive Screen Step Dots */}
-          <div className="flex items-center justify-center gap-1 mt-1 z-20">
-            {vidyasMobileScreens.map((s, idx) => (
-              <button
-                key={s.step}
-                type="button"
-                onClick={() => setActiveScreenIndex(idx)}
-                aria-label={`Show ${s.title}`}
-                className={`h-1.5 transition-all duration-300 rounded-full border border-black cursor-pointer ${
-                  activeScreenIndex === idx
-                    ? "w-3 sm:w-4 bg-[#00C16A]"
-                    : "w-1.5 bg-white/40 hover:bg-white"
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Badge: MOBILE PWA + Current Screen Title */}
-          <div className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 px-1 sm:px-1.5 py-0.5 bg-[#00C16A] text-black font-mono font-black text-[6.5px] sm:text-[7.5px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
-            {currentScreen.step} // {currentScreen.title}
+          {/* Badge: MOBILE MENU */}
+          <div className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-[#00C16A] text-black font-mono font-black text-[7px] sm:text-[8px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
+            BROWSE MENU
           </div>
         </div>
 
