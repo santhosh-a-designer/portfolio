@@ -20,6 +20,110 @@ export interface ProjectItem {
   description?: string;
 }
 
+function VidyasKitchenDualDeviceMockup() {
+  return (
+    <div className="w-full h-full min-h-[220px] sm:min-h-[280px] md:min-h-[320px] lg:max-h-[420px] bg-[#0A0D12] border-2 border-black p-3 sm:p-5 flex items-center justify-center relative overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] select-none">
+      {/* Subtle grid pattern background */}
+      <div 
+        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        style={{
+          backgroundImage: "linear-gradient(#ffffff 1px, transparent 1px), linear-gradient(90deg, #ffffff 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      />
+
+      {/* Dual Devices Composition: iPhone (Left) + MacBook (Right) */}
+      <div className="relative z-10 w-full flex flex-row items-center justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-8 max-w-[560px] mx-auto pb-6 sm:pb-8">
+        
+        {/* ─── LEFT: iPhone / Mobile Mockup ─── */}
+        <div className="relative w-[30%] max-w-[145px] shrink-0 transform -rotate-1 sm:-rotate-2 hover:rotate-0 transition-transform duration-300 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
+          {/* iPhone Outer Chassis */}
+          <div className="relative bg-[#1C1C1E] p-[3px] sm:p-[4.5px] rounded-[18px] sm:rounded-[22px] border-[2px] border-[#3A3A3C] shadow-inner">
+            
+            {/* Dynamic Island / Speaker Notch Pill */}
+            <div className="absolute top-[6px] sm:top-[8px] left-1/2 -translate-x-1/2 w-8 sm:w-10 h-2 sm:h-2.5 bg-black rounded-full z-20 flex items-center justify-end pr-1">
+              <div className="w-1 h-1 rounded-full bg-[#1c3d5a]/60" />
+            </div>
+
+            {/* Screen Bezel & Container */}
+            <div className="relative w-full aspect-[9/18.5] bg-black rounded-[14px] sm:rounded-[18px] overflow-hidden border border-black/50">
+              <Image
+                src="/case-studies/vidyas-kitchen/VK-M-1.png"
+                alt="Vidya's Kitchen Mobile PWA Experience"
+                fill
+                sizes="(max-width: 640px) 120px, 150px"
+                className="object-cover object-top"
+                priority
+              />
+              {/* Gloss Reflection Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none" />
+            </div>
+
+            {/* Bottom Home Indicator Line */}
+            <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-10 sm:w-12 h-[2.5px] bg-white/40 rounded-full z-20 pointer-events-none" />
+          </div>
+
+          {/* Badge: MOBILE PWA */}
+          <div className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-[#00C16A] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
+            MOBILE PWA
+          </div>
+        </div>
+
+        {/* ─── RIGHT: MacBook / Desktop Mockup ─── */}
+        <div className="relative w-[65%] max-w-[340px] shrink-0 drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-transform duration-300">
+          {/* MacBook Top Lid Display */}
+          <div className="relative bg-[#1A1A1A] p-[3.5px] sm:p-[5px] rounded-t-[10px] sm:rounded-t-[14px] border-[2px] border-b-0 border-[#383838]">
+            
+            {/* Top Webcam Notch / Bezel */}
+            <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full flex items-center justify-center z-20">
+              <div className="w-1 h-1 rounded-full bg-[#2a2a2a] border border-[#444]" />
+            </div>
+
+            {/* Laptop Screen Display */}
+            <div className="relative w-full aspect-[16/10] bg-black rounded-t-[7px] sm:rounded-t-[10px] overflow-hidden border border-black">
+              <Image
+                src="/case-studies/vidyas-kitchen/vidyas-kitchen-thumb.png"
+                alt="Vidya's Kitchen Desktop Experience"
+                fill
+                sizes="(max-width: 640px) 240px, (max-width: 1024px) 340px, 400px"
+                className="object-cover object-top"
+                priority
+              />
+              {/* Screen Glare Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
+            </div>
+          </div>
+
+          {/* MacBook Base Keyboard Chassis & Notch Lip */}
+          <div className="relative w-[106%] -left-[3%] h-[7px] sm:h-[9px] bg-gradient-to-b from-[#404040] via-[#2D2D2D] to-[#1C1C1C] rounded-b-[4px] border-[2px] border-[#383838] shadow-md flex justify-center">
+            {/* Display Open Thumb Groove */}
+            <div className="w-12 sm:w-16 h-[2.5px] bg-[#151515] rounded-b-sm border-t border-[#555]/30" />
+          </div>
+
+          {/* Badge: DESKTOP STORE */}
+          <div className="absolute -bottom-2 sm:-bottom-2.5 right-3 sm:right-6 px-1.5 py-0.5 bg-[#FAED00] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
+            DESKTOP STORE
+          </div>
+        </div>
+
+      </div>
+
+      {/* Floating Link Pill Overlay — Stays above the device visual */}
+      <Link
+        href="https://www.vidyaskitchenhome.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 flex items-center justify-between bg-black/90 hover:bg-black backdrop-blur-md px-2.5 sm:px-3.5 py-1.5 sm:py-2 border border-white/20 transition-all text-white font-mono text-[10px] sm:text-xs z-30 shadow-lg"
+      >
+        <span className="font-bold uppercase tracking-wider truncate">
+          VIDYA&apos;S KITCHEN // PWA / WHATSAPP ORDERING
+        </span>
+        <ArrowUpRight weight="bold" className="w-3.5 h-3.5 shrink-0 text-[#FAED00]" />
+      </Link>
+    </div>
+  );
+}
+
 function VidyasKitchenArchitectureVisual() {
   return (
     <div className="w-full h-full min-h-[380px] bg-[#0D1117] border-2 border-black p-4 sm:p-5 text-white font-mono shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
@@ -234,6 +338,10 @@ function WindowCard({
             {isVidyasKitchen && showArchVisual ? (
               <div className="w-full h-full max-h-[420px] overflow-y-auto">
                 <VidyasKitchenArchitectureVisual />
+              </div>
+            ) : isVidyasKitchen ? (
+              <div className="w-full h-full flex items-center justify-center">
+                <VidyasKitchenDualDeviceMockup />
               </div>
             ) : (
               <div className="w-full h-full min-h-[190px] sm:min-h-[260px] md:min-h-[300px] lg:max-h-[420px] aspect-[16/10] relative bg-black border-2 border-black overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group/mockup flex items-center justify-center">
