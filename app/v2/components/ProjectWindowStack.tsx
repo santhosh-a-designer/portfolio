@@ -113,41 +113,42 @@ function WindowCard({
         className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
       >
         {/* ─── Browser / Window Titlebar Header ─── */}
-        <div className="h-[38px] sm:h-[42px] shrink-0 px-2.5 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
+        <div className="h-[38px] sm:h-[42px] shrink-0 px-2.5 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none gap-2">
           {/* Left: Window Dots + Instance identifier */}
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
             <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
               <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
             </div>
-            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-black ml-1.5 sm:ml-2 hidden min-[380px]:inline truncate max-w-[120px] min-[480px]:max-w-none">
+            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-black ml-1 sm:ml-2 truncate max-w-[140px] sm:max-w-[220px] md:max-w-none">
               WIN_{item.num} // {item.title}
             </span>
           </div>
 
-          {/* Center: Category badge */}
-          <div className="px-1.5 min-[360px]:px-2.5 py-0.5 bg-black text-[#FAED00] font-black text-[8px] min-[360px]:text-[9px] uppercase tracking-wider sm:tracking-widest border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] truncate max-w-[130px] min-[400px]:max-w-none">
-            {item.category}
-          </div>
+          {/* Right side: Category badge (on larger screens) + Action link */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <div className="hidden sm:inline-block px-2.5 py-0.5 bg-black text-[#FAED00] font-black text-[9px] uppercase tracking-widest border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+              {item.category}
+            </div>
 
-          {/* Right: Project link status */}
-          <div className="flex items-center gap-2 text-[9.5px] sm:text-[10px] shrink-0">
-            {item.liveUrl && (
-              <span className="hidden md:inline-flex items-center gap-1 text-emerald-700 font-bold">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                PROD
-              </span>
-            )}
-            <Link
-              href={item.liveUrl || item.href}
-              target={item.liveUrl ? "_blank" : undefined}
-              rel={item.liveUrl ? "noopener noreferrer" : undefined}
-              className="flex items-center gap-1 text-black font-black uppercase hover:text-[#FF462D] transition-colors"
-            >
-              <span>{item.liveUrl ? "LIVE" : "CASE STUDY"}</span>
-              <ArrowUpRight weight="bold" className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            </Link>
+            <div className="flex items-center gap-1.5 text-[9.5px] sm:text-[10px]">
+              {item.liveUrl && (
+                <span className="hidden md:inline-flex items-center gap-1 text-emerald-700 font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  PROD
+                </span>
+              )}
+              <Link
+                href={item.liveUrl || item.href}
+                target={item.liveUrl ? "_blank" : undefined}
+                rel={item.liveUrl ? "noopener noreferrer" : undefined}
+                className="flex items-center gap-1 text-black font-black uppercase hover:text-[#FF462D] transition-colors py-0.5 px-1.5 sm:px-0 bg-black/5 sm:bg-transparent rounded sm:rounded-none"
+              >
+                <span>{item.liveUrl ? "LIVE" : "CASE STUDY"}</span>
+                <ArrowUpRight weight="bold" className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+              </Link>
+            </div>
           </div>
         </div>
 
