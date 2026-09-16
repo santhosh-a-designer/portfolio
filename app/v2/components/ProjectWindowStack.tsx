@@ -80,8 +80,8 @@ function VidyasKitchenDualDeviceMockup() {
       {/* Dual Devices Composition: iPhone (Left - Reduced) + MacBook (Right - Increased) */}
       <div className="relative z-10 w-full flex flex-row items-center justify-center gap-2.5 sm:gap-4 md:gap-5 lg:gap-6 max-w-[620px] mx-auto pb-7 sm:pb-9">
         
-        {/* ─── LEFT: iPhone / Mobile Mockup (Reduced Size) ─── */}
-        <div className="relative w-[23%] sm:w-[22%] max-w-[115px] shrink-0 transform -rotate-1 sm:-rotate-2 hover:rotate-0 transition-transform duration-300 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
+        {/* ─── LEFT: iPhone / Mobile Mockup (Straight Upright Position Always) ─── */}
+        <div className="relative w-[23%] sm:w-[22%] max-w-[115px] shrink-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
           {/* iPhone Silver Titanium / Aluminum Chassis */}
           <div className="relative bg-gradient-to-br from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[2.5px] sm:p-[3.5px] rounded-[16px] sm:rounded-[20px] border-[1.5px] sm:border-[2px] border-[#94A3B8] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_6px_16px_rgba(0,0,0,0.5)]">
             
