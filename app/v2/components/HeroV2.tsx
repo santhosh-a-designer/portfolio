@@ -174,68 +174,68 @@ export default function HeroV2() {
             {/* ─── Bottom: Unified 2×3 Stats & Status Grid ─── */}
             <motion.div
               variants={itemVariants}
-              className="grid grid-cols-3 grid-rows-2 border-t-2 border-black bg-white"
+              className="grid grid-cols-3 grid-rows-2 border-t-2 border-black bg-white select-none"
             >
               {/* Row 1, Col 1: 5+ YEARS */}
-              <div className="p-4 sm:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-b-2 border-black">
-                <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
+              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-b-2 border-black min-h-[72px] sm:min-h-[88px]">
+                <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
                   5+
                 </span>
-                <span className="text-[9px] font-black tracking-widest uppercase text-zinc-500 font-mono">
+                <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
                   YEARS
                 </span>
               </div>
 
               {/* Row 1, Col 2: US·UK CLIENTS */}
-              <div className="p-4 sm:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-b-2 border-black">
-                <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
+              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-b-2 border-black min-h-[72px] sm:min-h-[88px]">
+                <span className="text-base min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
                   US·UK
                 </span>
-                <span className="text-[9px] font-black tracking-widest uppercase text-zinc-500 font-mono">
+                <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
                   CLIENTS
                 </span>
               </div>
 
               {/* Row 1, Col 3: Green Box - Available for full-time */}
-              <div className="border-b-2 border-black bg-[#00C16A] p-4 sm:p-5 flex flex-col items-center justify-center group cursor-default h-full">
-                <span className="w-2.5 h-2.5 rounded-full bg-black mb-2" />
-                <span className="text-black font-black text-[11px] sm:text-xs uppercase tracking-widest text-center leading-snug font-mono">
+              <div className="border-b-2 border-black bg-[#00C16A] p-2 min-[360px]:p-2.5 sm:p-4 md:p-5 flex flex-col items-center justify-center group cursor-default h-full min-h-[72px] sm:min-h-[88px]">
+                <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-black mb-1 sm:mb-2" />
+                <span className="text-black font-black text-[8.5px] min-[360px]:text-[9.5px] min-[400px]:text-[10.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-center leading-tight font-mono">
                   AVAILABLE<br />FOR FULL-TIME
                 </span>
-                <span className="text-[9px] font-mono text-black/50 mt-1 sm:mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <span className="text-[8px] sm:text-[9px] font-mono text-black/50 mt-0.5 sm:mt-1 hidden min-[360px]:inline-block opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   // open to remote
                 </span>
               </div>
 
               {/* Row 2, Col 1: 10+ PROJECTS */}
-              <div className="p-4 sm:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-black">
-                <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
+              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-black min-h-[72px] sm:min-h-[88px]">
+                <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
                   10+
                 </span>
-                <span className="text-[9px] font-black tracking-widest uppercase text-zinc-500 font-mono">
+                <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
                   PROJECTS
                 </span>
               </div>
 
               {/* Row 2, Col 2: 100+ MENTORED */}
-              <div className="p-4 sm:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-black">
-                <span className="text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
+              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-black min-h-[72px] sm:min-h-[88px]">
+                <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
                   100+
                 </span>
-                <span className="text-[9px] font-black tracking-widest uppercase text-zinc-500 font-mono">
+                <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
                   MENTORED
                 </span>
               </div>
 
               {/* Row 2, Col 3: Orange Box - Location animated cell */}
-              <div className="relative overflow-hidden h-full">
+              <div className="relative overflow-hidden h-full min-h-[72px] sm:min-h-[88px]">
                 <LocationAnimatedCell />
               </div>
             </motion.div>
           </motion.div>
 
           {/* ─────────── RIGHT COLUMN: Design → Code Card ─────────── */}
-          <div className="lg:col-span-5 flex flex-col bg-[#F4F4F0] h-[480px] lg:h-full lg:max-h-full min-h-0 overflow-hidden">
+          <div className="lg:col-span-5 flex flex-col bg-[#F4F4F0] h-[380px] min-[380px]:h-[420px] sm:h-[480px] lg:h-full lg:max-h-full min-h-0 overflow-hidden">
             <DesignToCodeMorphingCard />
           </div>
         </div>
@@ -736,25 +736,24 @@ function DesignToCodeMorphingCard() {
       {/* ── TOP HALF: Design UI Mockup ── */}
       <div className="w-full h-full min-h-0 bg-white border-b-2 border-black flex flex-col relative overflow-hidden">
         {/* Safari titlebar */}
-        <div className="px-3 py-1.5 bg-[#E2E8F0] border-b border-black flex items-center justify-between z-20 shrink-0">
-          <div className="flex items-center gap-1.5">
+        <div className="px-2.5 sm:px-3 py-1.5 bg-[#E2E8F0] border-b border-black flex items-center justify-between z-20 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0">
             <span className="w-2 h-2 rounded-full bg-[#FF5F56] border border-black/30" />
             <span className="w-2 h-2 rounded-full bg-[#FFBD2E] border border-black/30" />
             <span className="w-2 h-2 rounded-full bg-[#27C93F] border border-black/30" />
           </div>
-          <div className="flex items-center gap-1.5 px-2.5 py-0.5 bg-white border border-zinc-300 rounded text-[9px] font-mono text-zinc-700 shadow-inner">
-            <FigmaLogo className="w-2.5 h-3.5 shrink-0" />
+          <div className="flex items-center gap-1 px-1.5 min-[360px]:px-2.5 py-0.5 bg-white border border-zinc-300 rounded text-[8px] min-[360px]:text-[9px] font-mono text-zinc-700 shadow-inner max-w-[170px] sm:max-w-none truncate">
+            <FigmaLogo className="w-2 h-2.5 min-[360px]:w-2.5 min-[360px]:h-3.5 shrink-0" />
             <span className="truncate">designbysanthosh.com/v2</span>
           </div>
-          <div className="flex items-center gap-1">
-            <FigmaLogo className="w-2.5 h-3 shrink-0" />
-            <span className="text-[8px] font-pixel text-zinc-600 font-bold">[FIGMA_UI]</span>
+          <div className="flex items-center gap-1 shrink-0">
+            <span className="text-[7.5px] min-[360px]:text-[8px] font-pixel text-zinc-600 font-bold hidden min-[340px]:inline">[FIGMA_UI]</span>
           </div>
         </div>
 
         {/* Technical Grid Background Layer — clean grid lines with drafting crosshairs */}
         <div
-          className="flex-1 min-h-0 relative overflow-hidden bg-[#F8F9FA] p-2.5 sm:p-3.5 flex items-center justify-center"
+          className="flex-1 min-h-0 relative overflow-hidden bg-[#F8F9FA] p-2 sm:p-3.5 flex items-center justify-center"
           style={{
             backgroundImage: `
               linear-gradient(to right, rgba(0,0,0,0.07) 1px, transparent 1px),
@@ -787,14 +786,14 @@ function DesignToCodeMorphingCard() {
       </div>
 
       {/* ── CENTRE DIVIDER ── */}
-      <div className="h-[36px] shrink-0 bg-[#FAED00] border-b-2 border-black px-4 flex items-center justify-between z-10">
-        <span className="text-[10px] font-pixel text-black font-bold uppercase tracking-widest">
+      <div className="h-[32px] sm:h-[36px] shrink-0 bg-[#FAED00] border-b-2 border-black px-2 sm:px-4 flex items-center justify-between z-10">
+        <span className="text-[8.5px] min-[360px]:text-[9.5px] sm:text-[10px] font-pixel text-black font-bold uppercase tracking-wider sm:tracking-widest">
           DESIGN ➔ CODE
         </span>
-        <div className="px-3 py-0.5 bg-black text-[#FAED00] font-pixel text-[9px] uppercase font-bold border border-black shadow-[2px_2px_0px_0px_rgba(250,237,0,1)]">
+        <div className="px-2 sm:px-3 py-0.5 bg-black text-[#FAED00] font-pixel text-[8px] min-[360px]:text-[9px] uppercase font-bold border border-black shadow-[2px_2px_0px_0px_rgba(250,237,0,1)]">
           FIGMA ➔ JSX
         </div>
-        <span className="text-[9px] font-mono font-bold text-black uppercase">
+        <span className="text-[8px] min-[360px]:text-[9px] font-mono font-bold text-black uppercase">
           LIVE HANDOFF
         </span>
       </div>
@@ -802,16 +801,16 @@ function DesignToCodeMorphingCard() {
       {/* ── BOTTOM HALF: VS Code Live Typing (JSX) ── */}
       <div className="w-full h-full min-h-0 bg-[#0D1117] flex flex-col relative overflow-hidden text-zinc-200 font-mono">
         {/* IDE titlebar */}
-        <div className="px-3 py-1.5 bg-[#161B22] border-b border-[#30363D] flex items-center justify-between shrink-0 text-[10px]">
-          <div className="flex items-center gap-2">
-            <VSCodeLogo className="w-3.5 h-3.5 shrink-0" />
-            <span className="font-pixel text-emerald-400 font-bold uppercase">
+        <div className="px-2.5 sm:px-3 py-1.5 bg-[#161B22] border-b border-[#30363D] flex items-center justify-between shrink-0 text-[10px]">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <VSCodeLogo className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
+            <span className="font-pixel text-emerald-400 font-bold uppercase text-[8.5px] min-[360px]:text-[10px]">
               [OracleFusionLogin.jsx]
             </span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[9px] text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 bg-emerald-950/40 font-mono">
+            <span className="text-[8px] min-[360px]:text-[9px] text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 bg-emerald-950/40 font-mono">
               JSX Syntax
             </span>
           </div>

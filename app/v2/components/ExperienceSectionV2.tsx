@@ -88,16 +88,16 @@ export default function ExperienceSectionV2() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-4 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-6 sm:p-8 flex flex-col items-center justify-center text-center select-none"
+            className="md:col-span-4 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center text-center select-none"
           >
-            <span className="text-5xl sm:text-6xl font-black font-mono tracking-tighter text-black leading-none mb-1">
+            <span className="text-4xl min-[360px]:text-5xl sm:text-6xl font-black font-mono tracking-tighter text-black leading-none mb-1">
               05+
             </span>
             <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-black font-mono">
               YEARS EXP.
             </span>
-            <div className="w-12 h-1 bg-black mt-2.5 mb-1.5" />
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-black/80">
+            <div className="w-10 sm:w-12 h-1 bg-black mt-2 sm:mt-2.5 mb-1 sm:mb-1.5" />
+            <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-black/80">
               PROVEN IMPACT
             </span>
           </motion.div>
@@ -108,34 +108,34 @@ export default function ExperienceSectionV2() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-8 lg:col-span-9 p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 bg-white relative"
+            className="md:col-span-8 lg:col-span-9 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6 bg-white relative"
           >
-            <span className="absolute top-2 right-4 text-[10px] font-mono text-zinc-400 italic">
+            <span className="absolute top-2 right-3 sm:right-4 text-[9px] sm:text-[10px] font-mono text-zinc-400 italic">
               <span className="text-[#FF462D] not-italic font-bold">//</span> TRACK_RECORD_INDEX
             </span>
             <div className="max-w-2xl">
-              <div className="flex items-center gap-3 mb-2 font-mono">
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#FF462D]">
+              <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2 font-mono">
+                <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-widest text-[#FF462D]">
                   CAREER &amp; TRACK RECORD
                 </span>
                 <span className="text-zinc-300">/</span>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
+                <span className="text-[9.5px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
                   3 MILESTONES
                 </span>
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-mono mb-3">
+              <h2 className="text-xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-mono mb-2 sm:mb-3">
                 TRACK RECORD.
               </h2>
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-700 leading-relaxed font-sans">
+              <p className="text-[11px] sm:text-sm font-bold uppercase tracking-wider text-zinc-700 leading-relaxed font-sans">
                 FROM 0-TO-1 VENTURES TO GLOBAL ENTERPRISES. BUILDING SCALABLE DESIGN SYSTEMS, DIGITAL PLATFORMS, AND INTELLIGENT AI EXPERIENCES AS A DESIGN ENGINEER.
               </p>
             </div>
 
-            <div className="shrink-0 pt-2 lg:pt-0">
+            <div className="shrink-0 pt-1 lg:pt-0">
               <button
                 type="button"
                 onClick={() => setResumeOpen(true)}
-                className="inline-flex items-center gap-3 px-6 py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs font-black tracking-widest uppercase select-none group cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-3 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs font-black tracking-widest uppercase select-none group cursor-pointer"
               >
                 <span>VIEW FULL RESUME</span>
                 <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -157,7 +157,7 @@ export default function ExperienceSectionV2() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.55, delay: idx * 0.09, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col justify-between p-6 sm:p-8 bg-white hover:bg-zinc-50/70 transition-colors group relative"
+                className="flex flex-col justify-between p-4 sm:p-6 md:p-8 bg-white hover:bg-zinc-50/70 transition-colors group relative"
               >
                 {/* Top Number & Period Header */}
                 <div>

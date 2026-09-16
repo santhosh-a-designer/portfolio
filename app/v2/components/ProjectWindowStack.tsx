@@ -100,7 +100,7 @@ function WindowCard({
 
   return (
     <div
-      className="sticky w-full mb-10 sm:mb-16 last:mb-0"
+      className="sticky w-full mb-8 sm:mb-16 last:mb-0"
       style={{
         top: `${stickyTop}px`,
         zIndex: index + 10,
@@ -110,33 +110,33 @@ function WindowCard({
         style={{
           opacity,
         }}
-        className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
+        className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
       >
-        {/* ─── Browser / Window Titlebar Header (Fixed Height) ─── */}
-        <div className="h-[42px] shrink-0 px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
+        {/* ─── Browser / Window Titlebar Header ─── */}
+        <div className="h-[38px] sm:h-[42px] shrink-0 px-2.5 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
           {/* Left: Window Dots + Instance identifier */}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
             </div>
-            <span className="text-[10px] font-black uppercase tracking-wider text-black ml-2 hidden sm:inline">
-              WINDOW_{item.num} // {item.title}
+            <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-black ml-1.5 sm:ml-2 hidden min-[380px]:inline truncate max-w-[120px] min-[480px]:max-w-none">
+              WIN_{item.num} // {item.title}
             </span>
           </div>
 
           {/* Center: Category badge */}
-          <div className="px-2.5 py-0.5 bg-black text-[#FAED00] font-black text-[9px] uppercase tracking-widest border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+          <div className="px-1.5 min-[360px]:px-2.5 py-0.5 bg-black text-[#FAED00] font-black text-[8px] min-[360px]:text-[9px] uppercase tracking-wider sm:tracking-widest border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] truncate max-w-[130px] min-[400px]:max-w-none">
             {item.category}
           </div>
 
           {/* Right: Project link status */}
-          <div className="flex items-center gap-2 text-[10px]">
+          <div className="flex items-center gap-2 text-[9.5px] sm:text-[10px] shrink-0">
             {item.liveUrl && (
               <span className="hidden md:inline-flex items-center gap-1 text-emerald-700 font-bold">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                PRODUCTION
+                PROD
               </span>
             )}
             <Link
@@ -146,7 +146,7 @@ function WindowCard({
               className="flex items-center gap-1 text-black font-black uppercase hover:text-[#FF462D] transition-colors"
             >
               <span>{item.liveUrl ? "LIVE" : "CASE STUDY"}</span>
-              <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />
+              <ArrowUpRight weight="bold" className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             </Link>
           </div>
         </div>
@@ -154,29 +154,29 @@ function WindowCard({
         {/* ─── Window Body: Uniform Height 12-Column Layout ─── */}
         <div className="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-12 bg-white overflow-hidden">
           
-          {/* Left: Big Monospace Number & Details (Contained height with consistent padding) */}
-          <div className="lg:col-span-5 p-6 sm:p-7 flex flex-col justify-between h-full min-h-0 border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white overflow-y-auto">
+          {/* Left: Big Monospace Number & Details */}
+          <div className="lg:col-span-5 p-4 sm:p-6 lg:p-7 flex flex-col justify-between h-full min-h-0 border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white overflow-y-auto">
             <div>
               {/* Monospace Project Index */}
-              <div className="flex items-baseline justify-between mb-2 font-mono">
-                <span className="text-5xl sm:text-6xl font-black tracking-tighter leading-none text-black select-none">
+              <div className="flex items-baseline justify-between mb-1 sm:mb-2 font-mono">
+                <span className="text-4xl min-[360px]:text-5xl sm:text-6xl font-black tracking-tighter leading-none text-black select-none">
                   {item.num}
                 </span>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
+                <span className="text-[9px] sm:text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
                   CASE_FILE // {item.num} OF 03
                 </span>
               </div>
 
               {/* Title & Tagline */}
-              <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-black font-sans leading-tight mb-1.5">
+              <h3 className="text-xl min-[360px]:text-2xl sm:text-3xl font-black uppercase tracking-tight text-black font-sans leading-tight mb-1 sm:mb-1.5">
                 {item.title}
               </h3>
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-wide text-[#FF462D] font-mono mb-3.5">
+              <p className="text-[11px] sm:text-sm font-bold uppercase tracking-wide text-[#FF462D] font-mono mb-2.5 sm:mb-3.5">
                 {item.category}
               </p>
 
               {/* Description */}
-              <p className="text-xs sm:text-sm font-sans text-zinc-700 leading-relaxed uppercase mb-5 font-semibold">
+              <p className="text-xs sm:text-sm font-sans text-zinc-700 leading-relaxed uppercase mb-3.5 sm:mb-5 font-semibold">
                 {item.description ||
                   (item.id === "01"
                     ? "Conversion-driven ecommerce scheduling platform for high-value retail appointments across UK & US markets."
@@ -188,12 +188,12 @@ function WindowCard({
               {/* Tech Stack Chips */}
               {item.techStack && (
                 <div>
-                  <span className="text-[9px] font-mono uppercase text-zinc-400 block mb-1.5 font-bold">TECH SPEC:</span>
-                  <div className="flex flex-wrap gap-1.5">
+                  <span className="text-[8.5px] sm:text-[9px] font-mono uppercase text-zinc-400 block mb-1.5 font-bold">TECH SPEC:</span>
+                  <div className="flex flex-wrap gap-1 sm:gap-1.5">
                     {item.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-[10px] font-mono font-bold px-2 py-0.5 bg-black text-white uppercase tracking-wider"
+                        className="text-[9px] sm:text-[10px] font-mono font-bold px-1.5 sm:px-2 py-0.5 bg-black text-white uppercase tracking-wider"
                       >
                         {tech}
                       </span>
@@ -204,12 +204,12 @@ function WindowCard({
             </div>
 
             {/* Action Buttons at bottom of info panel */}
-            <div className="pt-5 mt-4 border-t border-zinc-200 flex items-center gap-3 flex-wrap shrink-0">
+            <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-zinc-200 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 shrink-0">
               <Link
                 href={item.liveUrl || item.href}
                 target={item.liveUrl ? "_blank" : undefined}
                 rel={item.liveUrl ? "noopener noreferrer" : undefined}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FF462D] text-white hover:bg-black font-mono font-black text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-[#FF462D] text-white hover:bg-black font-mono font-black text-[11px] sm:text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-center"
               >
                 <span>{item.liveUrl ? "OPEN LIVE PRODUCT" : "VIEW CASE STUDY"}</span>
                 <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />
@@ -219,7 +219,7 @@ function WindowCard({
                 <button
                   type="button"
                   onClick={() => setShowArchVisual((prev) => !prev)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#FAED00] text-black hover:bg-[#ffe600] font-mono font-bold text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-[#FAED00] text-black hover:bg-[#ffe600] font-mono font-bold text-[11px] sm:text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer text-center"
                 >
                   <Terminal weight="bold" className="w-3.5 h-3.5" />
                   <span>{showArchVisual ? "SHOW PREVIEW" : "VIEW ARCHITECTURE"}</span>
@@ -229,13 +229,13 @@ function WindowCard({
           </div>
 
           {/* Right: Interactive Mockup Visual or Contained Architecture Visual */}
-          <div className="lg:col-span-7 p-4 sm:p-6 lg:p-7 bg-[#F8F9FA] flex flex-col justify-center items-center relative overflow-hidden h-full min-h-0">
+          <div className="lg:col-span-7 p-3 sm:p-5 lg:p-7 bg-[#F8F9FA] flex flex-col justify-center items-center relative overflow-hidden h-full min-h-0">
             {isVidyasKitchen && showArchVisual ? (
               <div className="w-full h-full max-h-[420px] overflow-y-auto">
                 <VidyasKitchenArchitectureVisual />
               </div>
             ) : (
-              <div className="w-full h-full max-h-[420px] aspect-[16/10] relative bg-black border-2 border-black overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group/mockup flex items-center justify-center">
+              <div className="w-full h-full min-h-[190px] sm:min-h-[260px] md:min-h-[300px] lg:max-h-[420px] aspect-[16/10] relative bg-black border-2 border-black overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group/mockup flex items-center justify-center">
                 {item.image ? (
                   <>
                     <Image
@@ -251,7 +251,7 @@ function WindowCard({
                       href={item.liveUrl || item.href}
                       target={item.liveUrl ? "_blank" : undefined}
                       rel={item.liveUrl ? "noopener noreferrer" : undefined}
-                      className="absolute bottom-3 left-3 right-3 flex items-center justify-between bg-black/85 hover:bg-black backdrop-blur-sm px-3 py-2 border border-white/20 transition-all text-white font-mono text-xs z-10"
+                      className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 flex items-center justify-between bg-black/85 hover:bg-black backdrop-blur-sm px-2.5 sm:px-3 py-1.5 sm:py-2 border border-white/20 transition-all text-white font-mono text-[10px] sm:text-xs z-10"
                     >
                       <span className="font-bold uppercase tracking-wider truncate">
                         {item.title} // {item.category}
@@ -260,7 +260,7 @@ function WindowCard({
                     </Link>
                   </>
                 ) : (
-                  <div className="w-full h-full bg-zinc-900 p-6 flex flex-col justify-between text-white font-mono">
+                  <div className="w-full h-full bg-zinc-900 p-4 sm:p-6 flex flex-col justify-between text-white font-mono">
                     <span className="text-xs uppercase tracking-widest text-zinc-400">
                       {item.title}
                     </span>

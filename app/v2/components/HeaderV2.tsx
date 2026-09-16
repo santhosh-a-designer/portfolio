@@ -79,33 +79,34 @@ export default function HeaderV2() {
         </nav>
 
         {/* Download Resume - Highlight Button */}
-        <button
+        <motion.button
           type="button"
+          whileTap={{ scale: 0.96 }}
           onClick={() => setResumeOpen(true)}
-          className="flex items-center justify-between gap-1.5 sm:gap-3 px-3.5 sm:px-7 md:px-8 bg-[#FAED00] border-l-2 md:border-l-0 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[10px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors ml-auto select-none group cursor-pointer shrink-0"
+          className="flex items-center justify-between gap-1.5 sm:gap-3 px-3 sm:px-6 md:px-8 bg-[#FAED00] border-l-2 md:border-l-0 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[9.5px] min-[360px]:text-[10px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors ml-auto select-none group cursor-pointer shrink-0"
         >
           <span className="leading-tight text-left">
             DOWNLOAD<br />RESUME
           </span>
           <DownloadSimple
             weight="bold"
-            className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
+            className="w-3.5 h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
           />
-        </button>
+        </motion.button>
       </div>
 
-      {/* Mobile Secondary Navigation Row (for smaller screens) */}
-      <div className="flex md:hidden w-full overflow-x-auto border-t-2 border-black bg-white scrollbar-none">
+      {/* Mobile Secondary Navigation Row (320px–767px) */}
+      <nav className="flex md:hidden w-full border-t-2 border-black bg-white overflow-x-hidden">
         {navItems.map((item) => (
           <Link
             key={item.label}
             href={item.href}
-            className="flex-1 min-w-[65px] sm:min-w-[75px] py-2 sm:py-2.5 px-1 sm:px-2 flex items-center justify-center border-r-2 last:border-r-0 border-black text-[10px] sm:text-[11px] font-black tracking-wider uppercase text-black hover:bg-black hover:text-white transition-colors text-center whitespace-nowrap"
+            className="flex-1 min-w-0 py-2 sm:py-2.5 px-0.5 min-[360px]:px-1 sm:px-2 flex items-center justify-center border-r-2 last:border-r-0 border-black text-[8.5px] min-[360px]:text-[9.5px] min-[400px]:text-[10px] sm:text-[11px] font-black tracking-wider uppercase text-black hover:bg-black hover:text-white active:bg-black active:text-[#FAED00] transition-colors text-center whitespace-nowrap select-none"
           >
             {item.label}
           </Link>
         ))}
-      </div>
+      </nav>
     </motion.header>
   );
 }
