@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, type FormEvent } from "react";
+import React, { useState, useRef, type FormEvent } from "react";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -60,9 +60,26 @@ export default function ServicesAndFooterV2() {
   const [form, setForm] = useState({ name: "", email: "", project: "" });
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorText, setErrorText] = useState("");
+  const yellowBoxRef = useRef<HTMLDivElement>(null);
+
+  const scrollToYellowBox = () => {
+    if (!yellowBoxRef.current) return;
+    const headerHeight = window.innerWidth < 768 ? 100 : 70;
+    const elementPosition = yellowBoxRef.current.getBoundingClientRect().top + window.scrollY;
+    const offsetPosition = elementPosition - headerHeight - 12;
+
+    window.scrollTo({
+      top: Math.max(0, offsetPosition),
+      behavior: "smooth",
+    });
+  };
 
   const toggleService = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
+    // Smoothly scroll to the yellow details box after React state update
+    requestAnimationFrame(() => {
+      setTimeout(scrollToYellowBox, 40);
+    });
   };
 
   const copyEmail = () => {
@@ -111,6 +128,7 @@ export default function ServicesAndFooterV2() {
           
           {/* Column 1 & 2 Combined: Dynamic Yellow Panel (7 / 12 cols) */}
           <motion.div
+            ref={yellowBoxRef}
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
