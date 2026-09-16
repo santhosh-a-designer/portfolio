@@ -10,12 +10,12 @@ import { useRef } from "react";
 import ProjectWindowStack, { ProjectItem } from "./ProjectWindowStack";
 
 const clientLogos = [
-  { name: "Makeon", src: "/clients/makeon-norm.png", widthClass: "w-36 sm:w-44 md:w-48", heightClass: "h-8 sm:h-9 md:h-10" },
-  { name: "Parla", src: "/clients/parla-norm.png", widthClass: "w-36 sm:w-44 md:w-50", heightClass: "h-7 sm:h-8 md:h-9" },
-  { name: "Nebraska Furniture Mart", src: "/clients/nfm-norm.png", widthClass: "w-36 sm:w-44 md:w-48", heightClass: "h-9 sm:h-10 md:h-12" },
-  { name: "iRasus", src: "/clients/irasus-norm.png", widthClass: "w-36 sm:w-44 md:w-48", heightClass: "h-9 sm:h-10 md:h-12" },
-  { name: "Intellemo", src: "/clients/intellemo-full.png", widthClass: "w-36 sm:w-44 md:w-48", heightClass: "h-9 sm:h-10 md:h-12" },
-  { name: "We Two Pets", src: "/clients/wetwopets-norm.png", widthClass: "w-28 sm:w-34 md:w-38", heightClass: "h-9 sm:h-10 md:h-12" },
+  { name: "Makeon", src: "/clients/makeon-norm.png", widthClass: "w-20 min-[360px]:w-24 sm:w-36 md:w-44 lg:w-48", heightClass: "h-5 min-[360px]:h-6 sm:h-8 md:h-9 lg:h-10" },
+  { name: "Parla", src: "/clients/parla-norm.png", widthClass: "w-20 min-[360px]:w-24 sm:w-36 md:w-44 lg:w-50", heightClass: "h-5 min-[360px]:h-5.5 sm:h-7 md:h-8 lg:h-9" },
+  { name: "Nebraska Furniture Mart", src: "/clients/nfm-norm.png", widthClass: "w-22 min-[360px]:w-26 sm:w-36 md:w-44 lg:w-48", heightClass: "h-6 min-[360px]:h-7 sm:h-9 md:h-10 lg:h-12" },
+  { name: "iRasus", src: "/clients/irasus-norm.png", widthClass: "w-20 min-[360px]:w-24 sm:w-36 md:w-44 lg:w-48", heightClass: "h-6 min-[360px]:h-7 sm:h-9 md:h-10 lg:h-12" },
+  { name: "Intellemo", src: "/clients/intellemo-full.png", widthClass: "w-22 min-[360px]:w-26 sm:w-36 md:w-44 lg:w-48", heightClass: "h-6 min-[360px]:h-7 sm:h-9 md:h-10 lg:h-12" },
+  { name: "We Two Pets", src: "/clients/wetwopets-norm.png", widthClass: "w-16 min-[360px]:w-20 sm:w-28 md:w-34 lg:w-38", heightClass: "h-6 min-[360px]:h-7 sm:h-9 md:h-10 lg:h-12" },
 ];
 
 export default function SelectedWorkV2() {
@@ -63,11 +63,11 @@ export default function SelectedWorkV2() {
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
         
         {/* Top Header Row of Selected Work: Yellow Title Block + White Marquee */}
-        <div className="border-b-2 border-black bg-white overflow-hidden flex items-center h-16 sm:h-20 md:h-24 relative">
+        <div className="border-b-2 border-black bg-white overflow-hidden flex items-center h-12 sm:h-16 md:h-20 lg:h-24 relative">
           
           {/* Static Title Label with Separator — ONLY this block is yellow (#FAED00) */}
-          <div className="px-5 sm:px-8 md:px-10 h-full flex items-center shrink-0 border-r-2 border-black bg-[#FAED00] z-10 select-none font-mono">
-            <span className="text-xs sm:text-sm md:text-base font-black uppercase tracking-wider text-black whitespace-nowrap">
+          <div className="px-2.5 min-[360px]:px-3.5 sm:px-6 md:px-8 lg:px-10 h-full flex items-center justify-center shrink-0 border-r-2 border-black bg-[#FAED00] z-10 select-none font-mono">
+            <span className="text-[9px] min-[360px]:text-[10px] sm:text-xs md:text-sm lg:text-base font-black uppercase tracking-wider text-black whitespace-nowrap">
               CLIENTS &amp; COMPANIES
             </span>
           </div>
@@ -75,26 +75,27 @@ export default function SelectedWorkV2() {
           {/* Smooth Continuous 2x Looping Marquee — clean white background */}
           <div className="flex-1 overflow-hidden h-full flex items-center relative bg-white">
             <motion.div
-              className="flex items-center gap-12 sm:gap-16 md:gap-20 shrink-0 pr-12 sm:pr-16 md:pr-20"
+              className="flex items-center gap-5 min-[360px]:gap-7 sm:gap-12 md:gap-16 lg:gap-20 shrink-0 pr-5 min-[360px]:pr-7 sm:pr-12 md:pr-16 lg:pr-20"
               animate={{
                 x: ["0%", "-50%"],
               }}
               transition={{
                 repeat: Infinity,
                 ease: "linear",
-                duration: 18,
+                duration: 16,
               }}
             >
               {[...clientLogos, ...clientLogos].map((logo, idx) => (
                 <div
                   key={`${logo.name}-marquee-${idx}`}
-                  className="flex items-center justify-center shrink-0 h-full py-2 px-3"
+                  className="flex items-center justify-center shrink-0 h-full py-1.5 px-1 sm:px-2"
                 >
                   <div className={`relative ${logo.heightClass} ${logo.widthClass} flex items-center justify-center`}>
                     <Image
                       src={logo.src}
                       alt={logo.name}
                       fill
+                      sizes="(max-width: 640px) 110px, (max-width: 1024px) 160px, 200px"
                       className="object-contain filter contrast-110"
                     />
                   </div>
