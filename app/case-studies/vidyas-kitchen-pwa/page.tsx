@@ -157,31 +157,26 @@ export default function VidyasKitchenCaseStudyPage() {
                 Dark-themed, built for long kitchen shifts. Orders update live — no refreshing.
               </p>
 
-              <div className="py-8 border-y border-black/15 text-center my-4">
-                <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                  [IMAGE: Dashboard — live orders view]
-                </p>
+              {/* Admin Dashboard Image */}
+              <div className="py-6 border-y border-black/15 my-6 flex justify-center">
+                <div className="w-full overflow-hidden rounded-xl border border-black/15 shadow-sm bg-[#111]">
+                  <Image
+                    src="/case-studies/vidyas-kitchen/admin-dashboard.png"
+                    alt="Vidya's Kitchen Admin Dashboard — Live Orders and Kitchen View"
+                    width={1200}
+                    height={675}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               </div>
 
               <p>
                 Color-coded order cards, one-tap accept/reject/advance. Drivers are added with a name, phone, and PIN.
               </p>
 
-              <div className="py-8 border-y border-black/15 text-center my-4">
-                <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                  [IMAGE: Driver management screen]
-                </p>
-              </div>
-
               <p>
                 Also built in: promo code management, seasonal auto-offers, and an AI pricing assistant that suggests price changes based on market context.
               </p>
-
-              <div className="py-8 border-y border-black/15 text-center my-4">
-                <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                  [IMAGE: Offers page or AI pricing panel]
-                </p>
-              </div>
             </section>
 
             <hr className="border-t border-black/20" />
@@ -196,21 +191,22 @@ export default function VidyasKitchenCaseStudyPage() {
                 One-handed, PIN-based login — no passwords for field staff. Enter phone number, the app looks up the name automatically for a quick &quot;yes, that&apos;s me&quot; moment, then PIN.
               </p>
 
-              <div className="py-8 border-y border-black/15 text-center my-4">
-                <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                  [IMAGE: Driver login screen]
-                </p>
+              {/* Driver App Deliveries Image */}
+              <div className="py-6 border-y border-black/15 my-6 flex justify-center">
+                <div className="w-full max-w-sm overflow-hidden rounded-2xl border border-black/10 shadow-sm">
+                  <Image
+                    src="/case-studies/vidyas-kitchen/driver-deliveries.png"
+                    alt="Vidya's Kitchen Driver App — Delivery Status and Alerts"
+                    width={600}
+                    height={1200}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               </div>
 
               <p>
                 Drivers get their assigned orders, navigate to the address, and share live GPS — which powers the customer&apos;s tracking map.
               </p>
-
-              <div className="py-8 border-y border-black/15 text-center my-4">
-                <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                  [IMAGE: Driver delivery screen]
-                </p>
-              </div>
             </section>
 
             <hr className="border-t border-black/20" />
@@ -225,10 +221,17 @@ export default function VidyasKitchenCaseStudyPage() {
                 For customers who&apos;d rather not use an app. Every order milestone — placed, confirmed, out for delivery, delivered — triggers a WhatsApp message with buttons and a live tracking link.
               </p>
 
-              <div className="py-8 border-y border-black/15 text-center my-4">
-                <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                  [IMAGE: WhatsApp message flow]
-                </p>
+              {/* WhatsApp Bot Message Flow Image */}
+              <div className="py-6 border-y border-black/15 my-6 flex justify-center">
+                <div className="w-full max-w-sm overflow-hidden rounded-2xl border border-black/10 shadow-sm">
+                  <Image
+                    src="/case-studies/vidyas-kitchen/whatsapp-bot.png"
+                    alt="Vidya's Kitchen WhatsApp Bot — Automated Order Welcome and Menu CTA"
+                    width={600}
+                    height={1200}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               </div>
 
               <p>
