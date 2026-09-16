@@ -35,18 +35,18 @@ function VidyasKitchenDualDeviceMockup() {
       {/* Dual Devices Composition: iPhone (Left) + MacBook (Right) */}
       <div className="relative z-10 w-full flex flex-row items-center justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-8 max-w-[560px] mx-auto pb-6 sm:pb-8">
         
-        {/* ─── LEFT: iPhone / Mobile Mockup ─── */}
+        {/* ─── LEFT: iPhone / Mobile Mockup (Silver Edition) ─── */}
         <div className="relative w-[30%] max-w-[145px] shrink-0 transform -rotate-1 sm:-rotate-2 hover:rotate-0 transition-transform duration-300 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
-          {/* iPhone Outer Chassis */}
-          <div className="relative bg-[#1C1C1E] p-[3px] sm:p-[4.5px] rounded-[18px] sm:rounded-[22px] border-[2px] border-[#3A3A3C] shadow-inner">
+          {/* iPhone Silver Titanium / Aluminum Chassis */}
+          <div className="relative bg-gradient-to-br from-[#F1F5F9] via-[#E2E8F0] to-[#CBD5E1] p-[3px] sm:p-[4.5px] rounded-[18px] sm:rounded-[22px] border-[2px] border-[#94A3B8] shadow-[inset_0_1px_2px_rgba(255,255,255,0.8),0_4px_12px_rgba(0,0,0,0.4)]">
             
             {/* Dynamic Island / Speaker Notch Pill */}
-            <div className="absolute top-[6px] sm:top-[8px] left-1/2 -translate-x-1/2 w-8 sm:w-10 h-2 sm:h-2.5 bg-black rounded-full z-20 flex items-center justify-end pr-1">
-              <div className="w-1 h-1 rounded-full bg-[#1c3d5a]/60" />
+            <div className="absolute top-[6px] sm:top-[8px] left-1/2 -translate-x-1/2 w-8 sm:w-10 h-2 sm:h-2.5 bg-[#09090b] rounded-full z-20 flex items-center justify-end pr-1 border border-black/40">
+              <div className="w-1 h-1 rounded-full bg-[#1c3d5a]/70" />
             </div>
 
             {/* Screen Bezel & Container */}
-            <div className="relative w-full aspect-[9/18.5] bg-black rounded-[14px] sm:rounded-[18px] overflow-hidden border border-black/50">
+            <div className="relative w-full aspect-[9/18.5] bg-black rounded-[14px] sm:rounded-[18px] overflow-hidden border border-black/80">
               <Image
                 src="/case-studies/vidyas-kitchen/VK-M-1.png"
                 alt="Vidya's Kitchen Mobile PWA Experience"
@@ -56,11 +56,11 @@ function VidyasKitchenDualDeviceMockup() {
                 priority
               />
               {/* Gloss Reflection Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.08] to-transparent pointer-events-none" />
             </div>
 
             {/* Bottom Home Indicator Line */}
-            <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-10 sm:w-12 h-[2.5px] bg-white/40 rounded-full z-20 pointer-events-none" />
+            <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-10 sm:w-12 h-[2.5px] bg-white/50 rounded-full z-20 pointer-events-none" />
           </div>
 
           {/* Badge: MOBILE PWA */}
@@ -69,14 +69,14 @@ function VidyasKitchenDualDeviceMockup() {
           </div>
         </div>
 
-        {/* ─── RIGHT: MacBook / Desktop Mockup ─── */}
+        {/* ─── RIGHT: MacBook / Desktop Mockup (Silver Aluminum Edition) ─── */}
         <div className="relative w-[65%] max-w-[340px] shrink-0 drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-transform duration-300">
-          {/* MacBook Top Lid Display */}
-          <div className="relative bg-[#1A1A1A] p-[3.5px] sm:p-[5px] rounded-t-[10px] sm:rounded-t-[14px] border-[2px] border-b-0 border-[#383838]">
+          {/* MacBook Top Lid Display in Silver Anodized Finish */}
+          <div className="relative bg-gradient-to-b from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[3.5px] sm:p-[5px] rounded-t-[10px] sm:rounded-t-[14px] border-[2px] border-b-0 border-[#94A3B8] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9)]">
             
             {/* Top Webcam Notch / Bezel */}
             <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full flex items-center justify-center z-20">
-              <div className="w-1 h-1 rounded-full bg-[#2a2a2a] border border-[#444]" />
+              <div className="w-1 h-1 rounded-full bg-[#18181b] border border-[#64748b]" />
             </div>
 
             {/* Laptop Screen Display */}
@@ -90,14 +90,14 @@ function VidyasKitchenDualDeviceMockup() {
                 priority
               />
               {/* Screen Glare Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.08] to-transparent pointer-events-none" />
             </div>
           </div>
 
-          {/* MacBook Base Keyboard Chassis & Notch Lip */}
-          <div className="relative w-[106%] -left-[3%] h-[7px] sm:h-[9px] bg-gradient-to-b from-[#404040] via-[#2D2D2D] to-[#1C1C1C] rounded-b-[4px] border-[2px] border-[#383838] shadow-md flex justify-center">
+          {/* MacBook Base Keyboard Chassis & Notch Lip in Silver Aluminum */}
+          <div className="relative w-[106%] -left-[3%] h-[7px] sm:h-[9px] bg-gradient-to-b from-[#E2E8F0] via-[#CBD5E1] to-[#94A3B8] rounded-b-[4px] border-[2px] border-[#94A3B8] shadow-[0_4px_10px_rgba(0,0,0,0.3)] flex justify-center">
             {/* Display Open Thumb Groove */}
-            <div className="w-12 sm:w-16 h-[2.5px] bg-[#151515] rounded-b-sm border-t border-[#555]/30" />
+            <div className="w-12 sm:w-16 h-[2.5px] bg-[#64748B]/60 rounded-b-sm border-t border-white/40" />
           </div>
 
           {/* Badge: DESKTOP STORE */}
