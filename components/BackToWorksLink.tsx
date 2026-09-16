@@ -15,7 +15,7 @@ type Props = Omit<ComponentPropsWithoutRef<"a">, "href"> & {
  * Client navigation to home + section hash: Next.js may skip native hash scroll on cross-route links.
  * We set a one-shot session flag and push `/` so {@link HomeHashScroll} can Lenis-scroll once the section exists.
  */
-export default function BackToWorksLink({ href = "/v2#work", onClick, ...rest }: Props) {
+export default function BackToWorksLink({ href = "/#works", onClick, ...rest }: Props) {
   const router = useRouter();
 
   return (
@@ -27,14 +27,33 @@ export default function BackToWorksLink({ href = "/v2#work", onClick, ...rest }:
         if (e.defaultPrevented) return;
         e.preventDefault();
 
-        // Check if history has a previous page within the same origin
+        // Check if user came from /v2 or has v2 origin flag
+        let isFromV2 = false;
+        try {
+          if (
+            sessionStorage.getItem("origin_version") === "v2" ||
+            document.referrer.includes("/v2")
+          ) {
+            isFromV2 = true;
+          }
+        } catch {
+          /* ignore */
+        }
+
+        const targetHref = isFromV2 ? "/v2#work" : href;
+
+        try {
+          const targetKey =
+            targetHref.includes("#snippets") ? SCROLL_TO_SNIPPETS_STORAGE_KEY : SCROLL_TO_WORKS_STORAGE_KEY;
+          sessionStorage.setItem(targetKey, "1");
+        } catch {
+          /* private / blocked storage */
+        }
+
         if (typeof window !== "undefined") {
-          const referrer = document.referrer;
-          const isFromV2 = referrer.includes("/v2") || (!referrer.includes("/graphic-design") && !referrer.includes("/ux-ui-shorts"));
-          const targetUrl = isFromV2 ? "/v2#work" : href;
-          window.location.assign(targetUrl);
+          window.location.assign(targetHref);
         } else {
-          router.push("/v2#work");
+          router.push(targetHref);
         }
       }}
     />

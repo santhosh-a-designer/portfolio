@@ -815,8 +815,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   const backLink = (
     <BackToWorksLink
-      href="/v2#work"
-      aria-label="Back to Portfolio"
+      aria-label="Back to home"
       className={
         (study.cinematicIntro
           ? "z-[600] "
@@ -826,7 +825,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
     >
       <ArrowLeft size={18} className="shrink-0 text-[#0a0908]" aria-hidden />
       <span className="ml-2 whitespace-nowrap text-[11px] font-mono font-semibold uppercase tracking-[0.18em] opacity-0 -translate-x-2 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100">
-        Back to Portfolio
+        Back to home
       </span>
     </BackToWorksLink>
   );
