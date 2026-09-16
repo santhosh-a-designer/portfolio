@@ -192,18 +192,6 @@ function WindowCard({
   const [showArchVisual, setShowArchVisual] = useState(false);
   const isVidyasKitchen = item.id === "02";
 
-  // Calculate subtle depth dimming based on scroll progress (WITHOUT any horizontal scale)
-  const step = 1 / total;
-  const start = index * step;
-  const end = (index + 1) * step;
-
-  // Dimming as card gets stacked over, while keeping left/right edges 100% flush
-  const opacity = useTransform(
-    scrollYProgress,
-    [start, end, 1],
-    index === total - 1 ? [1, 1, 1] : [1, 0.9, 0.82]
-  );
-
   // Sticky top docking offset: exactly 28px downward offset per card for clean window tabs
   const stickyTop = 76 + index * 28;
 
@@ -215,11 +203,8 @@ function WindowCard({
         zIndex: index + 10,
       }}
     >
-      <motion.div
-        style={{
-          opacity,
-        }}
-        className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
+      <div
+        className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative z-10"
       >
         {/* ─── Browser / Window Titlebar Header ─── */}
         <div className="h-[38px] sm:h-[42px] shrink-0 px-2.5 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none gap-2">
@@ -393,7 +378,7 @@ function WindowCard({
           </div>
 
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
