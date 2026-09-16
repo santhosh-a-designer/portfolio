@@ -42,13 +42,8 @@ function VidyasKitchenDualDeviceMockup() {
           {/* iPhone Silver Titanium / Aluminum Chassis */}
           <div className="relative bg-gradient-to-br from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[2.5px] sm:p-[3.5px] rounded-[16px] sm:rounded-[20px] border-[1.5px] sm:border-[2px] border-[#94A3B8] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_6px_16px_rgba(0,0,0,0.5)]">
             
-            {/* Dynamic Island / Speaker Notch Pill */}
-            <div className="absolute top-[5px] sm:top-[6.5px] left-1/2 -translate-x-1/2 w-6 sm:w-8 h-1.5 sm:h-2 bg-[#09090b] rounded-full z-20 flex items-center justify-end pr-1 border border-black/40">
-              <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-[#1c3d5a]/70" />
-            </div>
-
             {/* Screen Bezel & Container displaying the exact Browse Menu screen */}
-            <div className="relative w-full aspect-[438/956] bg-black rounded-[13px] sm:rounded-[16px] overflow-hidden border border-black/80">
+            <div className="relative w-full aspect-[438/956] bg-[#F5F5F7] rounded-[13px] sm:rounded-[16px] overflow-hidden border border-black/80">
               <Image
                 src="/case-studies/vidyas-kitchen/vidyas-kitchen-mobile-menu.png"
                 alt="Vidya's Kitchen Browse Menu Mobile App"
@@ -62,9 +57,6 @@ function VidyasKitchenDualDeviceMockup() {
               {/* Gloss Reflection Overlay */}
               <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.08] to-transparent pointer-events-none" />
             </div>
-
-            {/* Bottom Home Indicator Line */}
-            <div className="absolute bottom-[5px] left-1/2 -translate-x-1/2 w-8 sm:w-10 h-[2px] bg-white/60 rounded-full z-20 pointer-events-none" />
           </div>
 
           {/* Badge: MOBILE MENU */}
