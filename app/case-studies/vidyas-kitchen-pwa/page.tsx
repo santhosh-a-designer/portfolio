@@ -98,10 +98,26 @@ export default function VidyasKitchenCaseStudyPage() {
                 Phone number + OTP, no passwords. Straight into a menu that feels like a food app, not a spreadsheet.
               </p>
 
-              <div className="py-8 border-y border-black/15 text-center my-4">
-                <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                  [IMAGE: Login screen]
-                </p>
+              {/* Login Flow Images: Phone Input + OTP Verification */}
+              <div className="py-6 border-y border-black/15 my-6 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <div className="overflow-hidden rounded-2xl border border-black/10 shadow-sm bg-white">
+                  <Image
+                    src="/case-studies/vidyas-kitchen/login-phone.png"
+                    alt="Vidya's Kitchen Customer App — Phone Number Input Screen"
+                    width={600}
+                    height={1200}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-2xl border border-black/10 shadow-sm bg-white">
+                  <Image
+                    src="/case-studies/vidyas-kitchen/login-otp.png"
+                    alt="Vidya's Kitchen Customer App — OTP Verification Screen"
+                    width={600}
+                    height={1200}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               </div>
 
               <p>
