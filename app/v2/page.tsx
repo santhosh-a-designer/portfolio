@@ -13,7 +13,7 @@ export const metadata = {
 export default function V2Page() {
   return (
     <LenisProvider>
-      <main className="min-h-screen bg-[#F4F4F0] text-black antialiased font-sans selection:bg-black selection:text-[#FAED00] w-full max-w-full">
+      <main className="min-h-screen bg-[#F4F4F0] text-black antialiased font-sans select-none w-full max-w-full">
         {/* Header */}
         <HeaderV2 />
 
