@@ -15,7 +15,7 @@ type Props = Omit<ComponentPropsWithoutRef<"a">, "href"> & {
  * Client navigation to home + section hash: Next.js may skip native hash scroll on cross-route links.
  * We set a one-shot session flag and push `/` so {@link HomeHashScroll} can Lenis-scroll once the section exists.
  */
-export default function BackToWorksLink({ href = "/#works", onClick, ...rest }: Props) {
+export default function BackToWorksLink({ href = "/v2#work", onClick, ...rest }: Props) {
   const router = useRouter();
 
   return (
@@ -26,19 +26,15 @@ export default function BackToWorksLink({ href = "/#works", onClick, ...rest }: 
         onClick?.(e);
         if (e.defaultPrevented) return;
         e.preventDefault();
-        try {
-          const targetKey =
-            href.includes("#snippets") ? SCROLL_TO_SNIPPETS_STORAGE_KEY : SCROLL_TO_WORKS_STORAGE_KEY;
-          sessionStorage.setItem(targetKey, "1");
-        } catch {
-          /* private / blocked storage */
-        }
-        // Cross-route hash scroll can be flaky with soft navigation; force a full nav so
-        // HomeHashScroll + hash always run from a clean page load.
+
+        // Check if history has a previous page within the same origin
         if (typeof window !== "undefined") {
-          window.location.assign(href);
+          const referrer = document.referrer;
+          const isFromV2 = referrer.includes("/v2") || (!referrer.includes("/graphic-design") && !referrer.includes("/ux-ui-shorts"));
+          const targetUrl = isFromV2 ? "/v2#work" : href;
+          window.location.assign(targetUrl);
         } else {
-          router.push("/");
+          router.push("/v2#work");
         }
       }}
     />
