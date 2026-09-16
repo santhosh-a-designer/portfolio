@@ -294,7 +294,7 @@ export default function ProjectWindowStack({ projects }: { projects: ProjectItem
   });
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-[1320px] mx-auto p-4 sm:p-6 md:p-8 lg:p-10 pb-36 sm:pb-48">
+    <div ref={containerRef} className="relative w-full max-w-[1320px] mx-auto p-4 sm:p-6 md:p-8 lg:p-10 pb-8 sm:pb-14">
       {projects.map((project, idx) => (
         <WindowCard
           key={project.id}

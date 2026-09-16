@@ -63,7 +63,7 @@ export default function HeaderV2() {
       
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black flex items-stretch min-h-[56px] md:min-h-[64px] bg-white">
         {/* Logo / Brand Name */}
-        <div className="flex items-center px-3 sm:px-6 md:px-8 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
+        <div className="flex items-center px-3 sm:px-6 md:px-8 border-r-0 md:border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors flex-1 md:flex-initial">
           <Link href="/v2" className="inline-block">
             <span className="text-base sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none">
               SIMON SANTHOSH
@@ -83,7 +83,7 @@ export default function HeaderV2() {
           type="button"
           whileTap={{ scale: 0.96 }}
           onClick={() => setResumeOpen(true)}
-          className="flex items-center justify-between gap-1.5 sm:gap-3 px-3 sm:px-6 md:px-8 bg-[#FAED00] border-l-2 md:border-l-0 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[9.5px] min-[360px]:text-[10px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors ml-auto select-none group cursor-pointer shrink-0"
+          className="flex items-center justify-between gap-1.5 sm:gap-3 px-3 sm:px-6 md:px-8 bg-[#FAED00] border-l-2 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[9.5px] min-[360px]:text-[10px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors select-none group cursor-pointer shrink-0"
         >
           <span className="leading-tight text-left">
             DOWNLOAD<br />RESUME
