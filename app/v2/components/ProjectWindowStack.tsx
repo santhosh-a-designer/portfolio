@@ -80,8 +80,8 @@ function VidyasKitchenDualDeviceMockup() {
       {/* Dual Devices Composition: iPhone (Left - Reduced) + MacBook (Right - Increased) */}
       <div className="relative z-10 w-full flex flex-row items-center justify-center gap-2.5 sm:gap-4 md:gap-5 lg:gap-6 max-w-[620px] mx-auto pb-7 sm:pb-9">
         
-        {/* ─── LEFT: iPhone / Mobile Mockup (Reduced Size) ─── */}
-        <div className="relative w-[23%] sm:w-[22%] max-w-[115px] shrink-0 transform -rotate-1 sm:-rotate-2 hover:rotate-0 transition-transform duration-300 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
+        {/* ─── LEFT: iPhone / Mobile Mockup (Straight angle, no tilt) ─── */}
+        <div className="relative w-[23%] sm:w-[22%] max-w-[115px] shrink-0 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
           {/* iPhone Silver Titanium / Aluminum Chassis */}
           <div className="relative bg-gradient-to-br from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[2.5px] sm:p-[3.5px] rounded-[16px] sm:rounded-[20px] border-[1.5px] sm:border-[2px] border-[#94A3B8] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_6px_16px_rgba(0,0,0,0.5)]">
             
@@ -157,12 +157,12 @@ function VidyasKitchenDualDeviceMockup() {
             {/* Laptop Screen Display */}
             <div className="relative w-full aspect-[16/10] bg-black rounded-t-[8px] sm:rounded-t-[11px] overflow-hidden border border-black">
               <Image
-                src="/case-studies/vidyas-kitchen/vidyas-kitchen-desktop-qr.png"
-                alt="Vidya's Kitchen Desktop Experience"
+                src="/case-studies/vidyas-kitchen/vidyas-kitchen-admin-dashboard.png"
+                alt="Vidya's Kitchen Admin Dashboard"
                 fill
                 unoptimized
                 sizes="(max-width: 640px) 300px, (max-width: 1024px) 420px, 500px"
-                className="object-cover object-center filter contrast-[1.02]"
+                className="object-cover object-top filter contrast-[1.02]"
                 priority
               />
               {/* Screen Glare Overlay */}
@@ -176,9 +176,9 @@ function VidyasKitchenDualDeviceMockup() {
             <div className="w-14 sm:w-20 h-[3px] bg-[#64748B]/60 rounded-b-sm border-t border-white/40" />
           </div>
 
-          {/* Badge: DESKTOP STORE */}
+          {/* Badge: ADMIN DASHBOARD */}
           <div className="absolute -bottom-2 sm:-bottom-2.5 right-3 sm:right-6 px-1.5 py-0.5 bg-[#FAED00] text-black font-mono font-black text-[7.5px] sm:text-[8.5px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
-            DESKTOP STORE
+            ADMIN DASHBOARD
           </div>
         </div>
 
