@@ -77,21 +77,21 @@ function VidyasKitchenDualDeviceMockup() {
         }}
       />
 
-      {/* Dual Devices Composition: iPhone (Left) + MacBook (Right) */}
-      <div className="relative z-10 w-full flex flex-row items-center justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-8 max-w-[560px] mx-auto pb-7 sm:pb-9">
+      {/* Dual Devices Composition: iPhone (Left - Reduced) + MacBook (Right - Increased) */}
+      <div className="relative z-10 w-full flex flex-row items-center justify-center gap-2.5 sm:gap-4 md:gap-5 lg:gap-6 max-w-[620px] mx-auto pb-7 sm:pb-9">
         
-        {/* ─── LEFT: iPhone / Mobile Mockup (Silver Edition) ─── */}
-        <div className="relative w-[34%] sm:w-[32%] max-w-[155px] shrink-0 transform -rotate-1 sm:-rotate-2 hover:rotate-0 transition-transform duration-300 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
+        {/* ─── LEFT: iPhone / Mobile Mockup (Reduced Size) ─── */}
+        <div className="relative w-[23%] sm:w-[22%] max-w-[115px] shrink-0 transform -rotate-1 sm:-rotate-2 hover:rotate-0 transition-transform duration-300 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]">
           {/* iPhone Silver Titanium / Aluminum Chassis */}
-          <div className="relative bg-gradient-to-br from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[3px] sm:p-[4.5px] rounded-[20px] sm:rounded-[24px] border-[2px] border-[#94A3B8] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_6px_16px_rgba(0,0,0,0.5)]">
+          <div className="relative bg-gradient-to-br from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[2.5px] sm:p-[3.5px] rounded-[16px] sm:rounded-[20px] border-[1.5px] sm:border-[2px] border-[#94A3B8] shadow-[inset_0_1px_2px_rgba(255,255,255,0.9),0_6px_16px_rgba(0,0,0,0.5)]">
             
             {/* Dynamic Island / Speaker Notch Pill */}
-            <div className="absolute top-[6px] sm:top-[8px] left-1/2 -translate-x-1/2 w-8 sm:w-10 h-2 sm:h-2.5 bg-[#09090b] rounded-full z-20 flex items-center justify-end pr-1 border border-black/40">
-              <div className="w-1 h-1 rounded-full bg-[#1c3d5a]/70" />
+            <div className="absolute top-[5px] sm:top-[6.5px] left-1/2 -translate-x-1/2 w-6 sm:w-8 h-1.5 sm:h-2 bg-[#09090b] rounded-full z-20 flex items-center justify-end pr-1 border border-black/40">
+              <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-[#1c3d5a]/70" />
             </div>
 
             {/* Screen Bezel & Container displaying the 5 high-res screens */}
-            <div className="relative w-full aspect-[9/18.5] bg-black rounded-[16px] sm:rounded-[20px] overflow-hidden border border-black/80">
+            <div className="relative w-full aspect-[9/18.5] bg-black rounded-[13px] sm:rounded-[16px] overflow-hidden border border-black/80">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentScreen.src}
@@ -106,7 +106,7 @@ function VidyasKitchenDualDeviceMockup() {
                     alt={currentScreen.alt}
                     fill
                     unoptimized
-                    sizes="(max-width: 640px) 180px, 220px"
+                    sizes="(max-width: 640px) 130px, 160px"
                     className="object-cover object-top filter contrast-[1.03] brightness-[1.01]"
                     priority
                   />
@@ -118,11 +118,11 @@ function VidyasKitchenDualDeviceMockup() {
             </div>
 
             {/* Bottom Home Indicator Line */}
-            <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-10 sm:w-12 h-[2.5px] bg-white/60 rounded-full z-20 pointer-events-none" />
+            <div className="absolute bottom-[5px] left-1/2 -translate-x-1/2 w-8 sm:w-10 h-[2px] bg-white/60 rounded-full z-20 pointer-events-none" />
           </div>
 
           {/* Interactive Screen Step Dots */}
-          <div className="flex items-center justify-center gap-1 mt-1.5 z-20">
+          <div className="flex items-center justify-center gap-1 mt-1 z-20">
             {vidyasMobileScreens.map((s, idx) => (
               <button
                 key={s.step}
@@ -131,7 +131,7 @@ function VidyasKitchenDualDeviceMockup() {
                 aria-label={`Show ${s.title}`}
                 className={`h-1.5 transition-all duration-300 rounded-full border border-black cursor-pointer ${
                   activeScreenIndex === idx
-                    ? "w-4 bg-[#00C16A]"
+                    ? "w-3 sm:w-4 bg-[#00C16A]"
                     : "w-1.5 bg-white/40 hover:bg-white"
                 }`}
               />
@@ -139,29 +139,29 @@ function VidyasKitchenDualDeviceMockup() {
           </div>
 
           {/* Badge: MOBILE PWA + Current Screen Title */}
-          <div className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-[#00C16A] text-black font-mono font-black text-[7px] sm:text-[8px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
+          <div className="absolute -bottom-2 sm:-bottom-2.5 left-1/2 -translate-x-1/2 px-1 sm:px-1.5 py-0.5 bg-[#00C16A] text-black font-mono font-black text-[6.5px] sm:text-[7.5px] uppercase tracking-wider border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] whitespace-nowrap z-20">
             {currentScreen.step} // {currentScreen.title}
           </div>
         </div>
 
-        {/* ─── RIGHT: MacBook / Desktop Mockup (Silver Aluminum Edition) ─── */}
-        <div className="relative w-[62%] sm:w-[64%] max-w-[340px] shrink-0 drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-transform duration-300">
+        {/* ─── RIGHT: MacBook / Desktop Mockup (Increased Size) ─── */}
+        <div className="relative w-[73%] sm:w-[75%] max-w-[420px] shrink-0 drop-shadow-[0_18px_36px_rgba(0,0,0,0.7)] hover:scale-[1.02] transition-transform duration-300">
           {/* MacBook Top Lid Display in Silver Anodized Finish */}
-          <div className="relative bg-gradient-to-b from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[3.5px] sm:p-[5px] rounded-t-[10px] sm:rounded-t-[14px] border-[2px] border-b-0 border-[#94A3B8] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9)]">
+          <div className="relative bg-gradient-to-b from-[#F8FAFC] via-[#E2E8F0] to-[#CBD5E1] p-[4px] sm:p-[6px] rounded-t-[12px] sm:rounded-t-[16px] border-[2px] border-b-0 border-[#94A3B8] shadow-[inset_0_1px_1px_rgba(255,255,255,0.9)]">
             
             {/* Top Webcam Notch / Bezel */}
-            <div className="absolute top-[3px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full flex items-center justify-center z-20">
+            <div className="absolute top-[3.5px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full flex items-center justify-center z-20">
               <div className="w-1 h-1 rounded-full bg-[#18181b] border border-[#64748b]" />
             </div>
 
             {/* Laptop Screen Display */}
-            <div className="relative w-full aspect-[16/10] bg-black rounded-t-[7px] sm:rounded-t-[10px] overflow-hidden border border-black">
+            <div className="relative w-full aspect-[16/10] bg-black rounded-t-[8px] sm:rounded-t-[11px] overflow-hidden border border-black">
               <Image
                 src="/case-studies/vidyas-kitchen/vidyas-kitchen-thumb.png"
                 alt="Vidya's Kitchen Desktop Experience"
                 fill
                 unoptimized
-                sizes="(max-width: 640px) 240px, (max-width: 1024px) 340px, 400px"
+                sizes="(max-width: 640px) 300px, (max-width: 1024px) 420px, 500px"
                 className="object-cover object-top filter contrast-[1.03]"
                 priority
               />
@@ -171,9 +171,9 @@ function VidyasKitchenDualDeviceMockup() {
           </div>
 
           {/* MacBook Base Keyboard Chassis & Notch Lip in Silver Aluminum */}
-          <div className="relative w-[106%] -left-[3%] h-[7px] sm:h-[9px] bg-gradient-to-b from-[#E2E8F0] via-[#CBD5E1] to-[#94A3B8] rounded-b-[4px] border-[2px] border-[#94A3B8] shadow-[0_4px_10px_rgba(0,0,0,0.3)] flex justify-center">
+          <div className="relative w-[106%] -left-[3%] h-[8px] sm:h-[10px] bg-gradient-to-b from-[#E2E8F0] via-[#CBD5E1] to-[#94A3B8] rounded-b-[5px] border-[2px] border-[#94A3B8] shadow-[0_4px_10px_rgba(0,0,0,0.3)] flex justify-center">
             {/* Display Open Thumb Groove */}
-            <div className="w-12 sm:w-16 h-[2.5px] bg-[#64748B]/60 rounded-b-sm border-t border-white/40" />
+            <div className="w-14 sm:w-20 h-[3px] bg-[#64748B]/60 rounded-b-sm border-t border-white/40" />
           </div>
 
           {/* Badge: DESKTOP STORE */}
