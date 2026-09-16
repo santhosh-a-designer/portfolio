@@ -145,190 +145,222 @@ export default function FloatingActionTriggers() {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      onMouseEnter={cancelClose}
-      onMouseLeave={scheduleClose}
-      className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto select-none"
-    >
-      {/* ─── Popover Panels Container (Floats above / left of buttons) ─── */}
+    <>
+      {/* ─── Blurred Backdrop Overlay when panel is open ─── */}
       <AnimatePresence>
-        {activePanel === "recommendations" && (
+        {activePanel !== null && (
           <motion.div
-            key="panel-recommendations"
-            initial={{ opacity: 0, scale: 0.95, y: 12, x: 0 }}
-            animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="w-[340px] sm:w-[410px] bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden max-h-[520px] mb-2"
-          >
-            {/* Panel Header */}
-            <div className="px-4 py-3 bg-[#FAED00] border-b-2 border-black flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-2">
-                <Quotes weight="fill" className="w-4 h-4 text-black" />
-                <span className="text-[11px] font-mono font-black uppercase tracking-wider text-black">
-                  // RECOMMENDATIONS (04)
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setActivePanel(null)}
-                aria-label="Close recommendations panel"
-                className="w-6 h-6 flex items-center justify-center bg-black text-white hover:bg-zinc-800 transition-colors cursor-pointer"
-              >
-                <X size={14} weight="bold" />
-              </button>
-            </div>
+            key="modal-backdrop-blur"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setActivePanel(null)}
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-md pointer-events-auto"
+          />
+        )}
+      </AnimatePresence>
 
-            {/* Scrollable Card Stack */}
-            <div className="p-3.5 space-y-3 overflow-y-auto max-h-[380px] divide-y divide-zinc-200">
-              {testimonials.map((t) => (
-                <div key={t.name} className="pt-3 first:pt-0">
-                  <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <div className="w-6 h-6 rounded-none bg-black text-[#FAED00] flex items-center justify-center font-mono font-black text-[10px] shrink-0">
-                        {t.initials}
+      <div
+        ref={containerRef}
+        onMouseEnter={cancelClose}
+        onMouseLeave={scheduleClose}
+        className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto select-none"
+      >
+        {/* ─── Popover Panels Container (Floats above / left of buttons) ─── */}
+        <AnimatePresence>
+          {activePanel === "recommendations" && (
+            <motion.div
+              key="panel-recommendations"
+              initial={{ opacity: 0, scale: 0.95, y: 12, x: 0 }}
+              animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className="w-[340px] sm:w-[420px] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden max-h-[80vh] sm:max-h-[540px] mb-2 z-50"
+              onWheel={(e) => e.stopPropagation()}
+            >
+              {/* Panel Header */}
+              <div className="px-4 py-3 bg-[#FAED00] border-b-2 border-black flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-2">
+                  <Quotes weight="fill" className="w-4 h-4 text-black" />
+                  <span className="text-[11px] font-mono font-black uppercase tracking-wider text-black">
+                    // RECOMMENDATIONS (04)
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActivePanel(null)}
+                  aria-label="Close recommendations panel"
+                  className="w-6 h-6 flex items-center justify-center bg-black text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+                >
+                  <X size={14} weight="bold" />
+                </button>
+              </div>
+
+              {/* Scrollable Card Stack — with data-lenis-prevent and native overscroll containment */}
+              <div 
+                data-lenis-prevent
+                className="p-4 space-y-4 overflow-y-auto overscroll-contain flex-1 min-h-0 divide-y divide-zinc-200 touch-pan-y"
+                style={{
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "#000000 #F4F4F0",
+                }}
+              >
+                {testimonials.map((t) => (
+                  <div key={t.name} className="pt-3.5 first:pt-0">
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-6 h-6 rounded-none bg-black text-[#FAED00] flex items-center justify-center font-mono font-black text-[10px] shrink-0">
+                          {t.initials}
+                        </div>
+                        <div className="min-w-0">
+                          <span className="text-xs font-black uppercase tracking-tight text-black truncate block font-sans">
+                            {t.name}
+                          </span>
+                          <span className="text-[9px] font-mono font-bold text-zinc-500 truncate block">
+                            {t.role}
+                          </span>
+                        </div>
                       </div>
-                      <div className="min-w-0">
-                        <span className="text-xs font-black uppercase tracking-tight text-black truncate block font-sans">
-                          {t.name}
-                        </span>
-                        <span className="text-[9px] font-mono font-bold text-zinc-500 truncate block">
-                          {t.role}
-                        </span>
-                      </div>
+                      <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 bg-zinc-100 text-zinc-700 border border-zinc-300 uppercase shrink-0">
+                        {t.location}
+                      </span>
                     </div>
-                    <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 bg-zinc-100 text-zinc-700 border border-zinc-300 uppercase shrink-0">
-                      {t.location}
+
+                    <p className="text-[11.5px] font-serif italic text-zinc-800 leading-relaxed pl-2.5 border-l-2 border-[#FF462D]">
+                      &ldquo;{t.text}&rdquo;
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer LinkedIn Action */}
+              <div className="px-4 py-2.5 bg-[#F4F4F0] border-t-2 border-black flex items-center justify-between shrink-0">
+                <span className="text-[10px] font-mono font-bold text-zinc-600 flex items-center gap-1.5">
+                  <CheckCircle weight="fill" className="text-[#00C16A] w-3.5 h-3.5" />
+                  VERIFIED LINKEDIN REVIEWS
+                </span>
+                <a
+                  href="https://linkedin.com/in/santhosh-designer"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[10px] font-mono font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors"
+                >
+                  <span>VIEW ALL ON LINKEDIN</span>
+                  <ArrowUpRight weight="bold" className="w-3 h-3" />
+                </a>
+              </div>
+            </motion.div>
+          )}
+
+          {activePanel === "shorts" && (
+            <motion.div
+              key="panel-shorts"
+              initial={{ opacity: 0, scale: 0.95, y: 12, x: 0 }}
+              animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className="w-[340px] sm:w-[420px] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden max-h-[80vh] sm:max-h-[540px] mb-2 z-50"
+              onWheel={(e) => e.stopPropagation()}
+            >
+              {/* Panel Header */}
+              <div className="px-4 py-3 bg-[#0FE0E3] border-b-2 border-black flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-2">
+                  <SquaresFour weight="bold" className="w-4 h-4 text-black" />
+                  <span className="text-[11px] font-mono font-black uppercase tracking-wider text-black">
+                    // ARCHIVES &amp; SHORTS
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActivePanel(null)}
+                  aria-label="Close shorts panel"
+                  className="w-6 h-6 flex items-center justify-center bg-black text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+                >
+                  <X size={14} weight="bold" />
+                </button>
+              </div>
+
+              {/* Content List — with data-lenis-prevent and native overscroll containment */}
+              <div 
+                data-lenis-prevent
+                className="p-4 space-y-4 overflow-y-auto overscroll-contain flex-1 min-h-0 touch-pan-y"
+                style={{
+                  scrollbarWidth: "thin",
+                  scrollbarColor: "#000000 #F4F4F0",
+                }}
+              >
+                {/* UX/UI Shorts Section */}
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500">
+                      UX / UI SHORTS (P1–P3)
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-[#FF462D]">
+                      3 CASE SHORTS
                     </span>
                   </div>
 
-                  <p className="text-[11px] font-serif italic text-zinc-800 leading-relaxed pl-2 border-l-2 border-[#FF462D]">
-                    &ldquo;{t.text}&rdquo;
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            {/* Footer LinkedIn Action */}
-            <div className="px-4 py-2.5 bg-[#F4F4F0] border-t-2 border-black flex items-center justify-between shrink-0">
-              <span className="text-[10px] font-mono font-bold text-zinc-600 flex items-center gap-1.5">
-                <CheckCircle weight="fill" className="text-[#00C16A] w-3.5 h-3.5" />
-                VERIFIED LINKEDIN REVIEWS
-              </span>
-              <a
-                href="https://linkedin.com/in/santhosh-designer"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[10px] font-mono font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors"
-              >
-                <span>VIEW ALL ON LINKEDIN</span>
-                <ArrowUpRight weight="bold" className="w-3 h-3" />
-              </a>
-            </div>
-          </motion.div>
-        )}
-
-        {activePanel === "shorts" && (
-          <motion.div
-            key="panel-shorts"
-            initial={{ opacity: 0, scale: 0.95, y: 12, x: 0 }}
-            animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="w-[340px] sm:w-[410px] bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden max-h-[520px] mb-2"
-          >
-            {/* Panel Header */}
-            <div className="px-4 py-3 bg-[#0FE0E3] border-b-2 border-black flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-2">
-                <SquaresFour weight="bold" className="w-4 h-4 text-black" />
-                <span className="text-[11px] font-mono font-black uppercase tracking-wider text-black">
-                  // ARCHIVES &amp; SHORTS
-                </span>
-              </div>
-              <button
-                type="button"
-                onClick={() => setActivePanel(null)}
-                aria-label="Close shorts panel"
-                className="w-6 h-6 flex items-center justify-center bg-black text-white hover:bg-zinc-800 transition-colors cursor-pointer"
-              >
-                <X size={14} weight="bold" />
-              </button>
-            </div>
-
-            {/* Content List */}
-            <div className="p-4 space-y-4 overflow-y-auto max-h-[400px]">
-              {/* UX/UI Shorts Section */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500">
-                    UX / UI SHORTS (P1–P3)
-                  </span>
-                  <span className="text-[9px] font-mono font-bold text-[#FF462D]">
-                    3 CASE SHORTS
-                  </span>
-                </div>
-
-                <div className="space-y-2">
-                  {uxShorts.map((short) => (
-                    <div
-                      key={short.title}
-                      className="p-2.5 bg-zinc-50 hover:bg-zinc-100 border border-black/30 flex items-start gap-3 transition-colors"
-                    >
-                      <span
-                        className="text-[10px] font-mono font-black px-1.5 py-0.5 text-black border border-black shrink-0 mt-0.5"
-                        style={{ backgroundColor: short.accent }}
+                  <div className="space-y-2">
+                    {uxShorts.map((short) => (
+                      <div
+                        key={short.title}
+                        className="p-2.5 bg-zinc-50 hover:bg-zinc-100 border border-black/30 flex items-start gap-3 transition-colors"
                       >
-                        {short.tag}
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <span className="text-xs font-black uppercase tracking-tight text-black font-mono block">
-                          {short.title}
+                        <span
+                          className="text-[10px] font-mono font-black px-1.5 py-0.5 text-black border border-black shrink-0 mt-0.5"
+                          style={{ backgroundColor: short.accent }}
+                        >
+                          {short.tag}
                         </span>
-                        <span className="text-[10px] font-bold text-zinc-600 block leading-tight font-sans">
-                          {short.desc}
-                        </span>
+                        <div className="min-w-0 flex-1">
+                          <span className="text-xs font-black uppercase tracking-tight text-black font-mono block">
+                            {short.title}
+                          </span>
+                          <span className="text-[10px] font-bold text-zinc-600 block leading-tight font-sans">
+                            {short.desc}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+
+                  <Link
+                    href="/ux-ui-shorts"
+                    className="mt-2.5 w-full py-2 px-3 bg-black hover:bg-zinc-800 text-white font-mono font-black text-[10px] uppercase tracking-wider flex items-center justify-between transition-colors border border-black shadow-[2px_2px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
+                  >
+                    <span>OPEN FULL UX/UI SHORTS PAGE</span>
+                    <ArrowRight weight="bold" className="w-3.5 h-3.5 text-[#FAED00]" />
+                  </Link>
                 </div>
 
-                <Link
-                  href="/ux-ui-shorts"
-                  className="mt-2.5 w-full py-2 px-3 bg-black hover:bg-zinc-800 text-white font-mono font-black text-[10px] uppercase tracking-wider flex items-center justify-between transition-colors border border-black shadow-[2px_2px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
-                >
-                  <span>OPEN FULL UX/UI SHORTS PAGE</span>
-                  <ArrowRight weight="bold" className="w-3.5 h-3.5 text-[#FAED00]" />
-                </Link>
-              </div>
+                {/* Graphic Work Section */}
+                <div className="pt-3 border-t-2 border-black/10">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500">
+                      GRAPHIC DESIGN WORK
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-zinc-400">
+                      POSTERS &amp; PRINT
+                    </span>
+                  </div>
 
-              {/* Graphic Work Section */}
-              <div className="pt-3 border-t-2 border-black/10">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500">
-                    GRAPHIC DESIGN WORK
-                  </span>
-                  <span className="text-[9px] font-mono font-bold text-zinc-400">
-                    POSTERS &amp; PRINT
-                  </span>
+                  <p className="text-[11px] font-bold uppercase tracking-wide text-zinc-700 leading-relaxed font-sans mb-2.5">
+                    Brand identities, packaging typography, poster collections, and experimental visual systems.
+                  </p>
+
+                  <Link
+                    href="/graphic-design"
+                    className="w-full py-2 px-3 bg-[#FF462D] hover:bg-[#ff3419] text-white font-mono font-black text-[10px] uppercase tracking-wider flex items-center justify-between transition-colors border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
+                  >
+                    <span>EXPLORE GRAPHIC WORK</span>
+                    <ArrowRight weight="bold" className="w-3.5 h-3.5 text-white" />
+                  </Link>
                 </div>
-
-                <p className="text-[11px] font-bold uppercase tracking-wide text-zinc-700 leading-relaxed font-sans mb-2.5">
-                  Brand identities, packaging typography, poster collections, and experimental visual systems.
-                </p>
-
-                <Link
-                  href="/graphic-design"
-                  className="w-full py-2 px-3 bg-[#FF462D] hover:bg-[#ff3419] text-white font-mono font-black text-[10px] uppercase tracking-wider flex items-center justify-between transition-colors border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
-                >
-                  <span>EXPLORE GRAPHIC WORK</span>
-                  <ArrowRight weight="bold" className="w-3.5 h-3.5 text-white" />
-                </Link>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       {/* ─── Stacked Floating Action Buttons ─── */}
       <div className="flex flex-col gap-2.5 items-end">
@@ -405,5 +437,6 @@ export default function FloatingActionTriggers() {
         </div>
       </div>
     </div>
+    </>
   );
 }
