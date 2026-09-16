@@ -99,13 +99,13 @@ export default function VidyasKitchenCaseStudyPage() {
               </p>
 
               {/* Login Flow Images: Phone Input + OTP Verification */}
-              <div className="py-6 border-y border-black/15 my-6 grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              <div className="py-6 border-y border-black/15 my-6 grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
                 <div className="overflow-hidden rounded-2xl border border-black/10 shadow-sm bg-white">
                   <Image
                     src="/case-studies/vidyas-kitchen/login-phone.png"
                     alt="Vidya's Kitchen Customer App — Phone Number Input Screen"
-                    width={600}
-                    height={1200}
+                    width={457}
+                    height={1024}
                     className="w-full h-auto object-cover"
                   />
                 </div>
@@ -113,8 +113,8 @@ export default function VidyasKitchenCaseStudyPage() {
                   <Image
                     src="/case-studies/vidyas-kitchen/login-otp.png"
                     alt="Vidya's Kitchen Customer App — OTP Verification Screen"
-                    width={600}
-                    height={1200}
+                    width={455}
+                    height={1024}
                     className="w-full h-auto object-cover"
                   />
                 </div>
