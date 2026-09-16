@@ -397,15 +397,6 @@ export default function ServicesAndFooterV2() {
                     Fill in your details below for a prompt response within 24 hours.
                   </p>
                 </div>
-
-                {/* Follow Us Social Shortcuts */}
-                <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-black uppercase tracking-wider text-black font-mono">
-                  <span className="text-[10px] text-zinc-400 font-mono">FOLLOW:</span>
-                  <a href="https://instagram.com/designbysanthosh" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">IG.</a>
-                  <a href="https://behance.net/santhosh-designer" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">BE.</a>
-                  <a href="https://linkedin.com/in/santhosh-designer" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">LI.</a>
-                  <a href="https://x.com/designbysanthosh" target="_blank" rel="noopener noreferrer" className="hover:text-[#FF462D] transition-colors">TW.</a>
-                </div>
               </div>
 
               {/* Form inputs */}
