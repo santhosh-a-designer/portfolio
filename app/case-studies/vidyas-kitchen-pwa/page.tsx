@@ -134,10 +134,26 @@ export default function VidyasKitchenCaseStudyPage() {
                 Cart opens as a bottom sheet. Promo codes validate inline with a spinner → success animation, no page reload.
               </p>
 
-              <div className="py-8 border-y border-black/15 text-center my-4">
-                <p className="font-mono text-xs uppercase tracking-wider text-gray-500">
-                  [IMAGE: Cart / checkout screen]
-                </p>
+              {/* Cart & Checkout Flow: Cart Bottom Sheet + Razorpay Gateway */}
+              <div className="py-6 border-y border-black/15 my-6 grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
+                <div className="overflow-hidden rounded-2xl border border-black/10 shadow-sm bg-white">
+                  <Image
+                    src="/case-studies/vidyas-kitchen/cart-bottom-sheet.png"
+                    alt="Vidya's Kitchen Customer App — Cart Bottom Sheet & Bill Details"
+                    width={436}
+                    height={954}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-2xl border border-black/10 shadow-sm bg-white">
+                  <Image
+                    src="/case-studies/vidyas-kitchen/checkout-razorpay.png"
+                    alt="Vidya's Kitchen Customer App — Razorpay Payment Link Gateway"
+                    width={439}
+                    height={945}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
               </div>
 
               <p>
