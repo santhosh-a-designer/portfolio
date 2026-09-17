@@ -626,42 +626,6 @@ export default function VidyasKitchenCaseStudyPage() {
                 </div>
               </div>
 
-              {/* Screen Mockups Gallery */}
-              <div className="space-y-4 pt-4 border-t-2 border-black">
-                <span className="text-xs font-mono font-black uppercase tracking-wider text-zinc-500 block">
-                  Interactive Screen Mockups &amp; Production Surfaces
-                </span>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {[
-                    { title: "Customer Phone Login", sub: "Firebase OTP Flow", img: "/case-studies/vidyas-kitchen/login-phone.png" },
-                    { title: "Customer Menu & Slots", sub: "24-Hr Batch Selector", img: "/case-studies/vidyas-kitchen/customer-menu.png" },
-                    { title: "Slide-Over Cart", sub: "Framer Motion Promo Box", img: "/case-studies/vidyas-kitchen/cart-bottom-sheet.png" },
-                    { title: "Checkout & Razorpay", sub: "Instant UPI Intent", img: "/case-studies/vidyas-kitchen/checkout-razorpay.png" },
-                    { title: "Admin Kitchen Kanban", sub: "OLED Dark Sound Alerts", img: "/case-studies/vidyas-kitchen/admin-dashboard.png" },
-                    { title: "Driver Queue & Maps", sub: "Daylight High Contrast", img: "/case-studies/vidyas-kitchen/driver-deliveries.png" },
-                    { title: "WhatsApp Cloud Bot", sub: "Automated Receipts", img: "/case-studies/vidyas-kitchen/whatsapp-bot.png" },
-                    { title: "OTP Verification", sub: "Auto-Focus 6-Digit PIN", img: "/case-studies/vidyas-kitchen/login-otp.png" },
-                  ].map((screen, idx) => (
-                    <div key={idx} className="border-2 border-black bg-white overflow-hidden shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group">
-                      <div className="relative aspect-[9/16] bg-zinc-100 overflow-hidden border-b-2 border-black">
-                        <Image
-                          src={screen.img}
-                          alt={screen.title}
-                          fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                          quality={100}
-                          className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                        />
-                      </div>
-                      <div className="p-3 font-mono">
-                        <h5 className="font-black text-xs text-black uppercase truncate">{screen.title}</h5>
-                        <p className="text-[10px] text-zinc-500 uppercase">{screen.sub}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </section>
 
