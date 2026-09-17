@@ -680,6 +680,46 @@ export default function VidyasKitchenCaseStudyPage() {
                       desc: "Presents traditional home-cooked delicacies (Mom's Recipe Chicken Gravy, Pepper Chicken) with high-definition dish photography, real-time discount tags, category switchers (Kitchen picks, Favorites), and bottom navigation for rapid access.",
                       highlights: ["Card-based meal browsing with discount badges", "Floating bottom navigation dock", "Instant + ADD action button"],
                     },
+                    {
+                      step: "06",
+                      title: "Category Filter & Dish Listing Screen",
+                      tag: "Quick Diet Filtering",
+                      img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
+                      desc: "Allows customers to filter dishes by dietary preference (Chicken, Mutton, Egg) with pill tabs, viewing distinct recipe variations like Mom's Recipe vs. Sister's Recipe with clear pricing, discount badges, and quick-add actions.",
+                      highlights: ["Dietary category pill toggles", "Side-by-side recipe variations", "Direct item quantity steppers"],
+                    },
+                    {
+                      step: "07",
+                      title: "Cart Overview & Promo Code Application",
+                      tag: "Conversion & Upsell Flow",
+                      img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
+                      desc: "Detailed cart review displaying item weights (500gm, 1kg), increment/decrement controls, animated promo code entry box with instant validation feedback, and transparent itemized bill breakdown.",
+                      highlights: ["Item weight & recipe specs", "Framer Motion animated coupon box", "Transparent delivery fee itemization"],
+                    },
+                    {
+                      step: "08",
+                      title: "24-Hour Advance Meal Scheduler & Payment Choice",
+                      tag: "Predictable Kitchen Logistics",
+                      img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
+                      desc: "Enforces 24-hour advance batch cooking logic. Users select delivery day (Thu, Fri, Sat) and discrete slots (Breakfast 7-9 AM, Lunch 12-2 PM, Dinner 7-9 PM) with unavailable cutoff times disabled, plus payment toggles (Pay Online vs. Pay at the door).",
+                      highlights: ["Visual calendar slot selector", "24-hour cutoff safety logic", "Instant online vs. COD toggle"],
+                    },
+                    {
+                      step: "09",
+                      title: "Order Confirmation Modal",
+                      tag: "Clear Order Handoff",
+                      img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
+                      desc: "A spring-animated confirmation popup summarizing the unique Order ID, cash readiness prompt for COD deliveries, and a direct primary action button routing users straight to real-time order tracking.",
+                      highlights: ["Spring physics entry modal", "Clear COD cash reminder", "1-tap 'Track my order' redirect"],
+                    },
+                    {
+                      step: "10",
+                      title: "Live Real-Time Order & Delivery Status",
+                      tag: "Live Reassurance & Status Stepper",
+                      img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
+                      desc: "Real-time tracking dashboard indicating scheduled arrival time, active 4-stage stepper (Order → Preparing → On the way → Delivered), cash on delivery reminder, and integrated direct customer support chat button.",
+                      highlights: ["Supabase Realtime live sync stepper", "Exact arrival time display", "Direct kitchen chat support trigger"],
+                    },
                   ].map((screen) => (
                     <div
                       key={screen.step}
