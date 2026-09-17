@@ -760,40 +760,16 @@ export default function VidyasKitchenCaseStudyPage() {
                     </div>
 
                     {/* Only The Pure Image */}
-                    <div className="flex justify-center w-full">
-                      <div className="relative w-full max-w-[280px] aspect-[9/19]">
+                    <div className="flex justify-center w-full py-2">
+                      <div className="relative w-full max-w-[300px] aspect-[9/19]">
                         <Image
                           src={screen.img}
                           alt={screen.title}
                           fill
-                          sizes="280px"
+                          sizes="300px"
                           quality={100}
                           className="object-contain object-center"
                         />
-                      </div>
-                    </div>
-
-                    {/* Explanation & Highlights */}
-                    <div className="space-y-3 font-mono">
-                      <p className="font-sans text-xs sm:text-sm text-zinc-700 leading-relaxed">
-                        {screen.desc}
-                      </p>
-
-                      <div className="pt-3 border-t border-black/15">
-                        <span className="text-[10px] font-bold text-zinc-500 uppercase block mb-1.5">
-                          Key UX Highlights:
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {screen.highlights.map((h, i) => (
-                            <span
-                              key={i}
-                              className="px-2 py-0.5 bg-white border border-black text-[10px] font-bold text-black flex items-center gap-1"
-                            >
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A]" />
-                              {h}
-                            </span>
-                          ))}
-                        </div>
                       </div>
                     </div>
                   </div>
