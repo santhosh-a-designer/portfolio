@@ -57,6 +57,8 @@ export const metadata: Metadata = {
   },
 };
 
+import LenisProvider from "@/components/LenisProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -65,7 +67,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${spaceGrotesk.variable} ${poppins.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${silkscreen.variable} antialiased noise`}>
-        {children}
+        <LenisProvider>
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );
