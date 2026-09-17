@@ -460,6 +460,8 @@ export default function VidyasKitchenCaseStudyPage() {
                         src="/case-studies/vidyas-kitchen/login-phone.png"
                         alt="Vidya's Kitchen Phone Login"
                         fill
+                        quality={100}
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
                         className="object-cover object-top"
                       />
                     </div>
@@ -475,6 +477,8 @@ export default function VidyasKitchenCaseStudyPage() {
                         src="/case-studies/vidyas-kitchen/login-otp.png"
                         alt="Vidya's Kitchen OTP Verification"
                         fill
+                        quality={100}
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
                         className="object-cover object-top"
                       />
                     </div>
@@ -490,6 +494,8 @@ export default function VidyasKitchenCaseStudyPage() {
                         src="/case-studies/vidyas-kitchen/customer-menu.png"
                         alt="Vidya's Kitchen Browse Menu"
                         fill
+                        quality={100}
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
                         className="object-cover object-top"
                       />
                     </div>
@@ -505,6 +511,8 @@ export default function VidyasKitchenCaseStudyPage() {
                         src="/case-studies/vidyas-kitchen/cart-bottom-sheet.png"
                         alt="Vidya's Kitchen Cart Sheet"
                         fill
+                        quality={100}
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
                         className="object-cover object-top"
                       />
                     </div>
@@ -520,6 +528,8 @@ export default function VidyasKitchenCaseStudyPage() {
                         src="/case-studies/vidyas-kitchen/checkout-razorpay.png"
                         alt="Vidya's Kitchen Checkout with Razorpay"
                         fill
+                        quality={100}
+                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
                         className="object-cover object-top"
                       />
                     </div>
