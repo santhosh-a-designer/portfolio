@@ -63,34 +63,34 @@ export default function HeaderV2() {
       
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black flex items-stretch min-h-[50px] min-[360px]:min-h-[54px] md:min-h-[64px] bg-white">
         {/* Logo / Brand Name */}
-        <div className="flex items-center px-3 min-[360px]:px-4 sm:px-6 md:px-7 border-r-0 md:border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors flex-1 md:flex-initial min-w-0">
-          <Link href="/v2" className="inline-block truncate">
-            <span className="text-[17px] min-[360px]:text-[19px] min-[400px]:text-xl sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none truncate whitespace-nowrap">
+        <div className="flex items-center px-3 min-[360px]:px-4 sm:px-6 md:px-7 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
+          <Link href="/v2" className="inline-block">
+            <span className="text-[16px] min-[360px]:text-[18px] min-[400px]:text-xl sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
               SIMON SANTHOSH
             </span>
           </Link>
         </div>
 
-        {/* Navigation Items with Slide-Fill Interaction */}
+        {/* Navigation Items with Slide-Fill Interaction (Desktop) */}
         <nav className="hidden md:flex items-stretch flex-1 min-w-0">
           {navItems.map((item) => (
             <NavItem key={item.label} label={item.label} href={item.href} />
           ))}
         </nav>
 
-        {/* Download Resume - Highlight Button */}
+        {/* Download Resume - Highlight Button (Expands on Mobile to fill space) */}
         <motion.button
           type="button"
-          whileTap={{ scale: 0.96 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => setResumeOpen(true)}
-          className="flex items-center justify-between gap-1.5 sm:gap-3 px-3 min-[360px]:px-4 sm:px-6 md:px-8 bg-[#FAED00] border-l-2 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[9.5px] min-[360px]:text-[10.5px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors select-none group cursor-pointer shrink-0"
+          className="flex items-center justify-center gap-2 sm:gap-3 px-3 min-[360px]:px-4 sm:px-6 md:px-8 bg-[#FAED00] border-l-0 md:border-l-2 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[10px] min-[360px]:text-[11px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors select-none group cursor-pointer flex-1 md:flex-initial"
         >
-          <span className="leading-tight text-left">
-            DOWNLOAD<br />RESUME
+          <span className="leading-tight text-center md:text-left whitespace-nowrap">
+            DOWNLOAD<span className="inline md:hidden"> </span><br className="hidden md:inline" />RESUME
           </span>
           <DownloadSimple
             weight="bold"
-            className="w-3.5 h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
+            className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
           />
         </motion.button>
       </div>
