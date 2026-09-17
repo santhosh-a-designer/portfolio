@@ -10,6 +10,7 @@ interface ScrollFocusWrapperProps {
   isFirst?: boolean;
   isLast?: boolean;
   disabled?: boolean;
+  disableOnMobile?: boolean;
   maxBlur?: number;
   minOpacity?: number;
 }
@@ -21,6 +22,7 @@ export default function ScrollFocusWrapper({
   isFirst = false,
   isLast = false,
   disabled = false,
+  disableOnMobile = false,
   maxBlur = 3.5,
   minOpacity = 0.68,
 }: ScrollFocusWrapperProps) {
@@ -39,6 +41,7 @@ export default function ScrollFocusWrapper({
       className={className}
       isFirst={isFirst}
       isLast={isLast}
+      disableOnMobile={disableOnMobile}
       maxBlur={maxBlur}
       minOpacity={minOpacity}
     >
@@ -53,6 +56,7 @@ function ActiveScrollFocusItem({
   className = "",
   isFirst = false,
   isLast = false,
+  disableOnMobile = false,
   maxBlur = 3.5,
   minOpacity = 0.68,
 }: Omit<ScrollFocusWrapperProps, "disabled">) {
@@ -107,14 +111,16 @@ function ActiveScrollFocusItem({
   const rawBlur = useTransform(scrollYProgress, blurRangeInput, blurRangeOutput);
   const opacity = useTransform(scrollYProgress, opacityRangeInput, opacityRangeOutput);
 
-  // Performance optimization: set filter to "none" when in focus (val <= 0.2px) or on mobile
+  const shouldDisable = mounted && isMobile && disableOnMobile;
+
+  // Performance optimization: set filter to "none" when in focus (val <= 0.2px) or when disabled on mobile
   const filter = useTransform(rawBlur, (val) => {
-    if (!mounted || isMobile || val <= 0.2) return "none";
+    if (!mounted || shouldDisable || val <= 0.2) return "none";
     return `blur(${val.toFixed(1)}px)`;
   });
 
   const activeOpacity = useTransform(opacity, (val) => {
-    if (!mounted || isMobile) return 1;
+    if (!mounted || shouldDisable) return 1;
     return val;
   });
 
@@ -123,8 +129,8 @@ function ActiveScrollFocusItem({
       ref={containerRef}
       id={id}
       style={{
-        filter: mounted && !isMobile ? filter : "none",
-        opacity: mounted && !isMobile ? activeOpacity : 1,
+        filter: mounted && !shouldDisable ? filter : "none",
+        opacity: mounted && !shouldDisable ? activeOpacity : 1,
       }}
       className={`w-full transition-[filter,opacity] duration-300 ease-out ${className}`}
     >

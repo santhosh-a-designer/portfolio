@@ -37,8 +37,8 @@ export default function V2Page() {
           <ExperienceSectionV2 />
         </ScrollFocusWrapper>
 
-        {/* Skills & Contact Section — sharpens and stays 100% sharp at page bottom */}
-        <ScrollFocusWrapper isLast>
+        {/* Skills & Contact Section — sharpens on desktop; 100% sharp on mobile */}
+        <ScrollFocusWrapper isLast disableOnMobile>
           <ServicesAndFooterV2 />
         </ScrollFocusWrapper>
       </main>
