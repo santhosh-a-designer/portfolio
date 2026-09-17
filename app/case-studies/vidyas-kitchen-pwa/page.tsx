@@ -34,7 +34,7 @@ export default function VidyasKitchenCaseStudyPage() {
         <HeaderV2 />
         <FloatingActionTriggers />
 
-        <main className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-32 space-y-10 sm:space-y-14">
+        <main className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-32 space-y-8 sm:space-y-12">
           
           {/* ─── Breadcrumb & Quick Nav Bar ─── */}
           <div className="flex items-center justify-between gap-4 border-b-2 border-black pb-4 select-none font-mono">
