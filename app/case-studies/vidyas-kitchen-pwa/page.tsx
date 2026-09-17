@@ -700,16 +700,18 @@ export default function VidyasKitchenCaseStudyPage() {
                         </h4>
                       </div>
 
-                      {/* Clean Rectangular Image Display (No Mobile Mockup Border) */}
-                      <div className="relative w-full aspect-[9/16] max-h-[420px] bg-white border-2 border-black overflow-hidden shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                        <Image
-                          src={screen.img}
-                          alt={screen.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                          quality={100}
-                          className="object-contain object-center"
-                        />
+                      {/* Only The Pure Image */}
+                      <div className="flex justify-center w-full">
+                        <div className="relative w-full max-w-[280px] aspect-[9/19]">
+                          <Image
+                            src={screen.img}
+                            alt={screen.title}
+                            fill
+                            sizes="280px"
+                            quality={100}
+                            className="object-contain object-center"
+                          />
+                        </div>
                       </div>
 
                       {/* Explanation & Highlights */}
