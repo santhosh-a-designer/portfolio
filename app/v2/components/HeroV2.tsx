@@ -91,7 +91,7 @@ export default function HeroV2() {
             className="lg:col-span-7 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white h-full max-h-full min-h-0 overflow-hidden"
           >
             {/* Top text block */}
-            <div className="flex flex-col p-4 sm:p-6 md:p-8 lg:p-12 lg:justify-between lg:h-full gap-4 sm:gap-5 lg:gap-0">
+            <div className="flex flex-col pt-2.5 pb-4 px-3 sm:pt-4 sm:pb-6 sm:px-6 md:p-8 lg:p-12 lg:justify-between lg:h-full gap-3 sm:gap-4 lg:gap-0">
               {/* Role badges */}
               <motion.div
                 variants={itemVariants}
