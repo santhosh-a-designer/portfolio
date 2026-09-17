@@ -20,6 +20,17 @@ import {
   MapPin,
   Flame,
   Check,
+  User,
+  CookingPot,
+  Bicycle,
+  Database,
+  LockKey,
+  CreditCard,
+  BellRinging,
+  DeviceMobileCamera,
+  Graph,
+  Tag,
+  ArrowsLeftRight,
 } from "@phosphor-icons/react";
 import HeaderV2 from "@/app/v2/components/HeaderV2";
 import FloatingActionTriggers from "@/app/v2/components/FloatingActionTriggers";
@@ -53,7 +64,7 @@ export default function VidyasKitchenCaseStudyPage() {
             </div>
           </div>
 
-          {/* ─── HERO WINDOW // CASE STUDY HEADER ─── */}
+          {/* ─── HERO WINDOW // CASE STUDY COVER OVERVIEW ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             {/* Window Chrome Titlebar */}
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
@@ -93,61 +104,49 @@ export default function VidyasKitchenCaseStudyPage() {
                 <p className="text-base sm:text-xl md:text-2xl font-bold text-zinc-700 leading-snug">
                   Designing &amp; Building Sivakasi&apos;s First Digital Home-Chef Platform across Customer PWA, Admin Dashboard, Driver App &amp; WhatsApp Bot.
                 </p>
+
+                <p className="text-xs sm:text-sm font-mono text-zinc-500 italic">
+                  &ldquo;Bridging authentic home-cooked meals with modern digital convenience — Sivakasi’s first zero-commission food delivery network.&rdquo;
+                </p>
               </div>
 
               {/* Meta Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs pt-4 border-t-2 border-dashed border-black/30">
                 <div className="p-3.5 bg-[#FAF9F5] border-2 border-black">
-                  <span className="text-[10px] text-zinc-500 font-bold uppercase block mb-1">ROLE</span>
-                  <span className="font-black text-black text-sm block">Solo Designer &amp; Developer</span>
+                  <span className="text-[10px] text-zinc-500 font-bold uppercase block">ROLE</span>
+                  <span className="font-black text-xs sm:text-sm text-black">Solo Designer &amp; Developer</span>
                 </div>
                 <div className="p-3.5 bg-[#FAF9F5] border-2 border-black">
-                  <span className="text-[10px] text-zinc-500 font-bold uppercase block mb-1">TIMELINE</span>
-                  <span className="font-black text-black text-sm block">6 Months (End-to-End)</span>
+                  <span className="text-[10px] text-zinc-500 font-bold uppercase block">TIMELINE</span>
+                  <span className="font-black text-xs sm:text-sm text-black">6 Months (End-to-End)</span>
                 </div>
                 <div className="p-3.5 bg-[#FAF9F5] border-2 border-black">
-                  <span className="text-[10px] text-zinc-500 font-bold uppercase block mb-1">TARGET MARKET</span>
-                  <span className="font-black text-black text-sm block">Sivakasi, Tamil Nadu</span>
+                  <span className="text-[10px] text-zinc-500 font-bold uppercase block">TARGET MARKET</span>
+                  <span className="font-black text-xs sm:text-sm text-black">Sivakasi, Tamil Nadu</span>
                 </div>
                 <div className="p-3.5 bg-[#FAED00] border-2 border-black">
-                  <span className="text-[10px] text-black/70 font-black uppercase block mb-1">CORE METRIC</span>
-                  <span className="font-black text-black text-sm block">0% Aggregator Tax</span>
+                  <span className="text-[10px] text-black/70 font-bold uppercase block">CORE METRIC</span>
+                  <span className="font-black text-xs sm:text-sm text-black">0% Aggregator Tax</span>
                 </div>
               </div>
 
-              {/* 4 Stat Hero Strip */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono">
-                <div className="p-4 sm:p-5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center">
-                  <span className="text-2xl sm:text-3xl md:text-4xl font-black text-[#FF462D] block leading-none mb-1">
-                    0%
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-zinc-600 block">
-                    PLATFORM COMMISSION
-                  </span>
+              {/* 4 Metric Strips */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+                <div className="p-4 sm:p-5 bg-black text-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center space-y-1">
+                  <div className="text-2xl sm:text-4xl font-black font-mono text-[#FF462D]">0%</div>
+                  <div className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">PLATFORM COMMISSION</div>
                 </div>
-                <div className="p-4 sm:p-5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center">
-                  <span className="text-2xl sm:text-3xl md:text-4xl font-black text-black block leading-none mb-1">
-                    &lt; 10s
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-zinc-600 block">
-                    PHONE OTP CHECKOUT
-                  </span>
+                <div className="p-4 sm:p-5 bg-white text-black border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center space-y-1">
+                  <div className="text-2xl sm:text-4xl font-black font-mono text-black">&lt; 10s</div>
+                  <div className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-zinc-600">PHONE OTP CHECKOUT</div>
                 </div>
-                <div className="p-4 sm:p-5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center">
-                  <span className="text-2xl sm:text-3xl md:text-4xl font-black text-[#00C16A] block leading-none mb-1">
-                    100%
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-zinc-600 block">
-                    ORDER CAPTURE ACCURACY
-                  </span>
+                <div className="p-4 sm:p-5 bg-white text-black border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center space-y-1">
+                  <div className="text-2xl sm:text-4xl font-black font-mono text-[#00C16A]">100%</div>
+                  <div className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-zinc-600">ORDER CAPTURE ACCURACY</div>
                 </div>
-                <div className="p-4 sm:p-5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center">
-                  <span className="text-2xl sm:text-3xl md:text-4xl font-black text-black block leading-none mb-1">
-                    99.2%
-                  </span>
-                  <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-zinc-600 block">
-                    HOME-SCREEN PWA INSTALLS
-                  </span>
+                <div className="p-4 sm:p-5 bg-white text-black border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center space-y-1">
+                  <div className="text-2xl sm:text-4xl font-black font-mono text-black">99.2%</div>
+                  <div className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-zinc-600">HOME-SCREEN PWA INSTALLS</div>
                 </div>
               </div>
             </div>
@@ -163,42 +162,47 @@ export default function VidyasKitchenCaseStudyPage() {
             </div>
 
             <div className="p-6 sm:p-8 md:p-10 space-y-8">
-              <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-normal">
-                Vidya&apos;s Kitchen is an end-to-end digital food ordering network built for a home chef business operating in <strong>Sivakasi, Tamil Nadu</strong>. Prior to this platform, all orders were taken manually over WhatsApp chat and phone calls — causing lost orders, delayed payments, and uncoordinated logistics. The goal was to build a tailored 4-surface digital infrastructure with <strong>zero third-party commission</strong>.
-              </p>
+              {/* The Genesis narrative */}
+              <div className="space-y-3">
+                <h3 className="font-mono font-black text-lg sm:text-xl uppercase tracking-tight text-black">
+                  The Genesis
+                </h3>
+                <p className="text-sm sm:text-base text-zinc-700 leading-relaxed max-w-4xl">
+                  Vidya&apos;s Kitchen is an end-to-end digital food ordering network built for a home chef business operating in Sivakasi, Tamil Nadu. Known for authentic, hygienic, and nostalgic traditional meals with hundreds of regular patrons, 100% of operations were previously handled manually through chaotic WhatsApp chats, missed voice notes, and uncoordinated logistics. The mission was to design an independent, 4-surface digital infrastructure with zero third-party commission without stripping away the personal, warm touch of home dining.
+                </p>
+              </div>
 
-              {/* Design vs Engineering Tools Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Design & Research Tools */}
-                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">🎨</span>
-                    <h3 className="text-base sm:text-lg font-black uppercase font-mono tracking-tight">
-                      Design &amp; Research Tools
-                    </h3>
+              {/* Tools Ecosystem Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                {/* Design & Research */}
+                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black space-y-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="flex items-center gap-2 font-mono font-black text-sm uppercase text-black">
+                    <span className="text-lg">🎨</span>
+                    <h4>Design &amp; Research Tools</h4>
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-600">
-                    Created complete component tokens, wireframes, and responsive design systems.
+                    Created complete component tokens, wireframes, empathy maps, and responsive design systems.
                   </p>
                   <div className="flex flex-wrap gap-2 pt-2">
                     {["Figma UI System", "FigJam Journeys", "Phosphor Icons", "Lucide Icons", "Interactive Prototyping"].map((tool) => (
-                      <span key={tool} className="px-2.5 py-1 bg-white border border-black text-xs font-mono font-bold text-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                      <span
+                        key={tool}
+                        className="px-3 py-1.5 bg-white border-2 border-black font-mono text-xs font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                      >
                         {tool}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                {/* Engineering & Tech Tools */}
-                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">💻</span>
-                    <h3 className="text-base sm:text-lg font-black uppercase font-mono tracking-tight">
-                      Engineering &amp; Tech Tools
-                    </h3>
+                {/* Engineering & Tech */}
+                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black space-y-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="flex items-center gap-2 font-mono font-black text-sm uppercase text-black">
+                    <span className="text-lg">💻</span>
+                    <h4>Engineering &amp; Tech Stack</h4>
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-600">
-                    Built for instant loads, offline reliability, and live GPS map tracking.
+                    Built for instant loads, offline reliability, live GPS driver tracking, and instant automated messaging.
                   </p>
                   <div className="flex flex-wrap gap-2 pt-2">
                     {[
@@ -211,7 +215,10 @@ export default function VidyasKitchenCaseStudyPage() {
                       "Mapbox GL",
                       "Twilio WhatsApp API",
                     ].map((tool) => (
-                      <span key={tool} className="px-2.5 py-1 bg-white border border-black text-xs font-mono font-bold text-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                      <span
+                        key={tool}
+                        className="px-3 py-1.5 bg-white border-2 border-black font-mono text-xs font-bold shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                      >
                         {tool}
                       </span>
                     ))}
@@ -220,37 +227,36 @@ export default function VidyasKitchenCaseStudyPage() {
               </div>
 
               {/* Business Perspective Banner */}
-              <div className="p-5 sm:p-6 bg-[#FFF9E6] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                <div className="flex items-center gap-2 border-b-2 border-black pb-3">
-                  <span className="w-3 h-3 bg-[#FF462D] border border-black" />
-                  <h3 className="text-base sm:text-lg font-black uppercase font-mono text-black">
+              <div className="p-6 bg-[#FAF9F5] border-2 border-black border-l-8 border-l-[#FF462D] space-y-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+                <div className="space-y-1">
+                  <h4 className="font-mono font-black text-base sm:text-lg uppercase text-[#BD2320]">
                     Business Perspective: Monetization &amp; Profitability in Sivakasi Town
-                  </h3>
+                  </h4>
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
+                    Sivakasi is India&apos;s industrial printing, packaging, and fireworks hub, populated by thousands of factory directors, press supervisors, and migrant administrative workers who endure 10–14 hour shifts. Most eat outside daily, but restaurant food causes health fatigue. As the <strong>first dedicated digital home-food platform in Sivakasi</strong>, Vidya&apos;s Kitchen captures high margins through:
+                  </p>
                 </div>
-                <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
-                  Sivakasi is India&apos;s industrial printing and fireworks hub, populated by thousands of factory directors, press supervisors, and migrant workers who endure 10–14 hour shifts. Most eat outside daily, but restaurant food causes health fatigue. As the <strong>first dedicated digital home-food platform in Sivakasi</strong>, Vidya&apos;s Kitchen captures high margins through:
-                </p>
 
-                <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-800 font-medium">
-                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-800 font-sans">
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320] mt-1.5 shrink-0" />
                     <span><strong>Direct Margin Retention (0% Aggregator Tax):</strong> Retains the full 25%–30% fee typically extracted by Swiggy/Zomato, yielding a <strong>+28% net profit margin</strong> on every plate.</span>
                   </li>
-                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320] mt-1.5 shrink-0" />
                     <span><strong>B2B Corporate Lunch Subscriptions:</strong> Guaranteed recurring monthly tiffin plans for printing press offices, ensuring zero food waste.</span>
                   </li>
-                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320] mt-1.5 shrink-0" />
                     <span><strong>Tiered Micro-Zone Delivery:</strong> In-house drivers deliver 5–8 pre-ordered meals along single cluster routes (Zone 1: ₹20, Zone 2: ₹35, Zone 3: ₹50).</span>
                   </li>
-                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320] mt-1.5 shrink-0" />
                     <span><strong>Bulk Festival &amp; Event Pre-Orders:</strong> Sivakasi&apos;s festive peaks (Diwali, Pongal) bring high-ticket sweet and meal orders (AOV jumps from ₹160 to ₹850+).</span>
                   </li>
-                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
-                    <span className="text-[#00C16A] font-black text-sm">✔</span>
-                    <span><strong>AI Dynamic Margin Assistant:</strong> Gemini AI calculates wholesale ingredient shifts and recommends margin-preserving menu prices.</span>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320] mt-1.5 shrink-0" />
+                    <span><strong>AI Dynamic Margin Assistant:</strong> Gemini AI calculates wholesale ingredient shifts and recommends margin-preserving menu prices (maintaining 38%+ gross margin).</span>
                   </li>
                 </ul>
               </div>
@@ -266,96 +272,234 @@ export default function VidyasKitchenCaseStudyPage() {
               </div>
             </div>
 
-            <div className="p-6 sm:p-8 md:p-10">
+            <div className="p-6 sm:p-8 md:p-10 space-y-6">
+              <p className="text-xs sm:text-sm font-mono text-zinc-600 uppercase">
+                The project was executed across 3 strategic client discussion milestones to align business goals with design and engineering solutions:
+              </p>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  {
-                    step: "1",
-                    title: "Discovery & Scoping",
-                    desc: "Mapped the chef's peak kitchen bottlenecks, manual WhatsApp mistakes, and cash-on-delivery tracking needs.",
-                    accent: "bg-[#FF462D] text-white",
-                  },
-                  {
-                    step: "2",
-                    title: "Figma Review",
-                    desc: "Demonstrated interactive prototype; rejected complex passwords in favor of one-step phone OTP.",
-                    accent: "bg-[#FAED00] text-black",
-                  },
-                  {
-                    step: "3",
-                    title: "Field Testing",
-                    desc: "Live kitchen orders, driver app sunlight readability tests, and automated WhatsApp alert verification.",
-                    accent: "bg-[#0FE0E3] text-black",
-                  },
-                  {
-                    step: "✓",
-                    title: "Zero-Commission Launch",
-                    desc: "Full deployment in Sivakasi with automated order dispatch and real-time ledger sync.",
-                    accent: "bg-[#00C16A] text-white",
-                  },
-                ].map((milestone) => (
-                  <div key={milestone.title} className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-4">
-                    <div className="space-y-3">
-                      <span className={`w-7 h-7 rounded-full border border-black font-mono text-xs font-black flex items-center justify-center ${milestone.accent}`}>
-                        {milestone.step}
-                      </span>
-                      <h4 className="font-mono font-black uppercase text-sm text-black">
-                        {milestone.title}
-                      </h4>
+                {/* Step 1 */}
+                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="w-8 h-8 rounded-full bg-[#FF462D] text-white font-mono font-black text-sm flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                      1
                     </div>
-                    <p className="text-xs text-zinc-700 leading-relaxed">
-                      {milestone.desc}
+                    <h4 className="font-mono font-black text-sm sm:text-base text-black uppercase">
+                      Discovery &amp; Scoping
+                    </h4>
+                    <p className="text-xs text-zinc-600 leading-relaxed">
+                      Mapped the chef&apos;s peak kitchen bottlenecks, manual WhatsApp mistakes, and cash-on-delivery tracking needs.
                     </p>
                   </div>
-                ))}
+                  <div className="pt-2 border-t border-black/20 text-[11px] font-mono text-zinc-500">
+                    Phase: Problem Framing
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="w-8 h-8 rounded-full bg-[#FAED00] text-black font-mono font-black text-sm flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                      2
+                    </div>
+                    <h4 className="font-mono font-black text-sm sm:text-base text-black uppercase">
+                      Figma Review
+                    </h4>
+                    <p className="text-xs text-zinc-600 leading-relaxed">
+                      Demonstrated interactive prototype; rejected complex passwords in favor of one-step phone OTP.
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-black/20 text-[11px] font-mono text-zinc-500">
+                    Phase: Prototyping
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="w-8 h-8 rounded-full bg-black text-white font-mono font-black text-sm flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                      3
+                    </div>
+                    <h4 className="font-mono font-black text-sm sm:text-base text-black uppercase">
+                      Field Testing
+                    </h4>
+                    <p className="text-xs text-zinc-600 leading-relaxed">
+                      Live kitchen orders, driver app sunlight readability tests, and automated WhatsApp alert verification.
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-black/20 text-[11px] font-mono text-zinc-500">
+                    Phase: Dry-Runs
+                  </div>
+                </div>
+
+                {/* Step 4 (Launch) */}
+                <div className="p-5 bg-[#00C16A]/10 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-4">
+                  <div className="space-y-3">
+                    <div className="w-8 h-8 rounded-full bg-[#00C16A] text-white font-mono font-black text-sm flex items-center justify-center border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                      ✓
+                    </div>
+                    <h4 className="font-mono font-black text-sm sm:text-base text-black uppercase">
+                      Zero-Commission Launch
+                    </h4>
+                    <p className="text-xs text-zinc-800 leading-relaxed">
+                      Full deployment in Sivakasi with automated order dispatch and real-time ledger sync.
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-black/20 text-[11px] font-mono text-emerald-800 font-bold">
+                    Phase: Production
+                  </div>
+                </div>
               </div>
             </div>
           </section>
 
-          {/* ─── SECTION 03 // COMPETITOR ANALYSIS: SWIGGY VS VIDYA'S KITCHEN ─── */}
+          {/* ─── SECTION 03 // USER PERSONAS & OPERATIONAL CONSTRAINTS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
               <div className="flex items-center gap-2">
                 <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">03</span>
-                <span className="font-bold text-black uppercase tracking-wider">COMPETITOR ANALYSIS: SWIGGY VS. VIDYA&apos;S KITCHEN</span>
+                <span className="font-bold text-black uppercase tracking-wider">USER RESEARCH &amp; OPERATIONAL CONSTRAINTS</span>
               </div>
             </div>
 
-            <div className="p-6 sm:p-8 md:p-10">
+            <div className="p-6 sm:p-8 md:p-10 space-y-8">
+              {/* 3 Personas */}
+              <div className="space-y-4">
+                <h3 className="font-mono font-black text-base sm:text-lg uppercase text-black">
+                  Contextual User Interviews (15 Local Sivakasi Users)
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+                  {/* Persona 1 */}
+                  <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 bg-[#FF462D] text-white border border-black">
+                        <User weight="bold" size={16} />
+                      </div>
+                      <div>
+                        <div className="font-black text-sm text-black">Priya, 34</div>
+                        <div className="text-[10px] text-zinc-500 uppercase">Working Mother &amp; Office Executive</div>
+                      </div>
+                    </div>
+                    <div className="space-y-1.5 pt-2 border-t border-black/10 font-sans text-xs text-zinc-700">
+                      <p><strong>Goal:</strong> Preservative-free, healthy food for kids; schedule meals 3 days in advance effortlessly.</p>
+                      <p className="text-zinc-500"><strong>Pain:</strong> No time to cook morning breakfast; dislikes oily restaurant takeout.</p>
+                    </div>
+                  </div>
+
+                  {/* Persona 2 */}
+                  <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 bg-[#FAED00] text-black border border-black">
+                        <CookingPot weight="bold" size={16} />
+                      </div>
+                      <div>
+                        <div className="font-black text-sm text-black">Chef Vidya, 48</div>
+                        <div className="text-[10px] text-zinc-500 uppercase">Home Kitchen Founder &amp; Chef</div>
+                      </div>
+                    </div>
+                    <div className="space-y-1.5 pt-2 border-t border-black/10 font-sans text-xs text-zinc-700">
+                      <p><strong>Goal:</strong> Glanceable dashboard with loud order sound chimes; zero manual typing during cooking.</p>
+                      <p className="text-zinc-500"><strong>Pain:</strong> Lost orders on WhatsApp, delayed customer payments, uncoordinated riders.</p>
+                    </div>
+                  </div>
+
+                  {/* Persona 3 */}
+                  <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-3">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 bg-[#00C16A] text-white border border-black">
+                        <Bicycle weight="bold" size={16} />
+                      </div>
+                      <div>
+                        <div className="font-black text-sm text-black">Murugan, 26</div>
+                        <div className="text-[10px] text-zinc-500 uppercase">Two-Wheeler Delivery Driver</div>
+                      </div>
+                    </div>
+                    <div className="space-y-1.5 pt-2 border-t border-black/10 font-sans text-xs text-zinc-700">
+                      <p><strong>Goal:</strong> Big buttons, phone-number PIN login, 1-tap WhatsApp/calling, simple Cash on Delivery ledger.</p>
+                      <p className="text-zinc-500"><strong>Pain:</strong> Harsh outdoor sunlight glare on phone, complex navigation menus.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3 Physical Operational Constraints */}
+              <div className="p-5 sm:p-6 bg-black text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                <h4 className="font-mono font-black text-sm sm:text-base uppercase text-[#FAED00]">
+                  Handling Real Physical Operational Constraints
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+                  <div className="p-4 bg-[#1A1A1A] border border-zinc-700 space-y-1.5">
+                    <span className="text-[#FF462D] font-bold block">01. BATCH PREP SCHEDULE</span>
+                    <p className="text-zinc-300 font-sans text-xs leading-relaxed">
+                      Home cooking is not 15-minute fast food. Hardcoded 24-hour advance booking windows tied to 3 discrete slots (Breakfast 7-9 AM, Lunch 12-2 PM, Dinner 7-9 PM).
+                    </p>
+                  </div>
+                  <div className="p-4 bg-[#1A1A1A] border border-zinc-700 space-y-1.5">
+                    <span className="text-[#FAED00] font-bold block">02. CASH ON DELIVERY (COD)</span>
+                    <p className="text-zinc-300 font-sans text-xs leading-relaxed">
+                      Local customers heavily favor COD. Driver App enforces a mandatory &ldquo;Cash Collected: ₹X&rdquo; confirmation step before completion to sync real-time ledgers.
+                    </p>
+                  </div>
+                  <div className="p-4 bg-[#1A1A1A] border border-zinc-700 space-y-1.5">
+                    <span className="text-[#00C16A] font-bold block">03. ZERO APP STORE FRICTION</span>
+                    <p className="text-zinc-300 font-sans text-xs leading-relaxed">
+                      Tier-2 users resist downloading heavy 80MB native apps. Built as a lightweight (&lt; 2MB) PWA with instant browser loading and 1-tap homescreen install.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── SECTION 04 // COMPETITOR ANALYSIS: SWIGGY VS. VIDYA'S KITCHEN ─── */}
+          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">04</span>
+                <span className="font-bold text-black uppercase tracking-wider">COMPETITOR ANALYSIS: SWIGGY / ZOMATO VS. VIDYA&apos;S KITCHEN</span>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 md:p-10 space-y-6">
               <div className="overflow-x-auto border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                 <table className="w-full text-left border-collapse text-xs sm:text-sm font-mono">
                   <thead>
-                    <tr className="bg-black text-white border-b-2 border-black uppercase tracking-wider text-[11px] sm:text-xs">
-                      <th className="p-3 sm:p-4 border-r-2 border-zinc-700 w-1/4">ATTRIBUTE</th>
-                      <th className="p-3 sm:p-4 border-r-2 border-zinc-700 w-3/8 text-zinc-300">SWIGGY / ZOMATO</th>
-                      <th className="p-3 sm:p-4 w-3/8 text-[#FAED00]">VIDYA&apos;S KITCHEN (INDEPENDENT ECOSYSTEM)</th>
+                    <tr className="bg-[#FAED00] text-black border-b-2 border-black uppercase tracking-wider text-[11px] sm:text-xs">
+                      <th className="p-3 sm:p-4 border-r-2 border-black">ATTRIBUTE</th>
+                      <th className="p-3 sm:p-4 border-r-2 border-black">SWIGGY / ZOMATO</th>
+                      <th className="p-3 sm:p-4 bg-black text-[#FAED00]">VIDYA&apos;S KITCHEN (INDEPENDENT ECOSYSTEM)</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y-2 divide-black bg-white">
                     <tr className="hover:bg-[#FAF9F5]">
-                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">Commission Cut</td>
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Commission Cut</td>
                       <td className="p-3 sm:p-4 border-r-2 border-black text-red-600 font-bold">25% – 33% per plate deducted from chef</td>
-                      <td className="p-3 sm:p-4 text-emerald-700 font-black bg-emerald-50/50">0% (100% chef revenue retention)</td>
+                      <td className="p-3 sm:p-4 bg-emerald-50 text-emerald-900 font-bold">0% (100% chef revenue retention)</td>
                     </tr>
                     <tr className="hover:bg-[#FAF9F5]">
-                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">Preparation Model</td>
-                      <td className="p-3 sm:p-4 border-r-2 border-black text-zinc-600">On-demand instant fast food (15–30 mins)</td>
-                      <td className="p-3 sm:p-4 font-bold text-black">24-hour advance scheduled batch booking</td>
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Preparation Model</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black">On-demand instant fast food (15–30 mins)</td>
+                      <td className="p-3 sm:p-4 font-bold">24-hour advance scheduled batch booking</td>
                     </tr>
                     <tr className="hover:bg-[#FAF9F5]">
-                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">Customer Relation</td>
-                      <td className="p-3 sm:p-4 border-r-2 border-black text-zinc-600">Aggregator locks customer data and contact</td>
-                      <td className="p-3 sm:p-4 font-bold text-black">Direct chef-customer relationship &amp; WhatsApp bot</td>
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Food Quality &amp; Health</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black">Commercial restaurant cooking, high oil/MSG</td>
+                      <td className="p-3 sm:p-4 font-bold text-emerald-900">Hygienic, 100% home-cooked authentic recipes</td>
                     </tr>
                     <tr className="hover:bg-[#FAF9F5]">
-                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">App Footprint</td>
-                      <td className="p-3 sm:p-4 border-r-2 border-black text-zinc-600">Heavy 70MB–110MB app download</td>
-                      <td className="p-3 sm:p-4 font-bold text-black">Lightweight &lt;2MB PWA, instant home screen install</td>
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Customer Relation</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black">Aggregator locks customer data and contact</td>
+                      <td className="p-3 sm:p-4 font-bold">Direct chef-customer relationship &amp; WhatsApp bot</td>
                     </tr>
                     <tr className="hover:bg-[#FAF9F5]">
-                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">Tier-2 Delivery Economics</td>
-                      <td className="p-3 sm:p-4 border-r-2 border-black text-zinc-600">Third-party riders with surge fees</td>
-                      <td className="p-3 sm:p-4 font-bold text-black">Dedicated local delivery routes at flat ₹20–₹50 zones</td>
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black">App Footprint</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black">Heavy 70MB–110MB app download</td>
+                      <td className="p-3 sm:p-4 font-bold text-emerald-900">Lightweight &lt;2MB PWA, instant home screen install</td>
+                    </tr>
+                    <tr className="hover:bg-[#FAF9F5]">
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Tier-2 Delivery Economics</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black">Third-party riders with surge fees</td>
+                      <td className="p-3 sm:p-4 font-bold">Dedicated local delivery routes at flat ₹20–₹50 zones</td>
                     </tr>
                   </tbody>
                 </table>
@@ -363,191 +507,182 @@ export default function VidyasKitchenCaseStudyPage() {
             </div>
           </section>
 
-          {/* ─── SECTION 04 // INFORMATION ARCHITECTURE ACROSS 4 SURFACES ─── */}
+          {/* ─── SECTION 05 // INFORMATION ARCHITECTURE & USER FLOWS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">04</span>
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">05</span>
                 <span className="font-bold text-black uppercase tracking-wider">INFORMATION ARCHITECTURE ACROSS 4 SURFACES</span>
               </div>
             </div>
 
-            <div className="p-6 sm:p-8 md:p-10 space-y-6">
-              {/* 3 Main Surfaces Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {/* 1. Customer PWA */}
-                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                  <div className="border-b-2 border-black pb-2">
-                    <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">SURFACE 01</span>
-                    <h4 className="text-base sm:text-lg font-black uppercase font-mono text-black">1. Customer PWA</h4>
-                    <span className="text-[10px] font-mono font-bold text-[#FF462D] uppercase block">
-                      MOBILE / IOS &amp; ANDROID (LIGHT GLASS)
+            <div className="p-6 sm:p-8 md:p-10 space-y-8">
+              {/* 3 Physical Columns */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {/* Surface 1: Customer PWA */}
+                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="p-1.5 bg-[#FF462D] text-white border border-black font-mono text-xs font-black">
+                      1
                     </span>
+                    <h4 className="font-mono font-black text-base text-black uppercase">
+                      Customer PWA
+                    </h4>
                   </div>
-                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-800 font-medium">
-                    <li className="flex items-center gap-2">• Home &amp; Category Browsing</li>
-                    <li className="flex items-center gap-2">• 24-Hr Meal Slot Scheduler</li>
-                    <li className="flex items-center gap-2">• Slide-Over Animated Cart</li>
-                    <li className="flex items-center gap-2">• Razorpay UPI &amp; COD Checkout</li>
-                    <li className="flex items-center gap-2">• Live Realtime Driver Tracking Map</li>
+                  <span className="text-[10px] font-mono font-bold uppercase text-zinc-500 block">
+                    MOBILE / IOS &amp; ANDROID (LIGHT GLASS)
+                  </span>
+                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-700 pt-2 border-t border-black/10">
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#BD2320]" /> Home &amp; Category Browsing</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#BD2320]" /> 24-Hr Meal Slot Scheduler</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#BD2320]" /> Slide-Over Animated Cart</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#BD2320]" /> Razorpay UPI &amp; COD Checkout</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#BD2320]" /> Live Realtime Driver Tracking Map</li>
                   </ul>
                 </div>
 
-                {/* 2. Admin Dashboard */}
-                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                  <div className="border-b-2 border-black pb-2">
-                    <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">SURFACE 02</span>
-                    <h4 className="text-base sm:text-lg font-black uppercase font-mono text-black">2. Admin Dashboard</h4>
-                    <span className="text-[10px] font-mono font-bold text-black uppercase block">
-                      DESKTOP &amp; TABLET (OLED DARK MODE)
+                {/* Surface 2: Admin Dashboard */}
+                <div className="p-5 sm:p-6 bg-[#000000] text-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="p-1.5 bg-[#FAED00] text-black border border-black font-mono text-xs font-black">
+                      2
                     </span>
+                    <h4 className="font-mono font-black text-base text-white uppercase">
+                      Admin Dashboard
+                    </h4>
                   </div>
-                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-800 font-medium">
-                    <li className="flex items-center gap-2">• Live Orders Kanban with Chimes</li>
-                    <li className="flex items-center gap-2">• Accept / Prep / Dispatch / Reject</li>
-                    <li className="flex items-center gap-2">• Driver Assignment &amp; PIN Generator</li>
-                    <li className="flex items-center gap-2">• Offers &amp; Promo Code Engine</li>
-                    <li className="flex items-center gap-2">• Gemini AI Menu Pricing Insights</li>
+                  <span className="text-[10px] font-mono font-bold uppercase text-zinc-400 block">
+                    DESKTOP &amp; TABLET (OLED DARK MODE)
+                  </span>
+                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-200 pt-2 border-t border-zinc-700">
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#FAED00]" /> Live Orders Kanban with Audio Chimes</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#FAED00]" /> Accept / Prep / Dispatch / Reject</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#FAED00]" /> Driver Assignment &amp; PIN Generator</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#FAED00]" /> Offers &amp; Promo Code Engine</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#FAED00]" /> Gemini AI Menu Pricing Insights</li>
                   </ul>
                 </div>
 
-                {/* 3. Driver App */}
-                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                  <div className="border-b-2 border-black pb-2">
-                    <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">SURFACE 03</span>
-                    <h4 className="text-base sm:text-lg font-black uppercase font-mono text-black">3. Driver App</h4>
-                    <span className="text-[10px] font-mono font-bold text-[#00C16A] uppercase block">
-                      MOBILE PWA (DAYLIGHT HIGH-CONTRAST)
+                {/* Surface 3: Driver App */}
+                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-3">
+                  <div className="flex items-center gap-2">
+                    <span className="p-1.5 bg-[#12833F] text-white border border-black font-mono text-xs font-black">
+                      3
                     </span>
+                    <h4 className="font-mono font-black text-base text-black uppercase">
+                      Driver App
+                    </h4>
                   </div>
-                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-800 font-medium">
-                    <li className="flex items-center gap-2">• 10-Digit Auto Phone Lookup</li>
-                    <li className="flex items-center gap-2">• Quick 4-Digit PIN Authentication</li>
-                    <li className="flex items-center gap-2">• Active Route &amp; Delivery Queue</li>
-                    <li className="flex items-center gap-2">• One-Tap Customer Calling</li>
-                    <li className="flex items-center gap-2">• Cash-on-Delivery Ledger Confirm</li>
+                  <span className="text-[10px] font-mono font-bold uppercase text-zinc-500 block">
+                    MOBILE PWA (DAYLIGHT HIGH-CONTRAST)
+                  </span>
+                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-700 pt-2 border-t border-black/10">
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#12833F]" /> 10-Digit Auto Phone Lookup</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#12833F]" /> Quick 4-Digit PIN Authentication</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#12833F]" /> Active Route &amp; Delivery Queue</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#12833F]" /> One-Tap Customer Calling &amp; Maps</li>
+                    <li className="flex items-center gap-2"><Check weight="bold" className="w-3.5 h-3.5 text-[#12833F]" /> Cash-on-Delivery Ledger Confirm</li>
                   </ul>
                 </div>
               </div>
 
               {/* Surface 4: Automated WhatsApp Cloud Bot */}
-              <div className="p-4 sm:p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex items-start gap-3">
-                <span className="text-2xl shrink-0">💬</span>
-                <div className="space-y-1">
-                  <h4 className="font-mono text-xs sm:text-sm font-black uppercase text-[#25D366]">
+              <div className="p-5 sm:p-6 bg-[#25D366]/10 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-2">
+                <div className="flex items-center gap-2">
+                  <ChatCircleDots weight="fill" className="w-5 h-5 text-[#128C7E]" />
+                  <h4 className="font-mono font-black text-sm sm:text-base text-black uppercase">
                     Surface 4: Automated WhatsApp Cloud Bot
                   </h4>
-                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
-                    Triggered via Supabase webhooks to keep non-tech customers informed without opening the browser: <strong>Instant Order Confirmation (with PDF receipt) → Out for Delivery Alert (with driver name and live tracking link) → Delivery Complete &amp; Rating Request.</strong>
-                  </p>
+                </div>
+                <p className="text-xs sm:text-sm text-zinc-800 leading-relaxed">
+                  Triggered via Supabase webhooks to keep non-tech customers informed without opening the browser: <strong>Instant Order Confirmation</strong> (with PDF receipt) → <strong>Out for Delivery Alert</strong> (with driver name and live tracking link) → <strong>Delivery Complete &amp; Rating Request</strong>.
+                </p>
+              </div>
+
+              {/* End-to-End User Flow Architecture */}
+              <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black space-y-4">
+                <span className="font-mono text-xs font-black uppercase text-zinc-500 block">
+                  End-to-End Synchronized User Flows
+                </span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+                  <div className="p-4 bg-white border border-black space-y-2">
+                    <span className="font-black text-black block uppercase text-[11px]">A. Customer PWA Flow</span>
+                    <ol className="space-y-1 text-zinc-700 list-decimal list-inside font-sans text-xs">
+                      <li>Customer opens PWA on mobile and authenticates via Phone OTP.</li>
+                      <li>Selects meal slot (e.g. Lunch 12–2 PM) with 24-hr advance booking.</li>
+                      <li>Adds dishes to slide-over animated cart and applies promo coupon.</li>
+                      <li>Pays via Razorpay UPI / COD and enters live tracking map.</li>
+                    </ol>
+                  </div>
+                  <div className="p-4 bg-white border border-black space-y-2">
+                    <span className="font-black text-black block uppercase text-[11px]">B. Kitchen &amp; Driver Dispatch Flow</span>
+                    <ol className="space-y-1 text-zinc-700 list-decimal list-inside font-sans text-xs">
+                      <li>Realtime audio chime rings on Admin Kanban board for new order.</li>
+                      <li>Chef reviews and clicks &lsquo;Accept&rsquo;, assigning driver &lsquo;Murugan&rsquo;.</li>
+                      <li>Driver receives instant push alert, calls customer in 1 tap.</li>
+                      <li>Driver collects COD cash, confirms delivery, and updates ledger.</li>
+                    </ol>
+                  </div>
                 </div>
               </div>
 
-              {/* High-Resolution Screen Gallery */}
-              <div className="pt-6 border-t-2 border-dashed border-black/20">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-                  <div className="space-y-1.5">
-                    <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                      <Image
-                        src="/case-studies/vidyas-kitchen/login-phone.png"
-                        alt="Vidya's Kitchen Phone Login"
-                        fill
-                        quality={100}
-                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-                        className="object-cover object-top"
-                      />
-                    </div>
-                    <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase text-black block text-center">
-                      01 / PHONE LOGIN
-                    </span>
-                  </div>
+              {/* Screen Mockups Gallery */}
+              <div className="space-y-4 pt-4 border-t-2 border-black">
+                <span className="text-xs font-mono font-black uppercase tracking-wider text-zinc-500 block">
+                  Interactive Screen Mockups &amp; Production Surfaces
+                </span>
 
-                  <div className="space-y-1.5">
-                    <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                      <Image
-                        src="/case-studies/vidyas-kitchen/login-otp.png"
-                        alt="Vidya's Kitchen OTP Verification"
-                        fill
-                        quality={100}
-                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-                        className="object-cover object-top"
-                      />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[
+                    { title: "Customer Phone Login", sub: "Firebase OTP Flow", img: "/case-studies/vidyas-kitchen/login-phone.png" },
+                    { title: "Customer Menu & Slots", sub: "24-Hr Batch Selector", img: "/case-studies/vidyas-kitchen/customer-menu.png" },
+                    { title: "Slide-Over Cart", sub: "Framer Motion Promo Box", img: "/case-studies/vidyas-kitchen/cart-bottom-sheet.png" },
+                    { title: "Checkout & Razorpay", sub: "Instant UPI Intent", img: "/case-studies/vidyas-kitchen/checkout-razorpay.png" },
+                    { title: "Admin Kitchen Kanban", sub: "OLED Dark Sound Alerts", img: "/case-studies/vidyas-kitchen/admin-dashboard.png" },
+                    { title: "Driver Queue & Maps", sub: "Daylight High Contrast", img: "/case-studies/vidyas-kitchen/driver-deliveries.png" },
+                    { title: "WhatsApp Cloud Bot", sub: "Automated Receipts", img: "/case-studies/vidyas-kitchen/whatsapp-bot.png" },
+                    { title: "OTP Verification", sub: "Auto-Focus 6-Digit PIN", img: "/case-studies/vidyas-kitchen/login-otp.png" },
+                  ].map((screen, idx) => (
+                    <div key={idx} className="border-2 border-black bg-white overflow-hidden shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] group">
+                      <div className="relative aspect-[9/16] bg-zinc-100 overflow-hidden border-b-2 border-black">
+                        <Image
+                          src={screen.img}
+                          alt={screen.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                          quality={100}
+                          className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-3 font-mono">
+                        <h5 className="font-black text-xs text-black uppercase truncate">{screen.title}</h5>
+                        <p className="text-[10px] text-zinc-500 uppercase">{screen.sub}</p>
+                      </div>
                     </div>
-                    <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase text-black block text-center">
-                      02 / OTP AUTO-ADVANCE
-                    </span>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                      <Image
-                        src="/case-studies/vidyas-kitchen/customer-menu.png"
-                        alt="Vidya's Kitchen Browse Menu"
-                        fill
-                        quality={100}
-                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-                        className="object-cover object-top"
-                      />
-                    </div>
-                    <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase text-black block text-center">
-                      03 / BROWSABLE MENU
-                    </span>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                      <Image
-                        src="/case-studies/vidyas-kitchen/cart-bottom-sheet.png"
-                        alt="Vidya's Kitchen Cart Sheet"
-                        fill
-                        quality={100}
-                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-                        className="object-cover object-top"
-                      />
-                    </div>
-                    <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase text-black block text-center">
-                      04 / CART BOTTOM SHEET
-                    </span>
-                  </div>
-
-                  <div className="space-y-1.5 col-span-2 sm:col-span-1">
-                    <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                      <Image
-                        src="/case-studies/vidyas-kitchen/checkout-razorpay.png"
-                        alt="Vidya's Kitchen Checkout with Razorpay"
-                        fill
-                        quality={100}
-                        sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 20vw"
-                        className="object-cover object-top"
-                      />
-                    </div>
-                    <span className="font-mono text-[9px] sm:text-[10px] font-black uppercase text-black block text-center">
-                      05 / 1-TAP CHECKOUT
-                    </span>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
           </section>
 
-          {/* ─── SECTION 05 // UNIFIED DESIGN SYSTEM & VISUAL TOKENS ─── */}
+          {/* ─── SECTION 06 // UNIFIED DESIGN SYSTEM & VISUAL TOKENS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">05</span>
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">06</span>
                 <span className="font-bold text-black uppercase tracking-wider">UNIFIED DESIGN SYSTEM &amp; VISUAL TOKENS</span>
               </div>
             </div>
 
             <div className="p-6 sm:p-8 md:p-10 space-y-8">
-              <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-normal">
-                All three surfaces share a single foundational brand thread: the <strong>Outfit typeface</strong>, the <strong>#BD2320 Brand Crimson</strong>, and a unified Framer Motion spring physics engine — with color palettes optimized for their physical environments.
+              <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
+                All surfaces share a single foundational brand thread: the <strong>Outfit</strong> typeface, the <strong>#BD2320 Brand Crimson</strong>, and a unified <strong>Framer Motion spring physics engine</strong> — with color palettes optimized for their physical environments.
               </p>
 
-              {/* Palette by Environment */}
+              {/* Color Swatches */}
               <div className="space-y-3">
                 <span className="text-xs font-mono font-black uppercase tracking-wider text-zinc-500 block">
-                  Color Palette by Environment
+                  Color Palette by Physical Environment
                 </span>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 font-mono text-xs">
                   <div className="p-3 border-2 border-black bg-white flex flex-col justify-between">
@@ -635,12 +770,12 @@ export default function VidyasKitchenCaseStudyPage() {
             </div>
           </section>
 
-          {/* ─── SECTION 06 // ENGINEERING CHALLENGES & UX SOLUTIONS ─── */}
+          {/* ─── SECTION 07 // DETAILED ENGINEERING CHALLENGES & UX SOLUTIONS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">06</span>
-                <span className="font-bold text-black uppercase tracking-wider">ENGINEERING CHALLENGES &amp; UX SOLUTIONS</span>
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">07</span>
+                <span className="font-bold text-black uppercase tracking-wider">ENGINEERING CHALLENGES &amp; HOW UX SOLVED THEM</span>
               </div>
             </div>
 
@@ -648,7 +783,7 @@ export default function VidyasKitchenCaseStudyPage() {
               {[
                 {
                   id: "CHALLENGE 1",
-                  title: "Dual PWA Installation on a Single Origin (vidyaskitchenhome.com)",
+                  title: "Single Domain Dual PWA Installation (vidyaskitchenhome.com)",
                   obstacle: "Chrome suppresses PWA install prompts if the root domain already has an installed PWA scope. Drivers visiting /driver could not install their app.",
                   fix: "Served dual-scoped manifests (/driver/manifest.webmanifest) and created an interactive, animated OS-detection guide showing step-by-step installation.",
                 },
@@ -675,6 +810,24 @@ export default function VidyasKitchenCaseStudyPage() {
                   title: "Choppy Live GPS Driver Marker Teleportation",
                   obstacle: "Sending driver GPS coordinates every 5 seconds caused the map pin to jump erratically across customer screens.",
                   fix: "Paired Supabase Realtime subscriptions with a CSS transition: transform 0.4s ease on the marker element, creating a smooth gliding effect.",
+                },
+                {
+                  id: "CHALLENGE 6",
+                  title: "Driver Management False 'Save' State",
+                  obstacle: "Deleting a driver left local state desynchronized with baseline state, incorrectly showing the 'Save Drivers' warning button.",
+                  fix: "Synced savedDrivers synchronously upon receiving a 200 OK deletion response, eliminating user confusion and false warnings.",
+                },
+                {
+                  id: "CHALLENGE 7",
+                  title: "In-Memory Cart Loss on Mobile Reload",
+                  obstacle: "Refreshing the mobile browser tab destroyed the in-memory React cart state during checkout.",
+                  fix: "Built a versioned localStorage persistence engine (vk-cart-v2) that hydrates cart items before initial layout render.",
+                },
+                {
+                  id: "CHALLENGE 8",
+                  title: "Driver Search Tap Friction",
+                  obstacle: "Requiring drivers to click 'Search Account' before entering a PIN led to confusion in outdoor field environments.",
+                  fix: "Attached an effect watcher to the phone input; entering the 10th digit automatically triggers the backend lookup and animates the PIN pad into view.",
                 },
               ].map((challenge) => (
                 <div key={challenge.id} className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
@@ -708,6 +861,45 @@ export default function VidyasKitchenCaseStudyPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* ─── SECTION 08 // MEASURABLE IMPACT & BUSINESS RESULTS ─── */}
+          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">08</span>
+                <span className="font-bold text-black uppercase tracking-wider">MEASURABLE IMPACT &amp; KEY TAKEAWAYS</span>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 md:p-10 space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 font-mono">
+                <div className="p-5 bg-black text-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-2">
+                  <div className="text-2xl sm:text-3xl font-black text-[#FAED00]">₹45,000+</div>
+                  <div className="text-xs font-bold uppercase text-zinc-300">Monthly Commission Saved</div>
+                  <p className="text-xs text-zinc-400 font-sans">100% chef revenue retention by bypassing aggregator fees.</p>
+                </div>
+
+                <div className="p-5 bg-white text-black border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-2">
+                  <div className="text-2xl sm:text-3xl font-black text-[#00C16A]">100%</div>
+                  <div className="text-xs font-bold uppercase text-zinc-700">Order Capture Accuracy</div>
+                  <p className="text-xs text-zinc-600 font-sans">Eliminated handwritten kitchen mixups and missed voice notes.</p>
+                </div>
+
+                <div className="p-5 bg-white text-black border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-2">
+                  <div className="text-2xl sm:text-3xl font-black text-[#FF462D]">&lt; 10s</div>
+                  <div className="text-xs font-bold uppercase text-zinc-700">Checkout Time</div>
+                  <p className="text-xs text-zinc-600 font-sans">Reduced checkout from 4+ minutes on WhatsApp to under 10 seconds.</p>
+                </div>
+              </div>
+
+              <div className="p-5 bg-[#FAF9F5] border-2 border-black space-y-2 font-mono text-xs">
+                <span className="font-black text-black uppercase block">First Mover in Sivakasi Town</span>
+                <p className="text-zinc-700 font-sans leading-relaxed">
+                  Established Vidya&apos;s Kitchen as the premier, tech-enabled home culinary brand in the region with an active, growing customer base and 99.2% home-screen PWA install rate among recurring weekly subscription customers.
+                </p>
+              </div>
             </div>
           </section>
 
