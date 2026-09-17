@@ -19,13 +19,14 @@ import {
   Clock,
   MapPin,
   Flame,
+  Check,
 } from "@phosphor-icons/react";
 import HeaderV2 from "@/app/v2/components/HeaderV2";
 import FloatingActionTriggers from "@/app/v2/components/FloatingActionTriggers";
 import LenisProvider from "@/components/LenisProvider";
 
 export default function VidyasKitchenCaseStudyPage() {
-  const [activeSurfaceTab, setActiveSurfaceTab] = useState<"pwa" | "admin" | "driver">("pwa");
+  const [activeSurfaceTab, setActiveSurfaceTab] = useState<"pwa" | "admin" | "driver" | "whatsapp">("pwa");
 
   return (
     <LenisProvider>
@@ -48,412 +49,403 @@ export default function VidyasKitchenCaseStudyPage() {
 
             <div className="flex items-center gap-2 text-[10px] sm:text-xs text-zinc-500 font-bold uppercase tracking-widest">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>PROD DEPLOYED · 2024</span>
+              <span>PROD DEPLOYED · SIVAKASI, TAMIL NADU</span>
             </div>
           </div>
 
-          {/* ─── WINDOW_01 // OVERVIEW ─── */}
+          {/* ─── HERO WINDOW // CASE STUDY HEADER ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             {/* Window Chrome Titlebar */}
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
               <div className="flex items-center gap-2 min-w-0">
                 <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
+                  <span className="w-3 h-3 rounded-full bg-[#FF462D] border border-black inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-[#FAED00] border border-black inline-block" />
+                  <span className="w-3 h-3 rounded-full bg-[#00C16A] border border-black inline-block" />
                 </div>
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black ml-1.5 truncate">
-                  WINDOW_01 // OVERVIEW
+                <span className="font-bold text-black uppercase tracking-wider truncate ml-2">
+                  FULL-STACK UX/UI &amp; ENGINEERING CASE STUDY
                 </span>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="hidden sm:inline-block px-2 py-0.5 bg-black text-[#FAED00] font-black text-[9px] uppercase tracking-widest border border-black">
-                  CASE_FILE // 01 OF 07
-                </span>
-                <a
-                  href="https://www.vidyaskitchenhome.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-black uppercase text-black hover:text-[#FF462D] transition-colors"
-                >
-                  <span>LIVE PRODUCT</span>
-                  <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />
-                </a>
-              </div>
+              <a
+                href="https://vidyaskitchenhome.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-1.5 font-bold uppercase tracking-wider hover:text-[#FF462D] transition-colors shrink-0 text-[11px]"
+              >
+                <span>LIVE PRODUCT</span>
+                <ArrowUpRight weight="bold" size={14} />
+              </a>
             </div>
 
-            {/* Window Content */}
-            <div className="p-5 sm:p-8 md:p-10 space-y-6 sm:space-y-8">
-              {/* Title & One-Line Bold Definition */}
-              <div>
-                <div className="flex items-center gap-2 font-mono text-[10px] sm:text-xs font-black uppercase tracking-widest text-[#FF462D] mb-2">
-                  <span className="w-2 h-2 bg-[#FF462D] inline-block" />
-                  <span>FOOD ORDERING PLATFORM &amp; DISPATCH ECOSYSTEM</span>
+            {/* Hero Card Body */}
+            <div className="p-6 sm:p-8 md:p-12 space-y-8">
+              <div className="space-y-4 max-w-4xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FF462D] text-white border-2 border-black font-mono text-xs font-black uppercase tracking-widest shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <Flame weight="fill" className="w-4 h-4 text-[#FAED00]" />
+                  <span>FULL-STACK UX/UI &amp; ENGINEERING CASE STUDY</span>
                 </div>
-                <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-black font-mono leading-none mb-4">
-                  VIDYA&apos;S KITCHEN
+
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none text-black">
+                  Vidya&apos;s Kitchen — Home Food Ecosystem
                 </h1>
-                <p className="text-base sm:text-xl md:text-2xl font-black uppercase tracking-tight text-black font-sans leading-snug max-w-4xl">
-                  A full-stack ordering ecosystem that unifies a <span className="underline decoration-4 decoration-[#FF462D]">Customer PWA</span>, <span className="underline decoration-4 decoration-black">Kitchen Admin Dashboard</span>, <span className="underline decoration-4 decoration-[#FAED00] bg-black text-white px-1">Driver App</span>, and <span className="underline decoration-4 decoration-[#22C55E]">Automated WhatsApp Bot</span> into one system.
+
+                <p className="text-base sm:text-xl md:text-2xl font-bold text-zinc-700 leading-snug">
+                  Designing &amp; Building Sivakasi&apos;s First Digital Home-Chef Platform across Customer PWA, Admin Dashboard, Driver App &amp; WhatsApp Bot.
                 </p>
               </div>
 
-              {/* Tag Pills for Role, Timeline, Platform */}
-              <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
-                <div className="px-3 py-1.5 bg-black text-white font-mono text-xs font-bold uppercase tracking-wider border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  ROLE: PRODUCT DESIGNER &amp; DEVELOPER (SOLO)
+              {/* Meta Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs pt-4 border-t-2 border-dashed border-black/30">
+                <div className="p-3.5 bg-[#FAF9F5] border-2 border-black">
+                  <span className="text-[10px] text-zinc-500 font-bold uppercase block mb-1">ROLE</span>
+                  <span className="font-black text-black text-sm block">Solo Designer &amp; Developer</span>
                 </div>
-                <div className="px-3 py-1.5 bg-[#FAED00] text-black font-mono text-xs font-black uppercase tracking-wider border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  TIMELINE: ~6 MONTHS (DESIGN + FULL BUILD)
+                <div className="p-3.5 bg-[#FAF9F5] border-2 border-black">
+                  <span className="text-[10px] text-zinc-500 font-bold uppercase block mb-1">TIMELINE</span>
+                  <span className="font-black text-black text-sm block">6 Months (End-to-End)</span>
                 </div>
-                <div className="px-3 py-1.5 bg-white text-black font-mono text-xs font-black uppercase tracking-wider border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  SURFACES: 4 INTERCONNECTED APPS
+                <div className="p-3.5 bg-[#FAF9F5] border-2 border-black">
+                  <span className="text-[10px] text-zinc-500 font-bold uppercase block mb-1">TARGET MARKET</span>
+                  <span className="font-black text-black text-sm block">Sivakasi, Tamil Nadu</span>
                 </div>
-              </div>
-
-              {/* Hero Product Shot: Responsive Multi-Device Composition */}
-              <div className="mt-6 border-2 border-black bg-[#0A0D12] p-4 sm:p-8 relative overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                {/* Tech grid texture overlay */}
-                <div 
-                  className="absolute inset-0 opacity-10 pointer-events-none"
-                  style={{
-                    backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-                    backgroundSize: "24px 24px"
-                  }}
-                />
-
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                  {/* Left: Mobile App Hero (Customer Menu) */}
-                  <div className="lg:col-span-5 flex justify-center">
-                    <div className="relative w-full max-w-[280px] sm:max-w-[310px] drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)]">
-                      <div className="bg-gradient-to-b from-[#E2E8F0] via-[#CBD5E1] to-[#94A3B8] p-2 sm:p-2.5 rounded-[36px] border-2 border-[#64748B] shadow-2xl">
-                        <div className="rounded-[28px] overflow-hidden border border-black/80 bg-[#F5F5F7] aspect-[9/19.5] relative">
-                          <Image
-                            src="/case-studies/vidyas-kitchen/customer-menu.png"
-                            alt="Vidya's Kitchen Customer PWA Browse Menu"
-                            fill
-                            className="object-cover object-top"
-                            priority
-                          />
-                        </div>
-                      </div>
-                      <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#BD2320] text-white font-mono text-[10px] font-black uppercase tracking-widest border border-black shadow-md whitespace-nowrap">
-                        CUSTOMER PWA · IOS-INSPIRED GLASS
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right: Kitchen Admin Dashboard Preview */}
-                  <div className="lg:col-span-7 flex flex-col justify-center">
-                    <div className="border-2 border-black bg-[#0D0D0F] shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] overflow-hidden">
-                      <div className="h-8 bg-[#1A1A1A] border-b border-zinc-800 px-3 flex items-center justify-between text-zinc-400 font-mono text-[10px]">
-                        <div className="flex items-center gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-red-500/70" />
-                          <span className="w-2 h-2 rounded-full bg-yellow-500/70" />
-                          <span className="w-2 h-2 rounded-full bg-green-500/70" />
-                          <span className="ml-2 text-zinc-300 font-bold">dashboard.vidyaskitchenhome.com</span>
-                        </div>
-                        <span className="text-[#F5E32D] font-bold">REALTIME SYNCED</span>
-                      </div>
-                      <div className="relative aspect-[16/10] w-full bg-black">
-                        <Image
-                          src="/case-studies/vidyas-kitchen/admin-dashboard.png"
-                          alt="Vidya's Kitchen Kitchen Admin Dashboard"
-                          fill
-                          className="object-cover object-top"
-                        />
-                      </div>
-                    </div>
-                    <div className="mt-3 flex items-center justify-between font-mono text-[10px] text-zinc-400">
-                      <span>OLED DARK CONTROL CENTRE · SINGLE-VIEW LIVE ORDERS</span>
-                      <span className="text-[#22C55E] font-bold">● 300MS REALTIME DISPATCH</span>
-                    </div>
-                  </div>
+                <div className="p-3.5 bg-[#FAED00] border-2 border-black">
+                  <span className="text-[10px] text-black/70 font-black uppercase block mb-1">CORE METRIC</span>
+                  <span className="font-black text-black text-sm block">0% Aggregator Tax</span>
                 </div>
               </div>
-            </div>
-          </section>
 
-          {/* ─── WINDOW_02 // THE PROBLEM ─── */}
-          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
-            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
-                </div>
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black ml-1.5 truncate">
-                  WINDOW_02 // THE PROBLEM
-                </span>
-              </div>
-              <span className="px-2 py-0.5 bg-black text-[#FF462D] font-black text-[9px] uppercase tracking-widest border border-black">
-                CASE_FILE // 02 OF 07
-              </span>
-            </div>
-
-            <div className="p-5 sm:p-8 md:p-10 space-y-6">
-              <div className="max-w-3xl">
-                <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-[#FF462D] block mb-1">
-                  // THE ROOT FRICTION
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-black font-mono leading-tight">
-                  ZERO INFRASTRUCTURE. CHAOTIC CHATS.
-                </h2>
-              </div>
-
-              {/* 3 Bullets Max as Brutalist Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-2">
-                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                  <div className="mb-4">
-                    <span className="w-8 h-8 rounded-none border-2 border-black bg-[#FF462D] text-white flex items-center justify-center font-mono font-black text-sm mb-3">
-                      01
-                    </span>
-                    <h3 className="text-sm sm:text-base font-black uppercase font-mono text-black leading-snug mb-2">
-                      No Digital Infrastructure
-                    </h3>
-                    <p className="text-xs sm:text-sm font-bold uppercase text-zinc-700 leading-relaxed font-sans">
-                      100% of orders ran over phone calls and WhatsApp voice notes — resulting in lost requests and meal prep confusion.
-                    </p>
-                  </div>
-                  <span className="text-[10px] font-mono font-black text-[#FF462D] uppercase tracking-wider">
-                    // 10-MIN PER ORDER CHAT OVERHEAD
+              {/* 4 Stat Hero Strip */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono">
+                <div className="p-4 sm:p-5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center">
+                  <span className="text-2xl sm:text-3xl md:text-4xl font-black text-[#FF462D] block leading-none mb-1">
+                    0%
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-zinc-600 block">
+                    PLATFORM COMMISSION
                   </span>
                 </div>
-
-                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                  <div className="mb-4">
-                    <span className="w-8 h-8 rounded-none border-2 border-black bg-black text-[#FAED00] flex items-center justify-center font-mono font-black text-sm mb-3">
-                      02
-                    </span>
-                    <h3 className="text-sm sm:text-base font-black uppercase font-mono text-black leading-snug mb-2">
-                      Zero Tracking &amp; Payment Records
-                    </h3>
-                    <p className="text-xs sm:text-sm font-bold uppercase text-zinc-700 leading-relaxed font-sans">
-                      No order status visibility for pending meals, no driver GPS coordinates, and zero automated payment confirmations.
-                    </p>
-                  </div>
-                  <span className="text-[10px] font-mono font-black text-black uppercase tracking-wider">
-                    // MANUAL CASH &amp; UNVERIFIED UPI
+                <div className="p-4 sm:p-5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center">
+                  <span className="text-2xl sm:text-3xl md:text-4xl font-black text-black block leading-none mb-1">
+                    &lt; 10s
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-zinc-600 block">
+                    PHONE OTP CHECKOUT
                   </span>
                 </div>
-
-                <div className="p-5 sm:p-6 bg-[#FAED00] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                  <div className="mb-4">
-                    <span className="w-8 h-8 rounded-none border-2 border-black bg-black text-white flex items-center justify-center font-mono font-black text-sm mb-3">
-                      ★
-                    </span>
-                    <h3 className="text-sm sm:text-base font-black uppercase font-mono text-black leading-snug mb-2">
-                      The Core Design Goal
-                    </h3>
-                    <p className="text-xs sm:text-sm font-black uppercase text-black leading-relaxed font-sans">
-                      Preserve the warm, personal feel of ordering home-cooked meals from a friend, while delivering enterprise operational reliability.
-                    </p>
-                  </div>
-                  <span className="text-[10px] font-mono font-black text-black uppercase tracking-wider">
-                    // WARMTH + BULLETPROOF DISPATCH
+                <div className="p-4 sm:p-5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center">
+                  <span className="text-2xl sm:text-3xl md:text-4xl font-black text-[#00C16A] block leading-none mb-1">
+                    100%
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-zinc-600 block">
+                    ORDER CAPTURE ACCURACY
+                  </span>
+                </div>
+                <div className="p-4 sm:p-5 bg-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-center">
+                  <span className="text-2xl sm:text-3xl md:text-4xl font-black text-black block leading-none mb-1">
+                    99.2%
+                  </span>
+                  <span className="text-[9px] sm:text-[10px] font-bold tracking-widest uppercase text-zinc-600 block">
+                    HOME-SCREEN PWA INSTALLS
                   </span>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* ─── WINDOW_02.5 // INFORMATION ARCHITECTURE ─── */}
+          {/* ─── SECTION 01 // ABOUT THE PROJECT & TOOLS ECOSYSTEM ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
-                </div>
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black ml-1.5 truncate">
-                  WINDOW_02.5 // INFORMATION ARCHITECTURE
-                </span>
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">01</span>
+                <span className="font-bold text-black uppercase tracking-wider">ABOUT THE PROJECT &amp; TOOLS ECOSYSTEM</span>
               </div>
-              <span className="px-2 py-0.5 bg-black text-white font-black text-[9px] uppercase tracking-widest border border-black">
-                SYSTEM FLOWS
-              </span>
             </div>
 
-            <div className="p-5 sm:p-8 md:p-10 space-y-6">
-              <div>
-                <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-[#FF462D] block mb-1">
-                  // CROSS-SURFACE USER JOURNEYS
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-black font-mono leading-tight">
-                  ONE FLOW LINE PER SURFACE
-                </h2>
-              </div>
+            <div className="p-6 sm:p-8 md:p-10 space-y-8">
+              <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-normal">
+                Vidya&apos;s Kitchen is an end-to-end digital food ordering network built for a home chef business operating in <strong>Sivakasi, Tamil Nadu</strong>. Prior to this platform, all orders were taken manually over WhatsApp chat and phone calls — causing lost orders, delayed payments, and uncoordinated logistics. The goal was to build a tailored 4-surface digital infrastructure with <strong>zero third-party commission</strong>.
+              </p>
 
-              {/* One flow line per surface */}
-              <div className="space-y-3 font-mono">
-                {/* Surface 1: Customer PWA */}
-                <div className="p-3.5 sm:p-4 bg-[#FAF9F5] border-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                    <span className="px-2 py-0.5 bg-[#BD2320] text-white font-black text-[10px] tracking-wider uppercase border border-black">
-                      CUSTOMER PWA
-                    </span>
+              {/* Design vs Engineering Tools Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Design & Research Tools */}
+                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">🎨</span>
+                    <h3 className="text-base sm:text-lg font-black uppercase font-mono tracking-tight">
+                      Design &amp; Research Tools
+                    </h3>
                   </div>
-                  <div className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm font-bold text-black">
-                    <span className="px-2 py-1 bg-white border border-black">Login</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-white border border-black">Menu</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-[#FAED00] border border-black">Slot Picker</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-white border border-black">Cart</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-white border border-black">Checkout</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-black text-white border border-black">Live Tracking</span>
+                  <p className="text-xs sm:text-sm text-zinc-600">
+                    Created complete component tokens, wireframes, and responsive design systems.
+                  </p>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {["Figma UI System", "FigJam Journeys", "Phosphor Icons", "Lucide Icons", "Interactive Prototyping"].map((tool) => (
+                      <span key={tool} className="px-2.5 py-1 bg-white border border-black text-xs font-mono font-bold text-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                        {tool}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                {/* Surface 2: Admin Dashboard */}
-                <div className="p-3.5 sm:p-4 bg-[#FAF9F5] border-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                    <span className="px-2 py-0.5 bg-black text-[#F5E32D] font-black text-[10px] tracking-wider uppercase border border-black">
-                      ADMIN DASHBOARD
-                    </span>
+                {/* Engineering & Tech Tools */}
+                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xl">💻</span>
+                    <h3 className="text-base sm:text-lg font-black uppercase font-mono tracking-tight">
+                      Engineering &amp; Tech Tools
+                    </h3>
                   </div>
-                  <div className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm font-bold text-black">
-                    <span className="px-2 py-1 bg-black text-white border border-black">Single-View Live Orders</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-white border border-black">Driver Dispatch</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-[#FAED00] border border-black">Offers &amp; Promo Engine</span>
-                  </div>
-                </div>
-
-                {/* Surface 3: Driver App */}
-                <div className="p-3.5 sm:p-4 bg-[#FAF9F5] border-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                    <span className="px-2 py-0.5 bg-[#12833F] text-white font-black text-[10px] tracking-wider uppercase border border-black">
-                      DRIVER APP
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm font-bold text-black">
-                    <span className="px-2 py-1 bg-white border border-black">Auto-PIN Login</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-white border border-black">Assigned Orders</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-[#FAED00] border border-black">Navigate</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-black text-white border border-black">Mark Delivered</span>
-                  </div>
-                </div>
-
-                {/* Surface 4: WhatsApp Bot */}
-                <div className="p-3.5 sm:p-4 bg-[#FAF9F5] border-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                    <span className="px-2 py-0.5 bg-[#22C55E] text-white font-black text-[10px] tracking-wider uppercase border border-black">
-                      WHATSAPP BOT
-                    </span>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm font-bold text-black">
-                    <span className="px-2 py-1 bg-white border border-black">Order Event</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-white border border-black">Rich Confirmation</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-[#FAED00] border border-black">Live GPS Link</span>
-                    <span className="text-[#FF462D] font-black">→</span>
-                    <span className="px-2 py-1 bg-black text-white border border-black">5-Star Rate</span>
+                  <p className="text-xs sm:text-sm text-zinc-600">
+                    Built for instant loads, offline reliability, and live GPS map tracking.
+                  </p>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {[
+                      "Next.js 15 App Router",
+                      "TypeScript",
+                      "Supabase Realtime",
+                      "Firebase Phone Auth",
+                      "Razorpay UPI",
+                      "Framer Motion",
+                      "Mapbox GL",
+                      "Twilio WhatsApp API",
+                    ].map((tool) => (
+                      <span key={tool} className="px-2.5 py-1 bg-white border border-black text-xs font-mono font-bold text-black shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                        {tool}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Rationale Quote Card */}
-              <div className="p-4 sm:p-5 bg-black text-white border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] flex items-start gap-3">
-                <span className="text-xl font-mono text-[#FAED00]">✦</span>
-                <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-400 block mb-1">
-                    // UX ARCHITECTURE RATIONALE
-                  </span>
-                  <p className="text-xs sm:text-base font-black uppercase tracking-wide text-white leading-relaxed font-mono">
-                    &ldquo;Flattened to 4 taps max — older, non-tech customers abandon deep nested navigation flows.&rdquo;
+              {/* Business Perspective Banner */}
+              <div className="p-5 sm:p-6 bg-[#FFF9E6] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                <div className="flex items-center gap-2 border-b-2 border-black pb-3">
+                  <span className="w-3 h-3 bg-[#FF462D] border border-black" />
+                  <h3 className="text-base sm:text-lg font-black uppercase font-mono text-black">
+                    Business Perspective: Monetization &amp; Profitability in Sivakasi Town
+                  </h3>
+                </div>
+                <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
+                  Sivakasi is India&apos;s industrial printing and fireworks hub, populated by thousands of factory directors, press supervisors, and migrant workers who endure 10–14 hour shifts. Most eat outside daily, but restaurant food causes health fatigue. As the <strong>first dedicated digital home-food platform in Sivakasi</strong>, Vidya&apos;s Kitchen captures high margins through:
+                </p>
+
+                <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-800 font-medium">
+                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                    <span><strong>Direct Margin Retention (0% Aggregator Tax):</strong> Retains the full 25%–30% fee typically extracted by Swiggy/Zomato, yielding a <strong>+28% net profit margin</strong> on every plate.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                    <span><strong>B2B Corporate Lunch Subscriptions:</strong> Guaranteed recurring monthly tiffin plans for printing press offices, ensuring zero food waste.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                    <span><strong>Tiered Micro-Zone Delivery:</strong> In-house drivers deliver 5–8 pre-ordered meals along single cluster routes (Zone 1: ₹20, Zone 2: ₹35, Zone 3: ₹50).</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                    <span><strong>Bulk Festival &amp; Event Pre-Orders:</strong> Sivakasi&apos;s festive peaks (Diwali, Pongal) bring high-ticket sweet and meal orders (AOV jumps from ₹160 to ₹850+).</span>
+                  </li>
+                  <li className="flex items-start gap-2.5 bg-white border border-black p-3 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]">
+                    <span className="text-[#00C16A] font-black text-sm">✔</span>
+                    <span><strong>AI Dynamic Margin Assistant:</strong> Gemini AI calculates wholesale ingredient shifts and recommends margin-preserving menu prices.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── SECTION 02 // CLIENT COMMUNICATION MILESTONES ─── */}
+          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">02</span>
+                <span className="font-bold text-black uppercase tracking-wider">CLIENT COMMUNICATION MILESTONES</span>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 md:p-10">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  {
+                    step: "1",
+                    title: "Discovery & Scoping",
+                    desc: "Mapped the chef's peak kitchen bottlenecks, manual WhatsApp mistakes, and cash-on-delivery tracking needs.",
+                    accent: "bg-[#FF462D] text-white",
+                  },
+                  {
+                    step: "2",
+                    title: "Figma Review",
+                    desc: "Demonstrated interactive prototype; rejected complex passwords in favor of one-step phone OTP.",
+                    accent: "bg-[#FAED00] text-black",
+                  },
+                  {
+                    step: "3",
+                    title: "Field Testing",
+                    desc: "Live kitchen orders, driver app sunlight readability tests, and automated WhatsApp alert verification.",
+                    accent: "bg-[#0FE0E3] text-black",
+                  },
+                  {
+                    step: "✓",
+                    title: "Zero-Commission Launch",
+                    desc: "Full deployment in Sivakasi with automated order dispatch and real-time ledger sync.",
+                    accent: "bg-[#00C16A] text-white",
+                  },
+                ].map((milestone) => (
+                  <div key={milestone.title} className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-4">
+                    <div className="space-y-3">
+                      <span className={`w-7 h-7 rounded-full border border-black font-mono text-xs font-black flex items-center justify-center ${milestone.accent}`}>
+                        {milestone.step}
+                      </span>
+                      <h4 className="font-mono font-black uppercase text-sm text-black">
+                        {milestone.title}
+                      </h4>
+                    </div>
+                    <p className="text-xs text-zinc-700 leading-relaxed">
+                      {milestone.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* ─── SECTION 03 // COMPETITOR ANALYSIS: SWIGGY VS VIDYA'S KITCHEN ─── */}
+          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">03</span>
+                <span className="font-bold text-black uppercase tracking-wider">COMPETITOR ANALYSIS: SWIGGY VS. VIDYA&apos;S KITCHEN</span>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 md:p-10">
+              <div className="overflow-x-auto border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <table className="w-full text-left border-collapse text-xs sm:text-sm font-mono">
+                  <thead>
+                    <tr className="bg-black text-white border-b-2 border-black uppercase tracking-wider text-[11px] sm:text-xs">
+                      <th className="p-3 sm:p-4 border-r-2 border-zinc-700 w-1/4">ATTRIBUTE</th>
+                      <th className="p-3 sm:p-4 border-r-2 border-zinc-700 w-3/8 text-zinc-300">SWIGGY / ZOMATO</th>
+                      <th className="p-3 sm:p-4 w-3/8 text-[#FAED00]">VIDYA&apos;S KITCHEN (INDEPENDENT ECOSYSTEM)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y-2 divide-black bg-white">
+                    <tr className="hover:bg-[#FAF9F5]">
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">Commission Cut</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black text-red-600 font-bold">25% – 33% per plate deducted from chef</td>
+                      <td className="p-3 sm:p-4 text-emerald-700 font-black bg-emerald-50/50">0% (100% chef revenue retention)</td>
+                    </tr>
+                    <tr className="hover:bg-[#FAF9F5]">
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">Preparation Model</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black text-zinc-600">On-demand instant fast food (15–30 mins)</td>
+                      <td className="p-3 sm:p-4 font-bold text-black">24-hour advance scheduled batch booking</td>
+                    </tr>
+                    <tr className="hover:bg-[#FAF9F5]">
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">Customer Relation</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black text-zinc-600">Aggregator locks customer data and contact</td>
+                      <td className="p-3 sm:p-4 font-bold text-black">Direct chef-customer relationship &amp; WhatsApp bot</td>
+                    </tr>
+                    <tr className="hover:bg-[#FAF9F5]">
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">App Footprint</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black text-zinc-600">Heavy 70MB–110MB app download</td>
+                      <td className="p-3 sm:p-4 font-bold text-black">Lightweight &lt;2MB PWA, instant home screen install</td>
+                    </tr>
+                    <tr className="hover:bg-[#FAF9F5]">
+                      <td className="p-3 sm:p-4 font-bold border-r-2 border-black bg-zinc-50">Tier-2 Delivery Economics</td>
+                      <td className="p-3 sm:p-4 border-r-2 border-black text-zinc-600">Third-party riders with surge fees</td>
+                      <td className="p-3 sm:p-4 font-bold text-black">Dedicated local delivery routes at flat ₹20–₹50 zones</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── SECTION 04 // INFORMATION ARCHITECTURE ACROSS 4 SURFACES ─── */}
+          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">04</span>
+                <span className="font-bold text-black uppercase tracking-wider">INFORMATION ARCHITECTURE ACROSS 4 SURFACES</span>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 md:p-10 space-y-6">
+              {/* 3 Main Surfaces Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {/* 1. Customer PWA */}
+                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                  <div className="border-b-2 border-black pb-2">
+                    <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">SURFACE 01</span>
+                    <h4 className="text-base sm:text-lg font-black uppercase font-mono text-black">1. Customer PWA</h4>
+                    <span className="text-[10px] font-mono font-bold text-[#FF462D] uppercase block">
+                      MOBILE / IOS &amp; ANDROID (LIGHT GLASS)
+                    </span>
+                  </div>
+                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-800 font-medium">
+                    <li className="flex items-center gap-2">• Home &amp; Category Browsing</li>
+                    <li className="flex items-center gap-2">• 24-Hr Meal Slot Scheduler</li>
+                    <li className="flex items-center gap-2">• Slide-Over Animated Cart</li>
+                    <li className="flex items-center gap-2">• Razorpay UPI &amp; COD Checkout</li>
+                    <li className="flex items-center gap-2">• Live Realtime Driver Tracking Map</li>
+                  </ul>
+                </div>
+
+                {/* 2. Admin Dashboard */}
+                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                  <div className="border-b-2 border-black pb-2">
+                    <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">SURFACE 02</span>
+                    <h4 className="text-base sm:text-lg font-black uppercase font-mono text-black">2. Admin Dashboard</h4>
+                    <span className="text-[10px] font-mono font-bold text-black uppercase block">
+                      DESKTOP &amp; TABLET (OLED DARK MODE)
+                    </span>
+                  </div>
+                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-800 font-medium">
+                    <li className="flex items-center gap-2">• Live Orders Kanban with Chimes</li>
+                    <li className="flex items-center gap-2">• Accept / Prep / Dispatch / Reject</li>
+                    <li className="flex items-center gap-2">• Driver Assignment &amp; PIN Generator</li>
+                    <li className="flex items-center gap-2">• Offers &amp; Promo Code Engine</li>
+                    <li className="flex items-center gap-2">• Gemini AI Menu Pricing Insights</li>
+                  </ul>
+                </div>
+
+                {/* 3. Driver App */}
+                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                  <div className="border-b-2 border-black pb-2">
+                    <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">SURFACE 03</span>
+                    <h4 className="text-base sm:text-lg font-black uppercase font-mono text-black">3. Driver App</h4>
+                    <span className="text-[10px] font-mono font-bold text-[#00C16A] uppercase block">
+                      MOBILE PWA (DAYLIGHT HIGH-CONTRAST)
+                    </span>
+                  </div>
+                  <ul className="space-y-2 text-xs sm:text-sm text-zinc-800 font-medium">
+                    <li className="flex items-center gap-2">• 10-Digit Auto Phone Lookup</li>
+                    <li className="flex items-center gap-2">• Quick 4-Digit PIN Authentication</li>
+                    <li className="flex items-center gap-2">• Active Route &amp; Delivery Queue</li>
+                    <li className="flex items-center gap-2">• One-Tap Customer Calling</li>
+                    <li className="flex items-center gap-2">• Cash-on-Delivery Ledger Confirm</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Surface 4: Automated WhatsApp Cloud Bot */}
+              <div className="p-4 sm:p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex items-start gap-3">
+                <span className="text-2xl shrink-0">💬</span>
+                <div className="space-y-1">
+                  <h4 className="font-mono text-xs sm:text-sm font-black uppercase text-[#25D366]">
+                    Surface 4: Automated WhatsApp Cloud Bot
+                  </h4>
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
+                    Triggered via Supabase webhooks to keep non-tech customers informed without opening the browser: <strong>Instant Order Confirmation (with PDF receipt) → Out for Delivery Alert (with driver name and live tracking link) → Delivery Complete &amp; Rating Request.</strong>
                   </p>
                 </div>
               </div>
-            </div>
-          </section>
 
-          {/* ─── WINDOW_03 // RESEARCH → DECISIONS ─── */}
-          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
-            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
-                </div>
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black ml-1.5 truncate">
-                  WINDOW_03 // RESEARCH → DECISIONS
-                </span>
-              </div>
-              <span className="px-2 py-0.5 bg-black text-[#FAED00] font-black text-[9px] uppercase tracking-widest border border-black">
-                CASE_FILE // 03 OF 07
-              </span>
-            </div>
-
-            <div className="p-5 sm:p-8 md:p-10 space-y-8">
-              <div>
-                <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-[#FF462D] block mb-1">
-                  // CORE INSIGHTS TRANSLATED TO INTERACTION
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-black font-mono leading-tight">
-                  ONE LINE EACH: OBSERVATION → EXECUTION
-                </h2>
-              </div>
-
-              {/* 4 One-line Research Decisions */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs sm:text-sm">
-                <div className="p-4 bg-[#FAF9F5] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <span className="text-[10px] font-black uppercase text-zinc-500 block mb-1">01 / USER DEMOGRAPHICS</span>
-                  <span className="font-bold text-zinc-600 block mb-1">Non-tech users</span>
-                  <span className="text-black font-black uppercase block text-sm sm:text-base">
-                    → OTP-only login (zero passwords, &lt;10s into menu)
-                  </span>
-                </div>
-
-                <div className="p-4 bg-[#FAF9F5] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <span className="text-[10px] font-black uppercase text-zinc-500 block mb-1">02 / HOME KITCHEN REALITY</span>
-                  <span className="font-bold text-zinc-600 block mb-1">Fixed prep times</span>
-                  <span className="text-black font-black uppercase block text-sm sm:text-base">
-                    → 24hr slot picker with soft visual constraints
-                  </span>
-                </div>
-
-                <div className="p-4 bg-[#FAF9F5] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <span className="text-[10px] font-black uppercase text-zinc-500 block mb-1">03 / KITCHEN SHIFT OPERATIONALITY</span>
-                  <span className="font-bold text-zinc-600 block mb-1">Kitchen glanceable state</span>
-                  <span className="text-black font-black uppercase block text-sm sm:text-base">
-                    → OLED dark, color-coded real-time dashboard
-                  </span>
-                </div>
-
-                <div className="p-4 bg-[#FAF9F5] border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <span className="text-[10px] font-black uppercase text-zinc-500 block mb-1">04 / FIELD ENVIRONMENT</span>
-                  <span className="font-bold text-zinc-600 block mb-1">Drivers on motorcycle</span>
-                  <span className="text-black font-black uppercase block text-sm sm:text-base">
-                    → Single-hand UI with auto 10-digit PIN lookup
-                  </span>
-                </div>
-              </div>
-
-              {/* Real Mobile App Screen Progressions */}
-              <div className="pt-4 border-t-2 border-black">
-                <div className="flex items-center justify-between mb-4 font-mono">
-                  <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-black">
-                    // CUSTOMER PWA SCREEN PROGRESSION
-                  </span>
-                  <span className="text-[10px] text-zinc-500 font-bold uppercase">
-                    5 KEY SCREENS
-                  </span>
-                </div>
-
+              {/* High-Resolution Screen Gallery */}
+              <div className="pt-6 border-t-2 border-dashed border-black/20">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
-                  {/* Screen 1: Phone Login */}
                   <div className="space-y-1.5">
                     <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                       <Image
@@ -470,7 +462,6 @@ export default function VidyasKitchenCaseStudyPage() {
                     </span>
                   </div>
 
-                  {/* Screen 2: OTP Verify */}
                   <div className="space-y-1.5">
                     <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                       <Image
@@ -487,7 +478,6 @@ export default function VidyasKitchenCaseStudyPage() {
                     </span>
                   </div>
 
-                  {/* Screen 3: Browse Menu */}
                   <div className="space-y-1.5">
                     <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                       <Image
@@ -504,7 +494,6 @@ export default function VidyasKitchenCaseStudyPage() {
                     </span>
                   </div>
 
-                  {/* Screen 4: Cart Bottom Sheet */}
                   <div className="space-y-1.5">
                     <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                       <Image
@@ -521,7 +510,6 @@ export default function VidyasKitchenCaseStudyPage() {
                     </span>
                   </div>
 
-                  {/* Screen 5: Checkout & Razorpay */}
                   <div className="space-y-1.5 col-span-2 sm:col-span-1">
                     <div className="rounded-xl overflow-hidden border-2 border-black bg-white aspect-[9/19] relative shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
                       <Image
@@ -542,585 +530,207 @@ export default function VidyasKitchenCaseStudyPage() {
             </div>
           </section>
 
-          {/* ─── WINDOW_04 // DESIGN SYSTEM ─── */}
+          {/* ─── SECTION 05 // UNIFIED DESIGN SYSTEM & VISUAL TOKENS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
-                </div>
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black ml-1.5 truncate">
-                  WINDOW_04 // DESIGN SYSTEM
-                </span>
-              </div>
-              <span className="px-2 py-0.5 bg-black text-[#0FE0E3] font-black text-[9px] uppercase tracking-widest border border-black">
-                CASE_FILE // 04 OF 07
-              </span>
-            </div>
-
-            <div className="p-5 sm:p-8 md:p-10 space-y-8">
-              <div>
-                <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-[#FF462D] block mb-1">
-                  // THREE DISTINCT SURFACES · ONE UNIFIED LANGUAGE
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-black font-mono leading-tight">
-                  SWATCHES, TYPE SCALES &amp; SURFACE PERSONALITY
-                </h2>
-                <p className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-zinc-600 mt-1">
-                  Shared thread: <span className="text-[#BD2320] font-black">#BD2320 RED</span> + <span className="text-black font-black">OUTFIT</span> thread all three surfaces.
-                </p>
-              </div>
-
-              {/* Surface Switcher Tabs */}
-              <div className="flex flex-wrap gap-2 border-b-2 border-black pb-3 font-mono">
-                <button
-                  type="button"
-                  onClick={() => setActiveSurfaceTab("pwa")}
-                  className={`px-4 py-2 text-xs font-black uppercase tracking-wider border-2 border-black transition-all cursor-pointer ${
-                    activeSurfaceTab === "pwa"
-                      ? "bg-[#BD2320] text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                      : "bg-white hover:bg-zinc-100 text-black"
-                  }`}
-                >
-                  01 / CUSTOMER PWA
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveSurfaceTab("admin")}
-                  className={`px-4 py-2 text-xs font-black uppercase tracking-wider border-2 border-black transition-all cursor-pointer ${
-                    activeSurfaceTab === "admin"
-                      ? "bg-black text-[#F5E32D] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                      : "bg-white hover:bg-zinc-100 text-black"
-                  }`}
-                >
-                  02 / KITCHEN ADMIN
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActiveSurfaceTab("driver")}
-                  className={`px-4 py-2 text-xs font-black uppercase tracking-wider border-2 border-black transition-all cursor-pointer ${
-                    activeSurfaceTab === "driver"
-                      ? "bg-[#12833F] text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                      : "bg-white hover:bg-zinc-100 text-black"
-                  }`}
-                >
-                  03 / DRIVER APP
-                </button>
-              </div>
-
-              {/* Tab Content Display */}
-              <div className="min-h-[220px]">
-                {activeSurfaceTab === "pwa" && (
-                  <div className="space-y-6">
-                    <div className="p-4 bg-[#FAF9F5] border-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div>
-                        <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">SURFACE PERSONALITY</span>
-                        <h4 className="text-base sm:text-lg font-black uppercase font-mono text-black">
-                          Customer PWA: Light glassmorphism, iOS-inspired, warm and personal
-                        </h4>
-                      </div>
-                      <span className="px-2.5 py-1 bg-white text-[#BD2320] font-mono text-xs font-black uppercase border border-black shrink-0">
-                        MOBILE-FIRST PWA
-                      </span>
-                    </div>
-
-                    {/* Palette Swatches */}
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-2">
-                        COLOR PALETTE (ACTUAL HEX TOKENS):
-                      </span>
-                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 font-mono text-xs">
-                        <div className="p-3 border-2 border-black bg-[#F5F5F7]">
-                          <div className="w-6 h-6 rounded-full border border-black bg-[#F5F5F7] mb-2" />
-                          <span className="font-bold block">#F5F5F7</span>
-                          <span className="text-[10px] text-zinc-500 uppercase">Apple Base</span>
-                        </div>
-                        <div className="p-2.5 sm:p-3 border-2 border-black bg-white overflow-hidden">
-                          <div className="w-6 h-6 rounded-full border border-black bg-white/75 backdrop-blur-md mb-2 shadow-inner" />
-                          <span className="font-bold block text-[10px] sm:text-xs break-all leading-tight">
-                            rgba(255,255,255,0.72)
-                          </span>
-                          <span className="text-[9px] sm:text-[10px] text-zinc-500 uppercase block mt-0.5">Glass Surface</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#BD2320] text-white">
-                          <div className="w-6 h-6 rounded-full border border-white bg-[#BD2320] mb-2" />
-                          <span className="font-bold block">#BD2320</span>
-                          <span className="text-[10px] text-zinc-200 uppercase">Brand Red CTA</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#1A1A1A] text-white">
-                          <div className="w-6 h-6 rounded-full border border-zinc-500 bg-[#1A1A1A] mb-2" />
-                          <span className="font-bold block">#1A1A1A</span>
-                          <span className="text-[10px] text-zinc-400 uppercase">Text Primary</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#22c55e] text-white">
-                          <div className="w-6 h-6 rounded-full border border-white bg-[#22c55e] mb-2" />
-                          <span className="font-bold block">#22C55E</span>
-                          <span className="text-[10px] text-zinc-100 uppercase">Success Green</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Typography Pills */}
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-2">
-                        TYPOGRAPHY SPECIFICATION (OUTFIT ROUNDED):
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="px-3 py-1.5 bg-black text-white font-mono text-xs font-bold uppercase border border-black">
-                          Outfit · 36px Display (Splash)
-                        </span>
-                        <span className="px-3 py-1.5 bg-[#FAED00] text-black font-mono text-xs font-black uppercase border border-black">
-                          17px Input (Anti-Zoom on iOS)
-                        </span>
-                        <span className="px-3 py-1.5 bg-black text-white font-mono text-xs font-bold uppercase border border-black">
-                          16px / 900 Heavy Price Display
-                        </span>
-                        <span className="px-3 py-1.5 bg-zinc-100 text-black font-mono text-xs font-bold uppercase border border-black">
-                          15px / 800 Primary Button
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeSurfaceTab === "admin" && (
-                  <div className="space-y-6">
-                    <div className="p-4 bg-black text-white border-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div>
-                        <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">SURFACE PERSONALITY</span>
-                        <h4 className="text-base sm:text-lg font-black uppercase font-mono text-[#F5E32D]">
-                          Kitchen Dashboard: OLED true-black control centre, high-contrast operational status
-                        </h4>
-                      </div>
-                      <span className="px-2.5 py-1 bg-[#1A1A1A] text-white font-mono text-xs font-bold uppercase border border-zinc-700 shrink-0">
-                        DESKTOP &amp; KITCHEN MOUNT
-                      </span>
-                    </div>
-
-                    {/* Palette Swatches */}
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-2">
-                        COLOR PALETTE (OLED-FRIENDLY):
-                      </span>
-                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 font-mono text-xs">
-                        <div className="p-3 border-2 border-black bg-black text-white">
-                          <div className="w-6 h-6 rounded-full border border-zinc-700 bg-black mb-2" />
-                          <span className="font-bold block">#000000</span>
-                          <span className="text-[10px] text-zinc-400 uppercase">OLED Black</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#0D0D0F] text-white">
-                          <div className="w-6 h-6 rounded-full border border-zinc-700 bg-[#0D0D0F] mb-2" />
-                          <span className="font-bold block">#0D0D0F</span>
-                          <span className="text-[10px] text-zinc-400 uppercase">Card Surface</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#F5E32D] text-black">
-                          <div className="w-6 h-6 rounded-full border border-black bg-[#F5E32D] mb-2" />
-                          <span className="font-bold block">#F5E32D</span>
-                          <span className="text-[10px] text-black uppercase">Pending Yellow</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#3B82F6] text-white">
-                          <div className="w-6 h-6 rounded-full border border-white bg-[#3B82F6] mb-2" />
-                          <span className="font-bold block">#3B82F6</span>
-                          <span className="text-[10px] text-white uppercase">Preparing Blue</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#22C55E] text-white">
-                          <div className="w-6 h-6 rounded-full border border-white bg-[#22C55E] mb-2" />
-                          <span className="font-bold block">#22C55E</span>
-                          <span className="text-[10px] text-white uppercase">Delivered Green</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Typography Pills */}
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-2">
-                        TYPOGRAPHY &amp; CONTAINER QUERIES:
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="px-3 py-1.5 bg-black text-[#F5E32D] font-mono text-xs font-bold uppercase border border-black">
-                          clamp(22px, 5.5vw, 30px) Fluid Headers
-                        </span>
-                        <span className="px-3 py-1.5 bg-black text-white font-mono text-xs font-bold uppercase border border-black">
-                          Container Queries (@container &lt;420px switches to vertical)
-                        </span>
-                        <span className="px-3 py-1.5 bg-zinc-100 text-black font-mono text-xs font-bold uppercase border border-black">
-                          Non-blocking Framer Motion Modals
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {activeSurfaceTab === "driver" && (
-                  <div className="space-y-6">
-                    <div className="p-4 bg-[#FAF9F5] border-2 border-black flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                      <div>
-                        <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">SURFACE PERSONALITY</span>
-                        <h4 className="text-base sm:text-lg font-black uppercase font-mono text-black">
-                          Driver App: Light &amp; low-chroma for outdoor daylight &amp; bright sunlight legibility
-                        </h4>
-                      </div>
-                      <span className="px-2.5 py-1 bg-[#12833F] text-white font-mono text-xs font-black uppercase border border-black shrink-0">
-                        OUTDOOR HIGH CONTRAST
-                      </span>
-                    </div>
-
-                    {/* Palette Swatches */}
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-2">
-                        COLOR PALETTE (SUNLIGHT READABLE):
-                      </span>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
-                        <div className="p-3 border-2 border-black bg-white">
-                          <div className="w-6 h-6 rounded-full border border-black bg-white mb-2" />
-                          <span className="font-bold block">#FFFFFF</span>
-                          <span className="text-[10px] text-zinc-500 uppercase">Pure White Sheet</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#F6F6F7]">
-                          <div className="w-6 h-6 rounded-full border border-black bg-[#F6F6F7] mb-2" />
-                          <span className="font-bold block">#F6F6F7</span>
-                          <span className="text-[10px] text-zinc-500 uppercase">App Canvas</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#101010] text-white">
-                          <div className="w-6 h-6 rounded-full border border-zinc-700 bg-[#101010] mb-2" />
-                          <span className="font-bold block">#101010</span>
-                          <span className="text-[10px] text-zinc-400 uppercase">Near-Black Contrast</span>
-                        </div>
-                        <div className="p-3 border-2 border-black bg-[#12833F] text-white">
-                          <div className="w-6 h-6 rounded-full border border-white bg-[#12833F] mb-2" />
-                          <span className="font-bold block">#12833F</span>
-                          <span className="text-[10px] text-zinc-100 uppercase">Forest Green COD</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Typography Pills */}
-                    <div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-2">
-                        DRIVER ERGONOMICS SPEC:
-                      </span>
-                      <div className="flex flex-wrap gap-2">
-                        <span className="px-3 py-1.5 bg-black text-white font-mono text-xs font-bold uppercase border border-black">
-                          Outfit · 24px Bold Screen Title
-                        </span>
-                        <span className="px-3 py-1.5 bg-[#FAED00] text-black font-mono text-xs font-black uppercase border border-black">
-                          RADIUS.control: 14px Touch Targets
-                        </span>
-                        <span className="px-3 py-1.5 bg-black text-white font-mono text-xs font-bold uppercase border border-black">
-                          10-Digit Auto-Detect API Trigger
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">05</span>
+                <span className="font-bold text-black uppercase tracking-wider">UNIFIED DESIGN SYSTEM &amp; VISUAL TOKENS</span>
               </div>
             </div>
-          </section>
 
-          {/* ─── WINDOW_05 // CHALLENGES SOLVED ─── */}
-          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
-            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
-                </div>
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black ml-1.5 truncate">
-                  WINDOW_05 // CHALLENGES SOLVED
+            <div className="p-6 sm:p-8 md:p-10 space-y-8">
+              <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-normal">
+                All three surfaces share a single foundational brand thread: the <strong>Outfit typeface</strong>, the <strong>#BD2320 Brand Crimson</strong>, and a unified Framer Motion spring physics engine — with color palettes optimized for their physical environments.
+              </p>
+
+              {/* Palette by Environment */}
+              <div className="space-y-3">
+                <span className="text-xs font-mono font-black uppercase tracking-wider text-zinc-500 block">
+                  Color Palette by Environment
                 </span>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 font-mono text-xs">
+                  <div className="p-3 border-2 border-black bg-white flex flex-col justify-between">
+                    <div className="w-6 h-6 rounded-full border border-black bg-[#BD2320] mb-2" />
+                    <span className="font-bold text-[11px]">#BD2320</span>
+                    <span className="text-[9px] text-zinc-500 uppercase">Brand Red</span>
+                  </div>
+                  <div className="p-3 border-2 border-black bg-white flex flex-col justify-between">
+                    <div className="w-6 h-6 rounded-full border border-black bg-[#F5F5F7] mb-2" />
+                    <span className="font-bold text-[11px]">#F5F5F7</span>
+                    <span className="text-[9px] text-zinc-500 uppercase">PWA Base</span>
+                  </div>
+                  <div className="p-3 border-2 border-black bg-black text-white flex flex-col justify-between">
+                    <div className="w-6 h-6 rounded-full border border-zinc-700 bg-[#000000] mb-2" />
+                    <span className="font-bold text-[11px]">#000000</span>
+                    <span className="text-[9px] text-zinc-400 uppercase">OLED Dark</span>
+                  </div>
+                  <div className="p-3 border-2 border-black bg-[#F5E32D] text-black flex flex-col justify-between">
+                    <div className="w-6 h-6 rounded-full border border-black bg-[#F5E32D] mb-2" />
+                    <span className="font-bold text-[11px]">#F5E32D</span>
+                    <span className="text-[9px] text-black uppercase">Kitchen Amber</span>
+                  </div>
+                  <div className="p-3 border-2 border-black bg-[#12833F] text-white flex flex-col justify-between">
+                    <div className="w-6 h-6 rounded-full border border-white bg-[#12833F] mb-2" />
+                    <span className="font-bold text-[11px]">#12833F</span>
+                    <span className="text-[9px] text-zinc-100 uppercase">Driver Green</span>
+                  </div>
+                  <div className="p-3 border-2 border-black bg-[#101010] text-white flex flex-col justify-between">
+                    <div className="w-6 h-6 rounded-full border border-zinc-700 bg-[#101010] mb-2" />
+                    <span className="font-bold text-[11px]">#101010</span>
+                    <span className="text-[9px] text-zinc-400 uppercase">Driver Text</span>
+                  </div>
+                </div>
               </div>
-              <span className="px-2 py-0.5 bg-black text-[#FF462D] font-black text-[9px] uppercase tracking-widest border border-black">
-                CASE_FILE // 05 OF 07
-              </span>
-            </div>
 
-            <div className="p-5 sm:p-8 md:p-10 space-y-6">
-              <div>
-                <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-[#FF462D] block mb-1">
-                  // CRITICAL BUGS &amp; ARCHITECTURAL SOLUTIONS
+              {/* Typography Hierarchy Table */}
+              <div className="space-y-3">
+                <span className="text-xs font-mono font-black uppercase tracking-wider text-zinc-500 block">
+                  Typography Hierarchy (Outfit &amp; JetBrains Mono)
                 </span>
-                <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-black font-mono leading-tight">
-                  PROBLEM → FIX (ONE LINE EACH)
-                </h2>
-              </div>
-
-              {/* 4 Callout Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Challenge 1 */}
-                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono font-black uppercase text-[#FF462D] block mb-1">
-                      CHALLENGE 01 // PWA REGISTRATION
-                    </span>
-                    <h4 className="text-base font-black font-mono uppercase text-black mb-2">
-                      Two PWAs, One Single Domain
-                    </h4>
-                    <p className="text-xs sm:text-sm font-bold uppercase text-zinc-700 leading-relaxed font-sans mb-3">
-                      Chrome suppresses the install prompt if an app from the same origin is already installed.
-                    </p>
-                  </div>
-                  <div className="pt-3 border-t-2 border-black/10 font-mono text-xs font-black text-black bg-white p-2.5 border border-black">
-                    <span className="text-emerald-700">FIX:</span> Separate dynamic manifests &amp; scope-aware service workers (`/` vs `/driver/`).
-                  </div>
-                </div>
-
-                {/* Challenge 2 */}
-                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono font-black uppercase text-[#FF462D] block mb-1">
-                      CHALLENGE 02 // SAFARI VIEWPORT JANK
-                    </span>
-                    <h4 className="text-base font-black font-mono uppercase text-black mb-2">
-                      iOS Safari Auto-Zoom on Inputs
-                    </h4>
-                    <p className="text-xs sm:text-sm font-bold uppercase text-zinc-700 leading-relaxed font-sans mb-3">
-                      Tapping input fields on iPhone automatically zoomed the viewport, breaking full-screen PWA feel.
-                    </p>
-                  </div>
-                  <div className="pt-3 border-t-2 border-black/10 font-mono text-xs font-black text-black bg-white p-2.5 border border-black">
-                    <span className="text-emerald-700">FIX:</span> Strict 17px input font size silently bypasses Safari&apos;s 16px auto-zoom trigger.
-                  </div>
-                </div>
-
-                {/* Challenge 3 */}
-                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono font-black uppercase text-[#FF462D] block mb-1">
-                      CHALLENGE 03 // LAYOUT STABILITY
-                    </span>
-                    <h4 className="text-base font-black font-mono uppercase text-black mb-2">
-                      Promo Code Layout Jump
-                    </h4>
-                    <p className="text-xs sm:text-sm font-bold uppercase text-zinc-700 leading-relaxed font-sans mb-3">
-                      Validating promo codes caused an empty white box and visual layout jump during async API calls.
-                    </p>
-                  </div>
-                  <div className="pt-3 border-t-2 border-black/10 font-mono text-xs font-black text-black bg-white p-2.5 border border-black">
-                    <span className="text-emerald-700">FIX:</span> `AnimatePresence mode=&quot;wait&quot;` cross-fade with in-place spinning spinner.
-                  </div>
-                </div>
-
-                {/* Challenge 4 */}
-                <div className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                  <div>
-                    <span className="text-[10px] font-mono font-black uppercase text-[#FF462D] block mb-1">
-                      CHALLENGE 04 // OPERATIONAL UX
-                    </span>
-                    <h4 className="text-base font-black font-mono uppercase text-black mb-2">
-                      Native `window.confirm()` Thread Freeze
-                    </h4>
-                    <p className="text-xs sm:text-sm font-bold uppercase text-zinc-700 leading-relaxed font-sans mb-3">
-                      Browser-native alert dialogs looked alien in a dark dashboard and blocked the JS animation thread.
-                    </p>
-                  </div>
-                  <div className="pt-3 border-t-2 border-black/10 font-mono text-xs font-black text-black bg-white p-2.5 border border-black">
-                    <span className="text-emerald-700">FIX:</span> Custom Framer Motion dark modal system with non-blocking spring physics.
-                  </div>
+                <div className="overflow-x-auto border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                  <table className="w-full text-left border-collapse text-xs sm:text-sm font-mono">
+                    <thead>
+                      <tr className="bg-[#FAED00] text-black border-b-2 border-black uppercase tracking-wider text-[11px] sm:text-xs">
+                        <th className="p-3 sm:p-4 border-r-2 border-black">ROLE</th>
+                        <th className="p-3 sm:p-4 border-r-2 border-black">SIZE</th>
+                        <th className="p-3 sm:p-4 border-r-2 border-black">WEIGHT</th>
+                        <th className="p-3 sm:p-4 border-r-2 border-black">TRACKING</th>
+                        <th className="p-3 sm:p-4">DESIGN PURPOSE</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y-2 divide-black bg-white">
+                      <tr className="hover:bg-[#FAF9F5]">
+                        <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Display Hero</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black">36px</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black font-extrabold">800 Extrabold</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black">-0.5px</td>
+                        <td className="p-3 sm:p-4">Splash screen welcome greeting</td>
+                      </tr>
+                      <tr className="hover:bg-[#FAF9F5]">
+                        <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Screen Titles</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black">24px</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black font-extrabold">800 Extrabold</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black">-0.02em</td>
+                        <td className="p-3 sm:p-4">Primary section and sheet headings</td>
+                      </tr>
+                      <tr className="hover:bg-[#FAF9F5]">
+                        <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Form Inputs</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black">17px</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black font-semibold">600 Semibold</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black">0</td>
+                        <td className="p-3 sm:p-4 text-[#FF462D] font-bold">Bypasses iOS Safari 16px auto-zoom</td>
+                      </tr>
+                      <tr className="hover:bg-[#FAF9F5]">
+                        <td className="p-3 sm:p-4 font-bold border-r-2 border-black">Price Display</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black">16–24px</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black font-black">900 Black</td>
+                        <td className="p-3 sm:p-4 border-r-2 border-black">0</td>
+                        <td className="p-3 sm:p-4">Instant monetary glanceability without color clutter</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </section>
 
-          {/* ─── WINDOW_06 // OUTCOMES ─── */}
+          {/* ─── SECTION 06 // ENGINEERING CHALLENGES & UX SOLUTIONS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
-                </div>
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black ml-1.5 truncate">
-                  WINDOW_06 // OUTCOMES
-                </span>
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">06</span>
+                <span className="font-bold text-black uppercase tracking-wider">ENGINEERING CHALLENGES &amp; UX SOLUTIONS</span>
               </div>
-              <span className="px-2 py-0.5 bg-black text-[#FAED00] font-black text-[9px] uppercase tracking-widest border border-black">
-                CASE_FILE // 06 OF 07
-              </span>
             </div>
 
-            <div className="p-5 sm:p-8 md:p-10 space-y-6">
-              <div>
-                <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-[#FF462D] block mb-1">
-                  // QUANTIFIABLE BUSINESS IMPACT
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-black font-mono leading-tight">
-                  MEASURED RESULTS IN PRODUCTION
-                </h2>
-              </div>
+            <div className="p-6 sm:p-8 md:p-10 space-y-5">
+              {[
+                {
+                  id: "CHALLENGE 1",
+                  title: "Dual PWA Installation on a Single Origin (vidyaskitchenhome.com)",
+                  obstacle: "Chrome suppresses PWA install prompts if the root domain already has an installed PWA scope. Drivers visiting /driver could not install their app.",
+                  fix: "Served dual-scoped manifests (/driver/manifest.webmanifest) and created an interactive, animated OS-detection guide showing step-by-step installation.",
+                },
+                {
+                  id: "CHALLENGE 2",
+                  title: "iOS Safari Auto-Zoom Breaking Full-Screen Immersion",
+                  obstacle: "Safari forcibly zooms into any form input with font size < 16px on focus, breaking the native app illusion and requiring manual pinch-out.",
+                  fix: "Enforced TYPO.input at exactly 17px. The 1px difference is invisible to the eye but eliminates 100% of unwanted iOS viewport shifts.",
+                },
+                {
+                  id: "CHALLENGE 3",
+                  title: "Promo Code Empty Box & Layout Jumping",
+                  obstacle: "Applying a coupon caused a visible white box to flash and an abrupt layout jump while awaiting the server validation response.",
+                  fix: "Implemented <AnimatePresence mode=\"wait\"> with a spinning CircleNotch embedded inside the button, cross-fading smoothly into success state.",
+                },
+                {
+                  id: "CHALLENGE 4",
+                  title: "Browser Native window.confirm() Blocking UI Thread",
+                  obstacle: "Native browser alert dialogs blocked the JavaScript event loop and rendered ugly light-grey browser popups inside the dark kitchen dashboard.",
+                  fix: "Replaced all native prompts with a custom Framer Motion dark glass modal with warning icons and spring physics, eliminating UI jank during busy kitchen hours.",
+                },
+                {
+                  id: "CHALLENGE 5",
+                  title: "Choppy Live GPS Driver Marker Teleportation",
+                  obstacle: "Sending driver GPS coordinates every 5 seconds caused the map pin to jump erratically across customer screens.",
+                  fix: "Paired Supabase Realtime subscriptions with a CSS transition: transform 0.4s ease on the marker element, creating a smooth gliding effect.",
+                },
+              ].map((challenge) => (
+                <div key={challenge.id} className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
+                  <div className="flex flex-wrap items-center gap-2 border-b-2 border-black pb-3">
+                    <span className="px-2.5 py-1 bg-black text-white font-mono text-xs font-black uppercase">
+                      {challenge.id}
+                    </span>
+                    <h4 className="font-mono font-black text-sm sm:text-base text-black uppercase">
+                      {challenge.title}
+                    </h4>
+                  </div>
 
-              {/* 4 Brutalist Stat Tiles (Matching V2 Hero Stats Style) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-2 border-black bg-white font-mono">
-                {/* Stat 1 */}
-                <div className="p-5 sm:p-6 border-b-2 sm:border-b-0 sm:border-r-2 border-black flex flex-col justify-between hover:bg-zinc-50 transition-colors">
-                  <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FF462D] tracking-tighter leading-none mb-2">
-                    10m → 2m
-                  </span>
-                  <div>
-                    <span className="text-xs font-black uppercase text-black block mb-0.5">
-                      80% FASTER ORDERS
-                    </span>
-                    <span className="text-[10px] text-zinc-500 uppercase tracking-wider block">
-                      From chat exchanges to 4-tap checkout
-                    </span>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm font-normal">
+                    <div className="p-4 bg-[#FF462D]/10 border border-black space-y-1.5">
+                      <span className="font-mono text-xs font-black uppercase text-[#FF462D] block">
+                        TECHNICAL OBSTACLE
+                      </span>
+                      <p className="text-zinc-900 leading-relaxed">
+                        {challenge.obstacle}
+                      </p>
+                    </div>
+
+                    <div className="p-4 bg-[#00C16A]/15 border border-black space-y-1.5">
+                      <span className="font-mono text-xs font-black uppercase text-emerald-800 block">
+                        ENGINEERING &amp; UX FIX
+                      </span>
+                      <p className="text-zinc-900 leading-relaxed">
+                        {challenge.fix}
+                      </p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Stat 2 */}
-                <div className="p-5 sm:p-6 border-b-2 sm:border-b-0 lg:border-r-2 border-black flex flex-col justify-between hover:bg-zinc-50 transition-colors">
-                  <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-black tracking-tighter leading-none mb-2">
-                    300ms
-                  </span>
-                  <div>
-                    <span className="text-xs font-black uppercase text-black block mb-0.5">
-                      REALTIME GPS SYNC
-                    </span>
-                    <span className="text-[10px] text-zinc-500 uppercase tracking-wider block">
-                      Driver map gliding with 0.4s CSS ease
-                    </span>
-                  </div>
-                </div>
-
-                {/* Stat 3 */}
-                <div className="p-5 sm:p-6 border-b-2 sm:border-b-0 sm:border-r-2 border-black flex flex-col justify-between hover:bg-zinc-50 transition-colors">
-                  <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#FF462D] tracking-tighter leading-none mb-2">
-                    0 BACKEND
-                  </span>
-                  <div>
-                    <span className="text-xs font-black uppercase text-black block mb-0.5">
-                      ZERO WEBSOCKET SERVERS
-                    </span>
-                    <span className="text-[10px] text-zinc-500 uppercase tracking-wider block">
-                      Powered by Supabase PostgreSQL listeners
-                    </span>
-                  </div>
-                </div>
-
-                {/* Stat 4 */}
-                <div className="p-5 sm:p-6 bg-[#FAED00] flex flex-col justify-between">
-                  <span className="text-3xl sm:text-4xl lg:text-5xl font-black text-black tracking-tighter leading-none mb-2">
-                    100%
-                  </span>
-                  <div>
-                    <span className="text-xs font-black uppercase text-black block mb-0.5">
-                      AUTOMATED ONBOARDING
-                    </span>
-                    <span className="text-[10px] text-black/80 font-bold uppercase tracking-wider block">
-                      Driver WhatsApp dispatch &amp; PIN setup
-                    </span>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </section>
 
-          {/* ─── WINDOW_07 // WHAT I LEARNED ─── */}
-          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
-            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] border border-black/40" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] border border-black/40" />
-                </div>
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black ml-1.5 truncate">
-                  WINDOW_07 // WHAT I LEARNED
-                </span>
-              </div>
-              <span className="px-2 py-0.5 bg-black text-white font-black text-[9px] uppercase tracking-widest border border-black">
-                CASE_FILE // 07 OF 07
-              </span>
+          {/* ─── CASE STUDY FOOTER ATTRIBUTION ─── */}
+          <footer className="bg-black text-white p-6 sm:p-8 border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-[#FAED00] font-black mb-1">
+                Vidya&apos;s Kitchen End-to-End Case Study
+              </p>
+              <p className="text-sm font-bold text-white">
+                Designed &amp; Developed by Simon Santhosh
+              </p>
+              <p className="text-xs text-zinc-400 mt-0.5">
+                vidyaskitchenhome.com · Sivakasi, Tamil Nadu
+              </p>
             </div>
-
-            <div className="p-5 sm:p-8 md:p-10 space-y-6">
-              <div>
-                <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-widest text-[#FF462D] block mb-1">
-                  // POST-MORTEM &amp; ENGINEERING TAKEAWAYS
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-black font-mono leading-tight">
-                  2 BULLETS MAX: RETROSPECTIVE
-                </h2>
-              </div>
-
-              {/* 2 Bullets Max */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 font-mono">
-                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="w-6 h-6 rounded-none bg-black text-white flex items-center justify-center text-xs font-black">
-                      01
-                    </span>
-                    <span className="text-xs font-black uppercase tracking-wider text-[#FF462D]">
-                      SYSTEM ARCHITECTURE
-                    </span>
-                  </div>
-                  <h4 className="text-base font-black uppercase text-black mb-2">
-                    Build design system tokens before components, not after
-                  </h4>
-                  <p className="text-xs sm:text-sm font-sans font-bold uppercase text-zinc-700 leading-relaxed">
-                    Building components ad-hoc created subtle style drift across surfaces. Defining color tokens and typography scale primitives upfront eliminated technical theming debt.
-                  </p>
-                </div>
-
-                <div className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="w-6 h-6 rounded-none bg-black text-white flex items-center justify-center text-xs font-black">
-                      02
-                    </span>
-                    <span className="text-xs font-black uppercase tracking-wider text-[#FF462D]">
-                      USER RESEARCH
-                    </span>
-                  </div>
-                  <h4 className="text-base font-black uppercase text-black mb-2">
-                    Test with real end users earlier, not just client reviews
-                  </h4>
-                  <p className="text-xs sm:text-sm font-sans font-bold uppercase text-zinc-700 leading-relaxed">
-                    Testing with elderly family members and field delivery drivers exposed real-world edge cases (input auto-zoom, sunlight glare) much faster than stakeholder walkthroughs.
-                  </p>
-                </div>
-              </div>
-
-              {/* Tech Specs as Compact Tag Pills Only (No Table) */}
-              <div className="pt-6 border-t-2 border-black">
-                <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-500 block mb-3">
-                  COMPLETE PRODUCTION STACK (COMPACT TECH SPEC):
-                </span>
-                <div className="flex flex-wrap gap-2 font-mono text-xs">
-                  {["Next.js 14 (App Router)", "TypeScript", "Supabase (PostgreSQL)", "Supabase Realtime", "Razorpay Payment Gateway", "Meta WhatsApp Cloud API", "Firebase Auth (OTP)", "Framer Motion", "Vercel Edge Functions", "Custom PWA Service Worker", "Gemini AI Pricing Agent"].map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1.5 bg-black text-white font-bold uppercase tracking-wider border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FAED00] hover:text-black transition-colors"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Closing CTA */}
-              <div className="pt-6 border-t-2 border-black flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 select-none">
-                <a
-                  href="https://www.vidyaskitchenhome.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 sm:px-8 py-4 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black font-mono tracking-widest uppercase flex items-center justify-center gap-3 cursor-pointer group"
-                >
-                  <span>OPEN LIVE PRODUCT</span>
-                  <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </a>
-
-                <Link
-                  href="/v2#work"
-                  className="px-6 py-4 bg-white text-black hover:bg-zinc-100 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-xs sm:text-sm font-black font-mono tracking-widest uppercase flex items-center justify-center gap-2 transition-all"
-                >
-                  <ArrowLeft weight="bold" className="w-4 h-4" />
-                  <span>BACK TO SELECTED WORK</span>
-                </Link>
-              </div>
-            </div>
-          </section>
+            <Link
+              href="/v2#work"
+              className="px-5 py-2.5 bg-[#FAED00] text-black font-mono text-xs font-black uppercase tracking-wider border-2 border-white hover:bg-white hover:text-black transition-colors shrink-0"
+            >
+              Back to Selected Work ↑
+            </Link>
+          </footer>
 
         </main>
       </div>
