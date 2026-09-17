@@ -657,14 +657,6 @@ export default function VidyasKitchenCaseStudyPage() {
                     },
                     {
                       step: "03",
-                      title: "6-Digit OTP Verification Screen",
-                      tag: "Frictionless Authentication",
-                      img: "/case-studies/vidyas-kitchen/v3/03-otp-verification.png",
-                      desc: "A clean, auto-focusing 6-digit numeric input with a 30-second resend countdown timer and direct 'Change number' safety hatch. Features active focused digit states and automatic form submission upon typing the final digit for under 10-second logins.",
-                      highlights: ["Active focused digit box state", "Auto-advancing single digit fields", "Live 30-second resend throttle"],
-                    },
-                    {
-                      step: "04",
                       title: "Delivery Location & Address Confirmation",
                       tag: "Precision Local Logistics",
                       img: "/case-studies/vidyas-kitchen/v3/04-location-selector.png",
@@ -672,7 +664,7 @@ export default function VidyasKitchenCaseStudyPage() {
                       highlights: ["Mapbox GL pin geolocation picker", "Saved places quick-toggle chips", "Graceful permission error handling"],
                     },
                     {
-                      step: "05",
+                      step: "04",
                       title: "Home Menu & Dish Browsing",
                       tag: "Batch Discovery & 1-Tap Ordering",
                       img: "/case-studies/vidyas-kitchen/v3/05-menu-browsing.png",
