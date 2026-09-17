@@ -658,7 +658,7 @@ export default function VidyasKitchenCaseStudyPage() {
                   transition={{
                     repeat: Infinity,
                     ease: "linear",
-                    duration: 38,
+                    duration: 65,
                   }}
                 >
                   {[
