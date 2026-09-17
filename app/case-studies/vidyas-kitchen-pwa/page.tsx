@@ -720,6 +720,14 @@ export default function VidyasKitchenCaseStudyPage() {
                       desc: "Real-time tracking dashboard indicating scheduled arrival time, active 4-stage stepper (Order → Preparing → On the way → Delivered), cash on delivery reminder, and integrated direct customer support chat button.",
                       highlights: ["Supabase Realtime live sync stepper", "Exact arrival time display", "Direct kitchen chat support trigger"],
                     },
+                    {
+                      step: "11",
+                      title: "Automated WhatsApp Bot Order Receipt",
+                      tag: "Zero-Friction Transactional Sync",
+                      img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
+                      desc: "Automated WhatsApp Cloud bot triggered via Supabase database webhooks immediately upon checkout. Sends a branded conversational message ('We\'ve reserved the stove. You rest — the gravy is our problem now.') with an itemized receipt, bill breakdown, and delivery window reminder.",
+                      highlights: ["Webhook-triggered Twilio WhatsApp API", "Humorous local conversational tone", "Full itemized bill with tax & delivery breakdown"],
+                    },
                   ].map((screen) => (
                     <div
                       key={screen.step}
