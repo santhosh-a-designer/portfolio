@@ -693,6 +693,14 @@ export default function VidyasKitchenCaseStudyPage() {
                   },
                   {
                     step: "06",
+                    title: "Automated WhatsApp Bot Order Receipt",
+                    tag: "Zero-Friction Transactional Sync",
+                    img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
+                    desc: "Automated WhatsApp Cloud bot triggered via Supabase database webhooks immediately upon checkout. Sends a branded conversational message ('We\'ve reserved the stove. You rest — the gravy is our problem now.') with an itemized receipt, bill breakdown, and delivery window reminder.",
+                    highlights: ["Webhook-triggered Twilio WhatsApp API", "Humorous local conversational tone", "Full itemized bill with tax & delivery breakdown"],
+                  },
+                  {
+                    step: "07",
                     title: "Category Filter & Dish Listing Screen",
                     tag: "Quick Diet Filtering",
                     img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
@@ -700,7 +708,7 @@ export default function VidyasKitchenCaseStudyPage() {
                     highlights: ["Dietary category pill toggles", "Side-by-side recipe variations", "Direct item quantity steppers"],
                   },
                   {
-                    step: "07",
+                    step: "08",
                     title: "Cart Overview & Promo Code Application",
                     tag: "Conversion & Upsell Flow",
                     img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
@@ -708,7 +716,7 @@ export default function VidyasKitchenCaseStudyPage() {
                     highlights: ["Item weight & recipe specs", "Framer Motion animated coupon box", "Transparent delivery fee itemization"],
                   },
                   {
-                    step: "08",
+                    step: "09",
                     title: "24-Hour Advance Meal Scheduler & Payment Choice",
                     tag: "Predictable Kitchen Logistics",
                     img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
@@ -716,7 +724,7 @@ export default function VidyasKitchenCaseStudyPage() {
                     highlights: ["Visual calendar slot selector", "24-hour cutoff safety logic", "Instant online vs. COD toggle"],
                   },
                   {
-                    step: "09",
+                    step: "10",
                     title: "Order Confirmation Modal",
                     tag: "Clear Order Handoff",
                     img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
@@ -724,20 +732,12 @@ export default function VidyasKitchenCaseStudyPage() {
                     highlights: ["Spring physics entry modal", "Clear COD cash reminder", "1-tap 'Track my order' redirect"],
                   },
                   {
-                    step: "10",
+                    step: "11",
                     title: "Live Real-Time Order & Delivery Status",
                     tag: "Live Reassurance & Status Stepper",
                     img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
                     desc: "Real-time tracking dashboard indicating scheduled arrival time, active 4-stage stepper (Order → Preparing → On the way → Delivered), cash on delivery reminder, and integrated direct customer support chat button.",
                     highlights: ["Supabase Realtime live sync stepper", "Exact arrival time display", "Direct kitchen chat support trigger"],
-                  },
-                  {
-                    step: "11",
-                    title: "Automated WhatsApp Bot Order Receipt",
-                    tag: "Zero-Friction Transactional Sync",
-                    img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
-                    desc: "Automated WhatsApp Cloud bot triggered via Supabase database webhooks immediately upon checkout. Sends a branded conversational message ('We\'ve reserved the stove. You rest — the gravy is our problem now.') with an itemized receipt, bill breakdown, and delivery window reminder.",
-                    highlights: ["Webhook-triggered Twilio WhatsApp API", "Humorous local conversational tone", "Full itemized bill with tax & delivery breakdown"],
                   },
                 ].map((screen) => (
                   <div
