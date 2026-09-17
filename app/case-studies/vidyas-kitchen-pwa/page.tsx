@@ -660,8 +660,8 @@ export default function VidyasKitchenCaseStudyPage() {
                       title: "6-Digit OTP Verification Screen",
                       tag: "Frictionless Authentication",
                       img: "/case-studies/vidyas-kitchen/v3/03-otp-verification.png",
-                      desc: "A clean, auto-focusing 6-digit numeric input with a 30-second resend countdown timer and direct 'Change number' safety hatch. Integrated with mobile SMS auto-fill for instant frictionless session verification under 10 seconds.",
-                      highlights: ["Auto-advancing single digit boxes", "Dynamic Island SMS paste preview integration", "Live 30-second resend throttle"],
+                      desc: "A clean, auto-focusing 6-digit numeric input with a 30-second resend countdown timer and direct 'Change number' safety hatch. Features active focused digit states and automatic form submission upon typing the final digit for under 10-second logins.",
+                      highlights: ["Active focused digit box state", "Auto-advancing single digit fields", "Live 30-second resend throttle"],
                     },
                     {
                       step: "04",
