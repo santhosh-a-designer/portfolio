@@ -637,7 +637,8 @@ export default function VidyasKitchenCaseStudyPage() {
                   </h3>
                 </div>
 
-                <div className="space-y-6">
+                {/* Responsive Side-by-Side 2-Column Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {[
                     {
                       step: "01",
@@ -645,7 +646,7 @@ export default function VidyasKitchenCaseStudyPage() {
                       tag: "Instant Brand Recognition",
                       img: "/case-studies/vidyas-kitchen/v3/01-splash-screen.png",
                       desc: "The introductory launch experience immediately establishes Vidya’s Kitchen brand identity with an inviting culinary mascot and warm crimson motif. Optimized as an ultra-fast loading PWA splash state that hides initial asset hydration seamlessly without white screen flashes.",
-                      highlights: ["Lightweight SVG brand mascot badge", "Animated micro-pulsing loader", "< 2MB initial bundle footprint"],
+                      highlights: ["Lightweight SVG mascot badge", "Animated pulsing loader", "< 2MB initial bundle"],
                     },
                     {
                       step: "02",
@@ -653,7 +654,7 @@ export default function VidyasKitchenCaseStudyPage() {
                       tag: "Low-Friction Onboarding",
                       img: "/case-studies/vidyas-kitchen/v3/02-phone-login.png",
                       desc: "Designed specifically for Sivakasi’s user base by completely removing traditional email and password barriers. Greets returning users personally ('Hey, Dee.') while new visitors enter their preferred nickname and 10-digit mobile number with standard +91 India formatting.",
-                      highlights: ["17px input token to bypass iOS Safari auto-zoom", "Pre-filled returning user greeting", "1-tap 'Send OTP' with Firebase Auth"],
+                      highlights: ["17px input token (no iOS zoom)", "Pre-filled returning user greeting", "1-tap 'Send OTP' with Firebase"],
                     },
                     {
                       step: "03",
@@ -661,7 +662,7 @@ export default function VidyasKitchenCaseStudyPage() {
                       tag: "Frictionless Authentication",
                       img: "/case-studies/vidyas-kitchen/v3/03-otp-screen-clean.png",
                       desc: "An auto-advancing 6-digit OTP keypad interface with real-time numeric entry states, an active field indicator, countdown resend safety throttle (16s), and direct 'Change number' fallback. Seamlessly verifies sessions without complex passwords.",
-                      highlights: ["High-contrast single-digit input tiles", "Active input yellow focus indicator", "Direct 'Change number' safety hatch"],
+                      highlights: ["High-contrast input tiles", "Active yellow focus indicator", "Direct 'Change number' safety hatch"],
                     },
                     {
                       step: "04",
@@ -669,7 +670,7 @@ export default function VidyasKitchenCaseStudyPage() {
                       tag: "Precision Local Logistics",
                       img: "/case-studies/vidyas-kitchen/v3/04-location-selector.png",
                       desc: "Features interactive 3D map pin placement, saved tags (Home, Work), manual flat/building inputs, and a one-tap 'Use current location' GPS detector. Includes friendly fallback alert banners with clear instructions if location permission is denied.",
-                      highlights: ["Mapbox GL pin geolocation picker", "Saved places quick-toggle chips", "Graceful permission error handling"],
+                      highlights: ["Mapbox GL pin geolocation picker", "Saved places quick chips", "Graceful permission fallback"],
                     },
                     {
                       step: "05",
@@ -677,30 +678,16 @@ export default function VidyasKitchenCaseStudyPage() {
                       tag: "Batch Discovery & 1-Tap Ordering",
                       img: "/case-studies/vidyas-kitchen/v3/05-menu-browsing.png",
                       desc: "Presents traditional home-cooked delicacies (Mom's Recipe Chicken Gravy, Pepper Chicken) with high-definition dish photography, real-time discount tags, category switchers (Kitchen picks, Favorites), and bottom navigation for rapid access.",
-                      highlights: ["Card-based meal browsing with 20% discount badges", "Floating bottom navigation dock (Home, Orders, Profile)", "Instant + ADD action button with optimistic cart feedback"],
+                      highlights: ["Card-based meal browsing with discount badges", "Floating bottom navigation dock", "Instant + ADD action button"],
                     },
                   ].map((screen) => (
                     <div
                       key={screen.step}
-                      className="p-5 sm:p-7 bg-[#FAF9F5] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] grid grid-cols-1 md:grid-cols-12 gap-6 items-center"
+                      className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-5"
                     >
-                      {/* Visual Phone Frame */}
-                      <div className="md:col-span-4 lg:col-span-3 flex justify-center">
-                        <div className="w-full max-w-[240px] aspect-[9/19] rounded-[24px] border-4 border-black bg-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] relative">
-                          <Image
-                            src={screen.img}
-                            alt={screen.title}
-                            fill
-                            sizes="260px"
-                            quality={100}
-                            className="object-cover object-top"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Screen Explanation & Insights */}
-                      <div className="md:col-span-8 lg:col-span-9 space-y-3 font-mono">
-                        <div className="flex flex-wrap items-center gap-2">
+                      {/* Top Meta Header */}
+                      <div className="space-y-2 font-mono">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
                           <span className="px-2.5 py-1 bg-[#FF462D] text-white text-xs font-black">
                             SCREEN {screen.step}
                           </span>
@@ -708,24 +695,38 @@ export default function VidyasKitchenCaseStudyPage() {
                             {screen.tag}
                           </span>
                         </div>
-
-                        <h4 className="text-lg sm:text-xl font-black text-black uppercase">
+                        <h4 className="text-base sm:text-lg font-black text-black uppercase pt-1">
                           {screen.title}
                         </h4>
+                      </div>
 
+                      {/* Clean Rectangular Image Display (No Mobile Mockup Border) */}
+                      <div className="relative w-full aspect-[9/16] max-h-[420px] bg-white border-2 border-black overflow-hidden shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                        <Image
+                          src={screen.img}
+                          alt={screen.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          quality={100}
+                          className="object-contain object-center"
+                        />
+                      </div>
+
+                      {/* Explanation & Highlights */}
+                      <div className="space-y-3 font-mono">
                         <p className="font-sans text-xs sm:text-sm text-zinc-700 leading-relaxed">
                           {screen.desc}
                         </p>
 
-                        <div className="pt-2 border-t border-black/15">
+                        <div className="pt-3 border-t border-black/15">
                           <span className="text-[10px] font-bold text-zinc-500 uppercase block mb-1.5">
                             Key UX Highlights:
                           </span>
-                          <div className="flex flex-wrap gap-2">
+                          <div className="flex flex-wrap gap-1.5">
                             {screen.highlights.map((h, i) => (
                               <span
                                 key={i}
-                                className="px-2.5 py-1 bg-white border border-black text-[11px] font-bold text-black flex items-center gap-1.5"
+                                className="px-2 py-0.5 bg-white border border-black text-[10px] font-bold text-black flex items-center gap-1"
                               >
                                 <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A]" />
                                 {h}
