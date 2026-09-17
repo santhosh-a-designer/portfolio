@@ -707,11 +707,6 @@ export default function VidyasKitchenCaseStudyPage() {
                       title: "Order Placed Modal",
                       img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
                     },
-                    {
-                      step: "10",
-                      title: "Live Order Status & Stepper",
-                      img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
-                    },
                   ]
                     .concat([
                       {
@@ -758,11 +753,6 @@ export default function VidyasKitchenCaseStudyPage() {
                         step: "09",
                         title: "Order Placed Modal",
                         img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
-                      },
-                      {
-                        step: "10",
-                        title: "Live Order Status & Stepper",
-                        img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
                       },
                     ])
                     .map((screen, idx) => (
