@@ -689,31 +689,26 @@ export default function VidyasKitchenCaseStudyPage() {
                     },
                     {
                       step: "06",
-                      title: "Automated WhatsApp Bot",
-                      img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
-                    },
-                    {
-                      step: "07",
                       title: "Category Filter & Listing",
                       img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
                     },
                     {
-                      step: "08",
+                      step: "07",
                       title: "Cart & Promo Engine",
                       img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
                     },
                     {
-                      step: "09",
+                      step: "08",
                       title: "Meal Schedule & Slot Booking",
                       img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
                     },
                     {
-                      step: "10",
+                      step: "09",
                       title: "Order Placed Modal",
                       img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
                     },
                     {
-                      step: "11",
+                      step: "10",
                       title: "Live Order Status & Stepper",
                       img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
                     },
@@ -746,31 +741,26 @@ export default function VidyasKitchenCaseStudyPage() {
                       },
                       {
                         step: "06",
-                        title: "Automated WhatsApp Bot",
-                        img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
-                      },
-                      {
-                        step: "07",
                         title: "Category Filter & Listing",
                         img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
                       },
                       {
-                        step: "08",
+                        step: "07",
                         title: "Cart & Promo Engine",
                         img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
                       },
                       {
-                        step: "09",
+                        step: "08",
                         title: "Meal Schedule & Slot Booking",
                         img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
                       },
                       {
-                        step: "10",
+                        step: "09",
                         title: "Order Placed Modal",
                         img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
                       },
                       {
-                        step: "11",
+                        step: "10",
                         title: "Live Order Status & Stepper",
                         img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
                       },
