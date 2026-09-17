@@ -648,111 +648,162 @@ export default function VidyasKitchenCaseStudyPage() {
                 </h3>
               </div>
 
-              {/* Horizontal Sliding Carousel Showcase */}
-              <div className="relative -mx-6 sm:-mx-8 md:-mx-10 px-6 sm:px-8 md:px-10">
-                <div className="flex gap-6 overflow-x-auto pb-6 pt-2 scrollbar-thin scrollbar-thumb-black scrollbar-track-zinc-200 scroll-smooth snap-x snap-mandatory">
+              {/* Smooth Continuous Auto-Sliding Showcase */}
+              <div className="relative -mx-6 sm:-mx-8 md:-mx-10 overflow-hidden py-4">
+                <motion.div
+                  className="flex gap-6 sm:gap-8 w-max"
+                  animate={{
+                    x: ["0%", "-50%"],
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    ease: "linear",
+                    duration: 38,
+                  }}
+                >
                   {[
                     {
                       step: "01",
                       title: "Opening & Splash",
-                      tag: "Brand Intro",
                       img: "/case-studies/vidyas-kitchen/v3/01-splash-screen.png",
                     },
                     {
                       step: "02",
                       title: "Phone Login",
-                      tag: "Firebase Auth",
                       img: "/case-studies/vidyas-kitchen/v3/02-phone-login.png",
                     },
                     {
                       step: "03",
                       title: "6-Digit OTP Verification",
-                      tag: "One-Time Password",
                       img: "/case-studies/vidyas-kitchen/v3/03-otp-screen-clean.png",
                     },
                     {
                       step: "04",
                       title: "Delivery Location Selector",
-                      tag: "Map Geolocation",
                       img: "/case-studies/vidyas-kitchen/v3/04-location-selector.png",
                     },
                     {
                       step: "05",
                       title: "Home Menu Browsing",
-                      tag: "Dish Discovery",
                       img: "/case-studies/vidyas-kitchen/v3/05-menu-browsing.png",
                     },
                     {
                       step: "06",
                       title: "Automated WhatsApp Bot",
-                      tag: "Instant Receipt",
                       img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
                     },
                     {
                       step: "07",
                       title: "Category Filter & Listing",
-                      tag: "Menu Dishes",
                       img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
                     },
                     {
                       step: "08",
                       title: "Cart & Promo Engine",
-                      tag: "Checkout Review",
                       img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
                     },
                     {
                       step: "09",
                       title: "Meal Schedule & Slot Booking",
-                      tag: "24-Hr Batch Window",
                       img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
                     },
                     {
                       step: "10",
                       title: "Order Placed Modal",
-                      tag: "Confirmation",
                       img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
                     },
                     {
                       step: "11",
                       title: "Live Order Status & Stepper",
-                      tag: "Realtime Tracking",
                       img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
                     },
-                  ].map((screen) => (
-                    <div
-                      key={screen.step}
-                      className="shrink-0 w-[240px] sm:w-[260px] md:w-[280px] flex flex-col items-center snap-center space-y-3"
-                    >
-                      {/* Heading Displayed Above The Image */}
-                      <div className="text-center w-full px-2">
-                        <span className="text-[10px] font-mono font-bold uppercase text-[#FF462D] block tracking-wider">
-                          SCREEN {screen.step}
-                        </span>
-                        <h4 className="text-xs sm:text-sm font-mono font-black text-black uppercase tracking-tight truncate">
-                          {screen.title}
-                        </h4>
-                      </div>
+                  ]
+                    .concat([
+                      {
+                        step: "01",
+                        title: "Opening & Splash",
+                        img: "/case-studies/vidyas-kitchen/v3/01-splash-screen.png",
+                      },
+                      {
+                        step: "02",
+                        title: "Phone Login",
+                        img: "/case-studies/vidyas-kitchen/v3/02-phone-login.png",
+                      },
+                      {
+                        step: "03",
+                        title: "6-Digit OTP Verification",
+                        img: "/case-studies/vidyas-kitchen/v3/03-otp-screen-clean.png",
+                      },
+                      {
+                        step: "04",
+                        title: "Delivery Location Selector",
+                        img: "/case-studies/vidyas-kitchen/v3/04-location-selector.png",
+                      },
+                      {
+                        step: "05",
+                        title: "Home Menu Browsing",
+                        img: "/case-studies/vidyas-kitchen/v3/05-menu-browsing.png",
+                      },
+                      {
+                        step: "06",
+                        title: "Automated WhatsApp Bot",
+                        img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
+                      },
+                      {
+                        step: "07",
+                        title: "Category Filter & Listing",
+                        img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
+                      },
+                      {
+                        step: "08",
+                        title: "Cart & Promo Engine",
+                        img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
+                      },
+                      {
+                        step: "09",
+                        title: "Meal Schedule & Slot Booking",
+                        img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
+                      },
+                      {
+                        step: "10",
+                        title: "Order Placed Modal",
+                        img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
+                      },
+                      {
+                        step: "11",
+                        title: "Live Order Status & Stepper",
+                        img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
+                      },
+                    ])
+                    .map((screen, idx) => (
+                      <div
+                        key={`${screen.step}-${idx}`}
+                        className="shrink-0 w-[240px] sm:w-[260px] md:w-[280px] flex flex-col items-center space-y-3"
+                      >
+                        {/* Heading Displayed Above The Image */}
+                        <div className="text-center w-full px-2">
+                          <span className="text-[10px] font-mono font-bold uppercase text-[#FF462D] block tracking-wider">
+                            SCREEN {screen.step}
+                          </span>
+                          <h4 className="text-xs sm:text-sm font-mono font-black text-black uppercase tracking-tight truncate">
+                            {screen.title}
+                          </h4>
+                        </div>
 
-                      {/* Clean Mobile Screen Image Frame */}
-                      <div className="relative w-full aspect-[9/19] rounded-[24px] overflow-hidden border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
-                        <Image
-                          src={screen.img}
-                          alt={screen.title}
-                          fill
-                          sizes="280px"
-                          quality={100}
-                          className="object-cover object-top"
-                        />
+                        {/* Normal Clean Image (No Frame/Mockup Box) */}
+                        <div className="relative w-full aspect-[9/19] flex items-center justify-center">
+                          <Image
+                            src={screen.img}
+                            alt={screen.title}
+                            fill
+                            sizes="(max-width: 640px) 240px, (max-width: 1024px) 260px, 280px"
+                            quality={100}
+                            className="object-contain"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Subtle Scroll Indicator Bar */}
-                <div className="pt-2 flex items-center justify-between text-[11px] font-mono font-bold text-zinc-500 uppercase">
-                  <span>← Swipe to explore screens</span>
-                  <span>11 Screens Total →</span>
-                </div>
+                    ))}
+                </motion.div>
               </div>
             </div>
           </section>
