@@ -788,11 +788,164 @@ export default function VidyasKitchenCaseStudyPage() {
             </div>
           </section>
 
-          {/* ─── SECTION 07 // UNIFIED DESIGN SYSTEM & VISUAL TOKENS ─── */}
+          {/* ─── SECTION 07 // DELIVERY PERSON PWA & DRIVER LOGISTICS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
               <div className="flex items-center gap-2">
                 <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">07</span>
+                <span className="font-bold text-black uppercase tracking-wider">DELIVERY PERSON PWA &amp; DRIVER LOGISTICS</span>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-8 md:p-10 space-y-8">
+              <div>
+                <span className="text-xs font-mono font-black uppercase tracking-wider text-[#FF462D] block mb-1">
+                  DRIVER SURFACE &amp; LAST-MILE LOGISTICS
+                </span>
+                <h3 className="font-mono font-black text-lg sm:text-xl uppercase text-black">
+                  Driver PWA Workflow: PIN Auth, Live Drops, Map Navigation &amp; Payment Reconciliation
+                </h3>
+              </div>
+
+              {/* Smooth Continuous Auto-Sliding Showcase for Driver Screens */}
+              <div className="relative -mx-6 sm:-mx-8 md:-mx-10 overflow-hidden py-4">
+                <motion.div
+                  className="flex gap-6 sm:gap-8 w-max"
+                  animate={{
+                    x: ["0%", "-50%"],
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    ease: "linear",
+                    duration: 45,
+                  }}
+                >
+                  {[
+                    {
+                      step: "01",
+                      title: "Driver PIN Auth",
+                      img: "/case-studies/vidyas-kitchen/driver/01-driver-login.png",
+                    },
+                    {
+                      step: "02",
+                      title: "Active Deliveries Queue",
+                      img: "/case-studies/vidyas-kitchen/driver/02-driver-active-deliveries.png",
+                    },
+                    {
+                      step: "03",
+                      title: "Drop Details & Map Routing",
+                      img: "/case-studies/vidyas-kitchen/driver/03-driver-map-navigation.png",
+                    },
+                    {
+                      step: "04",
+                      title: "Cash / UPI Settlement",
+                      img: "/case-studies/vidyas-kitchen/driver/04-driver-cash-collection.png",
+                    },
+                  ]
+                    .concat([
+                      {
+                        step: "01",
+                        title: "Driver PIN Auth",
+                        img: "/case-studies/vidyas-kitchen/driver/01-driver-login.png",
+                      },
+                      {
+                        step: "02",
+                        title: "Active Deliveries Queue",
+                        img: "/case-studies/vidyas-kitchen/driver/02-driver-active-deliveries.png",
+                      },
+                      {
+                        step: "03",
+                        title: "Drop Details & Map Routing",
+                        img: "/case-studies/vidyas-kitchen/driver/03-driver-map-navigation.png",
+                      },
+                      {
+                        step: "04",
+                        title: "Cash / UPI Settlement",
+                        img: "/case-studies/vidyas-kitchen/driver/04-driver-cash-collection.png",
+                      },
+                    ])
+                    .concat([
+                      {
+                        step: "01",
+                        title: "Driver PIN Auth",
+                        img: "/case-studies/vidyas-kitchen/driver/01-driver-login.png",
+                      },
+                      {
+                        step: "02",
+                        title: "Active Deliveries Queue",
+                        img: "/case-studies/vidyas-kitchen/driver/02-driver-active-deliveries.png",
+                      },
+                      {
+                        step: "03",
+                        title: "Drop Details & Map Routing",
+                        img: "/case-studies/vidyas-kitchen/driver/03-driver-map-navigation.png",
+                      },
+                      {
+                        step: "04",
+                        title: "Cash / UPI Settlement",
+                        img: "/case-studies/vidyas-kitchen/driver/04-driver-cash-collection.png",
+                      },
+                    ])
+                    .concat([
+                      {
+                        step: "01",
+                        title: "Driver PIN Auth",
+                        img: "/case-studies/vidyas-kitchen/driver/01-driver-login.png",
+                      },
+                      {
+                        step: "02",
+                        title: "Active Deliveries Queue",
+                        img: "/case-studies/vidyas-kitchen/driver/02-driver-active-deliveries.png",
+                      },
+                      {
+                        step: "03",
+                        title: "Drop Details & Map Routing",
+                        img: "/case-studies/vidyas-kitchen/driver/03-driver-map-navigation.png",
+                      },
+                      {
+                        step: "04",
+                        title: "Cash / UPI Settlement",
+                        img: "/case-studies/vidyas-kitchen/driver/04-driver-cash-collection.png",
+                      },
+                    ])
+                    .map((screen, idx) => (
+                      <div
+                        key={`${screen.step}-${idx}`}
+                        className="shrink-0 w-[240px] sm:w-[260px] md:w-[280px] flex flex-col items-center space-y-3"
+                      >
+                        {/* Heading Displayed Above The Image */}
+                        <div className="text-center w-full px-2">
+                          <span className="text-[10px] font-mono font-bold uppercase text-[#FF462D] block tracking-wider">
+                            SCREEN {screen.step}
+                          </span>
+                          <h4 className="text-xs sm:text-sm font-mono font-black text-black uppercase tracking-tight truncate">
+                            {screen.title}
+                          </h4>
+                        </div>
+
+                        {/* Normal Clean Image */}
+                        <div className="relative w-full aspect-[9/19] flex items-center justify-center">
+                          <Image
+                            src={screen.img}
+                            alt={screen.title}
+                            fill
+                            sizes="(max-width: 640px) 240px, (max-width: 1024px) 260px, 280px"
+                            quality={100}
+                            className="object-contain"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── SECTION 08 // UNIFIED DESIGN SYSTEM & VISUAL TOKENS ─── */}
+          <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+            <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">08</span>
                 <span className="font-bold text-black uppercase tracking-wider">UNIFIED DESIGN SYSTEM &amp; VISUAL TOKENS</span>
               </div>
             </div>
@@ -893,11 +1046,11 @@ export default function VidyasKitchenCaseStudyPage() {
             </div>
           </section>
 
-          {/* ─── SECTION 08 // DETAILED ENGINEERING CHALLENGES & UX SOLUTIONS ─── */}
+          {/* ─── SECTION 09 // DETAILED ENGINEERING CHALLENGES & UX SOLUTIONS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">08</span>
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">09</span>
                 <span className="font-bold text-black uppercase tracking-wider">ENGINEERING CHALLENGES &amp; HOW UX SOLVED THEM</span>
               </div>
             </div>
@@ -987,11 +1140,11 @@ export default function VidyasKitchenCaseStudyPage() {
             </div>
           </section>
 
-          {/* ─── SECTION 09 // MEASURABLE IMPACT & BUSINESS RESULTS ─── */}
+          {/* ─── SECTION 10 // MEASURABLE IMPACT & BUSINESS RESULTS ─── */}
           <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
             <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none">
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">09</span>
+                <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">10</span>
                 <span className="font-bold text-black uppercase tracking-wider">MEASURABLE IMPACT &amp; KEY TAKEAWAYS</span>
               </div>
             </div>
