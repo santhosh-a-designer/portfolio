@@ -648,132 +648,111 @@ export default function VidyasKitchenCaseStudyPage() {
                 </h3>
               </div>
 
-              {/* Responsive Side-by-Side 2-Column Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  {
-                    step: "01",
-                    title: "Splash & Opening Screen",
-                    tag: "Instant Brand Recognition",
-                    img: "/case-studies/vidyas-kitchen/v3/01-splash-screen.png",
-                    desc: "The introductory launch experience immediately establishes Vidya’s Kitchen brand identity with an inviting culinary mascot and warm crimson motif. Optimized as an ultra-fast loading PWA splash state that hides initial asset hydration seamlessly without white screen flashes.",
-                    highlights: ["Lightweight SVG mascot badge", "Animated pulsing loader", "< 2MB initial bundle"],
-                  },
-                  {
-                    step: "02",
-                    title: "Personalized Phone Login Screen",
-                    tag: "Low-Friction Onboarding",
-                    img: "/case-studies/vidyas-kitchen/v3/02-phone-login.png",
-                    desc: "Designed specifically for Sivakasi’s user base by completely removing traditional email and password barriers. Greets returning users personally ('Hey, Dee.') while new visitors enter their preferred nickname and 10-digit mobile number with standard +91 India formatting.",
-                    highlights: ["17px input token (no iOS zoom)", "Pre-filled returning user greeting", "1-tap 'Send OTP' with Firebase"],
-                  },
-                  {
-                    step: "03",
-                    title: "6-Digit OTP Verification Screen",
-                    tag: "Frictionless Authentication",
-                    img: "/case-studies/vidyas-kitchen/v3/03-otp-screen-clean.png",
-                    desc: "An auto-advancing 6-digit OTP keypad interface with real-time numeric entry states, an active field indicator, countdown resend safety throttle (16s), and direct 'Change number' fallback. Seamlessly verifies sessions without complex passwords.",
-                    highlights: ["High-contrast input tiles", "Active yellow focus indicator", "Direct 'Change number' safety hatch"],
-                  },
-                  {
-                    step: "04",
-                    title: "Delivery Location & Address Confirmation",
-                    tag: "Precision Local Logistics",
-                    img: "/case-studies/vidyas-kitchen/v3/04-location-selector.png",
-                    desc: "Features interactive 3D map pin placement, saved tags (Home, Work), manual flat/building inputs, and a one-tap 'Use current location' GPS detector. Includes friendly fallback alert banners with clear instructions if location permission is denied.",
-                    highlights: ["Mapbox GL pin geolocation picker", "Saved places quick chips", "Graceful permission fallback"],
-                  },
-                  {
-                    step: "05",
-                    title: "Home Menu & Dish Browsing",
-                    tag: "Batch Discovery & 1-Tap Ordering",
-                    img: "/case-studies/vidyas-kitchen/v3/05-menu-browsing.png",
-                    desc: "Presents traditional home-cooked delicacies (Mom's Recipe Chicken Gravy, Pepper Chicken) with high-definition dish photography, real-time discount tags, category switchers (Kitchen picks, Favorites), and bottom navigation for rapid access.",
-                    highlights: ["Card-based meal browsing with discount badges", "Floating bottom navigation dock", "Instant + ADD action button"],
-                  },
-                  {
-                    step: "06",
-                    title: "Automated WhatsApp Bot Order Receipt",
-                    tag: "Zero-Friction Transactional Sync",
-                    img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
-                    desc: "Automated WhatsApp Cloud bot triggered via Supabase database webhooks immediately upon checkout. Sends a branded conversational message ('We\'ve reserved the stove. You rest — the gravy is our problem now.') with an itemized receipt, bill breakdown, and delivery window reminder.",
-                    highlights: ["Webhook-triggered Twilio WhatsApp API", "Humorous local conversational tone", "Full itemized bill with tax & delivery breakdown"],
-                  },
-                  {
-                    step: "07",
-                    title: "Category Filter & Dish Listing Screen",
-                    tag: "Quick Diet Filtering",
-                    img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
-                    desc: "Allows customers to filter dishes by dietary preference (Chicken, Mutton, Egg) with pill tabs, viewing distinct recipe variations like Mom's Recipe vs. Sister's Recipe with clear pricing, discount badges, and quick-add actions.",
-                    highlights: ["Dietary category pill toggles", "Side-by-side recipe variations", "Direct item quantity steppers"],
-                  },
-                  {
-                    step: "08",
-                    title: "Cart Overview & Promo Code Application",
-                    tag: "Conversion & Upsell Flow",
-                    img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
-                    desc: "Detailed cart review displaying item weights (500gm, 1kg), increment/decrement controls, animated promo code entry box with instant validation feedback, and transparent itemized bill breakdown.",
-                    highlights: ["Item weight & recipe specs", "Framer Motion animated coupon box", "Transparent delivery fee itemization"],
-                  },
-                  {
-                    step: "09",
-                    title: "24-Hour Advance Meal Scheduler & Payment Choice",
-                    tag: "Predictable Kitchen Logistics",
-                    img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
-                    desc: "Enforces 24-hour advance batch cooking logic. Users select delivery day (Thu, Fri, Sat) and discrete slots (Breakfast 7-9 AM, Lunch 12-2 PM, Dinner 7-9 PM) with unavailable cutoff times disabled, plus payment toggles (Pay Online vs. Pay at the door).",
-                    highlights: ["Visual calendar slot selector", "24-hour cutoff safety logic", "Instant online vs. COD toggle"],
-                  },
-                  {
-                    step: "10",
-                    title: "Order Confirmation Modal",
-                    tag: "Clear Order Handoff",
-                    img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
-                    desc: "A spring-animated confirmation popup summarizing the unique Order ID, cash readiness prompt for COD deliveries, and a direct primary action button routing users straight to real-time order tracking.",
-                    highlights: ["Spring physics entry modal", "Clear COD cash reminder", "1-tap 'Track my order' redirect"],
-                  },
-                  {
-                    step: "11",
-                    title: "Live Real-Time Order & Delivery Status",
-                    tag: "Live Reassurance & Status Stepper",
-                    img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
-                    desc: "Real-time tracking dashboard indicating scheduled arrival time, active 4-stage stepper (Order → Preparing → On the way → Delivered), cash on delivery reminder, and integrated direct customer support chat button.",
-                    highlights: ["Supabase Realtime live sync stepper", "Exact arrival time display", "Direct kitchen chat support trigger"],
-                  },
-                ].map((screen) => (
-                  <div
-                    key={screen.step}
-                    className="p-5 sm:p-6 bg-[#FAF9F5] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-5"
-                  >
-                    {/* Top Meta Header */}
-                    <div className="space-y-2 font-mono">
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <span className="px-2.5 py-1 bg-[#FF462D] text-white text-xs font-black">
+              {/* Horizontal Sliding Carousel Showcase */}
+              <div className="relative -mx-6 sm:-mx-8 md:-mx-10 px-6 sm:px-8 md:px-10">
+                <div className="flex gap-6 overflow-x-auto pb-6 pt-2 scrollbar-thin scrollbar-thumb-black scrollbar-track-zinc-200 scroll-smooth snap-x snap-mandatory">
+                  {[
+                    {
+                      step: "01",
+                      title: "Opening & Splash",
+                      tag: "Brand Intro",
+                      img: "/case-studies/vidyas-kitchen/v3/01-splash-screen.png",
+                    },
+                    {
+                      step: "02",
+                      title: "Phone Login",
+                      tag: "Firebase Auth",
+                      img: "/case-studies/vidyas-kitchen/v3/02-phone-login.png",
+                    },
+                    {
+                      step: "03",
+                      title: "6-Digit OTP Verification",
+                      tag: "One-Time Password",
+                      img: "/case-studies/vidyas-kitchen/v3/03-otp-screen-clean.png",
+                    },
+                    {
+                      step: "04",
+                      title: "Delivery Location Selector",
+                      tag: "Map Geolocation",
+                      img: "/case-studies/vidyas-kitchen/v3/04-location-selector.png",
+                    },
+                    {
+                      step: "05",
+                      title: "Home Menu Browsing",
+                      tag: "Dish Discovery",
+                      img: "/case-studies/vidyas-kitchen/v3/05-menu-browsing.png",
+                    },
+                    {
+                      step: "06",
+                      title: "Automated WhatsApp Bot",
+                      tag: "Instant Receipt",
+                      img: "/case-studies/vidyas-kitchen/v3/11-whatsapp-bot-receipt.png",
+                    },
+                    {
+                      step: "07",
+                      title: "Category Filter & Listing",
+                      tag: "Menu Dishes",
+                      img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
+                    },
+                    {
+                      step: "08",
+                      title: "Cart & Promo Engine",
+                      tag: "Checkout Review",
+                      img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
+                    },
+                    {
+                      step: "09",
+                      title: "Meal Schedule & Slot Booking",
+                      tag: "24-Hr Batch Window",
+                      img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
+                    },
+                    {
+                      step: "10",
+                      title: "Order Placed Modal",
+                      tag: "Confirmation",
+                      img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
+                    },
+                    {
+                      step: "11",
+                      title: "Live Order Status & Stepper",
+                      tag: "Realtime Tracking",
+                      img: "/case-studies/vidyas-kitchen/v3/10-live-order-tracking.png",
+                    },
+                  ].map((screen) => (
+                    <div
+                      key={screen.step}
+                      className="shrink-0 w-[240px] sm:w-[260px] md:w-[280px] flex flex-col items-center snap-center space-y-3"
+                    >
+                      {/* Heading Displayed Above The Image */}
+                      <div className="text-center w-full px-2">
+                        <span className="text-[10px] font-mono font-bold uppercase text-[#FF462D] block tracking-wider">
                           SCREEN {screen.step}
                         </span>
-                        <span className="px-2.5 py-1 bg-[#FAED00] text-black text-xs font-bold uppercase border border-black">
-                          {screen.tag}
-                        </span>
+                        <h4 className="text-xs sm:text-sm font-mono font-black text-black uppercase tracking-tight truncate">
+                          {screen.title}
+                        </h4>
                       </div>
-                      <h4 className="text-base sm:text-lg font-black text-black uppercase pt-1">
-                        {screen.title}
-                      </h4>
-                    </div>
 
-                    {/* Only The Pure Image */}
-                    <div className="flex justify-center w-full py-2">
-                      <div className="relative w-full max-w-[300px] aspect-[9/19]">
+                      {/* Clean Mobile Screen Image Frame */}
+                      <div className="relative w-full aspect-[9/19] rounded-[24px] overflow-hidden border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all duration-300">
                         <Image
                           src={screen.img}
                           alt={screen.title}
                           fill
-                          sizes="300px"
+                          sizes="280px"
                           quality={100}
-                          className="object-contain object-center"
+                          className="object-cover object-top"
                         />
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+
+                {/* Subtle Scroll Indicator Bar */}
+                <div className="pt-2 flex items-center justify-between text-[11px] font-mono font-bold text-zinc-500 uppercase">
+                  <span>← Swipe to explore screens</span>
+                  <span>11 Screens Total →</span>
+                </div>
               </div>
             </div>
           </section>
