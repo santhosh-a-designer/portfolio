@@ -10,7 +10,6 @@ interface ScrollFocusWrapperProps {
   isFirst?: boolean;
   isLast?: boolean;
   disabled?: boolean;
-  disableOnMobile?: boolean;
   maxBlur?: number;
   minOpacity?: number;
 }
@@ -22,7 +21,6 @@ export default function ScrollFocusWrapper({
   isFirst = false,
   isLast = false,
   disabled = false,
-  disableOnMobile = false,
   maxBlur = 3.5,
   minOpacity = 0.68,
 }: ScrollFocusWrapperProps) {
@@ -41,7 +39,6 @@ export default function ScrollFocusWrapper({
       className={className}
       isFirst={isFirst}
       isLast={isLast}
-      disableOnMobile={disableOnMobile}
       maxBlur={maxBlur}
       minOpacity={minOpacity}
     >
@@ -56,22 +53,14 @@ function ActiveScrollFocusItem({
   className = "",
   isFirst = false,
   isLast = false,
-  disableOnMobile = false,
   maxBlur = 3.5,
   minOpacity = 0.68,
 }: Omit<ScrollFocusWrapperProps, "disabled">) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -111,17 +100,10 @@ function ActiveScrollFocusItem({
   const rawBlur = useTransform(scrollYProgress, blurRangeInput, blurRangeOutput);
   const opacity = useTransform(scrollYProgress, opacityRangeInput, opacityRangeOutput);
 
-  const shouldDisable = mounted && isMobile && disableOnMobile;
-
-  // Performance optimization: set filter to "none" when in focus (val <= 0.2px) or when disabled on mobile
+  // Performance optimization: set filter to "none" when in focus (val <= 0.2px)
   const filter = useTransform(rawBlur, (val) => {
-    if (!mounted || shouldDisable || val <= 0.2) return "none";
+    if (!mounted || val <= 0.2) return "none";
     return `blur(${val.toFixed(1)}px)`;
-  });
-
-  const activeOpacity = useTransform(opacity, (val) => {
-    if (!mounted || shouldDisable) return 1;
-    return val;
   });
 
   return (
@@ -129,8 +111,8 @@ function ActiveScrollFocusItem({
       ref={containerRef}
       id={id}
       style={{
-        filter: mounted && !shouldDisable ? filter : "none",
-        opacity: mounted && !shouldDisable ? activeOpacity : 1,
+        filter: mounted ? filter : "none",
+        opacity: mounted ? opacity : 1,
       }}
       className={`w-full transition-[filter,opacity] duration-300 ease-out ${className}`}
     >

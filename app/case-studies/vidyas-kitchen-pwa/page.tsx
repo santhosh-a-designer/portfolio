@@ -627,10 +627,12 @@ export default function VidyasKitchenCaseStudyPage() {
                           <span className="font-bold block">#F5F5F7</span>
                           <span className="text-[10px] text-zinc-500 uppercase">Apple Base</span>
                         </div>
-                        <div className="p-3 border-2 border-black bg-white">
-                          <div className="w-6 h-6 rounded-full border border-black bg-white/75 backdrop-blur-md mb-2" />
-                          <span className="font-bold block">rgba(255,255,255,0.72)</span>
-                          <span className="text-[10px] text-zinc-500 uppercase">Glass Surface</span>
+                        <div className="p-2.5 sm:p-3 border-2 border-black bg-white overflow-hidden">
+                          <div className="w-6 h-6 rounded-full border border-black bg-white/75 backdrop-blur-md mb-2 shadow-inner" />
+                          <span className="font-bold block text-[10px] sm:text-xs break-all leading-tight">
+                            rgba(255,255,255,0.72)
+                          </span>
+                          <span className="text-[9px] sm:text-[10px] text-zinc-500 uppercase block mt-0.5">Glass Surface</span>
                         </div>
                         <div className="p-3 border-2 border-black bg-[#BD2320] text-white">
                           <div className="w-6 h-6 rounded-full border border-white bg-[#BD2320] mb-2" />
