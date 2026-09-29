@@ -133,7 +133,7 @@ function WindowCard({
   total: number;
   scrollYProgress: MotionValue<number>;
 }) {
-  const isVidyasKitchen = item.id === "02";
+  const isVidyasKitchen = item.title.toUpperCase().includes("VIDYA");
 
   // Sticky top docking offset: exactly 28px downward offset per card for clean window tabs
   const stickyTop = 76 + index * 28;
@@ -215,12 +215,7 @@ function WindowCard({
 
               {/* Description */}
               <p className="text-xs sm:text-sm font-sans text-zinc-700 leading-relaxed uppercase mb-3.5 sm:mb-5 font-semibold">
-                {item.description ||
-                  (item.id === "01"
-                    ? "Conversion-driven ecommerce scheduling platform for high-value retail appointments across UK & US markets."
-                    : item.id === "02"
-                    ? "Full-stack Progressive Web App with zero-friction WhatsApp ordering flow and automated business dispatch."
-                    : "Intelligent STEM hardware builder platform with visual block coding and AI agent integration.")}
+                {item.description}
               </p>
 
               {/* Tech Stack Chips */}
