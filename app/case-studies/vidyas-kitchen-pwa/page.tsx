@@ -665,94 +665,94 @@ export default function VidyasKitchenCaseStudyPage() {
                     {
                       step: "01",
                       title: "Opening & Splash",
-                      img: "/case-studies/vidyas-kitchen/v3/01-splash-screen.png",
+                      img: "",
                     },
                     {
                       step: "02",
                       title: "Phone Login",
-                      img: "/case-studies/vidyas-kitchen/v3/02-phone-login.png",
+                      img: "",
                     },
                     {
                       step: "03",
                       title: "6-Digit OTP Verification",
-                      img: "/case-studies/vidyas-kitchen/v3/03-otp-screen-clean.png",
+                      img: "",
                     },
                     {
                       step: "04",
                       title: "Delivery Location Selector",
-                      img: "/case-studies/vidyas-kitchen/v3/04-location-selector.png",
+                      img: "",
                     },
                     {
                       step: "05",
                       title: "Home Menu Browsing",
-                      img: "/case-studies/vidyas-kitchen/v3/05-menu-browsing.png",
+                      img: "",
                     },
                     {
                       step: "06",
                       title: "Category Filter & Listing",
-                      img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
+                      img: "",
                     },
                     {
                       step: "07",
                       title: "Cart & Promo Engine",
-                      img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
+                      img: "",
                     },
                     {
                       step: "08",
                       title: "Meal Schedule & Slot Booking",
-                      img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
+                      img: "",
                     },
                     {
                       step: "09",
                       title: "Order Placed Modal",
-                      img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
+                      img: "",
                     },
                   ]
                     .concat([
                       {
                         step: "01",
                         title: "Opening & Splash",
-                        img: "/case-studies/vidyas-kitchen/v3/01-splash-screen.png",
+                        img: "",
                       },
                       {
                         step: "02",
                         title: "Phone Login",
-                        img: "/case-studies/vidyas-kitchen/v3/02-phone-login.png",
+                        img: "",
                       },
                       {
                         step: "03",
                         title: "6-Digit OTP Verification",
-                        img: "/case-studies/vidyas-kitchen/v3/03-otp-screen-clean.png",
+                        img: "",
                       },
                       {
                         step: "04",
                         title: "Delivery Location Selector",
-                        img: "/case-studies/vidyas-kitchen/v3/04-location-selector.png",
+                        img: "",
                       },
                       {
                         step: "05",
                         title: "Home Menu Browsing",
-                        img: "/case-studies/vidyas-kitchen/v3/05-menu-browsing.png",
+                        img: "",
                       },
                       {
                         step: "06",
                         title: "Category Filter & Listing",
-                        img: "/case-studies/vidyas-kitchen/v3/06-dish-category-menu.png",
+                        img: "",
                       },
                       {
                         step: "07",
                         title: "Cart & Promo Engine",
-                        img: "/case-studies/vidyas-kitchen/v3/07-cart-summary.png",
+                        img: "",
                       },
                       {
                         step: "08",
                         title: "Meal Schedule & Slot Booking",
-                        img: "/case-studies/vidyas-kitchen/v3/08-meal-scheduler.png",
+                        img: "",
                       },
                       {
                         step: "09",
                         title: "Order Placed Modal",
-                        img: "/case-studies/vidyas-kitchen/v3/09-order-confirmed-modal.png",
+                        img: "",
                       },
                     ])
                     .map((screen, idx) => (
@@ -770,16 +770,27 @@ export default function VidyasKitchenCaseStudyPage() {
                           </h4>
                         </div>
 
-                        {/* Normal Clean Image (No Frame/Mockup Box) */}
-                        <div className="relative w-full aspect-[9/19] flex items-center justify-center">
-                          <Image
-                            src={screen.img}
-                            alt={screen.title}
-                            fill
-                            sizes="(max-width: 640px) 240px, (max-width: 1024px) 260px, 280px"
-                            quality={100}
-                            className="object-contain"
-                          />
+                        {/* Screen Image Slot (clean placeholder area until new images are replaced) */}
+                        <div className="relative w-full aspect-[9/19] flex items-center justify-center border-2 border-dashed border-zinc-200 bg-zinc-50/60 rounded-xl">
+                          {screen.img ? (
+                            <Image
+                              src={screen.img}
+                              alt={screen.title}
+                              fill
+                              sizes="(max-width: 640px) 240px, (max-width: 1024px) 260px, 280px"
+                              quality={100}
+                              className="object-contain"
+                            />
+                          ) : (
+                            <div className="flex flex-col items-center justify-center text-zinc-400 gap-1.5 p-4 text-center select-none">
+                              <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+                                Image Slot
+                              </span>
+                              <span className="font-mono text-[10px] text-zinc-400">
+                                Ready for replacement
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
