@@ -658,103 +658,158 @@ export default function VidyasKitchenCaseStudyPage() {
                   transition={{
                     repeat: Infinity,
                     ease: "linear",
-                    duration: 65,
+                    duration: 160,
                   }}
                 >
                   {[
                     {
                       step: "01",
-                      title: "Opening & Splash",
-                      img: "",
+                      title: "Phone Login",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/01-phone-login.png",
                     },
                     {
                       step: "02",
-                      title: "Phone Login",
-                      img: "",
+                      title: "SMS OTP Auto-Fill",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/02-otp-autofill.png",
                     },
                     {
                       step: "03",
                       title: "6-Digit OTP Verification",
-                      img: "",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/03-otp-verification.png",
                     },
                     {
                       step: "04",
-                      title: "Delivery Location Selector",
-                      img: "",
+                      title: "OTP Verified Success",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/04-otp-verified.png",
                     },
                     {
                       step: "05",
-                      title: "Home Menu Browsing",
-                      img: "",
+                      title: "Delivery Location Selector",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/05-delivery-location-selector.png",
                     },
                     {
                       step: "06",
-                      title: "Category Filter & Listing",
-                      img: "",
+                      title: "Location Confirmed",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/06-location-confirmed.png",
                     },
                     {
                       step: "07",
-                      title: "Cart & Promo Engine",
-                      img: "",
+                      title: "Home Menu Browsing",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/07-home-menu-browsing.png",
                     },
                     {
                       step: "08",
-                      title: "Meal Schedule & Slot Booking",
-                      img: "",
+                      title: "Dish Favorites (Empty State)",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/08-dish-favorites.png",
                     },
                     {
                       step: "09",
-                      title: "Order Placed Modal",
-                      img: "",
+                      title: "Outside Delivery Zone Alert",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/09-outside-delivery-zone.png",
                     },
-                  ]
-                    .concat([
-                      {
-                        step: "01",
-                        title: "Opening & Splash",
-                        img: "",
-                      },
-                      {
-                        step: "02",
-                        title: "Phone Login",
-                        img: "",
-                      },
-                      {
-                        step: "03",
-                        title: "6-Digit OTP Verification",
-                        img: "",
-                      },
-                      {
-                        step: "04",
-                        title: "Delivery Location Selector",
-                        img: "",
-                      },
-                      {
-                        step: "05",
-                        title: "Home Menu Browsing",
-                        img: "",
-                      },
-                      {
-                        step: "06",
-                        title: "Category Filter & Listing",
-                        img: "",
-                      },
-                      {
-                        step: "07",
-                        title: "Cart & Promo Engine",
-                        img: "",
-                      },
-                      {
-                        step: "08",
-                        title: "Meal Schedule & Slot Booking",
-                        img: "",
-                      },
-                      {
-                        step: "09",
-                        title: "Order Placed Modal",
-                        img: "",
-                      },
-                    ])
+                    {
+                      step: "10",
+                      title: "Dish Details & Pairing Notes",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/10-dish-details-pairing.png",
+                    },
+                    {
+                      step: "11",
+                      title: "Portion Size Selector",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/11-portion-size-selector.png",
+                    },
+                    {
+                      step: "12",
+                      title: "Portion Added To Cart",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/12-portion-added-to-cart.png",
+                    },
+                    {
+                      step: "13",
+                      title: "Dish Details (Active Item)",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/13-dish-details-active.png",
+                    },
+                    {
+                      step: "14",
+                      title: "Cart & Bill Breakdown",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/14-cart-order-summary.png",
+                    },
+                    {
+                      step: "15",
+                      title: "Promos & Coupons (Empty State)",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/15-promo-offers-empty.png",
+                    },
+                    {
+                      step: "16",
+                      title: "Welcome Promo Coupon",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/16-welcome-promo-coupon.png",
+                    },
+                    {
+                      step: "17",
+                      title: "Cart with Discount Applied",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/17-cart-with-coupon.png",
+                    },
+                    {
+                      step: "18",
+                      title: "Recipient & Gifting Details",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/18-recipient-gifting-details.png",
+                    },
+                    {
+                      step: "19",
+                      title: "Advance Meal Slot Booking",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/19-meal-slot-booking.png",
+                    },
+                    {
+                      step: "20",
+                      title: "Order Confirmed Modal",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/20-order-placed-modal.png",
+                    },
+                    {
+                      step: "21",
+                      title: "Lockscreen Push Alert",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/21-lockscreen-order-alert.png",
+                    },
+                    {
+                      step: "22",
+                      title: "Live Order Stage Tracker",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/22-live-order-tracker.png",
+                    },
+                    {
+                      step: "23",
+                      title: "Active Orders List",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/23-active-orders-history.png",
+                    },
+                    {
+                      step: "24",
+                      title: "Account & Profile Hub",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/24-account-profile-hub.png",
+                    },
+                    {
+                      step: "25",
+                      title: "Support & Kitchen Hotline",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/25-support-kitchen-hotline.png",
+                    },
+                    {
+                      step: "26",
+                      title: "Saved Addresses Management",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/26-saved-addresses-management.png",
+                    },
+                    {
+                      step: "27",
+                      title: "Self-Service Support FAQ",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/27-faq-self-service.png",
+                    },
+                    {
+                      step: "28",
+                      title: "Advance Cancellation Window",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/28-advance-cancellation-window.png",
+                    },
+                    {
+                      step: "29",
+                      title: "Automated WhatsApp Receipt",
+                      img: "/case-studies/vidyas-kitchen/walkthrough/29-automated-whatsapp-receipt.png",
+                    },
+                  ].reduce<
+                    Array<{ step: string; title: string; img: string }>
+                  >((acc, item, _, arr) => (acc.length === 0 ? arr.concat(arr) : acc), [])
                     .map((screen, idx) => (
                       <div
                         key={`${screen.step}-${idx}`}
@@ -770,27 +825,16 @@ export default function VidyasKitchenCaseStudyPage() {
                           </h4>
                         </div>
 
-                        {/* Screen Image Slot (clean placeholder area until new images are replaced) */}
-                        <div className="relative w-full aspect-[9/19] flex items-center justify-center border-2 border-dashed border-zinc-200 bg-zinc-50/60 rounded-xl">
-                          {screen.img ? (
-                            <Image
-                              src={screen.img}
-                              alt={screen.title}
-                              fill
-                              sizes="(max-width: 640px) 240px, (max-width: 1024px) 260px, 280px"
-                              quality={100}
-                              className="object-contain"
-                            />
-                          ) : (
-                            <div className="flex flex-col items-center justify-center text-zinc-400 gap-1.5 p-4 text-center select-none">
-                              <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                                Image Slot
-                              </span>
-                              <span className="font-mono text-[10px] text-zinc-400">
-                                Ready for replacement
-                              </span>
-                            </div>
-                          )}
+                        {/* Normal Clean Image (No Frame/Mockup Box) */}
+                        <div className="relative w-full aspect-[9/19] flex items-center justify-center">
+                          <Image
+                            src={screen.img}
+                            alt={screen.title}
+                            fill
+                            sizes="(max-width: 640px) 240px, (max-width: 1024px) 260px, 280px"
+                            quality={100}
+                            className="object-contain"
+                          />
                         </div>
                       </div>
                     ))}
