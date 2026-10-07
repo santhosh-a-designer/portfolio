@@ -186,7 +186,7 @@ export default function ServicesAndFooterV2() {
   const activeService = openIndex !== null ? services[openIndex] : null;
 
   return (
-    <section id="skills" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20">
+    <section id="skills" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">
         
         {/* ─── Top Main Section: Dynamic Left Yellow Panel + Divider + 4 Service Items ─── */}

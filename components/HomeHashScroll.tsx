@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import type Lenis from "lenis";
 import { useLenis } from "@/components/LenisProvider";
 import {
   SCROLL_TO_SNIPPETS_STORAGE_KEY,
@@ -30,9 +31,27 @@ function consumeStorageFlag(key: string): boolean {
   return false;
 }
 
+/** Lenis scroll to `#work` (main / light portfolio). */
+function scrollToWorkSection(lenis: Lenis | null) {
+  const el = document.getElementById("work");
+  if (!el) return;
+  try {
+    if (window.location.hash !== "#work") {
+      history.replaceState(null, "", `${window.location.pathname}${window.location.search}#work`);
+    }
+  } catch {
+    /* */
+  }
+  if (lenis) {
+    lenis.scrollTo(el, { offset: -80, duration: 0.9, lerp: 0.12, force: true });
+  } else {
+    window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+  }
+}
+
 /**
- * Scroll to visible Works when landing with `#works` or after {@link BackToWorksLink} set the session flag.
- * Uses {@link scrollToWorksSection} so desktop `-100vh` overlap is accounted for.
+ * Scroll to Works when landing with `#works` / `#work` or after {@link BackToWorksLink} set the session flag.
+ * `#works` uses {@link scrollToWorksSection} (blueprint / dark edition). `#work` targets the main portfolio work section.
  */
 export default function HomeHashScroll() {
   const lenis = useLenis();
@@ -93,6 +112,10 @@ export default function HomeHashScroll() {
         consumeStorageFlag(SCROLL_TO_WORKS_STORAGE_KEY)
       ) {
         scheduleScroll(scrollToWorks);
+        return;
+      }
+      if (window.location.hash === "#work") {
+        scheduleScroll(() => scrollToWorkSection(lenis));
       }
     };
 
@@ -103,6 +126,8 @@ export default function HomeHashScroll() {
         scheduleScroll(scrollToSnippets);
       } else if (window.location.hash === "#works") {
         scheduleScroll(scrollToWorks);
+      } else if (window.location.hash === "#work") {
+        scheduleScroll(() => scrollToWorkSection(lenis));
       }
     };
     window.addEventListener("hashchange", onHash);

@@ -90,7 +90,7 @@ export default function ExperienceSectionV2() {
   };
 
   return (
-    <section id="experience" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20">
+    <section id="experience" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
 
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">

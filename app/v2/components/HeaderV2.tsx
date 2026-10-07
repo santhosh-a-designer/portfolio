@@ -57,14 +57,14 @@ export default function HeaderV2() {
       initial={{ opacity: 0, y: -30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
-      className="w-full bg-[#F4F4F0] border-b-2 border-black sticky top-0 z-50"
+      className="w-full bg-[#F4F4F0] border-b-2 border-black sticky top-0 z-50 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16"
     >
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
       
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black flex items-stretch min-h-[50px] min-[360px]:min-h-[54px] md:min-h-[64px] bg-white">
         {/* Logo / Brand Name */}
         <div className="flex items-center px-3 min-[360px]:px-4 sm:px-6 md:px-7 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
-          <Link href="/v2" className="inline-block">
+          <Link href="/" className="inline-block">
             <span className="text-[16px] min-[360px]:text-[18px] min-[400px]:text-xl sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
               SIMON SANTHOSH
             </span>

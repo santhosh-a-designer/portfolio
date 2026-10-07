@@ -77,7 +77,7 @@ export default function HeroV2() {
   }, [isHeadlinePaused, currentSlide, headlineSlides.length]);
 
   return (
-    <section className="w-full bg-[#F4F4F0] border-b-2 border-black">
+    <section className="w-full bg-[#F4F4F0] border-b-2 border-black px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
 
         {/* ─── Main Hero Grid — locked to desktop viewport height to prevent all layout shifts ─── */}
@@ -743,7 +743,7 @@ function DesignToCodeMorphingCard() {
           </div>
           <div className="flex items-center gap-1 px-1.5 min-[360px]:px-2.5 py-0.5 bg-white border border-zinc-300 rounded text-[8px] min-[360px]:text-[9px] font-mono text-zinc-700 shadow-inner max-w-[170px] sm:max-w-none truncate">
             <FigmaLogo className="w-2 h-2.5 min-[360px]:w-2.5 min-[360px]:h-3.5 shrink-0" />
-            <span className="truncate">designbysanthosh.com/v2</span>
+            <span className="truncate">designbysanthosh.com</span>
           </div>
           <div className="flex items-center gap-1 shrink-0">
             <span className="text-[7.5px] min-[360px]:text-[8px] font-pixel text-zinc-600 font-bold hidden min-[340px]:inline">[FIGMA_UI]</span>

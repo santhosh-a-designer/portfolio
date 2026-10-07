@@ -51,7 +51,7 @@ export default function VidyasKitchenCaseStudyPage() {
           {/* ─── Breadcrumb & Quick Nav Bar ─── */}
           <div className="flex items-center justify-between gap-4 border-b-2 border-black pb-4 select-none font-mono">
             <Link
-              href="/v2#work"
+              href="/#work"
               className="inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group"
             >
               <ArrowLeft weight="bold" className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
@@ -1248,7 +1248,7 @@ export default function VidyasKitchenCaseStudyPage() {
               </p>
             </div>
             <Link
-              href="/v2#work"
+              href="/#work"
               className="px-5 py-2.5 bg-[#FAED00] text-black font-mono text-xs font-black uppercase tracking-wider border-2 border-white hover:bg-white hover:text-black transition-colors shrink-0"
             >
               Back to Selected Work ↑
