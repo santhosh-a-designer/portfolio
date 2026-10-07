@@ -9,7 +9,11 @@ function ScreenFrame({ screen }: { screen: VidyasShowcaseScreen }) {
   const showPlaceholder = !screen.imageSrc || imgFailed;
 
   return (
-    <article className="flex flex-col shrink-0 w-[220px] sm:w-[260px] md:w-[280px] select-none">
+    <article
+      className={`flex flex-col shrink-0 select-none ${
+        screen.wide ? "w-[320px] sm:w-[380px] md:w-[420px]" : "w-[220px] sm:w-[260px] md:w-[280px]"
+      }`}
+    >
       <div className="flex items-center justify-between gap-2 mb-2 px-0.5">
         <span className="text-[10px] font-mono font-black uppercase tracking-wider text-black truncate">
           {screen.surface}
@@ -28,14 +32,18 @@ function ScreenFrame({ screen }: { screen: VidyasShowcaseScreen }) {
         ))}
       </div>
 
-      <div className="relative aspect-[9/19.5] bg-[#1a1a1a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden rounded-[1.25rem]">
+      <div
+        className={`relative bg-[#1a1a1a] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden ${
+          screen.wide ? "aspect-video rounded-lg" : "aspect-[9/19.5] rounded-[1.25rem]"
+        }`}
+      >
         {!showPlaceholder && screen.imageSrc ? (
           <Image
             src={screen.imageSrc}
             alt={screen.name}
             fill
-            className="object-cover object-top"
-            sizes="280px"
+            className={screen.wide ? "object-cover object-left-top" : "object-cover object-top"}
+            sizes={screen.wide ? "420px" : "280px"}
             onError={() => setImgFailed(true)}
           />
         ) : (
@@ -46,7 +54,9 @@ function ScreenFrame({ screen }: { screen: VidyasShowcaseScreen }) {
             <span className="text-xs font-bold text-white/90 leading-snug">{screen.name}</span>
           </div>
         )}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-black/80 rounded-b-md z-10" />
+        {!screen.wide && (
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-black/80 rounded-b-md z-10" />
+        )}
       </div>
 
       <p className="mt-2.5 text-[11px] sm:text-xs font-bold text-zinc-800 leading-snug">{screen.caption}</p>

@@ -19,9 +19,15 @@ export type VidyasShowcaseScreen = {
   surface: string;
   name: string;
   caption: string;
-  /** Replace with real path when screenshots are ready */
   imageSrc?: string;
   tags: string[];
+  /** Landscape dashboard / desktop frames */
+  wide?: boolean;
+};
+
+export type VidyasTerminalLine = {
+  text: string;
+  tone?: "comment" | "keyword" | "string" | "muted" | "accent" | "default";
 };
 
 export const vidyasTimeline = {
@@ -35,9 +41,34 @@ export const vidyasSnapshot = {
   team: "One builder — kitchen is client and operator",
   market: "Sivakasi, Tamil Nadu",
   liveUrl: "https://www.vidyaskitchenhome.com",
+  firstInMarket: "First home-food delivery app in Sivakasi, Tamil Nadu",
+  problem:
+    "In Sivakasi, home food still moves through **WhatsApp and memory** — a sentence to the kitchen, no receipt, no slot, no driver handoff. Swiggy lists restaurants; **nobody had built for a home kitchen** that cooks to order.",
+  solution:
+    "I shipped the **first dedicated product in town**: order in plain language on WhatsApp or a PWA, **one priced ticket** through kitchen board and driver app — 15 km radius, 24 hours to cook, same bill everywhere.",
   elevator:
-    "Cook-to-order delivery for a home kitchen — customers order in a PWA or WhatsApp in plain language. The AI drafts; the server prices; the customer confirms. One order record moves through kitchen board and driver app inside a 15 km radius, with at least 24 hours to cook.",
+    "Sivakasi orders on WhatsApp. I built the first home-food delivery app in Tamil Nadu for this town — sentence in, server prices, one ticket out.",
 };
+
+export const vidyasDesignSystem = {
+  intro:
+    "Dark landing, one action — **brand red**, WhatsApp green for the CTA, food photography doing the work. The UI disappears so the order button is all anyone sees.",
+  pdfHref: "/case-studies/vidyas-kitchen/design-system.pdf",
+  colors: [
+    { name: "Brand red", hex: "#CC1C1C" },
+    { name: "Dark canvas", hex: "#1A1A1A" },
+    { name: "WhatsApp green", hex: "#25D366" },
+    { name: "Pure white", hex: "#FFFFFF" },
+  ],
+  typeSample: {
+    display: "VIDYA'S KITCHEN",
+    body: "Welcome to authentic home food — order with the bot or install the app.",
+  },
+  components: ["WhatsApp CTA button", "Centre landing card", "Size drawer (500g / 1kg)"],
+};
+
+/** Set true when tableau-screenshot.png exists in public */
+export const showTableauSection = false;
 
 export const vidyasStack = [
   "Next.js 15",
@@ -61,94 +92,96 @@ export const vidyasStack = [
 export const vidyasChallenges: VidyasChallenge[] = [
   {
     id: "01",
-    title: "Design for chat, not for the App Store",
-    stake: "No local benchmark existed — I had to match how Sivakasi already orders.",
+    title: "Design for chat, not the App Store",
+    stake: "Sivakasi already orders on WhatsApp. I built for that first.",
     happened:
-      "People message a kitchen, name a gravy, and wait. There was no product in town whose checkout, slots, or driver handoff I could copy.",
+      "Customers message the kitchen, name a gravy, and wait for a person. **No local app existed to copy.**",
     whyHard:
-      "Trust lives in WhatsApp, not in install prompts. Solo builder — every wrong bet cost weeks.",
+      "**Trust lives in the chat**, not in an install prompt. One builder, so every wrong bet cost build time.",
     triedFirst:
-      "Structured bot menus: categories, numbered lists, “pick 1–5”. Clean in Figma. Dead on first real sentence.",
+      "A menu-driven bot with lists and “pick 1-5”. Tidy, and it broke on the first normal sentence.",
     worked:
-      "Two doors, one system. PWA for browse, map pin, and receipt. WhatsApp for “mutton gravy 500gm tomorrow dinner, cash” — the bot parses the sentence and only asks what is missing.",
-    outcome: "The product meets the town where it already is. The app is the upgrade path, not the gate.",
+      "**Two doors, one system.** The PWA handles browsing, the map pin and the receipt. WhatsApp handles “mutton gravy 500gm tomorrow dinner, cash”: the bot fills the order and asks only for what is missing.",
+    outcome: "The product meets the town where it already orders. **The app is the upgrade, not the gate.**",
     surface: "WhatsApp",
-    interviewLine: "I did not ask Sivakasi to change how it orders. I digitised the sentence they already send.",
   },
   {
     id: "02",
-    title: "One inbox, four intentions",
-    stake: "“Call the kitchen” must never open an empty cart.",
+    title: "“Call the kitchen” opened an empty cart",
+    stake: "One inbox, four intentions.",
     happened:
-      "Support, complaints, tracking, and orders all arrive as text. “Call the kitchen” returned an empty cart. “Black pepper chicken gravy, 8th oct lunch, 500gm, cash” collapsed into every chicken dish and lost date, meal, and payment.",
-    whyHard: "The bot had one chance to classify before replying. No human backup at midnight.",
+      "Orders, complaints, tracking and call requests all arrive as plain text. **“Call the kitchen” returned an empty cart.** “Black pepper chicken gravy, 8th oct lunch, 500gm, cash” collapsed into a generic chicken list and dropped the date, meal and payment.",
+    whyHard:
+      "The bot must **decide what a message is before it replies**, with nobody watching at midnight.",
     triedFirst:
-      "Route long or “food-looking” messages to AI. Sounded smart. Mis-routed the simple jobs.",
+      "Send anything long or food-like to the AI. It sounded flexible and misrouted the simplest jobs.",
     worked:
-      "Strict doors: support → commands → complaint → food sentence. During checkout, answer the side question, then re-ask the pending step. A full new order can replace the draft.",
+      "**A fixed order of doors:** support, commands, complaints, then food sentences. During checkout, a side question gets answered and the pending step is asked again.",
     outcome:
-      "Call shows recent orders by dish and date. Named gravies keep size, slot, and cash vs online.",
+      "“Call the kitchen” shows recent orders by dish and date with a call button. Named dishes keep size, day, meal and payment. **I fixed it by reproducing bad sentences in tests.**",
     surface: "WhatsApp",
-    interviewLine: "I fixed the bot by reproducing bad sentences in tests — not by prompting until it sounded friendly.",
   },
   {
     id: "03",
-    title: "The model must never touch money",
-    stake: "A wrong total on Razorpay is a charge, not a UX bug.",
+    title: "The AI drafts. The kitchen prices.",
+    stake: "A wrong total is a charge, not a UX bug.",
     happened:
-      "Customers want the bot to “just take the order”. Letting the model assemble the basket created ghost orders and invented totals.",
-    whyHard: "Speed and safety pull opposite ways. Confirm cannot feel like a tax form.",
-    triedFirst: "More authority in the language model. Faster to demo. Unsafe in production.",
+      "The risk was a model path creating an order that was not a real basket, such as an empty order with an invented total. **With Razorpay behind it, that is real money.**",
+    whyHard:
+      "Customers want the bot to just take the order, but **confirming cannot feel like a form.**",
+    triedFirst:
+      "Giving the model more control over building the order. Quicker to demo, unsafe to ship.",
     worked:
-      "Draft → server → confirm. The model fills intent; the server matches the dish, reads menu price, adds ₹20 packing, ₹35 delivery, 5% GST on food, validates the slot. One pricing function powers WhatsApp and PWA.",
-    outcome: "Same bill everywhere. The assistant can mishear a dish — it still cannot invent a rupee.",
+      "**The model only fills a draft.** The server matches the dish, reads the menu price, adds Rs 20 packing, Rs 35 delivery and 5% GST on food, and checks the slot. Nothing is written until the customer confirms. The app and WhatsApp use the same function.",
+    outcome: "**One bill everywhere.** The bot can mishear a dish, but it cannot invent a price.",
     surface: "WhatsApp",
-    interviewLine: "AI drafts. The kitchen prices. The customer confirms. That line is the architecture.",
   },
   {
     id: "04",
-    title: "Fresh food needs a 24-hour promise",
-    stake: "Swiggy trained “now”. This kitchen cooks to order.",
+    title: "24 hours to cook, 12 to cancel",
+    stake: "Delivery apps trained people to expect “now”. This kitchen cooks to order.",
     happened:
-      "Ingredients are bought per slot. “Deliver in 30 minutes” would have broken prep on day one.",
-    whyHard: "The rule had to hold in bot, app, and dashboard — customers will find the weakest door.",
-    triedFirst: "Early slot experiments without a hard 24h floor.",
+      "Ingredients are bought per order, so **“30 minutes” would have broken the kitchen on day one.**",
+    whyHard:
+      "The rule had to hold in the app, the bot and the dashboard, or **customers would find the weakest door.**",
+    triedFirst: "",
     worked:
-      "Breakfast, lunch, dinner — book at least 24 hours ahead. Self-serve cancel until 12 hours before the slot. Online refunds return food, packing, delivery, and GST. Cash at the door never hits Razorpay.",
-    outcome: "The kitchen cooks to a calendar, not a surprise ping. The slot is the product promise.",
+      "Breakfast, lunch and dinner slots, **booked at least 24 hours ahead.** Self-serve cancel until 12 hours before the slot. A paid online cancel is refunded in full: food, packing, delivery and GST. Cash was never charged.",
+    outcome:
+      "The kitchen preps against a real calendar, and **the customer sees the reason inside the order.**",
     surface: "PWA",
-    interviewLine: "I sold slowness as honesty — the slot is why the food is fresh.",
   },
   {
     id: "05",
     title: "Four surfaces, one ticket",
-    stake: "“Where is my order?” cannot require an order number.",
+    stake: "“Where is my order?” should never need an order number.",
     happened:
-      "Customer, kitchen, driver, and bot each risked telling a different story for the same phone. Cash orders can be on the bike before payment lands.",
-    whyHard: "Food state ≠ payment state. One status field would lie to someone.",
-    triedFirst: "Ask customers to remember #00017. Failed in every real chat.",
+      "Customer, kitchen, driver and bot could each describe a different order for the same phone number. **A cash order can be on the bike before payment.**",
+    whyHard:
+      "**Food status and payment status are different.** One status field would lie to someone.",
+    triedFirst:
+      "Asking customers to remember an order number. It failed in real chats.",
     worked:
-      "One reference everywhere. Food: waiting → paid → confirmed → preparing → ready → out → delivered. Payment tracked separately. Undelivered is explicit — not a silent drop.",
-    outcome: "Phone, WhatsApp, and dashboard point at the same box.",
+      "**One reference on every surface.** Food moves one way: waiting for payment, paid, confirmed, preparing, ready, out for delivery, delivered. Payment is tracked separately. Undelivered is a real status.",
+    outcome:
+      "A phone call, a WhatsApp thread and the dashboard **all point at the same order.**",
     surface: "Dashboard",
-    interviewLine: "I designed ops like air-traffic control — one ticket, four screens, zero arguments.",
   },
   {
     id: "06",
-    title: "A week before the festival, the menu should already know",
-    stake: "Discount the wrong gravy and you buy complaints, not orders.",
+    title: "Festival week, planned a week early",
+    stake: "Discount the wrong dish and you buy complaints.",
     happened:
-      "Festival weeks in Sivakasi fill fast — decide offers too late and the calendar is already booked. On ordinary weeks the same tension is quieter: some gravies barely move, some sell out, and a quiet dish looks identical to a bad one on a chart.",
+      "Festival weeks fill fast, and a decision made the morning of is too late. **A quiet dish and a badly rated dish look identical on a sales chart.**",
     whyHard:
-      "Solo builder. The kitchen will not read spreadsheets at 9 p.m. I refused a model that picks a percent and flips it on alone.",
+      "The kitchen will not read spreadsheets at night, and **I did not want a model setting a percent on its own.**",
     triedFirst:
-      "Low sales as the only signal — that would have discounted a poorly rated dish and hidden quality problems behind a promo.",
+      "Treating low sales as the only signal. That would have discounted a poorly rated dish.",
     worked:
-      "One nightly pricing agent at 2:00 IST — not a team of bots, one job with rules. ~7 days before a festival: card with name, dates, suggested percent (20% when there is no history). Every night: split the menu three ways — liked but quiet (<3 orders / 7 days, rating ≥3.5) gets 15–20% suggestion; selling but >30% under its usual week gets a push; already hot (~2× category) gets told to drop the discount. Rating <3.0 → quality flag, approve hidden. Nothing goes live until the kitchen taps approve.",
+      "One nightly job at 2:00 IST. About 7 days before a festival it raises a card with the dates and a suggested percent (20% with no history). A liked dish with under 3 orders in 7 days gets a suggestion. **A rating under 3.0 is flagged as a quality issue** and cannot be approved as an offer. Nothing goes live until the kitchen approves.",
     outcome:
-      "The week before a festival is a decision, not a scramble. Quiet dishes and strong dishes are named separately. Bad ratings stay off the promo list.",
+      "The week before a festival becomes a decision, not a scramble. **Bad dishes stay off the promo list.**",
     surface: "Dashboard",
-    interviewLine: "Say ‘a nightly pricing agent with rules’ — the model suggests, the kitchen approves, nothing auto-publishes.",
   },
 ];
 
@@ -156,37 +189,42 @@ export const vidyasJourney = [
   {
     stage: "Discover",
     goal: "Find what the kitchen cooks today",
-    pain: "Chat history is the menu. New customers do not know names or sizes.",
+    pain: "Chat history is the menu. New customers do not know gravy names or sizes.",
     fix: "Installable PWA with photos and sizes. WhatsApp welcome includes a one-line order example.",
-    impact: "Start from chat or from the app.",
+    sivakasiAngle:
+      "Generic apps assume a searchable restaurant list. Here the menu lives in **yesterday's chat** and word of mouth — discovery had to work inside WhatsApp first.",
   },
   {
     stage: "Order",
     goal: "Say dish, size, day, and meal without a form",
-    pain: "Free text is messy. “Chicken” is five gravies.",
+    pain: "Free text is messy. “Chicken” is five gravies in this kitchen.",
     fix: "Bot keeps the specific dish name; photo cards when several match. App uses a size drawer: 500gm, 1kg, or both.",
-    impact: "One sentence can finish most of the order.",
+    sivakasiAngle:
+      "Not “pick category → subcategory”. Customers already send **one Tamil-English sentence** — the product had to parse that, not replace it with menus.",
   },
   {
     stage: "Pay",
     goal: "Know the full amount before paying",
-    pain: "Fees feel like a surprise on the bank screen.",
-    fix: "Full bill before confirm: items, offer, ₹20 packing, ₹35 delivery, 5% GST on food. Razorpay online or cash at door up to ₹2,000.",
-    impact: "The payment link matches what they already agreed to.",
+    pain: "Fees feel like a surprise on the bank screen — trust breaks on the last tap.",
+    fix: "Full bill before confirm: items, offer, Rs 20 packing, Rs 35 delivery, 5% GST on food. Razorpay online or cash at door.",
+    sivakasiAngle:
+      "Cash at the door is normal here. **Payment status and food status are separate** — a box can be on the bike before Razorpay clears.",
   },
   {
     stage: "Fulfill",
     goal: "Know the box is moving",
-    pain: "“Where is my order?” should not need an order number.",
-    fix: "Same reference on app, bot, kitchen board, and driver job. Live status and driver location inside the Sivakasi radius.",
-    impact: "Kitchen and customer talk about one ticket.",
+    pain: "“Where is my order?” should not need an order number nobody wrote down.",
+    fix: "Same reference on app, bot, kitchen board, and driver job. Live status inside the 15 km Sivakasi radius.",
+    sivakasiAngle:
+      "No call centre. The customer, kitchen owner and driver all **share one phone-led thread** — ops had to mirror that, not invent ticket numbers.",
   },
   {
     stage: "Return",
     goal: "Fix a bad box or cancel in time",
-    pain: "A complaint that names a dish can be mistaken for a new order.",
+    pain: "A complaint that names a dish gets mistaken for a new order.",
     fix: "Cancel until 12 hours before slot. “Something wrong” picks order by dish and date, then files a note for the kitchen.",
-    impact: "Kitchen sees the order first, complaint second.",
+    sivakasiAngle:
+      "Cook-to-order means **24 hours to prep**. Cancel rules are the product promise — not a hidden policy page.",
   },
 ];
 
@@ -243,86 +281,124 @@ export const vidyasFlows = [
 
 export const vidyasShowcaseScreens: VidyasShowcaseScreen[] = [
   {
-    id: "wa-confirm",
+    id: "wa-flow",
     rank: 1,
     surface: "WhatsApp",
-    name: "Confirm card",
-    caption: "Confirm only after the full bill is visible",
-    tags: ["Confirm", "Pricing"],
-    imageSrc: "/case-studies/vidyas-kitchen/placeholders/whatsapp-confirm.png",
+    name: "Full order flow",
+    caption: "Sentence → draft → confirm → pay",
+    tags: ["Bot", "Order"],
+    imageSrc: "/case-studies/vidyas-kitchen/whatsapp-bot.png",
   },
   {
-    id: "wa-dishes",
+    id: "wa-routing",
     rank: 2,
     surface: "WhatsApp",
-    name: "Dish photo cards",
-    caption: "Several gravies — pick the right one",
-    tags: ["Cards", "Menu"],
-    imageSrc: "/case-studies/vidyas-kitchen/placeholders/whatsapp-dishes.png",
+    name: "Support vs order routing",
+    caption: "Call kitchen shows orders — not an empty cart",
+    tags: ["Routing", "Support"],
+    imageSrc: "/case-studies/vidyas-kitchen/VK-M-1.png",
   },
   {
     id: "pwa-menu",
     rank: 3,
     surface: "PWA",
-    name: "Menu & size drawer",
-    caption: "Choose a size before it hits the cart",
-    tags: ["Home", "Size picker"],
+    name: "Browse menu",
+    caption: "Photos and sizes before the cart",
+    tags: ["Home", "Menu"],
     imageSrc: "/case-studies/vidyas-kitchen/vk-mobile-browse.png",
   },
   {
     id: "pwa-slot",
     rank: 4,
     surface: "PWA",
-    name: "Slot picker",
-    caption: "Breakfast, lunch, or dinner — a day ahead",
+    name: "Cart & slot picker",
+    caption: "Breakfast, lunch, dinner — 24h ahead",
     tags: ["Schedule", "Slots"],
-    imageSrc: "/case-studies/vidyas-kitchen/placeholders/pwa-slot.png",
-  },
-  {
-    id: "pwa-pin",
-    rank: 5,
-    surface: "PWA",
-    name: "Address pin",
-    caption: "Drop a pin inside Sivakasi",
-    tags: ["Map", "Zone"],
-    imageSrc: "/case-studies/vidyas-kitchen/placeholders/pwa-pin.png",
+    imageSrc: "/case-studies/vidyas-kitchen/cart-bottom-sheet.png",
   },
   {
     id: "pwa-bill",
-    rank: 6,
+    rank: 5,
     surface: "PWA",
     name: "Checkout bill",
-    caption: "Every rupee on the bill before pay",
+    caption: "Every rupee visible before Razorpay",
     tags: ["Checkout", "GST"],
-    imageSrc: "/case-studies/vidyas-kitchen/placeholders/pwa-bill.png",
+    imageSrc: "/case-studies/vidyas-kitchen/checkout-razorpay.png",
   },
   {
     id: "dash-orders",
-    rank: 7,
+    rank: 6,
     surface: "Dashboard",
-    name: "Live orders",
-    caption: "The kitchen sees every live ticket",
+    name: "Live orders board",
+    caption: "Every ticket the kitchen is cooking",
     tags: ["Ops", "Pipeline"],
-    imageSrc: "/case-studies/vidyas-kitchen/placeholders/dashboard-orders.png",
+    imageSrc: "/case-studies/vidyas-kitchen/vidyas-kitchen-admin-dashboard.png",
+    wide: true,
   },
   {
     id: "dash-pricing",
-    rank: 8,
+    rank: 7,
     surface: "Dashboard",
-    name: "AI pricing card",
-    caption: "A week out, the menu gets a suggestion",
+    name: "AI pricing & festivals",
+    caption: "Nightly agent — kitchen approves every percent",
     tags: ["AI pricing", "Festival"],
-    imageSrc: "/case-studies/vidyas-kitchen/placeholders/dashboard-pricing.png",
+    imageSrc: "/case-studies/vidyas-kitchen/admin-dashboard.png",
+    wide: true,
   },
   {
-    id: "driver-drop",
+    id: "driver-jobs",
+    rank: 8,
+    surface: "Driver",
+    name: "Assigned deliveries",
+    caption: "Jobs tied to the same order reference",
+    tags: ["Jobs", "Status"],
+    imageSrc: "/case-studies/vidyas-kitchen/driver-deliveries.png",
+  },
+  {
+    id: "driver-nav",
     rank: 9,
     surface: "Driver",
-    name: "Active delivery",
-    caption: "Navigate, then mark it delivered",
-    tags: ["Navigation", "Status"],
-    imageSrc: "/case-studies/vidyas-kitchen/placeholders/driver-drop.png",
+    name: "Map & navigation",
+    caption: "Drop pin inside the delivery radius",
+    tags: ["Map", "Navigate"],
+    imageSrc: "/case-studies/vidyas-kitchen/driver/02-driver-active-deliveries.png",
   },
+  {
+    id: "driver-cash",
+    rank: 10,
+    surface: "Driver",
+    name: "Cash collection",
+    caption: "Payment tracked separately from food status",
+    tags: ["Cash", "Collect"],
+    imageSrc: "/case-studies/vidyas-kitchen/driver/04-driver-cash-collection.png",
+  },
+];
+
+export const vidyasArchitectureLines: VidyasTerminalLine[] = [
+  { text: "# Vidya's Kitchen — system map (no private code)", tone: "comment" },
+  { text: "", tone: "default" },
+  { text: "const surfaces = [", tone: "keyword" },
+  { text: '  "Customer PWA",', tone: "string" },
+  { text: '  "WhatsApp Bot",', tone: "string" },
+  { text: '  "Kitchen Dashboard",', tone: "string" },
+  { text: '  "Driver App",', tone: "string" },
+  { text: "];", tone: "keyword" },
+  { text: "", tone: "default" },
+  { text: "const core = {", tone: "keyword" },
+  { text: '  runtime: "Next.js 15 on Vercel",', tone: "string" },
+  { text: '  database: "Supabase — orders, menu, users",', tone: "string" },
+  { text: "};", tone: "keyword" },
+  { text: "", tone: "default" },
+  { text: "const integrations = [", tone: "keyword" },
+  { text: '  "Razorpay",', tone: "string" },
+  { text: '  "Firebase + Twilio OTP",', tone: "string" },
+  { text: '  "Mapbox / Google Places",', tone: "string" },
+  { text: '  "OpenAI + Gemini + Whisper",', tone: "string" },
+  { text: "];", tone: "keyword" },
+  { text: "", tone: "default" },
+  { text: "// Order pipeline — models never touch payments", tone: "comment" },
+  { text: "draft → server.matchDish() → server.price() → confirm → one order row", tone: "accent" },
+  { text: "dashboard.advance(row) · driver.advance(row)", tone: "muted" },
 ];
 
 export const vidyasHonestOutcomes = [
@@ -332,8 +408,4 @@ export const vidyasHonestOutcomes = [
   "A home kitchen can take a slot order, cook to it, dispatch a driver, and answer “where is my order?” without a marketplace in the middle.",
 ];
 
-export const vidyasDoNotClaim = [
-  "User counts, revenue, or “hours saved” without real numbers.",
-  "“AI-trained on our menu” — rules + models, not fine-tuning.",
-  "GST as legal advice — only how the bill is calculated.",
-];
+export const vidyasDoNotClaim: string[] = [];
