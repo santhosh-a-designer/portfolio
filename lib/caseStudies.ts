@@ -972,8 +972,9 @@ export const caseStudies: CaseStudy[] = [
     processWalkthroughLabel: "2.1",
     summary:
       "The first home-catering product in the region with a premium app-like PWA, a WhatsApp ordering bot, Razorpay checkout, and an operations dashboard—built so a Sivakasi home kitchen can scale beyond word-of-mouth like a small cloud kitchen.",
-    timeline: "Mar 2026 — Present",
-    toolsAndLanguages: "Figma · Meta Business · TypeScript · React · PWA · WhatsApp Business · Razorpay",
+    timeline: "Feb 2026 — Sep 2026",
+    toolsAndLanguages:
+      "Figma · Next.js 15 · TypeScript · Supabase · Razorpay · WhatsApp Cloud API · OpenAI · Gemini · Mapbox · Vercel · Tableau",
     role: "UX Design & Development",
     situation:
       "A home cook in Sivakasi was already serving her network, but to grow she needed a real digital system—not a generic menu PDF. Nothing similar existed locally as a first-class experience: no regional benchmark for a premium UI, a WhatsApp-native path, and a way to run payments and delivery without turning the kitchen into an admin job.",
