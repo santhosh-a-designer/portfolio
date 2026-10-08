@@ -255,6 +255,22 @@ kbd,
   50%       { opacity: 0.6; box-shadow: 0 0 14px #FF7410; }
 }
 
+@keyframes ds-hotspot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 1px #000, 0 0 0 0 rgba(225, 29, 46, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 1px #000, 0 0 0 6px rgba(225, 29, 46, 0.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-hotspot-pulse {
+    animation: none !important;
+  }
+}
+
 /* ─── Noise overlay ─── */
 .noise::before {
   content: "";

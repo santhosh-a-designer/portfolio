@@ -1,244 +1,101 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { FilePdf } from "@phosphor-icons/react";
 import Image from "next/image";
 import { contrastGrade } from "@/lib/contrast";
 import type { DesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
+import { designSystemHeroScreens } from "@/lib/vidyasDesignSystemScreens";
 import { outfitVk } from "@/lib/fonts/outfitVk";
 import {
   vidyasDesignSystem,
   type VidyasDesignSurface,
 } from "@/lib/vidyasKitchenCaseStudyContent";
+import DesignSystemHeroPanel from "./DesignSystemHeroPanel";
 import HighlightText from "./HighlightText";
 
 type Props = {
   pdfMeta: DesignSystemPdfMeta;
 };
 
-function Dim({ w, h, r }: { w?: number; h?: number; r?: number }) {
-  const parts: string[] = [];
-  if (w != null) parts.push(`${w}px`);
-  if (h != null) parts.push(`${h}px`);
-  if (r != null) parts.push(`r${r}`);
-  if (!parts.length) return null;
-  return (
-    <span className="pointer-events-none absolute -bottom-4 left-0 font-mono text-[8px] font-bold text-[#E11D2E]">
-      {parts.join(" · ")}
-    </span>
-  );
-}
-
-function PreviewStage({
-  surface,
-  chipId,
-  menuPhoto,
-}: {
-  surface: VidyasDesignSurface;
-  chipId: string;
-  menuPhoto: string;
-}) {
-  const wrap = "relative mx-auto w-full max-w-[320px] rounded-lg border-2 border-black p-4";
-
-  if (surface.id === "landing") {
-    const bg = "#1A1A1A";
-    if (chipId === "wa-cta") {
-      return (
-        <div className={wrap} style={{ background: bg }}>
-          <div className="relative inline-block">
-            <button
-              type="button"
-              className="w-full min-w-[220px] rounded-xl px-5 py-3 text-center text-[15px] font-bold text-white"
-              style={{ background: "#25D366" }}
-            >
-              Order with Vidya Bot
-            </button>
-            <Dim h={48} r={12} />
-          </div>
-        </div>
-      );
-    }
-    if (chipId === "landing-card") {
-      return (
-        <div className={wrap} style={{ background: bg }}>
-          <div className="relative rounded-2xl border border-white/10 bg-[#222] p-4 text-center text-white">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/70">Welcome to</p>
-            <p className="mt-1 text-lg font-extrabold tracking-wide" style={{ color: "#CC1C1C" }}>
-              VIDYA&apos;S KITCHEN
-            </p>
-            <Dim r={16} />
-          </div>
-        </div>
-      );
-    }
-    return (
-      <div className={wrap} style={{ background: bg }}>
-        <div className="relative flex flex-col gap-2">
-          <button
-            type="button"
-            className="h-12 w-full rounded-xl text-[15px] font-bold text-white"
-            style={{ background: "#25D366" }}
-          >
-            WhatsApp
-          </button>
-          <button
-            type="button"
-            className="h-12 w-full rounded-xl border-2 text-[14px] font-bold text-white"
-            style={{ borderColor: "#CC1C1C", color: "#CC1C1C" }}
-          >
-            Install app
-          </button>
-          <Dim h={48} />
-        </div>
-      </div>
-    );
-  }
-
-  if (surface.id === "customer") {
-    const bg = "#F5F5F7";
-    if (chipId === "primary-btn") {
-      return (
-        <div className={wrap} style={{ background: bg }}>
-          <div className="relative inline-block w-full">
-            <button
-              type="button"
-              className="flex h-14 w-full min-w-[220px] items-center justify-center rounded-[20px] text-[15px] font-extrabold tracking-tight text-white"
-              style={{ background: "#BD2320" }}
-            >
-              Continue
-            </button>
-            <Dim w={220} h={56} r={20} />
-          </div>
-        </div>
-      );
-    }
-    if (chipId === "menu-card") {
-      return (
-        <div className={wrap} style={{ background: bg }}>
-          <div className="relative w-[220px] rounded-[28px] border border-black/10 bg-white/80 p-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-            <div className="relative h-[120px] overflow-hidden rounded-[22px]">
-              <Image src={menuPhoto} alt="" fill className="object-cover" sizes="220px" />
-            </div>
-            <p className="mt-2 text-[16px] font-bold leading-snug text-[#1A1A1A]">Mom&apos;s Recipe — Chicken Gravy</p>
-            <Dim w={220} r={28} />
-          </div>
-        </div>
-      );
-    }
-    return (
-      <div className={wrap} style={{ background: bg }}>
-        <div className="relative flex gap-2">
-          <div className="flex h-[72px] w-[108px] flex-col items-center justify-center rounded-2xl border border-black/10 bg-black/[0.03] text-[15px] font-extrabold">
-            500gm
-            <span className="text-[12px] font-bold text-black/40">₹349</span>
-          </div>
-          <div className="flex h-[72px] w-[108px] flex-col items-center justify-center rounded-2xl border-[1.5px] border-[#BD2320] bg-[#BD2320]/10 text-[15px] font-extrabold">
-            1kg
-            <span className="text-[12px] font-bold text-[#BD2320]">₹699</span>
-          </div>
-          <Dim w={108} h={72} r={16} />
-        </div>
-      </div>
-    );
-  }
-
-  if (surface.id === "driver") {
-    const bg = "#0A0A0A";
-    if (chipId === "swipe") {
-      return (
-        <div className={wrap} style={{ background: bg }}>
-          <div className="relative h-[60px] w-[280px] overflow-hidden rounded-[14px] text-[15px] font-extrabold text-white" style={{ background: "#E8492D" }}>
-            <span className="absolute left-1 top-1 h-[52px] w-[52px] rounded-xl bg-white" aria-hidden />
-            <span className="relative z-10 flex h-full items-center justify-center">Swipe to mark delivered</span>
-            <Dim w={280} h={60} r={14} />
-          </div>
-        </div>
-      );
-    }
-    if (chipId === "job-card") {
-      return (
-        <div className={wrap} style={{ background: bg }}>
-          <div className="relative w-[280px] rounded-[18px] bg-[#1C1C1E] p-3.5 text-white">
-            <p className="text-[22px] font-extrabold">Anand</p>
-            <p className="mt-1 text-[13px] font-semibold text-[#AEAEB2]">#00001 · Breakfast</p>
-            <Dim w={280} r={18} />
-          </div>
-        </div>
-      );
-    }
-    return (
-      <div className={wrap} style={{ background: bg }}>
-        <div className="relative w-[280px] rounded-2xl bg-[#F5A623]/10 p-3.5">
-          <p className="text-[11px] font-extrabold tracking-wider text-[#F5A623]">COLLECT — CASH OR UPI</p>
-          <p className="text-[28px] font-extrabold text-white">₹348</p>
-          <Dim w={280} r={16} />
-        </div>
-      </div>
-    );
-  }
-
-  // dashboard
-  const bg = "#0D0D0D";
-  if (chipId === "approve") {
-    return (
-      <div className={wrap} style={{ background: bg }}>
-        <div className="relative inline-block">
-          <button
-            type="button"
-            className="h-11 rounded-[10px] px-4 text-[14px] font-medium text-[#111]"
-            style={{ background: "#F5E32D" }}
-          >
-            Approve
-          </button>
-          <Dim h={44} r={10} />
-        </div>
-      </div>
-    );
-  }
-  if (chipId === "stat") {
-    return (
-      <div className={wrap} style={{ background: bg }}>
-        <div className="relative w-[160px] rounded-2xl border border-[#222] bg-[#161616] p-3.5">
-          <p className="text-[12px] font-bold text-[#888]">New orders</p>
-          <p className="mt-1 text-[28px] font-extrabold text-white">12</p>
-          <Dim w={160} r={16} />
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className={wrap} style={{ background: bg }}>
-      <div className="relative w-[240px] rounded-2xl bg-[#0d0d0d] p-3">
-        <div className="flex min-h-[44px] items-center gap-3 rounded-xl bg-[#F5E32D] px-4 text-[14px] font-semibold text-black">
-          Dashboard
-        </div>
-        <div className="mt-1 flex min-h-[44px] items-center rounded-xl px-4 text-[14px] font-semibold text-[#888]">
-          Drivers
-        </div>
-        <Dim h={44} r={12} />
-      </div>
-    </div>
-  );
-}
-
 const TAB_IDS = vidyasDesignSystem.surfaces.map((s) => s.id);
+
+function usePrefersReducedMotion() {
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduce(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return reduce;
+}
 
 export default function DesignSystemSection({ pdfMeta }: Props) {
   const [surfaceId, setSurfaceId] = useState<VidyasDesignSurface["id"]>("customer");
   const [chipId, setChipId] = useState<string>(vidyasDesignSystem.surfaces[1].chips[0].id);
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
   const [contrastHint, setContrastHint] = useState<string | null>(null);
+  const [displaySurfaceId, setDisplaySurfaceId] = useState(surfaceId);
+  const [panelVisible, setPanelVisible] = useState(true);
+  const [leftVisible, setLeftVisible] = useState(true);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const tabListRef = useRef<HTMLDivElement | null>(null);
+  const [tabIndicator, setTabIndicator] = useState({ left: 0, width: 0 });
+  const reduceMotion = usePrefersReducedMotion();
 
   const surface = useMemo(
     () => vidyasDesignSystem.surfaces.find((s) => s.id === surfaceId) ?? vidyasDesignSystem.surfaces[0],
     [surfaceId],
   );
 
+  const displaySurface = useMemo(
+    () =>
+      vidyasDesignSystem.surfaces.find((s) => s.id === displaySurfaceId) ??
+      vidyasDesignSystem.surfaces[0],
+    [displaySurfaceId],
+  );
+
+  useEffect(() => {
+    for (const s of designSystemHeroScreens) {
+      const img = new window.Image();
+      img.src = s.src;
+      void img.decode?.().catch(() => undefined);
+    }
+  }, []);
+
   useEffect(() => {
     const first = surface.chips[0]?.id;
     if (first) setChipId(first);
   }, [surface]);
+
+  useEffect(() => {
+    if (surfaceId === displaySurfaceId) return;
+    const delay = reduceMotion ? 0 : 300;
+    setPanelVisible(false);
+    setLeftVisible(false);
+    const t = window.setTimeout(() => {
+      setDisplaySurfaceId(surfaceId);
+      setPanelVisible(true);
+      setLeftVisible(true);
+    }, delay);
+    return () => window.clearTimeout(t);
+  }, [surfaceId, displaySurfaceId, reduceMotion]);
+
+  const tabIndex = TAB_IDS.indexOf(surfaceId);
+
+  useLayoutEffect(() => {
+    const tab = tabRefs.current[tabIndex];
+    const list = tabListRef.current;
+    if (!tab || !list) return;
+    const listRect = list.getBoundingClientRect();
+    const tabRect = tab.getBoundingClientRect();
+    setTabIndicator({
+      left: tabRect.left - listRect.left + list.scrollLeft,
+      width: tabRect.width,
+    });
+  }, [tabIndex, surfaceId]);
 
   const onTabKeyDown = (e: React.KeyboardEvent, index: number) => {
     let next = index;
@@ -267,8 +124,21 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
   }, []);
 
   const showPdfBlock = pdfMeta.available;
-
   const mb = pdfMeta.bytes / (1024 * 1024);
+
+  const fadeMs = reduceMotion ? 0 : 300;
+  const leftFadeStyle = {
+    transition: `opacity ${fadeMs}ms ease-out`,
+    opacity: leftVisible ? 1 : 0,
+  };
+
+  const heroOnDark =
+    displaySurfaceId === "driver" || displaySurfaceId === "dashboard";
+
+  const heroChipId =
+    displaySurfaceId === surfaceId
+      ? chipId
+      : (displaySurface.chips[0]?.id ?? chipId);
 
   return (
     <div className={`${outfitVk.className} space-y-5`}>
@@ -277,14 +147,31 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
       </p>
 
       <div
-        className="border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000] sm:p-5"
-        style={{ background: surface.id === "customer" || surface.id === "landing" ? "#FAF9F5" : surface.id === "driver" ? "#0A0A0A" : "#0D0D0D" }}
+        className="overflow-x-hidden border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000] sm:p-5"
+        style={{
+          background:
+            surface.id === "customer" || surface.id === "landing"
+              ? "#FAF9F5"
+              : surface.id === "driver"
+                ? "#0A0A0A"
+                : "#0D0D0D",
+        }}
       >
         <div
+          ref={tabListRef}
           role="tablist"
           aria-label="Design system surfaces"
-          className="mb-4 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="relative mb-4 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
+          <span
+            className="pointer-events-none absolute top-0 z-0 h-[calc(100%-4px)] border-2 border-black bg-[#FF462D] shadow-[2px_2px_0_0_#000]"
+            style={{
+              left: tabIndicator.left,
+              width: tabIndicator.width,
+              transition: reduceMotion ? "none" : "left 250ms ease-out, width 250ms ease-out",
+            }}
+            aria-hidden
+          />
           {vidyasDesignSystem.surfaces.map((tab, i) => {
             const selected = tab.id === surfaceId;
             return (
@@ -301,8 +188,8 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
                 tabIndex={selected ? 0 : -1}
                 onClick={() => setSurfaceId(tab.id)}
                 onKeyDown={(e) => onTabKeyDown(e, i)}
-                className={`shrink-0 border-2 border-black px-3 py-2 font-mono text-[10px] font-black uppercase tracking-wider focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAED00] ${
-                  selected ? "bg-[#FF462D] text-white shadow-[2px_2px_0_0_#000]" : "bg-white text-black"
+                className={`relative z-10 shrink-0 border-2 border-black px-3 py-2 font-mono text-[10px] font-black uppercase tracking-wider focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAED00] ${
+                  selected ? "bg-transparent text-white" : "bg-white text-black"
                 }`}
               >
                 {tab.tabLabel}
@@ -317,24 +204,37 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
           aria-labelledby={`ds-tab-${surface.id}`}
           className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8"
         >
-          <div className="space-y-4">
+          <div className="order-2 space-y-4 lg:order-1" style={leftFadeStyle}>
             <p
               className={`text-xs leading-relaxed ${
-                surface.id === "customer" || surface.id === "landing" ? "text-zinc-600" : "text-zinc-300"
+                displaySurface.id === "customer" || displaySurface.id === "landing"
+                  ? "text-zinc-600"
+                  : "text-zinc-300"
               }`}
             >
-              {surface.caption}
+              {displaySurface.caption}
             </p>
 
             <div className="flex flex-wrap gap-2">
-              {surface.swatches.map((sw) => (
+              {displaySurface.swatches.map((sw, swIndex) => (
                 <button
                   key={sw.token}
                   type="button"
                   onClick={() => copySwatch(sw)}
                   className={`flex min-w-[140px] flex-1 items-center gap-2 border-2 border-black p-2 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAED00] ${
-                    surface.id === "customer" || surface.id === "landing" ? "bg-white" : "bg-black/40"
+                    displaySurface.id === "customer" || displaySurface.id === "landing"
+                      ? "bg-white"
+                      : "bg-black/40"
                   }`}
+                  style={
+                    reduceMotion
+                      ? undefined
+                      : {
+                          transition: `opacity ${fadeMs}ms ease-out`,
+                          transitionDelay: leftVisible ? `${swIndex * 40}ms` : "0ms",
+                          opacity: leftVisible ? 1 : 0,
+                        }
+                  }
                 >
                   <span
                     className="h-9 w-9 shrink-0 border border-black/20"
@@ -344,12 +244,20 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
                   <span className="font-mono text-[9px]">
                     <span
                       className={`block font-black uppercase ${
-                        surface.id === "customer" || surface.id === "landing" ? "text-black" : "text-white"
+                        displaySurface.id === "customer" || displaySurface.id === "landing"
+                          ? "text-black"
+                          : "text-white"
                       }`}
                     >
                       {sw.token}
                     </span>
-                    <span className={surface.id === "customer" || surface.id === "landing" ? "text-zinc-500" : "text-zinc-400"}>
+                    <span
+                      className={
+                        displaySurface.id === "customer" || displaySurface.id === "landing"
+                          ? "text-zinc-500"
+                          : "text-zinc-400"
+                      }
+                    >
                       {copiedToken === sw.token ? "Copied" : sw.hex}
                     </span>
                   </span>
@@ -368,26 +276,30 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
 
             <dl
               className={`grid grid-cols-2 gap-2 font-mono text-[9px] font-bold uppercase tracking-wide ${
-                surface.id === "customer" || surface.id === "landing" ? "text-zinc-600" : "text-zinc-400"
+                displaySurface.id === "customer" || displaySurface.id === "landing"
+                  ? "text-zinc-600"
+                  : "text-zinc-400"
               }`}
             >
               <div>
                 <dt className="opacity-60">Icons</dt>
-                <dd>{surface.meta.icons}</dd>
+                <dd>{displaySurface.meta.icons}</dd>
               </div>
               <div>
                 <dt className="opacity-60">Radius</dt>
-                <dd>{surface.meta.radius}</dd>
+                <dd>{displaySurface.meta.radius}</dd>
               </div>
               <div>
                 <dt className="opacity-60">Touch</dt>
-                <dd>{surface.meta.touch}</dd>
+                <dd>{displaySurface.meta.touch}</dd>
               </div>
-              <div className="col-span-2 text-[8px] font-semibold normal-case opacity-70">{surface.meta.source}</div>
+              <div className="col-span-2 text-[8px] font-semibold normal-case opacity-70">
+                {displaySurface.meta.source}
+              </div>
             </dl>
 
             <div className="flex flex-wrap gap-2">
-              {surface.chips.map((chip) => {
+              {displaySurface.chips.map((chip) => {
                 const active = chip.id === chipId;
                 return (
                   <button
@@ -398,7 +310,7 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
                     className={`border-2 border-black px-2.5 py-1 font-mono text-[10px] font-bold uppercase focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAED00] ${
                       active
                         ? "bg-[#FAED00] text-black shadow-[2px_2px_0_0_#000]"
-                        : surface.id === "customer" || surface.id === "landing"
+                        : displaySurface.id === "customer" || displaySurface.id === "landing"
                           ? "bg-[#FAF9F5] text-black"
                           : "bg-white/10 text-white"
                     }`}
@@ -412,7 +324,9 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
             <div className="border-t-2 border-black/20 pt-3">
               <p
                 className={`mb-2 font-mono text-[9px] font-black uppercase tracking-wider ${
-                  surface.id === "customer" || surface.id === "landing" ? "text-zinc-500" : "text-zinc-400"
+                  displaySurface.id === "customer" || displaySurface.id === "landing"
+                    ? "text-zinc-500"
+                    : "text-zinc-400"
                 }`}
               >
                 Outfit
@@ -422,7 +336,9 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
                   <div key={w} className="min-w-[52px] text-center">
                     <span
                       className={`block text-2xl leading-none ${
-                        surface.id === "customer" || surface.id === "landing" ? "text-black" : "text-white"
+                        displaySurface.id === "customer" || displaySurface.id === "landing"
+                          ? "text-black"
+                          : "text-white"
                       }`}
                       style={{ fontWeight: w }}
                     >
@@ -434,7 +350,9 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
               </div>
               <p
                 className={`mt-2 text-sm ${
-                  surface.id === "customer" || surface.id === "landing" ? "text-zinc-700" : "text-zinc-300"
+                  displaySurface.id === "customer" || displaySurface.id === "landing"
+                    ? "text-zinc-700"
+                    : "text-zinc-300"
                 }`}
                 style={{ fontWeight: 600 }}
               >
@@ -443,11 +361,13 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
             </div>
           </div>
 
-          <div className="flex min-h-[200px] items-center justify-center pb-6">
-            <PreviewStage
-              surface={surface}
-              chipId={chipId}
-              menuPhoto={vidyasDesignSystem.menuPhotoSrc}
+          <div className="order-1 lg:sticky lg:top-24 lg:order-2 lg:self-start">
+            <DesignSystemHeroPanel
+              surfaceId={displaySurfaceId}
+              chipId={heroChipId}
+              reduceMotion={reduceMotion}
+              visible={panelVisible}
+              isDarkPanel={heroOnDark}
             />
           </div>
         </div>
@@ -458,7 +378,10 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
           {pdfMeta.previews.length > 0 ? (
             <div className="flex shrink-0 gap-2">
               {pdfMeta.previews.map((p) => (
-                <div key={p.src} className="relative h-[100px] w-[72px] overflow-hidden border-2 border-black bg-zinc-100">
+                <div
+                  key={p.src}
+                  className="relative h-[100px] w-[72px] overflow-hidden border-2 border-black bg-zinc-100"
+                >
                   <Image src={p.src} alt={p.alt} fill className="object-cover object-top" sizes="72px" />
                 </div>
               ))}
