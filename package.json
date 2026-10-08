@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "design-system:preview": "node scripts/generate-design-system-pdf-preview.mjs",
+    "prebuild": "node scripts/generate-design-system-pdf-preview.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

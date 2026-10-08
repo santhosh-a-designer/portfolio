@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, FilePdf } from "@phosphor-icons/react";
+import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import TableauSection from "./TableauSection";
 import IADiagram from "./IADiagram";
@@ -13,11 +13,12 @@ import StackToolsSkills from "./StackToolsSkills";
 import HomeFoodStory from "./HomeFoodStory";
 import PwaStorySection from "./PwaStorySection";
 import KitchenOpsSection from "./KitchenOpsSection";
+import DesignSystemSection from "./DesignSystemSection";
 import ScrollReveal from "./ScrollReveal";
+import type { DesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
 import {
   vidyasArchitectureTree,
   vidyasChallenges,
-  vidyasDesignSystem,
   vidyasDoNotClaim,
   vidyasFlowDiagrams,
   vidyasHonestOutcomes,
@@ -71,7 +72,11 @@ function ChallengeBlock({ text, label }: { text: string; label: string }) {
   );
 }
 
-export default function VidyasKitchenCaseStudyView() {
+export default function VidyasKitchenCaseStudyView({
+  designSystemPdfMeta,
+}: {
+  designSystemPdfMeta: DesignSystemPdfMeta;
+}) {
   return (
     <main className="max-w-[1240px] mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-28 sm:pb-32 space-y-8 sm:space-y-12 min-w-0">
       <motion.div
@@ -288,50 +293,7 @@ export default function VidyasKitchenCaseStudyView() {
       {/* 04 — Design system */}
       <ScrollReveal>
         <SectionWindow num="04" title="Design system">
-          <p className="text-sm text-zinc-700 leading-relaxed max-w-3xl mb-6">
-            <HighlightText text={vidyasDesignSystem.intro} />
-          </p>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <div className="flex flex-wrap gap-3">
-                {vidyasDesignSystem.colors.map((c) => (
-                  <div key={c.hex} className="flex items-center gap-2">
-                    <span
-                      className="w-10 h-10 rounded border-2 border-black shrink-0"
-                      style={{ backgroundColor: c.hex }}
-                    />
-                    <div className="font-mono text-[10px]">
-                      <p className="font-black uppercase">{c.name}</p>
-                      <p className="text-zinc-500">{c.hex}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <ul className="flex flex-wrap gap-2">
-                {vidyasDesignSystem.components.map((c) => (
-                  <li
-                    key={c}
-                    className="px-2.5 py-1 bg-[#FAF9F5] border-2 border-black font-mono text-[10px] font-bold uppercase"
-                  >
-                    {c}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href={vidyasDesignSystem.pdfHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#FAED00] border-2 border-black font-mono text-xs font-black uppercase tracking-wider hover:bg-white transition-colors"
-              >
-                <FilePdf weight="bold" className="w-4 h-4" />
-                Design system PDF
-              </a>
-            </div>
-            <div className="p-6 bg-[#1A1A1A] text-white border-2 border-black space-y-3">
-              <p className="text-xl sm:text-2xl font-black tracking-tight">{vidyasDesignSystem.typeSample.display}</p>
-              <p className="text-sm text-zinc-300">{vidyasDesignSystem.typeSample.body}</p>
-            </div>
-          </div>
+          <DesignSystemSection pdfMeta={designSystemPdfMeta} />
         </SectionWindow>
       </ScrollReveal>
 

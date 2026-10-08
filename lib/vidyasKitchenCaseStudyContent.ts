@@ -348,21 +348,265 @@ export const vidyasSnapshot = {
     "Skip the restaurant. Home-cooked, hygienic food from Vidya's Kitchen — order in one WhatsApp message or the app, delivered to your door in Sivakasi.",
 };
 
+export type VidyasDesignSwatch = {
+  token: string;
+  hex: string;
+  /** Background for contrast pair */
+  onHex: string;
+  /** Foreground on `onHex` */
+  fgHex: string;
+  fontSize: number;
+  fontWeight: number;
+  source: string;
+};
+
+export type VidyasDesignChip = {
+  id: string;
+  label: string;
+};
+
+export type VidyasDesignSurface = {
+  id: "landing" | "customer" | "driver" | "dashboard";
+  tabLabel: string;
+  caption: string;
+  meta: {
+    icons: string;
+    radius: string;
+    touch: string;
+    source: string;
+  };
+  swatches: VidyasDesignSwatch[];
+  chips: VidyasDesignChip[];
+};
+
+/** Token index + measured specs from design-system.pdf v2.1 (portfolio copy). */
 export const vidyasDesignSystem = {
   intro:
-    "Dark landing, one action — **brand red**, WhatsApp green for the CTA, food photography doing the work. The UI disappears so the order button is all anyone sees.",
+    "Three product surfaces plus the marketing landing — same Outfit type, different jobs. Values below trace to the **design-system PDF** token index and measured harness specs.",
   pdfHref: "/case-studies/vidyas-kitchen/design-system.pdf",
-  colors: [
-    { name: "Brand red", hex: "#CC1C1C" },
-    { name: "Dark canvas", hex: "#1A1A1A" },
-    { name: "WhatsApp green", hex: "#25D366" },
-    { name: "Pure white", hex: "#FFFFFF" },
-  ],
-  typeSample: {
-    display: "VIDYA'S KITCHEN",
-    body: "Welcome to authentic home food — order with the bot or install the app.",
-  },
-  components: ["WhatsApp CTA button", "Centre landing card", "Size drawer (500g / 1kg)"],
+  menuPhotoSrc: "/case-studies/vidyas-kitchen/food/web/food-01.webp",
+  surfaces: [
+    {
+      id: "landing",
+      tabLabel: "Landing",
+      caption:
+        "Dark canvas, one action — WhatsApp green owns the CTA; brand red on the wordmark is the marketing accent (#CC1C1C in case study artifacts).",
+      meta: {
+        icons: "Logo mark · no app icon set",
+        radius: "12–16 on card · circle logo",
+        touch: "WhatsApp CTA · full-width",
+        source: "lib/caseStudies.ts · landing designSystem artifact",
+      },
+      swatches: [
+        {
+          token: "Landing brand red",
+          hex: "#CC1C1C",
+          onHex: "#1A1A1A",
+          fgHex: "#CC1C1C",
+          fontSize: 24,
+          fontWeight: 800,
+          source: "caseStudies.ts · landing artifact",
+        },
+        {
+          token: "Dark canvas",
+          hex: "#1A1A1A",
+          onHex: "#FFFFFF",
+          fgHex: "#1A1A1A",
+          fontSize: 15,
+          fontWeight: 500,
+          source: "caseStudies.ts",
+        },
+        {
+          token: "WhatsApp green",
+          hex: "#25D366",
+          onHex: "#1A1A1A",
+          fgHex: "#25D366",
+          fontSize: 16,
+          fontWeight: 700,
+          source: "caseStudies.ts",
+        },
+        {
+          token: "Pure white",
+          hex: "#FFFFFF",
+          onHex: "#1A1A1A",
+          fgHex: "#FFFFFF",
+          fontSize: 15,
+          fontWeight: 500,
+          source: "caseStudies.ts",
+        },
+      ],
+      chips: [
+        { id: "wa-cta", label: "WhatsApp CTA" },
+        { id: "landing-card", label: "Centre card" },
+        { id: "order-row", label: "Order row" },
+      ],
+    },
+    {
+      id: "customer",
+      tabLabel: "Customer",
+      caption:
+        "Light glass at home — soft neutrals and #BD2320 primary so food photography leads; button 56px / radius 20 from PDF harness.",
+      meta: {
+        icons: "Phosphor",
+        radius: "16–28 cards · 20 primary",
+        touch: "56px primary",
+        source: "design-system.pdf · C.* tokens",
+      },
+      swatches: [
+        {
+          token: "C.bg",
+          hex: "#F5F5F7",
+          onHex: "#1A1A1A",
+          fgHex: "#1A1A1A",
+          fontSize: 15,
+          fontWeight: 500,
+          source: "PDF token index",
+        },
+        {
+          token: "C.red",
+          hex: "#BD2320",
+          onHex: "#FFFFFF",
+          fgHex: "#FFFFFF",
+          fontSize: 15,
+          fontWeight: 800,
+          source: "PDF token index · mobile-design-tokens",
+        },
+        {
+          token: "C.text",
+          hex: "#1A1A1A",
+          onHex: "#F5F5F7",
+          fgHex: "#1A1A1A",
+          fontSize: 16,
+          fontWeight: 700,
+          source: "PDF token index",
+        },
+        {
+          token: "SUCCESS",
+          hex: "#22C55E",
+          onHex: "#F5F5F7",
+          fgHex: "#22C55E",
+          fontSize: 13,
+          fontWeight: 600,
+          source: "PDF token index",
+        },
+      ],
+      chips: [
+        { id: "primary-btn", label: "Primary button" },
+        { id: "menu-card", label: "Menu card" },
+        { id: "size-drawer", label: "Size drawer" },
+      ],
+    },
+    {
+      id: "driver",
+      tabLabel: "Driver",
+      caption:
+        "Near-black field UI — brighter #E84040 / #E8492D so reach and swipe read on a bike in daylight (PDF notes sub-AA white-on-red).",
+      meta: {
+        icons: "Lucide",
+        radius: "14 control · 16 card",
+        touch: "60px reach / swipe",
+        source: "design-system.pdf · D.* tokens",
+      },
+      swatches: [
+        {
+          token: "D.bg",
+          hex: "#0A0A0A",
+          onHex: "#FFFFFF",
+          fgHex: "#FFFFFF",
+          fontSize: 16,
+          fontWeight: 800,
+          source: "PDF token index",
+        },
+        {
+          token: "D.red",
+          hex: "#E84040",
+          onHex: "#E84040",
+          fgHex: "#FFFFFF",
+          fontSize: 16,
+          fontWeight: 800,
+          source: "PDF token index · reach btn",
+        },
+        {
+          token: "Navigate / swipe",
+          hex: "#E8492D",
+          onHex: "#E8492D",
+          fgHex: "#FFFFFF",
+          fontSize: 15,
+          fontWeight: 800,
+          source: "PDF token index",
+        },
+        {
+          token: "D.green",
+          hex: "#34D469",
+          onHex: "#0A0A0A",
+          fgHex: "#34D469",
+          fontSize: 15,
+          fontWeight: 800,
+          source: "PDF token index",
+        },
+        {
+          token: "D.amber",
+          hex: "#F5A623",
+          onHex: "#0A0A0A",
+          fgHex: "#F5A623",
+          fontSize: 11,
+          fontWeight: 800,
+          source: "PDF token index",
+        },
+      ],
+      chips: [
+        { id: "swipe", label: "Swipe to deliver" },
+        { id: "job-card", label: "Job card" },
+        { id: "collect", label: "Collect cash" },
+      ],
+    },
+    {
+      id: "dashboard",
+      tabLabel: "Dashboard",
+      caption:
+        "Desk ops on #0D0D0D — yellow (#F5E32D / #F5C518) reserved for the control you must tap (nav, approve).",
+      meta: {
+        icons: "Lucide",
+        radius: "12 nav · 16 tiles",
+        touch: "44px rows",
+        source: "design-system.pdf · dashboard literals",
+      },
+      swatches: [
+        {
+          token: "Dashboard bg",
+          hex: "#0D0D0D",
+          onHex: "#FFFFFF",
+          fgHex: "#FFFFFF",
+          fontSize: 14,
+          fontWeight: 600,
+          source: "PDF token index",
+        },
+        {
+          token: "Sidebar active",
+          hex: "#F5E32D",
+          onHex: "#F5E32D",
+          fgHex: "#000000",
+          fontSize: 14,
+          fontWeight: 600,
+          source: "PDF token index",
+        },
+        {
+          token: "Complaints accent",
+          hex: "#F5C518",
+          onHex: "#0D0D0D",
+          fgHex: "#F5C518",
+          fontSize: 10,
+          fontWeight: 800,
+          source: "PDF token index",
+        },
+      ],
+      chips: [
+        { id: "approve", label: "Approve" },
+        { id: "stat", label: "Stat tile" },
+        { id: "sidebar", label: "Sidebar row" },
+      ],
+    },
+  ] satisfies VidyasDesignSurface[],
 };
 
 /** Ops dashboard export — file in public/case-studies/vidyas-kitchen/ */
