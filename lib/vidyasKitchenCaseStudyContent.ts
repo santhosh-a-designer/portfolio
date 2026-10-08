@@ -13,21 +13,319 @@ export type VidyasChallenge = {
   interviewLine?: string;
 };
 
-export type VidyasShowcaseScreen = {
+export type VidyasOpsScreen = {
   id: string;
-  rank: number;
-  surface: string;
-  name: string;
+  tag: string;
   caption: string;
-  imageSrc?: string;
-  tags: string[];
-  /** Landscape dashboard / desktop frames */
-  wide?: boolean;
+  src: string;
+  alt: string;
+};
+
+export type VidyasOpsStoryPanel = {
+  label: string;
+  body: string;
+  highlights: { id: string; label: string }[];
+  screens: VidyasOpsScreen[];
 };
 
 export type VidyasTerminalLine = {
   text: string;
-  tone?: "comment" | "keyword" | "string" | "muted" | "accent" | "default";
+  tone?: "comment" | "keyword" | "string" | "muted" | "accent" | "default" | "heading";
+};
+
+export type VidyasOrderSyncLine = VidyasTerminalLine & {
+  indent?: number;
+  /** Key lines — pulse after the type-in animation */
+  highlight?: boolean;
+};
+
+export type VidyasOrderSyncRules = {
+  filename: string;
+  title: string;
+  /** Portfolio-only path — not a file in the client repo */
+  illustrationNote: string;
+  lines: VidyasOrderSyncLine[];
+};
+
+export type VidyasStackItem = {
+  name: string;
+  /** simple-icons slug → cdn.jsdelivr.net/npm/simple-icons@v11/icons/{slug}.svg */
+  icon: string;
+};
+
+export type VidyasArchNode = {
+  id: string;
+  name: string;
+  kind: "folder" | "file";
+  children?: VidyasArchNode[];
+  preview?: VidyasTerminalLine[];
+};
+
+export type IASurfaceColumn = {
+  id: string;
+  label: string;
+  tag: "PWA" | "WhatsApp" | "Dashboard" | "Driver";
+  steps: string[];
+};
+
+export type FlowStepNode = {
+  id: string;
+  label: string;
+  type: "start" | "process" | "decision" | "end";
+};
+
+export type FlowDiagramData = {
+  id: string;
+  title: string;
+  steps: FlowStepNode[];
+};
+
+export type VidyasWhatsAppHighlight = {
+  id: string;
+  label: string;
+};
+
+export type VidyasWhatsAppScreen = {
+  id: string;
+  tag: string;
+  caption: string;
+  src: string;
+  alt: string;
+  featured?: boolean;
+};
+
+export type VidyasWhatsAppFlowPanel = {
+  id: string;
+  tabLabel: string;
+  body: string;
+  highlights: VidyasWhatsAppHighlight[];
+  screens: VidyasWhatsAppScreen[];
+};
+
+export type VidyasProductFlowHighlight = VidyasWhatsAppHighlight;
+export type VidyasProductFlowScreen = VidyasWhatsAppScreen;
+export type VidyasProductFlowPanel = VidyasWhatsAppFlowPanel;
+
+const PWA = "/case-studies/vidyas-kitchen/pwa/flow";
+
+export const vidyasPwaStory = {
+  eyebrow: "Customer PWA · installable · live",
+  headline: "Same menu · same bill · map pin on your phone",
+  flows: [
+    {
+      id: "open",
+      tabLabel: "Open the app",
+      body:
+        "Installable PWA — **OTP login**, drop a **Mapbox pin** inside the 15 km radius, save **Home and Work**. Returning users land on a **personalised home feed** with kitchen picks and a one-tap link back to WhatsApp.",
+      highlights: [
+        { id: "otp", label: "OTP · no password" },
+        { id: "map", label: "Map pin · saved places" },
+        { id: "radius", label: "Sivakasi radius enforced" },
+        { id: "personal", label: "Hey, {name} · kitchen picks" },
+      ],
+      screens: [
+        {
+          id: "login",
+          tag: "Step 01",
+          caption: "Hey, Santhosh → Send OTP",
+          src: `${PWA}/1.png`,
+          alt: "PWA login with pre-filled name and mobile number",
+        },
+        {
+          id: "otp",
+          tag: "Step 02",
+          caption: "Enter the OTP · sent to saved number",
+          src: `${PWA}/2.png`,
+          alt: "OTP entry with digits filled in",
+        },
+        {
+          id: "location",
+          tag: "Step 03",
+          caption: "Map pin · Home / Work · Confirm location",
+          src: `${PWA}/3.png`,
+          alt: "Map pin picker with saved addresses and Sivakasi delivery note",
+        },
+        {
+          id: "home",
+          tag: "Step 04",
+          caption: "Midday feast? · Hey, Santhosh · kitchen picks",
+          src: `${PWA}/06-home.png`,
+          alt: "Personalised PWA home with location, kitchen picks, and Vidya Bot",
+        },
+      ],
+    },
+    {
+      id: "checkout",
+      tabLabel: "Browse → track",
+      body:
+        "Browse by category → dish detail → **500gm / 1kg** → cart with **promo + GST breakdown**. Schedule a slot **24 hours ahead**, pay online or at the door. **Ordering for someone in Sivakasi while you’re away?** A gift path collects their name, phone, and pin — then the same slot and payment rules apply.",
+      highlights: [
+        { id: "sizes", label: "500gm · 1kg · combo 1.5kg" },
+        { id: "bill", label: "Full bill before checkout" },
+        { id: "slot", label: "24h slot rule · breakfast / lunch / dinner" },
+        { id: "gift", label: "Gift order · outside Sivakasi" },
+      ],
+      screens: [
+        {
+          id: "browse",
+          tag: "Step 01",
+          caption: "Browse menu · Chicken · Mutton · Egg",
+          src: `${PWA}/image-12.png`,
+          alt: "PWA browse menu with category tabs and dish grid",
+        },
+        {
+          id: "dish",
+          tag: "Step 02",
+          caption: "Dish detail · pairing note · Add item",
+          src: `${PWA}/image-5.png`,
+          alt: "PWA dish details with promo badge and add button",
+        },
+        {
+          id: "size",
+          tag: "Step 03",
+          caption: "Pick 500gm or 1kg · qty in cart",
+          src: `${PWA}/image-6.png`,
+          alt: "PWA size picker with quantity controls",
+        },
+        {
+          id: "cart",
+          tag: "Step 04",
+          caption: "Cart · Navaratri promo · itemized total",
+          src: `${PWA}/image-7.png`,
+          alt: "PWA cart with promo discount and checkout button",
+        },
+        {
+          id: "gift",
+          tag: "Gift order",
+          caption: "Outside Sivakasi → who · phone · their pin",
+          src: `${PWA}/image-8.png`,
+          alt: "PWA gift order form for sending food to someone in Sivakasi",
+          featured: true,
+        },
+        {
+          id: "schedule",
+          tag: "Step 06",
+          caption: "Delivery day · meal slot · pay online or door",
+          src: `${PWA}/image-9.png`,
+          alt: "PWA schedule screen with slot picker and payment choice",
+        },
+        {
+          id: "confirmed",
+          tag: "Step 07",
+          caption: "Order confirmed → Track my order",
+          src: `${PWA}/image-10.png`,
+          alt: "PWA order confirmed modal with track button",
+        },
+        {
+          id: "tracking",
+          tag: "Step 08",
+          caption: "Live timeline · cancel window · WhatsApp help",
+          src: `${PWA}/image-11.png`,
+          alt: "PWA live order tracking with delivery status pipeline",
+        },
+      ],
+    },
+  ] satisfies VidyasProductFlowPanel[],
+};
+
+export const vidyasHomeFoodStory = {
+  headline: "Not another meal outside",
+  subhead:
+    "Delicious, clean, hygienic home food — cooked the way a family kitchen would, delivered to your door in Sivakasi.",
+  body:
+    "For **bachelors, working professionals, and families** who are tired of restaurant grease. The headline feature: pack a full order into **one WhatsApp sentence** — dish, qty, day, meal, payment — and get a server-priced confirm card. No app store required.",
+  foodPhotos: [
+    { src: "/case-studies/vidyas-kitchen/food/web/food-01.jpg", alt: "Vidya's Kitchen home-cooked dish", focus: "42% 38%" },
+    { src: "/case-studies/vidyas-kitchen/food/web/food-02.jpg", alt: "Vidya's Kitchen meal spread", focus: "50% 72%" },
+    { src: "/case-studies/vidyas-kitchen/food/web/food-03.jpg", alt: "Fresh hygienic home food", focus: "50% 44%" },
+    { src: "/case-studies/vidyas-kitchen/food/web/food-04.jpg", alt: "South Indian home-style cooking", focus: "50% 54%" },
+    { src: "/case-studies/vidyas-kitchen/food/web/food-05.jpg", alt: "Vidya's Kitchen plated meal", focus: "58% 60%" },
+    { src: "/case-studies/vidyas-kitchen/food/web/food-06.jpg", alt: "Home kitchen food photography", focus: "48% 50%" },
+  ],
+  whatsAppStory: {
+    eyebrow: "WhatsApp bot · live product · main differentiator",
+    headline: "One message. Full order.",
+    flows: [
+      {
+        id: "returning",
+        tabLabel: "Returning user",
+        body:
+          "I have not seen another food-ordering bot do this: a returning customer sends **one sentence** — dish, quantity, day, meal, payment — and the server returns a **priced confirm card** with their saved address. Typing is optional: tap **Quick Reorder** for frequent items, or say “Hi” for Menu and Help. **Nothing is booked until Confirm**.",
+        highlights: [
+          { id: "one-shot", label: "One sentence → full bill" },
+          { id: "first", label: "Not menu trees · not forms" },
+          { id: "quick", label: "Quick Reorder · zero typing" },
+          { id: "confirm", label: "Server-priced · Confirm to book" },
+        ],
+        screens: [
+          {
+            id: "one-message",
+            tag: "Highlight",
+            caption: "One sentence → itemized bill · saved address · Confirm",
+            src: "/case-studies/vidyas-kitchen/whatsapp/one-message-flow/01-sentence-to-summary.png",
+            alt: "WhatsApp one-message order parsed into itemized confirm card",
+            featured: true,
+          },
+          {
+            id: "greeting",
+            tag: "Returning path",
+            caption: "“Hi” → Quick Reorder · Menu · Help",
+            src: "/case-studies/vidyas-kitchen/whatsapp/one-message-flow/02-returning-greeting.png",
+            alt: "WhatsApp greeting for returning customer with quick action buttons",
+          },
+          {
+            id: "quick-reorder",
+            tag: "No typing",
+            caption: "Tap Quick Reorder → your usual frequent items",
+            src: "/case-studies/vidyas-kitchen/whatsapp/one-message-flow/03-quick-reorder-sheet.png",
+            alt: "WhatsApp quick reorder sheet with frequently ordered dishes",
+          },
+        ],
+      },
+      {
+        id: "normal",
+        tabLabel: "Standard order",
+        body:
+          "First-time or vague intent — name a dish in plain language. The bot shows **photo cards** when several gravies match, asks only for what is missing, then the same **confirm card with the full bill**. Same prices and slots as the app.",
+        highlights: [
+          { id: "plain", label: "Plain language in" },
+          { id: "carousel", label: "Dish carousel" },
+          { id: "bill", label: "Full bill before confirm" },
+          { id: "thread", label: "Receipt in the same thread" },
+        ],
+        screens: [
+          {
+            id: "carousel",
+            tag: "Step 01",
+            caption: "“Chicken for tomorrow’s dinner” → swipe cards · tap Add",
+            src: "/case-studies/vidyas-kitchen/whatsapp/order-flow/01-chicken-carousel.jpg",
+            alt: "WhatsApp dish carousel after a plain-language order",
+          },
+          {
+            id: "pick-size",
+            tag: "Step 02",
+            caption: "Tap Add → pick 500gm or 1kg",
+            src: "/case-studies/vidyas-kitchen/whatsapp/order-flow/02-pick-size.jpg",
+            alt: "WhatsApp size selection for chicken gravy",
+          },
+          {
+            id: "summary",
+            tag: "Step 03",
+            caption: "Bill · slot · address · Confirm order",
+            src: "/case-studies/vidyas-kitchen/whatsapp/order-flow/03-order-summary.jpg",
+            alt: "WhatsApp order summary with itemized bill before confirm",
+          },
+          {
+            id: "confirmed",
+            tag: "Step 04",
+            caption: "Order lands · receipt in the same thread",
+            src: "/case-studies/vidyas-kitchen/whatsapp/order-flow/04-order-confirmed.jpg",
+            alt: "WhatsApp order confirmed with receipt",
+          },
+        ],
+      },
+    ] satisfies VidyasWhatsAppFlowPanel[],
+  },
 };
 
 export const vidyasTimeline = {
@@ -47,7 +345,7 @@ export const vidyasSnapshot = {
   solution:
     "I shipped the **first dedicated product in town**: order in plain language on WhatsApp or a PWA, **one priced ticket** through kitchen board and driver app — 15 km radius, 24 hours to cook, same bill everywhere.",
   elevator:
-    "Sivakasi orders on WhatsApp. I built the first home-food delivery app in Tamil Nadu for this town — sentence in, server prices, one ticket out.",
+    "Skip the restaurant. Home-cooked, hygienic food from Vidya's Kitchen — order in one WhatsApp message or the app, delivered to your door in Sivakasi.",
 };
 
 export const vidyasDesignSystem = {
@@ -69,24 +367,31 @@ export const vidyasDesignSystem = {
 
 /** Set true when tableau-screenshot.png exists in public */
 export const showTableauSection = false;
+export const tableauScreenshotSrc = "/case-studies/vidyas-kitchen/tableau-screenshot.png";
+export const tableauCopy =
+  "Basic Tableau so the kitchen can see meal and dish revenue — breakfast vs dinner, top gravies vs quiet ones — alongside the in-app pricing agent.";
 
-export const vidyasStack = [
-  "Next.js 15",
-  "React 19",
-  "TypeScript",
-  "Tailwind CSS 4",
-  "Supabase",
-  "Razorpay",
-  "Firebase Phone Auth",
-  "Twilio OTP",
-  "Mapbox",
-  "Meta WhatsApp Cloud API",
-  "OpenAI",
-  "Gemini",
-  "Whisper",
-  "Vercel",
-  "Figma",
-  "Tableau",
+/** Languages, frameworks, and design craft */
+export const vidyasSkills: VidyasStackItem[] = [
+  { name: "TypeScript", icon: "typescript" },
+  { name: "React 19", icon: "react" },
+  { name: "Next.js 15", icon: "nextdotjs" },
+  { name: "Tailwind CSS 4", icon: "tailwindcss" },
+  { name: "Figma", icon: "figma" },
+];
+
+/** Services, APIs, and platforms wired into production */
+export const vidyasTools: VidyasStackItem[] = [
+  { name: "Supabase", icon: "supabase" },
+  { name: "Razorpay", icon: "razorpay" },
+  { name: "Firebase Auth", icon: "firebase" },
+  { name: "Twilio OTP", icon: "twilio" },
+  { name: "Mapbox", icon: "mapbox" },
+  { name: "WhatsApp API", icon: "whatsapp" },
+  { name: "OpenAI", icon: "openai" },
+  { name: "Google Gemini", icon: "googlegemini" },
+  { name: "Vercel", icon: "vercel" },
+  { name: "Tableau", icon: "tableau" },
 ];
 
 export const vidyasChallenges: VidyasChallenge[] = [
@@ -248,6 +553,112 @@ export const vidyasIA = {
   ],
 };
 
+export const vidyasIADiagram = {
+  root: "One order record · Supabase",
+  subtitle: "Four surfaces · same prices, slots, and reference on every screen",
+  columns: [
+    {
+      id: "pwa",
+      label: "Customer PWA",
+      tag: "PWA",
+      steps: [
+        "Home / menu · chicken, egg, mutton + photos",
+        "Dish → cart → schedule (date + breakfast / lunch / dinner)",
+        "Address · map pin in Sivakasi, saved places, order for someone else",
+        "Pay · full bill, Razorpay or cash at door → orders & live tracking",
+      ],
+    },
+    {
+      id: "bot",
+      label: "WhatsApp bot",
+      tag: "WhatsApp",
+      steps: [
+        "Welcome + one-line order example in chat",
+        "Route support / complaint / food · draft dish, size, day, meal",
+        "Server prices draft · confirm card with packing, delivery, GST",
+        "Payment link or cash · track · call kitchen · file complaint",
+      ],
+    },
+    {
+      id: "kitchen",
+      label: "Kitchen dashboard",
+      tag: "Dashboard",
+      steps: [
+        "Live orders board · revenue by meal",
+        "Move ticket · paid → preparing → ready → dispatch",
+        "AI pricing cards · festival offers · approve every percent",
+        "Drivers · reviews · complaints · WhatsApp inbox",
+      ],
+    },
+    {
+      id: "driver",
+      label: "Driver app",
+      tag: "Driver",
+      steps: [
+        "Phone login · OTP",
+        "Assigned jobs · same order reference as customer chat",
+        "Mapbox navigation to drop pin inside radius",
+        "Mark delivered or not delivered · cash collection if needed",
+      ],
+    },
+  ] satisfies IASurfaceColumn[],
+};
+
+export const vidyasFlowDiagrams: FlowDiagramData[] = [
+  {
+    id: "returning",
+    title: "Returning user",
+    steps: [
+      { id: "s1", label: "One sentence · dish · qty · day · meal · payment", type: "start" },
+      { id: "d1", label: "Quick Reorder or type?", type: "decision" },
+      { id: "p1", label: "Tap usual from frequent list · no typing required", type: "process" },
+      { id: "p2", label: "Server parses sentence · matches menu · prices draft", type: "process" },
+      { id: "p3", label: "Saved address · confirm card · nothing booked yet", type: "process" },
+      { id: "d2", label: "Confirm order?", type: "decision" },
+      { id: "e1", label: "Same ticket · kitchen board · receipt in thread", type: "end" },
+    ],
+  },
+  {
+    id: "whatsapp",
+    title: "Standard order",
+    steps: [
+      { id: "s1", label: "Customer sends a sentence — or taps the one-line example", type: "start" },
+      { id: "p1", label: "Bot routes support, complaint, or food · fills dish, size, day, meal, cash/online", type: "process" },
+      { id: "p2", label: "Photo cards if several gravies match · ask only what is missing", type: "process" },
+      { id: "p3", label: "Server matches dish, reads menu price, adds packing + delivery + GST", type: "process" },
+      { id: "d1", label: "Customer confirms the full bill?", type: "decision" },
+      { id: "p4", label: "Order row written · Razorpay link or cash-at-door flag", type: "process" },
+      { id: "e1", label: "Kitchen board + driver job · same ticket reference", type: "end" },
+    ],
+  },
+  {
+    id: "pwa",
+    title: "PWA checkout",
+    steps: [
+      { id: "s1", label: "Open installable PWA · browse menu with sizes", type: "start" },
+      { id: "p1", label: "Add to cart · pick 500gm or 1kg", type: "process" },
+      { id: "p2", label: "Choose slot at least 24 hours ahead · breakfast / lunch / dinner", type: "process" },
+      { id: "p3", label: "Drop pin inside Sivakasi · or order for someone in town", type: "process" },
+      { id: "d1", label: "Bill correct · online or cash at door?", type: "decision" },
+      { id: "p4", label: "Razorpay checkout or cash flag · apply promo if any", type: "process" },
+      { id: "e1", label: "Tracking view = the ticket the kitchen is cooking", type: "end" },
+    ],
+  },
+  {
+    id: "kitchen",
+    title: "Kitchen → driver",
+    steps: [
+      { id: "s1", label: "Paid or cash-confirmed order hits live board", type: "start" },
+      { id: "p1", label: "Kitchen marks confirmed → preparing against the slot calendar", type: "process" },
+      { id: "p2", label: "Ready for pickup · assign driver from dashboard", type: "process" },
+      { id: "p3", label: "Driver sees drop pin · Mapbox navigation", type: "process" },
+      { id: "d1", label: "Box handed off?", type: "decision" },
+      { id: "p4", label: "Out for delivery · customer status updates on PWA / WhatsApp", type: "process" },
+      { id: "e1", label: "Delivered or not delivered · payment tracked separately", type: "end" },
+    ],
+  },
+];
+
 export const vidyasFlows = [
   {
     title: "WhatsApp order",
@@ -279,126 +690,290 @@ export const vidyasFlows = [
   },
 ];
 
-export const vidyasShowcaseScreens: VidyasShowcaseScreen[] = [
-  {
-    id: "wa-flow",
-    rank: 1,
-    surface: "WhatsApp",
-    name: "Full order flow",
-    caption: "Sentence → draft → confirm → pay",
-    tags: ["Bot", "Order"],
-    imageSrc: "/case-studies/vidyas-kitchen/whatsapp-bot.png",
-  },
-  {
-    id: "wa-routing",
-    rank: 2,
-    surface: "WhatsApp",
-    name: "Support vs order routing",
-    caption: "Call kitchen shows orders — not an empty cart",
-    tags: ["Routing", "Support"],
-    imageSrc: "/case-studies/vidyas-kitchen/VK-M-1.png",
-  },
-  {
-    id: "pwa-menu",
-    rank: 3,
-    surface: "PWA",
-    name: "Browse menu",
-    caption: "Photos and sizes before the cart",
-    tags: ["Home", "Menu"],
-    imageSrc: "/case-studies/vidyas-kitchen/vk-mobile-browse.png",
-  },
-  {
-    id: "pwa-slot",
-    rank: 4,
-    surface: "PWA",
-    name: "Cart & slot picker",
-    caption: "Breakfast, lunch, dinner — 24h ahead",
-    tags: ["Schedule", "Slots"],
-    imageSrc: "/case-studies/vidyas-kitchen/cart-bottom-sheet.png",
-  },
-  {
-    id: "pwa-bill",
-    rank: 5,
-    surface: "PWA",
-    name: "Checkout bill",
-    caption: "Every rupee visible before Razorpay",
-    tags: ["Checkout", "GST"],
-    imageSrc: "/case-studies/vidyas-kitchen/checkout-razorpay.png",
-  },
-  {
-    id: "dash-orders",
-    rank: 6,
-    surface: "Dashboard",
-    name: "Live orders board",
-    caption: "Every ticket the kitchen is cooking",
-    tags: ["Ops", "Pipeline"],
-    imageSrc: "/case-studies/vidyas-kitchen/vidyas-kitchen-admin-dashboard.png",
-    wide: true,
-  },
-  {
-    id: "dash-pricing",
-    rank: 7,
-    surface: "Dashboard",
-    name: "AI pricing & festivals",
-    caption: "Nightly agent — kitchen approves every percent",
-    tags: ["AI pricing", "Festival"],
-    imageSrc: "/case-studies/vidyas-kitchen/admin-dashboard.png",
-    wide: true,
-  },
-  {
-    id: "driver-jobs",
-    rank: 8,
-    surface: "Driver",
-    name: "Assigned deliveries",
-    caption: "Jobs tied to the same order reference",
-    tags: ["Jobs", "Status"],
-    imageSrc: "/case-studies/vidyas-kitchen/driver-deliveries.png",
-  },
-  {
-    id: "driver-nav",
-    rank: 9,
-    surface: "Driver",
-    name: "Map & navigation",
-    caption: "Drop pin inside the delivery radius",
-    tags: ["Map", "Navigate"],
-    imageSrc: "/case-studies/vidyas-kitchen/driver/02-driver-active-deliveries.png",
-  },
-  {
-    id: "driver-cash",
-    rank: 10,
-    surface: "Driver",
-    name: "Cash collection",
-    caption: "Payment tracked separately from food status",
-    tags: ["Cash", "Collect"],
-    imageSrc: "/case-studies/vidyas-kitchen/driver/04-driver-cash-collection.png",
-  },
-];
+/** Kitchen-side story — dashboard + driver only (customer surfaces live above) */
+export const vidyasKitchenOpsStory = {
+  eyebrow: "Act 03 · After the order confirms",
+  headline: "Kitchen dashboard & driver handoff",
+  intro:
+    "WhatsApp and the PWA get the customer to **Confirm** — then the same **order row** hits the kitchen board, gets assigned, and goes out on the road. No duplicate entry, no phone calls to the driver.",
+  dashboard: {
+    label: "Kitchen dashboard",
+    body:
+      "Vidya sees **new → preparing → ready** on one board. Revenue and festival pricing sit on the same login — the nightly **AI pricing agent** proposes changes; she approves every percent before it goes live.",
+    highlights: [
+      { id: "pipeline", label: "Accept · reject pipeline" },
+      { id: "revenue", label: "Revenue & meal mix" },
+      { id: "ai", label: "AI pricing · festival mode" },
+    ],
+    screens: [
+      {
+        id: "dash-orders",
+        tag: "Step 01 · Order board",
+        caption: "New orders land here — Accept or Reject before prep starts",
+        src: "/case-studies/vidyas-kitchen/dashboard/orders-board.png",
+        alt: "Kitchen dashboard order management board",
+      },
+      {
+        id: "dash-revenue",
+        tag: "Step 02 · Revenue",
+        caption: "Monthly sales, meal breakdown, calendar — same session as ops",
+        src: "/case-studies/vidyas-kitchen/dashboard/revenue.png",
+        alt: "Kitchen dashboard revenue and sales view",
+      },
+      {
+        id: "dash-pricing",
+        tag: "Step 03 · AI pricing",
+        caption: "Nightly agent suggests festival pricing — kitchen approves every change",
+        src: "/case-studies/vidyas-kitchen/dashboard/ai-pricing.png",
+        alt: "Kitchen dashboard AI pricing and festival settings",
+      },
+    ],
+  } satisfies VidyasOpsStoryPanel,
+  driver: {
+    label: "Driver app",
+    body:
+      "Drivers log in with a **kitchen-issued PIN**. Jobs appear when food is ready — navigate, call the customer, mark **cash or UPI**, swipe to **delivered**. Kitchen gets the same status the customer sees in the PWA.",
+    highlights: [
+      { id: "pin", label: "PIN login" },
+      { id: "live", label: "Live job queue" },
+      { id: "collect", label: "Cash · UPI · delivered" },
+    ],
+    screens: [
+      {
+        id: "driver-login",
+        tag: "Step 01 · Portal",
+        caption: "Phone number entry — kitchen registers each driver",
+        src: "/case-studies/vidyas-kitchen/driver/01-login.png",
+        alt: "Driver app login screen",
+      },
+      {
+        id: "driver-pin",
+        tag: "Step 02 · PIN",
+        caption: "Verified number + secret PIN → sign in",
+        src: "/case-studies/vidyas-kitchen/driver/02-pin-signin.png",
+        alt: "Driver app PIN sign in",
+      },
+      {
+        id: "driver-empty",
+        tag: "Step 03 · Waiting",
+        caption: "All clear — new jobs push automatically when ready",
+        src: "/case-studies/vidyas-kitchen/driver/03-deliveries-empty.png",
+        alt: "Driver app empty deliveries queue",
+      },
+      {
+        id: "driver-jobs",
+        tag: "Step 04 · Active job",
+        caption: "Pick up from kitchen · on the road · ₹348 to collect",
+        src: "/case-studies/vidyas-kitchen/driver/04-deliveries-active.png",
+        alt: "Driver app active delivery",
+      },
+      {
+        id: "driver-on-way",
+        tag: "Step 05 · Navigate",
+        caption: "Maps, call customer, collect cash or UPI on arrival",
+        src: "/case-studies/vidyas-kitchen/driver/05-on-the-way.png",
+        alt: "Driver app on the way screen",
+      },
+      {
+        id: "driver-collect",
+        tag: "Step 06 · Payment",
+        caption: "Mark cash collected · swipe to confirm delivery",
+        src: "/case-studies/vidyas-kitchen/driver/06-collect-payment.png",
+        alt: "Driver app payment collection",
+      },
+      {
+        id: "driver-delivered",
+        tag: "Step 07 · Done",
+        caption: "Same order reference — kitchen and customer notified",
+        src: "/case-studies/vidyas-kitchen/driver/07-delivered.png",
+        alt: "Driver app delivery complete",
+      },
+    ],
+  } satisfies VidyasOpsStoryPanel,
+};
 
-export const vidyasArchitectureLines: VidyasTerminalLine[] = [
-  { text: "# Vidya's Kitchen — system map (no private code)", tone: "comment" },
-  { text: "", tone: "default" },
-  { text: "const surfaces = [", tone: "keyword" },
-  { text: '  "Customer PWA",', tone: "string" },
-  { text: '  "WhatsApp Bot",', tone: "string" },
-  { text: '  "Kitchen Dashboard",', tone: "string" },
-  { text: '  "Driver App",', tone: "string" },
-  { text: "];", tone: "keyword" },
-  { text: "", tone: "default" },
-  { text: "const core = {", tone: "keyword" },
-  { text: '  runtime: "Next.js 15 on Vercel",', tone: "string" },
-  { text: '  database: "Supabase — orders, menu, users",', tone: "string" },
-  { text: "};", tone: "keyword" },
-  { text: "", tone: "default" },
-  { text: "const integrations = [", tone: "keyword" },
-  { text: '  "Razorpay",', tone: "string" },
-  { text: '  "Firebase + Twilio OTP",', tone: "string" },
-  { text: '  "Mapbox / Google Places",', tone: "string" },
-  { text: '  "OpenAI + Gemini + Whisper",', tone: "string" },
-  { text: "];", tone: "keyword" },
-  { text: "", tone: "default" },
-  { text: "// Order pipeline — models never touch payments", tone: "comment" },
-  { text: "draft → server.matchDish() → server.price() → confirm → one order row", tone: "accent" },
-  { text: "dashboard.advance(row) · driver.advance(row)", tone: "muted" },
+export const vidyasOrderSyncRules: VidyasOrderSyncRules = {
+  filename: "system/sync-contract.md",
+  title: "How an order stays in sync",
+  illustrationNote: "Portfolio illustration — this path is not in the client repo.",
+  lines: [
+    { text: "# SYSTEM — how an order stays in sync", tone: "heading" },
+    { text: "", tone: "default" },
+    { text: "// Model boundaries — never cross these", tone: "comment" },
+    { text: "never createOrder()", tone: "keyword", highlight: true },
+    { text: "never setPrice()", tone: "keyword", highlight: true },
+    {
+      text: "return draft { dish, size, day, meal, payment }  // omit unknown fields",
+      tone: "accent",
+    },
+    { text: "", tone: "default" },
+    { text: "// Server-owned pipeline", tone: "comment" },
+    { text: "server.matchDish(liveMenu)", tone: "default", indent: 1 },
+    { text: "server.price(food, packing, delivery, tax)", tone: "default", indent: 1 },
+    { text: "server.writeOrder()  // only after customer confirms", tone: "accent", indent: 1, highlight: true },
+    { text: "", tone: "default" },
+    { text: "// One row — every surface reads the same copy", tone: "comment" },
+    {
+      text: "read(orderRow) → kitchenBoard | driverApp | tracking | nextReply",
+      tone: "string",
+      highlight: true,
+    },
+    { text: "", tone: "default" },
+    { text: "// Food status ≠ payment status", tone: "comment" },
+    {
+      text: 'food.status === "out_for_delivery" && payment.status === "pending"  // valid',
+      tone: "muted",
+    },
+    { text: "", tone: "default" },
+    { text: '// "Where is my order?"', tone: "comment" },
+    { text: "readOrders(customer)  // never invent status or refund", tone: "default" },
+    { text: "refundStarted(paymentRecord)  // only then say money is on the way", tone: "default" },
+    { text: "", tone: "default" },
+    { text: "// Draft hygiene", tone: "comment" },
+    { text: "if (draft.has(dish)) keep(dish)  // do not replace with category", tone: "default" },
+  ],
+};
+
+export const vidyasArchitectureTree: VidyasArchNode[] = [
+  {
+    id: "root",
+    name: "vidyas-kitchen",
+    kind: "folder",
+    children: [
+      {
+        id: "surfaces",
+        name: "surfaces",
+        kind: "folder",
+        children: [
+          {
+            id: "pwa",
+            name: "customer-pwa.tsx",
+            kind: "file",
+            preview: [
+              { text: "// Customer PWA — browse, cart, slot, pay", tone: "comment" },
+              { text: 'export const routes = ["menu", "cart", "checkout", "track"];', tone: "default" },
+            ],
+          },
+          {
+            id: "bot",
+            name: "whatsapp-bot.ts",
+            kind: "file",
+            preview: [
+              { text: "// WhatsApp — sentence in, draft out", tone: "comment" },
+              { text: "route(support) → route(complaint) → parseFood(sentence)", tone: "accent" },
+            ],
+          },
+          {
+            id: "dash",
+            name: "kitchen-dashboard.tsx",
+            kind: "file",
+            preview: [
+              { text: "// Kitchen board — live orders + AI pricing cards", tone: "comment" },
+              { text: "advance(order, status: Preparing | Ready | Dispatched)", tone: "default" },
+            ],
+          },
+          {
+            id: "driver",
+            name: "driver-app.tsx",
+            kind: "file",
+            preview: [
+              { text: "// Driver — assigned jobs, map pin, delivered", tone: "comment" },
+              { text: "sync(orderRef) // same reference as bot + PWA", tone: "accent" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "core",
+        name: "core",
+        kind: "folder",
+        children: [
+          {
+            id: "next",
+            name: "next.config.ts",
+            kind: "file",
+            preview: [
+              { text: 'runtime: "Next.js 15 on Vercel"', tone: "string" },
+              { text: "edge + server actions · one deploy", tone: "muted" },
+            ],
+          },
+          {
+            id: "supa",
+            name: "supabase",
+            kind: "folder",
+            children: [
+              {
+                id: "schema",
+                name: "schema.sql",
+                kind: "file",
+                preview: [
+                  { text: "-- orders · menu · users · one row per ticket", tone: "comment" },
+                  { text: "create table orders ( ref, status, payment_status, ... );", tone: "default" },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: "integrations",
+        name: "integrations",
+        kind: "folder",
+        children: [
+          {
+            id: "pay",
+            name: "razorpay.ts",
+            kind: "file",
+            preview: [{ text: "// Payments — only after server-priced confirm", tone: "comment" }],
+          },
+          {
+            id: "auth",
+            name: "auth.ts",
+            kind: "file",
+            preview: [{ text: "// Firebase phone auth + Twilio OTP", tone: "comment" }],
+          },
+          {
+            id: "maps",
+            name: "maps.ts",
+            kind: "file",
+            preview: [{ text: "// Mapbox pin inside 15 km Sivakasi radius", tone: "comment" }],
+          },
+          {
+            id: "ai",
+            name: "ai-models.ts",
+            kind: "file",
+            preview: [
+              { text: "// OpenAI + Gemini draft · Whisper transcribe", tone: "comment" },
+              { text: "// models never write prices or charge cards", tone: "muted" },
+            ],
+          },
+        ],
+      },
+      {
+        id: "pipeline",
+        name: "pipeline",
+        kind: "folder",
+        children: [
+          {
+            id: "sync",
+            name: "sync-contract.md",
+            kind: "file",
+            preview: vidyasOrderSyncRules.lines.slice(0, 12),
+          },
+          {
+            id: "flow",
+            name: "order-flow.ts",
+            kind: "file",
+            preview: [
+              { text: "// Order pipeline — models never touch payments", tone: "comment" },
+              { text: "draft → server.matchDish() → server.price() → confirm → one order row", tone: "accent" },
+              { text: "dashboard.advance(row) · driver.advance(row)", tone: "muted" },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const vidyasHonestOutcomes = [

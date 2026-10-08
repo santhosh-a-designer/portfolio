@@ -298,6 +298,80 @@ kbd,
 .animated-underline:hover::after { width: 100%; }
 
 /* ─── Case study intro gallery: side cards slide in (CSS only, no layout reflow) ─── */
+@keyframes food-carousel {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-food-carousel {
+  animation: food-carousel 48s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-food-carousel {
+    animation: none;
+  }
+}
+
+/* ─── Case study product flow: infinite auto-moving carousel ─── */
+@keyframes flow-carousel {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-flow-carousel {
+  animation: flow-carousel 45s linear infinite;
+  will-change: transform;
+}
+
+.flow-scroll-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.flow-scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-flow-carousel {
+    animation: none;
+  }
+}
+
+/* ─── Product flow: idle nudge on second tab ─── */
+@keyframes flow-tab-prompt {
+  0%,
+  100% {
+    background-color: #ffffff;
+    box-shadow: 4px 4px 0 0 #000000;
+  }
+  50% {
+    background-color: #faed00;
+    box-shadow: 4px 4px 0 0 #000000;
+  }
+}
+
+.animate-flow-tab-prompt {
+  animation: flow-tab-prompt 1.1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-flow-tab-prompt {
+    animation: none;
+    outline: 2px solid #faed00;
+    outline-offset: 2px;
+  }
+}
+
 @keyframes case-study-intro-slide-left {
   from {
     opacity: 0;

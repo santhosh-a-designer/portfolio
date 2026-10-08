@@ -6,6 +6,13 @@ const nextConfig: NextConfig = {
   /** Hides the dev-only blue top bar + route indicator (dev only; no effect in production). */
   devIndicators: false,
   images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.jsdelivr.net",
+        pathname: "/npm/simple-icons/**",
+      },
+    ],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; frame-src 'none'; sandbox;",

@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Vidya's Kitchen — raw Drive exports (use food/web/ for the site)
+/public/case-studies/vidyas-kitchen/food/*.jpg
+/public/case-studies/vidyas-kitchen/food/cc*
