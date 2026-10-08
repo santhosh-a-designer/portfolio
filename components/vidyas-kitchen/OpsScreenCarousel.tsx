@@ -12,16 +12,24 @@ type Props = {
   label: string;
 };
 
-function MobileSlide({ screen }: { screen: VidyasOpsScreen }) {
+function MobileGridCell({ screen }: { screen: VidyasOpsScreen }) {
   return (
-    <div className="flex w-[min(267px,calc(100vw-1.5rem))] shrink-0 flex-col items-center px-3 sm:px-4">
+    <div className="flex w-full max-w-[235px] flex-col items-center">
       <span className="mb-2 font-mono text-[9px] font-black uppercase tracking-wider text-[#FF462D]">
         {screen.tag}
       </span>
       <MobileScreen src={screen.src} alt={screen.alt} />
-      <p className="mt-3 max-w-[235px] text-center text-[11px] font-bold leading-snug text-zinc-700 sm:text-xs">
+      <p className="mt-3 text-center text-[11px] font-bold leading-snug text-zinc-700 sm:text-xs">
         {screen.caption}
       </p>
+    </div>
+  );
+}
+
+function MobileSlide({ screen }: { screen: VidyasOpsScreen }) {
+  return (
+    <div className="flex w-[min(267px,calc(100vw-1.5rem))] shrink-0 flex-col items-center px-3 sm:px-4">
+      <MobileGridCell screen={screen} />
     </div>
   );
 }
@@ -46,7 +54,12 @@ function WideSlide({ screen }: { screen: VidyasOpsScreen }) {
 }
 
 /** Auto-moving carousel for kitchen ops screens */
-export default function OpsScreenCarousel({ screens, wide = false, durationSec = 50, label }: Props) {
+export default function OpsScreenCarousel({
+  screens,
+  wide = false,
+  durationSec = 50,
+  label,
+}: Props) {
   const [reducedMotion, setReducedMotion] = useState(false);
   const loop = [...screens, ...screens];
 
@@ -59,7 +72,7 @@ export default function OpsScreenCarousel({ screens, wide = false, durationSec =
   }, []);
 
   return (
-    <div className="relative overflow-hidden py-4" aria-label={label}>
+    <div className="relative overflow-hidden py-6" aria-label={label}>
       <div
         className={`flex w-max items-start ${
           reducedMotion

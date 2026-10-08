@@ -69,7 +69,11 @@ export default function KitchenOpsSection() {
               </li>
             ))}
           </ul>
-          <OpsScreenCarousel screens={driver.screens} durationSec={55} label="Driver app screens" />
+          <OpsScreenCarousel
+            screens={driver.screens}
+            durationSec={55}
+            label="Driver app screens"
+          />
         </div>
       </div>
     </section>
