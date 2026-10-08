@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import SkeletonImage from "@/components/SkeletonImage";
 
 type Photo = { src: string; alt: string; focus?: string };
 
@@ -10,7 +11,7 @@ type Props = {
 
 /** 3:2 slides — width drives height via aspect-ratio */
 const SLIDE_CLASS =
-  "relative shrink-0 overflow-hidden border-r-2 border-black w-[300px] sm:w-[390px] md:w-[450px] aspect-[3/2]";
+  "relative shrink-0 overflow-hidden border-r-2 border-black w-[min(300px,78vw)] sm:w-[390px] md:w-[450px] aspect-[3/2]";
 
 const DEFAULT_FOCUS = "50% 58%";
 
@@ -35,18 +36,16 @@ export default function FoodPhotoCarousel({ photos }: Props) {
         className={`flex w-max items-stretch ${reducedMotion ? "overflow-x-auto" : "animate-food-carousel"}`}
       >
         {loop.map((photo, index) => (
-          <div key={`${photo.src}-${index}`} className={SLIDE_CLASS}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={photo.src}
-              alt={photo.alt}
-              loading="eager"
-              decoding="async"
-              draggable={false}
-              className="absolute inset-0 block h-full w-full scale-[1.03] object-cover"
-              style={{ objectPosition: photo.focus ?? DEFAULT_FOCUS }}
-            />
-          </div>
+          <SkeletonImage
+            key={`${photo.src}-${index}`}
+            src={photo.src}
+            alt={photo.alt}
+            loading={index < 2 ? "eager" : "lazy"}
+            className={SLIDE_CLASS}
+            imgClassName="scale-[1.03] object-cover"
+            imgStyle={{ objectPosition: photo.focus ?? DEFAULT_FOCUS }}
+            tone="dark"
+          />
         ))}
       </div>
     </div>

@@ -150,7 +150,7 @@ export default function CaseStudyMakeonShowcase() {
             <div className="relative overflow-hidden border border-[#1e293b] bg-[#0c1014]">
               <div className="relative aspect-[16/10] w-full">
                 <Image
-                  src="/case-studies/makeon/makeon-hero.png"
+                  src="/case-studies/makeon/makeon-hero.webp"
                   alt="Makeon web platform hero and manifesto interface"
                   fill
                   className="object-cover object-top"
@@ -166,7 +166,7 @@ export default function CaseStudyMakeonShowcase() {
             <div className="relative overflow-hidden border border-[#1e293b] bg-[#0c1014]">
               <div className="relative aspect-[16/10] w-full">
                 <Image
-                  src="/case-studies/makeon/makeon-conversion.png"
+                  src="/case-studies/makeon/makeon-conversion.webp"
                   alt="Makeon dual-audience institutional conversion and parent assessment form"
                   fill
                   className="object-cover object-top"

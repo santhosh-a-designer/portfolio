@@ -169,11 +169,11 @@ function VidyasKitchenDualDeviceMockup() {
           >
             {/* Screen Bezel & Container displaying user's real Browse Menu screenshot */}
             <div className="relative w-full aspect-[470/1024] bg-white rounded-[15px] sm:rounded-[18px] overflow-hidden border border-black/80">
+              <div className="skeleton-shine absolute inset-0" aria-hidden />
               <Image
-                src="/case-studies/vidyas-kitchen/vk-mobile-browse.png"
+                src="/case-studies/vidyas-kitchen/vk-mobile-browse.webp"
                 alt="Vidya's Kitchen Browse Menu Mobile App"
                 fill
-                unoptimized
                 sizes="(max-width: 640px) 150px, 200px"
                 className="object-cover object-top filter contrast-[1.02]"
                 priority
@@ -227,11 +227,11 @@ function VidyasKitchenDualDeviceMockup() {
 
               {/* Laptop Screen Display */}
               <div className="relative w-full aspect-[1024/567] bg-[#0A0D12] rounded-t-[8px] sm:rounded-t-[11px] overflow-hidden border border-black flex items-center justify-center">
+                <div className="skeleton-shine absolute inset-0" aria-hidden />
                 <Image
-                  src="/case-studies/vidyas-kitchen/vidyas-kitchen-admin-dashboard.png"
+                  src="/case-studies/vidyas-kitchen/vidyas-kitchen-admin-dashboard.webp"
                   alt="Vidya's Kitchen Admin Dashboard"
                   fill
-                  unoptimized
                   sizes="(max-width: 640px) 300px, (max-width: 1024px) 420px, 500px"
                   className="object-contain filter contrast-[1.02]"
                   priority
@@ -288,7 +288,7 @@ function WindowCard({
     item.title.toUpperCase().includes("VIDYA") || item.href.includes("vidyas-kitchen");
 
   // Sticky top docking offset: exactly 28px downward offset per card for clean window tabs
-  const stickyTop = 76 + index * 28;
+  const stickyTop = `calc(var(--site-header) + ${index} * 22px)`;
 
   return (
     <div

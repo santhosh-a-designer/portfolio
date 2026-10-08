@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
+import SkeletonImage from "@/components/SkeletonImage";
+import HighlightText from "./HighlightText";
 import {
-  showTableauSection,
   tableauCopy,
+  tableauHighlights,
   tableauScreenshotSrc,
 } from "@/lib/vidyasKitchenCaseStudyContent";
 
@@ -23,54 +24,58 @@ function SectionWindow({
         <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">{num}</span>
         <span className="font-bold text-black uppercase tracking-wider truncate">{title}</span>
       </div>
-      <div className="p-6 sm:p-8 md:p-10">{children}</div>
+      <div className="p-4 sm:p-8 md:p-10">{children}</div>
     </section>
   );
 }
 
-/** Always shows the section — image slot fills when file exists and flag is on. */
-export default function TableauSection({ num = "06" }: { num?: string }) {
-  const [imageOk, setImageOk] = useState(false);
+/** Hidden when the screenshot asset is missing or fails to load. */
+export default function TableauSection({ num = "05" }: { num?: string }) {
+  const [assetMissing, setAssetMissing] = useState(false);
+
+  if (assetMissing) return null;
 
   return (
     <SectionWindow num={num} title="Ops visibility · Tableau">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-        <div className="space-y-3">
-          <p className="text-sm text-zinc-700 leading-relaxed">{tableauCopy}</p>
-          <span className="inline-block px-2 py-1 bg-zinc-100 border border-black font-mono text-[10px] font-bold uppercase">
-            Basic Tableau · Supabase-fed exports
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+        <div className="space-y-5 min-w-0">
+          <p className="text-sm text-zinc-700 leading-relaxed">
+            <HighlightText text={tableauCopy} />
+          </p>
+          <ul className="space-y-4">
+            {tableauHighlights.map((item) => (
+              <li
+                key={item.id}
+                className="border-2 border-black bg-[#FAF9F5] p-4 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+              >
+                <p className="font-mono text-[10px] font-black uppercase tracking-wider text-[#FF462D] mb-1.5">
+                  {item.label}
+                </p>
+                <p className="text-sm text-zinc-700 leading-relaxed">
+                  <HighlightText text={item.body} />
+                </p>
+              </li>
+            ))}
+          </ul>
+          <span className="inline-block px-2.5 py-1 bg-[#FAED00] border-2 border-black font-mono text-[10px] font-black uppercase tracking-wide shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+            Tableau · Supabase-fed exports
           </span>
         </div>
 
-        <div className="aspect-video border-2 border-black overflow-hidden bg-zinc-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] relative">
-          {showTableauSection && (
-            <Image
-              src={tableauScreenshotSrc}
-              alt="Tableau dashboard for meal and dish revenue"
-              fill
-              loading="lazy"
-              className={`object-cover object-top transition-opacity duration-300 ${imageOk ? "opacity-100" : "opacity-0"}`}
-              onLoad={() => setImageOk(true)}
-              onError={() => setImageOk(false)}
-            />
-          )}
-          {(!showTableauSection || !imageOk) && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center border-2 border-dashed border-zinc-400 m-3 bg-white">
-              <p className="font-mono font-black text-sm uppercase text-zinc-500 mb-1">
-                Tableau dashboard slot
-              </p>
-              <p className="text-xs text-zinc-600 mb-3">
-                Meal &amp; dish revenue — breakfast vs dinner, top gravies vs quiet ones
-              </p>
-              <code className="text-[10px] font-mono bg-zinc-50 px-2 py-1 border border-zinc-300 text-zinc-600">
-                public/case-studies/vidyas-kitchen/tableau-screenshot.png
-              </code>
-              <p className="text-[10px] font-mono text-zinc-400 mt-3 uppercase">
-                Set showTableauSection = true in content file when ready
-              </p>
-            </div>
-          )}
-        </div>
+        <figure className="min-w-0 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+          <SkeletonImage
+            src={tableauScreenshotSrc}
+            alt="Tableau dashboard — meals and dishes by order rupees"
+            loading="lazy"
+            className="w-full min-h-[280px] sm:min-h-[360px]"
+            imgClassName="block w-full h-auto object-contain object-center p-2 sm:p-3"
+            imgStyle={{ height: "auto", width: "100%" }}
+            onError={() => setAssetMissing(true)}
+          />
+          <figcaption className="px-3 py-2 border-t-2 border-black bg-[#E2E8F0] font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-zinc-600 text-center">
+            Live export · meals + top dishes by rupees
+          </figcaption>
+        </figure>
       </div>
     </SectionWindow>
   );

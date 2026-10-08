@@ -45,18 +45,18 @@ export default function HeaderV2() {
   const [resumeOpen, setResumeOpen] = useState(false);
 
   const navItems = [
-    { label: "WORK", href: "#work" },
-    { label: "EXPERIENCE", href: "#experience" },
-    { label: "SKILLS", href: "#skills" },
-    { label: "MENTORSHIP", href: "#mentorship" },
-    { label: "CONTACT", href: "#contact" },
+    { label: "WORK", short: "WORK", href: "#work" },
+    { label: "EXPERIENCE", short: "EXP", href: "#experience" },
+    { label: "SKILLS", short: "SKILLS", href: "#skills" },
+    { label: "MENTORSHIP", short: "MENTOR", href: "#mentorship" },
+    { label: "CONTACT", short: "CONTACT", href: "#contact" },
   ];
 
   return (
     <motion.header
       initial={{ opacity: 0, y: -30 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
       className="w-full bg-[#F4F4F0] border-b-2 border-black sticky top-0 z-50 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16"
     >
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
@@ -65,7 +65,7 @@ export default function HeaderV2() {
         {/* Logo / Brand Name */}
         <div className="flex items-center px-3 min-[360px]:px-4 sm:px-6 md:px-7 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
           <Link href="/" className="inline-block">
-            <span className="text-[16px] min-[360px]:text-[18px] min-[400px]:text-xl sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
+            <span className="text-[13px] min-[360px]:text-[16px] min-[400px]:text-xl sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
               SIMON SANTHOSH
             </span>
           </Link>
@@ -83,10 +83,10 @@ export default function HeaderV2() {
           type="button"
           whileTap={{ scale: 0.98 }}
           onClick={() => setResumeOpen(true)}
-          className="flex items-center justify-center gap-2 sm:gap-3 px-3 min-[360px]:px-4 sm:px-6 md:px-8 bg-[#FAED00] border-l-0 md:border-l-2 border-black hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[10px] min-[360px]:text-[11px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors select-none group cursor-pointer flex-1 md:flex-initial"
+          className="flex items-center justify-center gap-2 sm:gap-3 px-3 min-[360px]:px-4 sm:px-6 md:px-8 bg-[#FAED00] border-0 hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[10px] min-[360px]:text-[11px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors select-none group cursor-pointer flex-1 md:flex-initial"
         >
           <span className="leading-tight text-center md:text-left whitespace-nowrap">
-            DOWNLOAD<span className="inline md:hidden"> </span><br className="hidden md:inline" />RESUME
+            <span className="hidden min-[400px]:inline">DOWNLOAD </span>RESUME
           </span>
           <DownloadSimple
             weight="bold"
@@ -101,9 +101,10 @@ export default function HeaderV2() {
           <Link
             key={item.label}
             href={item.href}
-            className="flex-1 min-w-0 py-2 sm:py-2.5 px-0.5 min-[360px]:px-1 sm:px-2 flex items-center justify-center border-r-2 last:border-r-0 border-black text-[8.5px] min-[360px]:text-[9.5px] min-[400px]:text-[10px] sm:text-[11px] font-black tracking-wider uppercase text-black hover:bg-black hover:text-white active:bg-black active:text-[#FAED00] transition-colors text-center whitespace-nowrap select-none"
+            className="flex-1 min-w-0 py-2 sm:py-2.5 px-0.5 flex items-center justify-center border-r-2 last:border-r-0 border-black text-[8px] min-[390px]:text-[9px] sm:text-[11px] font-black tracking-tight min-[390px]:tracking-wider uppercase text-black hover:bg-black hover:text-white active:bg-black active:text-[#FAED00] transition-colors text-center leading-none select-none"
           >
-            {item.label}
+            <span className="min-[390px]:hidden">{item.short}</span>
+            <span className="hidden min-[390px]:inline">{item.label}</span>
           </Link>
         ))}
       </nav>

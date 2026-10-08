@@ -12,8 +12,8 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
     overview:
       "Large-format board for the clinic: clearer information hierarchy, calmer lettering, and a more confident layout so it reads at a distance.",
     beforeAfter: {
-      oldSrc: `${POSTERS}/Old.png`,
-      newSrc: `${POSTERS}/New_Clinic_Board.png`,
+      oldSrc: `${POSTERS}/Old.webp`,
+      newSrc: `${POSTERS}/New_Clinic_Board.webp`,
       oldAlt: "Kirubai Clinic banner before redesign",
       newAlt: "Kirubai Clinic banner after redesign",
       intrinsicWidth: 6400,
@@ -29,8 +29,8 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
       "Branded boards for the Infinex Corporation location: a clear read from the approach (outside) and a consistent, professional presence in the interior.",
     imagePairTitle: "Outside & inside",
     beforeAfter: {
-      oldSrc: `${POSTERS}/Infinex_B_Outside.png`,
-      newSrc: `${POSTERS}/Infinex_B_Inside.png`,
+      oldSrc: `${POSTERS}/Infinex_B_Outside.webp`,
+      newSrc: `${POSTERS}/Infinex_B_Inside.webp`,
       oldAlt: "Infinex Corporation exterior signage",
       newAlt: "Infinex Corporation interior signage",
       intrinsicWidth: 10500,
@@ -46,15 +46,15 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
       "Tri-fold brochure for The Key — The Centre for Special Education (Chennai, Vadapalani), plus exterior signage. Navy, gold, and white, with student and classroom photography and a script logotype. Messaging leads with care: help every child unlock potential, with services from assessment and IEPs through instruction, parent–school collaboration, behaviour strategies, advocacy, professional development, and family support. Contact: No. 4/6, Thirunagar 5th St; +91 98409 80958; contact@thekey.school; www.thekey.school. The sign board extends the same identity to the approach.",
     imagePairTitle: "Brochure and signage",
     beforeAfter: {
-      oldSrc: `${POSTERS}/The_Key_Brochure_Back.png`,
-      newSrc: `${POSTERS}/The_Key_Brochure_Front.png`,
+      oldSrc: `${POSTERS}/The_Key_Brochure_Back.webp`,
+      newSrc: `${POSTERS}/The_Key_Brochure_Front.webp`,
       oldAlt: "The Key school brochure — back (contact, location, and identity)",
       newAlt: "The Key school brochure — front (brand, mission, and services overview)",
       intrinsicWidth: 1056,
       intrinsicHeight: 816,
     },
     thirdPanel: {
-      src: `${POSTERS}/Key_Sign_Board.png`,
+      src: `${POSTERS}/Key_Sign_Board.webp`,
       alt: "The Key exterior sign board",
       intrinsicWidth: 1920,
       intrinsicHeight: 2560,
@@ -62,13 +62,13 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
     businessCardPair: {
       blockTitle: "Business card",
       first: {
-        src: `${POSTERS}/key_front_b.png`,
+        src: `${POSTERS}/key_front_b.webp`,
         alt: "The Key business card — front (dark blue)",
         intrinsicWidth: 4200,
         intrinsicHeight: 2400,
       },
       second: {
-        src: `${POSTERS}/The_Key_Card_Back_Dark_Blue.png`,
+        src: `${POSTERS}/The_Key_Card_Back_Dark_Blue.webp`,
         alt: "The Key business card — back (dark blue)",
         intrinsicWidth: 1344,
         intrinsicHeight: 768,
@@ -85,8 +85,8 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
     imagePairTitle: "Logo",
     useMainRowSingleImage: true,
     beforeAfter: {
-      oldSrc: `${POSTERS}/EOA_1.png`,
-      newSrc: `${POSTERS}/EOA_1.png`,
+      oldSrc: `${POSTERS}/EOA_1.webp`,
+      newSrc: `${POSTERS}/EOA_1.webp`,
       oldAlt: "Essence of Asia — logo",
       newAlt: "Essence of Asia — logo",
       intrinsicWidth: 1588,
@@ -95,13 +95,13 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
     businessCardPair: {
       blockTitle: "Business card",
       first: {
-        src: `${POSTERS}/EOA_Card_Front.png`,
+        src: `${POSTERS}/EOA_Card_Front.webp`,
         alt: "Essence of Asia business card — front",
         intrinsicWidth: 4200,
         intrinsicHeight: 2400,
       },
       second: {
-        src: `${POSTERS}/EOA_Card_Back.png`,
+        src: `${POSTERS}/EOA_Card_Back.webp`,
         alt: "Essence of Asia business card — back",
         intrinsicWidth: 4200,
         intrinsicHeight: 2400,
@@ -119,18 +119,18 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
     hideImageBlock: true,
     // beforeAfter is required by type but hidden via hideImageBlock — use front as placeholder
     beforeAfter: {
-      oldSrc: `${IRSTUNNER}/front.png`,
-      newSrc: `${IRSTUNNER}/back.png`,
+      oldSrc: `${IRSTUNNER}/front.webp`,
+      newSrc: `${IRSTUNNER}/back.webp`,
       oldAlt: "IR Stunner box — front",
       newAlt: "IR Stunner box — back",
       intrinsicWidth: 800,
       intrinsicHeight: 800,
     },
     packagingImages: [
-      { src: `${IRSTUNNER}/front.png`, alt: "IR STUNNER box — front", label: "Front" },
-      { src: `${IRSTUNNER}/back.png`, alt: "IR STUNNER box — back", label: "Back" },
-      { src: `${IRSTUNNER}/left.png`, alt: "IR STUNNER box — left", label: "Left" },
-      { src: `${IRSTUNNER}/right.png`, alt: "IR STUNNER box — right", label: "Right" },
+      { src: `${IRSTUNNER}/front.webp`, alt: "IR STUNNER box — front", label: "Front" },
+      { src: `${IRSTUNNER}/back.webp`, alt: "IR STUNNER box — back", label: "Back" },
+      { src: `${IRSTUNNER}/left.webp`, alt: "IR STUNNER box — left", label: "Left" },
+      { src: `${IRSTUNNER}/right.webp`, alt: "IR STUNNER box — right", label: "Right" },
     ],
     marketingStats: [
       { label: "Sales growth (summer, WhatsApp-led)", value: "15% → 40%" },

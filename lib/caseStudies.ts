@@ -227,15 +227,15 @@ export const caseStudies: CaseStudy[] = [
     timeline: "2024 — 2025",
     introGallery: [
       {
-        src: "/case-studies/parla/Admin_Dashboard_Desktop.png",
+        src: "/case-studies/parla/Admin_Dashboard_Desktop.webp",
         alt: "Parla admin dashboard on desktop",
       },
       {
-        src: "/case-studies/parla/Messages_Desktop.png",
+        src: "/case-studies/parla/Messages_Desktop.webp",
         alt: "Parla messages workspace on desktop",
       },
       {
-        src: "/case-studies/parla/CRM_Order.png",
+        src: "/case-studies/parla/CRM_Order.webp",
         alt: "Parla CRM order view",
       },
     ],
@@ -1244,7 +1244,7 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: "https://makeon.build",
     introGallery: [
       {
-        src: "/case-studies/makeon/makeon-hero-desktop.png",
+        src: "/case-studies/makeon/makeon-hero-desktop.webp",
         alt: "Makeon Builder-Learning Ecosystem — live desktop website preview",
       },
     ],

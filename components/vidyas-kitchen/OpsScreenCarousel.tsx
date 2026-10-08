@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import MobileScreen, { MOBILE_SCREEN_WIDTH } from "./MobileScreen";
+import SkeletonImage from "@/components/SkeletonImage";
+import MobileScreen from "./MobileScreen";
 import type { VidyasOpsScreen } from "@/lib/vidyasKitchenCaseStudyContent";
-
-const WIDE_SLIDE_WIDTH = 520;
 
 type Props = {
   screens: VidyasOpsScreen[];
@@ -15,10 +14,7 @@ type Props = {
 
 function MobileSlide({ screen }: { screen: VidyasOpsScreen }) {
   return (
-    <div
-      className="flex shrink-0 flex-col items-center px-3 sm:px-4"
-      style={{ width: MOBILE_SCREEN_WIDTH + 32 }}
-    >
+    <div className="flex w-[min(267px,calc(100vw-1.5rem))] shrink-0 flex-col items-center px-3 sm:px-4">
       <span className="mb-2 font-mono text-[9px] font-black uppercase tracking-wider text-[#FF462D]">
         {screen.tag}
       </span>
@@ -32,26 +28,16 @@ function MobileSlide({ screen }: { screen: VidyasOpsScreen }) {
 
 function WideSlide({ screen }: { screen: VidyasOpsScreen }) {
   return (
-    <div
-      className="flex shrink-0 flex-col items-center px-3 sm:px-4"
-      style={{ width: WIDE_SLIDE_WIDTH + 32 }}
-    >
+    <div className="flex w-[min(552px,calc(100vw-2.5rem))] shrink-0 flex-col items-center px-3 sm:px-4">
       <span className="mb-2 font-mono text-[9px] font-black uppercase tracking-wider text-[#FF462D]">
         {screen.tag}
       </span>
-      <div
-        className="overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50 shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
-        style={{ width: WIDE_SLIDE_WIDTH }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={screen.src}
-          alt={screen.alt}
-          loading="lazy"
-          decoding="async"
-          className="block w-full h-auto"
-        />
-      </div>
+      <SkeletonImage
+        src={screen.src}
+        alt={screen.alt}
+        className="aspect-[183/100] w-full overflow-hidden rounded-lg border border-zinc-200 bg-zinc-100 shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+        imgClassName="object-contain object-top"
+      />
       <p className="mt-3 max-w-[520px] text-center text-[11px] font-bold leading-snug text-zinc-700 sm:text-xs">
         {screen.caption}
       </p>

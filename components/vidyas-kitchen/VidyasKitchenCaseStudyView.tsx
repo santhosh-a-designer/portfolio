@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, FilePdf } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
 import TableauSection from "./TableauSection";
 import IADiagram from "./IADiagram";
 import UserFlowDiagram from "./UserFlowDiagram";
@@ -44,10 +45,22 @@ function SectionWindow({
         <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">{num}</span>
         <span className="font-bold text-black uppercase tracking-wider truncate">{title}</span>
       </div>
-      <div className="p-6 sm:p-8 md:p-10">{children}</div>
+      <div className="p-4 sm:p-8 md:p-10">{children}</div>
     </section>
   );
 }
+
+const openEase = [0.22, 1, 0.36, 1] as const;
+
+const heroStagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } },
+};
+
+const heroItem = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: openEase } },
+};
 
 function ChallengeBlock({ text, label }: { text: string; label: string }) {
   return (
@@ -60,8 +73,13 @@ function ChallengeBlock({ text, label }: { text: string; label: string }) {
 
 export default function VidyasKitchenCaseStudyView() {
   return (
-    <main className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-32 space-y-8 sm:space-y-12">
-      <div className="flex items-center justify-between gap-4 border-b-2 border-black pb-4 select-none font-mono">
+    <main className="max-w-[1240px] mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-28 sm:pb-32 space-y-8 sm:space-y-12 min-w-0">
+      <motion.div
+        variants={heroItem}
+        initial="hidden"
+        animate="show"
+        className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-4 select-none font-mono"
+      >
         <Link
           href="/#work"
           className="inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group"
@@ -71,27 +89,31 @@ export default function VidyasKitchenCaseStudyView() {
         </Link>
         <div className="flex items-center gap-2 text-[10px] sm:text-xs text-zinc-500 font-bold uppercase tracking-widest">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="hidden sm:inline">PROD · SIVAKASI</span>
+          <span className="hidden min-[380px]:inline">PROD · SIVAKASI</span>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Hero — the problem & the bet */}
-      <ScrollReveal>
-        <section className="bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
-          <div className="p-6 sm:p-10 md:p-12 space-y-6 text-center">
-            <div className="flex flex-wrap gap-2 justify-center">
+      {/* Hero — sequenced on open, not waiting for scroll */}
+      <motion.section
+        variants={heroStagger}
+        initial="hidden"
+        animate="show"
+        className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
+      >
+          <div className="p-4 sm:p-10 md:p-12 space-y-5 sm:space-y-6 text-center">
+            <motion.div variants={heroItem} className="flex flex-wrap gap-2 justify-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FF462D] text-white border-2 border-black font-mono text-xs font-black uppercase tracking-widest">
                 0→1 · SOLO DESIGN &amp; BUILD
               </div>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FAED00] text-black border-2 border-black font-mono text-[10px] sm:text-xs font-black uppercase tracking-widest">
                 {vidyasSnapshot.firstInMarket}
               </div>
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none">
+            </motion.div>
+            <motion.h1 variants={heroItem} className="text-[1.7rem] min-[380px]:text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none">
               Vidya&apos;s Kitchen
-            </h1>
+            </motion.h1>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-4xl mx-auto w-full">
+            <motion.div variants={heroItem} className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 max-w-4xl mx-auto w-full">
               <div className="p-4 border-2 border-black bg-zinc-50 text-left lg:text-center min-h-[140px] flex flex-col justify-center">
                 <p className="font-mono text-[10px] font-black uppercase text-[#FF462D] mb-2">The problem</p>
                 <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
@@ -104,13 +126,13 @@ export default function VidyasKitchenCaseStudyView() {
                   <HighlightText text={vidyasSnapshot.solution} />
                 </p>
               </div>
-            </div>
+            </motion.div>
 
-            <p className="text-base sm:text-lg font-bold text-zinc-600 max-w-3xl mx-auto leading-snug italic">
+            <motion.p variants={heroItem} className="text-sm sm:text-lg font-bold text-zinc-600 max-w-3xl mx-auto leading-snug italic">
               {vidyasSnapshot.elevator}
-            </p>
+            </motion.p>
 
-            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-500">
+            <motion.p variants={heroItem} className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-500">
               This case study follows one thread: <strong className="text-zinc-800">why Sivakasi is different</strong>
               {" → "}
               <strong className="text-zinc-800">how customers order</strong>
@@ -118,9 +140,9 @@ export default function VidyasKitchenCaseStudyView() {
               <strong className="text-zinc-800">how the kitchen runs</strong>
               {" → "}
               <strong className="text-zinc-800">what we had to decide along the way</strong>.
-            </p>
+            </motion.p>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-4xl mx-auto w-full font-mono text-xs pt-2">
+            <motion.div variants={heroItem} className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto w-full font-mono text-xs pt-2">
               <div className="p-3 border-2 border-black bg-[#FAED00] min-h-[72px] flex flex-col items-center justify-center text-center">
                 <span className="text-[10px] text-black/60 uppercase block mb-1">Timeline</span>
                 <span className="font-black leading-snug">{vidyasTimeline.label}</span>
@@ -142,10 +164,9 @@ export default function VidyasKitchenCaseStudyView() {
                 <span className="font-black uppercase">Live site</span>
                 <ArrowUpRight weight="bold" className="w-4 h-4" />
               </a>
-            </div>
+            </motion.div>
           </div>
-        </section>
-      </ScrollReveal>
+      </motion.section>
 
       {/* 01 — Why this market needs its own product */}
       <ScrollReveal>

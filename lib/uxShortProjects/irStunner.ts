@@ -23,10 +23,10 @@ export const IRSTUNNER_UX_SHORT = {
     { label: "Channel focus", value: "Consult-led, not paint upsell" },
   ],
   packagingImages: [
-    { src: `${PACK}/front.png`, alt: "IR STUNNER box — front", label: "Front" },
-    { src: `${PACK}/back.png`, alt: "IR STUNNER box — back", label: "Back" },
-    { src: `${PACK}/left.png`, alt: "IR STUNNER box — left", label: "Left" },
-    { src: `${PACK}/right.png`, alt: "IR STUNNER box — right", label: "Right" },
+    { src: `${PACK}/front.webp`, alt: "IR STUNNER box — front", label: "Front" },
+    { src: `${PACK}/back.webp`, alt: "IR STUNNER box — back", label: "Back" },
+    { src: `${PACK}/left.webp`, alt: "IR STUNNER box — left", label: "Left" },
+    { src: `${PACK}/right.webp`, alt: "IR STUNNER box — right", label: "Right" },
   ],
   accentColor: "#FF7410",
 } satisfies UxShortProjectContent;

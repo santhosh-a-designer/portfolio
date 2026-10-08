@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import SkeletonImage from "@/components/SkeletonImage";
 
-/** Display size — 940px-wide sources render at ¼ for crisp 2× retina */
+/** Display size — 940px-wide sources stay sharp at 2× on a ~235px frame */
 export const MOBILE_SCREEN_WIDTH = 235;
 export const MOBILE_SCREEN_HEIGHT = 512;
 
@@ -12,36 +12,15 @@ type Props = {
   className?: string;
 };
 
-/** Rounded phone frame · source rendered at 2× density for clarity */
+/** Rounded phone frame. Shrinks on narrow screens so two-up layouts don't overflow. */
 export default function MobileScreen({ src, alt, className = "" }: Props) {
-  const [failed, setFailed] = useState(false);
-
-  if (failed) {
-    return (
-      <div
-        className={`flex items-center justify-center rounded-[32px] border border-zinc-200 bg-zinc-50 p-3 text-center shadow-[0_4px_16px_rgba(0,0,0,0.06)] ${className}`}
-        style={{ width: MOBILE_SCREEN_WIDTH, height: MOBILE_SCREEN_HEIGHT }}
-      >
-        <span className="font-mono text-[10px] uppercase text-zinc-500">{alt}</span>
-      </div>
-    );
-  }
-
   return (
-    <div
-      className={`overflow-hidden rounded-[32px] border border-zinc-200 bg-zinc-50 shadow-[0_4px_16px_rgba(0,0,0,0.06)] ${className}`}
-      style={{ width: MOBILE_SCREEN_WIDTH, height: MOBILE_SCREEN_HEIGHT }}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="sync"
-        draggable={false}
-        className="block h-full w-full object-cover object-top"
-        onError={() => setFailed(true)}
-      />
-    </div>
+    <SkeletonImage
+      src={src}
+      alt={alt}
+      className={`mx-auto w-[min(235px,calc(100vw-3.25rem))] aspect-[235/512] overflow-hidden rounded-[32px] border border-zinc-200 bg-zinc-100 shadow-[0_4px_16px_rgba(0,0,0,0.06)] ${className}`}
+      imgClassName="object-cover object-top"
+      decoding="async"
+    />
   );
 }

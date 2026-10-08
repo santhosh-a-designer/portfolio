@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import MobileScreen, { MOBILE_SCREEN_WIDTH } from "./MobileScreen";
+import MobileScreen from "./MobileScreen";
 import FlowScreenCarousel from "./FlowScreenCarousel";
 import HighlightText from "./HighlightText";
 import type { VidyasProductFlowPanel } from "@/lib/vidyasKitchenCaseStudyContent";
@@ -27,7 +27,7 @@ function ScreenCard({
 }) {
   return (
     <div className="flex shrink-0 items-center">
-      <div className="flex flex-col items-center" style={{ width: MOBILE_SCREEN_WIDTH }}>
+      <div className="flex w-full max-w-[235px] flex-col items-center">
         <span
           className={`mb-2 font-mono text-[9px] font-black uppercase tracking-wider ${
             screen.featured
@@ -67,10 +67,7 @@ function FlowScreens({ flow }: { flow: VidyasProductFlowPanel }) {
   const reduceMotion = useReducedMotion();
   const scrollable = flow.screens.length > 4;
   const isTriple = flow.screens.length === 3;
-  const gridCols =
-    flow.screens.length === 4
-      ? "grid-cols-2 lg:grid-cols-4"
-      : "grid-cols-2 lg:grid-cols-4";
+  const gridCols = "grid-cols-1 min-[520px]:grid-cols-2 xl:grid-cols-4 justify-items-center";
 
   const transition = reduceMotion
     ? { duration: 0 }
@@ -147,7 +144,7 @@ export default function ProductFlowBlock({ eyebrow, headline, flows }: Props) {
     : { duration: 0.38, ease: [0.25, 0.1, 0.25, 1] as const };
 
   return (
-    <div className="border-t-2 border-black bg-[#FAF9F5] p-6 sm:p-8 md:p-10">
+    <div className="border-t-2 border-black bg-[#FAF9F5] p-4 sm:p-8 md:p-10">
       <p className="mb-2 text-center font-mono text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500">
         {eyebrow}
       </p>

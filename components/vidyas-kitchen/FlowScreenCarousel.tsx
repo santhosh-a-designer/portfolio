@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import MobileScreen, { MOBILE_SCREEN_WIDTH } from "./MobileScreen";
+import MobileScreen from "./MobileScreen";
 import type { VidyasProductFlowScreen } from "@/lib/vidyasKitchenCaseStudyContent";
 
 type Props = {
@@ -11,10 +11,7 @@ type Props = {
 /** One slide: tag + phone + caption */
 function CarouselSlide({ screen }: { screen: VidyasProductFlowScreen }) {
   return (
-    <div
-      className="flex shrink-0 flex-col items-center px-3 sm:px-4"
-      style={{ width: MOBILE_SCREEN_WIDTH + 32 }}
-    >
+    <div className="flex w-[min(267px,calc(100vw-1.5rem))] shrink-0 flex-col items-center px-3 sm:px-4">
       <span
         className={`mb-2 font-mono text-[9px] font-black uppercase tracking-wider ${
           screen.featured

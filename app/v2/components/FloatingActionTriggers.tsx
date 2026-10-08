@@ -165,7 +165,7 @@ export default function FloatingActionTriggers() {
         ref={containerRef}
         onMouseEnter={cancelClose}
         onMouseLeave={scheduleClose}
-        className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto select-none"
+        className="fixed bottom-4 right-3 z-50 flex flex-col items-end gap-3 pointer-events-auto select-none sm:bottom-6 sm:right-6"
       >
         {/* ─── Popover Panels Container (Floats above / left of buttons) ─── */}
         <AnimatePresence>
@@ -176,7 +176,7 @@ export default function FloatingActionTriggers() {
               animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              className="w-[340px] sm:w-[420px] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden max-h-[80vh] sm:max-h-[540px] mb-2 z-50"
+              className="w-[min(420px,calc(100vw-1.25rem))] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden max-h-[min(80vh,540px)] mb-2 z-50"
               onWheel={(e) => e.stopPropagation()}
             >
               {/* Panel Header */}
@@ -260,7 +260,7 @@ export default function FloatingActionTriggers() {
               animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-              className="w-[340px] sm:w-[420px] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden max-h-[80vh] sm:max-h-[540px] mb-2 z-50"
+              className="w-[min(420px,calc(100vw-1.25rem))] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden max-h-[min(80vh,540px)] mb-2 z-50"
               onWheel={(e) => e.stopPropagation()}
             >
               {/* Panel Header */}

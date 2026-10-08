@@ -10,13 +10,13 @@ import { useRef } from "react";
 import ProjectWindowStack, { ProjectItem } from "./ProjectWindowStack";
 
 const clientLogos = [
-  { name: "Makeon", src: "/clients/makeon-norm.png", widthClass: "w-24 sm:w-28 md:w-32", heightClass: "h-6 sm:h-7 md:h-7.5" },
-  { name: "Parla", src: "/clients/parla-norm.png", widthClass: "w-24 sm:w-30 md:w-34", heightClass: "h-5 sm:h-5.5 md:h-6" },
-  { name: "Nebraska Furniture Mart", src: "/clients/nfm-norm.png", widthClass: "w-24 sm:w-30 md:w-34", heightClass: "h-6 sm:h-7 md:h-8" },
-  { name: "iRasus", src: "/clients/irasus-norm.png", widthClass: "w-24 sm:w-28 md:w-32", heightClass: "h-6 sm:h-7 md:h-8" },
-  { name: "Intellemo", src: "/clients/intellemo-full.png", widthClass: "w-24 sm:w-28 md:w-32", heightClass: "h-6 sm:h-7 md:h-8" },
-  { name: "We Two Pets", src: "/clients/wetwopets-norm.png", widthClass: "w-20 sm:w-24 md:w-26", heightClass: "h-6 sm:h-7 md:h-8" },
-  { name: "We Two Brand", src: "/clients/wetwo-brand.png", widthClass: "w-8 sm:w-9 md:w-10", heightClass: "h-8 sm:h-9 md:h-10" },
+  { name: "Makeon", src: "/clients/makeon-norm.webp", widthClass: "w-24 sm:w-28 md:w-32", heightClass: "h-6 sm:h-7 md:h-7.5" },
+  { name: "Parla", src: "/clients/parla-norm.webp", widthClass: "w-24 sm:w-30 md:w-34", heightClass: "h-5 sm:h-5.5 md:h-6" },
+  { name: "Nebraska Furniture Mart", src: "/clients/nfm-norm.webp", widthClass: "w-24 sm:w-30 md:w-34", heightClass: "h-6 sm:h-7 md:h-8" },
+  { name: "iRasus", src: "/clients/irasus-norm.webp", widthClass: "w-24 sm:w-28 md:w-32", heightClass: "h-6 sm:h-7 md:h-8" },
+  { name: "Intellemo", src: "/clients/intellemo-full.webp", widthClass: "w-24 sm:w-28 md:w-32", heightClass: "h-6 sm:h-7 md:h-8" },
+  { name: "We Two Pets", src: "/clients/wetwopets-norm.webp", widthClass: "w-20 sm:w-24 md:w-26", heightClass: "h-6 sm:h-7 md:h-8" },
+  { name: "We Two Brand", src: "/clients/wetwo-brand.webp", widthClass: "w-8 sm:w-9 md:w-10", heightClass: "h-8 sm:h-9 md:h-10" },
 ];
 
 export default function SelectedWorkV2() {
@@ -30,7 +30,7 @@ export default function SelectedWorkV2() {
       href: "/case-studies/vidyas-kitchen-pwa",
       liveUrl: "https://www.vidyaskitchenhome.com/",
       isHighlight: true,
-      image: "/case-studies/vidyas-kitchen/VK_Clean.png",
+      image: "/case-studies/vidyas-kitchen/VK_Clean.webp",
       mockupType: "forma",
       techStack: ["Next.js", "TypeScript", "Tailwind", "Supabase", "Razorpay", "WhatsApp API"],
       description: (
@@ -45,7 +45,7 @@ export default function SelectedWorkV2() {
       title: "SHOW & SELL",
       category: "ECOMMERCE / SCHEDULER",
       href: "/case-studies/parla-show-and-sell",
-      image: "/case-studies/parla/Admin_Dashboard_Clean.png",
+      image: "/case-studies/parla/Admin_Dashboard_Clean.webp",
       mockupType: "parla",
       techStack: ["Next.js", "TypeScript", "Tailwind", "Figma"],
       description: "Conversion-driven ecommerce scheduling platform for high-value retail appointments across UK & US markets.",
@@ -57,7 +57,7 @@ export default function SelectedWorkV2() {
       category: "STEM / AI ECOSYSTEM",
       href: "/case-studies/makeon-builder-ecosystem",
       liveUrl: "https://makeon.build/",
-      image: "/case-studies/makeon/makeon-hero-desktop.png",
+      image: "/case-studies/makeon/makeon-hero-desktop.webp",
       mockupType: "forma",
       techStack: ["React", "TypeScript", "AI Workflows", "Figma"],
       description: "Intelligent STEM hardware builder platform with visual block coding and AI agent integration.",

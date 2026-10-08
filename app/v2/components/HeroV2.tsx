@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowUpRight, MapPin, GlobeSimple } from "@phosphor-icons/react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import SkeletonImage from "@/components/SkeletonImage";
 
 // Page-load stagger variants
 const containerVariants = {
@@ -234,9 +235,14 @@ export default function HeroV2() {
           </motion.div>
 
           {/* ─────────── RIGHT COLUMN: Design → Code Card ─────────── */}
-          <div className="lg:col-span-5 flex flex-col bg-[#F4F4F0] h-[380px] min-[380px]:h-[420px] sm:h-[480px] lg:h-full lg:max-h-full min-h-0 overflow-hidden">
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5 flex flex-col bg-[#F4F4F0] h-[340px] min-[380px]:h-[400px] sm:h-[480px] lg:h-full lg:max-h-full min-h-0 overflow-hidden"
+          >
             <DesignToCodeMorphingCard />
-          </div>
+          </motion.div>
         </div>
 
       </div>
@@ -775,10 +781,12 @@ function DesignToCodeMorphingCard() {
             }}
             className="relative max-h-full max-w-full aspect-[5224/3396] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden z-10 flex items-center justify-center"
           >
-            <img
-              src="/login_website.png"
+            <SkeletonImage
+              src="/login_website.webp"
               alt="Oracle Fusion Login UI Design"
-              className="w-full h-full object-contain block brightness-[1.04] contrast-[1.03]"
+              loading="eager"
+              className="absolute inset-0"
+              imgClassName="object-contain brightness-[1.04] contrast-[1.03]"
             />
           </div>
         </div>
