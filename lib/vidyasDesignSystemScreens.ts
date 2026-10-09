@@ -32,11 +32,11 @@ export const designSystemHeroScreens: DesignSystemHeroScreen[] = [
   },
   {
     surfaceId: "driver",
-    src: "/case-studies/vidyas-kitchen/driver/04-driver-cash-collection.png",
-    intrinsicWidth: 488,
-    intrinsicHeight: 1024,
-    alt: "Driver app active delivery with collect payment and swipe to deliver.",
-    screenCaption: "Driver · Active delivery.",
+    src: "/case-studies/vidyas-kitchen/driver/vkhome-3-collect-deliver.png",
+    intrinsicWidth: 1080,
+    intrinsicHeight: 2400,
+    alt: "Driver app collect cash or UPI and swipe to mark delivered.",
+    screenCaption: "Driver · Collect & deliver.",
     frame: "phone",
   },
   {
