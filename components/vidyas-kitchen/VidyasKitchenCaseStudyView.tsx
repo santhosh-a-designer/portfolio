@@ -14,6 +14,7 @@ import HomeFoodStory from "./HomeFoodStory";
 import PwaStorySection from "./PwaStorySection";
 import KitchenOpsSection from "./KitchenOpsSection";
 import DesignSystemSection from "./DesignSystemSection";
+import ChallengeWindowStack from "./ChallengeWindowStack";
 import ScrollReveal from "./ScrollReveal";
 import type { DesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
 import {
@@ -62,15 +63,6 @@ const heroItem = {
   hidden: { opacity: 0, y: 22 },
   show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: openEase } },
 };
-
-function ChallengeBlock({ text, label }: { text: string; label: string }) {
-  return (
-    <p className="text-zinc-800 leading-relaxed">
-      <span className="font-mono text-[10px] font-black uppercase text-zinc-400 block mb-1">{label}</span>
-      <HighlightText text={text} />
-    </p>
-  );
-}
 
 export default function VidyasKitchenCaseStudyView({
   designSystemPdfMeta,
@@ -253,39 +245,17 @@ export default function VidyasKitchenCaseStudyView({
       {/* 03 — Six decisions */}
       <ScrollReveal>
         <SectionWindow num="03" title="Six problems worth solving">
-          <p className="text-sm text-zinc-600 mb-6 max-w-2xl">
-            Each block is one decision — what broke, why it was hard, what we tried, what worked, and the outcome.
-          </p>
-          <div className="space-y-5">
-            {vidyasChallenges.map((c, i) => (
-              <ScrollReveal key={c.id} delay={i * 60}>
-                <article className="p-5 sm:p-6 border-2 border-black bg-[#FAF9F5] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] space-y-4">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="px-2 py-0.5 bg-black text-white font-mono text-xs font-black">{c.id}</span>
-                    <h3 className="font-mono font-black text-sm sm:text-base uppercase leading-snug">{c.title}</h3>
-                    <span className="px-2 py-0.5 bg-[#0FE0E3] border border-black text-[10px] font-mono font-black uppercase">
-                      {c.surface}
-                    </span>
-                  </div>
-                  <p className="text-sm font-bold text-[#FF462D] border-l-4 border-[#FF462D] pl-3 leading-snug">
-                    <HighlightText text={c.stake} />
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div className="space-y-3">
-                      <ChallengeBlock label="What happened" text={c.happened} />
-                      <ChallengeBlock label="Why it was hard" text={c.whyHard} />
-                      {c.triedFirst ? (
-                        <ChallengeBlock label="First try · failed" text={c.triedFirst} />
-                      ) : null}
-                    </div>
-                    <div className="space-y-3 p-4 bg-white border-2 border-black">
-                      <ChallengeBlock label="What worked" text={c.worked} />
-                      <ChallengeBlock label="Outcome" text={c.outcome} />
-                    </div>
-                  </div>
-                </article>
-              </ScrollReveal>
-            ))}
+          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <p className="max-w-2xl text-sm text-zinc-600">
+              Each window is one decision — what broke, why it was hard, what we tried, what worked, and the outcome.
+            </p>
+            <p className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-[#FF462D]" />
+              Stacking windows scroll ↓
+            </p>
+          </div>
+          <div className="rounded-sm bg-[#F4F4F0] p-3 sm:p-5 md:p-6">
+            <ChallengeWindowStack challenges={vidyasChallenges} />
           </div>
         </SectionWindow>
       </ScrollReveal>
