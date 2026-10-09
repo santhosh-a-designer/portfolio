@@ -16,6 +16,9 @@ import CustomerSchedulerStory from "@/components/CustomerSchedulerStory";
 import PageEntryAnimation from "@/components/PageEntryAnimation";
 import CaseStudyMakeonShowcase from "@/components/CaseStudyMakeonShowcase";
 import CaseStudyLaptopMockup from "@/components/CaseStudyLaptopMockup";
+import HeaderV2 from "@/app/v2/components/HeaderV2";
+import FloatingActionTriggers from "@/app/v2/components/FloatingActionTriggers";
+import ParlaCaseStudyView from "@/components/parla/ParlaCaseStudyView";
 
 const SECTION_H2 = "text-[12px] font-mono uppercase tracking-[0.2em] text-[#FF7410]";
 
@@ -808,6 +811,16 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const study = caseStudyBySlug[slug];
 
   if (!study) notFound();
+
+  if (slug === "parla-show-and-sell") {
+    return (
+      <div className="relative min-h-screen bg-[#F4F4F0] font-sans text-black antialiased">
+        <HeaderV2 />
+        <FloatingActionTriggers />
+        <ParlaCaseStudyView study={study} />
+      </div>
+    );
+  }
 
   const { prev, next } = getCaseStudyNeighbors(slug);
 
