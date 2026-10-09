@@ -17,7 +17,7 @@ function ChallengeWindowCard({ challenge, index }: { challenge: VidyasChallenge;
 
   return (
     <div
-      className="sticky w-full mb-8 sm:mb-12 last:mb-0"
+      className="sticky w-full mb-8 sm:mb-16 last:mb-0"
       style={{
         top: stickyTop,
         zIndex: index + 10,
@@ -68,11 +68,11 @@ type Props = {
 };
 
 export default function ChallengeWindowStack({ challenges }: Props) {
-  const stackScrollPad = Math.max(0, challenges.length - 1) * 160;
+  const stackScrollPad = Math.max(0, challenges.length - 1) * 140;
 
   return (
     <div
-      className="relative w-full"
+      className="relative w-full rounded-sm bg-[#F4F4F0] p-3 sm:p-5 md:p-6"
       style={{ paddingBottom: `calc(2rem + ${stackScrollPad}px)` }}
     >
       {challenges.map((challenge, index) => (

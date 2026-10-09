@@ -36,13 +36,20 @@ function SectionWindow({
   num,
   title,
   children,
+  allowOverflow = false,
 }: {
   num: string;
   title: string;
   children: React.ReactNode;
+  /** Required for sticky stacked cards — overflow-hidden breaks position:sticky */
+  allowOverflow?: boolean;
 }) {
   return (
-    <section className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+    <section
+      className={`bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] ${
+        allowOverflow ? "overflow-visible" : "overflow-hidden"
+      }`}
+    >
       <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center gap-2 font-mono text-xs select-none">
         <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">{num}</span>
         <span className="font-bold text-black uppercase tracking-wider truncate">{title}</span>
@@ -242,23 +249,19 @@ export default function VidyasKitchenCaseStudyView({
         </SectionWindow>
       </ScrollReveal>
 
-      {/* 03 — Six decisions */}
-      <ScrollReveal>
-        <SectionWindow num="03" title="Six problems worth solving">
-          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-            <p className="max-w-2xl text-sm text-zinc-600">
-              Each window is one decision — what broke, why it was hard, what we tried, what worked, and the outcome.
-            </p>
-            <p className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-[#FF462D]" />
-              Stacking windows scroll ↓
-            </p>
-          </div>
-          <div className="rounded-sm bg-[#F4F4F0] p-3 sm:p-5 md:p-6">
-            <ChallengeWindowStack challenges={vidyasChallenges} />
-          </div>
-        </SectionWindow>
-      </ScrollReveal>
+      {/* 03 — Six decisions (no ScrollReveal: transform on ancestor breaks sticky stack) */}
+      <SectionWindow num="03" title="Six problems worth solving" allowOverflow>
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-2xl text-sm text-zinc-600">
+            Each window is one decision — what broke, why it was hard, what we tried, what worked, and the outcome.
+          </p>
+          <p className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-500">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-[#FF462D]" />
+            Stacking windows scroll ↓
+          </p>
+        </div>
+        <ChallengeWindowStack challenges={vidyasChallenges} />
+      </SectionWindow>
 
       {/* 04 — Design system */}
       <ScrollReveal>
