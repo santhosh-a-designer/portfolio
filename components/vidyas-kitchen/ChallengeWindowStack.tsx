@@ -3,8 +3,6 @@
 import HighlightText from "./HighlightText";
 import type { VidyasChallenge } from "@/lib/vidyasKitchenCaseStudyContent";
 
-const TAB_STEP_PX = 28;
-
 function ChallengeBlock({ text, label }: { text: string; label: string }) {
   return (
     <p className="text-zinc-800 leading-relaxed">
@@ -14,27 +12,19 @@ function ChallengeBlock({ text, label }: { text: string; label: string }) {
   );
 }
 
-function ChallengeWindowCard({
-  challenge,
-  index,
-  isLast,
-}: {
-  challenge: VidyasChallenge;
-  index: number;
-  isLast: boolean;
-}) {
-  const stickyTop = `calc(var(--site-header) + ${index * TAB_STEP_PX}px)`;
+function ChallengeWindowCard({ challenge, index }: { challenge: VidyasChallenge; index: number }) {
+  const stickyTop = `calc(var(--site-header) + ${index * 28}px)`;
 
   return (
     <div
-      className={`sticky w-full ${isLast ? "" : "-mb-[min(520px,72dvh)] sm:-mb-[540px]"}`}
+      className="sticky mb-8 w-full last:mb-0 sm:mb-16"
       style={{
         top: stickyTop,
         zIndex: index + 10,
       }}
     >
-      <article className="flex max-h-[min(720px,88dvh)] min-h-[min(480px,65dvh)] flex-col overflow-hidden border-2 border-black bg-[#FAF9F5] shadow-[0px_10px_25px_rgba(0,0,0,0.08),4px_4px_0px_0px_rgba(0,0,0,1)] sm:min-h-[530px] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.08),6px_6px_0px_0px_rgba(0,0,0,1)] lg:min-h-[530px] lg:max-h-[530px]">
-        <div className="flex h-[38px] shrink-0 items-center justify-between gap-2 border-b-2 border-black bg-[#E2E8F0] px-2.5 sm:h-[42px] sm:px-4 font-mono text-xs select-none">
+      <article className="overflow-hidden border-2 border-black bg-[#FAF9F5] shadow-[0px_10px_25px_rgba(0,0,0,0.08),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.08),6px_6px_0px_0px_rgba(0,0,0,1)]">
+        <div className="flex h-[38px] items-center justify-between gap-2 border-b-2 border-black bg-[#E2E8F0] px-2.5 sm:h-[42px] sm:px-4 font-mono text-xs select-none">
           <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
             <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
               <span className="h-2 w-2 rounded-full border border-black/40 bg-[#FF5F56] sm:h-2.5 sm:w-2.5" />
@@ -50,7 +40,7 @@ function ChallengeWindowCard({
           </span>
         </div>
 
-        <div className="min-h-0 flex-1 space-y-4 overflow-y-auto p-5 sm:p-6">
+        <div className="space-y-4 p-5 sm:p-6">
           <p className="border-l-4 border-[#FF462D] pl-3 text-sm font-bold leading-snug text-[#FF462D]">
             <HighlightText text={challenge.stake} />
           </p>
@@ -77,20 +67,13 @@ type Props = {
   challenges: VidyasChallenge[];
 };
 
+/** Same sticky window pattern as Selected Work — no negative margins, no extra gray pad. */
 export default function ChallengeWindowStack({ challenges }: Props) {
-  const tailSpacer = Math.max(0, challenges.length - 1) * TAB_STEP_PX + 48;
-
   return (
     <div className="relative w-full rounded-sm bg-[#F4F4F0] p-3 sm:p-5 md:p-6">
       {challenges.map((challenge, index) => (
-        <ChallengeWindowCard
-          key={challenge.id}
-          challenge={challenge}
-          index={index}
-          isLast={index === challenges.length - 1}
-        />
+        <ChallengeWindowCard key={challenge.id} challenge={challenge} index={index} />
       ))}
-      <div className="w-full shrink-0" style={{ height: tailSpacer }} aria-hidden />
     </div>
   );
 }
