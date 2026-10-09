@@ -779,14 +779,14 @@ function DesignToCodeMorphingCard() {
               opacity: 1,
               willChange: "transform",
             }}
-            className="relative max-h-full max-w-full aspect-[5224/3396] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden z-10 flex items-center justify-center"
+            className="relative z-10 h-full w-full max-w-[min(100%,520px)] max-h-full aspect-[5224/3396] shrink-0 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
           >
             <SkeletonImage
               src="/login_website.webp"
               alt="Oracle Fusion Login UI Design"
               loading="eager"
-              className="absolute inset-0"
-              imgClassName="object-contain brightness-[1.04] contrast-[1.03]"
+              className="absolute inset-0 h-full w-full"
+              imgClassName="h-full w-full object-contain object-center brightness-[1.04] contrast-[1.03]"
             />
           </div>
         </div>

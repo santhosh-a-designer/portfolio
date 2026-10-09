@@ -287,14 +287,14 @@ function WindowCard({
   const isVidyasKitchen =
     item.title.toUpperCase().includes("VIDYA") || item.href.includes("vidyas-kitchen");
 
-  // Sticky top docking offset: exactly 28px downward offset per card for clean window tabs
-  const stickyTop = `calc(var(--site-header) + ${index} * 22px)`;
+  // Sticky top docking offset: 28px per card for stacked window tabs
+  const stickyTop = `calc(var(--site-header) + ${index * 28}px)`;
 
   return (
     <div
       className="sticky w-full mb-8 sm:mb-16 last:mb-0"
       style={{
-        top: `${stickyTop}px`,
+        top: stickyTop,
         zIndex: index + 10,
       }}
     >
@@ -476,8 +476,14 @@ export default function ProjectWindowStack({ projects }: { projects: ProjectItem
     offset: ["start start", "end end"],
   });
 
+  const stackScrollPad = Math.max(0, projects.length - 1) * 140;
+
   return (
-    <div ref={containerRef} className="relative w-full max-w-[1320px] mx-auto p-4 sm:p-6 md:p-8 lg:p-10 pb-8 sm:pb-14">
+    <div
+      ref={containerRef}
+      className="relative w-full max-w-[1320px] mx-auto p-4 sm:p-6 md:p-8 lg:p-10 pb-8 sm:pb-14"
+      style={{ paddingBottom: `calc(2rem + ${stackScrollPad}px)` }}
+    >
       {projects.map((project, idx) => (
         <WindowCard
           key={project.id}

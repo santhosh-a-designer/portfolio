@@ -96,13 +96,15 @@ export default function SelectedWorkV2() {
                   key={`${logo.name}-marquee-${idx}`}
                   className="flex items-center justify-center shrink-0 h-full py-1.5 px-1 sm:px-2"
                 >
-                  <div className={`relative ${logo.heightClass} ${logo.widthClass} flex items-center justify-center`}>
+                  <div
+                    className={`relative ${logo.heightClass} ${logo.widthClass} min-h-[24px] min-w-[72px] flex items-center justify-center`}
+                  >
                     <Image
                       src={logo.src}
                       alt={logo.name}
                       fill
                       sizes="(max-width: 640px) 110px, (max-width: 1024px) 160px, 200px"
-                      className="object-contain filter contrast-110"
+                      className="object-contain object-center filter contrast-110"
                     />
                   </div>
                 </div>
