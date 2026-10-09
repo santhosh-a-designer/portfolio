@@ -20,6 +20,26 @@ type Props = {
 
 const TAB_IDS = vidyasDesignSystem.surfaces.map((s) => s.id);
 
+function hexRelativeLuminance(hex: string): number {
+  const raw = hex.replace("#", "");
+  if (raw.length !== 6) return 1;
+  const channel = (i: number) => {
+    const v = parseInt(raw.slice(i, i + 2), 16) / 255;
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  };
+  const r = channel(0);
+  const g = channel(2);
+  const b = channel(4);
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function swatchNeedsOutline(hex: string, onDarkPanel: boolean): boolean {
+  const lum = hexRelativeLuminance(hex);
+  if (lum < 0.12) return true;
+  if (onDarkPanel && lum < 0.22) return true;
+  return false;
+}
+
 function usePrefersReducedMotion() {
   const [reduce, setReduce] = useState(false);
   useEffect(() => {
@@ -135,10 +155,8 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
   const heroOnDark =
     displaySurfaceId === "driver" || displaySurfaceId === "dashboard";
 
-  const heroChipId =
-    displaySurfaceId === surfaceId
-      ? chipId
-      : (displaySurface.chips[0]?.id ?? chipId);
+  const swatchesOnDark =
+    displaySurface.id === "driver" || displaySurface.id === "dashboard";
 
   return (
     <div className={`${outfitVk.className} space-y-5`}>
@@ -215,16 +233,16 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
               {displaySurface.caption}
             </p>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
               {displaySurface.swatches.map((sw, swIndex) => (
                 <button
                   key={sw.token}
                   type="button"
                   onClick={() => copySwatch(sw)}
-                  className={`flex min-w-[140px] flex-1 items-center gap-2 border-2 border-black p-2 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAED00] ${
+                  className={`flex min-h-[52px] items-center gap-2 border-2 border-black p-2 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FAED00] ${
                     displaySurface.id === "customer" || displaySurface.id === "landing"
                       ? "bg-white"
-                      : "bg-black/40"
+                      : "bg-[#141414]"
                   }`}
                   style={
                     reduceMotion
@@ -237,7 +255,11 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
                   }
                 >
                   <span
-                    className="h-9 w-9 shrink-0 border border-black/20"
+                    className={`h-9 w-9 shrink-0 border-2 border-black ${
+                      swatchNeedsOutline(sw.hex, swatchesOnDark)
+                        ? "ring-2 ring-white/70 ring-offset-1 ring-offset-transparent"
+                        : ""
+                    }`}
                     style={{ background: sw.hex }}
                     aria-hidden
                   />
@@ -364,7 +386,6 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
           <div className="order-1 lg:sticky lg:top-24 lg:order-2 lg:self-start">
             <DesignSystemHeroPanel
               surfaceId={displaySurfaceId}
-              chipId={heroChipId}
               reduceMotion={reduceMotion}
               visible={panelVisible}
               isDarkPanel={heroOnDark}
