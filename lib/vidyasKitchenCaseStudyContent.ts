@@ -8,7 +8,7 @@ export type VidyasChallenge = {
   triedFirst: string;
   worked: string;
   outcome: string;
-  surface: "WhatsApp" | "PWA" | "Dashboard" | "Driver";
+  surface: string;
   /** How to say it in an interview */
   interviewLine?: string;
 };
@@ -64,7 +64,7 @@ export type VidyasArchNode = {
 export type IASurfaceColumn = {
   id: string;
   label: string;
-  tag: "PWA" | "WhatsApp" | "Dashboard" | "Driver";
+  tag: "PWA" | "WhatsApp" | "Dashboard" | "Driver" | "Store" | "Engine" | "Desk" | "Tailz";
   steps: string[];
 };
 

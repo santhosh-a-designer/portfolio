@@ -8,6 +8,10 @@ const TAG_STYLE: Record<IASurfaceColumn["tag"], string> = {
   WhatsApp: "bg-[#25D366] text-white",
   Dashboard: "bg-[#FAED00] text-black",
   Driver: "bg-white text-black",
+  Store: "bg-[#F6F1E7] text-black",
+  Engine: "bg-[#0D2E28] text-white",
+  Desk: "bg-[#FAED00] text-black",
+  Tailz: "bg-[#C9893A] text-black",
 };
 
 function VerticalConnector({ active, delay }: { active: boolean; delay: number }) {

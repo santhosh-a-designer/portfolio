@@ -400,7 +400,7 @@ function WindowCard({
                 <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />
               </Link>
 
-              {isVidyasKitchen && (
+              {item.liveUrl ? (
                 <Link
                   href={item.href}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-[#FAED00] text-black hover:bg-[#ffe600] font-mono font-black text-[11px] sm:text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-center"
@@ -408,7 +408,7 @@ function WindowCard({
                   <span>READ CASE STUDY</span>
                   <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />
                 </Link>
-              )}
+              ) : null}
             </div>
           </div>
 

@@ -53,14 +53,16 @@ export default function SelectedWorkV2() {
     {
       id: "03",
       num: "03",
-      title: "MAKEON BUILDER",
-      category: "STEM / AI ECOSYSTEM",
-      href: "/case-studies/makeon-builder-ecosystem",
-      liveUrl: "https://makeon.build/",
-      image: "/case-studies/makeon/makeon-hero-desktop.webp",
+      title: "WE TWO PETS",
+      category: "PET COMMERCE",
+      badge: "STORE / CHECKOUT / TRACKING",
+      href: "/case-studies/we-two-pets",
+      liveUrl: "https://www.wetwopets.com/",
+      image: "/case-studies/we-two-pets/home.jpg",
       mockupType: "forma",
-      techStack: ["React", "TypeScript", "AI Workflows", "Figma"],
-      description: "Intelligent STEM hardware builder platform with visual block coding and AI agent integration.",
+      techStack: ["Next.js", "TypeScript", "Supabase", "Cashfree"],
+      description:
+        "From an affiliate sketch to a store that owns the order — a Pet Engine hunts gear India does not already sell, and two people vote before it goes live.",
     },
   ];
 

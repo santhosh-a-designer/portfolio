@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { GlobeHemisphereWest, DeviceMobile, Robot, Cpu } from "@phosphor-icons/react";
+import { GlobeHemisphereWest, DeviceMobile, Robot, PawPrint } from "@phosphor-icons/react";
 
 type Project = {
   id: number;
@@ -80,21 +80,21 @@ const projects: Project[] = [
   {
     id: 4,
     index: "04",
-    tag: "STEM · Ecosystem · AI",
-    title: "Makeon",
-    subtitle: "Builder-Learning Ecosystem & AI Studio",
+    tag: "Pet commerce · India",
+    title: "We Two Pets",
+    subtitle: "Short catalog, checkout on site",
     description:
-      "India's builder-learning ecosystem: structured academic learning through hands-on making, evidence-based portfolios, and visible confidence. Connecting schools, learning centres, and young builders with a repeatable 7-step engineering loop and upcoming AI diagnostic agents.",
+      "A pet shop with sixteen products, exclusive imports marked on the card, and checkout that stays on wetwopets.com. Tracking uses the same steps as the hub: confirmed, checked and repacked, then shipped.",
     stats: [
-      { value: "500+", label: "Student builds" },
-      { value: "4 Tracks", label: "Ages 5–18" },
-      { value: "7-Beat", label: "Build Loop" },
-      { value: "Live", label: "makeon.build" },
+      { value: "16", label: "Products" },
+      { value: "Live", label: "wetwopets.com" },
+      { value: "OTP", label: "Phone sign-in" },
+      { value: "Hub", label: "Same timeline" },
     ],
-    icon: Cpu,
-    accentColor: "#FF2A2A",
+    icon: PawPrint,
+    accentColor: "#0D2E28",
     status: "live",
-    slug: "makeon-builder-ecosystem",
+    slug: "we-two-pets",
   },
 ];
 
