@@ -1,13 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { ReactNode, ComponentProps } from "react";
 
-/**
- * Keep `amount` low: `whileInView` compares visible area to the **element’s full height**.
- * A tall block (e.g. full product deep dive) can never hit 20% visible at once, so animation
- * never runs and `initial={{ opacity: 0 }}` sticks — content looks missing after CTA.
- */
 const VIEWPORT = { once: true, amount: 0.03 } as const;
 
 const motionTag = {
@@ -22,7 +18,6 @@ type Tag = keyof typeof motionTag;
 type Props = {
   children: ReactNode;
   className?: string;
-  /** Stagger on multi-block lists (e.g. second card). */
   delay?: number;
   as?: Tag;
 } & Omit<ComponentProps<"div">, "children" | "className">;
@@ -40,8 +35,27 @@ function staticShell(tag: Tag, className: string | undefined, children: ReactNod
   }
 }
 
-export function CaseStudyScrollReveal({ children, className, delay = 0, as: tag = "div", ...rest }: Props) {
+export function CaseStudyScrollReveal({ children, className = "", delay = 0, as: tag = "div", ...rest }: Props) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
   const reduce = useReducedMotion();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const rawBlur = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [5.5, 0, 0, 5.5]);
+  const opacity = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [0.55, 1, 1, 0.55]);
+
+  const filter = useTransform(rawBlur, (val) => {
+    if (!mounted || reduce || val <= 0.25) return "none";
+    return `blur(${val.toFixed(1)}px)`;
+  });
 
   if (reduce) {
     return staticShell(tag, className, children);
@@ -50,11 +64,16 @@ export function CaseStudyScrollReveal({ children, className, delay = 0, as: tag 
   const Motion = motionTag[tag];
   return (
     <Motion
-      className={className}
-      initial={{ opacity: 0, y: 64, scale: 0.985 }}
+      ref={containerRef as any}
+      className={`w-full transition-[filter,opacity] duration-300 ease-out will-change-[filter,opacity] ${className}`}
+      initial={{ opacity: 0, y: 48, scale: 0.99 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={VIEWPORT}
-      transition={{ delay, type: "spring", stiffness: 52, damping: 18, mass: 1.1 }}
+      transition={{ delay, type: "spring", stiffness: 60, damping: 20 }}
+      style={{
+        filter: mounted ? filter : "none",
+        opacity: mounted ? opacity : 1,
+      }}
       {...(rest as object)}
     >
       {children}

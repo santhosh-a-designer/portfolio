@@ -14,7 +14,8 @@ import {
   WarningCircle,
   LinkedinLogo,
 } from "@phosphor-icons/react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import ScrollFocusWrapper from "@/components/ScrollFocusWrapper";
 
 interface ServiceItem {
   num: string;
@@ -96,6 +97,16 @@ export default function ServicesAndFooterV2() {
   const yellowBoxRef = useRef<HTMLDivElement>(null);
   const errorTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  // InView refs for snappy architectural line drafting
+  const capabilitiesRef = useRef<HTMLDivElement>(null);
+  const isCapabilitiesInView = useInView(capabilitiesRef, { once: false, amount: 0.15 });
+
+  const mentorshipRef = useRef<HTMLDivElement>(null);
+  const isMentorshipInView = useInView(mentorshipRef, { once: false, amount: 0.15 });
+
+  const contactRef = useRef<HTMLDivElement>(null);
+  const isContactInView = useInView(contactRef, { once: false, amount: 0.15 });
+
   useEffect(() => {
     return () => {
       if (errorTimeoutRef.current) clearTimeout(errorTimeoutRef.current);
@@ -165,7 +176,7 @@ export default function ServicesAndFooterV2() {
         errorTimeoutRef.current = setTimeout(() => {
           setSubmitState("idle");
           setErrorText("");
-        }, 4000);
+        }, 5000);
         return;
       }
 
@@ -186,69 +197,97 @@ export default function ServicesAndFooterV2() {
   const activeService = openIndex !== null ? services[openIndex] : null;
 
   return (
-    <section id="skills" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-      <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">
-        
-        {/* ─── Top Main Section: Dynamic Left Yellow Panel + Divider + 4 Service Items ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-12 border-b-2 border-black bg-white">
+    <div className="w-full flex flex-col">
+      {/* ─── 01. SKILLS SECTION ─── */}
+      <ScrollFocusWrapper>
+        <section id="skills" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+          <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">
+            
+            {/* ─── Top Main Section: Dynamic Left Yellow Panel + Divider + 4 Service Items ─── */}
+            <div ref={capabilitiesRef} className="grid grid-cols-1 md:grid-cols-12 bg-white relative">
           
-          {/* Column 1 & 2 Combined: Dynamic Yellow Panel (7 / 12 cols) */}
+          {/* Animated Horizontal Bottom Border Line */}
           <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isCapabilitiesInView ? { scaleX: 1 } : { scaleX: 0 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-20"
+          />
+
+          {/* Column 1 & 2 Combined: Dynamic Yellow Panel (7 / 12 cols) */}
+          <div
             ref={yellowBoxRef}
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-7 lg:col-span-7 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between min-h-[320px] sm:min-h-[360px] md:min-h-[440px] select-none relative overflow-hidden"
+            className="md:col-span-7 lg:col-span-7 bg-[#FAED00] p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between min-h-[320px] sm:min-h-[360px] md:min-h-[440px] select-none relative overflow-hidden"
           >
-            <AnimatePresence mode="wait">
-              {activeService === null ? (
-                /* Default State: General Overview */
-                <motion.div
-                  key="default"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="flex flex-col justify-between h-full flex-1"
-                >
-                  <div>
-                    <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                      <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-black inline-block" />
-                      <span className="text-[9px] sm:text-[10px] font-mono font-black uppercase tracking-widest text-black">
-                        // CAPABILITIES_OVERVIEW
+            {/* Animated Vertical Divider Line on Right of Yellow Box */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={isCapabilitiesInView ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 0.35, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="hidden md:block absolute top-0 bottom-0 right-0 w-[2px] bg-black origin-top z-10"
+            />
+            {/* Mobile divider below yellow box */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={isCapabilitiesInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="md:hidden absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-10"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={isCapabilitiesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+              transition={{ duration: 0.28, delay: 0.2, ease: "easeOut" }}
+              className="h-full flex flex-col justify-between"
+            >
+              <AnimatePresence mode="wait">
+                {activeService === null ? (
+                  /* Default State: General Overview */
+                  <motion.div
+                    key="default"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="flex flex-col justify-between h-full flex-1"
+                  >
+                    <div>
+                      <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                        <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 bg-black inline-block" />
+                        <span className="text-[9px] sm:text-[10px] font-mono font-black uppercase tracking-widest text-black">
+                          // CAPABILITIES_OVERVIEW
+                        </span>
+                      </div>
+
+                      <h2 className="text-xl min-[360px]:text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black uppercase tracking-tight text-black leading-[1.0] font-mono mb-3 sm:mb-5">
+                        ENGINEERING<br />PRODUCT<br />EXPERIENCES.
+                      </h2>
+
+                      <p className="text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-black/90 leading-relaxed max-w-lg mb-4 sm:mb-6 font-sans">
+                        BRIDGING END-TO-END PRODUCT DESIGN, INTERACTION ARCHITECTURE, AND PRODUCTION-READY FRONTEND CODE FOR VENTURES &amp; ENTERPRISES.
+                      </p>
+                    </div>
+
+                    <div className="pt-3 sm:pt-4 border-t-2 border-black/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 mt-4 sm:mt-6">
+                      <div className="flex items-center gap-2 text-[10.5px] sm:text-xs font-black uppercase tracking-wider text-black font-mono">
+                        <span className="text-[#FF462D] font-bold">✦</span>
+                        <span>4 SPECIALIZED DISCIPLINES · 28 CORE SKILLS</span>
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] font-mono font-bold text-black/70">
+                        [SELECT A SERVICE ➔]
                       </span>
                     </div>
-
-                    <h2 className="text-xl min-[360px]:text-2xl sm:text-3xl md:text-4xl lg:text-[42px] font-black uppercase tracking-tight text-black leading-[1.0] font-mono mb-3 sm:mb-5">
-                      ENGINEERING<br />PRODUCT<br />EXPERIENCES.
-                    </h2>
-
-                    <p className="text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-black/90 leading-relaxed max-w-lg mb-4 sm:mb-6 font-sans">
-                      BRIDGING END-TO-END PRODUCT DESIGN, INTERACTION ARCHITECTURE, AND PRODUCTION-READY FRONTEND CODE FOR VENTURES &amp; ENTERPRISES.
-                    </p>
-                  </div>
-
-                  <div className="pt-3 sm:pt-4 border-t-2 border-black/20 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 mt-4 sm:mt-6">
-                    <div className="flex items-center gap-2 text-[10.5px] sm:text-xs font-black uppercase tracking-wider text-black font-mono">
-                      <span className="text-[#FF462D] font-bold">✦</span>
-                      <span>4 SPECIALIZED DISCIPLINES · 28 CORE SKILLS</span>
-                    </div>
-                    <span className="text-[9px] sm:text-[10px] font-mono font-bold text-black/70">
-                      [SELECT A SERVICE ➔]
-                    </span>
-                  </div>
-                </motion.div>
-              ) : (
-                /* Active State: Dynamic Service Skills & Tools View */
-                <motion.div
-                  key={activeService.num}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.25, ease: "easeOut" }}
-                  className="flex flex-col justify-between h-full flex-1"
-                >
+                  </motion.div>
+                ) : (
+                  /* Active State: Dynamic Service Skills & Tools View */
+                  <motion.div
+                    key={activeService.num}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.25, ease: "easeOut" }}
+                    className="flex flex-col justify-between h-full flex-1"
+                  >
                   <div>
                     <div className="flex items-center justify-between mb-3 sm:mb-4">
                       <div className="flex items-center gap-2">
@@ -308,7 +347,8 @@ export default function ServicesAndFooterV2() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+            </motion.div>
+          </div>
 
           {/* Column 3: Narrow Vertical "CORE CAPABILITIES →" Divider (1 / 12 cols) */}
           <motion.div
@@ -383,11 +423,16 @@ export default function ServicesAndFooterV2() {
           </div>
 
         </div>
+      </div>
+    </section>
+  </ScrollFocusWrapper>
 
-        {/* ─── Mentorship Section (Academic & Community Impact) ─── */}
-        <div id="mentorship" className="w-full border-b-2 border-black bg-white scroll-mt-20 flex flex-col">
-          {/* Header Banner */}
-          <div className="p-6 sm:p-8 md:p-10 border-b-2 border-black bg-[#F4F4F0] flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+  {/* ─── 02. MENTORSHIP SECTION (Academic & Community Impact) ─── */}
+  <ScrollFocusWrapper>
+    <section id="mentorship" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+      <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">
+        {/* Header Banner */}
+        <div className="p-6 sm:p-8 md:p-10 border-b-2 border-black bg-[#F4F4F0] flex flex-col lg:flex-row lg:items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2.5 h-2.5 bg-[#FF462D] inline-block" />
@@ -418,88 +463,169 @@ export default function ServicesAndFooterV2() {
             </div>
           </div>
 
-          {/* Mentorship Stats & Disciplines Grid (Brutalist Bordered Style) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y-2 sm:divide-y-0 sm:divide-x-2 divide-black border-black bg-white">
+          {/* Mentorship Stats & Disciplines Grid with Architectural Line Drafting */}
+          <div ref={mentorshipRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-white relative">
+            {/* Animated Bottom Border Line */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={isMentorshipInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-20"
+            />
+
             {/* Box 1: 100+ Students Mentored */}
-            <div className="p-6 sm:p-8 flex flex-col justify-between hover:bg-zinc-50 transition-colors group">
-              <div>
-                <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-400 block mb-2">
-                  // STAT_01
-                </span>
-                <div className="text-4xl sm:text-5xl font-black text-[#FF462D] font-mono tracking-tight group-hover:scale-105 transition-transform origin-left">
-                  100+
+            <div className="p-6 sm:p-8 flex flex-col justify-between hover:bg-zinc-50 transition-colors group relative">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={isMentorshipInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                transition={{ duration: 0.28, delay: 0.2, ease: "easeOut" }}
+                className="flex flex-col justify-between h-full"
+              >
+                <div>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-400 block mb-2">
+                    // STAT_01
+                  </span>
+                  <div className="text-4xl sm:text-5xl font-black text-[#FF462D] font-mono tracking-tight group-hover:scale-105 transition-transform origin-left">
+                    100+
+                  </div>
                 </div>
-              </div>
-              <div className="mt-6 pt-3 border-t border-zinc-200">
-                <span className="text-xs font-black uppercase tracking-wider text-black font-mono block">
-                  STUDENTS MENTORED
-                </span>
-                <span className="text-[10px] font-bold text-zinc-500 uppercase mt-0.5 block font-sans">
-                  One-on-one reviews &amp; cohort guidance
-                </span>
-              </div>
+                <div className="mt-6 pt-3 border-t border-zinc-200">
+                  <span className="text-xs font-black uppercase tracking-wider text-black font-mono block">
+                    STUDENTS MENTORED
+                  </span>
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase mt-0.5 block font-sans">
+                    One-on-one reviews &amp; cohort guidance
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Column 1 Vertical Divider Line */}
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={isMentorshipInView ? { scaleY: 1 } : { scaleY: 0 }}
+                transition={{ duration: 0.35, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                className="hidden sm:block absolute top-0 bottom-0 right-0 w-[2px] bg-black origin-top z-10"
+              />
+              {/* Mobile bottom divider */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={isMentorshipInView ? { scaleX: 1 } : { scaleX: 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="sm:hidden absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-10"
+              />
             </div>
 
             {/* Box 2: 2+ Years Teaching Experience */}
-            <div className="p-6 sm:p-8 flex flex-col justify-between hover:bg-zinc-50 transition-colors group">
-              <div>
-                <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-400 block mb-2">
-                  // STAT_02
-                </span>
-                <div className="text-4xl sm:text-5xl font-black text-black font-mono tracking-tight group-hover:scale-105 transition-transform origin-left">
-                  2+ <span className="text-2xl text-[#FF462D]">YRS</span>
+            <div className="p-6 sm:p-8 flex flex-col justify-between hover:bg-zinc-50 transition-colors group relative">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={isMentorshipInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                transition={{ duration: 0.28, delay: 0.24, ease: "easeOut" }}
+                className="flex flex-col justify-between h-full"
+              >
+                <div>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-400 block mb-2">
+                    // STAT_02
+                  </span>
+                  <div className="text-4xl sm:text-5xl font-black text-black font-mono tracking-tight group-hover:scale-105 transition-transform origin-left">
+                    2+ <span className="text-2xl text-[#FF462D]">YRS</span>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-6 pt-3 border-t border-zinc-200">
-                <span className="text-xs font-black uppercase tracking-wider text-black font-mono block">
-                  TEACHING EXPERIENCE
-                </span>
-                <span className="text-[10px] font-bold text-zinc-500 uppercase mt-0.5 block font-sans">
-                  FITA Academy faculty &amp; curriculum
-                </span>
-              </div>
+                <div className="mt-6 pt-3 border-t border-zinc-200">
+                  <span className="text-xs font-black uppercase tracking-wider text-black font-mono block">
+                    TEACHING EXPERIENCE
+                  </span>
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase mt-0.5 block font-sans">
+                    FITA Academy faculty &amp; curriculum
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Column 2 Vertical Divider Line */}
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={isMentorshipInView ? { scaleY: 1 } : { scaleY: 0 }}
+                transition={{ duration: 0.35, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="hidden lg:block absolute top-0 bottom-0 right-0 w-[2px] bg-black origin-top z-10"
+              />
+              {/* Tablet bottom divider */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={isMentorshipInView ? { scaleX: 1 } : { scaleX: 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="lg:hidden absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-10"
+              />
             </div>
 
             {/* Box 3: College Workshops Conducted */}
-            <div className="p-6 sm:p-8 flex flex-col justify-between hover:bg-zinc-50 transition-colors group">
-              <div>
-                <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-400 block mb-2">
-                  // STAT_03
-                </span>
-                <div className="text-3xl sm:text-4xl lg:text-[34px] font-black text-black font-mono tracking-tight group-hover:scale-105 transition-transform origin-left leading-tight">
-                  WORKSHOPS
+            <div className="p-6 sm:p-8 flex flex-col justify-between hover:bg-zinc-50 transition-colors group relative">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={isMentorshipInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                transition={{ duration: 0.28, delay: 0.28, ease: "easeOut" }}
+                className="flex flex-col justify-between h-full"
+              >
+                <div>
+                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-zinc-400 block mb-2">
+                    // STAT_03
+                  </span>
+                  <div className="text-3xl sm:text-4xl lg:text-[34px] font-black text-black font-mono tracking-tight group-hover:scale-105 transition-transform origin-left leading-tight">
+                    WORKSHOPS
+                  </div>
                 </div>
-              </div>
-              <div className="mt-6 pt-3 border-t border-zinc-200">
-                <span className="text-xs font-black uppercase tracking-wider text-black font-mono block">
-                  COLLEGE SESSIONS CONDUCTED
-                </span>
-                <span className="text-[10px] font-bold text-zinc-500 uppercase mt-0.5 block font-sans">
-                  Hands-on UX/UI &amp; code bootcamps
-                </span>
-              </div>
+                <div className="mt-6 pt-3 border-t border-zinc-200">
+                  <span className="text-xs font-black uppercase tracking-wider text-black font-mono block">
+                    COLLEGE SESSIONS CONDUCTED
+                  </span>
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase mt-0.5 block font-sans">
+                    Hands-on UX/UI &amp; code bootcamps
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Column 3 Vertical Divider Line */}
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={isMentorshipInView ? { scaleY: 1 } : { scaleY: 0 }}
+                transition={{ duration: 0.35, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+                className="hidden sm:block absolute top-0 bottom-0 right-0 w-[2px] bg-black origin-top z-10"
+              />
+              {/* Mobile bottom divider */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={isMentorshipInView ? { scaleX: 1 } : { scaleX: 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="sm:hidden absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-10"
+              />
             </div>
 
             {/* Box 4: Placement Track Record (Highlighted Yellow Accent) */}
-            <div className="p-6 sm:p-8 flex flex-col justify-between bg-[#FAED00] hover:bg-[#FAED00]/95 transition-colors group">
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono font-black uppercase tracking-widest text-black/70">
-                    // OUTCOME
+            <div className="p-6 sm:p-8 flex flex-col justify-between bg-[#FAED00] hover:bg-[#FAED00]/95 transition-colors group relative">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={isMentorshipInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                transition={{ duration: 0.28, delay: 0.32, ease: "easeOut" }}
+                className="flex flex-col justify-between h-full"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-mono font-black uppercase tracking-widest text-black/70">
+                      // OUTCOME
+                    </span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl lg:text-[28px] font-black text-black font-mono tracking-tight leading-tight">
+                    PLACED IN TECH
+                  </div>
+                </div>
+                <div className="mt-6 pt-3 border-t border-black/20">
+                  <span className="text-xs font-black uppercase tracking-wider text-black font-mono block">
+                    STUDENTS HIRED INTO COMPANIES
+                  </span>
+                  <span className="text-[10px] font-bold text-black/80 uppercase mt-0.5 block font-sans">
+                    Product design &amp; engineering roles
                   </span>
                 </div>
-                <div className="text-2xl sm:text-3xl lg:text-[28px] font-black text-black font-mono tracking-tight leading-tight">
-                  PLACED IN TECH
-                </div>
-              </div>
-              <div className="mt-6 pt-3 border-t border-black/20">
-                <span className="text-xs font-black uppercase tracking-wider text-black font-mono block">
-                  STUDENTS HIRED INTO COMPANIES
-                </span>
-                <span className="text-[10px] font-bold text-black/80 uppercase mt-0.5 block font-sans">
-                  Product design &amp; engineering roles
-                </span>
-              </div>
+              </motion.div>
             </div>
           </div>
 
@@ -523,18 +649,33 @@ export default function ServicesAndFooterV2() {
             </div>
           </div>
         </div>
+      </section>
+    </ScrollFocusWrapper>
 
-        {/* ─── Enhanced & Extended Bottom Section: GET IN TOUCH + QUICK PROJECT BRIEF (Expanded Height) ─── */}
-        <div id="contact" className="grid grid-cols-1 lg:grid-cols-12 bg-white scroll-mt-20">
-          
+    {/* ─── 03. CONTACT & TERMINAL FOOTER SECTION ─── */}
+    <ScrollFocusWrapper isLast>
+      <section id="contact" className="w-full bg-[#F4F4F0] scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+        <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">
+          {/* Enhanced & Extended Bottom Section: GET IN TOUCH + QUICK PROJECT BRIEF */}
+          <div ref={contactRef} className="grid grid-cols-1 lg:grid-cols-12 bg-white relative">
+            {/* Animated Vertical Divider between Contact Left and Form Right */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={isContactInView ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 0.35, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="hidden lg:block absolute top-0 bottom-0 left-1/3 w-[2px] bg-black origin-top z-10"
+            />
+
           {/* Left Column: Bold Red Box "LET'S CREATE SOMETHING DIFFERENT." + Direct Contact Cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-4 bg-[#FF462D] p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black text-black"
+          <div
+            className="lg:col-span-4 bg-[#FF462D] p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between border-b-2 lg:border-b-0 border-black text-black relative"
           >
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={isContactInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+              transition={{ duration: 0.28, delay: 0.2, ease: "easeOut" }}
+              className="flex flex-col justify-between h-full"
+            >
             <div>
               <div className="flex items-center justify-end mb-4 sm:mb-8">
                 <ArrowUpRight weight="bold" className="w-6 h-6 sm:w-7 sm:h-7 stroke-[3px]" />
@@ -609,7 +750,8 @@ export default function ServicesAndFooterV2() {
                 </div>
               </a>
             </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
           {/* Right Column: Quick Project Brief Form */}
           <motion.div
@@ -745,26 +887,28 @@ export default function ServicesAndFooterV2() {
         </div>
 
         {/* ─── Terminal Footer Strip ─── */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="border-t-2 border-black bg-[#0D1117] px-4 sm:px-8 md:px-10 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left"
-        >
-          <span className="font-mono text-[10.5px] sm:text-[11px] text-emerald-400 font-bold">
-            santhosh@portfolio:~$
-            <span className="terminal-prompt" />
-          </span>
-          <span className="font-mono text-[9.5px] sm:text-[10px] text-zinc-500 italic">
-            <span className="text-[#FF462D] not-italic font-bold">/*</span> ALL RIGHTS RESERVED · {new Date().getFullYear()} <span className="text-[#FF462D] not-italic font-bold">*/</span>
-          </span>
-          <span className="font-mono text-[9.5px] sm:text-[10px] text-zinc-500">
-            DESIGNED + BUILT BY <span className="text-[#FAED00] font-bold">SANTHOSH</span>
-          </span>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="border-t-2 border-black bg-[#0D1117] px-4 sm:px-8 md:px-10 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left"
+          >
+            <span className="font-mono text-[10.5px] sm:text-[11px] text-emerald-400 font-bold">
+              santhosh@portfolio:~$
+              <span className="terminal-prompt" />
+            </span>
+            <span className="font-mono text-[9.5px] sm:text-[10px] text-zinc-500 italic">
+              <span className="text-[#FF462D] not-italic font-bold">/*</span> ALL RIGHTS RESERVED · {new Date().getFullYear()} <span className="text-[#FF462D] not-italic font-bold">*/</span>
+            </span>
+            <span className="font-mono text-[9.5px] sm:text-[10px] text-zinc-500">
+              DESIGNED + BUILT BY <span className="text-[#FAED00] font-bold">SANTHOSH</span>
+            </span>
+          </motion.div>
 
-      </div>
-    </section>
+        </div>
+      </section>
+    </ScrollFocusWrapper>
+  </div>
   );
 }

@@ -35,9 +35,7 @@ export default function Home() {
           <ExperienceSectionV2 />
         </ScrollFocusWrapper>
 
-        <ScrollFocusWrapper isLast>
-          <ServicesAndFooterV2 />
-        </ScrollFocusWrapper>
+        <ServicesAndFooterV2 />
       </main>
     </LenisProvider>
   );

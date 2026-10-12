@@ -21,10 +21,10 @@ export default function ScrollFocusWrapper({
   isFirst = false,
   isLast = false,
   disabled = false,
-  maxBlur = 3.5,
-  minOpacity = 0.68,
+  maxBlur = 5.5,
+  minOpacity = 0.55,
 }: ScrollFocusWrapperProps) {
-  // If disabled (e.g. Selected Work), render standard container without any useScroll hook
+  // If disabled, render standard container without any useScroll hook
   if (disabled) {
     return (
       <div id={id} className={`w-full ${className}`}>
@@ -53,8 +53,8 @@ function ActiveScrollFocusItem({
   className = "",
   isFirst = false,
   isLast = false,
-  maxBlur = 3.5,
-  minOpacity = 0.68,
+  maxBlur = 5.5,
+  minOpacity = 0.55,
 }: Omit<ScrollFocusWrapperProps, "disabled">) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
@@ -72,12 +72,12 @@ function ActiveScrollFocusItem({
       : ["start end", "end start"],
   });
 
-  // Calculate blur and opacity mappings
+  // Calculate blur and opacity mappings: in-focus sweet spot is between 0.35 and 0.65
   const blurRangeInput = isFirst
-    ? [0, 0.45, 0.85, 1]
+    ? [0, 0.45, 0.82, 1]
     : isLast
-    ? [0, 0.4, 1]
-    : [0, 0.22, 0.78, 1];
+    ? [0, 0.35, 1]
+    : [0, 0.28, 0.72, 1];
 
   const blurRangeOutput = isFirst
     ? [0, 0, maxBlur, maxBlur]
@@ -86,10 +86,10 @@ function ActiveScrollFocusItem({
     : [maxBlur, 0, 0, maxBlur];
 
   const opacityRangeInput = isFirst
-    ? [0, 0.45, 0.85, 1]
+    ? [0, 0.45, 0.82, 1]
     : isLast
-    ? [0, 0.4, 1]
-    : [0, 0.22, 0.78, 1];
+    ? [0, 0.35, 1]
+    : [0, 0.28, 0.72, 1];
 
   const opacityRangeOutput = isFirst
     ? [1, 1, minOpacity, minOpacity]
@@ -100,9 +100,9 @@ function ActiveScrollFocusItem({
   const rawBlur = useTransform(scrollYProgress, blurRangeInput, blurRangeOutput);
   const opacity = useTransform(scrollYProgress, opacityRangeInput, opacityRangeOutput);
 
-  // Performance optimization: set filter to "none" when in focus (val <= 0.2px)
+  // Performance optimization: set filter to "none" when in focus (val <= 0.25px)
   const filter = useTransform(rawBlur, (val) => {
-    if (!mounted || val <= 0.2) return "none";
+    if (!mounted || val <= 0.25) return "none";
     return `blur(${val.toFixed(1)}px)`;
   });
 
@@ -114,7 +114,7 @@ function ActiveScrollFocusItem({
         filter: mounted ? filter : "none",
         opacity: mounted ? opacity : 1,
       }}
-      className={`w-full transition-[filter,opacity] duration-300 ease-out ${className}`}
+      className={`w-full transition-[filter,opacity] duration-300 ease-out will-change-[filter,opacity] ${className}`}
     >
       {children}
     </motion.div>

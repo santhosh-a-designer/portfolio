@@ -44,11 +44,16 @@ export default function SelectedWorkV2() {
       num: "02",
       title: "SHOW & SELL",
       category: "ECOMMERCE / SCHEDULER",
+      badge: "CTA / VIDEO CALL / IN-CALL CHECKOUT",
       href: "/case-studies/parla-show-and-sell",
-      image: "/case-studies/parla/Admin_Dashboard_Clean.webp",
+      image: "/case-studies/parla/parla-dashboard-mockup.webp",
       mockupType: "parla",
-      techStack: ["Next.js", "TypeScript", "Tailwind", "Figma"],
-      description: "Conversion-driven ecommerce scheduling platform for high-value retail appointments across UK & US markets.",
+      techStack: ["Figma", "Next.js", "TypeScript", "Tailwind", "WebRTC Video", "Ecommerce CRM"],
+      description: (
+        <>
+          Bridging high-value retail ecommerce and instant human trust — an assisted-selling platform connecting online shoppers directly to retail floor specialists via <span className="text-[#FF462D] font-black">ONE-CLICK SCHEDULING</span>, interactive video consultation, and in-call checkout that turns browsing doubt into immediate sales with <span className="inline-block px-1.5 py-0.5 bg-[#FAED00] text-black font-black border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] text-[10.5px] sm:text-[11.5px] tracking-tight">38% FRICTION REDUCTION</span>.
+        </>
+      ),
     },
     {
       id: "03",
@@ -58,11 +63,14 @@ export default function SelectedWorkV2() {
       badge: "STORE / CHECKOUT / TRACKING",
       href: "/case-studies/we-two-pets",
       liveUrl: "https://www.wetwopets.com/",
-      image: "/case-studies/we-two-pets/home.jpg",
+      image: "/case-studies/we-two-pets/wetwo-hero-mockup.webp",
       mockupType: "forma",
-      techStack: ["Next.js", "TypeScript", "Supabase", "Cashfree"],
-      description:
-        "From an affiliate sketch to a store that owns the order — a Pet Engine hunts gear India does not already sell, and two people vote before it goes live.",
+      techStack: ["Next.js", "TypeScript", "Tailwind", "Supabase", "FastAPI", "Gemini AI", "Cashfree"],
+      description: (
+        <>
+          From dropship noise to an editorial brand that owns the order — powered by an <span className="text-[#FF462D] font-black">AUTONOMOUS AI GAP ENGINE</span> that scours global catalogs, enforces an <span className="text-[#FF462D] font-black">INDIA-AVAILABILITY VETO</span>, and requires <span className="inline-block px-1.5 py-0.5 bg-[#FAED00] text-black font-black border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] text-[10.5px] sm:text-[11.5px] tracking-tight">TWO HUMAN VOTES</span> before any exclusive pet essential ever reaches the live storefront.
+        </>
+      ),
     },
   ];
 

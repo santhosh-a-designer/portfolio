@@ -83,7 +83,7 @@ export default function ExperienceSectionV2() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const isInView = useInView(sectionRef, { once: false, amount: 0.18 });
 
   const toggleExperience = (idx: number) => {
     setOpenIndex(openIndex === idx ? null : idx);
@@ -93,186 +93,205 @@ export default function ExperienceSectionV2() {
     <section id="experience" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
 
-      <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col">
+      <div ref={sectionRef} className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white flex flex-col relative overflow-hidden">
         
         {/* ─── Top Header Strip: Yellow Stats Box + Track Record Headline & Resume Link ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-12 border-b-2 border-black bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-12 bg-white relative">
           
-          {/* Left Block: Yellow 05+ Years Exp */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-4 lg:col-span-3 bg-[#FAED00] border-b-2 md:border-b-0 md:border-r-2 border-black p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center text-center select-none"
-          >
-            <span className="text-4xl min-[360px]:text-5xl sm:text-6xl font-black font-mono tracking-tighter text-black leading-none mb-1">
-              06+
-            </span>
-            <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-black font-mono">
-              YEARS EXP.
-            </span>
-            <div className="w-10 sm:w-12 h-1 bg-black mt-2 sm:mt-2.5 mb-1 sm:mb-1.5" />
-            <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-black/80">
-              PROVEN IMPACT
-            </span>
-          </motion.div>
+          {/* Left Block: Yellow 06+ Years Exp */}
+          <div className="md:col-span-4 lg:col-span-3 bg-[#FAED00] p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center text-center select-none relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.25, delay: 0.2, ease: "easeOut" }}
+              className="flex flex-col items-center justify-center text-center w-full"
+            >
+              <span className="text-4xl min-[360px]:text-5xl sm:text-6xl font-black font-mono tracking-tighter text-black leading-none mb-1">
+                06+
+              </span>
+              <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-black font-mono">
+                YEARS EXP.
+              </span>
+              <div className="w-10 sm:w-12 h-1 bg-black mt-2 sm:mt-2.5 mb-1 sm:mb-1.5" />
+              <span className="text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-black/80">
+                PROVEN IMPACT
+              </span>
+            </motion.div>
+
+            {/* Vertical dividing line between Yellow Box and Content (hidden on mobile, visible md+) */}
+            <motion.div
+              initial={{ scaleY: 0 }}
+              animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="hidden md:block absolute top-0 bottom-0 right-0 w-[2px] bg-black origin-top z-10"
+            />
+            {/* Mobile bottom divider for yellow box */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="md:hidden absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-10"
+            />
+          </div>
 
           {/* Middle & Right Block: Track Record Statement + View Resume */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="md:col-span-8 lg:col-span-9 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6 bg-white relative"
-          >
-            <span className="absolute top-2 right-3 sm:right-4 text-[9px] sm:text-[10px] font-mono text-zinc-400 italic">
-              <span className="text-[#FF462D] not-italic font-bold">//</span> TRACK_RECORD_INDEX
-            </span>
-            <div className="max-w-2xl">
-              <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2 font-mono">
-                <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-widest text-[#FF462D]">
-                  CAREER &amp; TRACK RECORD
-                </span>
-                <span className="text-zinc-300">/</span>
-                <span className="text-[9.5px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
-                  4 MILESTONES
-                </span>
+          <div className="md:col-span-8 lg:col-span-9 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6 bg-white relative">
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+              transition={{ duration: 0.28, delay: 0.22, ease: "easeOut" }}
+              className="w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 sm:gap-6"
+            >
+              <span className="absolute top-2 right-3 sm:right-4 text-[9px] sm:text-[10px] font-mono text-zinc-400 italic">
+                <span className="text-[#FF462D] not-italic font-bold">//</span> TRACK_RECORD_INDEX
+              </span>
+              <div className="max-w-2xl">
+                <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2 font-mono">
+                  <span className="text-[9.5px] sm:text-[10px] font-black uppercase tracking-widest text-[#FF462D]">
+                    CAREER &amp; TRACK RECORD
+                  </span>
+                  <span className="text-zinc-300">/</span>
+                  <span className="text-[9.5px] sm:text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500">
+                    4 MILESTONES
+                  </span>
+                </div>
+                <h2 className="text-xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-mono mb-2 sm:mb-3">
+                  TRACK RECORD.
+                </h2>
+                <p className="text-[11px] sm:text-sm font-bold uppercase tracking-wider text-zinc-700 leading-relaxed font-sans">
+                  FROM 0-TO-1 VENTURES TO GLOBAL ENTERPRISES. BUILDING SCALABLE DESIGN SYSTEMS, DIGITAL PLATFORMS, AND INTELLIGENT AI EXPERIENCES AS A DESIGN ENGINEER.
+                </p>
               </div>
-              <h2 className="text-xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-black leading-tight font-mono mb-2 sm:mb-3">
-                TRACK RECORD.
-              </h2>
-              <p className="text-[11px] sm:text-sm font-bold uppercase tracking-wider text-zinc-700 leading-relaxed font-sans">
-                FROM 0-TO-1 VENTURES TO GLOBAL ENTERPRISES. BUILDING SCALABLE DESIGN SYSTEMS, DIGITAL PLATFORMS, AND INTELLIGENT AI EXPERIENCES AS A DESIGN ENGINEER.
-              </p>
-            </div>
 
-            <div className="shrink-0 pt-1 lg:pt-0">
-              <button
-                type="button"
-                onClick={() => setResumeOpen(true)}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-3 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs font-black tracking-widest uppercase select-none group cursor-pointer"
-              >
-                <span>VIEW FULL RESUME</span>
-                <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </button>
-            </div>
-          </motion.div>
+              <div className="shrink-0 pt-1 lg:pt-0">
+                <button
+                  type="button"
+                  onClick={() => setResumeOpen(true)}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-3 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs font-black tracking-widest uppercase select-none group cursor-pointer"
+                >
+                  <span>VIEW FULL RESUME</span>
+                  <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </button>
+              </div>
+            </motion.div>
+          </div>
 
+          {/* Horizontal dividing line under Header Strip */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+            transition={{ duration: 0.35, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-20"
+          />
         </div>
 
         {/* ─── 4-Column Experience Grid: 4 Clean Grid Boxes ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b-0 bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-white relative">
           {experiences.map((exp, idx) => {
             const isHighlight = exp.isHighlight;
             const isCurrent = exp.isCurrent;
 
             return (
-              <motion.div
+              <div
                 key={exp.num}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.55, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                className={`flex flex-col justify-between p-4 sm:p-6 md:p-7 transition-colors group relative border-b-2 lg:border-b-0 ${
-                  idx % 2 === 0 ? "md:border-r-2" : "md:border-r-0"
-                } ${
-                  idx < 3 ? "lg:border-r-2" : "lg:border-r-0"
-                } ${
-                  idx < 2 ? "md:border-b-2 lg:border-b-0" : "md:border-b-0"
-                } ${
-                  idx === 3 ? "border-b-0" : ""
-                } border-black ${
+                className={`flex flex-col justify-between p-4 sm:p-6 md:p-7 transition-colors group relative ${
                   isCurrent
                     ? "bg-[#0FE0E3] hover:bg-[#0cd0d3] text-black"
                     : "bg-white hover:bg-zinc-50/70 text-black"
                 }`}
               >
-                {/* Top Number & Period Header */}
-                <div>
-                  <div className="flex items-start justify-between gap-4 pb-4 mb-5 border-b-2 border-black">
-                    <span className="text-3xl sm:text-4xl font-black font-mono tracking-tighter text-black leading-none">
-                      {exp.num}
-                    </span>
-                    <div className="flex flex-col items-end text-right gap-1">
-                      <div className="flex items-center gap-1.5 flex-wrap justify-end">
-                        {isCurrent && (
-                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-black text-[#0FE0E3] font-mono text-[9px] font-black uppercase tracking-wider border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse" />
-                            CURRENT
+                {/* Internal card content with quick snap reveal right after grid assembly */}
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                  transition={{ duration: 0.28, delay: 0.2 + idx * 0.06, ease: "easeOut" }}
+                  className="flex flex-col justify-between h-full"
+                >
+                  {/* Top Number & Period Header */}
+                  <div>
+                    <div className="flex items-start justify-between gap-4 pb-4 mb-5 border-b-2 border-black">
+                      <span className="text-3xl sm:text-4xl font-black font-mono tracking-tighter text-black leading-none">
+                        {exp.num}
+                      </span>
+                      <div className="flex flex-col items-end text-right gap-1">
+                        <div className="flex items-center gap-1.5 flex-wrap justify-end">
+                          {isCurrent && (
+                            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-black text-[#0FE0E3] font-mono text-[9px] font-black uppercase tracking-wider border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse" />
+                              CURRENT
+                            </span>
+                          )}
+                          <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-wider text-black">
+                            {exp.period}
                           </span>
-                        )}
-                        <span className="text-[10px] sm:text-xs font-mono font-black uppercase tracking-wider text-black">
-                          {exp.period}
+                        </div>
+                        <span className={`text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider ${
+                          isCurrent ? "text-black/80" : "text-zinc-600"
+                        }`}>
+                          {exp.location}
                         </span>
                       </div>
-                      <span className={`text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider ${
+                    </div>
+
+                    {/* Role Title & Company */}
+                    <div className="mb-4">
+                      <h3
+                        className={`text-base sm:text-lg font-black uppercase tracking-tight leading-snug mb-1 transition-colors ${
+                          isCurrent
+                            ? "text-black"
+                            : isHighlight
+                            ? "text-[#FF462D]"
+                            : "text-black group-hover:text-[#FF462D]"
+                        }`}
+                      >
+                        {exp.role}
+                      </h3>
+                      <span className={`text-xs font-mono font-bold uppercase tracking-wider block ${
                         isCurrent ? "text-black/80" : "text-zinc-600"
                       }`}>
-                        {exp.location}
+                        {exp.company}
                       </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className={`text-xs font-bold uppercase tracking-wide leading-relaxed mb-6 ${
+                      isCurrent ? "text-black" : "text-zinc-800"
+                    }`}>
+                      {exp.description}
+                    </p>
+
+                    {/* Key Achievements Bullet Points */}
+                    <div className={`space-y-2.5 pt-4 border-t-2 ${isCurrent ? "border-black/20" : "border-black/10"} mb-6`}>
+                      <span className={`text-[9px] font-mono font-black uppercase tracking-widest block ${
+                        isCurrent ? "text-black/80" : "text-zinc-500"
+                      }`}>
+                        KEY ACHIEVEMENTS
+                      </span>
+                      <ul className="space-y-2">
+                        {exp.highlights.map((h, i) => (
+                          <li key={i} className={`text-xs font-medium flex items-start gap-2 leading-snug ${
+                            isCurrent ? "text-black font-semibold" : "text-zinc-800"
+                          }`}>
+                            <span className={`${isCurrent ? "text-black" : "text-[#FF462D]"} font-bold text-sm leading-none mt-0.5 shrink-0`}>■</span>
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
 
-                  {/* Role Title & Company */}
-                  <div className="mb-4">
-                    <h3
-                      className={`text-base sm:text-lg font-black uppercase tracking-tight leading-snug mb-1 transition-colors ${
-                        isCurrent
-                          ? "text-black"
-                          : isHighlight
-                          ? "text-[#FF462D]"
-                          : "text-black group-hover:text-[#FF462D]"
-                      }`}
-                    >
-                      {exp.role}
-                    </h3>
-                    <span className={`text-xs font-mono font-bold uppercase tracking-wider block ${
-                      isCurrent ? "text-black/80" : "text-zinc-600"
-                    }`}>
-                      {exp.company}
-                    </span>
-                  </div>
-
-                  {/* Description */}
-                  <p className={`text-xs font-bold uppercase tracking-wide leading-relaxed mb-6 ${
-                    isCurrent ? "text-black" : "text-zinc-800"
-                  }`}>
-                    {exp.description}
-                  </p>
-
-                  {/* Key Achievements Bullet Points */}
-                  <div className={`space-y-2.5 pt-4 border-t-2 ${isCurrent ? "border-black/20" : "border-black/10"} mb-6`}>
-                    <span className={`text-[9px] font-mono font-black uppercase tracking-widest block ${
+                  {/* Skills Tags Bottom Row */}
+                  <div className={`pt-4 border-t-2 ${isCurrent ? "border-black/20" : "border-black/10"} mt-auto`}>
+                    <span className={`text-[9px] font-mono font-black uppercase tracking-widest block mb-2 ${
                       isCurrent ? "text-black/80" : "text-zinc-500"
                     }`}>
-                      KEY ACHIEVEMENTS
+                      CORE EXPERTISE
                     </span>
-                    <ul className="space-y-2">
-                      {exp.highlights.map((h, i) => (
-                        <li key={i} className={`text-xs font-medium flex items-start gap-2 leading-snug ${
-                          isCurrent ? "text-black font-semibold" : "text-zinc-800"
-                        }`}>
-                          <span className={`${isCurrent ? "text-black" : "text-[#FF462D]"} font-bold text-sm leading-none mt-0.5 shrink-0`}>■</span>
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Skills Tags Bottom Row */}
-                <div className={`pt-4 border-t-2 ${isCurrent ? "border-black/20" : "border-black/10"} mt-auto`}>
-                  <span className={`text-[9px] font-mono font-black uppercase tracking-widest block mb-2 ${
-                    isCurrent ? "text-black/80" : "text-zinc-500"
-                  }`}>
-                    CORE EXPERTISE
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {exp.skills.map((s) => (
-                      <span
-                        key={s}
-                        className={`text-[10px] font-mono font-bold px-2 py-1 border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-colors select-none ${
+                    <div className="flex flex-wrap gap-1.5">
+                      {exp.skills.map((s) => (
+                        <span
+                          key={s}
+                          className={`text-[10px] font-mono font-bold px-2 py-1 border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-colors select-none ${
                           isCurrent
                             ? "bg-white text-black hover:bg-zinc-100"
                             : "bg-white text-black group-hover:border-[#FF462D]"
@@ -285,6 +304,32 @@ export default function ExperienceSectionV2() {
                   </div>
                 </div>
               </motion.div>
+
+              {/* Dynamic Blueprint Drawing Lines for Grid Columns */}
+              {/* Right Vertical Divider (Desktop 4-col: indices 0,1,2; Tablet 2-col: indices 0,2) */}
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={isInView ? { scaleY: 1 } : { scaleY: 0 }}
+                transition={{ duration: 0.35, delay: 0.08 + (idx * 0.04), ease: [0.22, 1, 0.36, 1] }}
+                className={`absolute top-0 bottom-0 right-0 w-[2px] bg-black origin-top z-10 ${
+                  idx < 3 ? "lg:block" : "lg:hidden"
+                } ${
+                  idx % 2 === 0 ? "md:block" : "md:hidden"
+                } hidden`}
+              />
+
+              {/* Bottom Horizontal Divider (Mobile: 0,1,2; Tablet: 0,1) */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+                transition={{ duration: 0.35, delay: 0.08 + (idx * 0.04), ease: [0.22, 1, 0.36, 1] }}
+                className={`absolute bottom-0 left-0 right-0 h-[2px] bg-black origin-left z-10 ${
+                  idx < 3 ? "block lg:hidden" : "hidden"
+                } ${
+                  idx < 2 ? "md:block" : "md:hidden"
+                }`}
+              />
+            </div>
             );
           })}
         </div>

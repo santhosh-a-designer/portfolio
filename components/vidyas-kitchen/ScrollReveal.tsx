@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
 type Props = {
   children: ReactNode;
@@ -9,52 +10,48 @@ type Props = {
   delay?: number;
 };
 
-/** Slide up + fade when section enters the viewport */
+/** Slide up + fade when entering, and dynamically blur when scrolled out of viewport focus */
 export default function ScrollReveal({ children, className = "", delay = 0 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setReducedMotion(mq.matches);
-    sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
+    setMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (reducedMotion) {
-      setVisible(true);
-      return;
-    }
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [reducedMotion]);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Dynamic depth of field: sharp in center (0.28 to 0.72), soft blur (5.5px) and opacity (0.55) at edges
+  const rawBlur = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [5.5, 0, 0, 5.5]);
+  const opacity = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [0.55, 1, 1, 0.55]);
+
+  const filter = useTransform(rawBlur, (val) => {
+    if (!mounted || reduce || val <= 0.25) return "none";
+    return `blur(${val.toFixed(1)}px)`;
+  });
+
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={className}
-      style={
-        reducedMotion
-          ? undefined
-          : {
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(28px)",
-              transition: `opacity 0.55s ease ${delay}ms, transform 0.55s ease ${delay}ms`,
-            }
-      }
+      className={`w-full transition-[filter,opacity] duration-300 ease-out will-change-[filter,opacity] ${className}`}
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.55, delay: delay / 1000, ease: [0.22, 1, 0.36, 1] }}
+      style={{
+        filter: mounted ? filter : "none",
+        opacity: mounted ? opacity : 1,
+      }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

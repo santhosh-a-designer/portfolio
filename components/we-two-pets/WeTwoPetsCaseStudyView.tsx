@@ -22,6 +22,8 @@ import {
   weTwoTools,
 } from "@/lib/weTwoPetsCaseStudyContent";
 
+import ScrollFocusWrapper from "@/components/ScrollFocusWrapper";
+
 function SectionWindow({
   num,
   title,
@@ -34,17 +36,19 @@ function SectionWindow({
   allowOverflow?: boolean;
 }) {
   return (
-    <section
-      className={`border-2 border-black bg-white shadow-[4px_4px_0_0_#000] sm:shadow-[6px_6px_0_0_#000] ${
-        allowOverflow ? "overflow-visible" : "overflow-hidden"
-      }`}
-    >
-      <div className="flex h-10 items-center gap-2 border-b-2 border-black bg-[#E2E8F0] px-3 font-mono text-xs select-none sm:h-11 sm:px-4">
-        <span className="bg-[#FF462D] px-2 py-0.5 text-[10px] font-bold text-white">{num}</span>
-        <span className="truncate font-bold uppercase tracking-wider text-black">{title}</span>
-      </div>
-      <div className="p-4 sm:p-8 md:p-10">{children}</div>
-    </section>
+    <ScrollFocusWrapper>
+      <section
+        className={`border-2 border-black bg-white shadow-[4px_4px_0_0_#000] sm:shadow-[6px_6px_0_0_#000] ${
+          allowOverflow ? "overflow-visible" : "overflow-hidden"
+        }`}
+      >
+        <div className="flex h-10 items-center gap-2 border-b-2 border-black bg-[#E2E8F0] px-3 font-mono text-xs select-none sm:h-11 sm:px-4">
+          <span className="bg-[#FF462D] px-2 py-0.5 text-[10px] font-bold text-white">{num}</span>
+          <span className="truncate font-bold uppercase tracking-wider text-black">{title}</span>
+        </div>
+        <div className="p-4 sm:p-8 md:p-10">{children}</div>
+      </section>
+    </ScrollFocusWrapper>
   );
 }
 

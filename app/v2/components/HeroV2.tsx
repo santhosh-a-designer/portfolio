@@ -172,66 +172,137 @@ export default function HeroV2() {
               </motion.div>
             </div>
 
-            {/* ─── Bottom: Unified 2×3 Stats & Status Grid ─── */}
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-3 grid-rows-2 border-t-2 border-black bg-white select-none"
-            >
+            {/* ─── Bottom: Unified 2×3 Stats & Status Grid with Architectural Line Drafting ─── */}
+            <div className="relative grid grid-cols-3 grid-rows-2 bg-white select-none">
+              {/* Animated Top Border Line */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.35, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute top-0 left-0 right-0 h-[2px] bg-black origin-left z-20"
+              />
+
+              {/* Animated Middle Horizontal Divider Line (between row 1 and row 2) */}
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 0.35, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute top-1/2 left-0 right-0 h-[2px] bg-black origin-left z-20"
+              />
+
+              {/* Animated Column 1 Vertical Divider Line (after 1st column) */}
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 0.35, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute top-0 bottom-0 left-1/3 w-[2px] bg-black origin-top z-20 -translate-x-[1px]"
+              />
+
+              {/* Animated Column 2 Vertical Divider Line (after 2nd column) */}
+              <motion.div
+                initial={{ scaleY: 0 }}
+                animate={{ scaleY: 1 }}
+                transition={{ duration: 0.35, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute top-0 bottom-0 left-2/3 w-[2px] bg-black origin-top z-20 -translate-x-[1px]"
+              />
+
               {/* Row 1, Col 1: 6+ YEARS */}
-              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-b-2 border-black min-h-[72px] sm:min-h-[88px]">
-                <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
-                  6+
-                </span>
-                <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
-                  YEARS
-                </span>
+              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default min-h-[72px] sm:min-h-[88px] relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.25, delay: 0.38, ease: "easeOut" }}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
+                    6+
+                  </span>
+                  <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
+                    YEARS
+                  </span>
+                </motion.div>
               </div>
 
               {/* Row 1, Col 2: US·UK CLIENTS */}
-              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-b-2 border-black min-h-[72px] sm:min-h-[88px]">
-                <span className="text-base min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
-                  US·UK
-                </span>
-                <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
-                  CLIENTS
-                </span>
+              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default min-h-[72px] sm:min-h-[88px] relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.25, delay: 0.42, ease: "easeOut" }}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <span className="text-base min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
+                    US·UK
+                  </span>
+                  <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
+                    CLIENTS
+                  </span>
+                </motion.div>
               </div>
 
               {/* Row 1, Col 3: Green Box - Available for full-time */}
-              <div className="border-b-2 border-black bg-[#00C16A] p-2 min-[360px]:p-2.5 sm:p-4 md:p-5 flex flex-col items-center justify-center group cursor-default h-full min-h-[72px] sm:min-h-[88px]">
-                <span className="text-black font-black text-[8.5px] min-[360px]:text-[9.5px] min-[400px]:text-[10.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-center leading-tight font-mono">
-                  AVAILABLE<br />FOR FULL-TIME
-                </span>
-                <span className="text-[8px] sm:text-[9px] font-mono text-black/50 mt-0.5 sm:mt-1 hidden min-[360px]:inline-block opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                  // open to remote
-                </span>
+              <div className="bg-[#00C16A] p-2 min-[360px]:p-2.5 sm:p-4 md:p-5 flex flex-col items-center justify-center group cursor-default h-full min-h-[72px] sm:min-h-[88px] relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.25, delay: 0.45, ease: "easeOut" }}
+                  className="flex flex-col items-center justify-center text-center"
+                >
+                  <span className="text-black font-black text-[8.5px] min-[360px]:text-[9.5px] min-[400px]:text-[10.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-center leading-tight font-mono">
+                    AVAILABLE<br />FOR FULL-TIME
+                  </span>
+                  <span className="text-[8px] sm:text-[9px] font-mono text-black/50 mt-0.5 sm:mt-1 hidden min-[360px]:inline-block opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    // open to remote
+                  </span>
+                </motion.div>
               </div>
 
               {/* Row 2, Col 1: 10+ PROJECTS */}
-              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-black min-h-[72px] sm:min-h-[88px]">
-                <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
-                  10+
-                </span>
-                <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
-                  PROJECTS
-                </span>
+              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default min-h-[72px] sm:min-h-[88px] relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.25, delay: 0.48, ease: "easeOut" }}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
+                    10+
+                  </span>
+                  <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
+                    PROJECTS
+                  </span>
+                </motion.div>
               </div>
 
               {/* Row 2, Col 2: 100+ MENTORED */}
-              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default border-r-2 border-black min-h-[72px] sm:min-h-[88px]">
-                <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
-                  100+
-                </span>
-                <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
-                  MENTORED
-                </span>
+              <div className="p-2.5 sm:p-4 md:p-5 flex flex-col justify-center items-center text-center hover:bg-zinc-50 transition-colors group cursor-default min-h-[72px] sm:min-h-[88px] relative">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.25, delay: 0.52, ease: "easeOut" }}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <span className="text-lg min-[360px]:text-xl sm:text-2xl md:text-3xl font-black text-[#FF462D] tracking-tight leading-none font-mono mb-0.5 group-hover:scale-105 transition-transform">
+                    100+
+                  </span>
+                  <span className="text-[8px] min-[360px]:text-[9px] sm:text-[10px] font-black tracking-widest uppercase text-zinc-500 font-mono">
+                    MENTORED
+                  </span>
+                </motion.div>
               </div>
 
               {/* Row 2, Col 3: Orange Box - Location animated cell */}
               <div className="relative overflow-hidden h-full min-h-[72px] sm:min-h-[88px]">
-                <LocationAnimatedCell />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.25, delay: 0.55, ease: "easeOut" }}
+                  className="w-full h-full"
+                >
+                  <LocationAnimatedCell />
+                </motion.div>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* ─────────── RIGHT COLUMN: Design → Code Card ─────────── */}
@@ -335,7 +406,7 @@ function DesignToCodeMorphingCard() {
   const [cycleTime, setCycleTime] = useState(0);
   const cardContainerRef = useRef<HTMLDivElement>(null);
   const codeContainerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(cardContainerRef, { margin: "0px" });
+  const isInView = useInView(cardContainerRef, { margin: "100px" });
 
   const fullCodeLines = [
     {
@@ -695,17 +766,29 @@ function DesignToCodeMorphingCard() {
     return () => cancelAnimationFrame(animationFrameId);
   }, [CYCLE_MS, isInView]);
 
-  // Typing sync: code animates; design preview stays visible in the frame (no slide-off empty state).
+  // 4-Phase loop calculation:
+  // Phase 1 (0ms -> 7500ms): Continuous slide down (0% -> 135%) synchronized with typing
+  // Phase 2 (7500ms -> 8300ms): Image is held off-screen below (135%), fully revealing technical grid lines
+  // Phase 3 (8300ms -> 9700ms): Image smoothly loops in from top (-135% -> 0%) with cubic ease-out
+  // Phase 4 (9700ms -> 10200ms): Settle at 0% before next cycle seamlessly starts
+  let imageTranslateY = 0;
   let typedChars = 0;
 
   if (cycleTime < SLIDE_DOWN_MS) {
     const p = cycleTime / SLIDE_DOWN_MS;
+    imageTranslateY = p * 135;
     typedChars = Math.min(totalLength, Math.floor(p * totalLength));
   } else if (cycleTime < SLIDE_DOWN_MS + HOLD_MS) {
+    imageTranslateY = 135;
     typedChars = totalLength;
   } else if (cycleTime < SLIDE_DOWN_MS + HOLD_MS + ENTER_LOOP_MS) {
+    const enterP = (cycleTime - (SLIDE_DOWN_MS + HOLD_MS)) / ENTER_LOOP_MS;
+    // Cubic ease-out for smooth decelerating landing into 0%
+    const eased = 1 - Math.pow(1 - enterP, 3);
+    imageTranslateY = -135 + eased * 135;
     typedChars = 0;
   } else {
+    imageTranslateY = 0;
     typedChars = 0;
   }
 
@@ -761,7 +844,13 @@ function DesignToCodeMorphingCard() {
           <span className="absolute bottom-2 left-2 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
           <span className="absolute bottom-2 right-2 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
 
-          <div className="relative z-10 w-[min(100%,480px)] max-h-full shrink-0 aspect-[3200/2080] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
+          <div
+            style={{
+              transform: `translateY(${imageTranslateY}%)`,
+              willChange: "transform",
+            }}
+            className="relative z-10 w-[min(100%,480px)] max-h-full shrink-0 aspect-[3200/2080] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
+          >
             <Image
               src="/login_website.webp"
               alt="Oracle Fusion login screen — design handoff reference"
