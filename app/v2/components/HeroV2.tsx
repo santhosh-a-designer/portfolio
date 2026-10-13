@@ -52,36 +52,44 @@ export default function HeroV2() {
       question: "WHAT I BRING TO YOUR TEAM:",
       answer: "User empathy, rock-solid design systems, and thoughtful engineering handoffs.",
     },
-  ];
+  ];  const [activePrompt, setActivePrompt] = useState(0);
+  const [displayedAnswer, setDisplayedAnswer] = useState(interviewPrompts[0].answer);
+  const [isFading, setIsFading] = useState(false);
+  const activePromptRef = useRef(activePrompt);
+  activePromptRef.current = activePrompt;
 
-  const [activePrompt, setActivePrompt] = useState(0);
-  const [displayedAnswer, setDisplayedAnswer] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
-
-  // Typewriter effect triggered on prompt selection — relaxed, human pace
+  // Buttery-smooth, flicker-free typewriter effect
   useEffect(() => {
-    setDisplayedAnswer("");
-    setIsTyping(true);
+    let typeInterval: NodeJS.Timeout | null = null;
+    let startTimeout: NodeJS.Timeout | null = null;
+    let fadeTimeout: NodeJS.Timeout | null = null;
 
-    const fullAnswer = interviewPrompts[activePrompt].answer;
-    let charIndex = 0;
+    // Trigger subtle, quick fade to clear previous text without any layout shift
+    setIsFading(true);
+    fadeTimeout = setTimeout(() => {
+      setDisplayedAnswer("");
+      setIsFading(false);
 
-    // Small delay so question registers first
-    const startTimeout = setTimeout(() => {
-      const interval = setInterval(() => {
-        charIndex++;
-        setDisplayedAnswer(fullAnswer.slice(0, charIndex));
+      const fullAnswer = interviewPrompts[activePrompt].answer;
+      let charIndex = 0;
 
-        if (charIndex >= fullAnswer.length) {
-          clearInterval(interval);
-          setIsTyping(false);
-        }
-      }, 28); // gentle, readable typewriter rhythm
+      startTimeout = setTimeout(() => {
+        typeInterval = setInterval(() => {
+          charIndex++;
+          setDisplayedAnswer(fullAnswer.slice(0, charIndex));
 
-      return () => clearInterval(interval);
+          if (charIndex >= fullAnswer.length) {
+            if (typeInterval) clearInterval(typeInterval);
+          }
+        }, 26); // gentle, pleasing typewriter cadence
+      }, 50);
     }, 120);
 
-    return () => clearTimeout(startTimeout);
+    return () => {
+      if (fadeTimeout) clearTimeout(fadeTimeout);
+      if (startTimeout) clearTimeout(startTimeout);
+      if (typeInterval) clearInterval(typeInterval);
+    };
   }, [activePrompt]);
 
   return (
@@ -110,37 +118,32 @@ export default function HeroV2() {
                 <span className="text-black">MENTOR</span>
               </motion.div>
 
-              {/* Main Headline Answer Display with Typewriter effect */}
+              {/* Main Headline Answer Display — locked stable container, zero jitter */}
               <motion.div
                 variants={itemVariants}
                 className="relative flex flex-col my-auto"
               >
-                <div className="relative w-full min-h-[75px] sm:min-h-[90px] md:min-h-[105px] lg:min-h-[140px] flex items-start overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={activePrompt}
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -6 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="text-lg sm:text-2xl md:text-3xl lg:text-[30px] xl:text-[34px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading"
-                    >
-                      <span className="text-[#FF462D] block sm:inline mr-2 sm:mr-3">
-                        {interviewPrompts[activePrompt].question}
-                      </span>
-                      <span>{displayedAnswer}</span>
-                      <span className="inline-block w-2 sm:w-2.5 h-[1.1em] bg-black ml-1 align-baseline animate-pulse" />
-                    </motion.div>
-                  </AnimatePresence>
+                <div className="relative w-full min-h-[90px] sm:min-h-[110px] md:min-h-[125px] lg:min-h-[150px] flex items-start overflow-hidden">
+                  <div
+                    className={`transition-opacity duration-150 ease-out text-lg sm:text-2xl md:text-3xl lg:text-[30px] xl:text-[34px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading ${
+                      isFading ? "opacity-0" : "opacity-100"
+                    }`}
+                  >
+                    <span className="text-[#FF462D] block sm:inline mr-2 sm:mr-3">
+                      {interviewPrompts[activePrompt].question}
+                    </span>
+                    <span>{displayedAnswer}</span>
+                    <span className="inline-block w-2 sm:w-2.5 h-[1.1em] bg-black ml-1 align-baseline animate-pulse" />
+                  </div>
                 </div>
 
-              {/* Interactive Question Prompts: Tap to Ask */}
+                {/* Interactive Question Prompts: Full equal-height wrapped cards */}
                 <div className="flex flex-col gap-2 mt-4 sm:mt-5">
                   <div className="flex items-center gap-2 text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-500">
                     <span className="w-1.5 h-1.5 bg-[#FF462D] inline-block" />
                     <span>SELECT AN INTERVIEW QUESTION TO ASK:</span>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 items-stretch">
                     {interviewPrompts.map((p, idx) => {
                       const isActive = activePrompt === idx;
                       return (
@@ -148,20 +151,20 @@ export default function HeroV2() {
                           key={p.id}
                           type="button"
                           onClick={() => setActivePrompt(idx)}
-                          className={`text-left p-2 sm:p-2.5 border-2 border-black transition-all cursor-pointer font-mono select-none group ${
+                          className={`text-left p-2.5 sm:p-3 border-2 border-black transition-all cursor-pointer font-mono select-none group flex flex-col justify-between min-h-[64px] sm:min-h-[72px] ${
                             isActive
                               ? "bg-black text-white shadow-[3px_3px_0px_0px_rgba(255,70,45,1)] translate-x-[1px] translate-y-[1px]"
                               : "bg-white text-black hover:bg-zinc-50 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5"
                           }`}
                         >
                           <div
-                            className={`text-[9px] font-black tracking-wider uppercase mb-1 ${
+                            className={`text-[9px] font-black tracking-wider uppercase mb-1 shrink-0 ${
                               isActive ? "text-[#FF462D]" : "text-zinc-500"
                             }`}
                           >
                             {p.badge}
                           </div>
-                          <div className="text-[10px] sm:text-[11px] font-black tracking-tight leading-snug uppercase line-clamp-1">
+                          <div className="text-[10px] sm:text-[11px] font-black tracking-tight leading-snug uppercase break-words">
                             {p.promptLabel}
                           </div>
                         </button>
