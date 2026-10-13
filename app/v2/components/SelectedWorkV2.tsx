@@ -8,6 +8,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 import ProjectWindowStack, { ProjectItem } from "./ProjectWindowStack";
+import GraphicDesignModal from "./GraphicDesignModal";
+import { POSTER_PROJECTS } from "@/lib/graphicDesignProjects/posterProjects";
 
 const clientLogos = [
   { name: "Makeon", src: "/clients/makeon-norm.webp", widthClass: "w-24 sm:w-28 md:w-32", heightClass: "h-6 sm:h-7 md:h-7.5" },
@@ -20,6 +22,14 @@ const clientLogos = [
 ];
 
 export default function SelectedWorkV2() {
+  const [isGraphicModalOpen, setIsGraphicModalOpen] = useState(false);
+  const [activeGraphicId, setActiveGraphicId] = useState("project-1");
+
+  const openGraphicProject = (id: string) => {
+    setActiveGraphicId(id);
+    setIsGraphicModalOpen(true);
+  };
+
   const projects: ProjectItem[] = [
     {
       id: "01",
@@ -221,43 +231,64 @@ export default function SelectedWorkV2() {
                   // VISUAL_SYSTEMS
                 </span>
                 <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
-                  POSTERS &amp; PRINT
+                  5 PRINT &amp; PACKAGING WORKS
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl font-black font-mono uppercase tracking-tight text-black mb-3">
                 GRAPHIC DESIGN ARCHIVE
               </h3>
-              <p className="text-xs sm:text-[13px] text-zinc-600 font-sans leading-relaxed mb-6 font-medium">
-                Brand identities, packaging typography, poster collections, and experimental visual systems crafted with rigorous aesthetic discipline.
+              <p className="text-xs sm:text-[13px] text-zinc-600 font-sans leading-relaxed mb-5 font-medium">
+                Brand identities, packaging typography, poster collections, and experimental visual systems. Tap any work below to inspect full details:
               </p>
 
-              {/* Graphic Design Highlights preview banner */}
-              <div className="p-4 border-2 border-black bg-zinc-50 mb-6 flex flex-col gap-2">
-                <span className="text-[10px] font-mono font-black text-black uppercase tracking-wider">
-                  FEATURED WORK HIGHLIGHTS:
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {["Brand Identity", "Packaging", "Poster Design", "Custom Typography", "Exhibition Print"].map((label) => (
-                    <span
-                      key={label}
-                      className="px-2 py-0.5 bg-white border border-black text-[10px] font-mono font-bold uppercase text-zinc-700"
-                    >
-                      {label}
-                    </span>
-                  ))}
-                </div>
+              {/* Interactive Graphic Design Work Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
+                {POSTER_PROJECTS.map((proj) => (
+                  <button
+                    key={proj.id}
+                    type="button"
+                    onClick={() => openGraphicProject(proj.id)}
+                    className="p-3 text-left border-2 border-black bg-zinc-50 hover:bg-[#FAED00]/15 hover:border-black transition-all cursor-pointer group/card flex flex-col justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(255,70,45,1)] hover:-translate-x-0.5 hover:-translate-y-0.5"
+                  >
+                    <div className="flex items-center justify-between gap-1 mb-1.5">
+                      <span className="text-[9px] font-mono font-black px-1.5 py-0.5 bg-black text-white uppercase tracking-wider">
+                        {proj.projectLabel}
+                      </span>
+                      <ArrowUpRight
+                        weight="bold"
+                        className="w-3.5 h-3.5 text-zinc-400 group-hover/card:text-[#FF462D] transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <div className="text-xs font-mono font-black uppercase tracking-tight text-black line-clamp-1 group-hover/card:text-[#FF462D] transition-colors">
+                        {proj.projectTitle}
+                      </div>
+                      <div className="text-[10px] text-zinc-500 font-sans line-clamp-1 mt-0.5">
+                        {proj.tagline}
+                      </div>
+                    </div>
+                  </button>
+                ))}
               </div>
             </div>
 
-            <Link
-              href="/graphic-design"
-              className="w-full py-3 px-4 bg-[#FF462D] hover:bg-[#ff3419] text-white font-mono font-black text-xs uppercase tracking-wider flex items-center justify-between transition-colors border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
+            <button
+              type="button"
+              onClick={() => openGraphicProject("project-1")}
+              className="w-full py-3 px-4 bg-[#FF462D] hover:bg-[#ff3419] text-white font-mono font-black text-xs uppercase tracking-wider flex items-center justify-between transition-colors border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 cursor-pointer"
             >
-              <span>EXPLORE GRAPHIC DESIGN WORK</span>
+              <span>INSPECT FULL GRAPHIC DESIGN ARCHIVE (5 PROJECTS)</span>
               <ArrowRight weight="bold" className="w-4 h-4 text-white" />
-            </Link>
+            </button>
           </div>
         </div>
+
+        {/* ─── Brutalist Graphic Design Inspection Modal ─── */}
+        <GraphicDesignModal
+          isOpen={isGraphicModalOpen}
+          onClose={() => setIsGraphicModalOpen(false)}
+          initialProjectId={activeGraphicId}
+        />
 
       </div>
     </section>
