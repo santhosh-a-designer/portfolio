@@ -9,6 +9,7 @@ import { useRef } from "react";
 
 import ProjectWindowStack, { ProjectItem } from "./ProjectWindowStack";
 import GraphicDesignModal from "./GraphicDesignModal";
+import UxUiShortsModal, { UX_SHORTS_DATA } from "./UxUiShortsModal";
 import { POSTER_PROJECTS } from "@/lib/graphicDesignProjects/posterProjects";
 
 const clientLogos = [
@@ -25,9 +26,17 @@ export default function SelectedWorkV2() {
   const [isGraphicModalOpen, setIsGraphicModalOpen] = useState(false);
   const [activeGraphicId, setActiveGraphicId] = useState("project-1");
 
+  const [isShortsModalOpen, setIsShortsModalOpen] = useState(false);
+  const [activeShortsId, setActiveShortsId] = useState("p1");
+
   const openGraphicProject = (id: string) => {
     setActiveGraphicId(id);
     setIsGraphicModalOpen(true);
+  };
+
+  const openShortsProject = (id: string) => {
+    setActiveShortsId(id);
+    setIsShortsModalOpen(true);
   };
 
   const projects: ProjectItem[] = [
@@ -180,47 +189,52 @@ export default function SelectedWorkV2() {
               <h3 className="text-xl sm:text-2xl font-black font-mono uppercase tracking-tight text-black mb-3">
                 UX / UI SHORTS
               </h3>
-              <p className="text-xs sm:text-[13px] text-zinc-600 font-sans leading-relaxed mb-6 font-medium">
-                Focused micro case-studies tackling real hardware, IoT telemetry, and rural banking kiosk workflows.
+              <p className="text-xs sm:text-[13px] text-zinc-600 font-sans leading-relaxed mb-5 font-medium">
+                Focused micro case-studies tackling real hardware, IoT telemetry, and rural banking kiosk workflows. Tap any short below:
               </p>
 
-              {/* Quick Pills */}
-              <div className="grid grid-cols-1 gap-2 mb-6">
-                {[
-                  { tag: "P1", name: "IR STUNNER", desc: "Smart hardware, 3D packaging & visualizer", accent: "#FF462D" },
-                  { tag: "P2", name: "iRASUS", desc: "EV battery telemetry & fleet intelligence", accent: "#0FE0E3" },
-                  { tag: "P3", name: "INDIAONE ATM", desc: "Multi-lingual rural banking kiosk workflow", accent: "#FAED00" },
-                ].map((item) => (
-                  <div
-                    key={item.tag}
-                    className="p-2.5 border border-black bg-zinc-50 flex items-center gap-3"
+              {/* Interactive Shorts Cards */}
+              <div className="grid grid-cols-1 gap-2.5 mb-6">
+                {UX_SHORTS_DATA.map((short) => (
+                  <button
+                    key={short.id}
+                    type="button"
+                    onClick={() => openShortsProject(short.id)}
+                    className="p-3 border-2 border-black bg-zinc-50 hover:bg-[#FAED00]/15 hover:border-black transition-all cursor-pointer flex items-center justify-between gap-3 text-left shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 group/short"
                   >
-                    <span
-                      style={{ backgroundColor: item.accent }}
-                      className="px-1.5 py-0.5 text-[10px] font-mono font-black border border-black text-black shrink-0"
-                    >
-                      {item.tag}
-                    </span>
-                    <div className="min-w-0">
-                      <div className="text-[11px] font-mono font-black uppercase text-black truncate">
-                        {item.name}
-                      </div>
-                      <div className="text-[10px] text-zinc-500 font-sans truncate">
-                        {item.desc}
+                    <div className="flex items-center gap-3 min-w-0">
+                      <span
+                        style={{ backgroundColor: short.accent }}
+                        className="px-2 py-1 text-[10px] font-mono font-black border border-black text-black shrink-0"
+                      >
+                        {short.projectLabel.replace("Project ", "P")}
+                      </span>
+                      <div className="min-w-0">
+                        <div className="text-xs font-mono font-black uppercase text-black truncate group-hover/short:text-[#FF462D] transition-colors">
+                          {short.projectTitle}
+                        </div>
+                        <div className="text-[10px] text-zinc-500 font-sans truncate mt-0.5">
+                          {short.tagline}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    <ArrowUpRight
+                      weight="bold"
+                      className="w-3.5 h-3.5 text-zinc-400 group-hover/short:text-black shrink-0 transition-colors"
+                    />
+                  </button>
                 ))}
               </div>
             </div>
 
-            <Link
-              href="/ux-ui-shorts"
-              className="w-full py-3 px-4 bg-black hover:bg-zinc-800 text-white font-mono font-black text-xs uppercase tracking-wider flex items-center justify-between transition-colors border border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
+            <button
+              type="button"
+              onClick={() => openShortsProject("p1")}
+              className="w-full py-3 px-4 bg-black hover:bg-zinc-800 text-white font-mono font-black text-xs uppercase tracking-wider flex items-center justify-between transition-colors border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 cursor-pointer"
             >
-              <span>EXPLORE ALL UX/UI SHORTS</span>
+              <span>INSPECT ALL UX/UI SHORTS (WITH VIDEO DEMOS)</span>
               <ArrowRight weight="bold" className="w-4 h-4 text-[#FAED00]" />
-            </Link>
+            </button>
           </div>
 
           {/* Right: Graphic Design Work */}
@@ -288,6 +302,13 @@ export default function SelectedWorkV2() {
           isOpen={isGraphicModalOpen}
           onClose={() => setIsGraphicModalOpen(false)}
           initialProjectId={activeGraphicId}
+        />
+
+        {/* ─── Brutalist UX / UI Shorts Inspection Modal ─── */}
+        <UxUiShortsModal
+          isOpen={isShortsModalOpen}
+          onClose={() => setIsShortsModalOpen(false)}
+          initialProjectId={activeShortsId}
         />
 
       </div>
