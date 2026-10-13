@@ -6,7 +6,15 @@ import { DownloadSimple } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import ResumeModal from "@/components/ResumeModal";
 
-function NavItem({ label, href }: { label: string; href: string }) {
+function NavItem({
+  label,
+  href,
+  borderRight = true,
+}: {
+  label: string;
+  href: string;
+  borderRight?: boolean;
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -14,7 +22,9 @@ function NavItem({ label, href }: { label: string; href: string }) {
       href={href}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative flex-1 flex items-center justify-center px-3 lg:px-6 border-r-2 border-black text-xs md:text-sm font-black tracking-wider uppercase bg-white select-none text-center overflow-hidden group cursor-pointer"
+      className={`relative flex-1 flex items-center justify-center px-3 lg:px-6 ${
+        borderRight ? "border-r-2" : "border-r-0"
+      } border-black text-xs md:text-sm font-black tracking-wider uppercase bg-white select-none text-center overflow-hidden group cursor-pointer`}
     >
       {/* Background slide-fill that reveals automatically on hover/drag */}
       <motion.div
@@ -77,8 +87,13 @@ export default function HeaderV2() {
 
             {/* Nav items 1-4 (Work, Experience, Skills, Mentorship) ending exactly at the 7-col border */}
             <nav className="flex items-stretch flex-1 min-w-0">
-              {navItems.slice(0, 4).map((item) => (
-                <NavItem key={item.label} label={item.label} href={item.href} />
+              {navItems.slice(0, 4).map((item, idx) => (
+                <NavItem
+                  key={item.label}
+                  label={item.label}
+                  href={item.href}
+                  borderRight={idx !== 3} // Mentorship is at idx 3; border-r-2 is provided once by the 7-col parent divider
+                />
               ))}
             </nav>
           </div>
