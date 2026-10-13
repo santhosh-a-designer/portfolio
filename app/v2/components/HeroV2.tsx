@@ -120,12 +120,12 @@ export default function HeroV2() {
                 <span className="text-black">MENTOR</span>
               </motion.div>
 
-              {/* Main Headline Answer Display — locked stable container, zero jitter */}
+              {/* Main Headline Answer Display — locked stable container with exact fixed height, zero layout shift */}
               <motion.div
                 variants={itemVariants}
                 className="relative flex flex-col my-auto"
               >
-                <div className="relative w-full min-h-[90px] sm:min-h-[110px] md:min-h-[125px] lg:min-h-[150px] flex items-start overflow-hidden">
+                <div className="relative w-full h-[150px] sm:h-[160px] md:h-[170px] lg:h-[185px] xl:h-[200px] flex items-start overflow-hidden">
                   <div
                     className={`transition-opacity duration-150 ease-out text-lg sm:text-2xl md:text-3xl lg:text-[30px] xl:text-[34px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading ${
                       isFading ? "opacity-0" : "opacity-100"
