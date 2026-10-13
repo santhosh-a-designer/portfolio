@@ -5,6 +5,7 @@ import Link from "next/link";
 import { DownloadSimple } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import ResumeModal from "@/components/ResumeModal";
+import { useLenis } from "@/components/LenisProvider";
 
 function NavItem({
   label,
@@ -16,10 +17,28 @@ function NavItem({
   borderRight?: boolean;
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const lenis = useLenis();
 
   return (
     <Link
       href={href}
+      onClick={(e) => {
+        if (href.startsWith("#")) {
+          const targetId = href.slice(1);
+          const el = document.getElementById(targetId);
+          if (el) {
+            e.preventDefault();
+            if (window.location.hash !== href) {
+              history.replaceState(null, "", `${window.location.pathname}${window.location.search}${href}`);
+            }
+            if (lenis) {
+              lenis.scrollTo(el, { offset: -64, duration: 0.9, lerp: 0.12, force: true });
+            } else {
+              window.scrollTo({ top: el.offsetTop - 64, behavior: "smooth" });
+            }
+          }
+        }
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={`relative w-full h-full flex items-center justify-center px-2 sm:px-3 xl:px-4 ${
