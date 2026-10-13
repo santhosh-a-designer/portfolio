@@ -51,42 +51,42 @@ export default function HeroV2() {
   const [displayedAnswer, setDisplayedAnswer] = useState("");
   const [isTypingDone, setIsTypingDone] = useState(false);
 
-  // Typewriter effect when slide changes
+  // Snappy typewriter effect: types briskly, holds for 1.8s once finished, then switches to next slide
   useEffect(() => {
     setDisplayedAnswer("");
     setIsTypingDone(false);
 
     const fullAnswer = headlineSlides[currentSlide].answer;
     let charIndex = 0;
-    
-    // Slight initial delay before typing starts so question registers first
+    let nextSlideTimeout: NodeJS.Timeout | null = null;
+    let typeInterval: NodeJS.Timeout | null = null;
+
+    // Short 120ms start delay for punchy entrance
     const startDelay = setTimeout(() => {
-      const typeInterval = setInterval(() => {
+      typeInterval = setInterval(() => {
         charIndex++;
         setDisplayedAnswer(fullAnswer.slice(0, charIndex));
 
         if (charIndex >= fullAnswer.length) {
-          clearInterval(typeInterval);
+          if (typeInterval) clearInterval(typeInterval);
           setIsTypingDone(true);
+
+          // Hold for 1.8s so user can comfortably read, then immediately transition to next slide
+          nextSlideTimeout = setTimeout(() => {
+            if (!isHeadlinePaused) {
+              setCurrentSlide((prev) => (prev + 1) % headlineSlides.length);
+            }
+          }, 1800);
         }
-      }, 24); // smooth, human-paced typing speed
+      }, 16); // snappy, energetic typing speed
+    }, 120);
 
-      return () => clearInterval(typeInterval);
-    }, 250);
-
-    return () => clearTimeout(startDelay);
-  }, [currentSlide]);
-
-  useEffect(() => {
-    if (isHeadlinePaused) return;
-
-    // Give enough time to read after typing completes
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % headlineSlides.length);
-    }, 6500);
-
-    return () => clearInterval(timer);
-  }, [isHeadlinePaused, headlineSlides.length]);
+    return () => {
+      clearTimeout(startDelay);
+      if (typeInterval) clearInterval(typeInterval);
+      if (nextSlideTimeout) clearTimeout(nextSlideTimeout);
+    };
+  }, [currentSlide, isHeadlinePaused, headlineSlides.length]);
 
   return (
     <section className="w-full bg-[#F4F4F0] border-b-2 border-black px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
