@@ -75,7 +75,7 @@ export default function SelectedWorkV2() {
   ];
 
   return (
-    <section id="work" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+    <section id="clients-work" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
         
         {/* Top Header Row of Selected Work: Yellow Title Block + White Marquee */}
@@ -123,13 +123,14 @@ export default function SelectedWorkV2() {
           </div>
         </div>
 
-        {/* Section Title Banner */}
+        {/* Section Title Banner — Target anchor for VIEW WORK & WORK nav item */}
         <motion.div
+          id="work"
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="border-b-2 border-black p-6 sm:p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white relative select-none"
+          className="border-b-2 border-black p-6 sm:p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white relative select-none scroll-mt-16 sm:scroll-mt-20"
         >
           <span className="absolute top-2.5 right-4 text-[10px] font-pixel text-zinc-400 hidden sm:inline">[STACKED_WINDOWS_V2]</span>
           <div>

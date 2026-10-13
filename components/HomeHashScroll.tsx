@@ -42,10 +42,11 @@ function scrollToWorkSection(lenis: Lenis | null) {
   } catch {
     /* */
   }
+  // Offset -64px accounts for sticky header (h-16 / 64px) so SELECTED WORK banner sits flush below it
   if (lenis) {
-    lenis.scrollTo(el, { offset: -80, duration: 0.9, lerp: 0.12, force: true });
+    lenis.scrollTo(el, { offset: -64, duration: 0.9, lerp: 0.12, force: true });
   } else {
-    window.scrollTo({ top: el.offsetTop - 80, behavior: "smooth" });
+    window.scrollTo({ top: el.offsetTop - 64, behavior: "smooth" });
   }
 }
 
