@@ -22,57 +22,68 @@ const itemVariants = {
 
 export default function HeroV2() {
 
-  // 4 Auto-Rotating Headline Slides with uniform intervals
+  // 4 Human, conversational headline slides (2-3 lines max)
   const headlineSlides = [
     {
       id: 0,
-      content: (
-        <>
-          I design experiences people{" "}
-          <span className="text-[#FF462D]">feel</span>
-          <span className="hero-cursor font-mono text-black">_</span>
-          {" "}— then build them.
-        </>
-      ),
+      question: "WHAT I DO:",
+      answer: "I craft experiences people feel — then write the code to ship them.",
     },
     {
       id: 1,
-      content: (
-        <>
-          <span className="text-[#FF462D]">HOW I FACE CHALLENGES:</span>{" "}
-          I diagnose the root friction, dissect complex workflows, and engineer elegant solutions. Every obstacle is an invitation for crystal clear problem solving.
-        </>
-      ),
+      question: "HOW I TACKLE PROBLEMS:",
+      answer: "I find the root friction, untangle messy workflows, and make things simple.",
     },
     {
       id: 2,
-      content: (
-        <>
-          <span className="text-[#FF462D]">WHY I DESIGN &amp; BUILD:</span>{" "}
-          Because pixel-perfect design deserves zero-compromise execution. What I architect with obsessive visual precision in Figma, I bring to life with identical rigor in code.
-        </>
-      ),
+      question: "WHY DESIGN AND CODE?",
+      answer: "Because pixel-perfect Figma designs deserve identical precision in production.",
     },
     {
       id: 3,
-      content: (
-        <>
-          <span className="text-[#FF462D]">WHAT I BRING TO YOUR TEAM:</span>{" "}
-          Sharp UX psychology, rock-solid design systems, and production-ready engineering — closing the gap between prototype and shipping live products.
-        </>
-      ),
+      question: "WHAT I BRING TO YOUR TEAM:",
+      answer: "Sharp UX thinking, solid design systems, and fast execution from day one.",
     },
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHeadlinePaused, setIsHeadlinePaused] = useState(false);
+  const [displayedAnswer, setDisplayedAnswer] = useState("");
+  const [isTypingDone, setIsTypingDone] = useState(false);
+
+  // Typewriter effect when slide changes
+  useEffect(() => {
+    setDisplayedAnswer("");
+    setIsTypingDone(false);
+
+    const fullAnswer = headlineSlides[currentSlide].answer;
+    let charIndex = 0;
+    
+    // Slight initial delay before typing starts so question registers first
+    const startDelay = setTimeout(() => {
+      const typeInterval = setInterval(() => {
+        charIndex++;
+        setDisplayedAnswer(fullAnswer.slice(0, charIndex));
+
+        if (charIndex >= fullAnswer.length) {
+          clearInterval(typeInterval);
+          setIsTypingDone(true);
+        }
+      }, 24); // smooth, human-paced typing speed
+
+      return () => clearInterval(typeInterval);
+    }, 250);
+
+    return () => clearTimeout(startDelay);
+  }, [currentSlide]);
 
   useEffect(() => {
     if (isHeadlinePaused) return;
 
+    // Give enough time to read after typing completes
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % headlineSlides.length);
-    }, 7000);
+    }, 6500);
 
     return () => clearInterval(timer);
   }, [isHeadlinePaused, headlineSlides.length]);
@@ -103,25 +114,29 @@ export default function HeroV2() {
                 <span className="text-black">MENTOR</span>
               </motion.div>
 
-              {/* Headline Auto-Rotating Carousel */}
+              {/* Headline Auto-Rotating Carousel with Typewriter Effect */}
               <motion.div
                 variants={itemVariants}
                 className="relative flex flex-col mb-1 sm:mb-2 lg:mb-5"
                 onMouseEnter={() => setIsHeadlinePaused(true)}
                 onMouseLeave={() => setIsHeadlinePaused(false)}
               >
-                <div className="relative w-full min-h-[55px] sm:min-h-[70px] md:min-h-[85px] lg:min-h-[140px] flex items-start overflow-hidden">
+                <div className="relative w-full min-h-[75px] sm:min-h-[90px] md:min-h-[105px] lg:min-h-[145px] flex items-start overflow-hidden">
                   <AnimatePresence mode="wait">
-                    <motion.h1
+                    <motion.div
                       key={currentSlide}
-                      initial={{ opacity: 0, y: 12 }}
+                      initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -12 }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      className="text-lg sm:text-2xl md:text-3xl lg:text-[34px] xl:text-[38px] font-black leading-[1.2] sm:leading-[1.15] tracking-tight uppercase text-black select-none font-sans hero-heading"
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      className="text-lg sm:text-2xl md:text-3xl lg:text-[32px] xl:text-[36px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading"
                     >
-                      {headlineSlides[currentSlide].content}
-                    </motion.h1>
+                      <span className="text-[#FF462D] block sm:inline mr-2 sm:mr-3">
+                        {headlineSlides[currentSlide].question}
+                      </span>
+                      <span>{displayedAnswer}</span>
+                      <span className="inline-block w-2 sm:w-2.5 h-[1.1em] bg-black ml-1 align-baseline animate-pulse" />
+                    </motion.div>
                   </AnimatePresence>
                 </div>
 
