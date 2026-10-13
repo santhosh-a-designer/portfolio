@@ -162,210 +162,228 @@ export default function GraphicDesignModal({
             {/* Modal Body: Scrollable Content Area */}
             <div
               data-lenis-prevent="true"
-              className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 bg-[#F4F4F0]"
+              className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 md:p-8 bg-[#F4F4F0]"
             >
-              {/* Project Title & Overview Banner */}
-              <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] font-mono font-black text-[#FF462D] uppercase tracking-widest">
-                    {currentProject.tagline}
-                  </span>
-                  <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                    PRINT &amp; BRAND IDENTITY
-                  </span>
-                </div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-black font-mono uppercase tracking-tight text-black mb-3">
-                  {currentProject.projectTitle}
-                </h3>
-                <p className="text-xs sm:text-[13px] text-zinc-700 font-sans leading-relaxed font-medium">
-                  {currentProject.overview}
-                </p>
-              </div>
-
-              {/* ── Visual Assets Showcase ── */}
-
-              {/* 1. Before & After / Outside & Inside Pair */}
-              {!currentProject.hideImageBlock && currentProject.beforeAfter && (
-                <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
-                    <span className="text-xs font-mono font-black uppercase text-black">
-                      // {currentProject.imagePairTitle || "BEFORE & AFTER"}
-                    </span>
-                    <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
-                      HIGH-RESOLUTION ASSET
-                    </span>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentProject.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                  className="space-y-6 sm:space-y-8"
+                >
+                  {/* Project Title & Overview Banner */}
+                  <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                      <span className="text-[10px] font-mono font-black text-[#FF462D] uppercase tracking-widest">
+                        {currentProject.tagline}
+                      </span>
+                      <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
+                        PRINT &amp; BRAND IDENTITY
+                      </span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-black font-mono uppercase tracking-tight text-black mb-3">
+                      {currentProject.projectTitle}
+                    </h3>
+                    <p className="text-xs sm:text-[13px] text-zinc-700 font-sans leading-relaxed font-medium">
+                      {currentProject.overview}
+                    </p>
                   </div>
 
-                  {currentProject.useMainRowSingleImage ? (
-                    <div className="flex justify-center p-3 sm:p-6 bg-zinc-50 border border-black">
-                      <div className="relative w-full max-w-sm aspect-square">
-                        <Image
-                          src={currentProject.beforeAfter.newSrc}
-                          alt={currentProject.beforeAfter.newAlt}
-                          fill
-                          sizes="(max-width: 640px) 90vw, 400px"
-                          className="object-contain"
-                        />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Left Asset */}
-                      <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
-                        <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase mb-2">
-                          {currentProject.id === "project-1" ? "[ORIGINAL STREET BOARD]" : "[EXTERIOR / OUTSIDE]"}
+                  {/* ── Visual Assets Showcase ── */}
+
+                  {/* 1. Before & After / Outside & Inside Pair */}
+                  {!currentProject.hideImageBlock && currentProject.beforeAfter && (
+                    <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                      <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
+                        <span className="text-xs font-mono font-black uppercase text-black">
+                          // {currentProject.imagePairTitle || "BEFORE & AFTER"}
                         </span>
-                        <div className="relative w-full h-56 sm:h-72 md:h-80 bg-zinc-100 flex items-center justify-center overflow-hidden">
-                          <Image
-                            src={currentProject.beforeAfter.oldSrc}
-                            alt={currentProject.beforeAfter.oldAlt}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-contain p-2"
-                          />
-                        </div>
+                        <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
+                          HIGH-RESOLUTION ASSET
+                        </span>
                       </div>
 
-                      {/* Right Asset */}
-                      <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
-                        <span className="text-[10px] font-mono font-black text-[#FF462D] uppercase mb-2">
-                          {currentProject.id === "project-1" ? "[NEW REDESIGNED BOARD]" : "[INTERIOR / INSIDE]"}
-                        </span>
-                        <div className="relative w-full h-56 sm:h-72 md:h-80 bg-zinc-100 flex items-center justify-center overflow-hidden">
-                          <Image
-                            src={currentProject.beforeAfter.newSrc}
-                            alt={currentProject.beforeAfter.newAlt}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-contain p-2"
-                          />
+                      {currentProject.useMainRowSingleImage ? (
+                        <div className="flex justify-center p-3 sm:p-6 bg-zinc-50 border border-black">
+                          <div className="relative w-full max-w-sm aspect-square">
+                            <Image
+                              src={currentProject.beforeAfter.newSrc}
+                              alt={currentProject.beforeAfter.newAlt}
+                              fill
+                              priority
+                              sizes="(max-width: 640px) 90vw, 400px"
+                              className="object-contain"
+                            />
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {/* Left Asset */}
+                          <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
+                            <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase mb-2">
+                              {currentProject.id === "project-1" ? "[ORIGINAL STREET BOARD]" : "[EXTERIOR / OUTSIDE]"}
+                            </span>
+                            <div className="relative w-full h-56 sm:h-72 md:h-80 bg-zinc-100 flex items-center justify-center overflow-hidden">
+                              <Image
+                                src={currentProject.beforeAfter.oldSrc}
+                                alt={currentProject.beforeAfter.oldAlt}
+                                fill
+                                priority
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="object-contain p-2"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Right Asset */}
+                          <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
+                            <span className="text-[10px] font-mono font-black text-[#FF462D] uppercase mb-2">
+                              {currentProject.id === "project-1" ? "[NEW REDESIGNED BOARD]" : "[INTERIOR / INSIDE]"}
+                            </span>
+                            <div className="relative w-full h-56 sm:h-72 md:h-80 bg-zinc-100 flex items-center justify-center overflow-hidden">
+                              <Image
+                                src={currentProject.beforeAfter.newSrc}
+                                alt={currentProject.beforeAfter.newAlt}
+                                fill
+                                priority
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="object-contain p-2"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
-                </div>
-              )}
 
-              {/* 2. Third Panel: Sign Board (e.g. The Key) */}
-              {currentProject.thirdPanel && (
-                <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
-                    <span className="text-xs font-mono font-black uppercase text-black">
-                      // EXTERIOR APPROACH SIGN BOARD
-                    </span>
-                    <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
-                      WAYFINDING &amp; ENTRANCE
-                    </span>
-                  </div>
-                  <div className="relative w-full h-72 sm:h-96 md:h-[450px] bg-zinc-50 border border-black flex items-center justify-center overflow-hidden">
-                    <Image
-                      src={currentProject.thirdPanel.src}
-                      alt={currentProject.thirdPanel.alt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 800px"
-                      className="object-contain p-2"
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* 3. Business Card Pair (Front & Back) */}
-              {currentProject.businessCardPair && (
-                <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
-                    <span className="text-xs font-mono font-black uppercase text-black">
-                      // {currentProject.businessCardPair.blockTitle || "BUSINESS CARD IDENTITY"}
-                    </span>
-                    <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
-                      PRINT &amp; STATIONERY
-                    </span>
-                  </div>
-                  <div
-                    className={`grid gap-4 ${
-                      currentProject.businessCardPair.first ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
-                    }`}
-                  >
-                    {currentProject.businessCardPair.first && (
-                      <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
-                        <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase mb-2">
-                          [CARD FRONT]
+                  {/* 2. Third Panel: Sign Board (e.g. The Key) */}
+                  {currentProject.thirdPanel && (
+                    <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                      <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
+                        <span className="text-xs font-mono font-black uppercase text-black">
+                          // EXTERIOR APPROACH SIGN BOARD
                         </span>
-                        <div className="relative w-full h-48 sm:h-56 bg-zinc-100 flex items-center justify-center overflow-hidden">
-                          <Image
-                            src={currentProject.businessCardPair.first.src}
-                            alt={currentProject.businessCardPair.first.alt}
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-contain p-2"
-                          />
-                        </div>
+                        <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
+                          WAYFINDING &amp; ENTRANCE
+                        </span>
                       </div>
-                    )}
-
-                    <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
-                      <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase mb-2">
-                        {currentProject.businessCardPair.first ? "[CARD BACK]" : "[BUSINESS CARD]"}
-                      </span>
-                      <div className="relative w-full h-48 sm:h-56 bg-zinc-100 flex items-center justify-center overflow-hidden">
+                      <div className="relative w-full h-72 sm:h-96 md:h-[450px] bg-zinc-50 border border-black flex items-center justify-center overflow-hidden">
                         <Image
-                          src={currentProject.businessCardPair.second.src}
-                          alt={currentProject.businessCardPair.second.alt}
+                          src={currentProject.thirdPanel.src}
+                          alt={currentProject.thirdPanel.alt}
                           fill
-                          sizes="(max-width: 768px) 100vw, 50vw"
+                          priority
+                          sizes="(max-width: 768px) 100vw, 800px"
                           className="object-contain p-2"
                         />
                       </div>
                     </div>
-                  </div>
-                </div>
-              )}
+                  )}
 
-              {/* 4. Packaging 4-Side Showcase (e.g. IR Stunner) */}
-              {currentProject.packagingImages && currentProject.packagingImages.length > 0 && (
-                <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
-                    <span className="text-xs font-mono font-black uppercase text-black">
-                      // PACKAGING DESIGN — 4 PANEL VIEW
-                    </span>
-                    <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
-                      BOX FACINGS
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {currentProject.packagingImages.map((img) => (
-                      <div key={img.label} className="border border-black bg-zinc-50 p-2 flex flex-col">
-                        <span className="text-[9px] font-mono font-bold text-zinc-500 uppercase mb-1">
-                          [{img.label}]
+                  {/* 3. Business Card Pair (Front & Back) */}
+                  {currentProject.businessCardPair && (
+                    <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                      <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
+                        <span className="text-xs font-mono font-black uppercase text-black">
+                          // {currentProject.businessCardPair.blockTitle || "BUSINESS CARD IDENTITY"}
                         </span>
-                        <div className="relative w-full aspect-square bg-zinc-100 flex items-center justify-center overflow-hidden">
-                          <Image
-                            src={img.src}
-                            alt={img.alt}
-                            fill
-                            sizes="(max-width: 768px) 50vw, 25vw"
-                            className="object-contain p-1"
-                          />
+                        <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
+                          PRINT &amp; STATIONERY
+                        </span>
+                      </div>
+                      <div
+                        className={`grid gap-4 ${
+                          currentProject.businessCardPair.first ? "grid-cols-1 md:grid-cols-2" : "grid-cols-1"
+                        }`}
+                      >
+                        {currentProject.businessCardPair.first && (
+                          <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
+                            <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase mb-2">
+                              [CARD FRONT]
+                            </span>
+                            <div className="relative w-full h-48 sm:h-56 bg-zinc-100 flex items-center justify-center overflow-hidden">
+                              <Image
+                                src={currentProject.businessCardPair.first.src}
+                                alt={currentProject.businessCardPair.first.alt}
+                                fill
+                                priority
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                className="object-contain p-2"
+                              />
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
+                          <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase mb-2">
+                            {currentProject.businessCardPair.first ? "[CARD BACK]" : "[BUSINESS CARD]"}
+                          </span>
+                          <div className="relative w-full h-48 sm:h-56 bg-zinc-100 flex items-center justify-center overflow-hidden">
+                            <Image
+                              src={currentProject.businessCardPair.second.src}
+                              alt={currentProject.businessCardPair.second.alt}
+                              fill
+                              priority
+                              sizes="(max-width: 768px) 100vw, 50vw"
+                              className="object-contain p-2"
+                            />
+                          </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-
-                  {currentProject.marketingStats && (
-                    <div className="mt-4 pt-4 border-t border-black/10 grid grid-cols-2 sm:grid-cols-3 gap-2">
-                      {currentProject.marketingStats.map((stat) => (
-                        <div key={stat.label} className="p-2 bg-zinc-50 border border-black/20">
-                          <span className="text-[9px] font-mono text-zinc-500 uppercase block truncate">
-                            {stat.label}
-                          </span>
-                          <span className="text-xs font-mono font-black text-black uppercase mt-0.5 block truncate">
-                            {stat.value}
-                          </span>
-                        </div>
-                      ))}
                     </div>
                   )}
-                </div>
-              )}
+
+                  {/* 4. Packaging 4-Side Showcase (e.g. IR Stunner) */}
+                  {currentProject.packagingImages && currentProject.packagingImages.length > 0 && (
+                    <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                      <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black">
+                        <span className="text-xs font-mono font-black uppercase text-black">
+                          // PACKAGING DESIGN — 4 PANEL VIEW
+                        </span>
+                        <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
+                          BOX FACINGS
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        {currentProject.packagingImages.map((img) => (
+                          <div key={img.label} className="border border-black bg-zinc-50 p-2 flex flex-col">
+                            <span className="text-[9px] font-mono font-bold text-zinc-500 uppercase mb-1">
+                              [{img.label}]
+                            </span>
+                            <div className="relative w-full aspect-square bg-zinc-100 flex items-center justify-center overflow-hidden">
+                              <Image
+                                src={img.src}
+                                alt={img.alt}
+                                fill
+                                priority
+                                sizes="(max-width: 768px) 50vw, 25vw"
+                                className="object-contain p-1"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {currentProject.marketingStats && (
+                        <div className="mt-4 pt-4 border-t border-black/10 grid grid-cols-2 sm:grid-cols-3 gap-2">
+                          {currentProject.marketingStats.map((stat) => (
+                            <div key={stat.label} className="p-2 bg-zinc-50 border border-black/20">
+                              <span className="text-[9px] font-mono text-zinc-500 uppercase block truncate">
+                                {stat.label}
+                              </span>
+                              <span className="text-xs font-mono font-black text-black uppercase mt-0.5 block truncate">
+                                {stat.value}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Modal Footer Controls */}
