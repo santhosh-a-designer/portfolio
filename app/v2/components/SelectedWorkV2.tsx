@@ -154,6 +154,111 @@ export default function SelectedWorkV2() {
           <ProjectWindowStack projects={projects} />
         </div>
 
+        {/* ─── Archives & Shorts Dual Banner ─── */}
+        <div className="border-t-2 border-black grid grid-cols-1 lg:grid-cols-2 bg-white">
+          {/* Left: UX / UI Shorts */}
+          <div className="p-6 sm:p-8 md:p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black flex flex-col justify-between bg-white hover:bg-[#FAED00]/5 transition-colors group">
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="text-[10px] font-mono font-black text-[#FF462D] uppercase tracking-wider">
+                  // RAPID_CASE_STUDIES
+                </span>
+                <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
+                  3 CASE SHORTS
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black font-mono uppercase tracking-tight text-black mb-3">
+                UX / UI SHORTS
+              </h3>
+              <p className="text-xs sm:text-[13px] text-zinc-600 font-sans leading-relaxed mb-6 font-medium">
+                Focused micro case-studies tackling real hardware, IoT telemetry, and rural banking kiosk workflows.
+              </p>
+
+              {/* Quick Pills */}
+              <div className="grid grid-cols-1 gap-2 mb-6">
+                {[
+                  { tag: "P1", name: "IR STUNNER", desc: "Smart hardware, 3D packaging & visualizer", accent: "#FF462D" },
+                  { tag: "P2", name: "iRASUS", desc: "EV battery telemetry & fleet intelligence", accent: "#0FE0E3" },
+                  { tag: "P3", name: "INDIAONE ATM", desc: "Multi-lingual rural banking kiosk workflow", accent: "#FAED00" },
+                ].map((item) => (
+                  <div
+                    key={item.tag}
+                    className="p-2.5 border border-black bg-zinc-50 flex items-center gap-3"
+                  >
+                    <span
+                      style={{ backgroundColor: item.accent }}
+                      className="px-1.5 py-0.5 text-[10px] font-mono font-black border border-black text-black shrink-0"
+                    >
+                      {item.tag}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-[11px] font-mono font-black uppercase text-black truncate">
+                        {item.name}
+                      </div>
+                      <div className="text-[10px] text-zinc-500 font-sans truncate">
+                        {item.desc}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Link
+              href="/ux-ui-shorts"
+              className="w-full py-3 px-4 bg-black hover:bg-zinc-800 text-white font-mono font-black text-xs uppercase tracking-wider flex items-center justify-between transition-colors border border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
+            >
+              <span>EXPLORE ALL UX/UI SHORTS</span>
+              <ArrowRight weight="bold" className="w-4 h-4 text-[#FAED00]" />
+            </Link>
+          </div>
+
+          {/* Right: Graphic Design Work */}
+          <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-between bg-white hover:bg-[#FF462D]/5 transition-colors group">
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="text-[10px] font-mono font-black text-zinc-500 uppercase tracking-wider">
+                  // VISUAL_SYSTEMS
+                </span>
+                <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
+                  POSTERS &amp; PRINT
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black font-mono uppercase tracking-tight text-black mb-3">
+                GRAPHIC DESIGN ARCHIVE
+              </h3>
+              <p className="text-xs sm:text-[13px] text-zinc-600 font-sans leading-relaxed mb-6 font-medium">
+                Brand identities, packaging typography, poster collections, and experimental visual systems crafted with rigorous aesthetic discipline.
+              </p>
+
+              {/* Graphic Design Highlights preview banner */}
+              <div className="p-4 border-2 border-black bg-zinc-50 mb-6 flex flex-col gap-2">
+                <span className="text-[10px] font-mono font-black text-black uppercase tracking-wider">
+                  FEATURED WORK HIGHLIGHTS:
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Brand Identity", "Packaging", "Poster Design", "Custom Typography", "Exhibition Print"].map((label) => (
+                    <span
+                      key={label}
+                      className="px-2 py-0.5 bg-white border border-black text-[10px] font-mono font-bold uppercase text-zinc-700"
+                    >
+                      {label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <Link
+              href="/graphic-design"
+              className="w-full py-3 px-4 bg-[#FF462D] hover:bg-[#ff3419] text-white font-mono font-black text-xs uppercase tracking-wider flex items-center justify-between transition-colors border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5"
+            >
+              <span>EXPLORE GRAPHIC DESIGN WORK</span>
+              <ArrowRight weight="bold" className="w-4 h-4 text-white" />
+            </Link>
+          </div>
+        </div>
+
       </div>
     </section>
   );
