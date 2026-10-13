@@ -22,9 +22,9 @@ function NavItem({
       href={href}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`relative w-full h-full flex items-center justify-center px-2 xl:px-4 ${
+      className={`relative w-full h-full flex items-center justify-center px-2 sm:px-3 xl:px-4 ${
         borderRight ? "border-r-2" : "border-r-0"
-      } border-black text-xs md:text-sm font-black tracking-wider uppercase bg-white select-none text-center overflow-hidden group cursor-pointer`}
+      } border-black text-[11px] xl:text-[13px] font-black tracking-wider uppercase bg-white select-none text-center overflow-hidden group cursor-pointer whitespace-nowrap`}
     >
       {/* Background slide-fill that reveals automatically on hover/drag */}
       <motion.div
@@ -76,10 +76,10 @@ export default function HeaderV2() {
         <div className="hidden lg:grid lg:grid-cols-12 min-h-[64px] items-stretch">
           {/* Left 7 Columns (Logo + WORK, EXPERIENCE, SKILLS, MENTORSHIP) */}
           <div className="lg:col-span-7 flex items-stretch border-r-2 border-black min-h-[64px]">
-            {/* Logo / Brand Name */}
-            <div className="flex items-center px-4 xl:px-7 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
+            {/* Logo / Brand Name - compact padding so the 4 menu items have maximum breathing room */}
+            <div className="flex items-center px-3 xl:px-5 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
               <Link href="/" className="inline-block">
-                <span className="text-xl xl:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
+                <span className="text-lg xl:text-2xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
                   SIMON SANTHOSH
                 </span>
               </Link>
