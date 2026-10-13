@@ -612,7 +612,7 @@ function WindowCard({
                 href={item.liveUrl || item.href}
                 target={item.liveUrl ? "_blank" : undefined}
                 rel={item.liveUrl ? "noopener noreferrer" : undefined}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-[#FF462D] text-white hover:bg-black font-mono font-black text-[11px] sm:text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-center"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 bg-[#FF462D] text-white hover:bg-black font-mono font-black text-[11px] sm:text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-center scanline-btn"
               >
                 <span>{item.liveUrl ? "OPEN LIVE PRODUCT" : "VIEW CASE STUDY"}</span>
                 <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />
@@ -621,7 +621,7 @@ function WindowCard({
               {item.liveUrl ? (
                 <Link
                   href={item.href}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-[#FAED00] text-black hover:bg-[#ffe600] font-mono font-black text-[11px] sm:text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-center"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2.5 bg-[#FAED00] text-black hover:bg-[#ffe600] font-mono font-black text-[11px] sm:text-xs uppercase tracking-wider border border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-center scanline-btn scanline-btn-light"
                 >
                   <span>READ CASE STUDY</span>
                   <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />

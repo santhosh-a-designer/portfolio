@@ -822,7 +822,7 @@ export default function ServicesAndFooterV2() {
                   <button
                     type="submit"
                     disabled={submitState === "sending"}
-                    className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-black hover:bg-zinc-800 active:bg-zinc-900 text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all cursor-pointer disabled:opacity-60"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-black hover:bg-zinc-800 active:bg-zinc-900 text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all cursor-pointer disabled:opacity-60 scanline-btn"
                   >
                     <span>{submitState === "sending" ? "SENDING BRIEF..." : "SEND BRIEF"}</span>
                     {submitState === "sending" ? (

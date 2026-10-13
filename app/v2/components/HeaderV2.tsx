@@ -61,38 +61,98 @@ export default function HeaderV2() {
     >
       <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
       
-      <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black flex items-stretch min-h-[50px] min-[360px]:min-h-[54px] md:min-h-[64px] bg-white">
-        {/* Logo / Brand Name */}
-        <div className="flex items-center px-3 min-[360px]:px-4 sm:px-6 md:px-7 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
-          <Link href="/" className="inline-block">
-            <span className="text-[13px] min-[360px]:text-[16px] min-[400px]:text-xl sm:text-2xl md:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
-              SIMON SANTHOSH
-            </span>
-          </Link>
+      <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
+        {/* Desktop Header: 12-column Grid precisely matched to HeroV2 (7 cols Left / 5 cols Right) */}
+        <div className="hidden lg:grid lg:grid-cols-12 min-h-[64px] items-stretch">
+          {/* Left 7 Columns (Logo + WORK, EXPERIENCE, SKILLS, MENTORSHIP) */}
+          <div className="lg:col-span-7 flex items-stretch border-r-2 border-black min-h-[64px]">
+            {/* Logo / Brand Name */}
+            <div className="flex items-center px-4 xl:px-7 border-r-2 border-black bg-white hover:bg-zinc-50 transition-colors shrink-0">
+              <Link href="/" className="inline-block">
+                <span className="text-xl xl:text-3xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
+                  SIMON SANTHOSH
+                </span>
+              </Link>
+            </div>
+
+            {/* Nav items 1-4 (Work, Experience, Skills, Mentorship) ending exactly at the 7-col border */}
+            <nav className="flex items-stretch flex-1 min-w-0">
+              {navItems.slice(0, 4).map((item) => (
+                <NavItem key={item.label} label={item.label} href={item.href} />
+              ))}
+            </nav>
+          </div>
+
+          {/* Right 5 Columns (CONTACT nav item + DOWNLOAD RESUME) */}
+          <div className="lg:col-span-5 flex items-stretch min-h-[64px]">
+            <nav className="flex items-stretch flex-1 min-w-0">
+              <NavItem label={navItems[4].label} href={navItems[4].href} />
+            </nav>
+
+            {/* Download Resume Button */}
+            <motion.button
+              type="button"
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setResumeOpen(true)}
+              className="flex items-center justify-center gap-2 xl:gap-3 px-5 xl:px-8 bg-[#FAED00] border-0 hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-xs xl:text-sm tracking-wider uppercase transition-colors select-none group cursor-pointer shrink-0 scanline-btn scanline-btn-light"
+            >
+              <span className="leading-tight text-left whitespace-nowrap">
+                DOWNLOAD RESUME
+              </span>
+              <DownloadSimple
+                weight="bold"
+                className="w-5 h-5 xl:w-6 xl:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
+              />
+            </motion.button>
+          </div>
         </div>
 
-        {/* Navigation Items with Slide-Fill Interaction (Desktop) */}
-        <nav className="hidden md:flex items-stretch flex-1 min-w-0">
-          {navItems.map((item) => (
-            <NavItem key={item.label} label={item.label} href={item.href} />
-          ))}
-        </nav>
+        {/* Tablet Header (md to lg) */}
+        <div className="hidden md:flex lg:hidden items-stretch min-h-[60px]">
+          <div className="flex items-center px-4 sm:px-6 border-r-2 border-black bg-white shrink-0">
+            <Link href="/" className="inline-block">
+              <span className="text-xl sm:text-2xl font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
+                SIMON SANTHOSH
+              </span>
+            </Link>
+          </div>
+          <nav className="flex items-stretch flex-1 min-w-0">
+            {navItems.map((item) => (
+              <NavItem key={item.label} label={item.label} href={item.href} />
+            ))}
+          </nav>
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setResumeOpen(true)}
+            className="flex items-center justify-center gap-2 px-4 sm:px-6 bg-[#FAED00] text-black font-black text-xs uppercase transition-colors select-none shrink-0 scanline-btn scanline-btn-light"
+          >
+            <span>RESUME</span>
+            <DownloadSimple weight="bold" className="w-5 h-5" />
+          </motion.button>
+        </div>
 
-        {/* Download Resume - Highlight Button (Expands on Mobile to fill space) */}
-        <motion.button
-          type="button"
-          whileTap={{ scale: 0.98 }}
-          onClick={() => setResumeOpen(true)}
-          className="flex items-center justify-center gap-2 sm:gap-3 px-3 min-[360px]:px-4 sm:px-6 md:px-8 bg-[#FAED00] border-0 hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-black text-[10px] min-[360px]:text-[11px] sm:text-xs md:text-sm tracking-wider uppercase transition-colors select-none group cursor-pointer flex-1 md:flex-initial"
-        >
-          <span className="leading-tight text-center md:text-left whitespace-nowrap">
-            <span className="hidden min-[400px]:inline">DOWNLOAD </span>RESUME
-          </span>
-          <DownloadSimple
-            weight="bold"
-            className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]"
-          />
-        </motion.button>
+        {/* Mobile Header Top Row (< md) */}
+        <div className="flex md:hidden items-stretch min-h-[50px] min-[360px]:min-h-[54px]">
+          <div className="flex items-center px-3 min-[360px]:px-4 border-r-2 border-black bg-white shrink-0">
+            <Link href="/" className="inline-block">
+              <span className="text-[13px] min-[360px]:text-[16px] font-black tracking-tight uppercase text-black font-sans select-none block leading-none whitespace-nowrap">
+                SIMON SANTHOSH
+              </span>
+            </Link>
+          </div>
+          <motion.button
+            type="button"
+            whileTap={{ scale: 0.98 }}
+            onClick={() => setResumeOpen(true)}
+            className="flex items-center justify-center gap-2 px-3 min-[360px]:px-4 bg-[#FAED00] text-black font-black text-[10px] min-[360px]:text-[11px] tracking-wider uppercase transition-colors select-none group cursor-pointer flex-1 scanline-btn scanline-btn-light"
+          >
+            <span className="leading-tight whitespace-nowrap">
+              <span className="hidden min-[400px]:inline">DOWNLOAD </span>RESUME
+            </span>
+            <DownloadSimple weight="bold" className="w-4 h-4 transition-transform group-hover:translate-y-0.5 shrink-0 stroke-[3px]" />
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile Secondary Navigation Row (320px–767px) */}

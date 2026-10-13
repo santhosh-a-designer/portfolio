@@ -167,7 +167,7 @@ export default function ExperienceSectionV2() {
                 <button
                   type="button"
                   onClick={() => setResumeOpen(true)}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-3 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs font-black tracking-widest uppercase select-none group cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-5 sm:px-6 py-3 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs font-black tracking-widest uppercase select-none group cursor-pointer scanline-btn"
                 >
                   <span>VIEW FULL RESUME</span>
                   <ArrowUpRight weight="bold" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

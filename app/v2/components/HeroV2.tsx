@@ -22,7 +22,7 @@ const itemVariants = {
 
 export default function HeroV2() {
 
-  // 4 Auto-Rotating Headline Slides
+  // 4 Auto-Rotating Headline Slides with uniform intervals
   const headlineSlides = [
     {
       id: 0,
@@ -40,7 +40,7 @@ export default function HeroV2() {
       content: (
         <>
           <span className="text-[#FF462D]">HOW I FACE CHALLENGES:</span>{" "}
-          I debug first, panic later. Every problem is just a design flaw I haven&apos;t solved yet.
+          I diagnose the root friction, dissect complex workflows, and engineer elegant solutions. Every obstacle is an invitation for crystal clear problem solving.
         </>
       ),
     },
@@ -49,7 +49,7 @@ export default function HeroV2() {
       content: (
         <>
           <span className="text-[#FF462D]">WHY I DESIGN &amp; BUILD:</span>{" "}
-          I got tired of handing off ideas and watching them die in translation. So I learned to ship them myself.
+          Because pixel-perfect design deserves zero-compromise execution. What I architect with obsessive visual precision in Figma, I bring to life with identical rigor in code.
         </>
       ),
     },
@@ -58,7 +58,7 @@ export default function HeroV2() {
       content: (
         <>
           <span className="text-[#FF462D]">WHAT I BRING TO YOUR TEAM:</span>{" "}
-          Not just pixels, not just code — a bridge between them.
+          Sharp UX psychology, rock-solid design systems, and production-ready engineering — closing the gap between prototype and shipping live products.
         </>
       ),
     },
@@ -72,10 +72,10 @@ export default function HeroV2() {
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % headlineSlides.length);
-    }, 8500);
+    }, 7000);
 
     return () => clearInterval(timer);
-  }, [isHeadlinePaused, currentSlide, headlineSlides.length]);
+  }, [isHeadlinePaused, headlineSlides.length]);
 
   return (
     <section className="w-full bg-[#F4F4F0] border-b-2 border-black px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -240,20 +240,15 @@ export default function HeroV2() {
                 </motion.div>
               </div>
 
-              {/* Row 1, Col 3: Green Box - Available for full-time */}
-              <div className="bg-[#00C16A] p-2 min-[360px]:p-2.5 sm:p-4 md:p-5 flex flex-col items-center justify-center group cursor-default h-full min-h-[72px] sm:min-h-[88px] relative">
+              {/* Row 1, Col 3: Availability Animated Cell (Rolling REMOTE/HYBRID/ONSITE ➔ Sliding Green Card) */}
+              <div className="relative overflow-hidden h-full min-h-[72px] sm:min-h-[88px]">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.25, delay: 0.45, ease: "easeOut" }}
-                  className="flex flex-col items-center justify-center text-center"
+                  className="w-full h-full"
                 >
-                  <span className="text-black font-black text-[8.5px] min-[360px]:text-[9.5px] min-[400px]:text-[10.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-center leading-tight font-mono">
-                    AVAILABLE<br />FOR FULL-TIME
-                  </span>
-                  <span className="text-[8px] sm:text-[9px] font-mono text-black/50 mt-0.5 sm:mt-1 hidden min-[360px]:inline-block opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    // open to remote
-                  </span>
+                  <AvailabilityAnimatedCell />
                 </motion.div>
               </div>
 
@@ -318,6 +313,96 @@ export default function HeroV2() {
 
       </div>
     </section>
+  );
+}
+
+// ─── Availability Cell: Rolling Work Modes (REMOTE, HYBRID, ONSITE) ➔ Sliding Green Full-Time Card ───
+function AvailabilityAnimatedCell() {
+  const workModes = ["REMOTE", "HYBRID", "ONSITE"];
+  const [modeIndex, setModeIndex] = useState(0);
+  const [showGreenCard, setShowGreenCard] = useState(false);
+  const cellRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cellRef, { margin: "0px" });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    // Cycle:
+    // 0s: REMOTE (white background)
+    // 1.8s: HYBRID (white background)
+    // 3.6s: ONSITE (white background)
+    // 5.4s: Green Card SLIDES IN: "AVAILABLE FOR FULL-TIME" (stays for 3.6s)
+    // 9.0s: Loops back to REMOTE
+    const cycle = setInterval(() => {
+      setShowGreenCard((prev) => {
+        if (!prev) {
+          // If we were on work modes, show green card
+          return true;
+        } else {
+          // If we were on green card, slide out and reset modeIndex to 0
+          setModeIndex(0);
+          return false;
+        }
+      });
+    }, 4200);
+
+    return () => clearInterval(cycle);
+  }, [isInView]);
+
+  // Rolling text cycle inside the work modes phase
+  useEffect(() => {
+    if (!isInView || showGreenCard) return;
+
+    const rollTimer = setInterval(() => {
+      setModeIndex((prev) => (prev + 1) % workModes.length);
+    }, 1400);
+
+    return () => clearInterval(rollTimer);
+  }, [isInView, showGreenCard, workModes.length]);
+
+  return (
+    <div ref={cellRef} className="w-full h-full relative overflow-hidden bg-white select-none">
+      {/* ── State 1 (Base): Centered rolling text: REMOTE / HYBRID / ONSITE ── */}
+      <div className="w-full h-full bg-white flex flex-col items-center justify-center p-2.5 min-[360px]:p-3 text-center cursor-default">
+        <span className="text-[8px] sm:text-[8.5px] font-mono font-black uppercase tracking-widest text-[#00C16A] mb-1">
+          // WORK PREFERENCE
+        </span>
+        <div className="relative h-6 sm:h-7 w-full flex items-center justify-center overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={workModes[modeIndex]}
+              initial={{ y: 16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -16, opacity: 0 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="flex items-center gap-1.5 justify-center"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse shrink-0" />
+              <span className="text-black font-black text-xs min-[360px]:text-sm sm:text-base uppercase tracking-wider font-mono">
+                {workModes[modeIndex]}
+              </span>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <span className="text-[7.5px] sm:text-[8px] font-mono text-zinc-500 uppercase tracking-wider mt-0.5">
+          AVAILABLE NOW
+        </span>
+      </div>
+
+      {/* ── State 2 (Sliding Green Card): Slides in to reveal "AVAILABLE FOR FULL-TIME" ── */}
+      <motion.div
+        animate={{ y: showGreenCard ? "0%" : "100%" }}
+        transition={{ duration: 0.65, ease: [0.65, 0, 0.35, 1] }}
+        className="absolute inset-0 bg-[#00C16A] flex flex-col items-center justify-center p-2 min-[360px]:p-2.5 sm:p-4 text-center cursor-default z-10"
+      >
+        <span className="text-black font-black text-[8.5px] min-[360px]:text-[9.5px] min-[400px]:text-[10.5px] sm:text-xs uppercase tracking-wider sm:tracking-widest text-center leading-tight font-mono">
+          AVAILABLE<br />FOR FULL-TIME
+        </span>
+        <span className="text-[8px] sm:text-[9px] font-mono text-black/70 mt-1 uppercase tracking-wider font-bold">
+          [READY TO SHIP]
+        </span>
+      </motion.div>
+    </div>
   );
 }
 
