@@ -22,71 +22,67 @@ const itemVariants = {
 
 export default function HeroV2() {
 
-  // 4 Human, conversational headline slides (2-3 lines max)
-  const headlineSlides = [
+  // 4 Meaningful questions an interviewer asks a Design Engineer / Lead UX
+  const interviewPrompts = [
     {
       id: 0,
+      badge: "01. CORE",
+      promptLabel: "WHAT DO YOU DO?",
       question: "WHAT I DO:",
       answer: "I craft experiences people feel — then write the code to ship them.",
     },
     {
       id: 1,
+      badge: "02. PROBLEM SOLVING",
+      promptLabel: "HOW DO YOU HANDLE FRICTION?",
       question: "HOW I TACKLE PROBLEMS:",
       answer: "I find the root friction, untangle messy workflows, and make things simple.",
     },
     {
       id: 2,
+      badge: "03. HYBRID ROLE",
+      promptLabel: "WHY DESIGN & CODE BOTH?",
       question: "WHY DESIGN AND CODE?",
       answer: "Because pixel-perfect Figma designs deserve identical precision in production.",
     },
     {
       id: 3,
+      badge: "04. IMPACT",
+      promptLabel: "WHAT DO YOU BRING TO US?",
       question: "WHAT I BRING TO YOUR TEAM:",
       answer: "Sharp UX thinking, solid design systems, and fast execution from day one.",
     },
   ];
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHeadlinePaused, setIsHeadlinePaused] = useState(false);
+  const [activePrompt, setActivePrompt] = useState(0);
   const [displayedAnswer, setDisplayedAnswer] = useState("");
-  const [isTypingDone, setIsTypingDone] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
-  // Snappy typewriter effect: types briskly, holds for 1.8s once finished, then switches to next slide
+  // Typewriter effect triggered on prompt selection
   useEffect(() => {
     setDisplayedAnswer("");
-    setIsTypingDone(false);
+    setIsTyping(true);
 
-    const fullAnswer = headlineSlides[currentSlide].answer;
+    const fullAnswer = interviewPrompts[activePrompt].answer;
     let charIndex = 0;
-    let nextSlideTimeout: NodeJS.Timeout | null = null;
-    let typeInterval: NodeJS.Timeout | null = null;
 
-    // Short 120ms start delay for punchy entrance
-    const startDelay = setTimeout(() => {
-      typeInterval = setInterval(() => {
+    // Small delay so question registers first
+    const startTimeout = setTimeout(() => {
+      const interval = setInterval(() => {
         charIndex++;
         setDisplayedAnswer(fullAnswer.slice(0, charIndex));
 
         if (charIndex >= fullAnswer.length) {
-          if (typeInterval) clearInterval(typeInterval);
-          setIsTypingDone(true);
-
-          // Hold for 1.8s so user can comfortably read, then immediately transition to next slide
-          nextSlideTimeout = setTimeout(() => {
-            if (!isHeadlinePaused) {
-              setCurrentSlide((prev) => (prev + 1) % headlineSlides.length);
-            }
-          }, 1800);
+          clearInterval(interval);
+          setIsTyping(false);
         }
-      }, 16); // snappy, energetic typing speed
-    }, 120);
+      }, 18);
 
-    return () => {
-      clearTimeout(startDelay);
-      if (typeInterval) clearInterval(typeInterval);
-      if (nextSlideTimeout) clearTimeout(nextSlideTimeout);
-    };
-  }, [currentSlide, isHeadlinePaused, headlineSlides.length]);
+      return () => clearInterval(interval);
+    }, 100);
+
+    return () => clearTimeout(startTimeout);
+  }, [activePrompt]);
 
   return (
     <section className="w-full bg-[#F4F4F0] border-b-2 border-black px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -107,32 +103,30 @@ export default function HeroV2() {
               {/* Role badges */}
               <motion.div
                 variants={itemVariants}
-                className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-base md:text-xl font-black tracking-wider uppercase text-black mb-0 lg:mb-4 font-sans flex-wrap shrink-0"
+                className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-base md:text-xl font-black tracking-wider uppercase text-black mb-0 lg:mb-3 font-sans flex-wrap shrink-0"
               >
                 <span className="text-[#FF462D]">DESIGN ENGINEER</span>
                 <span className="text-[#FF462D]">×</span>
                 <span className="text-black">MENTOR</span>
               </motion.div>
 
-              {/* Headline Auto-Rotating Carousel with Typewriter Effect */}
+              {/* Main Headline Answer Display with Typewriter effect */}
               <motion.div
                 variants={itemVariants}
-                className="relative flex flex-col mb-1 sm:mb-2 lg:mb-5"
-                onMouseEnter={() => setIsHeadlinePaused(true)}
-                onMouseLeave={() => setIsHeadlinePaused(false)}
+                className="relative flex flex-col mb-1 sm:mb-2 lg:mb-4"
               >
-                <div className="relative w-full min-h-[75px] sm:min-h-[90px] md:min-h-[105px] lg:min-h-[145px] flex items-start overflow-hidden">
+                <div className="relative w-full min-h-[70px] sm:min-h-[85px] md:min-h-[95px] lg:min-h-[135px] flex items-start overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
-                      key={currentSlide}
-                      initial={{ opacity: 0, y: 8 }}
+                      key={activePrompt}
+                      initial={{ opacity: 0, y: 6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.25, ease: "easeOut" }}
-                      className="text-lg sm:text-2xl md:text-3xl lg:text-[32px] xl:text-[36px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading"
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="text-lg sm:text-2xl md:text-3xl lg:text-[30px] xl:text-[34px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading"
                     >
                       <span className="text-[#FF462D] block sm:inline mr-2 sm:mr-3">
-                        {headlineSlides[currentSlide].question}
+                        {interviewPrompts[activePrompt].question}
                       </span>
                       <span>{displayedAnswer}</span>
                       <span className="inline-block w-2 sm:w-2.5 h-[1.1em] bg-black ml-1 align-baseline animate-pulse" />
@@ -140,24 +134,40 @@ export default function HeroV2() {
                   </AnimatePresence>
                 </div>
 
-                {/* Pagination Dots directly below headline */}
-                <div className="flex items-center gap-2 mt-2.5 sm:mt-3 select-none shrink-0">
-                  {headlineSlides.map((slide, idx) => (
-                    <button
-                      key={slide.id}
-                      type="button"
-                      onClick={() => setCurrentSlide(idx)}
-                      aria-label={`Go to slide ${idx + 1}`}
-                      className={`h-2 transition-all duration-300 rounded-none border border-black ${
-                        currentSlide === idx
-                          ? "w-7 sm:w-8 bg-[#FF462D] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
-                          : "w-2.5 bg-zinc-200 hover:bg-zinc-400 opacity-60 hover:opacity-100 cursor-pointer"
-                      }`}
-                    />
-                  ))}
-                  <span className="text-[9px] font-mono font-bold text-zinc-400 ml-2 tracking-widest">
-                    0{currentSlide + 1} / 0{headlineSlides.length}
-                  </span>
+                {/* Interactive Question Prompts: Tap to Ask */}
+                <div className="flex flex-col gap-1.5 mt-2.5 sm:mt-3">
+                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-500">
+                    <span className="w-1.5 h-1.5 bg-[#FF462D] inline-block" />
+                    <span>SELECT AN INTERVIEW QUESTION TO ASK:</span>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2">
+                    {interviewPrompts.map((p, idx) => {
+                      const isActive = activePrompt === idx;
+                      return (
+                        <button
+                          key={p.id}
+                          type="button"
+                          onClick={() => setActivePrompt(idx)}
+                          className={`text-left p-1.5 sm:p-2 border-2 border-black transition-all cursor-pointer font-mono select-none group ${
+                            isActive
+                              ? "bg-black text-white shadow-[2px_2px_0px_0px_rgba(255,70,45,1)] translate-x-[1px] translate-y-[1px]"
+                              : "bg-white text-black hover:bg-zinc-100 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5"
+                          }`}
+                        >
+                          <div
+                            className={`text-[9px] font-black tracking-wider uppercase mb-0.5 ${
+                              isActive ? "text-[#FF462D]" : "text-zinc-600"
+                            }`}
+                          >
+                            {p.badge}
+                          </div>
+                          <div className="text-[10px] sm:text-[11px] font-black tracking-tight leading-tight uppercase line-clamp-1">
+                            {p.promptLabel}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
               </motion.div>
 
