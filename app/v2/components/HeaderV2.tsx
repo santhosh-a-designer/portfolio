@@ -22,7 +22,7 @@ function NavItem({
       href={href}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`relative flex-1 flex items-center justify-center px-3 lg:px-6 ${
+      className={`relative w-full h-full flex items-center justify-center px-2 xl:px-4 ${
         borderRight ? "border-r-2" : "border-r-0"
       } border-black text-xs md:text-sm font-black tracking-wider uppercase bg-white select-none text-center overflow-hidden group cursor-pointer`}
     >
@@ -85,8 +85,8 @@ export default function HeaderV2() {
               </Link>
             </div>
 
-            {/* Nav items 1-4 (Work, Experience, Skills, Mentorship) ending exactly at the 7-col border */}
-            <nav className="flex items-stretch flex-1 min-w-0">
+            {/* Nav items 1-4 (Work, Experience, Skills, Mentorship) distributed in exact equal 4 quarters ending at the 7-col border */}
+            <nav className="grid grid-cols-4 flex-1 min-w-0 items-stretch">
               {navItems.slice(0, 4).map((item, idx) => (
                 <NavItem
                   key={item.label}
