@@ -7,39 +7,6 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
   {
     id: "project-1",
     projectLabel: "Project 1",
-    projectTitle: "Kirubai Clinic Banner",
-    tagline: "Street-board revamp — before and after",
-    overview:
-      "Large-format board for the clinic: clearer information hierarchy, calmer lettering, and a more confident layout so it reads at a distance.",
-    beforeAfter: {
-      oldSrc: `${POSTERS}/Old.webp`,
-      newSrc: `${POSTERS}/New_Clinic_Board.webp`,
-      oldAlt: "Kirubai Clinic banner before redesign",
-      newAlt: "Kirubai Clinic banner after redesign",
-      intrinsicWidth: 6400,
-      intrinsicHeight: 3072,
-    },
-  },
-  {
-    id: "project-2",
-    projectLabel: "Project 2",
-    projectTitle: "Infinex Corporation",
-    tagline: "Building signage — outside & inside",
-    overview:
-      "Branded boards for the Infinex Corporation location: a clear read from the approach (outside) and a consistent, professional presence in the interior.",
-    imagePairTitle: "Outside & inside",
-    beforeAfter: {
-      oldSrc: `${POSTERS}/Infinex_B_Outside.webp`,
-      newSrc: `${POSTERS}/Infinex_B_Inside.webp`,
-      oldAlt: "Infinex Corporation exterior signage",
-      newAlt: "Infinex Corporation interior signage",
-      intrinsicWidth: 10500,
-      intrinsicHeight: 13500,
-    },
-  },
-  {
-    id: "project-3",
-    projectLabel: "Project 3",
     projectTitle: "The Key",
     tagline: "The Centre for Special Education — tri-fold brochure",
     overview:
@@ -73,6 +40,39 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
         intrinsicWidth: 1344,
         intrinsicHeight: 768,
       },
+    },
+  },
+  {
+    id: "project-2",
+    projectLabel: "Project 2",
+    projectTitle: "Kirubai Clinic Banner",
+    tagline: "Street-board revamp — before and after",
+    overview:
+      "Large-format board for the clinic: clearer information hierarchy, calmer lettering, and a more confident layout so it reads at a distance.",
+    beforeAfter: {
+      oldSrc: `${POSTERS}/Old.webp`,
+      newSrc: `${POSTERS}/New_Clinic_Board.webp`,
+      oldAlt: "Kirubai Clinic banner before redesign",
+      newAlt: "Kirubai Clinic banner after redesign",
+      intrinsicWidth: 6400,
+      intrinsicHeight: 3072,
+    },
+  },
+  {
+    id: "project-3",
+    projectLabel: "Project 3",
+    projectTitle: "Infinex Corporation",
+    tagline: "Building signage — outside & inside",
+    overview:
+      "Branded boards for the Infinex Corporation location: a clear read from the approach (outside) and a consistent, professional presence in the interior.",
+    imagePairTitle: "Outside & inside",
+    beforeAfter: {
+      oldSrc: `${POSTERS}/Infinex_B_Outside.webp`,
+      newSrc: `${POSTERS}/Infinex_B_Inside.webp`,
+      oldAlt: "Infinex Corporation exterior signage",
+      newAlt: "Infinex Corporation interior signage",
+      intrinsicWidth: 10500,
+      intrinsicHeight: 13500,
     },
   },
   {
