@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { POSTER_PROJECTS } from "@/lib/graphicDesignProjects/posterProjects";
 import type { GraphicDesignPosterProject } from "@/lib/graphicDesignTypes";
 
+import { useLenis } from "@/components/LenisProvider";
+
 interface GraphicDesignModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -19,6 +21,7 @@ export default function GraphicDesignModal({
   initialProjectId = "project-1",
 }: GraphicDesignModalProps) {
   const [selectedId, setSelectedId] = useState(initialProjectId);
+  const lenis = useLenis();
 
   // Sync initial project when modal opens
   useEffect(() => {
@@ -27,22 +30,49 @@ export default function GraphicDesignModal({
     }
   }, [initialProjectId]);
 
-  // Lock body scroll & listen for Escape
+  // Complete background and Lenis scroll freeze while modal is open
   useEffect(() => {
     if (!isOpen) return;
+
+    // 1. Pause Lenis smooth scroll engine
+    if (lenis) {
+      lenis.stop();
+    }
+
+    // 2. Lock window & body position
+    const scrollY = window.scrollY;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevBodyPos = document.body.style.position;
+    const prevBodyTop = document.body.style.top;
+    const prevBodyWidth = document.body.style.width;
+
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevBodyOverflow;
+      document.body.style.position = prevBodyPos;
+      document.body.style.top = prevBodyTop;
+      document.body.style.width = prevBodyWidth;
+      window.scrollTo(0, scrollY);
+
+      if (lenis) {
+        lenis.start();
+      }
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, lenis, onClose]);
 
   const currentProject =
     POSTER_PROJECTS.find((p) => p.id === selectedId) || POSTER_PROJECTS[0];
@@ -130,7 +160,10 @@ export default function GraphicDesignModal({
             </div>
 
             {/* Modal Body: Scrollable Content Area */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 bg-[#F4F4F0]">
+            <div
+              data-lenis-prevent="true"
+              className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 bg-[#F4F4F0]"
+            >
               {/* Project Title & Overview Banner */}
               <div className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
