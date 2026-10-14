@@ -62,6 +62,30 @@ try {
   console.log(
     `design-system preview: wrote thumbnails${pages ? ` (${pages} pages in PDF)` : ""}`,
   );
+
+  // Generate crisp resume preview image if PDF exists
+  const RESUME_PDF = path.join(ROOT, "public/Santhosh-A-Resume.pdf");
+  const RESUME_WEBP = path.join(ROOT, "public/resume-preview.webp");
+  if (fs.existsSync(RESUME_PDF)) {
+    try {
+      execFileSync(
+        "pdftoppm",
+        ["-png", "-r", "220", "-f", "1", "-l", "1", RESUME_PDF, path.join(tmp, "resume")],
+        { stdio: "pipe" },
+      );
+      const resumePng = fs.readdirSync(tmp).find((f) => f.startsWith("resume") && f.endsWith(".png"));
+      if (resumePng) {
+        const src = path.join(tmp, resumePng);
+        try {
+          execFileSync("cwebp", ["-q", "90", src, "-o", RESUME_WEBP], { stdio: "pipe" });
+        } catch {
+          fs.copyFileSync(src, path.join(ROOT, "public/resume-preview.png"));
+        }
+      }
+    } catch (e) {
+      // Quietly ignore if resume preview generation fails
+    }
+  }
 } finally {
   fs.rmSync(tmp, { recursive: true, force: true });
 }
