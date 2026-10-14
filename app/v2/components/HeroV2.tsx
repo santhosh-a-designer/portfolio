@@ -52,7 +52,7 @@ export default function HeroV2() {
       badge: "04. IMPACT",
       promptLabel: "WHAT DO YOU BRING TO US?",
       question: "WHAT I BRING TO YOUR TEAM:",
-      answer: "User empathy, rock-solid design systems, and thoughtful engineering handoffs.",
+      answer: "The power of two roles in one — fluent Figma systems, branding, and frontend code that speaks directly to developers.",
     },
   ];  const [activePrompt, setActivePrompt] = useState(0);
   const [displayedAnswer, setDisplayedAnswer] = useState(interviewPrompts[0].answer);
