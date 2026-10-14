@@ -98,22 +98,22 @@ export default function HeroV2() {
     <section className="w-full bg-[#F4F4F0] border-b-2 border-black px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
 
-        {/* ─── Main Hero Grid — locked to desktop viewport height to prevent all layout shifts ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-black lg:h-[calc(100vh-64px)] lg:max-h-[calc(100vh-64px)] min-h-0 overflow-hidden">
+        {/* ─── Main Hero Grid — responsive height on desktop to keep everything in view without clipping ─── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-black lg:min-h-[calc(100vh-64px)] overflow-hidden">
 
           {/* ─────────── LEFT COLUMN ─────────── */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-7 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white h-full max-h-full min-h-0 overflow-hidden"
+            className="lg:col-span-7 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white min-h-0"
           >
-            {/* Top text block with generous breathing room */}
-            <div className="flex flex-col pt-4 pb-6 px-4 sm:pt-6 sm:pb-8 sm:px-8 md:p-10 lg:p-14 lg:justify-between lg:h-full gap-4 sm:gap-6 lg:gap-8">
+            {/* Top text block with balanced breathing room */}
+            <div className="flex flex-col pt-3 pb-4 px-4 sm:pt-5 sm:pb-6 sm:px-6 md:p-8 lg:px-10 lg:pt-8 lg:pb-6 lg:justify-between flex-1 gap-3 sm:gap-4 lg:gap-5">
               {/* Role badges */}
               <motion.div
                 variants={itemVariants}
-                className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-base md:text-xl font-black tracking-wider uppercase text-black mb-0 font-sans flex-wrap shrink-0"
+                className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-base md:text-lg lg:text-xl font-black tracking-wider uppercase text-black mb-0 font-sans flex-wrap shrink-0"
               >
                 <span className="text-[#FF462D]">DESIGN ENGINEER</span>
                 <span className="text-[#FF462D]">×</span>
@@ -125,9 +125,9 @@ export default function HeroV2() {
                 variants={itemVariants}
                 className="relative flex flex-col my-auto"
               >
-                <div className="relative w-full h-[150px] sm:h-[160px] md:h-[170px] lg:h-[185px] xl:h-[200px] flex items-start overflow-hidden">
+                <div className="relative w-full h-[125px] sm:h-[135px] md:h-[145px] lg:h-[155px] xl:h-[165px] flex items-start overflow-hidden">
                   <div
-                    className={`transition-opacity duration-150 ease-out text-lg sm:text-2xl md:text-3xl lg:text-[30px] xl:text-[34px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading ${
+                    className={`transition-opacity duration-150 ease-out text-lg sm:text-2xl md:text-2xl lg:text-[28px] xl:text-[32px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading ${
                       isFading ? "opacity-0" : "opacity-100"
                     }`}
                   >
@@ -140,7 +140,7 @@ export default function HeroV2() {
                 </div>
 
                 {/* Interactive Question Prompts: Full equal-height wrapped cards */}
-                <div className="flex flex-col gap-2 mt-4 sm:mt-5">
+                <div className="flex flex-col gap-2 mt-3 sm:mt-4">
                   <div className="flex items-center gap-2 text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-500">
                     <span className="w-1.5 h-1.5 bg-[#FF462D] inline-block" />
                     <span>SELECT AN INTERVIEW QUESTION TO ASK:</span>
@@ -177,7 +177,7 @@ export default function HeroV2() {
               </motion.div>
 
               {/* VIEW WORK CTA (with clean breathing room) */}
-              <motion.div variants={itemVariants} className="mt-4 sm:mt-6 lg:mt-8">
+              <motion.div variants={itemVariants} className="mt-3 sm:mt-4 lg:mt-5">
                 <Link
                   href="#work"
                   onClick={(e) => {
