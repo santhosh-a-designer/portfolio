@@ -98,8 +98,8 @@ export default function HeroV2() {
     <section className="w-full bg-[#F4F4F0] border-b-2 border-black px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="w-full max-w-[1440px] mx-auto border-x-0 sm:border-x-2 border-black bg-white">
 
-        {/* ─── Main Hero Grid — responsive height on desktop to keep everything in view without clipping ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-black lg:min-h-[calc(100vh-64px)] overflow-hidden">
+        {/* ─── Main Hero Grid — locked rigid height on desktop so code typing scrolls internally and never expands the hero ─── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 border-b-2 border-black lg:h-[calc(100vh-64px)] lg:max-h-[calc(100vh-64px)] overflow-hidden">
 
           {/* ─────────── LEFT COLUMN ─────────── */}
           <motion.div
@@ -337,7 +337,7 @@ export default function HeroV2() {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 flex flex-col bg-[#F4F4F0] h-[340px] min-[380px]:h-[400px] sm:h-[480px] lg:h-full lg:max-h-full min-h-0 overflow-hidden"
+            className="lg:col-span-5 flex flex-col bg-[#F4F4F0] h-[340px] min-[380px]:h-[400px] sm:h-[480px] lg:h-full lg:max-h-full min-h-0 max-h-full overflow-hidden"
           >
             <DesignToCodeMorphingCard />
           </motion.div>
