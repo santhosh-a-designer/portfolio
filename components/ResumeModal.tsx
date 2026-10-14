@@ -1,9 +1,17 @@
 "use client";
 
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, DownloadSimple, ArrowSquareOut, FilePdf } from "@phosphor-icons/react";
+import {
+  X,
+  DownloadSimple,
+  ArrowSquareOut,
+  FilePdf,
+  MagnifyingGlassPlus,
+  MagnifyingGlassMinus,
+  ArrowsClockwise,
+} from "@phosphor-icons/react";
 import { useLenis } from "@/components/LenisProvider";
 
 const DEFAULT_FILENAME = "Santhosh-A-Resume";
@@ -27,7 +35,15 @@ export default function ResumeModal({
   onClose: () => void;
 }) {
   const lenis = useLenis();
+  const [zoomLevel, setZoomLevel] = useState<number>(100);
   const [imgError, setImgError] = useState(false);
+
+  /* Reset zoom when reopened */
+  useEffect(() => {
+    if (open) {
+      setZoomLevel(100);
+    }
+  }, [open]);
 
   /* Freeze background Lenis and window scroll while modal is open */
   useEffect(() => {
@@ -71,6 +87,10 @@ export default function ResumeModal({
     };
   }, [open, lenis, onClose]);
 
+  const zoomIn = () => setZoomLevel((prev) => Math.min(prev + 25, 175));
+  const zoomOut = () => setZoomLevel((prev) => Math.max(prev - 25, 75));
+  const zoomReset = () => setZoomLevel(100);
+
   return (
     <AnimatePresence>
       {open && (
@@ -78,7 +98,7 @@ export default function ResumeModal({
           role="dialog"
           aria-modal="true"
           aria-labelledby="resume-modal-title"
-          className="fixed inset-0 z-[200] flex items-center justify-center p-2.5 sm:p-4 md:p-6 select-none"
+          className="fixed inset-0 z-[200] flex items-center justify-center p-2 sm:p-4 md:p-6 select-none"
         >
           {/* Backdrop */}
           <motion.div
@@ -90,14 +110,14 @@ export default function ResumeModal({
             className="fixed inset-0 bg-black/75 backdrop-blur-sm cursor-pointer"
           />
 
-          {/* Modal Container — 2px Brutalist Theme */}
+          {/* Modal Container — 2px Brutalist Theme (wider 4xl for comfortable reading) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-xl max-h-[92vh] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
+            className="relative w-full max-w-4xl max-h-[92vh] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
           >
             {/* Modal Header Bar — Electric Orange/Red with Brutalist Badge */}
             <div className="p-3 sm:p-4 bg-[#FF462D] text-white border-b-2 border-black flex items-center justify-between gap-3 shrink-0">
@@ -133,21 +153,56 @@ export default function ResumeModal({
               </div>
             </div>
 
-            {/* Sub-header Information Strip */}
+            {/* Sub-header Information Strip & Zoom Toolbar */}
             <div className="px-3 sm:px-4 py-2 bg-[#FAED00] border-b-2 border-black flex items-center justify-between text-black font-mono text-[10px] sm:text-[11px] font-bold uppercase shrink-0">
               <div className="flex items-center gap-2">
-                <FilePdf size={14} weight="fill" className="text-black shrink-0" />
+                <FilePdf size={15} weight="fill" className="text-black shrink-0" />
                 <span className="tracking-wide">SANTHOSH_A_RESUME.PDF</span>
+                <span className="hidden sm:inline text-[9.5px] bg-black text-[#FAED00] px-1.5 py-0.5 border border-black font-pixel ml-1">
+                  VERIFIED_A4
+                </span>
               </div>
-              <span className="text-[9.5px] bg-black text-[#FAED00] px-1.5 py-0.5 border border-black font-pixel">
-                VERIFIED_A4
-              </span>
+
+              {/* Interactive Zoom Controls */}
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-mono font-bold text-zinc-800 mr-1 hidden min-[480px]:inline">
+                  ZOOM:
+                </span>
+                <button
+                  type="button"
+                  onClick={zoomOut}
+                  disabled={zoomLevel <= 75}
+                  className="w-6 h-6 bg-white hover:bg-black hover:text-white disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-black border border-black flex items-center justify-center cursor-pointer transition-colors"
+                  title="Zoom Out"
+                  aria-label="Zoom Out"
+                >
+                  <MagnifyingGlassMinus size={13} weight="bold" />
+                </button>
+                <button
+                  type="button"
+                  onClick={zoomReset}
+                  className="px-1.5 h-6 bg-white hover:bg-black hover:text-white border border-black text-[9px] font-mono font-bold flex items-center justify-center cursor-pointer transition-colors min-w-[38px]"
+                  title="Reset Zoom"
+                >
+                  {zoomLevel}%
+                </button>
+                <button
+                  type="button"
+                  onClick={zoomIn}
+                  disabled={zoomLevel >= 175}
+                  className="w-6 h-6 bg-white hover:bg-black hover:text-white disabled:opacity-40 disabled:hover:bg-white disabled:hover:text-black border border-black flex items-center justify-center cursor-pointer transition-colors"
+                  title="Zoom In"
+                  aria-label="Zoom In"
+                >
+                  <MagnifyingGlassPlus size={13} weight="bold" />
+                </button>
+              </div>
             </div>
 
             {/* Resume Preview Body — Crisp Render with Scroll Support */}
             <div
               data-lenis-prevent="true"
-              className="flex-1 min-h-0 bg-[#E8E8E4] p-3 sm:p-5 overflow-y-auto overflow-x-hidden flex flex-col items-center justify-start scrollbar-none"
+              className="flex-1 min-h-0 bg-[#E8E8E4] p-3 sm:p-6 overflow-y-auto overflow-x-auto flex flex-col items-center justify-start scrollbar-none"
               style={{
                 backgroundImage: `
                   linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
@@ -157,14 +212,22 @@ export default function ResumeModal({
               }}
             >
               {/* White A4 Paper Card with 2px Brutalist Border */}
-              <div className="relative w-full max-w-[480px] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden shrink-0 aspect-[1/1.414]">
+              <div
+                style={{
+                  width: `${Math.round(620 * (zoomLevel / 100))}px`,
+                  maxWidth: "100%",
+                  transition: "width 0.15s ease-out",
+                }}
+                className="bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden shrink-0 aspect-[2314/3275] relative"
+              >
                 {!imgError ? (
                   <Image
                     src={RESUME_PREVIEW_IMG}
                     alt="Santhosh A — UX/UI Designer & Developer Resume Preview"
                     fill
                     priority
-                    sizes="(max-width: 640px) 92vw, 480px"
+                    unoptimized
+                    sizes="(max-width: 768px) 95vw, 680px"
                     className="object-contain object-top"
                     onError={() => setImgError(true)}
                   />
