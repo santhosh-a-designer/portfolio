@@ -10,11 +10,11 @@ export const IRSTUNNER_UX_SHORT = {
   liveUrl: "https://irstunner.com",
   liveUrlDisplay: "irstunner.com",
   uxUi:
-    "Two distinct entry points — industrial and CHILL HOME residential — so each visitor sees only the story relevant to their roof. High-contrast stat strips and repeated WhatsApp/audit CTAs keep the decision path short.",
+    "Architected dual conversion funnels: 'Industrial' for factory scale audits and 'CHILL HOME' for residential buyers. High-contrast stat strips and direct WhatsApp conversion loops drove immediate customer engagement.",
   development:
-    "Static-first, mobile-optimised build with lazy images and clear heading hierarchy. Handoff included UI tokens and packaging dimensions so marketing updates stay low-friction.",
+    "Engineered ultra-lean, mobile-first responsive architecture with instant-load media and custom SVG assets. Produced physical packaging dimensions and print-ready production files alongside digital surfaces.",
   overview:
-    "A powder you mix with paint so factory and home roofs act as a thermal shield — cutting radiant heat before it enters the building. The design goal was trust: credible numbers, a consult-first CTA, and packaging that reads cleanly in-store and in photos.",
+    "A next-gen thermal radiation shield mixed directly into paint to cut interior heat before it enters buildings. We developed the end-to-end digital brand, interactive product visualizer, and retail packaging to drive direct consumer trust and contractor adoption.",
   marketingStats: [
     { label: "Sales growth (summer, WhatsApp-led)", value: "15% → 40%" },
     { label: "Core CTA", value: "WhatsApp + on-site / audit" },

@@ -13,11 +13,11 @@ export const IRASUS_UX_SHORT = {
   thirdInfoLabel: "Client link",
   thirdInfoFallback: "— (no public URL for this work)",
   overview:
-    "iRasus builds AI-driven battery intelligence for e-mobility, stationary storage, and manufacturing — the Preksha platform and related apps help fleets and operators see packs in real time, catch faults early, and extend life. I supported a dashboard revamp: competitor and landscape analysis, then cleaner tables, layouts, and real-time vehicle monitoring so heavy telemetry stays legible in operations.",
+    "AI-powered battery intelligence for global EV fleets and mega-watt stationary storage. We transformed millions of raw, chaotic telemetry data points into an ultra-clean, real-time command dashboard that operators and fleet managers can act on in seconds.",
   uxUi:
-    "I mapped competing analytics products and in-field review sessions to find where operators got lost. The UI prioritises at-a-glance health, trip and geolocation, and clear drill-downs from fleet → vehicle → pack — aligned with how admins and drivers actually work during incidents.",
+    "Designed mission-critical telemetry views: instantaneous pack health triage, geolocated battery thermal maps, and seamless multi-level drill-downs (Fleet ➔ Vehicle ➔ Pack ➔ Cell) to catch thermal anomalies before catastrophic failure.",
   development:
-    "Delivered as a Figma system: grids, table density, filter patterns, and responsive breakpoints for the monitoring views. The production stack stayed on the client side; I handed off component-ready frames and redlines for the internal app team.",
+    "Engineered a high-density, low-latency Figma design system: pixel-perfect data grids, customizable threshold charts, and dark-mode operational palettes ready for continuous 24/7 industrial monitoring.",
   marketingStats: [
     { label: "Batteries tracked", value: "7,000+" },
     { label: "Energy managed", value: "2 GWh" },

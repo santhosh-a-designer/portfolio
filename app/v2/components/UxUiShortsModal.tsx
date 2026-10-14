@@ -355,35 +355,54 @@ export default function UxUiShortsModal({
                     </div>
                   )}
 
-                  {/* Multi-role Video Pairs (e.g. IndiaOne ATM Manager: Admin vs Loadman) */}
+                  {/* Multi-role Video Pairs (IndiaOne ATM Manager: Admin vs Loadman Mobile Flows) */}
                   {currentProject.showreelVideoPairs && currentProject.showreelVideoPairs.length > 0 && (
-                    <div className="space-y-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       {currentProject.showreelVideoPairs.map((section) => (
                         <div
                           key={section.sectionTitle}
-                          className="p-4 sm:p-6 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                          className="p-4 sm:p-5 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col"
                         >
-                          <div className="flex items-center justify-between mb-3 pb-2 border-b-2 border-black">
-                            <span className="text-xs font-mono font-black uppercase text-black">
-                              // {section.sectionTitle} WORKFLOW WALKTHROUGHS
-                            </span>
-                            <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase">
-                              DUAL ROLE SYSTEM
+                          {/* Role Header Strip */}
+                          <div className="flex items-center justify-between mb-4 pb-2 border-b-2 border-black shrink-0">
+                            <div className="flex items-center gap-2">
+                              <span className="w-2.5 h-2.5 bg-[#FF462D]" />
+                              <span className="text-xs sm:text-sm font-mono font-black uppercase text-black tracking-wider">
+                                {section.sectionTitle} APP FLOWS
+                              </span>
+                            </div>
+                            <span className="text-[9.5px] font-mono bg-black text-[#FAED00] px-2 py-0.5 border border-black font-bold uppercase">
+                              MOBILE SCREENS
                             </span>
                           </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                          {/* 2 Phone Screens Side-by-Side with True Mobile Aspect Ratio */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 flex-1 items-start">
                             {section.videos.map((vid) => (
-                              <div key={vid.id} className="border border-black bg-zinc-50 p-2 flex flex-col">
-                                <span className="text-[10px] font-mono font-bold text-zinc-600 uppercase mb-1.5 truncate">
-                                  {vid.caption}
-                                </span>
-                                <div className="border border-black bg-black aspect-[9/16] sm:aspect-video overflow-hidden">
+                              <div
+                                key={vid.id}
+                                className="border-2 border-black bg-zinc-50 p-2 sm:p-2.5 flex flex-col shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-white transition-colors"
+                              >
+                                {/* Phone Frame & Video */}
+                                <div className="border-2 border-black bg-black rounded-lg overflow-hidden aspect-[9/19.5] relative w-full shadow-inner mb-2.5 flex items-center justify-center">
                                   <video
-                                    controls
+                                    autoPlay
+                                    muted
+                                    loop
                                     playsInline
-                                    className="w-full h-full object-contain"
+                                    className="w-full h-full object-contain object-top"
                                     src={vid.src}
                                   />
+                                </div>
+
+                                {/* Caption & Label */}
+                                <div className="pt-1 flex flex-col justify-between flex-1">
+                                  <span className="text-[10px] font-mono font-black uppercase text-[#FF462D] mb-0.5 tracking-wider">
+                                    {vid.label}
+                                  </span>
+                                  <p className="text-[11px] font-sans font-bold text-zinc-800 leading-snug">
+                                    {vid.caption}
+                                  </p>
                                 </div>
                               </div>
                             ))}

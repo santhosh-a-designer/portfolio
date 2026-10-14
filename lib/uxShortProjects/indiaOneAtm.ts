@@ -11,16 +11,12 @@ export const INDIAONE_ATM_UX_SHORT = {
   duration: "2024 — 2025",
   thirdInfoLabel: "Access",
   thirdInfoFallback: "Client-only — no public link",
-  overview: [
-    "The client runs ATMs, and a surprising amount of the job still lived on paper: when a machine was low on cash, when it needed a firmware or configuration touch, and especially how cash moved from the bank, through loadmen, and into the cassettes. Teams were manually checking sites, writing down who carried what, and tracking how much each loadman had deposited and in which denominations — all in notebooks and loose sheets. When one person oversaw more than one ATM in different areas, the mental map broke even faster. The load was on one side; proof of what went into the machine was on another.",
-    "After a working session with the client, the problem sharpened: they did not need another heavy banking product — they needed a trustworthy ledger in the field that could follow loadmen, cassettes, and deposits in one place, with as few taps and menus as possible so mistakes drop while everyone still feels in control.",
-  ].join("\n\n"),
-  uxUi: [
-    "We sketched a product with two logins that mirror how work actually happens. Admin owns the people and the map: they onboard and manage loadmen, see who put cash into which ATM, and can switch between two or more machines in different areas without juggling separate notebooks. Loadman works at arm’s length: they record denominations they received from the bank, fill what they are about to put into the machine before a deposit run, then cross-check what they typed against the bank’s figures, confirm the drop, and that signal goes straight back to the admin — a closed loop, no extra phone tag.",
-    "The client was explicit: no bottom nav, no hamburger of mystery screens, no enterprise density. The speciality of this app is that it feels like two clean doors (Admin vs Loadman), shallow screens, and as little touching as we could get away with — one primary action per moment, and the rest stays out of the way. That’s how we kept it simple, fast to train, and hard to use wrong in a rush.",
-  ].join("\n\n"),
+  overview:
+    "Replacing messy paper notebooks with a tamper-proof mobile workflow. Field teams manually tracked millions in cash movement, cassette replenishment, and loadmen across rural ATMs with zero visibility. We designed a rapid, mistake-proof digital ledger tailored for high-stakes cash operations.",
+  uxUi:
+    "Designed two frictionless doorways: 'Admin' (fleet maps, real-time cassette status, and loadman monitoring) and 'Loadman' (fast denomination logging, bank cross-checks, and instant deposit confirmation). Zero clutter, no deep menus — every action is designed for speed and error prevention under bright sunlight.",
   development:
-    "I translated the flows into a tight Figma system — spacing, type, and a single primary action pattern — then into build-ready screens for a mobile app so engineering could implement without re-interpreting the field logic. NDA/ops constraints mean the build stays in the client’s environment; the deliverable on my side is the interaction model, UI, and handoff that matches how they work on site every day.",
+    "Built a high-contrast, scalable Figma UI system with rigid touch targets and offline-first mobile states. Handed off complete interaction specifications and component libraries for rapid enterprise deployment.",
   showreelVideoPairs: [
     {
       sectionTitle: "Admin",
