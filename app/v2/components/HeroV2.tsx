@@ -509,12 +509,16 @@ function VSCodeLogo({ className = "w-4 h-4" }: { className?: string }) {
 
 // ─── Design → Code Morphing Card (Right Column) ───────────────────────────────
 function DesignToCodeMorphingCard() {
-  // Typing cycle timing:
-  // Types smoothly from 0 -> totalLength over 7.5s, holds for 1.8s, then resets
-  const TYPING_MS = 7500;
-  const HOLD_MS = 1800;
-  const RESET_MS = 400;
-  const CYCLE_MS = TYPING_MS + HOLD_MS + RESET_MS;
+  // Single unified cycle timing:
+  // Phase 1: Downward slide (0s -> 7.5s) synced 1:1 with code typing (Design in Figma -> converted to code)
+  // Phase 2: Grid-only reveal hold (7.5s -> 8.3s) where image is fully down out of view
+  // Phase 3: Loop in from top (8.3s -> 9.7s) entering from -135% smoothly down to 0%
+  // Phase 4: Settle & reset (9.7s -> 10.2s) resting at 0% before starting next loop
+  const SLIDE_DOWN_MS = 7500;
+  const HOLD_MS = 800;
+  const ENTER_LOOP_MS = 1400;
+  const REST_MS = 500;
+  const CYCLE_MS = SLIDE_DOWN_MS + HOLD_MS + ENTER_LOOP_MS + REST_MS;
 
   const [cycleTime, setCycleTime] = useState(0);
   const cardContainerRef = useRef<HTMLDivElement>(null);
@@ -879,17 +883,29 @@ function DesignToCodeMorphingCard() {
     return () => cancelAnimationFrame(animationFrameId);
   }, [CYCLE_MS, isInView]);
 
-  // Typing progress calculation:
-  // Phase 1 (0ms -> 7500ms): Continuous typing from 0 -> totalLength
-  // Phase 2 (7500ms -> 9300ms): Fully typed code held for viewing
-  // Phase 3 (9300ms -> 9700ms): Reset back to 0 for seamless continuous loop
+  // 4-Phase loop calculation:
+  // Phase 1 (0ms -> 7500ms): Continuous slide down (0% -> 135%) synchronized with typing (Figma design converts to code)
+  // Phase 2 (7500ms -> 8300ms): Image is held off-screen below (135%), fully revealing technical grid lines as code finishes
+  // Phase 3 (8300ms -> 9700ms): Image smoothly loops in from top (-135% -> 0%) with cubic ease-out
+  // Phase 4 (9700ms -> 10200ms): Settle at 0% before next cycle seamlessly starts
+  let imageTranslateY = 0;
   let typedChars = 0;
-  if (cycleTime < TYPING_MS) {
-    const p = cycleTime / TYPING_MS;
+
+  if (cycleTime < SLIDE_DOWN_MS) {
+    const p = cycleTime / SLIDE_DOWN_MS;
+    imageTranslateY = p * 135;
     typedChars = Math.min(totalLength, Math.floor(p * totalLength));
-  } else if (cycleTime < TYPING_MS + HOLD_MS) {
+  } else if (cycleTime < SLIDE_DOWN_MS + HOLD_MS) {
+    imageTranslateY = 135;
     typedChars = totalLength;
+  } else if (cycleTime < SLIDE_DOWN_MS + HOLD_MS + ENTER_LOOP_MS) {
+    const enterP = (cycleTime - (SLIDE_DOWN_MS + HOLD_MS)) / ENTER_LOOP_MS;
+    // Cubic ease-out for smooth decelerating landing into 0%
+    const eased = 1 - Math.pow(1 - enterP, 3);
+    imageTranslateY = -135 + eased * 135;
+    typedChars = 0;
   } else {
+    imageTranslateY = 0;
     typedChars = 0;
   }
 
@@ -945,8 +961,12 @@ function DesignToCodeMorphingCard() {
           <span className="absolute bottom-2 left-2 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
           <span className="absolute bottom-2 right-2 text-[11px] font-mono text-zinc-400 font-bold select-none pointer-events-none">+</span>
 
-          {/* Design Mockup Card — stationary & centered in frame */}
+          {/* Design Mockup Card — slides down as it converts to code */}
           <div
+            style={{
+              transform: `translateY(${imageTranslateY}%)`,
+              willChange: "transform",
+            }}
             className="relative z-10 w-[min(100%,480px)] max-h-full shrink-0 aspect-[3200/2080] bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
           >
             <Image
