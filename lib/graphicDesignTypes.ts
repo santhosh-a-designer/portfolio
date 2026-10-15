@@ -6,6 +6,9 @@ export type GraphicDesignBeforeAfter = {
   /** Next/Image intrinsic dimensions (must match the files’ aspect). Used so the row has no extra gap below. */
   intrinsicWidth?: number;
   intrinsicHeight?: number;
+  /** Optional custom labels for left and right panels */
+  leftLabel?: string;
+  rightLabel?: string;
 };
 
 export type GraphicDesignThirdPanel = {

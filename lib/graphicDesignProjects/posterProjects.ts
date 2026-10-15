@@ -140,5 +140,94 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
       { label: "Channel focus", value: "Consult-led, not paint upsell" },
     ],
   },
+  {
+    id: "project-6",
+    projectLabel: "Project 6",
+    projectTitle: "BowlBae",
+    tagline: "Subscription bowl menu pamphlet & packaging sticker",
+    overview:
+      "Full print identity for BowlBae's fresh fruit, egg, sprout, and protein subscriptions. Designed a dual-sided marketing pamphlet: Front spotlights tiered subscription plans (Mini, Classic, Prime, Elite) with weekly and monthly pricing, while the Back details curated box compositions and daily freshness guarantees. Accompanied by a circular die-cut delivery container sticker.",
+    imagePairTitle: "Menu pamphlet — front & back",
+    beforeAfter: {
+      oldSrc: "/graphic-design/new-works/BowlBae_Pamphlet_Front_High.webp",
+      newSrc: "/graphic-design/new-works/BowlBae_Pamphlet_Back_High.webp",
+      oldAlt: "BowlBae subscription menu pamphlet — front (plans & pricing)",
+      newAlt: "BowlBae subscription menu pamphlet — back (box compositions & ingredients)",
+      intrinsicWidth: 1748,
+      intrinsicHeight: 2480,
+      leftLabel: "[PAMPHLET FRONT — PRICING & TIERS]",
+      rightLabel: "[PAMPHLET BACK — NUTRITION & BOXES]",
+    },
+    businessCardPair: {
+      blockTitle: "Delivery packaging sticker",
+      second: {
+        src: "/graphic-design/new-works/bowlbaeSticker_1.webp",
+        alt: "BowlBae circular brand sticker for delivery bowls",
+        intrinsicWidth: 718,
+        intrinsicHeight: 738,
+      },
+    },
+  },
+  {
+    id: "project-7",
+    projectLabel: "Project 7",
+    projectTitle: "Slice of Chaos",
+    tagline: "Special brownie menu & packaging sticker",
+    overview:
+      "Artisan bakery print system for Slice of Chaos ('Baked and Bullets'). Features a crafted special menu poster breaking down full-sized fudgy brownie varieties (Classic, Nutella, Bullet Man) and mini bite-sized options, paired with an edgy round brand sticker for pastry boxes and seal tape.",
+    imagePairTitle: "Menu poster",
+    useMainRowSingleImage: true,
+    beforeAfter: {
+      oldSrc: "/graphic-design/new-works/SOC_MENU.webp",
+      newSrc: "/graphic-design/new-works/SOC_MENU.webp",
+      oldAlt: "Slice of Chaos special brownie menu poster",
+      newAlt: "Slice of Chaos special brownie menu poster",
+      intrinsicWidth: 595,
+      intrinsicHeight: 842,
+    },
+    businessCardPair: {
+      blockTitle: "Box seal sticker",
+      second: {
+        src: "/graphic-design/new-works/soc_sticker.webp",
+        alt: "Slice of Chaos round packaging seal sticker",
+        intrinsicWidth: 1024,
+        intrinsicHeight: 1024,
+      },
+    },
+  },
+  {
+    id: "project-8",
+    projectLabel: "Project 8",
+    projectTitle: "Harshi Salon & Tanushka Mehndi",
+    tagline: "Double business card identity — front & back",
+    overview:
+      "Two premium beauty & salon print identities. 1) Harshi Salon Stylist: Elegant dark business card featuring HD bridal makeup, facial, and nail service offerings with clean Delhi studio contact details. 2) Tanushka Mehndi: Warm terracotta and henna-inspired card detailing bridal, Arabic, and creative hidden mehndi artistry.",
+    imagePairTitle: "Harshi Salon Stylist — card pair",
+    beforeAfter: {
+      oldSrc: "/graphic-design/new-works/Harshi_Salon_Front.webp",
+      newSrc: "/graphic-design/new-works/Harshi_Salon_Back.webp",
+      oldAlt: "Harshi Salon Stylist business card — front",
+      newAlt: "Harshi Salon Stylist business card — back with service list",
+      intrinsicWidth: 1050,
+      intrinsicHeight: 600,
+      leftLabel: "[HARSHI SALON — FRONT]",
+      rightLabel: "[HARSHI SALON — BACK (SERVICES)]",
+    },
+    businessCardPair: {
+      blockTitle: "Tanushka Mehndi artist — card pair",
+      first: {
+        src: "/graphic-design/new-works/Tanushka_Mehndi_Front.webp",
+        alt: "Tanushka Mehndi business card — front",
+        intrinsicWidth: 1050,
+        intrinsicHeight: 600,
+      },
+      second: {
+        src: "/graphic-design/new-works/Tanushka_Mehndi_Back.webp",
+        alt: "Tanushka Mehndi business card — back with bridal mehndi offerings",
+        intrinsicWidth: 1050,
+        intrinsicHeight: 600,
+      },
+    },
+  },
 ];
 

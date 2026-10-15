@@ -245,7 +245,7 @@ export default function SelectedWorkV2() {
                   // VISUAL_SYSTEMS
                 </span>
                 <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
-                  5 PRINT &amp; PACKAGING WORKS
+                  8 PRINT &amp; PACKAGING WORKS
                 </span>
               </div>
               <h3 className="text-xl sm:text-2xl font-black font-mono uppercase tracking-tight text-black mb-3">

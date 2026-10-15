@@ -223,7 +223,10 @@ export default function GraphicDesignModal({
                           {/* Left Asset */}
                           <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
                             <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase mb-2">
-                              {currentProject.id === "project-1" ? "[ORIGINAL STREET BOARD]" : "[EXTERIOR / OUTSIDE]"}
+                              {currentProject.beforeAfter.leftLabel ||
+                                (currentProject.id === "project-1"
+                                  ? "[ORIGINAL STREET BOARD]"
+                                  : "[EXTERIOR / OUTSIDE]")}
                             </span>
                             <div className="relative w-full h-56 sm:h-72 md:h-80 bg-zinc-100 flex items-center justify-center overflow-hidden">
                               <Image
@@ -240,7 +243,10 @@ export default function GraphicDesignModal({
                           {/* Right Asset */}
                           <div className="border border-black bg-zinc-50 p-2 sm:p-3 flex flex-col">
                             <span className="text-[10px] font-mono font-black text-[#FF462D] uppercase mb-2">
-                              {currentProject.id === "project-1" ? "[NEW REDESIGNED BOARD]" : "[INTERIOR / INSIDE]"}
+                              {currentProject.beforeAfter.rightLabel ||
+                                (currentProject.id === "project-1"
+                                  ? "[NEW REDESIGNED BOARD]"
+                                  : "[INTERIOR / INSIDE]")}
                             </span>
                             <div className="relative w-full h-56 sm:h-72 md:h-80 bg-zinc-100 flex items-center justify-center overflow-hidden">
                               <Image
