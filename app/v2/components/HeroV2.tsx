@@ -184,9 +184,6 @@ export default function HeroV2() {
                     e.preventDefault();
                     const targetEl = document.getElementById("project-card-01") || document.getElementById("work");
                     if (!targetEl) return;
-                    if (window.location.hash !== "#work") {
-                      history.replaceState(null, "", `${window.location.pathname}${window.location.search}#work`);
-                    }
                     if (lenis) {
                       lenis.scrollTo(targetEl, { offset: -74, duration: 0.9, lerp: 0.12, force: true });
                     } else {

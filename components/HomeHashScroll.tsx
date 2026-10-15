@@ -115,8 +115,14 @@ export default function HomeHashScroll() {
         scheduleScroll(scrollToWorks);
         return;
       }
+      // Note: Do NOT auto-scroll to #work on initial page load/refresh.
+      // Clean up #work hash so refreshing the page always stays at the top of the hero.
       if (window.location.hash === "#work") {
-        scheduleScroll(() => scrollToWorkSection(lenis));
+        try {
+          history.replaceState(null, "", window.location.pathname + window.location.search);
+        } catch {
+          /* */
+        }
       }
     };
 

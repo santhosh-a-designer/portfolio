@@ -28,9 +28,6 @@ function NavItem({
           const el = (targetId === "work" ? document.getElementById("project-card-01") : null) || document.getElementById(targetId);
           if (el) {
             e.preventDefault();
-            if (window.location.hash !== href) {
-              history.replaceState(null, "", `${window.location.pathname}${window.location.search}${href}`);
-            }
             const offset = targetId === "work" ? -74 : -64;
             if (lenis) {
               lenis.scrollTo(el, { offset, duration: 0.9, lerp: 0.12, force: true });
