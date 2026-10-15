@@ -28,7 +28,7 @@ function NavItem({
           const el = (targetId === "work" ? document.getElementById("clients-work") : null) || document.getElementById(targetId);
           if (el) {
             e.preventDefault();
-            const offset = -64;
+            const offset = targetId === "work" ? 30 : -64;
             if (lenis) {
               lenis.scrollTo(el, { offset, duration: 0.9, lerp: 0.12, force: true });
             } else {
