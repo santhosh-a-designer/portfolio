@@ -348,9 +348,9 @@ export default function HeroV2() {
   );
 }
 
-// ─── Availability Cell: Rolling Work Modes (REMOTE, HYBRID, ONSITE) ➔ Sliding Green Full-Time Card ───
+// ─── Availability Cell: Rolling Work Modes (ONSITE, HYBRID, REMOTE) ➔ Sliding Green Full-Time Card ───
 function AvailabilityAnimatedCell() {
-  const workModes = ["REMOTE", "HYBRID", "ONSITE"];
+  const workModes = ["ONSITE", "HYBRID", "REMOTE"];
   const [modeIndex, setModeIndex] = useState(0);
   const [showGreenCard, setShowGreenCard] = useState(false);
   const cellRef = useRef<HTMLDivElement>(null);
@@ -360,11 +360,11 @@ function AvailabilityAnimatedCell() {
     if (!isInView) return;
 
     // Cycle:
-    // 0s: REMOTE (white background)
+    // 0s: ONSITE (white background)
     // 1.8s: HYBRID (white background)
-    // 3.6s: ONSITE (white background)
+    // 3.6s: REMOTE (white background)
     // 5.4s: Green Card SLIDES IN: "AVAILABLE FOR FULL-TIME" (stays for 3.6s)
-    // 9.0s: Loops back to REMOTE
+    // 9.0s: Loops back to ONSITE
     const cycle = setInterval(() => {
       setShowGreenCard((prev) => {
         if (!prev) {
