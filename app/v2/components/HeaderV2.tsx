@@ -28,11 +28,12 @@ function NavItem({
           const el = document.getElementById(targetId);
           if (el) {
             e.preventDefault();
-            const offset = -64;
+            const HEADER_H = 64;
+            const top = el.getBoundingClientRect().top + window.scrollY - HEADER_H;
             if (lenis) {
-              lenis.scrollTo(el, { offset, duration: 0.9, lerp: 0.12, force: true });
+              lenis.scrollTo(top, { duration: 0.9, lerp: 0.12, force: true });
             } else {
-              window.scrollTo({ top: el.offsetTop + offset, behavior: "smooth" });
+              window.scrollTo({ top, behavior: "smooth" });
             }
           }
         }

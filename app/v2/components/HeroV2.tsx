@@ -182,14 +182,15 @@ export default function HeroV2() {
                   href="#work"
                   onClick={(e) => {
                     e.preventDefault();
-                    const targetEl = document.getElementById("work");
-                    if (!targetEl) return;
-                    // Offset -64 places the SELECTED WORK banner right flush under the 64px sticky header,
-                    // completely scrolling past CLIENTS & COMPANIES.
+                    const workEl = document.getElementById("work");
+                    if (!workEl) return;
+                    // Dynamically skip past the sticky header (64px) so SELECTED WORK. is the first visible row
+                    const HEADER_H = 64;
+                    const top = workEl.getBoundingClientRect().top + window.scrollY - HEADER_H;
                     if (lenis) {
-                      lenis.scrollTo(targetEl, { offset: -64, duration: 0.9, lerp: 0.12, force: true });
+                      lenis.scrollTo(top, { duration: 0.9, lerp: 0.12, force: true });
                     } else {
-                      window.scrollTo({ top: targetEl.offsetTop - 64, behavior: "smooth" });
+                      window.scrollTo({ top, behavior: "smooth" });
                     }
                   }}
                   className="inline-flex items-center justify-center gap-3 sm:gap-5 px-5 py-2.5 sm:px-8 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] sm:shadow-[5px_5px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group w-auto cursor-pointer font-mono scanline-btn"

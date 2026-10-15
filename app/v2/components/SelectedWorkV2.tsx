@@ -149,7 +149,7 @@ export default function SelectedWorkV2() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="border-b-2 border-black p-6 sm:p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white relative select-none scroll-mt-16 sm:scroll-mt-20"
+          className="border-b-2 border-black p-6 sm:p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white relative select-none"
         >
           <span className="absolute top-2.5 right-4 text-[10px] font-pixel text-zinc-400 hidden sm:inline">[STACKED_WINDOWS_V2]</span>
           <div>
