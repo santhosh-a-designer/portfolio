@@ -25,10 +25,10 @@ function NavItem({
       onClick={(e) => {
         if (href.startsWith("#")) {
           const targetId = href.slice(1);
-          const el = (targetId === "work" ? document.getElementById("project-card-01") : null) || document.getElementById(targetId);
+          const el = (targetId === "work" ? document.getElementById("clients-work") : null) || document.getElementById(targetId);
           if (el) {
             e.preventDefault();
-            const offset = targetId === "work" ? -74 : -64;
+            const offset = -64;
             if (lenis) {
               lenis.scrollTo(el, { offset, duration: 0.9, lerp: 0.12, force: true });
             } else {
