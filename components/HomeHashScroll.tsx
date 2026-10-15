@@ -33,20 +33,13 @@ function consumeStorageFlag(key: string): boolean {
 
 /** Lenis scroll to `#work` (main / light portfolio). */
 function scrollToWorkSection(lenis: Lenis | null) {
-  const el = document.getElementById("project-card-01") || document.getElementById("work");
+  const el = document.getElementById("work");
   if (!el) return;
-  try {
-    if (window.location.hash !== "#work") {
-      history.replaceState(null, "", `${window.location.pathname}${window.location.search}#work`);
-    }
-  } catch {
-    /* */
-  }
-  // Scroll deeper into the first case study card so the mockup is immediately in view
+  // Offset -64px accounts for sticky header (h-16 / 64px) so SELECTED WORK banner sits flush below it
   if (lenis) {
-    lenis.scrollTo(el, { offset: -74, duration: 0.9, lerp: 0.12, force: true });
+    lenis.scrollTo(el, { offset: -64, duration: 0.9, lerp: 0.12, force: true });
   } else {
-    window.scrollTo({ top: el.offsetTop - 74, behavior: "smooth" });
+    window.scrollTo({ top: el.offsetTop - 64, behavior: "smooth" });
   }
 }
 

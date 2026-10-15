@@ -182,13 +182,14 @@ export default function HeroV2() {
                   href="#work"
                   onClick={(e) => {
                     e.preventDefault();
-                    const targetEl = document.getElementById("clients-work") || document.getElementById("work");
+                    const targetEl = document.getElementById("work");
                     if (!targetEl) return;
-                    // +30 offset scrolls the Clients and Companies bar further up above the fold
+                    // Offset -64 places the SELECTED WORK banner right flush under the 64px sticky header,
+                    // completely scrolling past CLIENTS & COMPANIES.
                     if (lenis) {
-                      lenis.scrollTo(targetEl, { offset: 30, duration: 0.9, lerp: 0.12, force: true });
+                      lenis.scrollTo(targetEl, { offset: -64, duration: 0.9, lerp: 0.12, force: true });
                     } else {
-                      window.scrollTo({ top: targetEl.offsetTop + 30, behavior: "smooth" });
+                      window.scrollTo({ top: targetEl.offsetTop - 64, behavior: "smooth" });
                     }
                   }}
                   className="inline-flex items-center justify-center gap-3 sm:gap-5 px-5 py-2.5 sm:px-8 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] sm:shadow-[5px_5px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group w-auto cursor-pointer font-mono scanline-btn"
