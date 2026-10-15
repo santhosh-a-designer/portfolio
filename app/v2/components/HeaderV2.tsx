@@ -25,16 +25,17 @@ function NavItem({
       onClick={(e) => {
         if (href.startsWith("#")) {
           const targetId = href.slice(1);
-          const el = document.getElementById(targetId);
+          const el = (targetId === "work" ? document.getElementById("project-card-01") : null) || document.getElementById(targetId);
           if (el) {
             e.preventDefault();
             if (window.location.hash !== href) {
               history.replaceState(null, "", `${window.location.pathname}${window.location.search}${href}`);
             }
+            const offset = targetId === "work" ? -74 : -64;
             if (lenis) {
-              lenis.scrollTo(el, { offset: -64, duration: 0.9, lerp: 0.12, force: true });
+              lenis.scrollTo(el, { offset, duration: 0.9, lerp: 0.12, force: true });
             } else {
-              window.scrollTo({ top: el.offsetTop - 64, behavior: "smooth" });
+              window.scrollTo({ top: el.offsetTop + offset, behavior: "smooth" });
             }
           }
         }

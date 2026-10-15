@@ -509,7 +509,8 @@ function WindowCard({
 
   return (
     <div
-      className="sticky w-full mb-8 sm:mb-16 last:mb-0"
+      id={index === 0 ? "project-card-01" : undefined}
+      className="sticky w-full mb-8 sm:mb-16 last:mb-0 scroll-mt-20 sm:scroll-mt-24"
       style={{
         top: stickyTop,
         zIndex: index + 10,
