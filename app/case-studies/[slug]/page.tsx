@@ -814,6 +814,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
   if (slug === "parla-show-and-sell") {
     return (
       <div className="relative min-h-screen bg-[#F4F4F0] font-sans text-black antialiased">
+        <CaseStudyScrollToTop />
         <HeaderV2 />
         <ParlaCaseStudyView study={study} />
       </div>

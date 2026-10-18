@@ -5,7 +5,6 @@ import SelectedWorkV2 from "./v2/components/SelectedWorkV2";
 import ExperienceSectionV2 from "./v2/components/ExperienceSectionV2";
 import TestimonialsSectionV2 from "./v2/components/TestimonialsSectionV2";
 import ServicesAndFooterV2 from "./v2/components/ServicesAndFooterV2";
-import LenisProvider from "@/components/LenisProvider";
 import ScrollFocusWrapper from "@/components/ScrollFocusWrapper";
 import HomeHashScroll from "@/components/HomeHashScroll";
 
@@ -17,7 +16,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <LenisProvider>
+    <>
       <HomeHashScroll />
       <main className="min-h-screen bg-[#F4F4F0] text-black antialiased font-sans select-none w-full max-w-full relative">
         <HeaderV2 />
@@ -38,6 +37,6 @@ export default function Home() {
 
         <ServicesAndFooterV2 />
       </main>
-    </LenisProvider>
+    </>
   );
 }

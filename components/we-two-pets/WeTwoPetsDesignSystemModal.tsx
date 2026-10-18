@@ -17,6 +17,7 @@ import {
   ArrowSquareOut,
 } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { useLenis } from "@/components/LenisProvider";
 
 interface WeTwoPetsDesignSystemModalProps {
@@ -73,9 +74,14 @@ export default function WeTwoPetsDesignSystemModal({
   isOpen,
   onClose,
 }: WeTwoPetsDesignSystemModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<"components" | "colors" | "typography">("components");
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
   const lenis = useLenis();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -124,10 +130,12 @@ export default function WeTwoPetsDesignSystemModal({
     }
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 select-none">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 md:p-6 select-none">
           {/* Dark Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -471,6 +479,7 @@ export default function WeTwoPetsDesignSystemModal({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

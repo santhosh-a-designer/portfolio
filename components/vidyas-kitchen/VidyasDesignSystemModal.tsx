@@ -27,6 +27,7 @@ import ModalImageWithSkeleton from "@/components/ModalImageWithSkeleton";
 import { contrastGrade } from "@/lib/contrast";
 import type { DesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
 import { vidyasDesignSystem, type VidyasDesignSurface } from "@/lib/vidyasKitchenCaseStudyContent";
+import { createPortal } from "react-dom";
 import { heroScreenForSurface } from "@/lib/vidyasDesignSystemScreens";
 
 interface VidyasDesignSystemModalProps {
@@ -42,9 +43,14 @@ export default function VidyasDesignSystemModal({
   pdfMeta,
   initialSurfaceId = "customer",
 }: VidyasDesignSystemModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [surfaceId, setSurfaceId] = useState<VidyasDesignSurface["id"]>(initialSurfaceId);
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
   const lenis = useLenis();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (initialSurfaceId) {
@@ -124,10 +130,12 @@ export default function VidyasDesignSystemModal({
     }
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 select-none">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 md:p-6 select-none">
           {/* Dark Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -598,6 +606,7 @@ export default function VidyasDesignSystemModal({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

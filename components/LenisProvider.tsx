@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 const LenisContext = createContext<Lenis | null>(null);
@@ -16,6 +17,7 @@ type Props = { children: ReactNode };
 
 export default function LenisProvider({ children }: Props) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -53,6 +55,21 @@ export default function LenisProvider({ children }: Props) {
       setTimeout(() => setLenis(null), 0);
     };
   }, []);
+
+  // When route changes (e.g. clicking "View Case Study"), immediately reset scroll to top
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    // If navigating to an in-page anchor hash (e.g. /#work), let hash scroll handler take over
+    if (window.location.hash) return;
+
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [pathname, lenis]);
 
   return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
 }

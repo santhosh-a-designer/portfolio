@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import HeaderV2 from "@/app/v2/components/HeaderV2";
-import LenisProvider from "@/components/LenisProvider";
+import CaseStudyScrollToTop from "@/components/CaseStudyScrollToTop";
 import VidyasKitchenCaseStudyView from "@/components/vidyas-kitchen/VidyasKitchenCaseStudyView";
 import { getDesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
 
@@ -14,11 +14,10 @@ export default function VidyasKitchenCaseStudyPage() {
   const designSystemPdfMeta = getDesignSystemPdfMeta();
 
   return (
-    <LenisProvider>
-      <div className="min-h-screen bg-[#F4F4F0] text-black font-sans antialiased relative">
-        <HeaderV2 />
-        <VidyasKitchenCaseStudyView designSystemPdfMeta={designSystemPdfMeta} />
-      </div>
-    </LenisProvider>
+    <div className="min-h-screen bg-[#F4F4F0] text-black font-sans antialiased relative">
+      <CaseStudyScrollToTop />
+      <HeaderV2 />
+      <VidyasKitchenCaseStudyView designSystemPdfMeta={designSystemPdfMeta} />
+    </div>
   );
 }

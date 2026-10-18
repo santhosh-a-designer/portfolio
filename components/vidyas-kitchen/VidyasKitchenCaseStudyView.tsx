@@ -223,7 +223,7 @@ export default function VidyasKitchenCaseStudyView({
       </ScrollReveal>
 
       {/* 02 — How all four surfaces connect */}
-      <ScrollReveal>
+      <ScrollReveal noBlur>
         <SectionWindow num="02" title="Information architecture & user flows">
           <p className="text-sm text-zinc-600 max-w-3xl mx-auto mb-8 text-center">
             Four surfaces — PWA, WhatsApp, kitchen dashboard, driver app — branch from one Supabase order record. Scroll to watch each diagram build in.
@@ -264,7 +264,7 @@ export default function VidyasKitchenCaseStudyView({
       </SectionWindow>
 
       {/* 04 — Design system */}
-      <ScrollReveal>
+      <ScrollReveal noBlur>
         <SectionWindow num="04" title="Design system">
           <DesignSystemSection pdfMeta={designSystemPdfMeta} />
         </SectionWindow>

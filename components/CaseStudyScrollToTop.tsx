@@ -2,6 +2,7 @@
 
 import { useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useLenis } from "@/components/LenisProvider";
 
 /**
  * Client navigations from the long homepage (or between case studies) can leave
@@ -10,12 +11,16 @@ import { usePathname } from "next/navigation";
  */
 export default function CaseStudyScrollToTop() {
   const pathname = usePathname();
+  const lenis = useLenis();
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true, force: true });
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
-  }, [pathname]);
+  }, [pathname, lenis]);
 
   return null;
 }

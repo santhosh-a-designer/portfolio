@@ -8,10 +8,12 @@ type Props = {
   className?: string;
   /** Stagger delay in ms */
   delay?: number;
+  /** Disable depth-of-field blur, keeping content 100% crisp */
+  noBlur?: boolean;
 };
 
 /** Slide up + fade when entering, and dynamically blur when scrolled out of viewport focus */
-export default function ScrollReveal({ children, className = "", delay = 0 }: Props) {
+export default function ScrollReveal({ children, className = "", delay = 0, noBlur = false }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -39,7 +41,7 @@ export default function ScrollReveal({ children, className = "", delay = 0 }: Pr
   const opacity = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [0.55, 1, 1, 0.55]);
 
   const filter = useTransform(rawBlur, (val) => {
-    if (isMobile || !mounted || reduce || val <= 0.25) return "none";
+    if (noBlur || isMobile || !mounted || reduce || val <= 0.25) return "none";
     return `blur(${val.toFixed(1)}px)`;
   });
 
