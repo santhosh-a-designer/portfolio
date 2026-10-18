@@ -10,7 +10,7 @@
 @page{size:A4 portrait;margin:0}
 @media print{
   html,body{background:white;padding:0}
-  .page{box-shadow:none;width:210mm;min-height:297mm;padding:14mm 16mm}
+  .page{box-shadow:none;width:210mm;min-height:297mm;max-height:297mm;padding:14mm 16mm 14mm;overflow:hidden}
 }
 
 html{background:#c8c8c8}
@@ -21,8 +21,8 @@ body{
 }
 .page{
   width:794px;min-height:1123px;max-height:1123px;background:white;
-  padding:26px 38px 22px;
-  color:#1a1a1a;font-size:9.2px;line-height:1.48;
+  padding:36px 42px 30px;
+  color:#1a1a1a;font-size:9.6px;line-height:1.52;
   overflow:hidden;
 }
 
@@ -30,51 +30,52 @@ body{
 :root{--a:#1e6091}
 
 /* ─── Header ─── */
-.hd{text-align:center;padding-bottom:5px}
-.hd-name{font-size:22px;font-weight:700;color:var(--a);letter-spacing:3px;line-height:1}
-.hd-contact{font-size:7.8px;color:#555;margin-top:4px}
-.hd-rule{height:1.5px;background:var(--a);margin-top:5px}
+.hd{text-align:center;padding-bottom:8px}
+.hd-name{font-size:25px;font-weight:700;color:var(--a);letter-spacing:3.5px;line-height:1}
+.hd-contact{font-size:8.8px;color:#4a4a4a;margin-top:6px;word-spacing:1px}
+.hd-rule{height:1.5px;background:var(--a);margin-top:8px}
 
 /* ─── Layout ─── */
-.cols{display:flex;gap:16px;margin-top:8px}
-.cl{flex:0 0 59%;min-width:0}
+.cols{display:flex;gap:20px;margin-top:12px}
+.cl{flex:0 0 58.5%;min-width:0}
 .cr{flex:1;min-width:0}
 
 /* ─── Section ─── */
-.sec{margin-bottom:9px}
+.sec{margin-bottom:15px}
 .sec-h{
-  font-size:11.5px;font-weight:700;color:var(--a);
+  font-size:12.5px;font-weight:700;color:var(--a);
   border-bottom:1.5px solid var(--a);
-  padding-bottom:2px;margin-bottom:5px
+  padding-bottom:3px;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.6px
 }
 
 /* ─── Job ─── */
-.job{margin-bottom:7px}
-.jt{font-size:9.8px;font-weight:700}
-.jm{font-size:8.5px;color:#666;font-style:italic;margin-bottom:3px}
-ul.bl{padding-left:11px;list-style:disc}
-ul.bl li{font-size:8.6px;line-height:1.45;margin-bottom:1.5px}
+.job{margin-bottom:11.5px}
+.jt{font-size:10.8px;font-weight:700;color:#111}
+.jm{font-size:9px;color:#555;font-style:italic;margin-bottom:4px}
+ul.bl{padding-left:13px;list-style:disc}
+ul.bl li{font-size:9.2px;line-height:1.5;margin-bottom:3.5px;color:#222}
 
 /* ─── Education ─── */
-.edu{margin-bottom:4px}
-.edu-d{font-size:9px;font-weight:700}
-.edu-m{font-size:8.4px;color:#666}
+.edu{margin-bottom:7px}
+.edu-d{font-size:9.8px;font-weight:700;color:#111}
+.edu-m{font-size:9px;color:#555}
 
 /* ─── Skills ─── */
-.sk{margin-bottom:4.5px}
-.sk-h{font-size:9px;font-weight:700}
-.sk-v{font-size:8.4px;color:#444;line-height:1.42}
+.sk{margin-bottom:7.5px}
+.sk-h{font-size:9.8px;font-weight:700;color:#111}
+.sk-v{font-size:9px;color:#333;line-height:1.48}
 
 /* ─── Projects ─── */
-.proj{margin-bottom:4.5px}
-.pn{font-size:8.9px;font-weight:700}
-.pd{font-size:8.3px;color:#444;margin-top:1px;line-height:1.4}
+.proj{margin-bottom:8px}
+.pn{font-size:9.8px;font-weight:700;color:#111}
+.pd{font-size:9px;color:#333;margin-top:2px;line-height:1.48}
 
 /* ─── Small blocks ─── */
-.sm-t{font-size:9px;font-weight:700}
-.sm-m{font-size:8.4px;color:#666;font-style:italic}
-.sm-b{font-size:8.4px;color:#444;margin-top:2px;line-height:1.42}
-.sm-p{font-size:8.4px;color:#444;line-height:1.44}
+.sm-t{font-size:9.8px;font-weight:700;color:#111}
+.sm-m{font-size:9px;color:#555;font-style:italic}
+.sm-b{font-size:9px;color:#333;margin-top:3px;line-height:1.48}
+.sm-p{font-size:9px;color:#333;line-height:1.48}
 </style>
 </head>
 <body>
