@@ -33,10 +33,12 @@ body{
 .hd{text-align:center;padding-bottom:8px}
 .hd-name{font-size:25px;font-weight:700;color:var(--a);letter-spacing:3.5px;line-height:1}
 .hd-contact{font-size:8.8px;color:#4a4a4a;margin-top:6px;word-spacing:1px}
-.hd-rule{height:1.5px;background:var(--a);margin-top:8px}
+.hd-rule{height:1.5px;background:var(--a);margin-top:7px}
+.summary-box{margin-top:7px;font-size:9px;line-height:1.45;color:#222;text-align:left}
+.summary-box strong{color:#111}
 
 /* ─── Layout ─── */
-.cols{display:flex;gap:20px;margin-top:12px}
+.cols{display:flex;gap:18px;margin-top:10px}
 .cl{flex:0 0 58.5%;min-width:0}
 .cr{flex:1;min-width:0}
 
@@ -57,14 +59,14 @@ ul.bl{padding-left:13px;list-style:disc}
 ul.bl li{font-size:9.2px;line-height:1.5;margin-bottom:3.5px;color:#222}
 
 /* ─── Education ─── */
-.edu{margin-bottom:7px}
+.edu{margin-bottom:10px}
 .edu-d{font-size:9.8px;font-weight:700;color:#111}
 .edu-m{font-size:9px;color:#555}
 
 /* ─── Skills ─── */
-.sk{margin-bottom:7.5px}
+.sk{margin-bottom:11px}
 .sk-h{font-size:9.8px;font-weight:700;color:#111}
-.sk-v{font-size:9px;color:#333;line-height:1.48}
+.sk-v{font-size:9px;color:#333;line-height:1.5}
 
 /* ─── Projects ─── */
 .proj{margin-bottom:8px}
@@ -74,8 +76,11 @@ ul.bl li{font-size:9.2px;line-height:1.5;margin-bottom:3.5px;color:#222}
 /* ─── Small blocks ─── */
 .sm-t{font-size:9.8px;font-weight:700;color:#111}
 .sm-m{font-size:9px;color:#555;font-style:italic}
-.sm-b{font-size:9px;color:#333;margin-top:3px;line-height:1.48}
-.sm-p{font-size:9px;color:#333;line-height:1.48}
+.sm-b{font-size:9px;color:#333;margin-top:4px;line-height:1.5}
+.sm-p{font-size:9px;color:#333;line-height:1.5}
+
+.cr .sec{margin-bottom:20px}
+.cr .sec:last-child{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -92,12 +97,17 @@ ul.bl li{font-size:9.2px;line-height:1.5;margin-bottom:3.5px;color:#222}
       Chennai, India
     </div>
     <div class="hd-rule"></div>
+    <div class="summary-box">
+      <strong>Design Engineer &amp; Lead UX Designer</strong> &bull;
+      <strong>What I Bring:</strong> 5+ years bridging rigorous user research, scalable Figma design systems, and production frontend code (React, Next.js, TypeScript).
+      <strong>What You Get If You Hire Me:</strong> Zero design-to-dev handoff friction, accelerated 0&rarr;1 shipping speed, and user experiences engineered to eliminate drop-offs and drive verified revenue growth.
+    </div>
   </div>
 
   <!-- TWO COLUMNS -->
   <div class="cols">
 
-    <!-- ═══════════ LEFT COLUMN (59%) ═══════════ -->
+    <!-- ═══════════ LEFT COLUMN (58.5%) ═══════════ -->
     <div class="cl">
 
       <!-- EXPERIENCE -->
@@ -141,11 +151,12 @@ ul.bl li{font-size:9.2px;line-height:1.5;margin-bottom:3.5px;color:#222}
 
         <!-- ICONIC DREAM FOCUS -->
         <div class="job">
-          <div class="jt">UX/UI Designer</div>
-          <div class="jm">Iconic Dream Focus Private Limited, Chennai &nbsp;|&nbsp; Aug 2020 – Oct 2022</div>
+          <div class="jt">UX Designer &bull; Software Developer Intern</div>
+          <div class="jm">Iconic Dream Focus, Chennai &nbsp;|&nbsp; Aug 2020 – Oct 2022 (2 yrs 3 mos)</div>
           <ul class="bl">
-            <li>Designed startup&rsquo;s flagship <strong>&ldquo;DRMURS&rdquo; social networking platform from concept to launch</strong> with agile design sprints, achieving a <strong>25% faster delivery cycle</strong>.</li>
-            <li>Won competitive Tamil Nadu Government digital platform redesign (Vandaloor Zoo), earning <strong>first place recognition</strong> and generating a <strong>30% surge in digital engagement</strong>.</li>
+            <li><strong>UX Designer (Dec 2020 – Oct 2022):</strong> Led project workflows as design lead, cutting delivery cycles by <strong>25%</strong>; designed flagship <strong>&ldquo;DRMURS&rdquo;</strong> social app from concept to launch with agile sprints.</li>
+            <li>Won competitive Tamil Nadu Government digital platform redesign (Vandaloor Zoo), earning <strong>first place recognition</strong> and driving a <strong>30% surge in digital engagement</strong>.</li>
+            <li><strong>Software Developer Intern (Aug 2020 – Nov 2020):</strong> Developed company web platform using <strong>HTML, CSS, JavaScript, and Bootstrap</strong> on tight deadlines, reducing dev turnaround by <strong>15%</strong>.</li>
           </ul>
         </div>
 
@@ -170,7 +181,7 @@ ul.bl li{font-size:9.2px;line-height:1.5;margin-bottom:3.5px;color:#222}
 
     </div><!-- /col-l -->
 
-    <!-- ═══════════ RIGHT COLUMN (41%) ═══════════ -->
+    <!-- ═══════════ RIGHT COLUMN (41.5%) ═══════════ -->
     <div class="cr">
 
       <!-- EDUCATION -->
@@ -218,7 +229,7 @@ ul.bl li{font-size:9.2px;line-height:1.5;margin-bottom:3.5px;color:#222}
       <!-- AWARDS & RECOGNITION -->
       <div class="sec">
         <div class="sec-h">Awards &amp; Recognition</div>
-        <div style="margin-bottom:4px">
+        <div style="margin-bottom:5px">
           <div class="sm-t">First Place Winner</div>
           <div class="sm-p">Tamil Nadu Government Digital Platform Redesign (Vandaloor Zoo Project) &ndash; recognized for accessibility and information architecture.</div>
         </div>
@@ -232,12 +243,6 @@ ul.bl li{font-size:9.2px;line-height:1.5;margin-bottom:3.5px;color:#222}
       <div class="sec">
         <div class="sec-h">Languages</div>
         <div class="sm-p">Tamil: Native &nbsp;&bull;&nbsp; English: Fluent &nbsp;&bull;&nbsp; Hindi: Conversational (Read/Write/Understand)</div>
-      </div>
-
-      <!-- PROFESSIONAL FOCUS -->
-      <div class="sec">
-        <div class="sec-h">Professional Focus</div>
-        <div class="sm-p">Building <strong>0-to-1 digital products</strong> by uniting rigorous UX research, scalable design systems, and production-ready frontend code.</div>
       </div>
 
     </div><!-- /col-r -->
