@@ -156,7 +156,7 @@ export default function FloatingActionTriggers() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setActivePanel(null)}
-            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-md pointer-events-auto"
+            className="fixed inset-0 z-40 bg-black/75 pointer-events-auto"
           />
         )}
       </AnimatePresence>

@@ -94,7 +94,7 @@ export function UxShortPhoneVideoCard({
       >
         <video
           ref={refFill}
-          className="pointer-events-none absolute inset-0 h-full w-full scale-[1.1] object-cover object-top opacity-75 blur-2xl"
+          className="hidden sm:block pointer-events-none absolute inset-0 h-full w-full scale-[1.1] object-cover object-top opacity-75 blur-2xl"
           aria-hidden
           muted
           autoPlay
@@ -188,7 +188,7 @@ export function UxShortDesktopVideoCard({
       >
         <video
           ref={refFill}
-          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center opacity-70 blur-2xl"
+          className="hidden sm:block absolute inset-0 h-full w-full scale-[1.08] object-cover object-center opacity-70 blur-2xl"
           aria-hidden
           muted
           autoPlay

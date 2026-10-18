@@ -173,127 +173,173 @@ export default function SelectedWorkV2() {
           <ProjectWindowStack projects={projects} />
         </div>
 
-        {/* ─── Archives & Shorts Dual Banner ─── */}
-        <div className="border-t-2 border-black grid grid-cols-1 lg:grid-cols-2 bg-white">
-          {/* Left: UX / UI Shorts */}
-          <div className="p-6 sm:p-8 md:p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black flex flex-col justify-between bg-white hover:bg-[#FAED00]/5 transition-colors group">
+        {/* ─── Row 1: UX / UI Shorts (Full Width Dedicated Row) ─── */}
+        <div className="border-t-2 border-black p-6 sm:p-8 md:p-10 bg-white">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b-2 border-black">
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center gap-2 mb-1.5 font-mono">
                 <span className="text-[10px] font-mono font-black text-[#FF462D] uppercase tracking-wider">
                   // RAPID_CASE_STUDIES
                 </span>
-                <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
-                  3 CASE SHORTS
+                <span className="text-zinc-300">/</span>
+                <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider">
+                  2 INTERACTIVE PRODUCT FLOWS
                 </span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-black font-mono uppercase tracking-tight text-black mb-3">
+              <h3 className="text-2xl sm:text-3xl font-black font-mono uppercase tracking-tight text-black">
                 UX / UI SHORTS
               </h3>
-              <p className="text-xs sm:text-[13px] text-zinc-600 font-sans leading-relaxed mb-5 font-medium">
-                Focused micro case-studies tackling real hardware, IoT telemetry, and rural banking kiosk workflows. Tap any short below:
+              <p className="text-xs sm:text-sm text-zinc-600 font-sans mt-1.5 max-w-2xl font-medium">
+                Focused micro case-studies tackling real-time EV telemetry systems and rural ATM banking kiosk workflows with recorded flow walkthroughs.
               </p>
-
-              {/* Interactive Shorts Cards */}
-              <div className="grid grid-cols-1 gap-2.5 mb-6">
-                {UX_SHORTS_DATA.map((short) => (
-                  <button
-                    key={short.id}
-                    type="button"
-                    onClick={() => openShortsProject(short.id)}
-                    className="p-3 border-2 border-black bg-zinc-50 hover:bg-[#FAED00]/15 hover:border-black transition-all cursor-pointer flex items-center justify-between gap-3 text-left shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 group/short"
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span
-                        style={{ backgroundColor: short.accent }}
-                        className="px-2 py-1 text-[10px] font-mono font-black border border-black text-black shrink-0"
-                      >
-                        {short.projectLabel.replace("Project ", "P")}
-                      </span>
-                      <div className="min-w-0">
-                        <div className="text-xs font-mono font-black uppercase text-black truncate group-hover/short:text-[#FF462D] transition-colors">
-                          {short.projectTitle}
-                        </div>
-                        <div className="text-[10px] text-zinc-500 font-sans truncate mt-0.5">
-                          {short.tagline}
-                        </div>
-                      </div>
-                    </div>
-                    <ArrowUpRight
-                      weight="bold"
-                      className="w-3.5 h-3.5 text-zinc-400 group-hover/short:text-black shrink-0 transition-colors"
-                    />
-                  </button>
-                ))}
-              </div>
             </div>
 
             <button
               type="button"
               onClick={() => openShortsProject("p1")}
-              className="w-full py-3 px-4 bg-black hover:bg-zinc-800 text-white font-mono font-black text-xs uppercase tracking-wider flex items-center justify-between transition-colors border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 cursor-pointer"
+              className="py-2.5 px-4 bg-black hover:bg-zinc-800 text-white font-mono font-black text-xs uppercase tracking-wider inline-flex items-center gap-2 border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer shrink-0 self-start md:self-auto"
             >
-              <span>INSPECT ALL UX/UI SHORTS (WITH VIDEO DEMOS)</span>
+              <span>OPEN SHORTS PLAYER</span>
               <ArrowRight weight="bold" className="w-4 h-4 text-[#FAED00]" />
             </button>
           </div>
 
-          {/* Right: Graphic Design Work */}
-          <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-between bg-white hover:bg-[#FF462D]/5 transition-colors group">
+          {/* 2 Symmetrical High-Impact Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mt-6 items-stretch">
+            {UX_SHORTS_DATA.map((short) => (
+              <div
+                key={short.id}
+                onClick={() => openShortsProject(short.id)}
+                className="p-5 sm:p-6 border-2 border-black bg-zinc-50 hover:bg-[#FAED00]/10 transition-all cursor-pointer flex flex-col justify-between shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-0.5 group/short h-full"
+              >
+                <div>
+                  {/* Top Bar */}
+                  <div className="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-zinc-200">
+                    <div className="flex items-center gap-2.5">
+                      <span
+                        style={{ backgroundColor: short.accent }}
+                        className="px-2 py-0.5 text-[11px] font-mono font-black border border-black text-black"
+                      >
+                        {short.projectLabel.replace("Project ", "P")}
+                      </span>
+                      <span className="text-[10px] font-mono font-black text-zinc-500 uppercase tracking-wider">
+                        {short.id === "p1" ? "IOT TELEMETRY & FLEET INTELLIGENCE" : "RURAL BANKING & CASH LOGISTICS"}
+                      </span>
+                    </div>
+                    <ArrowUpRight
+                      weight="bold"
+                      className="w-4 h-4 text-zinc-400 group-hover/short:text-[#FF462D] shrink-0 transition-colors"
+                    />
+                  </div>
+
+                  {/* Title & Tagline */}
+                  <h4 className="text-xl sm:text-2xl font-mono font-black uppercase text-black group-hover/short:text-[#FF462D] transition-colors mb-1.5">
+                    {short.projectTitle}
+                  </h4>
+                  <p className="text-xs sm:text-[13px] font-sans font-bold text-zinc-700 mb-3">
+                    {short.tagline}
+                  </p>
+
+                  {/* Tech / Scope Tags */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {(short.id === "p1"
+                      ? ["Figma", "Telemetry Dashboard", "Pack Health Triage", "Real-Time Telemetry"]
+                      : ["Figma", "Mobile App (Dual Role)", "Offline-First UI", "Cash Replenishment"]
+                    ).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9.5px] font-mono font-bold px-2 py-0.5 bg-white border border-black text-black uppercase"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Summary Snippet */}
+                  <p className="text-xs text-zinc-600 font-sans leading-relaxed line-clamp-3">
+                    {short.overview}
+                  </p>
+                </div>
+
+                {/* Card Action Button */}
+                <div className="pt-4 mt-4 border-t border-zinc-200 flex items-center justify-between">
+                  <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
+                    SHOWREEL &amp; CASE DETAILS
+                  </span>
+                  <span className="text-xs font-mono font-black uppercase text-black group-hover/short:text-[#FF462D] flex items-center gap-1">
+                    <span>INSPECT SHORT</span>
+                    <ArrowRight weight="bold" className="w-3.5 h-3.5" />
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ─── Row 2: Graphic Design Archive (Full Width Dedicated Row) ─── */}
+        <div className="border-t-2 border-black p-6 sm:p-8 md:p-10 bg-white">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b-2 border-black">
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
+              <div className="flex items-center gap-2 mb-1.5 font-mono">
                 <span className="text-[10px] font-mono font-black text-zinc-500 uppercase tracking-wider">
                   // VISUAL_SYSTEMS
                 </span>
-                <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
+                <span className="text-zinc-300">/</span>
+                <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-wider">
                   8 PRINT &amp; PACKAGING WORKS
                 </span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-black font-mono uppercase tracking-tight text-black mb-3">
+              <h3 className="text-2xl sm:text-3xl font-black font-mono uppercase tracking-tight text-black">
                 GRAPHIC DESIGN ARCHIVE
               </h3>
-              <p className="text-xs sm:text-[13px] text-zinc-600 font-sans leading-relaxed mb-5 font-medium">
+              <p className="text-xs sm:text-sm text-zinc-600 font-sans mt-1.5 max-w-2xl font-medium">
                 Brand identities, packaging typography, poster collections, and experimental visual systems. Tap any work below to inspect full details:
               </p>
-
-              {/* Interactive Graphic Design Work Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6">
-                {POSTER_PROJECTS.map((proj) => (
-                  <button
-                    key={proj.id}
-                    type="button"
-                    onClick={() => openGraphicProject(proj.id)}
-                    className="p-3 text-left border-2 border-black bg-zinc-50 hover:bg-[#FAED00]/15 hover:border-black transition-all cursor-pointer group/card flex flex-col justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(255,70,45,1)] hover:-translate-x-0.5 hover:-translate-y-0.5"
-                  >
-                    <div className="flex items-center justify-between gap-1 mb-1.5">
-                      <span className="text-[9px] font-mono font-black px-1.5 py-0.5 bg-black text-white uppercase tracking-wider">
-                        {proj.projectLabel}
-                      </span>
-                      <ArrowUpRight
-                        weight="bold"
-                        className="w-3.5 h-3.5 text-zinc-400 group-hover/card:text-[#FF462D] transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-xs font-mono font-black uppercase tracking-tight text-black line-clamp-1 group-hover/card:text-[#FF462D] transition-colors">
-                        {proj.projectTitle}
-                      </div>
-                      <div className="text-[10px] text-zinc-500 font-sans line-clamp-1 mt-0.5">
-                        {proj.tagline}
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
             </div>
 
             <button
               type="button"
               onClick={() => openGraphicProject("project-1")}
-              className="w-full py-3 px-4 bg-[#FF462D] hover:bg-[#ff3419] text-white font-mono font-black text-xs uppercase tracking-wider flex items-center justify-between transition-colors border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 cursor-pointer"
+              className="py-2.5 px-4 bg-[#FF462D] hover:bg-[#ff3419] text-white font-mono font-black text-xs uppercase tracking-wider inline-flex items-center gap-2 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer shrink-0 self-start md:self-auto"
             >
-              <span>INSPECT FULL GRAPHIC DESIGN ARCHIVE (5 PROJECTS)</span>
+              <span>INSPECT FULL ARCHIVE</span>
               <ArrowRight weight="bold" className="w-4 h-4 text-white" />
             </button>
+          </div>
+
+          {/* 8 Works in a Neat 4-Column Grid (2 Rows of 4) */}
+          <div className="grid grid-cols-1 min-[480px]:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-6 items-stretch">
+            {POSTER_PROJECTS.map((proj) => (
+              <button
+                key={proj.id}
+                type="button"
+                onClick={() => openGraphicProject(proj.id)}
+                className="p-3.5 sm:p-4 text-left border-2 border-black bg-zinc-50 hover:bg-[#FAED00]/15 hover:border-black transition-all cursor-pointer group/card flex flex-col justify-between shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[3px_3px_0px_0px_rgba(255,70,45,1)] hover:-translate-y-0.5 h-full"
+              >
+                <div>
+                  <div className="flex items-center justify-between gap-1 mb-2">
+                    <span className="text-[9px] font-mono font-black px-1.5 py-0.5 bg-black text-white uppercase tracking-wider">
+                      {proj.projectLabel}
+                    </span>
+                    <ArrowUpRight
+                      weight="bold"
+                      className="w-3.5 h-3.5 text-zinc-400 group-hover/card:text-[#FF462D] transition-colors"
+                    />
+                  </div>
+                  <div className="text-xs sm:text-[13px] font-mono font-black uppercase tracking-tight text-black line-clamp-1 group-hover/card:text-[#FF462D] transition-colors mb-1">
+                    {proj.projectTitle}
+                  </div>
+                  <p className="text-[10.5px] sm:text-[11px] text-zinc-500 font-sans line-clamp-2 leading-snug">
+                    {proj.tagline}
+                  </p>
+                </div>
+
+                <div className="pt-2 mt-3 border-t border-zinc-200 flex items-center justify-between text-[9px] font-mono font-bold text-zinc-400 group-hover/card:text-black uppercase">
+                  <span>VIEW DETAILS</span>
+                  <span>↗</span>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
 

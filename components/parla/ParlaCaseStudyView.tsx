@@ -1,8 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, Sparkle } from "@phosphor-icons/react";
 import type { CaseStudy } from "@/lib/caseStudies";
-
+import ParlaDesignSystemModal from "./ParlaDesignSystemModal";
 import ScrollFocusWrapper from "@/components/ScrollFocusWrapper";
 
 function SectionWindow({
@@ -55,6 +58,7 @@ function Clip({
 }
 
 export default function ParlaCaseStudyView({ study }: { study: CaseStudy }) {
+  const [dsModalOpen, setDsModalOpen] = useState(false);
   const story = study.productDeepDive?.customerSchedulerStory;
   const sell = study.productDeepDive?.showAndSell;
   const ds = study.artifacts?.designSystem;
@@ -63,6 +67,7 @@ export default function ParlaCaseStudyView({ study }: { study: CaseStudy }) {
 
   return (
     <main className="mx-auto min-w-0 max-w-[1240px] space-y-8 px-3 pb-28 pt-4 sm:space-y-12 sm:px-6 sm:pb-32 sm:pt-6 md:pt-8 lg:px-8">
+      <ParlaDesignSystemModal isOpen={dsModalOpen} onClose={() => setDsModalOpen(false)} />
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-4 font-mono select-none">
         <Link
           href="/#work"
@@ -309,6 +314,17 @@ export default function ParlaCaseStudyView({ study }: { study: CaseStudy }) {
                 {principle}
               </p>
             ))}
+          </div>
+
+          <div className="mt-6 pt-5 border-t-2 border-black flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => setDsModalOpen(true)}
+              className="px-5 py-3.5 bg-[#FAED00] hover:bg-[#faed00]/90 text-black border-2 border-black font-mono font-black text-xs uppercase tracking-wider shadow-[3px_3px_0_0_#000] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer scanline-btn"
+            >
+              <Sparkle weight="fill" size={16} />
+              <span>EXPLORE SHOW &amp; SELL DESIGN SYSTEM MODAL ↗</span>
+            </button>
           </div>
         </SectionWindow>
       ) : null}

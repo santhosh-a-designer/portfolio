@@ -38,10 +38,19 @@ function staticShell(tag: Tag, className: string | undefined, children: ReactNod
 export function CaseStudyScrollReveal({ children, className = "", delay = 0, as: tag = "div", ...rest }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const reduce = useReducedMotion();
 
   useEffect(() => {
     setMounted(true);
+    if (typeof window !== "undefined") {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches);
+      };
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+      return () => window.removeEventListener("resize", checkMobile);
+    }
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -53,7 +62,7 @@ export function CaseStudyScrollReveal({ children, className = "", delay = 0, as:
   const opacity = useTransform(scrollYProgress, [0, 0.28, 0.72, 1], [0.55, 1, 1, 0.55]);
 
   const filter = useTransform(rawBlur, (val) => {
-    if (!mounted || reduce || val <= 0.25) return "none";
+    if (isMobile || !mounted || reduce || val <= 0.25) return "none";
     return `blur(${val.toFixed(1)}px)`;
   });
 
@@ -65,14 +74,14 @@ export function CaseStudyScrollReveal({ children, className = "", delay = 0, as:
   return (
     <Motion
       ref={containerRef as any}
-      className={`w-full transition-[filter,opacity] duration-300 ease-out will-change-[filter,opacity] ${className}`}
+      className={`w-full ${isMobile ? "" : "transition-[filter,opacity] duration-300 ease-out will-change-[filter,opacity]"} ${className}`}
       initial={{ opacity: 0, y: 48, scale: 0.99 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={VIEWPORT}
       transition={{ delay, type: "spring", stiffness: 60, damping: 20 }}
       style={{
-        filter: mounted ? filter : "none",
-        opacity: mounted ? opacity : 1,
+        filter: isMobile ? "none" : (mounted ? filter : "none"),
+        opacity: isMobile ? 1 : (mounted ? opacity : 1),
       }}
       {...(rest as object)}
     >

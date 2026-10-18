@@ -21,26 +21,26 @@ interface ExperienceItem {
 const experiences: ExperienceItem[] = [
   {
     num: "01",
-    role: "DESIGN ENGINEER / HEAD OF PRODUCT DESIGN",
+    role: "CO-FOUNDER & DESIGN ENGINEER",
     company: "COMMERCE AGENTS",
     period: "2025 – PRESENT",
     location: "GLOBAL / REMOTE",
     isHighlight: true,
     isCurrent: true,
-    description: "Leading 0-to-1 product strategy, multi-agent AI workflow design, and high-performance design systems for venture-backed AI platforms.",
+    description: "Leading 0-to-1 product design, user research, and AI-accelerated frontend engineering across hyper-local food tech, pet commerce, and enterprise IoT systems.",
     highlights: [
-      "Architected autonomous agent interaction models & multimodal AI workflows",
-      "Directed end-to-end design & frontend delivery across Next.js and React",
-      "Created scalable design tokens and design systems adopted cross-team",
+      "Vidya's Kitchen: Designed & shipped Sivakasi's first food ordering PWA and kitchen ops with zero order drop-offs",
+      "We Two Pets: Architected editorial pet platform (wetwopets.com) with autonomous AI gap engine & human verification",
+      "iRasus & IndiaOne ATM: Built EV pack telemetry and dual-role rural ATM replenishment apps reducing downtime",
     ],
-    skills: ["AI Agent UX", "Next.js", "Design Systems", "Figma → Code", "Product Strategy"],
+    skills: ["0→1 Product UX", "Next.js", "Design Systems", "AI Workflows", "TypeScript", "Tailwind CSS"],
   },
   {
     num: "02",
     role: "PRODUCT UX DESIGNER",
     company: "PARLA RETAIL",
     period: "2024 – 2025",
-    location: "LONDON, UK (REMOTE)",
+    location: "CHENNAI, INDIA (UK HQ)",
     description: "Designed conversion-driven ecommerce platforms, enterprise scheduling systems, and cross-cultural user experiences for UK and US retailers.",
     highlights: [
       "Revamped Show & Sell merchant portal, decreasing friction by 38%",

@@ -178,7 +178,7 @@ function VideoCard({
       >
         <video
           ref={refFill}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover object-center scale-[1.12] blur-2xl opacity-75"
+          className="hidden sm:block pointer-events-none absolute inset-0 h-full w-full object-cover object-center scale-[1.12] blur-2xl opacity-75"
           aria-hidden
           tabIndex={-1}
           muted

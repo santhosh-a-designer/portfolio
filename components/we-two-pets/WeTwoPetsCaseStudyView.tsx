@@ -23,6 +23,9 @@ import {
 } from "@/lib/weTwoPetsCaseStudyContent";
 
 import ScrollFocusWrapper from "@/components/ScrollFocusWrapper";
+import WeTwoPetsDesignSystemModal from "@/components/we-two-pets/WeTwoPetsDesignSystemModal";
+import { useState } from "react";
+import { Sparkle } from "@phosphor-icons/react";
 
 function SectionWindow({
   num,
@@ -133,8 +136,11 @@ const shots = [
 ] as const;
 
 export default function WeTwoPetsCaseStudyView() {
+  const [dsModalOpen, setDsModalOpen] = useState(false);
+
   return (
     <main className="mx-auto min-w-0 max-w-[1240px] space-y-8 px-3 pb-28 pt-4 sm:space-y-12 sm:px-6 sm:pb-32 sm:pt-6 md:pt-8 lg:px-8">
+      <WeTwoPetsDesignSystemModal isOpen={dsModalOpen} onClose={() => setDsModalOpen(false)} />
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-4 font-mono select-none">
         <Link
           href="/#work"
@@ -400,6 +406,27 @@ export default function WeTwoPetsCaseStudyView() {
               {principle}
             </p>
           ))}
+        </div>
+
+        <div className="mt-6 pt-5 border-t-2 border-black flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <button
+            type="button"
+            onClick={() => setDsModalOpen(true)}
+            className="px-5 py-3.5 bg-[#FAED00] hover:bg-[#faed00]/90 text-black border-2 border-black font-mono font-black text-xs uppercase tracking-wider shadow-[3px_3px_0_0_#000] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer scanline-btn"
+          >
+            <Sparkle weight="fill" size={16} />
+            <span>EXPLORE WETWOPETS.COM DESIGN SYSTEM MODAL ↗</span>
+          </button>
+
+          <a
+            href="https://wetwopets.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-4 py-3 bg-white hover:bg-zinc-100 text-black border-2 border-black font-mono font-bold text-xs uppercase tracking-wider shadow-[2px_2px_0_0_#000] transition-colors flex items-center justify-center gap-2"
+          >
+            <ArrowSquareOut size={16} weight="bold" />
+            <span>VISIT LIVE STORE (WETWOPETS.COM)</span>
+          </a>
         </div>
       </SectionWindow>
 

@@ -255,19 +255,6 @@ function VidyasKitchenDualDeviceMockup() {
         </div>
 
       </div>
-
-      {/* Floating Link Pill Overlay — Completely Static, Stays above the device visual */}
-      <Link
-        href="https://www.vidyaskitchenhome.com/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 flex items-center justify-between bg-black/90 hover:bg-black backdrop-blur-md px-2.5 sm:px-3.5 py-1.5 sm:py-2 border border-white/20 transition-all text-white font-mono text-[10px] sm:text-xs z-30 shadow-lg"
-      >
-        <span className="font-bold uppercase tracking-wider truncate">
-          VIDYA&apos;S KITCHEN // PWA / DASHBOARD / WHATSAPP BOT
-        </span>
-        <ArrowUpRight weight="bold" className="w-3.5 h-3.5 shrink-0 text-[#FAED00]" />
-      </Link>
     </div>
   );
 }
@@ -462,19 +449,6 @@ function LaptopOnlyDeviceMockup({
           </div>
         </div>
       </div>
-
-      {/* Floating Link Pill Overlay — Completely Static, Stays above the device visual */}
-      <Link
-        href={linkHref}
-        target={linkHref.startsWith("http") ? "_blank" : undefined}
-        rel={linkHref.startsWith("http") ? "noopener noreferrer" : undefined}
-        className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 flex items-center justify-between bg-black/90 hover:bg-black backdrop-blur-md px-2.5 sm:px-3.5 py-1.5 sm:py-2 border border-white/20 transition-all text-white font-mono text-[10px] sm:text-xs z-30 shadow-lg"
-      >
-        <span className="font-bold uppercase tracking-wider truncate">
-          {linkLabel}
-        </span>
-        <ArrowUpRight weight="bold" className="w-3.5 h-3.5 shrink-0 text-[#FAED00]" />
-      </Link>
     </div>
   );
 }
@@ -492,10 +466,23 @@ function WindowCard({
   const isVidyasKitchen =
     item.title.toUpperCase().includes("VIDYA") || item.href.includes("vidyas-kitchen");
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches);
+      };
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+      return () => window.removeEventListener("resize", checkMobile);
+    }
+  }, []);
+
   // Sticky top docking offset: 28px per card for stacked window tabs
   const stickyTop = `calc(var(--site-header) + ${index * 28}px)`;
 
-  // Individual card focus range: when subsequent cards stack on top, slightly blur the lower card
+  // Individual card focus range: when subsequent cards stack on top, slightly blur the lower card on desktop only
   const cardStart = index / total;
   const cardEnd = (index + 1) / total;
   const cardCovered = Math.min(1, cardEnd + 0.1);
@@ -505,7 +492,10 @@ function WindowCard({
     [0, cardStart, cardEnd, cardCovered],
     [0, 0, 0, index === total - 1 ? 0 : 3.5]
   );
-  const cardFilter = useTransform(cardBlur, (val) => (val <= 0.2 ? "none" : `blur(${val.toFixed(1)}px)`));
+  const cardFilter = useTransform(cardBlur, (val) => {
+    if (isMobile || val <= 0.2) return "none";
+    return `blur(${val.toFixed(1)}px)`;
+  });
 
   return (
     <div
@@ -517,7 +507,7 @@ function WindowCard({
       }}
     >
       <motion.div
-        style={{ filter: cardFilter }}
+        style={{ filter: isMobile ? "none" : cardFilter }}
         className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative z-10 transition-[filter] duration-200"
       >
         {/* ─── Browser / Window Titlebar Header ─── */}
@@ -674,19 +664,6 @@ function WindowCard({
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 700px"
                       className="object-contain object-center brightness-[1.03] contrast-[1.01] group-hover/mockup:scale-[1.02] transition-transform duration-700 ease-out"
                     />
-                    
-                    {/* Floating Link Pill Overlay */}
-                    <Link
-                      href={item.liveUrl || item.href}
-                      target={item.liveUrl ? "_blank" : undefined}
-                      rel={item.liveUrl ? "noopener noreferrer" : undefined}
-                      className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 flex items-center justify-between bg-black/85 hover:bg-black backdrop-blur-sm px-2.5 sm:px-3 py-1.5 sm:py-2 border border-white/20 transition-all text-white font-mono text-[10px] sm:text-xs z-10"
-                    >
-                      <span className="font-bold uppercase tracking-wider truncate">
-                        {item.title} // {item.category}
-                      </span>
-                      <ArrowUpRight weight="bold" className="w-3.5 h-3.5 shrink-0 text-[#FAED00]" />
-                    </Link>
                   </>
                 ) : (
                   <div className="w-full h-full bg-zinc-900 p-4 sm:p-6 flex flex-col justify-between text-white font-mono">

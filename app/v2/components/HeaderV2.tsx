@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { DownloadSimple } from "@phosphor-icons/react";
 import { motion } from "framer-motion";
 import ResumeModal from "@/components/ResumeModal";
@@ -18,12 +19,15 @@ function NavItem({
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const lenis = useLenis();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const resolvedHref = isHome ? href : `/${href}`;
 
   return (
     <Link
-      href={href}
+      href={resolvedHref}
       onClick={(e) => {
-        if (href.startsWith("#")) {
+        if (isHome && href.startsWith("#")) {
           const targetId = href.slice(1);
           const el = document.getElementById(targetId);
           if (el) {
@@ -71,6 +75,8 @@ function NavItem({
 
 export default function HeaderV2() {
   const [resumeOpen, setResumeOpen] = useState(false);
+  const pathname = usePathname();
+  const lenis = useLenis();
 
   const navItems = [
     { label: "WORK", short: "WORK", href: "#work" },
@@ -189,17 +195,36 @@ export default function HeaderV2() {
       </div>
 
       {/* Mobile Secondary Navigation Row (320px–767px) */}
-      <nav className="flex md:hidden w-full border-t-2 border-black bg-white overflow-x-hidden">
-        {navItems.map((item) => (
-          <Link
-            key={item.label}
-            href={item.href}
-            className="flex-1 min-w-0 py-2 sm:py-2.5 px-0.5 flex items-center justify-center border-r-2 last:border-r-0 border-black text-[8px] min-[390px]:text-[9px] sm:text-[11px] font-black tracking-tight min-[390px]:tracking-wider uppercase text-black hover:bg-black hover:text-white active:bg-black active:text-[#FAED00] transition-colors text-center leading-none select-none"
-          >
-            <span className="min-[390px]:hidden">{item.short}</span>
-            <span className="hidden min-[390px]:inline">{item.label}</span>
-          </Link>
-        ))}
+      <nav className="flex md:hidden w-full border-t-2 border-black bg-white overflow-x-hidden min-h-[42px]">
+        {navItems.map((item) => {
+          const resolvedHref = pathname === "/" ? item.href : `/${item.href}`;
+          return (
+            <Link
+              key={item.label}
+              href={resolvedHref}
+              onClick={(e) => {
+                if (pathname === "/" && item.href.startsWith("#")) {
+                  const targetId = item.href.slice(1);
+                  const el = document.getElementById(targetId);
+                  if (el) {
+                    e.preventDefault();
+                    const HEADER_H = 96;
+                    const top = el.getBoundingClientRect().top + window.scrollY - HEADER_H;
+                    if (lenis) {
+                      lenis.scrollTo(top, { duration: 0.9, lerp: 0.12, force: true });
+                    } else {
+                      window.scrollTo({ top, behavior: "smooth" });
+                    }
+                  }
+                }
+              }}
+              className="flex-1 min-w-0 h-[42px] px-0.5 flex items-center justify-center border-r-2 last:border-r-0 border-black text-[9px] min-[360px]:text-[10px] min-[400px]:text-[11px] font-black tracking-tight min-[390px]:tracking-wider uppercase text-black hover:bg-black hover:text-white active:bg-black active:text-[#FAED00] transition-colors text-center leading-none select-none"
+            >
+              <span className="min-[390px]:hidden">{item.short}</span>
+              <span className="hidden min-[390px]:inline">{item.label}</span>
+            </Link>
+          );
+        })}
       </nav>
     </motion.header>
   );

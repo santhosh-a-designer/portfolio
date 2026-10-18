@@ -58,9 +58,18 @@ function ActiveScrollFocusItem({
 }: Omit<ScrollFocusWrapperProps, "disabled">) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    if (typeof window !== "undefined") {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768 || window.matchMedia("(pointer: coarse)").matches);
+      };
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+      return () => window.removeEventListener("resize", checkMobile);
+    }
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -100,9 +109,9 @@ function ActiveScrollFocusItem({
   const rawBlur = useTransform(scrollYProgress, blurRangeInput, blurRangeOutput);
   const opacity = useTransform(scrollYProgress, opacityRangeInput, opacityRangeOutput);
 
-  // Performance optimization: set filter to "none" when in focus (val <= 0.25px)
+  // Performance optimization: set filter to "none" when on mobile or in focus (val <= 0.25px)
   const filter = useTransform(rawBlur, (val) => {
-    if (!mounted || val <= 0.25) return "none";
+    if (isMobile || !mounted || val <= 0.25) return "none";
     return `blur(${val.toFixed(1)}px)`;
   });
 
@@ -111,10 +120,10 @@ function ActiveScrollFocusItem({
       ref={containerRef}
       id={id}
       style={{
-        filter: mounted ? filter : "none",
-        opacity: mounted ? opacity : 1,
+        filter: isMobile ? "none" : (mounted ? filter : "none"),
+        opacity: isMobile ? 1 : (mounted ? opacity : 1),
       }}
-      className={`w-full transition-[filter,opacity] duration-300 ease-out will-change-[filter,opacity] ${className}`}
+      className={`w-full ${isMobile ? "" : "transition-[filter,opacity] duration-300 ease-out will-change-[filter,opacity]"} ${className}`}
     >
       {children}
     </motion.div>

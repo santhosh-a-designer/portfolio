@@ -98,26 +98,26 @@ export default function ResumeModal({
           role="dialog"
           aria-modal="true"
           aria-labelledby="resume-modal-title"
-          className="fixed inset-0 z-[200] flex items-center justify-center p-2 sm:p-4 md:p-6 select-none"
+          className="fixed inset-0 z-[200] flex items-center justify-center p-0 sm:p-4 md:p-6 select-none"
         >
-          {/* Backdrop */}
+          {/* Backdrop (Solid high-contrast dark overlay, zero blur for crisp mobile rendering) */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/75 backdrop-blur-sm cursor-pointer"
+            className="fixed inset-0 bg-black/85 cursor-pointer"
           />
 
-          {/* Modal Container — 2px Brutalist Theme (wider 4xl for comfortable reading) */}
+          {/* Modal Container — Full-screen app view on mobile, Brutalist 4xl dialog on desktop */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: 16 }}
+            initial={{ opacity: 0, scale: 0.98, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: 16 }}
-            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, scale: 0.98, y: 12 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-4xl max-h-[92vh] bg-white border-2 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
+            className="relative w-full h-[100dvh] sm:h-auto sm:max-w-4xl sm:max-h-[92vh] bg-white border-0 sm:border-2 border-black sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
           >
             {/* Modal Header Bar — Electric Orange/Red with Brutalist Badge */}
             <div className="p-3 sm:p-4 bg-[#FF462D] text-white border-b-2 border-black flex items-center justify-between gap-3 shrink-0">
@@ -136,16 +136,16 @@ export default function ResumeModal({
                   href="/Santhosh-A-Resume.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden min-[400px]:flex items-center gap-1.5 px-2.5 py-1 text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-black bg-white hover:bg-[#FAED00] border-2 border-black transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                  className="flex items-center gap-1.5 px-2.5 py-1 text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-black bg-white hover:bg-[#FAED00] border-2 border-black transition-colors shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                   title="Open PDF directly in new tab"
                 >
                   <ArrowSquareOut size={13} weight="bold" />
-                  <span>OPEN_TAB</span>
+                  <span className="hidden min-[380px]:inline">OPEN_TAB</span>
                 </a>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-8 h-8 bg-black text-white hover:bg-white hover:text-black transition-colors border-2 border-black flex items-center justify-center cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                  className="w-9 h-9 sm:w-8 sm:h-8 bg-black text-white hover:bg-white hover:text-black transition-colors border-2 border-black flex items-center justify-center cursor-pointer shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:scale-95"
                   aria-label="Close modal"
                 >
                   <X weight="bold" className="w-4 h-4" />
@@ -155,16 +155,16 @@ export default function ResumeModal({
 
             {/* Sub-header Information Strip & Zoom Toolbar */}
             <div className="px-3 sm:px-4 py-2 bg-[#FAED00] border-b-2 border-black flex items-center justify-between text-black font-mono text-[10px] sm:text-[11px] font-bold uppercase shrink-0">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 min-w-0">
                 <FilePdf size={15} weight="fill" className="text-black shrink-0" />
-                <span className="tracking-wide">SANTHOSH_A_RESUME.PDF</span>
-                <span className="hidden sm:inline text-[9.5px] bg-black text-[#FAED00] px-1.5 py-0.5 border border-black font-pixel ml-1">
+                <span className="tracking-wide truncate">SANTHOSH_A_RESUME.PDF</span>
+                <span className="hidden sm:inline text-[9.5px] bg-black text-[#FAED00] px-1.5 py-0.5 border border-black font-pixel ml-1 shrink-0">
                   VERIFIED_A4
                 </span>
               </div>
 
               {/* Interactive Zoom Controls */}
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <span className="text-[10px] font-mono font-bold text-zinc-800 mr-1 hidden min-[480px]:inline">
                   ZOOM:
                 </span>
@@ -199,10 +199,10 @@ export default function ResumeModal({
               </div>
             </div>
 
-            {/* Resume Preview Body — Crisp Render with Scroll Support */}
+            {/* Resume Preview Body — Crisp Render with Touch Pan Support */}
             <div
               data-lenis-prevent="true"
-              className="flex-1 min-h-0 bg-[#E8E8E4] p-3 sm:p-6 overflow-y-auto overflow-x-auto flex flex-col items-center justify-start scrollbar-none"
+              className="flex-1 min-h-0 bg-[#E8E8E4] p-2 sm:p-6 overflow-y-auto overflow-x-auto flex flex-col items-center justify-start scrollbar-none touch-pan-y"
               style={{
                 backgroundImage: `
                   linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
@@ -218,7 +218,7 @@ export default function ResumeModal({
                   maxWidth: "100%",
                   transition: "width 0.15s ease-out",
                 }}
-                className="bg-white border-2 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden shrink-0 aspect-[2314/3275] relative"
+                className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden shrink-0 aspect-[2314/3275] relative w-full"
               >
                 {!imgError ? (
                   <Image
@@ -227,7 +227,7 @@ export default function ResumeModal({
                     fill
                     priority
                     unoptimized
-                    sizes="(max-width: 768px) 95vw, 680px"
+                    sizes="(max-width: 768px) 100vw, 680px"
                     className="object-contain object-top"
                     onError={() => setImgError(true)}
                   />
@@ -247,20 +247,12 @@ export default function ResumeModal({
               </div>
             </div>
 
-            {/* Modal Footer Bar — Theme Yellow Download Button */}
-            <div className="p-3 sm:p-4 bg-white border-t-2 border-black flex items-center justify-between gap-3 shrink-0">
-              <a
-                href="/Santhosh-A-Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-[400px]:hidden text-[10px] font-mono font-bold text-zinc-600 underline"
-              >
-                Open PDF
-              </a>
+            {/* Modal Footer Bar — Theme Yellow Download Button with safe area padding */}
+            <div className="p-3 sm:p-4 pb-[max(12px,env(safe-area-inset-bottom))] bg-white border-t-2 border-black flex items-center justify-between gap-3 shrink-0">
               <button
                 type="button"
                 onClick={downloadResumePdf}
-                className="w-full py-3 sm:py-3.5 px-5 bg-[#FAED00] hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-mono font-black text-xs sm:text-sm tracking-wider uppercase border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 cursor-pointer scanline-btn scanline-btn-light"
+                className="w-full py-3.5 px-5 bg-[#FAED00] hover:bg-[#ffe600] active:bg-[#e6d000] text-black font-mono font-black text-xs sm:text-sm tracking-wider uppercase border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer scanline-btn scanline-btn-light"
               >
                 <DownloadSimple size={18} weight="bold" className="shrink-0 stroke-[3px]" />
                 <span>DOWNLOAD RESUME (PDF)</span>
