@@ -15,7 +15,7 @@ type Props = {
 
 export default function DesignSystemSection({ pdfMeta }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [activeSurfaceId, setActiveSurfaceId] = useState<VidyasDesignSurface["id"]>("customer");
+  const [activeSurfaceId, setActiveSurfaceId] = useState<VidyasDesignSurface["id"]>("landing");
   const mb = pdfMeta.bytes / (1024 * 1024);
 
   const openModalWithSurface = (id: VidyasDesignSurface["id"]) => {
@@ -142,7 +142,7 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t-2 border-black">
           <button
             type="button"
-            onClick={() => setModalOpen(true)}
+            onClick={() => openModalWithSurface("landing")}
             className="px-5 sm:px-6 py-3.5 bg-[#FAED00] hover:bg-[#faed00]/90 text-black border-2 border-black font-mono font-black text-xs uppercase tracking-wider shadow-[3px_3px_0_0_#000] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all flex items-center justify-center gap-2 cursor-pointer scanline-btn"
           >
             <Sparkle weight="fill" size={16} />

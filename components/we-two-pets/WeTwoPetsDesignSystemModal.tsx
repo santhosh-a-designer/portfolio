@@ -152,7 +152,7 @@ export default function WeTwoPetsDesignSystemModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: 12 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full h-[100dvh] sm:h-auto sm:max-w-5xl sm:max-h-[94vh] bg-white border-0 sm:border-2 border-black sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
+            className="relative w-full h-[100dvh] sm:h-[92vh] sm:max-w-5xl max-h-[94vh] bg-white border-0 sm:border-2 border-black sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
           >
             {/* Header */}
             <div className="p-3 sm:p-4 bg-[#0D2E28] text-[#F5EFE6] border-b-2 border-black flex items-center justify-between gap-3 shrink-0">
@@ -222,7 +222,7 @@ export default function WeTwoPetsDesignSystemModal({
             </div>
 
             {/* Content Area */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-[#F4F4F0] space-y-6">
+            <div data-lenis-prevent="true" className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-6 md:p-8 bg-[#F4F4F0] space-y-6">
               
               {/* TAB 1: RECREATED NATIVE COMPONENTS */}
               {activeTab === "components" && (
@@ -274,7 +274,13 @@ export default function WeTwoPetsDesignSystemModal({
                             <Heart size={18} weight="regular" className="text-zinc-400 group-hover:text-rose-500 transition-colors" />
                           </div>
                           <div className="relative aspect-square w-full bg-white border border-black/10 flex items-center justify-center mb-3 overflow-hidden">
-                            <span className="font-mono text-xs text-zinc-400 font-bold uppercase">[Space Capsule Pack]</span>
+                            <Image
+                              src="/case-studies/we-two-pets/product.jpg"
+                              alt="Ultra-Lightweight Ergonomic Pet Carrier"
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              sizes="(max-width: 640px) 100vw, 300px"
+                            />
                           </div>
                           <h4 className="font-serif text-base font-bold text-[#1A2E2A] leading-tight">
                             Ultra-Lightweight Ergonomic Pet Carrier
@@ -302,7 +308,13 @@ export default function WeTwoPetsDesignSystemModal({
                             <Heart size={18} weight="fill" className="text-rose-500" />
                           </div>
                           <div className="relative aspect-square w-full bg-white border border-black/10 flex items-center justify-center mb-3 overflow-hidden">
-                            <span className="font-mono text-xs text-zinc-400 font-bold uppercase">[Orthopedic Cozy Lounger]</span>
+                            <Image
+                              src="/case-studies/we-two-pets/shop.jpg"
+                              alt="Memory Foam Anti-Anxiety Lounger Bed"
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform duration-300"
+                              sizes="(max-width: 640px) 100vw, 300px"
+                            />
                           </div>
                           <h4 className="font-serif text-base font-bold text-[#1A2E2A] leading-tight">
                             Memory Foam Anti-Anxiety Lounger Bed

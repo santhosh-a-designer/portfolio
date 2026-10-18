@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { X, ArrowRight, ArrowLeft, Check, CaretLeft, CaretRight } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { POSTER_PROJECTS } from "@/lib/graphicDesignProjects/posterProjects";
 import type { GraphicDesignPosterProject } from "@/lib/graphicDesignTypes";
 
@@ -21,8 +22,13 @@ export default function GraphicDesignModal({
   onClose,
   initialProjectId = "project-1",
 }: GraphicDesignModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [selectedId, setSelectedId] = useState(initialProjectId);
   const lenis = useLenis();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Sync initial project when modal opens
   useEffect(() => {
@@ -92,10 +98,12 @@ export default function GraphicDesignModal({
     setSelectedId(POSTER_PROJECTS[currentIndex + 1].id);
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 select-none">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 md:p-6 select-none">
           {/* Backdrop (Solid high-contrast dark overlay, zero blur for crisp mobile rendering) */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -112,7 +120,7 @@ export default function GraphicDesignModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: 12 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full h-[100dvh] sm:h-auto sm:max-w-5xl sm:max-h-[92vh] bg-white border-0 sm:border-2 border-black sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
+            className="relative w-full h-[100dvh] sm:h-[92vh] sm:max-w-5xl max-h-[94vh] bg-white border-0 sm:border-2 border-black sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
           >
             {/* Modal Header Bar */}
             <div className="p-3 sm:p-4 bg-[#FF462D] text-white border-b-2 border-black flex items-center justify-between gap-3 shrink-0">
@@ -165,7 +173,7 @@ export default function GraphicDesignModal({
             {/* Modal Body: Scrollable Content Area */}
             <div
               data-lenis-prevent="true"
-              className="flex-1 overflow-y-auto overscroll-contain p-3.5 sm:p-6 md:p-8 bg-[#F4F4F0] touch-pan-y"
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3.5 sm:p-6 md:p-8 bg-[#F4F4F0] touch-pan-y"
             >
               <AnimatePresence mode="wait">
                 <motion.div
@@ -429,6 +437,7 @@ export default function GraphicDesignModal({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }

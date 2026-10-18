@@ -19,6 +19,7 @@ import {
   Storefront,
 } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import { useLenis } from "@/components/LenisProvider";
 
 interface ParlaDesignSystemModalProps {
@@ -69,9 +70,14 @@ export default function ParlaDesignSystemModal({
   isOpen,
   onClose,
 }: ParlaDesignSystemModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<"components" | "colors" | "architecture">("components");
   const [copiedHex, setCopiedHex] = useState<string | null>(null);
   const lenis = useLenis();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -120,10 +126,12 @@ export default function ParlaDesignSystemModal({
     }
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 select-none">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 md:p-6 select-none">
           {/* Dark Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -140,7 +148,7 @@ export default function ParlaDesignSystemModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.98, y: 12 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full h-[100dvh] sm:h-auto sm:max-w-5xl sm:max-h-[94vh] bg-white border-0 sm:border-2 border-black sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
+            className="relative w-full h-[100dvh] sm:h-[92vh] sm:max-w-5xl max-h-[94vh] bg-white border-0 sm:border-2 border-black sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col z-10 overflow-hidden"
           >
             {/* Header */}
             <div className="p-3 sm:p-4 bg-[#1976D2] text-white border-b-2 border-black flex items-center justify-between gap-3 shrink-0">
@@ -204,7 +212,7 @@ export default function ParlaDesignSystemModal({
             </div>
 
             {/* Content Area */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-[#F4F4F0] space-y-6">
+            <div data-lenis-prevent="true" className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-4 sm:p-6 md:p-8 bg-[#F4F4F0] space-y-6">
               
               {/* TAB 1: RECREATED NATIVE COMPONENTS */}
               {activeTab === "components" && (
@@ -287,8 +295,23 @@ export default function ParlaDesignSystemModal({
                         </div>
 
                         {/* Consultant PiP Box */}
-                        <div className="absolute bottom-3 right-3 w-28 h-20 bg-slate-800 border-2 border-[#1976D2] shadow-md flex items-center justify-center font-mono text-[9px] text-zinc-300">
-                          <span>[Consultant]</span>
+                        <div className="absolute bottom-3 right-3 w-32 h-24 bg-slate-800 border-2 border-[#1976D2] shadow-lg flex flex-col justify-between p-1.5 overflow-hidden">
+                          <div className="flex items-center justify-between text-[8px] font-mono font-bold text-white/80">
+                            <span className="flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A]" />
+                              FEED 01
+                            </span>
+                            <VideoCamera size={11} className="text-[#1976D2]" weight="fill" />
+                          </div>
+                          <div className="flex flex-col items-center justify-center my-auto">
+                            <div className="w-7 h-7 rounded-full bg-slate-700 border border-slate-500 flex items-center justify-center text-white">
+                              <User size={14} weight="bold" />
+                            </div>
+                            <span className="text-[9px] font-mono font-bold text-white mt-1">Sarah J.</span>
+                          </div>
+                          <span className="text-[7.5px] font-mono text-center text-slate-400 truncate">
+                            Senior Specialist
+                          </span>
                         </div>
                       </div>
 
@@ -423,6 +446,7 @@ export default function ParlaDesignSystemModal({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
