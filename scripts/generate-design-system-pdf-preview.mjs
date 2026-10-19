@@ -35,9 +35,12 @@ if (!hasPdftoppm()) {
 
 const tmp = fs.mkdtempSync(path.join(OUT_DIR, ".pdf-preview-"));
 try {
+  const buf = fs.readFileSync(PDF);
+  const totalPages = countPages(buf) || 6;
+  const secondPage = Math.min(3, totalPages);
   for (const [page, outName] of [
     [1, "design-system-preview-1"],
-    [9, "design-system-preview-2"],
+    [secondPage, "design-system-preview-2"],
   ]) {
     for (const f of fs.readdirSync(tmp)) {
       if (f.endsWith(".png")) fs.unlinkSync(path.join(tmp, f));
@@ -57,7 +60,6 @@ try {
       fs.copyFileSync(src, path.join(OUT_DIR, `${outName}.png`));
     }
   }
-  const buf = fs.readFileSync(PDF);
   const pages = countPages(buf);
   console.log(
     `design-system preview: wrote thumbnails${pages ? ` (${pages} pages in PDF)` : ""}`,

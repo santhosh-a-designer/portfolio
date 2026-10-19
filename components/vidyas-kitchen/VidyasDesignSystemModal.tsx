@@ -20,6 +20,8 @@ import {
   ForkKnife,
   Clock,
   ShieldCheck,
+  Minus,
+  Plus,
 } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "@/components/LenisProvider";
@@ -171,7 +173,7 @@ export default function VidyasDesignSystemModal({
                   className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 bg-[#FAED00] text-black border border-black font-mono text-[10px] font-black uppercase tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-white transition-colors"
                 >
                   <FilePdf weight="bold" size={13} />
-                  <span>PDF SPEC (18 PAGES)</span>
+                  <span>PDF SPEC ({pdfMeta.pages || 6} PAGES)</span>
                 </a>
                 <button
                   type="button"
@@ -279,37 +281,138 @@ export default function VidyasDesignSystemModal({
                         {/* Surface-Specific Recreated Components */}
                         {currentSurface.id === "customer" && (
                           <div className="space-y-4">
-                            {/* Component A: Primary 56px CTA */}
+                            {/* Component A: Live Size Variant Drawer Card from SizeQtyDrawer.tsx */}
                             <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
                               <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                [PRIMARY ACTION CTA · 56PX · RADIUS 20PX · #BD2320]
+                                [SIZE &amp; PORTION CARD · EXACT RADIUS 22PX · C.RED #BD2320]
+                              </span>
+                              <div
+                                style={{
+                                  padding: "16px 16px 14px",
+                                  borderRadius: 22,
+                                  background: "rgba(189,35,32,0.04)",
+                                  border: "1.5px solid #BD2320",
+                                  boxShadow: "0 4px 20px rgba(189,35,32,0.25)",
+                                }}
+                              >
+                                <div className="flex items-start gap-3">
+                                  <span
+                                    style={{
+                                      width: 50,
+                                      height: 50,
+                                      borderRadius: 18,
+                                      background: "rgba(189,35,32,0.12)",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      flexShrink: 0,
+                                    }}
+                                  >
+                                    <ForkKnife size={24} weight="fill" color="#BD2320" />
+                                  </span>
+                                  <div className="flex-1 min-w-0 pt-0.5">
+                                    <p className="m-0 text-sm sm:text-base font-black text-[#1A1A1A]">South Indian Special Meals</p>
+                                    <p className="m-0 mt-0.5 text-xs font-semibold text-black/45">Serves 1–2 · 500gm Portion</p>
+                                  </div>
+                                  <div className="text-right shrink-0">
+                                    <p className="m-0 text-lg sm:text-xl font-black text-[#BD2320] tracking-tight">₹180</p>
+                                  </div>
+                                </div>
+
+                                <div className="mt-3.5 flex items-center justify-between gap-3">
+                                  <p className="m-0 text-xs font-semibold text-black/45">1 in order</p>
+                                  <div
+                                    style={{
+                                      height: 40,
+                                      borderRadius: 999,
+                                      background: "#BD2320",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      padding: "0 6px",
+                                      width: 118,
+                                      flexShrink: 0,
+                                    }}
+                                  >
+                                    <button
+                                      type="button"
+                                      className="w-8 h-8 rounded-full bg-transparent text-white flex items-center justify-center cursor-pointer border-0"
+                                      aria-label="Decrease"
+                                    >
+                                      <Minus size={14} weight="bold" />
+                                    </button>
+                                    <span className="flex-1 text-center font-black text-sm text-white font-mono">01</span>
+                                    <button
+                                      type="button"
+                                      className="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center cursor-pointer border-0"
+                                      aria-label="Increase"
+                                    >
+                                      <Plus size={14} weight="bold" />
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Component B: Exact Primary Action CTA Button from SizeQtyDrawer.tsx */}
+                            <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
+                              <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
+                                [PRIMARY ACTION CTA · HEIGHT 52PX · RADIUS 18PX · C.RED #BD2320 · GLOW]
                               </span>
                               <button
                                 type="button"
-                                className="w-full h-14 bg-[#BD2320] hover:bg-[#a51d1a] active:scale-[0.99] text-white rounded-[20px] font-bold text-sm flex items-center justify-center gap-2 shadow-[0_8px_20px_-4px_rgba(189,35,32,0.4)] transition-all cursor-pointer"
+                                style={{
+                                  width: "100%",
+                                  height: 52,
+                                  border: "none",
+                                  borderRadius: 18,
+                                  background: "#BD2320",
+                                  color: "#fff",
+                                  fontSize: 15,
+                                  fontWeight: 900,
+                                  cursor: "pointer",
+                                  boxShadow: "0 8px 24px rgba(189,35,32,0.25)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
                               >
-                                <ShoppingBag weight="bold" size={18} />
-                                <span>Place Home Meal Order · ₹180</span>
+                                <span>Add to Cart · ₹180</span>
                               </button>
                             </div>
 
-                            {/* Component B: Meal Schedule Segmented Chip Selector */}
+                            {/* Component C: Success Verification Status from mobile-typography.ts */}
                             <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
                               <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                [SCHEDULE SELECTOR CHIPS · TAP TARGET 44PX]
+                                [SUCCESS STATUS RING &amp; PILL CHIP · SUCCESS_STATUS TOKENS]
                               </span>
-                              <div className="grid grid-cols-3 gap-2">
-                                <div className="h-11 bg-[#BD2320] text-white rounded-xl flex items-center justify-center gap-1.5 text-xs font-bold border border-[#BD2320] shadow-sm">
-                                  <Clock size={15} weight="bold" />
-                                  <span>Lunch (12:30 PM)</span>
+                              <div className="flex items-center gap-3">
+                                <div
+                                  style={{
+                                    width: 52,
+                                    height: 52,
+                                    borderRadius: "50%",
+                                    background: "rgba(34,197,94,0.14)",
+                                    border: "1.5px solid rgba(34,197,94,0.45)",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    flexShrink: 0,
+                                  }}
+                                >
+                                  <Check size={24} weight="bold" color="#22C55E" />
                                 </div>
-                                <div className="h-11 bg-white text-zinc-700 rounded-xl flex items-center justify-center gap-1.5 text-xs font-semibold border border-zinc-200">
-                                  <Clock size={15} />
-                                  <span>Dinner (7:30 PM)</span>
-                                </div>
-                                <div className="h-11 bg-white text-zinc-700 rounded-xl flex items-center justify-center gap-1.5 text-xs font-semibold border border-zinc-200">
-                                  <Clock size={15} />
-                                  <span>Pre-Book Tomorrow</span>
+                                <div
+                                  style={{
+                                    padding: "8px 18px",
+                                    borderRadius: 999,
+                                    background: "rgba(255,255,255,0.96)",
+                                    border: "1px solid rgba(34,197,94,0.38)",
+                                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                                  }}
+                                  className="flex-1 min-w-0"
+                                >
+                                  <p className="m-0 text-sm font-bold text-[#1A1A1A]">OTP Verified</p>
+                                  <p className="m-0 text-xs font-semibold text-black/40">Location marked · Sivakasi East</p>
                                 </div>
                               </div>
                             </div>
@@ -318,68 +421,181 @@ export default function VidyasDesignSystemModal({
 
                         {currentSurface.id === "landing" && (
                           <div className="space-y-4">
-                            {/* Component A: High-Conversion WhatsApp Order CTA */}
-                            <div className="p-4 bg-[#1A1A1A] text-white border border-black flex flex-col gap-2">
+                            {/* Component A: Studio Glowing QR Glass Station from DesktopLanding.tsx */}
+                            <div className="p-4 bg-[#0d0d0d] text-white border border-black flex flex-col gap-3 relative overflow-hidden">
+                              <div
+                                className="absolute -top-10 -left-10 w-44 h-44 pointer-events-none rounded-full"
+                                style={{
+                                  background: "radial-gradient(circle, rgba(189, 35, 32, 0.45) 0%, transparent 70%)",
+                                  filter: "blur(40px)",
+                                }}
+                              />
+                              <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase relative z-10">
+                                [DESKTOP QR LAUNCH STATION · BLUR 40PX GLASS · SCANNING FLARE]
+                              </span>
+                              <div className="relative flex items-center justify-center py-2 z-10">
+                                <div
+                                  style={{
+                                    background: "rgba(255, 255, 255, 0.03)",
+                                    backdropFilter: "blur(40px)",
+                                    padding: "16px",
+                                    borderRadius: "16px",
+                                    border: "1px solid rgba(255, 255, 255, 0.08)",
+                                    boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
+                                  }}
+                                  className="relative flex flex-col items-center"
+                                >
+                                  {/* Scanning Laser Line */}
+                                  <div
+                                    className="w-full h-[2px] mb-3"
+                                    style={{
+                                      background: "linear-gradient(90deg, transparent 0%, #BD2320 50%, transparent 100%)",
+                                      boxShadow: "0 0 20px rgba(189,35,32,1)",
+                                    }}
+                                  />
+                                  <div className="w-24 h-24 bg-white p-2 rounded-lg flex items-center justify-center">
+                                    <div className="w-full h-full border border-black/20 flex flex-col items-center justify-center font-mono text-[9px] font-black text-black">
+                                      <span className="text-[#BD2320] text-xs font-black">VK</span>
+                                      <span>PWA QR</span>
+                                    </div>
+                                  </div>
+                                  <p className="text-[11px] text-white/75 text-center mt-2.5 font-medium leading-tight">
+                                    Scan with phone to open{"\n"}Vidya&apos;s Kitchen PWA
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Component B: WhatsApp Action CTA Button from DesktopLanding.tsx */}
+                            <div className="p-4 bg-[#0d0d0d] text-white border border-black flex flex-col gap-2">
                               <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
-                                [MARKETING WHATSAPP CTA · FULL-WIDTH · #25D366]
+                                [WHATSAPP ACTION CTA · EXACT RADIUS 16PX · #25D366]
                               </span>
                               <button
                                 type="button"
-                                className="w-full h-14 bg-[#25D366] hover:bg-[#20ba5a] active:scale-[0.99] text-black font-extrabold text-sm flex items-center justify-center gap-2.5 rounded-2xl shadow-[0_8px_24px_rgba(37,211,102,0.35)] transition-all cursor-pointer"
+                                style={{
+                                  width: "100%",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  gap: "10px",
+                                  padding: "16px 20px",
+                                  borderRadius: "16px",
+                                  fontWeight: 900,
+                                  fontSize: "14px",
+                                  textTransform: "uppercase",
+                                  letterSpacing: "0.05em",
+                                  background: "#FFFFFF",
+                                  color: "#000000",
+                                  border: "none",
+                                  cursor: "pointer",
+                                  boxShadow: "0 8px 24px rgba(37,211,102,0.25)",
+                                }}
+                                className="hover:!bg-[#25D366] hover:!text-white transition-all active:scale-[0.99]"
                               >
-                                <WhatsappLogo weight="fill" size={22} className="text-black" />
-                                <span className="tracking-wide">Order with Vidya Bot on WhatsApp</span>
+                                <WhatsappLogo weight="fill" size={22} className="text-[#25D366]" />
+                                <span>Order with Vidya Bot</span>
                               </button>
-                            </div>
-
-                            {/* Component B: Desktop QR Landing Feature Card */}
-                            <div className="p-4 bg-[#222222] text-white border border-black flex items-center justify-between gap-3">
-                              <div>
-                                <span className="text-[10px] font-mono text-[#FAED00] font-black uppercase block">
-                                  SCAN TO LAUNCH PWA
-                                </span>
-                                <span className="text-xs text-zinc-300 font-medium block mt-0.5">
-                                  Instant menu preview without app store friction
-                                </span>
-                              </div>
-                              <span className="px-3 py-1 bg-white/10 text-white font-mono text-[10px] font-bold uppercase rounded border border-white/20">
-                                Sivakasi Hub
-                              </span>
+                              <p className="text-[10px] text-white/40 text-center tracking-wide font-medium mt-1">
+                                Order from our daily menu or get instant support via WhatsApp
+                              </p>
                             </div>
                           </div>
                         )}
 
                         {currentSurface.id === "driver" && (
                           <div className="space-y-4">
-                            {/* Component A: Driver Sunlight-Optimized Swipe to Complete Slider */}
+                            {/* Component A: Outdoor High-Contrast Delivery Job Card */}
                             <div className="p-4 bg-[#0A0A0A] text-white border border-black flex flex-col gap-2">
                               <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
-                                [SWIPE TO DELIVER SLIDER · HIGH CONTRAST SUNLIGHT SAFE]
+                                [OUTDOOR DELIVERY CARD · RADIUS 16PX · SUNLIGHT HIGH CONTRAST]
                               </span>
-                              <div className="relative h-14 bg-zinc-900 border-2 border-white/30 rounded-2xl flex items-center px-2 select-none overflow-hidden">
-                                <div className="h-10 w-12 bg-[#00C16A] text-black rounded-xl flex items-center justify-center font-black shadow-md cursor-grab active:cursor-grabbing">
-                                  <Truck weight="bold" size={20} />
+                              <div
+                                style={{
+                                  background: "#141414",
+                                  borderRadius: 16,
+                                  border: "1px solid rgba(255,255,255,0.12)",
+                                  padding: 16,
+                                }}
+                                className="space-y-3"
+                              >
+                                <div className="flex items-start justify-between gap-2">
+                                  <div>
+                                    <p className="m-0 text-base font-bold text-white">Murugan K.</p>
+                                    <p className="m-0 text-xs text-white/60 mt-0.5">14/B Gandhi Road, Sivakasi East</p>
+                                  </div>
+                                  <span
+                                    style={{
+                                      borderRadius: 999,
+                                      background: "rgba(255,255,255,0.08)",
+                                      padding: "4px 10px",
+                                      fontSize: 11,
+                                      fontWeight: 700,
+                                      color: "rgba(255,255,255,0.85)",
+                                    }}
+                                  >
+                                    Slot: 12:30 PM
+                                  </span>
                                 </div>
-                                <span className="flex-1 text-center font-mono text-xs font-black uppercase tracking-wider text-zinc-300">
-                                  SWIPE TO CONFIRM DELIVERY ➔
-                                </span>
+
+                                {/* Amber Cash Alert Banner */}
+                                <div
+                                  style={{
+                                    background: "rgba(245, 166, 35, 0.12)",
+                                    border: "1px solid rgba(245, 166, 35, 0.35)",
+                                    borderRadius: 12,
+                                    padding: "10px 14px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  <span className="text-xs font-mono font-black text-[#F5A623]">
+                                    ₹180 CASH ON DELIVERY
+                                  </span>
+                                  <span className="text-[10px] font-mono text-white/80 font-bold uppercase">
+                                    Collect exact
+                                  </span>
+                                </div>
                               </div>
                             </div>
 
-                            {/* Component B: Cash vs UPI Instant Toggle */}
+                            {/* Component B: Driver Ergonomic Action Buttons */}
                             <div className="p-4 bg-[#0A0A0A] text-white border border-black flex flex-col gap-2">
                               <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
-                                [PAYMENT RECONCILIATION TOGGLE · ZERO DRIFT]
+                                [DRIVER ACTIONS · TOUCH 48PX · RADIUS 14PX · SIGNAL GREEN #34D469]
                               </span>
                               <div className="grid grid-cols-2 gap-2">
-                                <div className="p-3 bg-[#00C16A]/15 border-2 border-[#00C16A] rounded-xl text-center">
-                                  <span className="block text-xs font-mono font-black text-[#00C16A]">COLLECT CASH</span>
-                                  <span className="text-[10px] font-mono text-white/70">₹180 Exact change</span>
-                                </div>
-                                <div className="p-3 bg-zinc-900 border border-white/20 rounded-xl text-center">
-                                  <span className="block text-xs font-mono font-bold text-zinc-400">PAID VIA UPI</span>
-                                  <span className="text-[10px] font-mono text-zinc-500">Auto-verified</span>
-                                </div>
+                                <button
+                                  type="button"
+                                  style={{
+                                    height: 48,
+                                    borderRadius: 14,
+                                    border: "1px solid rgba(255,255,255,0.22)",
+                                    background: "transparent",
+                                    color: "#FFFFFF",
+                                    fontWeight: 700,
+                                    fontSize: 13,
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  Call Customer
+                                </button>
+                                <button
+                                  type="button"
+                                  style={{
+                                    height: 48,
+                                    borderRadius: 14,
+                                    border: "none",
+                                    background: "#34D469",
+                                    color: "#000000",
+                                    fontWeight: 900,
+                                    fontSize: 13,
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  Mark Delivered
+                                </button>
                               </div>
                             </div>
                           </div>
@@ -387,43 +603,119 @@ export default function VidyasDesignSystemModal({
 
                         {currentSurface.id === "dashboard" && (
                           <div className="space-y-4">
-                            {/* Component A: Live Order Ticket Bar */}
-                            <div className="p-4 bg-zinc-50 border border-black flex flex-col gap-2">
-                              <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                [KITCHEN OPS TICKET · LIVE STATUS PILL]
+                            {/* Component A: Floating Shell Sidebar Navigation from DashboardSidebar.tsx */}
+                            <div className="p-4 bg-[#0D0D0D] text-white border border-black flex flex-col gap-2">
+                              <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
+                                [DASHBOARD FLOATING SHELL &amp; ACTIVE NAV ROW · #F5E32D]
                               </span>
-                              <div className="p-3 bg-white border border-black shadow-sm flex items-center justify-between gap-3">
-                                <div className="flex items-center gap-2.5">
-                                  <span className="w-8 h-8 rounded-lg bg-[#BD2320] text-white font-mono font-bold text-xs flex items-center justify-center">
-                                    #42
+                              <div
+                                style={{
+                                  borderRadius: 16,
+                                  border: "1px solid #222",
+                                  background: "#141414",
+                                  boxShadow: "0 8px 32px rgba(0,0,0,0.45)",
+                                  padding: 12,
+                                }}
+                                className="space-y-1.5"
+                              >
+                                {/* Active Nav Item */}
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    padding: "10px 14px",
+                                    borderRadius: 12,
+                                    background: "#F5E32D",
+                                    color: "#000000",
+                                    fontWeight: 900,
+                                    fontSize: 13,
+                                    minHeight: 44,
+                                  }}
+                                >
+                                  <span className="flex items-center gap-2">
+                                    <Clock size={18} weight="bold" />
+                                    <span>Live Kitchen Orders</span>
                                   </span>
-                                  <div>
-                                    <span className="font-bold text-xs block text-black">South Indian Thali x 2</span>
-                                    <span className="text-[10px] text-zinc-500 font-mono">Pack dispatched · Sivakasi East</span>
-                                  </div>
+                                  <span
+                                    style={{
+                                      minWidth: 18,
+                                      height: 18,
+                                      padding: "0 5px",
+                                      borderRadius: 999,
+                                      background: "#000000",
+                                      color: "#F5E32D",
+                                      fontSize: 9,
+                                      fontWeight: 900,
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                    }}
+                                  >
+                                    9+
+                                  </span>
                                 </div>
-                                <span className="px-2.5 py-1 bg-[#FAED00] text-black border border-black font-mono text-[10px] font-black uppercase">
-                                  COOKING (8M)
-                                </span>
+
+                                {/* Idle Nav Item */}
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 8,
+                                    padding: "10px 14px",
+                                    borderRadius: 12,
+                                    background: "transparent",
+                                    color: "#888888",
+                                    fontWeight: 600,
+                                    fontSize: 13,
+                                  }}
+                                >
+                                  <Sparkle size={18} weight="bold" />
+                                  <span>AI Pricing Engine</span>
+                                </div>
                               </div>
                             </div>
 
-                            {/* Component B: AI Festival Pricing Alert */}
-                            <div className="p-4 bg-zinc-50 border border-black flex items-center justify-between gap-3">
-                              <div className="flex items-center gap-2">
-                                <span className="w-2.5 h-2.5 rounded-full bg-[#00C16A] animate-pulse" />
-                                <div>
-                                  <span className="text-xs font-mono font-black uppercase text-black block">
-                                    AI PRICING SUGGESTION
-                                  </span>
-                                  <span className="text-[10px] text-zinc-600 block">
-                                    Diwali meal demand surge: +15% recommended
-                                  </span>
-                                </div>
-                              </div>
-                              <span className="px-2.5 py-1 bg-black text-white font-mono text-[10px] font-black uppercase">
-                                AUTO-ADAPT
+                            {/* Component B: Dashboard Action Button & Live Store Status Pill */}
+                            <div className="p-4 bg-[#0D0D0D] text-white border border-black flex flex-col gap-2">
+                              <span className="text-[10px] font-mono font-bold text-zinc-400 uppercase">
+                                [DASHBOARD CONTROLS · #F5E32D ACTION · #86EFAC LIVE STATUS]
                               </span>
+                              <div className="flex items-center justify-between gap-3 p-3 bg-[#141414] border border-[#222] rounded-xl">
+                                <div
+                                  style={{
+                                    padding: "4px 12px",
+                                    borderRadius: 999,
+                                    background: "rgba(134, 239, 172, 0.12)",
+                                    border: "1px solid rgba(134, 239, 172, 0.3)",
+                                    color: "#86EFAC",
+                                    fontSize: 11,
+                                    fontWeight: 700,
+                                    display: "inline-flex",
+                                    alignItems: "center",
+                                    gap: 6,
+                                  }}
+                                >
+                                  <span className="w-1.5 h-1.5 rounded-full bg-[#86EFAC] animate-pulse" />
+                                  <span>Live on Storefront</span>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  style={{
+                                    padding: "8px 16px",
+                                    borderRadius: 8,
+                                    border: "1px solid rgba(245, 227, 45, 0.4)",
+                                    background: "transparent",
+                                    color: "#F5E32D",
+                                    fontSize: 12,
+                                    fontWeight: 800,
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  Approve &amp; Deploy
+                                </button>
+                              </div>
                             </div>
                           </div>
                         )}
@@ -538,11 +830,11 @@ export default function VidyasDesignSystemModal({
                         </p>
                       </div>
 
-                      {/* PDF 18-Page Download Card */}
+                      {/* PDF Download Card */}
                       <div className="border-2 border-black bg-[#FAED00] p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center justify-between gap-3">
                         <div className="min-w-0">
                           <span className="text-xs font-mono font-black uppercase text-black block truncate">
-                            COMPLETE 18-PAGE SPEC
+                            COMPLETE {pdfMeta.pages || 6}-PAGE SPEC
                           </span>
                           <span className="text-[10px] font-mono font-bold text-black/70 block">
                             Measured tokens, spacing harnesses &amp; component matrices

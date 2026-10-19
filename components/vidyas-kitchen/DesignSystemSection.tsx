@@ -156,7 +156,7 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
             className="px-4 py-3 bg-white hover:bg-zinc-100 text-black border-2 border-black font-mono font-bold text-xs uppercase tracking-wider shadow-[2px_2px_0_0_#000] transition-colors flex items-center justify-center gap-2"
           >
             <FilePdf weight="bold" size={16} />
-            <span>DOWNLOAD SPEC (PDF {mb.toFixed(1)} MB · 18 PGS)</span>
+            <span>DOWNLOAD SPEC (PDF {mb < 1 ? (pdfMeta.bytes / 1024).toFixed(0) + " KB" : mb.toFixed(1) + " MB"} · {pdfMeta.pages || 6} PGS)</span>
           </a>
         </div>
       </div>
