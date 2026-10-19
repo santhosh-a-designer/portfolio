@@ -22,6 +22,12 @@ import {
   ShieldCheck,
   Minus,
   Plus,
+  MapPin,
+  CaretDown,
+  House,
+  Receipt,
+  User,
+  ArrowRight,
 } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLenis } from "@/components/LenisProvider";
@@ -281,27 +287,351 @@ export default function VidyasDesignSystemModal({
                         {/* Surface-Specific Recreated Components */}
                         {currentSurface.id === "customer" && (
                           <div className="space-y-4">
-                            {/* Component A: Live Size Variant Drawer Card from SizeQtyDrawer.tsx */}
+                            {/* Component 1: Location Delivery Header Pill */}
+                            <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
+                              <div className="flex items-center justify-between">
+                                <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
+                                  [01. LOCATION DELIVERY PILL · H: 44PX · RADIUS: 999PX]
+                                </span>
+                                <span className="text-[9px] font-mono font-bold text-[#BD2320]">
+                                  WCAG 2.1 AAA
+                                </span>
+                              </div>
+                              <div
+                                style={{
+                                  height: 44,
+                                  borderRadius: 999,
+                                  background: "#FFFFFF",
+                                  border: "1px solid rgba(0,0,0,0.06)",
+                                  boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  padding: "6px 14px 6px 8px",
+                                  gap: 10,
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    width: 30,
+                                    height: 30,
+                                    borderRadius: 999,
+                                    background: "#FEE2E2",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    flexShrink: 0,
+                                  }}
+                                >
+                                  <MapPin size={16} weight="fill" color="#BD2320" />
+                                </span>
+                                <div className="flex-1 min-w-0">
+                                  <p className="m-0 text-[10px] text-black/50 font-medium leading-none">Delivering to • Home</p>
+                                  <p className="m-0 text-[12px] font-bold text-[#1A1A1A] truncate leading-tight mt-0.5">
+                                    5th Street 10th Main Rd 62, 60004...
+                                  </p>
+                                </div>
+                                <CaretDown size={14} weight="bold" className="text-black/40 shrink-0" />
+                              </div>
+                            </div>
+
+                            {/* Component 2: Category Segmented Filter Tabs */}
                             <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
                               <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                [SIZE &amp; PORTION CARD · EXACT RADIUS 22PX · C.RED #BD2320]
+                                [02. CATEGORY FILTER TABS · TRACK H: 44PX · TAB H: 36PX · RADIUS: 999PX]
+                              </span>
+                              <div
+                                style={{
+                                  height: 44,
+                                  borderRadius: 999,
+                                  background: "#FFFFFF",
+                                  border: "1px solid rgba(0,0,0,0.05)",
+                                  padding: 4,
+                                  display: "inline-flex",
+                                  alignItems: "center",
+                                  width: "fit-content",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    height: 36,
+                                    borderRadius: 999,
+                                    background: "#BD2320",
+                                    color: "#FFFFFF",
+                                    padding: "0 18px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    fontWeight: 800,
+                                    fontSize: 13,
+                                  }}
+                                >
+                                  Kitchen picks
+                                </div>
+                                <div
+                                  style={{
+                                    height: 36,
+                                    padding: "0 16px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    fontWeight: 600,
+                                    fontSize: 13,
+                                    color: "#666666",
+                                  }}
+                                >
+                                  Favorites
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Component 3: Food Menu Card with Price Badge & Add Button */}
+                            <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
+                              <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
+                                [03. FOOD MENU CARD · RADIUS: 20PX · PRICE: 24PX · ADD BTN: 36PX]
+                              </span>
+                              <div
+                                style={{
+                                  borderRadius: 20,
+                                  background: "#FFFFFF",
+                                  border: "1px solid rgba(0,0,0,0.06)",
+                                  boxShadow: "0 4px 18px rgba(0,0,0,0.04)",
+                                  padding: 12,
+                                  maxWidth: 260,
+                                }}
+                                className="space-y-3"
+                              >
+                                <div
+                                  style={{
+                                    height: 120,
+                                    borderRadius: 14,
+                                    background: "linear-gradient(135deg, #1C1917 0%, #292524 100%)",
+                                    position: "relative",
+                                    padding: 8,
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "flex-start",
+                                  }}
+                                >
+                                  <span
+                                    style={{
+                                      height: 24,
+                                      borderRadius: 999,
+                                      background: "#111111",
+                                      color: "#FFFFFF",
+                                      padding: "0 10px",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      fontSize: 12,
+                                      fontWeight: 800,
+                                    }}
+                                  >
+                                    ₹349
+                                  </span>
+                                  <span
+                                    style={{
+                                      height: 22,
+                                      borderRadius: 6,
+                                      background: "#F59E0B",
+                                      color: "#FFFFFF",
+                                      padding: "0 8px",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      fontSize: 10,
+                                      fontWeight: 900,
+                                    }}
+                                  >
+                                    20% Off!
+                                  </span>
+                                </div>
+
+                                <p className="m-0 text-sm font-bold text-[#1A1A1A]">Mom&apos;s Recipe — Chicken Gravy</p>
+
+                                <div className="flex justify-center pt-1">
+                                  <button
+                                    type="button"
+                                    style={{
+                                      height: 36,
+                                      padding: "0 24px",
+                                      borderRadius: 999,
+                                      background: "#BD2320",
+                                      color: "#FFFFFF",
+                                      fontWeight: 800,
+                                      fontSize: 13,
+                                      border: "none",
+                                      cursor: "pointer",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      gap: 6,
+                                      boxShadow: "0 4px 12px rgba(189,35,32,0.25)",
+                                    }}
+                                  >
+                                    <Plus size={14} weight="bold" />
+                                    <span>ADD</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Component 4: Vidya Bot Floating WhatsApp Card */}
+                            <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
+                              <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
+                                [04. VIDYA BOT FLOATING CARD · H: 58PX · RADIUS: 20PX · WA: 40×40PX]
+                              </span>
+                              <div
+                                style={{
+                                  height: 58,
+                                  borderRadius: 20,
+                                  background: "#FFFFFF",
+                                  border: "1px solid rgba(0,0,0,0.06)",
+                                  boxShadow: "0 4px 14px rgba(0,0,0,0.04)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "space-between",
+                                  padding: "8px 14px",
+                                }}
+                              >
+                                <div>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-xs font-bold text-[#1A1A1A]">Vidya Bot</span>
+                                    <span
+                                      style={{
+                                        height: 18,
+                                        padding: "0 6px",
+                                        borderRadius: 999,
+                                        background: "#DCFCE7",
+                                        color: "#166534",
+                                        fontSize: 9,
+                                        fontWeight: 900,
+                                        display: "inline-flex",
+                                        alignItems: "center",
+                                      }}
+                                    >
+                                      ⚡ INSTANT
+                                    </span>
+                                  </div>
+                                  <p className="m-0 text-[11px] text-black/50 font-medium">Order via our bot</p>
+                                </div>
+                                <span
+                                  style={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: 999,
+                                    background: "#25D366",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    boxShadow: "0 4px 12px rgba(37,211,102,0.3)",
+                                  }}
+                                >
+                                  <WhatsappLogo size={22} weight="fill" color="#FFFFFF" />
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Component 5: Floating Bottom Navigation Dock */}
+                            <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
+                              <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
+                                [05. BOTTOM DOCK · H: 64PX · RADIUS: 999PX · ACTIVE PILL: 48PX]
+                              </span>
+                              <div
+                                style={{
+                                  height: 64,
+                                  borderRadius: 999,
+                                  background: "rgba(255,255,255,0.96)",
+                                  border: "1px solid rgba(0,0,0,0.08)",
+                                  boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  padding: "6px 10px",
+                                  gap: 12,
+                                  maxWidth: 360,
+                                }}
+                              >
+                                <div>
+                                  <p className="m-0 text-[10px] font-bold text-black/70 leading-none">Explore</p>
+                                  <p className="m-0 text-[8px] text-black/40 leading-tight">17 dishes</p>
+                                </div>
+
+                                <div
+                                  style={{
+                                    height: 48,
+                                    padding: "0 18px",
+                                    borderRadius: 999,
+                                    background: "#BD2320",
+                                    color: "#FFFFFF",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 6,
+                                    fontWeight: 800,
+                                    fontSize: 13,
+                                  }}
+                                >
+                                  <House size={18} weight="fill" />
+                                  <span>Home</span>
+                                </div>
+
+                                <div className="relative p-2 text-black/60">
+                                  <Receipt size={20} weight="bold" />
+                                  <span
+                                    style={{
+                                      position: "absolute",
+                                      top: 2,
+                                      right: 2,
+                                      width: 14,
+                                      height: 14,
+                                      borderRadius: 999,
+                                      background: "#BD2320",
+                                      color: "#FFFFFF",
+                                      fontSize: 8,
+                                      fontWeight: 900,
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                    }}
+                                  >
+                                    1
+                                  </span>
+                                </div>
+
+                                <div className="p-2 text-black/60">
+                                  <User size={20} weight="bold" />
+                                </div>
+
+                                <span
+                                  style={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: 999,
+                                    background: "rgba(189,35,32,0.12)",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                  }}
+                                >
+                                  <ArrowRight size={18} weight="bold" color="#BD2320" />
+                                </span>
+                              </div>
+                            </div>
+
+                            {/* Component 6: Size Variant Selection Drawer & 52px Primary CTA */}
+                            <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
+                              <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
+                                [06. SIZE DRAWER · 52×52PX WELL · 44PX STEPPER · 52PX CTA]
                               </span>
                               <div
                                 style={{
                                   padding: "16px 16px 14px",
-                                  borderRadius: 22,
-                                  background: "rgba(189,35,32,0.04)",
-                                  border: "1.5px solid #BD2320",
-                                  boxShadow: "0 4px 20px rgba(189,35,32,0.25)",
+                                  borderRadius: 20,
+                                  background: "#FFFFFF",
+                                  border: "1.5px solid #F59E0B",
+                                  boxShadow: "0 4px 20px rgba(0,0,0,0.06)",
                                 }}
                               >
                                 <div className="flex items-start gap-3">
                                   <span
                                     style={{
-                                      width: 50,
-                                      height: 50,
+                                      width: 52,
+                                      height: 52,
                                       borderRadius: 18,
-                                      background: "rgba(189,35,32,0.12)",
+                                      background: "rgba(189,35,32,0.08)",
                                       display: "flex",
                                       alignItems: "center",
                                       justifyContent: "center",
@@ -320,100 +650,58 @@ export default function VidyasDesignSystemModal({
                                 </div>
 
                                 <div className="mt-3.5 flex items-center justify-between gap-3">
-                                  <p className="m-0 text-xs font-semibold text-black/45">1 in order</p>
+                                  <p className="m-0 text-xs font-semibold text-black/45">Quantity</p>
                                   <div
                                     style={{
-                                      height: 40,
+                                      height: 44,
                                       borderRadius: 999,
-                                      background: "#BD2320",
+                                      background: "rgba(0,0,0,0.05)",
                                       display: "flex",
                                       alignItems: "center",
                                       padding: "0 6px",
-                                      width: 118,
+                                      width: 120,
                                       flexShrink: 0,
                                     }}
                                   >
                                     <button
                                       type="button"
-                                      className="w-8 h-8 rounded-full bg-transparent text-white flex items-center justify-center cursor-pointer border-0"
+                                      className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center cursor-pointer border border-black/10 shadow-sm"
                                       aria-label="Decrease"
                                     >
                                       <Minus size={14} weight="bold" />
                                     </button>
-                                    <span className="flex-1 text-center font-black text-sm text-white font-mono">01</span>
+                                    <span className="flex-1 text-center font-black text-sm text-black font-mono">01</span>
                                     <button
                                       type="button"
-                                      className="w-8 h-8 rounded-full bg-white/20 text-white flex items-center justify-center cursor-pointer border-0"
+                                      className="w-8 h-8 rounded-full bg-[#BD2320] text-white flex items-center justify-center cursor-pointer border-0 shadow-sm"
                                       aria-label="Increase"
                                     >
                                       <Plus size={14} weight="bold" />
                                     </button>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
 
-                            {/* Component B: Exact Primary Action CTA Button from SizeQtyDrawer.tsx */}
-                            <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
-                              <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                [PRIMARY ACTION CTA · HEIGHT 52PX · RADIUS 18PX · C.RED #BD2320 · GLOW]
-                              </span>
-                              <button
-                                type="button"
-                                style={{
-                                  width: "100%",
-                                  height: 52,
-                                  border: "none",
-                                  borderRadius: 18,
-                                  background: "#BD2320",
-                                  color: "#fff",
-                                  fontSize: 15,
-                                  fontWeight: 900,
-                                  cursor: "pointer",
-                                  boxShadow: "0 8px 24px rgba(189,35,32,0.25)",
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                }}
-                              >
-                                <span>Add to Cart · ₹180</span>
-                              </button>
-                            </div>
-
-                            {/* Component C: Success Verification Status from mobile-typography.ts */}
-                            <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
-                              <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                [SUCCESS STATUS RING &amp; PILL CHIP · SUCCESS_STATUS TOKENS]
-                              </span>
-                              <div className="flex items-center gap-3">
-                                <div
+                                <button
+                                  type="button"
                                   style={{
-                                    width: 52,
+                                    width: "100%",
                                     height: 52,
-                                    borderRadius: "50%",
-                                    background: "rgba(34,197,94,0.14)",
-                                    border: "1.5px solid rgba(34,197,94,0.45)",
+                                    border: "none",
+                                    borderRadius: 18,
+                                    background: "#BD2320",
+                                    color: "#fff",
+                                    fontSize: 14,
+                                    fontWeight: 900,
+                                    cursor: "pointer",
+                                    boxShadow: "0 8px 24px rgba(189,35,32,0.25)",
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
-                                    flexShrink: 0,
+                                    marginTop: 14,
                                   }}
                                 >
-                                  <Check size={24} weight="bold" color="#22C55E" />
-                                </div>
-                                <div
-                                  style={{
-                                    padding: "8px 18px",
-                                    borderRadius: 999,
-                                    background: "rgba(255,255,255,0.96)",
-                                    border: "1px solid rgba(34,197,94,0.38)",
-                                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-                                  }}
-                                  className="flex-1 min-w-0"
-                                >
-                                  <p className="m-0 text-sm font-bold text-[#1A1A1A]">OTP Verified</p>
-                                  <p className="m-0 text-xs font-semibold text-black/40">Location marked · Sivakasi East</p>
-                                </div>
+                                  <span>ADD ITEM TO CART · ₹180</span>
+                                </button>
                               </div>
                             </div>
                           </div>
