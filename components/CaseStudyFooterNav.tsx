@@ -80,6 +80,13 @@ export default function CaseStudyFooterNav({
         </div>
         <Link
           href="/#work"
+          onClick={() => {
+            try {
+              sessionStorage.setItem("portfolio:scrollToWork", "1");
+            } catch {
+              /* */
+            }
+          }}
           className="w-full sm:w-auto px-5 py-2.5 bg-white hover:bg-[#FAED00] text-black font-black uppercase transition-colors border border-white text-center shrink-0 cursor-pointer"
         >
           Back to All Works ↑

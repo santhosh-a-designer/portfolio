@@ -316,6 +316,13 @@ export default function ParlaCaseStudyView({ study, prev, next }: ParlaCaseStudy
       <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-4 font-mono select-none">
         <Link
           href="/#work"
+          onClick={() => {
+            try {
+              sessionStorage.setItem("portfolio:scrollToWork", "1");
+            } catch {
+              /* */
+            }
+          }}
           className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-black hover:text-[#FF462D] sm:text-sm"
         >
           <ArrowLeft weight="bold" className="h-4 w-4" />

@@ -21,115 +21,115 @@ const itemVariants = {
   },
 };
 
+const PERSONAS = [
+  { id: "hiring", label: "HIRING MANAGER", shortLabel: "RECRUITER" },
+  { id: "eng", label: "ENG LEAD", shortLabel: "ENG LEAD" },
+  { id: "design", label: "DESIGN LEAD", shortLabel: "DESIGN LEAD" },
+];
+
+const PERSONA_PROMPTS = {
+  0: [
+    {
+      id: 0,
+      badge: "01. CORE",
+      promptLabel: "WHAT DO YOU DO?",
+      question: "WHAT I DO:",
+      answer: "I craft experiences people feel — then write the code to ship them.",
+    },
+    {
+      id: 1,
+      badge: "02. PROBLEM SOLVING",
+      promptLabel: "HOW DO YOU HANDLE FRICTION?",
+      question: "HOW I TACKLE PROBLEMS:",
+      answer: "I find the root friction, untangle messy workflows, and make things simple.",
+    },
+    {
+      id: 2,
+      badge: "03. HYBRID ROLE",
+      promptLabel: "WHY DESIGN & CODE BOTH?",
+      question: "WHY DESIGN AND CODE?",
+      answer: "Because pixel-perfect Figma designs deserve identical precision in production.",
+    },
+    {
+      id: 3,
+      badge: "04. IMPACT",
+      promptLabel: "WHAT DO YOU BRING TO US?",
+      question: "WHAT I BRING TO YOUR TEAM:",
+      answer: "The power of two roles in one — fluent Figma systems, branding, and frontend code that speaks directly to developers.",
+    },
+  ],
+  1: [
+    {
+      id: 0,
+      badge: "01. CODE RIGOR",
+      promptLabel: "HOW DO YOU WRITE CODE?",
+      question: "ENGINEERING RIGOR:",
+      answer: "Semantic, accessible HTML, modular Next.js architectures, strict TypeScript, and zero bloat.",
+    },
+    {
+      id: 1,
+      badge: "02. DEV HANDOFF",
+      promptLabel: "HOW DO YOU BRIDGE FIGMA?",
+      question: "BRIDGING FIGMA TO CODE:",
+      answer: "Design tokens match code 1:1 — zero guessing spacing, components, or interactive states.",
+    },
+    {
+      id: 2,
+      badge: "03. ARCHITECTURE",
+      promptLabel: "HOW DO YOU HANDLE COMPLEXITY?",
+      question: "SYSTEMS ARCHITECTURE:",
+      answer: "I isolate root edge cases, optimize render cycles, and build resilient UI state machines.",
+    },
+    {
+      id: 3,
+      badge: "04. TECH STACK",
+      promptLabel: "WHAT IS YOUR CORE STACK?",
+      question: "PRODUCTION TOOLBOX:",
+      answer: "Next.js App Router, Tailwind CSS, TypeScript, Supabase, Framer Motion, and Web APIs.",
+    },
+  ],
+  2: [
+    {
+      id: 0,
+      badge: "01. CRAFT",
+      promptLabel: "WHAT IS YOUR DESIGN PROCESS?",
+      question: "DESIGN CRAFT & RHYTHM:",
+      answer: "Systematic Figma auto-layout libraries, obsessive typographic hierarchy, and intuitive mental models.",
+    },
+    {
+      id: 1,
+      badge: "02. USER PSYCHOLOGY",
+      promptLabel: "HOW DO YOU SOLVE FRICTION?",
+      question: "USER PSYCHOLOGY:",
+      answer: "I study micro-moments of hesitation and remove cognitive clutter until interfaces feel effortless.",
+    },
+    {
+      id: 2,
+      badge: "03. DESIGN SYSTEMS",
+      promptLabel: "HOW DO YOU SCALE DESIGN?",
+      question: "SCALING DESIGN SYSTEMS:",
+      answer: "Atomic component hierarchies, strict semantic tokens, and production parity with code.",
+    },
+    {
+      id: 3,
+      badge: "04. MOTION",
+      promptLabel: "HOW DO YOU USE ANIMATION?",
+      question: "INTERACTION & MOTION:",
+      answer: "Subtle, physics-grounded choreography that guides spatial orientation without slowing down work.",
+    },
+  ],
+};
+
 export default function HeroV2() {
   const lenis = useLenis();
 
-  // 3 Targeted Personas for recruiters, eng leads, and design leaders
-  const personas = [
-    { id: "hiring", label: "HIRING MANAGER", shortLabel: "RECRUITER" },
-    { id: "eng", label: "ENG LEAD", shortLabel: "ENG LEAD" },
-    { id: "design", label: "DESIGN LEAD", shortLabel: "DESIGN LEAD" },
-  ];
-
-  const personaPrompts = {
-    0: [
-      {
-        id: 0,
-        badge: "01. CORE",
-        promptLabel: "WHAT DO YOU DO?",
-        question: "WHAT I DO:",
-        answer: "I craft experiences people feel — then write the code to ship them.",
-      },
-      {
-        id: 1,
-        badge: "02. PROBLEM SOLVING",
-        promptLabel: "HOW DO YOU HANDLE FRICTION?",
-        question: "HOW I TACKLE PROBLEMS:",
-        answer: "I find the root friction, untangle messy workflows, and make things simple.",
-      },
-      {
-        id: 2,
-        badge: "03. HYBRID ROLE",
-        promptLabel: "WHY DESIGN & CODE BOTH?",
-        question: "WHY DESIGN AND CODE?",
-        answer: "Because pixel-perfect Figma designs deserve identical precision in production.",
-      },
-      {
-        id: 3,
-        badge: "04. IMPACT",
-        promptLabel: "WHAT DO YOU BRING TO US?",
-        question: "WHAT I BRING TO YOUR TEAM:",
-        answer: "The power of two roles in one — fluent Figma systems, branding, and frontend code that speaks directly to developers.",
-      },
-    ],
-    1: [
-      {
-        id: 0,
-        badge: "01. CODE RIGOR",
-        promptLabel: "HOW DO YOU WRITE CODE?",
-        question: "ENGINEERING RIGOR:",
-        answer: "Semantic, accessible HTML, modular Next.js architectures, strict TypeScript, and zero bloat.",
-      },
-      {
-        id: 1,
-        badge: "02. DEV HANDOFF",
-        promptLabel: "HOW DO YOU BRIDGE FIGMA?",
-        question: "BRIDGING FIGMA TO CODE:",
-        answer: "Design tokens match code 1:1 — zero guessing spacing, components, or interactive states.",
-      },
-      {
-        id: 2,
-        badge: "03. ARCHITECTURE",
-        promptLabel: "HOW DO YOU HANDLE COMPLEXITY?",
-        question: "SYSTEMS ARCHITECTURE:",
-        answer: "I isolate root edge cases, optimize render cycles, and build resilient UI state machines.",
-      },
-      {
-        id: 3,
-        badge: "04. TECH STACK",
-        promptLabel: "WHAT IS YOUR CORE STACK?",
-        question: "PRODUCTION TOOLBOX:",
-        answer: "Next.js App Router, Tailwind CSS, TypeScript, Supabase, Framer Motion, and Web APIs.",
-      },
-    ],
-    2: [
-      {
-        id: 0,
-        badge: "01. CRAFT",
-        promptLabel: "WHAT IS YOUR DESIGN PROCESS?",
-        question: "DESIGN CRAFT & RHYTHM:",
-        answer: "Systematic Figma auto-layout libraries, obsessive typographic hierarchy, and intuitive mental models.",
-      },
-      {
-        id: 1,
-        badge: "02. USER PSYCHOLOGY",
-        promptLabel: "HOW DO YOU SOLVE FRICTION?",
-        question: "USER PSYCHOLOGY:",
-        answer: "I study micro-moments of hesitation and remove cognitive clutter until interfaces feel effortless.",
-      },
-      {
-        id: 2,
-        badge: "03. DESIGN SYSTEMS",
-        promptLabel: "HOW DO YOU SCALE DESIGN?",
-        question: "SCALING DESIGN SYSTEMS:",
-        answer: "Atomic component hierarchies, strict semantic tokens, and production parity with code.",
-      },
-      {
-        id: 3,
-        badge: "04. MOTION",
-        promptLabel: "HOW DO YOU USE ANIMATION?",
-        question: "INTERACTION & MOTION:",
-        answer: "Subtle, physics-grounded choreography that guides spatial orientation without slowing down work.",
-      },
-    ],
-  };
-
   const [activePersona, setActivePersona] = useState(0);
-  const activePrompts = personaPrompts[activePersona as keyof typeof personaPrompts] || personaPrompts[0];
+  const activePrompts = PERSONA_PROMPTS[activePersona as keyof typeof PERSONA_PROMPTS] || PERSONA_PROMPTS[0];
   const [activePrompt, setActivePrompt] = useState(0);
   const [displayedAnswer, setDisplayedAnswer] = useState(activePrompts[0].answer);
   const [isFading, setIsFading] = useState(false);
   const [currentTime, setCurrentTime] = useState("");
+  const isFirstMountRef = useRef(true);
 
   // Live IST Clock
   useEffect(() => {
@@ -151,6 +151,12 @@ export default function HeroV2() {
 
   // Buttery-smooth, flicker-free typewriter effect
   useEffect(() => {
+    // Keep initial pre-rendered answer immediately visible on first paint
+    if (isFirstMountRef.current) {
+      isFirstMountRef.current = false;
+      return;
+    }
+
     let typeInterval: NodeJS.Timeout | null = null;
     let startTimeout: NodeJS.Timeout | null = null;
     let fadeTimeout: NodeJS.Timeout | null = null;
@@ -160,7 +166,8 @@ export default function HeroV2() {
       setDisplayedAnswer("");
       setIsFading(false);
 
-      const fullAnswer = activePrompts[activePrompt]?.answer || "";
+      const targetPrompt = PERSONA_PROMPTS[activePersona as keyof typeof PERSONA_PROMPTS]?.[activePrompt] || PERSONA_PROMPTS[0][0];
+      const fullAnswer = targetPrompt.answer || "";
       let charIndex = 0;
 
       startTimeout = setTimeout(() => {
@@ -171,16 +178,16 @@ export default function HeroV2() {
           if (charIndex >= fullAnswer.length) {
             if (typeInterval) clearInterval(typeInterval);
           }
-        }, 24);
-      }, 50);
-    }, 120);
+        }, 18);
+      }, 40);
+    }, 100);
 
     return () => {
       if (fadeTimeout) clearTimeout(fadeTimeout);
       if (startTimeout) clearTimeout(startTimeout);
       if (typeInterval) clearInterval(typeInterval);
     };
-  }, [activePersona, activePrompt, activePrompts]);
+  }, [activePersona, activePrompt]);
 
   return (
     <section className="w-full bg-[#F4F4F0] border-b-2 border-black px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -206,7 +213,7 @@ export default function HeroV2() {
                     VIEW FOR:
                   </span>
                   <div className="inline-flex items-center p-0.5 bg-zinc-100 border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] gap-1">
-                    {personas.map((persona, pIdx) => {
+                    {PERSONAS.map((persona, pIdx) => {
                       const isSelected = activePersona === pIdx;
                       return (
                         <button

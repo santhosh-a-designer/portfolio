@@ -61,7 +61,18 @@ export default function LenisProvider({ children }: Props) {
     if (typeof window === "undefined") return;
 
     // If navigating to an in-page anchor hash (e.g. /#work), let hash scroll handler take over
-    if (window.location.hash) return;
+    try {
+      if (
+        window.location.hash ||
+        sessionStorage.getItem("portfolio:scrollToWork") === "1" ||
+        sessionStorage.getItem("portfolio:scrollToWorks") === "1" ||
+        sessionStorage.getItem("portfolio:scrollToSnippets") === "1"
+      ) {
+        return;
+      }
+    } catch {
+      /* ignore storage errors */
+    }
 
     if (lenis) {
       lenis.scrollTo(0, { immediate: true, force: true });

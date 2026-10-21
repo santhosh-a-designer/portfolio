@@ -87,6 +87,13 @@ export default function VidyasKitchenCaseStudyView({
       >
         <Link
           href="/#work"
+          onClick={() => {
+            try {
+              sessionStorage.setItem("portfolio:scrollToWork", "1");
+            } catch {
+              /* */
+            }
+          }}
           className="inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group"
         >
           <ArrowLeft weight="bold" className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />

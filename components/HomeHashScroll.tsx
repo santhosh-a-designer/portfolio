@@ -6,6 +6,7 @@ import { useLenis } from "@/components/LenisProvider";
 import {
   SCROLL_TO_SNIPPETS_STORAGE_KEY,
   SCROLL_TO_WORKS_STORAGE_KEY,
+  SCROLL_TO_WORK_STORAGE_KEY,
 } from "@/lib/scrollToWorks";
 import { scrollToWorksSection } from "@/lib/scrollToWorksSection";
 
@@ -108,14 +109,12 @@ export default function HomeHashScroll() {
         scheduleScroll(scrollToWorks);
         return;
       }
-      // Note: Do NOT auto-scroll to #work on initial page load/refresh.
-      // Clean up #work hash so refreshing the page always stays at the top of the hero.
-      if (window.location.hash === "#work") {
-        try {
-          history.replaceState(null, "", window.location.pathname + window.location.search);
-        } catch {
-          /* */
-        }
+      if (
+        window.location.hash === "#work" ||
+        consumeStorageFlag(SCROLL_TO_WORK_STORAGE_KEY)
+      ) {
+        scheduleScroll(() => scrollToWorkSection(lenis));
+        return;
       }
     };
 
