@@ -43,7 +43,7 @@ const timeline = [
   },
   {
     year: "May 2024 – Sep 2025",
-    role: "UX Designer",
+    role: "Senior UX/UI Designer",
     company: "Parla Retail (UK)",
     color: "#E06010",
     expertise: ["Cross-cultural UX", "Enterprise Dashboards", "CTA Workflows", "Figma"],
@@ -55,7 +55,7 @@ const timeline = [
   {
     year: "Oct 2022 – Feb 2024",
     role: "Lead UX Designer",
-    company: "Intellemo",
+    company: "Intellemo (Gurugram, India)",
     color: "#B04C0A",
     expertise: ["Product Strategy", "Conversion Optimization", "SaaS UX", "Figma"],
     learned: ["Lifted engagement through UI architecture revamp", "Improved monetization communication with subscription UX", "Scaled adoption with usability-first redesigns"],

@@ -29,7 +29,7 @@ const experiences: ExperienceItem[] = [
     isCurrent: true,
     description: "Co-founded and led a team of 5 (3 interns, 1 client-acquisition consultant); owned product design, UX and frontend engineering.",
     highlights: [
-      "Vidya's Kitchen: Designed & shipped Sivakasi's first food ordering PWA and automated kitchen ops with 0% marketplace commission",
+      "Vidya's Kitchen: Designed & shipped Sivakasi's first food ordering PWA and automated kitchen ops with 0% marketplace commission vs. delivery-app fees",
       "We Two Pets: Architected editorial pet platform (wetwopets.com) with autonomous AI gap engine & human verification",
       "iRasus & IndiaOne ATM: Built EV pack telemetry and dual-role rural ATM replenishment apps reducing downtime",
     ],
@@ -37,7 +37,7 @@ const experiences: ExperienceItem[] = [
   },
   {
     num: "02",
-    role: "PRODUCT UX DESIGNER",
+    role: "SENIOR UX/UI DESIGNER",
     company: "PARLA RETAIL",
     period: "2024 – 2025",
     location: "CHENNAI, INDIA (UK HQ)",
@@ -54,12 +54,12 @@ const experiences: ExperienceItem[] = [
     role: "LEAD UX DESIGNER",
     company: "INTELLEMO",
     period: "2022 – 2024",
-    location: "CHENNAI, INDIA",
-    description: "Spearheaded design and UI architecture for SaaS marketing automation tools, increasing activation and user retention.",
+    location: "GURUGRAM, INDIA",
+    description: "Spearheaded design and UI architecture for SaaS marketing automation tools.",
     highlights: [
-      "Redesigned SaaS navigation architecture and campaign generation wizard",
+      "Led UI architecture overhaul of SaaS marketing automation workflows",
       "Scaled app downloads from 1K to 10K+ through usability and onboarding redesign",
-      "Improved subscription and checkout conversion by 26%",
+      "Restructured monetization & subscription UX with transparent billing and clear value communication to improve subscription conversion",
     ],
     skills: ["SaaS Design", "Conversion (CRO)", "Information Architecture", "Prototyping", "A/B Testing"],
   },
@@ -71,7 +71,7 @@ const experiences: ExperienceItem[] = [
     location: "CHENNAI, INDIA",
     description: "Led design and early web development for a growing agency — shipped a social networking app and won a competitive government digital project.",
     highlights: [
-      "Won a Tamil Nadu government project, boosting company opportunities by 30%",
+      "Won a competitive Tamil Nadu Government digital project (Vandaloor Zoo)",
       "Designed and shipped DRMURS, a social networking & goal-achieving app",
       "Reduced project delivery time by 25% as team lead",
     ],

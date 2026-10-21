@@ -245,7 +245,7 @@ export const caseStudies: CaseStudy[] = [
     summary:
       "A CTA-led assisted selling system that connects ecommerce shoppers with store sales teams for booking, video consultation, and in-call checkout.",
     toolsAndLanguages: "Figma",
-    role: "UX Designer",
+    role: "Senior UX/UI Designer",
     situation:
       "Store owners needed a stronger way to convert website visitors who needed product guidance before making a purchase.",
     task:
