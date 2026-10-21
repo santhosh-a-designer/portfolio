@@ -4,6 +4,9 @@ import { Resend } from "resend";
 type ContactPayload = {
   name?: string;
   email?: string;
+  company?: string;
+  roleLink?: string;
+  message?: string;
   project?: string;
 };
 
@@ -16,17 +19,19 @@ export async function POST(request: Request) {
     const payload = (await request.json()) as ContactPayload;
     const name = payload.name?.trim() ?? "";
     const email = payload.email?.trim() ?? "";
-    const project = payload.project?.trim() ?? "";
+    const company = payload.company?.trim() ?? "";
+    const roleLink = payload.roleLink?.trim() ?? "";
+    const message = (payload.message || payload.project)?.trim() ?? "";
 
-    if (!name || !email || !project) {
-      return NextResponse.json({ error: "Please fill all fields before sending." }, { status: 400 });
+    if (!name || !email || !message) {
+      return NextResponse.json({ error: "Please fill all required fields before sending." }, { status: 400 });
     }
     if (!isValidEmail(email)) {
       return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
-    if (project.length < 12) {
+    if (message.length < 10) {
       return NextResponse.json(
-        { error: "Project brief is too short. Add a bit more detail so I can help better." },
+        { error: "Message is too short. Please add a bit more context so I can respond effectively." },
         { status: 400 }
       );
     }
@@ -47,14 +52,16 @@ export async function POST(request: Request) {
       from,
       to,
       replyTo: email,
-      subject: `Portfolio enquiry from ${name}`,
+      subject: `Role Enquiry from ${name}${company ? ` (${company})` : ""}`,
       html: `
         <div style="font-family: Inter, Arial, sans-serif; line-height: 1.55; color: #0f172a;">
-          <h2 style="margin: 0 0 10px;">New Portfolio Brief</h2>
+          <h2 style="margin: 0 0 10px;">New Role Enquiry</h2>
           <p style="margin: 0 0 8px;"><strong>Name:</strong> ${name}</p>
           <p style="margin: 0 0 8px;"><strong>Email:</strong> ${email}</p>
-          <p style="margin: 14px 0 6px;"><strong>Project Brief:</strong></p>
-          <p style="white-space: pre-wrap; margin: 0;">${project}</p>
+          ${company ? `<p style="margin: 0 0 8px;"><strong>Company:</strong> ${company}</p>` : ""}
+          ${roleLink ? `<p style="margin: 0 0 8px;"><strong>Role / JD Link:</strong> <a href="${roleLink}">${roleLink}</a></p>` : ""}
+          <p style="margin: 14px 0 6px;"><strong>Message:</strong></p>
+          <p style="white-space: pre-wrap; margin: 0;">${message}</p>
         </div>
       `,
     });

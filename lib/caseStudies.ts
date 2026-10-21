@@ -35,6 +35,7 @@ export type CaseStudy = {
       videos: Array<{
         label: string;
         caption: string;
+        description?: string;
         src: string;
       }>;
     };
@@ -280,13 +281,17 @@ export const caseStudies: CaseStudy[] = [
           "We introduced Show Preview mode before live meetings to reduce call uncertainty. Customers can quickly understand what they are about to join, while sales agents can validate setup quality in advance. This lowers awkward starts, improves trust before connecting, and makes the first minute of the call conversion-focused instead of orientation-focused.",
         videos: [
           {
-            label: "Video 01",
+            label: "VIDEO 01",
             caption: "CTA integrated inside merchant shoe-store website",
+            description:
+              "Discreet floating trigger lets shoppers launch instant 1-on-1 consultations or reserve appointments directly from product pages without disrupting their active browsing experience.",
             src: "/case-studies/parla/CTA-1.mp4",
           },
           {
-            label: "Video 02",
+            label: "VIDEO 02",
             caption: "New Show Preview mode inside CTA video-call flow",
+            description:
+              "Pre-call readiness interface allows customers to test camera and microphone settings while previewing associate availability, removing hesitation before connecting live.",
             src: "/case-studies/parla/CTA-2.mp4",
           },
         ],
@@ -432,9 +437,9 @@ export const caseStudies: CaseStudy[] = [
           { name: "Danger red", hex: "#EF4444", use: "End Conversation button, urgent time alerts" },
         ],
         type: [
-          { role: "Dashboard headings / nav", family: "Inter", note: "Consistent clean weight — Appointments, Calls, CRM, Orders, Messages" },
-          { role: "Metric values / data", family: "Inter semibold", note: "241 calls, $22.4k — tabular weight for quick scanning" },
-          { role: "Status chips", family: "Inter medium", note: "In Progress · Scheduled · Waiting · Ended — short, high-contrast labels" },
+          { role: "Dashboard headings / nav", family: "Montserrat", note: "Consistent clean weight — Appointments, Calls, CRM, Orders, Messages" },
+          { role: "Metric values / data", family: "Montserrat semibold", note: "241 calls, $22.4k — tabular weight for quick scanning" },
+          { role: "Status chips", family: "Montserrat medium", note: "In Progress · Scheduled · Waiting · Ended — short, high-contrast labels" },
         ],
         components: [
           "Metric summary card", "Create Appointment card", "Show & Sell launch card", "Conversation list row", "Chat message thread", "CRM customer panel", "Store toggle row", "Performance tracker donut", "Status badge", "End Conversation button",

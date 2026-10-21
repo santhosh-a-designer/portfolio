@@ -42,12 +42,12 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Simon Santhosh — UX Designer & Design Engineer",
+  title: "Santhosh A — Design Engineer | UX + Next.js",
   description:
-    "6+ years crafting intuitive digital experiences. UX Designer, Mentor, and Design Engineer based in Chennai, India.",
-  keywords: ["UX Designer", "Design Engineer", "Product Design", "Chennai", "Simon Santhosh"],
+    "Design Engineer & UX Specialist based in Chennai, India. 6+ years shipping intuitive digital products, scalable Next.js systems, and validated Figma design systems.",
+  keywords: ["Santhosh A", "Design Engineer", "UX Designer", "Next.js", "Product Design", "Chennai", "Frontend Engineer"],
   openGraph: {
-    title: "Simon Santhosh — UX Designer & Design Engineer",
+    title: "Santhosh A — Design Engineer | UX + Next.js",
     description: "Designing experiences that move people. 6+ years in UX, Design Systems, Front-end Engineering.",
     type: "website",
     url: siteUrl,
@@ -59,6 +59,22 @@ export const metadata: Metadata = {
 
 import LenisProvider from "@/components/LenisProvider";
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Santhosh A",
+  jobTitle: "Design Engineer",
+  url: siteUrl,
+  sameAs: ["https://linkedin.com/in/santhosh-designer"],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Chennai",
+    addressCountry: "India",
+  },
+  description:
+    "Design Engineer & UX Specialist based in Chennai, India. 6+ years shipping intuitive digital products, scalable Next.js systems, and validated Figma design systems.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -66,6 +82,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${spaceGrotesk.variable} ${poppins.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${silkscreen.variable} antialiased noise`}>
         <LenisProvider>
           {children}

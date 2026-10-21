@@ -9,9 +9,9 @@ import ScrollFocusWrapper from "@/components/ScrollFocusWrapper";
 import HomeHashScroll from "@/components/HomeHashScroll";
 
 export const metadata: Metadata = {
-  title: "Simon Santhosh — UX Designer & Design Engineer",
+  title: "Santhosh A — Design Engineer | UX + Next.js",
   description:
-    "6+ years crafting intuitive digital experiences. UX Designer, Mentor, and Design Engineer based in Chennai, India.",
+    "Design Engineer & UX Specialist based in Chennai, India. 6+ years crafting intuitive digital experiences, Next.js applications, and design systems.",
 };
 
 export default function Home() {

@@ -12,6 +12,8 @@ export interface ProjectItem {
   title: string;
   category: string;
   badge?: string;
+  isFlagship?: boolean;
+  results?: { label: string; value: string }[];
   href: string;
   liveUrl?: string;
   isHighlight?: boolean;
@@ -508,7 +510,9 @@ function WindowCard({
     >
       <motion.div
         style={{ filter: isMobile ? "none" : cardFilter }}
-        className="w-full h-auto lg:h-[530px] flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative z-10 transition-[filter] duration-200"
+        className={`w-full h-auto ${
+          isVidyasKitchen ? "lg:h-[610px]" : "lg:h-[530px]"
+        } flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative z-10 transition-[filter] duration-200`}
       >
         {/* ─── Browser / Window Titlebar Header ─── */}
         <div className="h-[38px] sm:h-[42px] shrink-0 px-2.5 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none gap-2">
@@ -526,9 +530,16 @@ function WindowCard({
 
           {/* Right side: Category badge (on larger screens) + Action link */}
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-            <div className="hidden sm:inline-block px-2.5 py-0.5 bg-black text-[#FAED00] font-black text-[9px] uppercase tracking-widest border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-              {item.badge || item.category}
-            </div>
+            {isVidyasKitchen ? (
+              <div className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#FF462D] text-white font-black text-[9.5px] uppercase tracking-widest border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                <span className="w-1.5 h-1.5 bg-[#FAED00] inline-block" />
+                FLAGSHIP
+              </div>
+            ) : (
+              <div className="hidden sm:inline-block px-2.5 py-0.5 bg-black text-[#FAED00] font-black text-[9px] uppercase tracking-widest border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                {item.badge || item.category}
+              </div>
+            )}
 
             <div className="flex items-center gap-1.5 text-[9.5px] sm:text-[10px]">
               {item.liveUrl && (
@@ -556,6 +567,14 @@ function WindowCard({
           {/* Left: Big Monospace Number & Details */}
           <div className="lg:col-span-5 p-4 sm:p-6 lg:p-7 flex flex-col justify-between h-full min-h-0 border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white overflow-y-auto">
             <div>
+              {/* Flagship Indicator Badge */}
+              {isVidyasKitchen && (
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 mb-2 bg-[#FF462D] text-white font-mono font-black text-[9px] uppercase tracking-wider border border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] self-start">
+                  <span>★</span>
+                  <span>FLAGSHIP CASE STUDY</span>
+                </div>
+              )}
+
               {/* Monospace Project Index */}
               <div className="flex items-baseline justify-between mb-1 sm:mb-2 font-mono">
                 <span className="text-4xl min-[360px]:text-5xl sm:text-6xl font-black tracking-tighter leading-none text-black select-none">
@@ -575,9 +594,34 @@ function WindowCard({
               </p>
 
               {/* Description */}
-              <p className="text-xs sm:text-sm font-sans text-zinc-700 leading-relaxed uppercase mb-3.5 sm:mb-5 font-semibold">
+              <p className="text-xs sm:text-sm font-sans text-zinc-700 leading-relaxed uppercase mb-3.5 sm:mb-4 font-semibold">
                 {item.description}
               </p>
+
+              {/* Results Block (Verified Impact Metrics) */}
+              {item.results && item.results.length > 0 && (
+                <div className="my-3 p-2.5 sm:p-3 bg-[#FAED00]/25 border-2 border-black shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="flex items-center justify-between mb-2 font-mono">
+                    <span className="text-[9px] sm:text-[9.5px] font-black uppercase tracking-wider text-black flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse" />
+                      RESULTS &amp; VERIFIED IMPACT
+                    </span>
+                    <span className="text-[8px] font-mono font-bold text-zinc-500 uppercase tracking-widest">[PROD]</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-1.5 font-mono text-center">
+                    {item.results.map((res) => (
+                      <div key={res.label} className="bg-white p-1.5 sm:p-2 border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)]">
+                        <div className="text-[11px] sm:text-xs font-black text-[#FF462D] tracking-tight truncate">
+                          {res.value}
+                        </div>
+                        <div className="text-[7.5px] sm:text-[8px] text-zinc-700 font-black uppercase tracking-wider mt-0.5 leading-tight">
+                          {res.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Tech Stack Chips */}
               {item.techStack && (

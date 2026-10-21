@@ -19,9 +19,11 @@ function hasPdftoppm() {
 
 function countPages(buffer) {
   const text = buffer.toString("latin1");
-  const m = text.match(/\/Type\s*\/Pages[\s\S]*?\/Count\s+(\d+)/);
-  if (m) return Number(m[1]);
-  return (text.match(/\/Type\s*\/Page\b/g) || []).length || null;
+  const pageMatches = text.match(/\/Type\s*\/Page\b/g);
+  if (pageMatches && pageMatches.length > 0) return pageMatches.length;
+  const countMatches = [...text.matchAll(/\/Type\s*\/Pages[\s\S]*?\/Count\s+(\d+)/g)].map((m) => Number(m[1]));
+  if (countMatches.length > 0) return Math.max(...countMatches);
+  return null;
 }
 
 if (!fs.existsSync(PDF)) {

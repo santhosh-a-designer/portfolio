@@ -27,8 +27,9 @@ const experiences: ExperienceItem[] = [
     location: "GLOBAL / REMOTE",
     isHighlight: true,
     isCurrent: true,
-    description: "Leading 0-to-1 product design, user research, and AI-accelerated frontend engineering across hyper-local food tech, pet commerce, and enterprise IoT systems.",
+    description: "Co-founded and led a team of 5 (3 interns, 1 client-acquisition consultant); owned product design, UX and frontend engineering.",
     highlights: [
+      "Co-founded and led a team of 5 (3 interns, 1 client-acquisition consultant); owned product design, UX and frontend engineering.",
       "Vidya's Kitchen: Designed & shipped Sivakasi's first food ordering PWA and kitchen ops with zero order drop-offs",
       "We Two Pets: Architected editorial pet platform (wetwopets.com) with autonomous AI gap engine & human verification",
       "iRasus & IndiaOne ATM: Built EV pack telemetry and dual-role rural ATM replenishment apps reducing downtime",

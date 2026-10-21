@@ -811,17 +811,17 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   if (!study) notFound();
 
+  const { prev, next } = getCaseStudyNeighbors(slug);
+
   if (slug === "parla-show-and-sell") {
     return (
       <div className="relative min-h-screen bg-[#F4F4F0] font-sans text-black antialiased">
         <CaseStudyScrollToTop />
         <HeaderV2 />
-        <ParlaCaseStudyView study={study} />
+        <ParlaCaseStudyView study={study} prev={prev} next={next} />
       </div>
     );
   }
-
-  const { prev, next } = getCaseStudyNeighbors(slug);
 
   const mainClass = "min-h-screen blueprint-page text-[#e8edf2]";
 

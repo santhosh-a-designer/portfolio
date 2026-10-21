@@ -61,10 +61,10 @@ export default function VidyasDesignSystemModal({
   }, []);
 
   useEffect(() => {
-    if (initialSurfaceId) {
-      setSurfaceId(initialSurfaceId);
+    if (isOpen) {
+      setSurfaceId(initialSurfaceId || "landing");
     }
-  }, [initialSurfaceId]);
+  }, [isOpen, initialSurfaceId]);
 
   // Freeze background scroll
   useEffect(() => {

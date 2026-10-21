@@ -137,10 +137,10 @@ export default function Navigation() {
             className="w-7 h-7 flex items-center justify-center text-[9px] font-bold font-mono group-hover:shadow-[0_0_14px_#FF7410] transition-all duration-300"
             style={{ border: "1px solid rgba(255,116,16,0.55)", color: "#FF7410", background: "rgba(255,116,16,0.06)" }}
           >
-            SS
+            SA
           </div>
           <span className="text-sm font-semibold text-white/75 group-hover:text-white transition-colors hidden sm:block">
-            Simon Santhosh
+            Santhosh A
           </span>
         </a>
 

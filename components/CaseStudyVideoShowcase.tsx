@@ -5,6 +5,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties }
 type VideoItem = {
   label: string;
   caption: string;
+  description?: string;
   src: string;
 };
 

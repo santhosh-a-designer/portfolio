@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     canonical: `${getSiteUrl()}${path}`,
   },
   openGraph: {
-    title: "UX UI Shorts | Simon Santhosh",
+    title: "UX UI Shorts | Santhosh A",
     description: "IR Stunner, iRasus, and IndiaOne ATM — case-study-style shorts.",
     url: `${getSiteUrl()}${path}`,
   },

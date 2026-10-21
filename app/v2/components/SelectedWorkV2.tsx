@@ -45,12 +45,18 @@ export default function SelectedWorkV2() {
       num: "01",
       title: "VIDYA'S KITCHEN",
       category: "ZERO TO LIVE",
-      badge: "PWA / DASHBOARD / WHATSAPP BOT",
+      badge: "★ FLAGSHIP · PWA / OPS / BOT",
+      isFlagship: true,
       href: "/case-studies/vidyas-kitchen-pwa",
       liveUrl: "https://www.vidyaskitchenhome.com/",
       isHighlight: true,
       image: "/case-studies/vidyas-kitchen/VK_Clean.webp",
       mockupType: "forma",
+      results: [
+        { label: "ORDERS", value: "[ORDERS]" },
+        { label: "REPEAT RATE", value: "[REPEAT RATE]" },
+        { label: "FEES SAVED", value: "[FEES SAVED]" },
+      ],
       techStack: ["Next.js", "TypeScript", "Tailwind", "Supabase", "Razorpay", "WhatsApp API"],
       description: (
         <>

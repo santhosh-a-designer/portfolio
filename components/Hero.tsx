@@ -294,8 +294,8 @@ export default function Hero() {
           custom={1} variants={fadeUp} initial="hidden" animate="show"
           className="font-title text-5xl sm:text-6xl lg:text-[5.5rem] font-black tracking-tight text-white mb-5 leading-[1.05]"
         >
-          Simon{" "}
-          <span className="neon-text">Santhosh</span>
+          Santhosh{" "}
+          <span className="neon-text">A</span>
         </motion.h1>
 
         {/* Roles */}

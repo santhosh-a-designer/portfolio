@@ -16,6 +16,7 @@ import KitchenOpsSection from "./KitchenOpsSection";
 import DesignSystemSection from "./DesignSystemSection";
 import ChallengeWindowStack from "./ChallengeWindowStack";
 import ScrollReveal from "./ScrollReveal";
+import CaseStudyFooterNav from "@/components/CaseStudyFooterNav";
 import type { DesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
 import {
   vidyasArchitectureTree,
@@ -129,6 +130,31 @@ export default function VidyasKitchenCaseStudyView({
                 <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
                   <HighlightText text={vidyasSnapshot.solution} />
                 </p>
+              </div>
+            </motion.div>
+
+            {/* Results Block */}
+            <motion.div variants={heroItem} className="max-w-4xl mx-auto w-full p-3 sm:p-4 bg-[#FAED00]/25 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
+              <div className="flex items-center justify-between mb-2 font-mono">
+                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#00C16A] animate-pulse" />
+                  KEY RESULTS &amp; PRODUCTION METRICS
+                </span>
+                <span className="text-[9px] font-mono font-bold text-zinc-600 uppercase tracking-widest">[FLAGSHIP PROD]</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-center">
+                <div className="bg-white p-3 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="text-base sm:text-lg font-black text-[#FF462D]">[ORDERS]</div>
+                  <div className="text-[9px] text-zinc-700 font-black uppercase tracking-wider mt-0.5">ORDERS SHIPPED</div>
+                </div>
+                <div className="bg-white p-3 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="text-base sm:text-lg font-black text-black">[REPEAT RATE]</div>
+                  <div className="text-[9px] text-zinc-700 font-black uppercase tracking-wider mt-0.5">REPEAT RETENTION</div>
+                </div>
+                <div className="bg-white p-3 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <div className="text-base sm:text-lg font-black text-[#00C16A]">[FEES SAVED]</div>
+                  <div className="text-[9px] text-zinc-700 font-black uppercase tracking-wider mt-0.5">MARKETPLACE FEES SAVED</div>
+                </div>
               </div>
             </motion.div>
 
@@ -310,21 +336,22 @@ export default function VidyasKitchenCaseStudyView({
         </SectionWindow>
       </ScrollReveal>
 
-      <ScrollReveal>
-        <footer className="bg-black text-white p-6 sm:p-8 border-2 border-black flex flex-col sm:flex-row justify-between gap-4 font-mono">
-          <div>
-            <p className="text-xs uppercase tracking-widest text-[#FAED00] font-black mb-1">Vidya&apos;s Kitchen</p>
-            <p className="text-sm font-bold">Designed &amp; developed by Simon Santhosh</p>
-            <p className="text-xs text-zinc-400">{vidyasTimeline.label}</p>
-          </div>
-          <Link
-            href="/#work"
-            className="px-5 py-2.5 bg-[#FAED00] text-black text-xs font-black uppercase border-2 border-white hover:bg-white transition-colors text-center"
-          >
-            Back to work ↑
-          </Link>
-        </footer>
-      </ScrollReveal>
+      <CaseStudyFooterNav
+        currentTitle="Vidya's Kitchen · Real-Time Home Food Delivery PWA"
+        currentSubtitle="Designed & Engineered by Santhosh A · Sivakasi's First Cloud Kitchen Ordering System"
+        prev={{
+          company: "We Two Pets · India",
+          project: "We Two Pets Commerce",
+          summary: "An Indian D2C store for international dog & cat gear, powered by an autonomous AI sourcing engine and 2-human approval desk.",
+          href: "/case-studies/we-two-pets",
+        }}
+        next={{
+          company: "Parla Retail · Video Commerce",
+          project: "Show & Sell Assisted Selling",
+          summary: "Bridging retail e-commerce and instant human trust via 1-click scheduling, video consultation, and in-call checkout.",
+          href: "/case-studies/parla-show-and-sell",
+        }}
+      />
     </main>
   );
 }

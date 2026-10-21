@@ -22,6 +22,7 @@ const timeline = [
       "Multimodal Agent Workflows",
     ],
     learned: [
+      "Co-founded and led a team of 5 (3 interns, 1 client-acquisition consultant); owned product design, UX and frontend engineering.",
       "Leading 0-to-1 product design, user research, and autonomous AI agent interaction models",
       "Designing multi-agent workflows, human-in-the-loop interfaces, and complex web ecosystems",
       "Bridging high-level UX strategy with production-ready design systems and frontend code",

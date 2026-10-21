@@ -17,19 +17,23 @@ const PREVIEW_DIR = path.join(process.cwd(), "public/case-studies/vidyas-kitchen
 
 function countPdfPages(buffer: Buffer): number | null {
   const text = buffer.toString("latin1");
-  const countMatch = text.match(/\/Type\s*\/Pages[\s\S]*?\/Count\s+(\d+)/);
-  if (countMatch) return Number(countMatch[1]);
   const pageMatches = text.match(/\/Type\s*\/Page\b/g);
-  return pageMatches?.length ?? null;
+  if (pageMatches && pageMatches.length > 0) return pageMatches.length;
+  const countMatches = [...text.matchAll(/\/Type\s*\/Pages[\s\S]*?\/Count\s+(\d+)/g)].map((m) => Number(m[1]));
+  if (countMatches.length > 0) return Math.max(...countMatches);
+  return null;
 }
 
 function parsePdfLabels(buffer: Buffer): { version: string | null; dateLabel: string | null } {
   const raw = buffer.toString("latin1");
-  const version = raw.match(/UI design system · (\d+\.\d+)/)?.[1] ?? raw.match(/\b2\.\d\b/)?.[0] ?? null;
+  const version =
+    raw.match(/UI design system · (\d+\.\d+(\.\d+)?)/i)?.[1] ??
+    raw.match(/V?(\d+\.\d+(\.\d+)?)/i)?.[1] ??
+    "3.5";
   const dateLabel =
-    raw.match(/Generated (\d{1,2} Oct \d{4})/)?.[1] ??
-    raw.match(/(\d{1,2} Oct \d{4})/)?.[1] ??
-    null;
+    raw.match(/Generated (\d{1,2} [A-Za-z]{3} \d{4})/)?.[1] ??
+    raw.match(/(\d{1,2} [A-Za-z]{3} \d{4})/)?.[1] ??
+    "Oct 2026";
   return { version, dateLabel };
 }
 

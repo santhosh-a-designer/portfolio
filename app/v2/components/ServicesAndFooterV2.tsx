@@ -13,9 +13,12 @@ import {
   PaperPlaneRight,
   WarningCircle,
   LinkedinLogo,
+  FileText,
+  DownloadSimple,
 } from "@phosphor-icons/react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import ScrollFocusWrapper from "@/components/ScrollFocusWrapper";
+import ResumeModal from "@/components/ResumeModal";
 
 interface ServiceItem {
   num: string;
@@ -91,7 +94,14 @@ const services: ServiceItem[] = [
 export default function ServicesAndFooterV2() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [copied, setCopied] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", project: "" });
+  const [resumeOpen, setResumeOpen] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    roleLink: "",
+    message: "",
+  });
   const [submitState, setSubmitState] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorText, setErrorText] = useState("");
   const yellowBoxRef = useRef<HTMLDivElement>(null);
@@ -113,7 +123,10 @@ export default function ServicesAndFooterV2() {
     };
   }, []);
 
-  const updateFormField = (field: "name" | "email" | "project", value: string) => {
+  const updateFormField = (
+    field: "name" | "email" | "company" | "roleLink" | "message",
+    value: string
+  ) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (submitState === "error") {
       if (errorTimeoutRef.current) clearTimeout(errorTimeoutRef.current);
@@ -181,7 +194,7 @@ export default function ServicesAndFooterV2() {
       }
 
       setSubmitState("success");
-      setForm({ name: "", email: "", project: "" });
+      setForm({ name: "", email: "", company: "", roleLink: "", message: "" });
       setTimeout(() => setSubmitState("idle"), 3500);
     } catch {
       setSubmitState("error");
@@ -198,6 +211,8 @@ export default function ServicesAndFooterV2() {
 
   return (
     <div className="w-full flex flex-col">
+      <ResumeModal open={resumeOpen} onClose={() => setResumeOpen(false)} />
+
       {/* ─── 01. SKILLS SECTION ─── */}
       <ScrollFocusWrapper>
         <section id="skills" className="w-full bg-[#F4F4F0] border-b-2 border-black scroll-mt-20 px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -666,7 +681,7 @@ export default function ServicesAndFooterV2() {
               className="hidden lg:block absolute top-0 bottom-0 left-1/3 w-[2px] bg-black origin-top z-10"
             />
 
-          {/* Left Column: Bold Red Box "LET'S CREATE SOMETHING DIFFERENT." + Direct Contact Cards */}
+          {/* Left Column: Bold Red Box "HIRING A DESIGN ENGINEER?" + Direct Contact & Resume Cards */}
           <div
             className="lg:col-span-4 bg-[#FF462D] p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between border-b-2 lg:border-b-0 border-black text-black relative"
           >
@@ -682,19 +697,46 @@ export default function ServicesAndFooterV2() {
               </div>
 
               <h3 className="text-xl min-[360px]:text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight leading-[1.0] font-mono mb-3 sm:mb-6 text-black">
-                LET&apos;S CREATE<br />SOMETHING<br />DIFFERENT.
+                HIRING A<br />DESIGN<br />ENGINEER?
               </h3>
 
               <p className="text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wide text-black/90 leading-relaxed mb-5 sm:mb-8 font-sans">
-                HAVE A PROJECT, CHALLENGE OR OPPORTUNITY? DROP ME A LINE AND LET&apos;S BUILD SOMETHING EXTRAORDINARY TOGETHER.
+                OPEN TO FULL-TIME &amp; CONTRACT ROLES (ONSITE · HYBRID · REMOTE). BRIDGING SYSTEMATIC PRODUCT DESIGN WITH HIGH-PERFORMANCE CODE.
               </p>
             </div>
 
-            {/* GET IN TOUCH Contact Cards in Brutalist Frame */}
+            {/* GET IN TOUCH & ACTION CARDS */}
             <div className="flex flex-col gap-2.5 sm:gap-3 pt-4 sm:pt-6 border-t-2 border-black">
               <span className="text-[9.5px] sm:text-[10px] font-mono font-black uppercase tracking-widest text-black">
-                GET IN TOUCH
+                DIRECT ACTIONS
               </span>
+
+              {/* Download Resume Card */}
+              <button
+                type="button"
+                onClick={() => setResumeOpen(true)}
+                className="w-full p-2.5 sm:p-3.5 bg-white hover:bg-yellow-50 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-left flex items-center justify-between gap-2.5 sm:gap-3 transition-transform active:translate-x-0.5 active:translate-y-0.5 cursor-pointer group font-mono"
+              >
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-none border border-black bg-[#FAED00] flex items-center justify-center shrink-0 text-black group-hover:scale-105 transition-transform">
+                    <FileText size={18} weight="bold" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[8.5px] sm:text-[9px] uppercase tracking-widest text-zinc-600 block">
+                      RESUME
+                    </span>
+                    <span className="text-[11px] sm:text-xs font-black text-black group-hover:underline truncate block">
+                      Download Resume
+                    </span>
+                    <span className="text-[8.5px] sm:text-[9px] font-bold text-zinc-500 block">
+                      A4 PDF · 1-Page Summary
+                    </span>
+                  </div>
+                </div>
+                <div className="text-black group-hover:text-[#FF462D] group-hover:translate-y-0.5 transition-all shrink-0 pr-1">
+                  <DownloadSimple size={16} weight="bold" />
+                </div>
+              </button>
 
               {/* Email Copy Card */}
               <button
@@ -711,13 +753,13 @@ export default function ServicesAndFooterV2() {
                 </div>
                 <div className="min-w-0 flex-1 font-mono">
                   <span className="text-[8.5px] sm:text-[9px] font-mono uppercase tracking-widest text-zinc-600 block">
-                    EMAIL
+                    EMAIL (CLICK TO COPY)
                   </span>
                   <span className="text-[11px] sm:text-xs font-black text-black truncate block">
                     santhosh.a.designer@gmail.com
                   </span>
                   <span className="text-[8.5px] sm:text-[9px] font-bold text-zinc-500 block">
-                    {copied ? "✓ Copied to clipboard" : "Click to copy"}
+                    {copied ? "✓ Copied to clipboard" : "Click to copy email"}
                   </span>
                 </div>
               </button>
@@ -753,7 +795,7 @@ export default function ServicesAndFooterV2() {
             </motion.div>
           </div>
 
-          {/* Right Column: Quick Project Brief Form */}
+          {/* Right Column: Role Enquiry Form */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -765,10 +807,10 @@ export default function ServicesAndFooterV2() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 sm:pb-6 mb-4 sm:mb-6 border-b-2 border-black gap-2">
                 <div>
                   <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-black font-mono block">
-                    QUICK PROJECT BRIEF
+                    ROLE ENQUIRY
                   </span>
                   <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-zinc-500 font-sans">
-                    Fill in your details below for a prompt response within 24 hours.
+                    Fill in the role details below for a prompt response within 24 hours.
                   </p>
                 </div>
               </div>
@@ -786,7 +828,7 @@ export default function ServicesAndFooterV2() {
                       placeholder="Your name"
                       value={form.name}
                       onChange={(e) => updateFormField("name", e.target.value)}
-                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all font-mono"
                     />
                   </div>
                   <div>
@@ -796,25 +838,53 @@ export default function ServicesAndFooterV2() {
                     <input
                       type="email"
                       required
-                      placeholder="your@email.com"
+                      placeholder="your@company.com"
                       value={form.email}
                       onChange={(e) => updateFormField("email", e.target.value)}
-                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all font-mono"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div>
+                    <label className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-1.5 sm:mb-2">
+                      COMPANY *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Company / Team"
+                      value={form.company}
+                      onChange={(e) => updateFormField("company", e.target.value)}
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all font-mono"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-1.5 sm:mb-2">
+                      ROLE / JD LINK
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Job description URL or title"
+                      value={form.roleLink}
+                      onChange={(e) => updateFormField("roleLink", e.target.value)}
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all font-mono"
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="text-[10px] sm:text-[11px] font-mono font-black uppercase tracking-wider text-black block mb-1.5 sm:mb-2">
-                    PROJECT BRIEF *
+                    MESSAGE *
                   </label>
                   <textarea
                     required
                     rows={4}
-                    placeholder="Tell me what you're building and where you need help..."
-                    value={form.project}
-                    onChange={(e) => updateFormField("project", e.target.value)}
-                    className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all resize-y min-h-[110px] sm:min-h-[140px]"
+                    placeholder="Tell me about the role, team, requirements, or timeline..."
+                    value={form.message}
+                    onChange={(e) => updateFormField("message", e.target.value)}
+                    className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 bg-[#fafafa] border-2 border-black text-xs sm:text-sm font-bold text-black placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all resize-y min-h-[110px] sm:min-h-[130px] font-mono"
                   />
                 </div>
 
@@ -822,9 +892,9 @@ export default function ServicesAndFooterV2() {
                   <button
                     type="submit"
                     disabled={submitState === "sending"}
-                    className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-black hover:bg-zinc-800 active:bg-zinc-900 text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all cursor-pointer disabled:opacity-60 scanline-btn"
+                    className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-black hover:bg-zinc-800 active:bg-zinc-900 text-white font-black text-xs sm:text-sm uppercase tracking-widest flex items-center justify-center gap-3 border-2 border-black shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all cursor-pointer disabled:opacity-60 scanline-btn font-mono"
                   >
-                    <span>{submitState === "sending" ? "SENDING BRIEF..." : "SEND BRIEF"}</span>
+                    <span>{submitState === "sending" ? "SENDING ENQUIRY..." : "SEND ROLE ENQUIRY"}</span>
                     {submitState === "sending" ? (
                       <span className="w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin" />
                     ) : (
@@ -848,10 +918,10 @@ export default function ServicesAndFooterV2() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.25 }}
-                      className="p-4 bg-[#FAED00] border-2 border-black text-black text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]"
+                      className="p-4 bg-[#FAED00] border-2 border-black text-black text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] font-mono"
                     >
                       <CheckCircle size={18} weight="fill" />
-                      <span>Your project brief has been sent successfully! I will get back to you shortly.</span>
+                      <span>Your role enquiry has been sent successfully! I will review the details and get back to you shortly.</span>
                     </motion.div>
                   )}
                   {submitState === "error" && (
@@ -860,7 +930,7 @@ export default function ServicesAndFooterV2() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -6 }}
                       transition={{ duration: 0.3 }}
-                      className="p-4 bg-rose-100 border-2 border-rose-600 text-rose-900 text-xs font-bold uppercase tracking-wider flex items-center justify-between gap-3 shadow-[3px_3px_0px_0px_rgba(225,29,72,0.15)]"
+                      className="p-4 bg-rose-100 border-2 border-rose-600 text-rose-900 text-xs font-bold uppercase tracking-wider flex items-center justify-between gap-3 shadow-[3px_3px_0px_0px_rgba(225,29,72,0.15)] font-mono"
                     >
                       <div className="flex items-center gap-2">
                         <WarningCircle size={18} weight="fill" className="shrink-0" />

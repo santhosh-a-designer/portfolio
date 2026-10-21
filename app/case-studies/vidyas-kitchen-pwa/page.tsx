@@ -5,7 +5,7 @@ import VidyasKitchenCaseStudyView from "@/components/vidyas-kitchen/VidyasKitche
 import { getDesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
 
 export const metadata: Metadata = {
-  title: "Vidya's Kitchen — Case Study | Simon Santhosh",
+  title: "Vidya's Kitchen — Case Study | Santhosh A",
   description:
     "0→1 home food delivery in Sivakasi: PWA, WhatsApp bot, kitchen dashboard with AI pricing, driver app — solo design and build.",
 };

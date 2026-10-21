@@ -13,7 +13,7 @@ import LenisProvider from "@/components/LenisProvider";
 import HomeHashScroll from "@/components/HomeHashScroll";
 
 export const metadata: Metadata = {
-  title: "Simon Santhosh — Blueprint (Dark Theme)",
+  title: "Santhosh A — Design Engineer | UX + Next.js (Blueprint)",
   description:
     "Classic blueprint portfolio edition — dark theme with full project archive, testimonials, and case-study snippets.",
 };

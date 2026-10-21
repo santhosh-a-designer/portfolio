@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     canonical: `${getSiteUrl()}${path}`,
   },
   openGraph: {
-    title: "Graphic design | Simon Santhosh",
+    title: "Graphic design | Santhosh A",
     description: "Kirubai, Infinex, The Key, and Essence of Asia — P1–P4 on one page.",
     url: `${getSiteUrl()}${path}`,
   },

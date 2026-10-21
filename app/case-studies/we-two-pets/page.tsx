@@ -4,7 +4,7 @@ import CaseStudyScrollToTop from "@/components/CaseStudyScrollToTop";
 import WeTwoPetsCaseStudyView from "@/components/we-two-pets/WeTwoPetsCaseStudyView";
 
 export const metadata: Metadata = {
-  title: "We Two Pets — Case Study | Simon Santhosh",
+  title: "We Two Pets — Case Study | Santhosh A",
   description:
     "0→1 pet commerce for India: a store, a hunt-and-veto engine, and a desk where two people vote before a product goes live.",
 };

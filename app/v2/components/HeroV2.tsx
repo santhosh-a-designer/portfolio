@@ -177,7 +177,8 @@ export default function HeroV2() {
               </motion.div>
 
               {/* VIEW WORK CTA (with clean breathing room) */}
-              <motion.div variants={itemVariants} className="mt-3 sm:mt-4 lg:mt-5">
+              {/* VIEW WORK CTA & Flagship Proof Chip */}
+              <motion.div variants={itemVariants} className="mt-3 sm:mt-4 lg:mt-5 flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <Link
                   href="#work"
                   onClick={(e) => {
@@ -193,13 +194,25 @@ export default function HeroV2() {
                       window.scrollTo({ top, behavior: "smooth" });
                     }
                   }}
-                  className="inline-flex items-center justify-center gap-3 sm:gap-5 px-5 py-2.5 sm:px-8 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] sm:shadow-[5px_5px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group w-auto cursor-pointer font-mono scanline-btn"
+                  className="inline-flex items-center justify-center gap-2.5 sm:gap-4 px-4 py-2.5 sm:px-7 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group w-auto cursor-pointer font-mono scanline-btn"
                 >
                   <span>VIEW WORK</span>
                   <ArrowUpRight
                     weight="bold"
                     className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                   />
+                </Link>
+
+                {/* Flagship proof chip */}
+                <Link
+                  href="/case-studies/vidyas-kitchen-pwa"
+                  className="inline-flex items-center gap-2 px-3 py-2 sm:px-3.5 sm:py-2.5 bg-zinc-50 hover:bg-[#FAED00] border-2 border-black text-black text-[10px] sm:text-xs font-mono font-bold tracking-tight transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 group"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[#FF462D] shrink-0 animate-pulse" />
+                  <span className="truncate max-w-[270px] sm:max-w-none">
+                    Shipped Sivakasi&apos;s first home-food ordering PWA, zero order drop-offs
+                  </span>
+                  <ArrowUpRight weight="bold" className="w-3 h-3 text-black shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
               </motion.div>
             </div>
@@ -272,7 +285,7 @@ export default function HeroV2() {
                 </motion.div>
               </div>
 
-              {/* Row 1, Col 3: Availability Animated Cell (Rolling REMOTE/HYBRID/ONSITE ➔ Sliding Green Card) */}
+              {/* Row 1, Col 3: Availability Animated Cell (OPEN TO ONSITE · HYBRID · REMOTE ➔ Sliding Green Card) */}
               <div className="relative overflow-hidden h-full min-h-[72px] sm:min-h-[88px]">
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -348,10 +361,8 @@ export default function HeroV2() {
   );
 }
 
-// ─── Availability Cell: Rolling Work Modes (ONSITE, HYBRID, REMOTE) ➔ Sliding Green Full-Time Card ───
+// ─── Availability Cell: OPEN TO ONSITE · HYBRID · REMOTE ➔ Sliding Green Full-Time Card ───
 function AvailabilityAnimatedCell() {
-  const workModes = ["ONSITE", "HYBRID", "REMOTE"];
-  const [modeIndex, setModeIndex] = useState(0);
   const [showGreenCard, setShowGreenCard] = useState(false);
   const cellRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cellRef, { margin: "0px" });
@@ -359,64 +370,28 @@ function AvailabilityAnimatedCell() {
   useEffect(() => {
     if (!isInView) return;
 
-    // Cycle:
-    // 0s: ONSITE (white background)
-    // 1.8s: HYBRID (white background)
-    // 3.6s: REMOTE (white background)
-    // 5.4s: Green Card SLIDES IN: "AVAILABLE FOR FULL-TIME" (stays for 3.6s)
-    // 9.0s: Loops back to ONSITE
+    // Cycle between OPEN TO ONSITE · HYBRID · REMOTE and AVAILABLE FOR FULL-TIME
     const cycle = setInterval(() => {
-      setShowGreenCard((prev) => {
-        if (!prev) {
-          // If we were on work modes, show green card
-          return true;
-        } else {
-          // If we were on green card, slide out and reset modeIndex to 0
-          setModeIndex(0);
-          return false;
-        }
-      });
+      setShowGreenCard((prev) => !prev);
     }, 4200);
 
     return () => clearInterval(cycle);
   }, [isInView]);
 
-  // Rolling text cycle inside the work modes phase
-  useEffect(() => {
-    if (!isInView || showGreenCard) return;
-
-    const rollTimer = setInterval(() => {
-      setModeIndex((prev) => (prev + 1) % workModes.length);
-    }, 1400);
-
-    return () => clearInterval(rollTimer);
-  }, [isInView, showGreenCard, workModes.length]);
-
   return (
     <div ref={cellRef} className="w-full h-full relative overflow-hidden bg-white select-none">
-      {/* ── State 1 (Base): Centered rolling text: REMOTE / HYBRID / ONSITE ── */}
-      <div className="w-full h-full bg-white flex flex-col items-center justify-center p-2.5 min-[360px]:p-3 text-center cursor-default">
-        <span className="text-[8px] sm:text-[8.5px] font-mono font-black uppercase tracking-widest text-[#00C16A] mb-1">
+      {/* ── State 1 (Base): OPEN TO ONSITE · HYBRID · REMOTE ── */}
+      <div className="w-full h-full bg-white flex flex-col items-center justify-center p-2 text-center cursor-default">
+        <span className="text-[7.5px] sm:text-[8px] font-mono font-black uppercase tracking-widest text-[#00C16A] mb-1">
           // WORK PREFERENCE
         </span>
-        <div className="relative h-6 sm:h-7 w-full flex items-center justify-center overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={workModes[modeIndex]}
-              initial={{ y: 16, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -16, opacity: 0 }}
-              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-              className="flex items-center gap-1.5 justify-center"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse shrink-0" />
-              <span className="text-black font-black text-xs min-[360px]:text-sm sm:text-base uppercase tracking-wider font-mono">
-                {workModes[modeIndex]}
-              </span>
-            </motion.div>
-          </AnimatePresence>
+        <div className="flex items-center gap-1.5 justify-center px-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse shrink-0" />
+          <span className="text-black font-black text-[9px] min-[360px]:text-[9.5px] sm:text-[10px] lg:text-[10.5px] uppercase tracking-tight font-mono leading-tight">
+            OPEN TO ONSITE · HYBRID · REMOTE
+          </span>
         </div>
-        <span className="text-[7.5px] sm:text-[8px] font-mono text-zinc-500 uppercase tracking-wider mt-0.5">
+        <span className="text-[7px] sm:text-[7.5px] font-mono text-zinc-500 uppercase tracking-wider mt-1">
           AVAILABLE NOW
         </span>
       </div>
