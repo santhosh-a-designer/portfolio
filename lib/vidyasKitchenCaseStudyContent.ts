@@ -250,7 +250,7 @@ export const vidyasHomeFoodStory = {
         id: "returning",
         tabLabel: "Returning user",
         body:
-          "I have not seen another food-ordering bot do this: a returning customer sends **one sentence** — dish, quantity, day, meal, payment — and the server returns a **priced confirm card** with their saved address. Typing is optional: tap **Quick Reorder** for frequent items, or say “Hi” for Menu and Help. **Nothing is booked until Confirm**.",
+          "A returning customer sends **one sentence** — dish, quantity, day, meal, payment — and the model drafts the order while the server returns a **priced confirm card** with their saved address. Typing is optional: tap **Quick Reorder** for frequent items, or say “Hi” for Menu and Help. **Nothing is booked until Confirm**.",
         highlights: [
           { id: "one-shot", label: "One sentence → full bill" },
           { id: "first", label: "Not menu trees · not forms" },
@@ -662,7 +662,7 @@ export const vidyasChallenges: VidyasChallenge[] = [
     happened:
       "Customers message the kitchen, name a gravy, and wait for a person. **No local app existed to copy.**",
     whyHard:
-      "**Trust lives in the chat**, not in an install prompt. One builder, so every wrong bet cost build time.",
+      "**Trust lives in the chat**, not in an install prompt. With a live kitchen waiting, every wrong bet cost build time.",
     triedFirst:
       "A menu-driven bot with lists and “pick 1-5”. Tidy, and it broke on the first normal sentence.",
     worked:
