@@ -109,25 +109,27 @@ export default function HeroV2() {
             className="lg:col-span-7 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white min-h-0"
           >
             {/* Top text block with balanced breathing room */}
-            <div className="flex flex-col pt-3 pb-4 px-4 sm:pt-5 sm:pb-6 sm:px-6 md:p-8 lg:px-10 lg:pt-8 lg:pb-6 lg:justify-between flex-1 gap-3 sm:gap-4 lg:gap-5">
-              {/* Role badges */}
+            {/* Top text block with balanced editorial breathing room */}
+            <div className="flex flex-col justify-center flex-1 px-4 sm:px-6 md:px-8 lg:px-10 py-6 sm:py-8 lg:py-6 gap-4 sm:gap-5 lg:gap-6">
+              {/* Role super-badge / editorial kicker */}
               <motion.div
                 variants={itemVariants}
-                className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-base md:text-lg lg:text-xl font-black tracking-wider uppercase text-black mb-0 font-sans flex-wrap shrink-0"
+                className="inline-flex items-center gap-2 px-3 py-1 bg-black text-white text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase border-2 border-black shadow-[2px_2px_0px_0px_rgba(255,70,45,1)] w-fit"
               >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF462D] animate-pulse" />
                 <span className="text-[#FF462D]">DESIGN ENGINEER</span>
-                <span className="text-[#FF462D]">×</span>
-                <span className="text-black">MENTOR</span>
+                <span className="text-zinc-500">×</span>
+                <span className="text-white">MENTOR</span>
               </motion.div>
 
-              {/* Main Headline Answer Display — locked stable container with exact fixed height, zero layout shift */}
+              {/* Main Headline Answer Display — locked stable container with zero layout shift */}
               <motion.div
                 variants={itemVariants}
-                className="relative flex flex-col my-auto"
+                className="relative flex flex-col"
               >
-                <div className="relative w-full h-[125px] sm:h-[135px] md:h-[145px] lg:h-[155px] xl:h-[165px] flex items-start overflow-hidden">
+                <div className="relative w-full min-h-[90px] sm:min-h-[105px] md:min-h-[115px] lg:min-h-[125px] xl:min-h-[135px] flex items-start overflow-hidden">
                   <div
-                    className={`transition-opacity duration-150 ease-out text-lg sm:text-2xl md:text-2xl lg:text-[28px] xl:text-[32px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading ${
+                    className={`transition-opacity duration-150 ease-out text-lg sm:text-2xl md:text-2xl lg:text-[26px] xl:text-[28px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading ${
                       isFading ? "opacity-0" : "opacity-100"
                     }`}
                   >
@@ -176,9 +178,8 @@ export default function HeroV2() {
                 </div>
               </motion.div>
 
-              {/* VIEW WORK CTA (with clean breathing room) */}
               {/* VIEW WORK CTA & Flagship Proof Chip */}
-              <motion.div variants={itemVariants} className="mt-3 sm:mt-4 lg:mt-5 flex flex-wrap items-center gap-2.5 sm:gap-3">
+              <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
                 <Link
                   href="#work"
                   onClick={(e) => {
@@ -210,7 +211,7 @@ export default function HeroV2() {
                 >
                   <span className="w-2 h-2 rounded-full bg-[#FF462D] shrink-0 animate-pulse" />
                   <span className="truncate max-w-[270px] sm:max-w-none">
-                    Shipped Sivakasi&apos;s first home-food ordering PWA, zero order drop-offs
+                    Shipped Sivakasi&apos;s first food PWA · 0% commission &amp; automated dispatch
                   </span>
                   <ArrowUpRight weight="bold" className="w-3 h-3 text-black shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>

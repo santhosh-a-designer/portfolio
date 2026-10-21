@@ -509,7 +509,7 @@ export default function WeTwoPetsCaseStudyView() {
       {/* Section 07: Tech Stack and Principles */}
       <SectionWindow num="07" title="Technology Stack &amp; Architectural Principles">
         <p className="mb-6 max-w-3xl text-sm leading-relaxed text-zinc-700">
-          Storefront on Next.js with Tailwind CSS. Database, auth, and real-time queues on Supabase. AI pipeline running on FastAPI with Gemini 1.5. Payment via Cashfree &amp; COD. Shipping logistics via Shiprocket and transactional alerts via Resend.
+          Storefront on Next.js with Tailwind CSS. Database, auth, and real-time queues on Supabase. AI pipeline running on FastAPI with Gemini. Payment via Cashfree &amp; COD. Shipping logistics via Shiprocket and transactional alerts via Resend.
         </p>
         <StackToolsSkills skills={weTwoSkills} tools={weTwoTools} />
 

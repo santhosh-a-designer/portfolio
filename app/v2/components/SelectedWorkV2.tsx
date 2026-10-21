@@ -60,7 +60,7 @@ export default function SelectedWorkV2() {
       techStack: ["Next.js", "TypeScript", "Tailwind", "Supabase", "Razorpay", "WhatsApp API"],
       description: (
         <>
-          Sivakasi Town&apos;s <span className="text-[#FF462D] font-black">FIRST-EVER</span> home food delivery app — built from zero infrastructure to a live, real-time ordering system, replacing manual WhatsApp call chaos with automated kitchen dispatch — eliminating marketplace fees while powering <span className="text-[#FF462D] font-black">ZERO ORDER DROP-OFFS</span> and <span className="inline-block px-1.5 py-0.5 bg-[#FAED00] text-black font-black border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] text-[10.5px] sm:text-[11.5px] tracking-tight">FRICTIONLESS REPEAT ORDERS</span>.
+          Sivakasi Town&apos;s <span className="text-[#FF462D] font-black">FIRST-EVER</span> home food delivery app — built from zero infrastructure to a live, real-time ordering system, replacing manual WhatsApp call chaos with automated kitchen dispatch — eliminating marketplace fees while powering <span className="text-[#FF462D] font-black">DIRECT ORDER CAPTURE</span> and <span className="inline-block px-1.5 py-0.5 bg-[#FAED00] text-black font-black border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] text-[10.5px] sm:text-[11.5px] tracking-tight">FRICTIONLESS REPEAT ORDERS</span>.
         </>
       ),
     },

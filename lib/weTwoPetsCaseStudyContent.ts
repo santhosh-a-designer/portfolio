@@ -222,7 +222,7 @@ export const weTwoAIFlow = [
     phase: "Multimodal AI Scoring",
     title: "Gemini Vision & Material Analysis",
     desc: "Evaluates product imagery and specs to generate a 0–100 ai_score, pros, cons, target pet family (dog/cat/size), and season appropriateness.",
-    tech: "Gemini 1.5 Pro / Flash · Structured JSON Schema",
+    tech: "Gemini · Structured JSON Schema",
   },
   {
     step: "03",
