@@ -24,41 +24,130 @@ const itemVariants = {
 export default function HeroV2() {
   const lenis = useLenis();
 
-  // 4 Meaningful questions an interviewer asks a Design Engineer / Lead UX
-  const interviewPrompts = [
-    {
-      id: 0,
-      badge: "01. CORE",
-      promptLabel: "WHAT DO YOU DO?",
-      question: "WHAT I DO:",
-      answer: "I craft experiences people feel — then write the code to ship them.",
-    },
-    {
-      id: 1,
-      badge: "02. PROBLEM SOLVING",
-      promptLabel: "HOW DO YOU HANDLE FRICTION?",
-      question: "HOW I TACKLE PROBLEMS:",
-      answer: "I find the root friction, untangle messy workflows, and make things simple.",
-    },
-    {
-      id: 2,
-      badge: "03. HYBRID ROLE",
-      promptLabel: "WHY DESIGN & CODE BOTH?",
-      question: "WHY DESIGN AND CODE?",
-      answer: "Because pixel-perfect Figma designs deserve identical precision in production.",
-    },
-    {
-      id: 3,
-      badge: "04. IMPACT",
-      promptLabel: "WHAT DO YOU BRING TO US?",
-      question: "WHAT I BRING TO YOUR TEAM:",
-      answer: "The power of two roles in one — fluent Figma systems, branding, and frontend code that speaks directly to developers.",
-    },
-  ];  const [activePrompt, setActivePrompt] = useState(0);
-  const [displayedAnswer, setDisplayedAnswer] = useState(interviewPrompts[0].answer);
+  // 3 Targeted Personas for recruiters, eng leads, and design leaders
+  const personas = [
+    { id: "hiring", label: "HIRING MANAGER", shortLabel: "RECRUITER" },
+    { id: "eng", label: "ENG LEAD", shortLabel: "ENG LEAD" },
+    { id: "design", label: "DESIGN LEAD", shortLabel: "DESIGN LEAD" },
+  ];
+
+  const personaPrompts = {
+    0: [
+      {
+        id: 0,
+        badge: "01. CORE",
+        promptLabel: "WHAT DO YOU DO?",
+        question: "WHAT I DO:",
+        answer: "I craft experiences people feel — then write the code to ship them.",
+      },
+      {
+        id: 1,
+        badge: "02. PROBLEM SOLVING",
+        promptLabel: "HOW DO YOU HANDLE FRICTION?",
+        question: "HOW I TACKLE PROBLEMS:",
+        answer: "I find the root friction, untangle messy workflows, and make things simple.",
+      },
+      {
+        id: 2,
+        badge: "03. HYBRID ROLE",
+        promptLabel: "WHY DESIGN & CODE BOTH?",
+        question: "WHY DESIGN AND CODE?",
+        answer: "Because pixel-perfect Figma designs deserve identical precision in production.",
+      },
+      {
+        id: 3,
+        badge: "04. IMPACT",
+        promptLabel: "WHAT DO YOU BRING TO US?",
+        question: "WHAT I BRING TO YOUR TEAM:",
+        answer: "The power of two roles in one — fluent Figma systems, branding, and frontend code that speaks directly to developers.",
+      },
+    ],
+    1: [
+      {
+        id: 0,
+        badge: "01. CODE RIGOR",
+        promptLabel: "HOW DO YOU WRITE CODE?",
+        question: "ENGINEERING RIGOR:",
+        answer: "Semantic, accessible HTML, modular Next.js architectures, strict TypeScript, and zero bloat.",
+      },
+      {
+        id: 1,
+        badge: "02. DEV HANDOFF",
+        promptLabel: "HOW DO YOU BRIDGE FIGMA?",
+        question: "BRIDGING FIGMA TO CODE:",
+        answer: "Design tokens match code 1:1 — zero guessing spacing, components, or interactive states.",
+      },
+      {
+        id: 2,
+        badge: "03. ARCHITECTURE",
+        promptLabel: "HOW DO YOU HANDLE COMPLEXITY?",
+        question: "SYSTEMS ARCHITECTURE:",
+        answer: "I isolate root edge cases, optimize render cycles, and build resilient UI state machines.",
+      },
+      {
+        id: 3,
+        badge: "04. TECH STACK",
+        promptLabel: "WHAT IS YOUR CORE STACK?",
+        question: "PRODUCTION TOOLBOX:",
+        answer: "Next.js App Router, Tailwind CSS, TypeScript, Supabase, Framer Motion, and Web APIs.",
+      },
+    ],
+    2: [
+      {
+        id: 0,
+        badge: "01. CRAFT",
+        promptLabel: "WHAT IS YOUR DESIGN PROCESS?",
+        question: "DESIGN CRAFT & RHYTHM:",
+        answer: "Systematic Figma auto-layout libraries, obsessive typographic hierarchy, and intuitive mental models.",
+      },
+      {
+        id: 1,
+        badge: "02. USER PSYCHOLOGY",
+        promptLabel: "HOW DO YOU SOLVE FRICTION?",
+        question: "USER PSYCHOLOGY:",
+        answer: "I study micro-moments of hesitation and remove cognitive clutter until interfaces feel effortless.",
+      },
+      {
+        id: 2,
+        badge: "03. DESIGN SYSTEMS",
+        promptLabel: "HOW DO YOU SCALE DESIGN?",
+        question: "SCALING DESIGN SYSTEMS:",
+        answer: "Atomic component hierarchies, strict semantic tokens, and production parity with code.",
+      },
+      {
+        id: 3,
+        badge: "04. MOTION",
+        promptLabel: "HOW DO YOU USE ANIMATION?",
+        question: "INTERACTION & MOTION:",
+        answer: "Subtle, physics-grounded choreography that guides spatial orientation without slowing down work.",
+      },
+    ],
+  };
+
+  const [activePersona, setActivePersona] = useState(0);
+  const activePrompts = personaPrompts[activePersona as keyof typeof personaPrompts] || personaPrompts[0];
+  const [activePrompt, setActivePrompt] = useState(0);
+  const [displayedAnswer, setDisplayedAnswer] = useState(activePrompts[0].answer);
   const [isFading, setIsFading] = useState(false);
-  const activePromptRef = useRef(activePrompt);
-  activePromptRef.current = activePrompt;
+  const [currentTime, setCurrentTime] = useState("");
+
+  // Live IST Clock
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const istTime = now.toLocaleTimeString("en-US", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      });
+      setCurrentTime(istTime);
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   // Buttery-smooth, flicker-free typewriter effect
   useEffect(() => {
@@ -66,13 +155,12 @@ export default function HeroV2() {
     let startTimeout: NodeJS.Timeout | null = null;
     let fadeTimeout: NodeJS.Timeout | null = null;
 
-    // Trigger subtle, quick fade to clear previous text without any layout shift
     setIsFading(true);
     fadeTimeout = setTimeout(() => {
       setDisplayedAnswer("");
       setIsFading(false);
 
-      const fullAnswer = interviewPrompts[activePrompt].answer;
+      const fullAnswer = activePrompts[activePrompt]?.answer || "";
       let charIndex = 0;
 
       startTimeout = setTimeout(() => {
@@ -83,7 +171,7 @@ export default function HeroV2() {
           if (charIndex >= fullAnswer.length) {
             if (typeInterval) clearInterval(typeInterval);
           }
-        }, 26); // gentle, pleasing typewriter cadence
+        }, 24);
       }, 50);
     }, 120);
 
@@ -92,7 +180,7 @@ export default function HeroV2() {
       if (startTimeout) clearTimeout(startTimeout);
       if (typeInterval) clearInterval(typeInterval);
     };
-  }, [activePrompt]);
+  }, [activePersona, activePrompt, activePrompts]);
 
   return (
     <section className="w-full bg-[#F4F4F0] border-b-2 border-black px-0 sm:px-6 md:px-8 lg:px-12 xl:px-16">
@@ -108,33 +196,65 @@ export default function HeroV2() {
             animate="visible"
             className="lg:col-span-7 flex flex-col justify-between border-b-2 lg:border-b-0 lg:border-r-2 border-black bg-white min-h-0"
           >
-            {/* Top text block with balanced breathing room */}
             {/* Top text block with balanced editorial breathing room */}
-            <div className="flex flex-col justify-center flex-1 px-4 sm:px-6 md:px-8 lg:px-10 py-6 sm:py-8 lg:py-6 gap-4 sm:gap-5 lg:gap-6">
-              {/* Role super-badge / editorial kicker */}
-              <motion.div
-                variants={itemVariants}
-                className="inline-flex items-center gap-2 px-3 py-1 bg-black text-white text-[11px] sm:text-xs font-mono font-bold tracking-wider uppercase border-2 border-black shadow-[2px_2px_0px_0px_rgba(255,70,45,1)] w-fit"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF462D] animate-pulse" />
-                <span className="text-[#FF462D]">DESIGN ENGINEER</span>
-                <span className="text-zinc-500">×</span>
-                <span className="text-white">MENTOR</span>
-              </motion.div>
+            <div className="flex flex-col justify-center flex-1 px-4 sm:px-6 md:px-8 lg:px-10 py-5 sm:py-6 lg:py-6 gap-3.5 sm:gap-4 lg:gap-5">
+              {/* Persona Switcher Bar + Role super-badge */}
+              <div className="flex flex-wrap items-center justify-between gap-2.5">
+                {/* Segmented Persona Switcher */}
+                <motion.div variants={itemVariants} className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="text-[9.5px] font-mono font-bold tracking-widest uppercase text-zinc-500 hidden sm:inline">
+                    VIEW FOR:
+                  </span>
+                  <div className="inline-flex items-center p-0.5 bg-zinc-100 border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] gap-1">
+                    {personas.map((persona, pIdx) => {
+                      const isSelected = activePersona === pIdx;
+                      return (
+                        <button
+                          key={persona.id}
+                          type="button"
+                          onClick={() => {
+                            setActivePersona(pIdx);
+                            setActivePrompt(0);
+                          }}
+                          className={`px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-mono font-black uppercase tracking-wider transition-all cursor-pointer ${
+                            isSelected
+                              ? "bg-black text-white shadow-[1px_1px_0px_0px_rgba(255,70,45,1)]"
+                              : "text-zinc-600 hover:text-black hover:bg-zinc-200"
+                          }`}
+                        >
+                          <span className="sm:hidden">{persona.shortLabel}</span>
+                          <span className="hidden sm:inline">{persona.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+
+                {/* Role super-badge / editorial kicker */}
+                <motion.div
+                  variants={itemVariants}
+                  className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:py-1 bg-black text-white text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase border border-black shadow-[1.5px_1.5px_0px_0px_rgba(255,70,45,1)] w-fit"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF462D] animate-pulse" />
+                  <span className="text-[#FF462D]">DESIGN ENGINEER</span>
+                  <span className="text-zinc-500">×</span>
+                  <span className="text-white">MENTOR</span>
+                </motion.div>
+              </div>
 
               {/* Main Headline Answer Display — locked stable container with zero layout shift */}
               <motion.div
                 variants={itemVariants}
                 className="relative flex flex-col"
               >
-                <div className="relative w-full min-h-[90px] sm:min-h-[105px] md:min-h-[115px] lg:min-h-[125px] xl:min-h-[135px] flex items-start overflow-hidden">
+                <div className="relative w-full min-h-[85px] sm:min-h-[100px] md:min-h-[110px] lg:min-h-[120px] xl:min-h-[130px] flex items-start overflow-hidden">
                   <div
                     className={`transition-opacity duration-150 ease-out text-lg sm:text-2xl md:text-2xl lg:text-[26px] xl:text-[28px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading ${
                       isFading ? "opacity-0" : "opacity-100"
                     }`}
                   >
                     <span className="text-[#FF462D] block sm:inline mr-2 sm:mr-3">
-                      {interviewPrompts[activePrompt].question}
+                      {activePrompts[activePrompt]?.question}
                     </span>
                     <span>{displayedAnswer}</span>
                     <span className="inline-block w-2 sm:w-2.5 h-[1.1em] bg-black ml-1 align-baseline animate-pulse" />
@@ -142,33 +262,33 @@ export default function HeroV2() {
                 </div>
 
                 {/* Interactive Question Prompts: Full equal-height wrapped cards */}
-                <div className="flex flex-col gap-2 mt-3 sm:mt-4">
-                  <div className="flex items-center gap-2 text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-500">
+                <div className="flex flex-col gap-1.5 sm:gap-2 mt-2.5 sm:mt-3">
+                  <div className="flex items-center gap-2 text-[9.5px] font-mono font-bold tracking-widest uppercase text-zinc-500">
                     <span className="w-1.5 h-1.5 bg-[#FF462D] inline-block" />
                     <span>SELECT AN INTERVIEW QUESTION TO ASK:</span>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 items-stretch">
-                    {interviewPrompts.map((p, idx) => {
+                    {activePrompts.map((p, idx) => {
                       const isActive = activePrompt === idx;
                       return (
                         <button
                           key={p.id}
                           type="button"
                           onClick={() => setActivePrompt(idx)}
-                          className={`text-left p-2.5 sm:p-3 border-2 border-black transition-all cursor-pointer font-mono select-none group flex flex-col justify-between min-h-[64px] sm:min-h-[72px] ${
+                          className={`text-left p-2 sm:p-2.5 border-2 border-black transition-all cursor-pointer font-mono select-none group flex flex-col justify-between min-h-[60px] sm:min-h-[68px] ${
                             isActive
                               ? "bg-black text-white shadow-[3px_3px_0px_0px_rgba(255,70,45,1)] translate-x-[1px] translate-y-[1px]"
                               : "bg-white text-black hover:bg-zinc-50 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5"
                           }`}
                         >
                           <div
-                            className={`text-[9px] font-black tracking-wider uppercase mb-1 shrink-0 ${
+                            className={`text-[8.5px] sm:text-[9px] font-black tracking-wider uppercase mb-1 shrink-0 ${
                               isActive ? "text-[#FF462D]" : "text-zinc-500"
                             }`}
                           >
                             {p.badge}
                           </div>
-                          <div className="text-[10px] sm:text-[11px] font-black tracking-tight leading-snug uppercase break-words">
+                          <div className="text-[9.5px] sm:text-[10.5px] font-black tracking-tight leading-snug uppercase break-words">
                             {p.promptLabel}
                           </div>
                         </button>
@@ -179,14 +299,13 @@ export default function HeroV2() {
               </motion.div>
 
               {/* VIEW WORK CTA & Flagship Proof Chip */}
-              <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
+              <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-0.5">
                 <Link
                   href="#work"
                   onClick={(e) => {
                     e.preventDefault();
                     const workEl = document.getElementById("work");
                     if (!workEl) return;
-                    // Dynamically skip past the sticky header (64px) so SELECTED WORK. is the first visible row
                     const HEADER_H = 64;
                     const top = workEl.getBoundingClientRect().top + window.scrollY - HEADER_H;
                     if (lenis) {
@@ -195,7 +314,7 @@ export default function HeroV2() {
                       window.scrollTo({ top, behavior: "smooth" });
                     }
                   }}
-                  className="inline-flex items-center justify-center gap-2.5 sm:gap-4 px-4 py-2.5 sm:px-7 sm:py-3.5 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] sm:shadow-[4px_4px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-xs sm:text-sm font-black tracking-widest uppercase select-none group w-auto cursor-pointer font-mono scanline-btn"
+                  className="inline-flex items-center justify-center gap-2.5 sm:gap-4 px-4 py-2 sm:px-6 sm:py-3 bg-black text-white hover:bg-zinc-900 border-2 border-black shadow-[3px_3px_0px_0px_rgba(250,237,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all text-xs sm:text-xs font-black tracking-widest uppercase select-none group w-auto cursor-pointer font-mono scanline-btn"
                 >
                   <span>VIEW WORK</span>
                   <ArrowUpRight
@@ -207,7 +326,7 @@ export default function HeroV2() {
                 {/* Flagship proof chip */}
                 <Link
                   href="/case-studies/vidyas-kitchen-pwa"
-                  className="inline-flex items-center gap-2 px-3 py-2 sm:px-3.5 sm:py-2.5 bg-zinc-50 hover:bg-[#FAED00] border-2 border-black text-black text-[10px] sm:text-xs font-mono font-bold tracking-tight transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 group"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-2.5 bg-zinc-50 hover:bg-[#FAED00] border-2 border-black text-black text-[10px] sm:text-xs font-mono font-bold tracking-tight transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 group"
                 >
                   <span className="w-2 h-2 rounded-full bg-[#FF462D] shrink-0 animate-pulse" />
                   <span className="truncate max-w-[270px] sm:max-w-none">
@@ -217,6 +336,26 @@ export default function HeroV2() {
                 </Link>
               </motion.div>
             </div>
+
+            {/* ─── Live Telemetry & Terminal Status Strip (Above 2×3 Stats Grid) ─── */}
+            <motion.div
+              variants={itemVariants}
+              className="w-full border-t-2 border-black bg-[#FAF9F5] px-3.5 sm:px-6 py-2 flex items-center justify-between font-mono text-[9px] sm:text-[10px] select-none shrink-0"
+            >
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#00C16A] animate-pulse shrink-0" />
+                <span className="font-black text-black uppercase tracking-wider">AVAILABLE FOR FULL-TIME</span>
+                <span className="text-zinc-300 hidden sm:inline">│</span>
+                <span className="text-zinc-500 font-bold hidden sm:inline uppercase">OPEN TO ONSITE · HYBRID · REMOTE</span>
+              </div>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <span className="font-black text-black tracking-wider">
+                  CHENNAI, IN · {currentTime || "01:25 AM"} IST
+                </span>
+                <span className="text-zinc-300 hidden md:inline">│</span>
+                <span className="text-zinc-500 font-bold hidden md:inline uppercase">NEXT.JS 16 · 60 FPS</span>
+              </div>
+            </motion.div>
 
             {/* ─── Bottom: Unified 2×3 Stats & Status Grid with Architectural Line Drafting ─── */}
             <div className="relative grid grid-cols-3 grid-rows-2 bg-white select-none">

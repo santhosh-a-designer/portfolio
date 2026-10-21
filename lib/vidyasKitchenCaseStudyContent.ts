@@ -335,8 +335,8 @@ export const vidyasTimeline = {
 };
 
 export const vidyasSnapshot = {
-  role: "Solo product designer & developer",
-  team: "One builder — kitchen is client and operator",
+  role: "Lead Product Designer & Frontend Engineer",
+  team: "Owned product design & build inside a 5-person agency team",
   market: "Sivakasi, Tamil Nadu",
   liveUrl: "https://www.vidyaskitchenhome.com",
   firstInMarket: "First home-food delivery app in Sivakasi, Tamil Nadu",

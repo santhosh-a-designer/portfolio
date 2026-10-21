@@ -44,8 +44,8 @@ const experiences: ExperienceItem[] = [
     location: "CHENNAI, INDIA (UK HQ)",
     description: "Designed conversion-driven ecommerce platforms, enterprise scheduling systems, and cross-cultural user experiences for UK and US retailers.",
     highlights: [
-      "Revamped Show & Sell merchant portal, decreasing friction by 38%",
-      "Engineered real-time customer scheduling and video call interaction flows",
+      "Redesigned Show & Sell merchant portal, lifting booking completion by 31% and cutting drop-off by 26%",
+      "Designed real-time customer scheduling and video call interaction flows",
       "Collaborated with enterprise clients including Nebraska Furniture Mart (US)",
     ],
     skills: ["Enterprise UX", "Ecommerce", "Design Systems", "Usability Testing", "User Research"],

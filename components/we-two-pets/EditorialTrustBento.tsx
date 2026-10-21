@@ -25,6 +25,12 @@ export default function EditorialTrustBento() {
         </div>
       </div>
 
+      {/* Prototype / Spec Disclaimer Bar */}
+      <div className="bg-[#FAF9F5] border-b border-black/10 px-4 py-1 flex items-center justify-between text-[9px] font-mono uppercase text-zinc-500 select-none">
+        <span>// UI Spec &amp; Design System Bento Canvas</span>
+        <span className="font-bold text-zinc-700">[Sample Storefront Copy / Prototype Spec]</span>
+      </div>
+
       {/* Bento Grid Canvas */}
       <div className="bg-[#FAF9F5] p-3 sm:p-5">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5">
@@ -38,6 +44,7 @@ export default function EditorialTrustBento() {
                 1,200+
               </p>
               <p className="text-sm font-semibold text-zinc-700 mt-1">Happy families</p>
+              <span className="text-[9px] font-mono text-zinc-400 block mt-1 uppercase">[Design prototype sample copy]</span>
             </div>
             <p className="font-serif italic text-xs text-zinc-500 mt-6 pt-3 border-t border-black/10">
               “Pets and people, thriving together.”
@@ -56,6 +63,7 @@ export default function EditorialTrustBento() {
                 4.5
               </p>
               <p className="text-xs text-zinc-300 mt-1">Average rating</p>
+              <span className="text-[9px] font-mono text-emerald-300/70 block mt-1 uppercase">[Storefront prototype spec]</span>
             </div>
 
             {/* Golden Retriever Image with bone */}

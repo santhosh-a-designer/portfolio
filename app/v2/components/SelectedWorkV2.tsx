@@ -52,11 +52,6 @@ export default function SelectedWorkV2() {
       isHighlight: true,
       image: "/case-studies/vidyas-kitchen/VK_Clean.webp",
       mockupType: "forma",
-      results: [
-        { label: "ORDERS", value: "[ORDERS]" },
-        { label: "REPEAT RATE", value: "[REPEAT RATE]" },
-        { label: "FEES SAVED", value: "[FEES SAVED]" },
-      ],
       techStack: ["Next.js", "TypeScript", "Tailwind", "Supabase", "Razorpay", "WhatsApp API"],
       description: (
         <>
@@ -76,7 +71,7 @@ export default function SelectedWorkV2() {
       techStack: ["Figma", "Next.js", "TypeScript", "Tailwind", "WebRTC Video", "Ecommerce CRM"],
       description: (
         <>
-          Bridging high-value retail ecommerce and instant human trust — an assisted-selling platform connecting online shoppers directly to retail floor specialists via <span className="text-[#FF462D] font-black">ONE-CLICK SCHEDULING</span>, interactive video consultation, and in-call checkout that turns browsing doubt into immediate sales with <span className="inline-block px-1.5 py-0.5 bg-[#FAED00] text-black font-black border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] text-[10.5px] sm:text-[11.5px] tracking-tight">38% FRICTION REDUCTION</span>.
+          Bridging high-value retail ecommerce and instant human trust — an assisted-selling platform connecting online shoppers directly to retail floor specialists via <span className="text-[#FF462D] font-black">ONE-CLICK SCHEDULING</span>, interactive video consultation, and in-call checkout that turns browsing doubt into immediate sales with <span className="inline-block px-1.5 py-0.5 bg-[#FAED00] text-black font-black border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] text-[10.5px] sm:text-[11.5px] tracking-tight">+31% BOOKING COMPLETION · −26% DROP-OFF</span>.
         </>
       ),
     },

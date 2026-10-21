@@ -108,7 +108,7 @@ export default function VidyasKitchenCaseStudyView({
           <div className="p-4 sm:p-10 md:p-12 space-y-5 sm:space-y-6 text-center">
             <motion.div variants={heroItem} className="flex flex-wrap gap-2 justify-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FF462D] text-white border-2 border-black font-mono text-xs font-black uppercase tracking-widest">
-                0→1 · SOLO DESIGN &amp; BUILD
+                0→1 · OWNED PRODUCT DESIGN &amp; BUILD (TEAM OF 5)
               </div>
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FAED00] text-black border-2 border-black font-mono text-[10px] sm:text-xs font-black uppercase tracking-widest">
                 {vidyasSnapshot.firstInMarket}
@@ -130,31 +130,6 @@ export default function VidyasKitchenCaseStudyView({
                 <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
                   <HighlightText text={vidyasSnapshot.solution} />
                 </p>
-              </div>
-            </motion.div>
-
-            {/* Results Block */}
-            <motion.div variants={heroItem} className="max-w-4xl mx-auto w-full p-3 sm:p-4 bg-[#FAED00]/25 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-              <div className="flex items-center justify-between mb-2 font-mono">
-                <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-black flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#00C16A] animate-pulse" />
-                  KEY RESULTS &amp; PRODUCTION METRICS
-                </span>
-                <span className="text-[9px] font-mono font-bold text-zinc-600 uppercase tracking-widest">[FLAGSHIP PROD]</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 font-mono text-center">
-                <div className="bg-white p-3 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="text-base sm:text-lg font-black text-[#FF462D]">[ORDERS]</div>
-                  <div className="text-[9px] text-zinc-700 font-black uppercase tracking-wider mt-0.5">ORDERS SHIPPED</div>
-                </div>
-                <div className="bg-white p-3 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="text-base sm:text-lg font-black text-black">[REPEAT RATE]</div>
-                  <div className="text-[9px] text-zinc-700 font-black uppercase tracking-wider mt-0.5">REPEAT RETENTION</div>
-                </div>
-                <div className="bg-white p-3 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                  <div className="text-base sm:text-lg font-black text-[#00C16A]">[FEES SAVED]</div>
-                  <div className="text-[9px] text-zinc-700 font-black uppercase tracking-wider mt-0.5">MARKETPLACE FEES SAVED</div>
-                </div>
               </div>
             </motion.div>
 
