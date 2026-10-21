@@ -362,8 +362,10 @@ export default function HeroV2() {
   );
 }
 
-// ─── Availability Cell: OPEN TO ONSITE · HYBRID · REMOTE ➔ Sliding Green Full-Time Card ───
+// ─── Availability Cell: Rolling Work Modes (ONSITE, HYBRID, REMOTE) ➔ Sliding Green Full-Time Card ───
 function AvailabilityAnimatedCell() {
+  const workModes = ["ONSITE", "HYBRID", "REMOTE"];
+  const [modeIndex, setModeIndex] = useState(0);
   const [showGreenCard, setShowGreenCard] = useState(false);
   const cellRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cellRef, { margin: "0px" });
@@ -371,28 +373,58 @@ function AvailabilityAnimatedCell() {
   useEffect(() => {
     if (!isInView) return;
 
-    // Cycle between OPEN TO ONSITE · HYBRID · REMOTE and AVAILABLE FOR FULL-TIME
+    // Cycle:
+    // Work modes rotate one by one, then green card slides in, then loops
     const cycle = setInterval(() => {
-      setShowGreenCard((prev) => !prev);
-    }, 4200);
+      setShowGreenCard((prev) => {
+        if (!prev) {
+          return true;
+        } else {
+          setModeIndex(0);
+          return false;
+        }
+      });
+    }, 4500);
 
     return () => clearInterval(cycle);
   }, [isInView]);
 
+  // Rolling text cycle inside the work modes phase
+  useEffect(() => {
+    if (!isInView || showGreenCard) return;
+
+    const rollTimer = setInterval(() => {
+      setModeIndex((prev) => (prev + 1) % workModes.length);
+    }, 1400);
+
+    return () => clearInterval(rollTimer);
+  }, [isInView, showGreenCard, workModes.length]);
+
   return (
     <div ref={cellRef} className="w-full h-full relative overflow-hidden bg-white select-none">
-      {/* ── State 1 (Base): OPEN TO ONSITE · HYBRID · REMOTE ── */}
-      <div className="w-full h-full bg-white flex flex-col items-center justify-center p-2 text-center cursor-default">
-        <span className="text-[7.5px] sm:text-[8px] font-mono font-black uppercase tracking-widest text-[#00C16A] mb-1">
+      {/* ── State 1 (Base): Centered rolling text: ONSITE / HYBRID / REMOTE ── */}
+      <div className="w-full h-full bg-white flex flex-col items-center justify-center p-2.5 min-[360px]:p-3 text-center cursor-default">
+        <span className="text-[8px] sm:text-[8.5px] font-mono font-black uppercase tracking-widest text-[#00C16A] mb-1">
           // WORK PREFERENCE
         </span>
-        <div className="flex items-center gap-1.5 justify-center px-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse shrink-0" />
-          <span className="text-black font-black text-[9px] min-[360px]:text-[9.5px] sm:text-[10px] lg:text-[10.5px] uppercase tracking-tight font-mono leading-tight">
-            OPEN TO ONSITE · HYBRID · REMOTE
-          </span>
+        <div className="relative h-6 sm:h-7 w-full flex items-center justify-center overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={workModes[modeIndex]}
+              initial={{ y: 16, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -16, opacity: 0 }}
+              transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="flex items-center gap-1.5 justify-center"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00C16A] animate-pulse shrink-0" />
+              <span className="text-black font-black text-xs min-[360px]:text-sm sm:text-base uppercase tracking-wider font-mono">
+                {workModes[modeIndex]}
+              </span>
+            </motion.div>
+          </AnimatePresence>
         </div>
-        <span className="text-[7px] sm:text-[7.5px] font-mono text-zinc-500 uppercase tracking-wider mt-1">
+        <span className="text-[7.5px] sm:text-[8px] font-mono text-zinc-500 uppercase tracking-wider mt-0.5">
           AVAILABLE NOW
         </span>
       </div>
