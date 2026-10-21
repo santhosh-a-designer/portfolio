@@ -34,28 +34,28 @@ const PERSONA_PROMPTS = {
       badge: "01. CORE",
       promptLabel: "WHAT DO YOU DO?",
       question: "WHAT I DO:",
-      answer: "I craft experiences people feel — then write the code to ship them.",
+      answer: "I design products in Figma, then ship them in Next.js. Vidya's Kitchen is Sivakasi's first home-food ordering app, and I designed and shipped all four surfaces: app, WhatsApp bot, kitchen board, driver app.",
     },
     {
       id: 1,
-      badge: "02. PROBLEM SOLVING",
+      badge: "02. FRICTION",
       promptLabel: "HOW DO YOU HANDLE FRICTION?",
-      question: "HOW I TACKLE PROBLEMS:",
-      answer: "I find the root friction, untangle messy workflows, and make things simple.",
+      question: "HOW I TACKLE FRICTION:",
+      answer: "I find where people give up. At Parla, shoppers stalled before booking a showroom call, so the scheduler now speaks in real store names and cities.",
     },
     {
       id: 2,
-      badge: "03. HYBRID ROLE",
+      badge: "03. DESIGN & CODE",
       promptLabel: "WHY DESIGN & CODE BOTH?",
       question: "WHY DESIGN AND CODE?",
-      answer: "Because pixel-perfect Figma designs deserve identical precision in production.",
+      answer: "Handoffs lose detail. When I build what I design, I catch the edge cases early, like a bot that read \"Call the kitchen\" as an empty cart.",
     },
     {
       id: 3,
       badge: "04. IMPACT",
       promptLabel: "WHAT DO YOU BRING TO US?",
       question: "WHAT I BRING TO YOUR TEAM:",
-      answer: "The power of two roles in one — fluent Figma systems, branding, and frontend code that speaks directly to developers.",
+      answer: "A 0→1 shipper: a live ordering system for a town, an AI sourcing desk where two humans vote, and a booking flow for a US retailer.",
     },
   ],
   1: [
@@ -64,28 +64,28 @@ const PERSONA_PROMPTS = {
       badge: "01. CODE RIGOR",
       promptLabel: "HOW DO YOU WRITE CODE?",
       question: "ENGINEERING RIGOR:",
-      answer: "Semantic, accessible HTML, modular Next.js architectures, strict TypeScript, and zero bloat.",
+      answer: "I keep AI in its lane. In Vidya's Kitchen the model only drafts the order, the server sets the price, and nothing is written until the customer confirms.",
     },
     {
       id: 1,
       badge: "02. DEV HANDOFF",
       promptLabel: "HOW DO YOU BRIDGE FIGMA?",
       question: "BRIDGING FIGMA TO CODE:",
-      answer: "Design tokens match code 1:1 — zero guessing spacing, components, or interactive states.",
+      answer: "One spec for four surfaces, with real values: #BD2320 primary, 56px buttons, a type scale. No guessing.",
     },
     {
       id: 2,
-      badge: "03. ARCHITECTURE",
+      badge: "03. COMPLEXITY",
       promptLabel: "HOW DO YOU HANDLE COMPLEXITY?",
-      question: "SYSTEMS ARCHITECTURE:",
-      answer: "I isolate root edge cases, optimize render cycles, and build resilient UI state machines.",
+      question: "HANDLING COMPLEXITY:",
+      answer: "Four surfaces read one Supabase order record, and food status and payment status are separate, because a cash order can be on the bike before it's paid.",
     },
     {
       id: 3,
       badge: "04. TECH STACK",
       promptLabel: "WHAT IS YOUR CORE STACK?",
       question: "PRODUCTION TOOLBOX:",
-      answer: "Next.js App Router, Tailwind CSS, TypeScript, Supabase, Framer Motion, and Web APIs.",
+      answer: "Next.js, TypeScript, Tailwind, Supabase, FastAPI, Gemini, Razorpay, Cashfree, WhatsApp API, all in production.",
     },
   ],
   2: [
@@ -93,29 +93,29 @@ const PERSONA_PROMPTS = {
       id: 0,
       badge: "01. CRAFT",
       promptLabel: "WHAT IS YOUR DESIGN PROCESS?",
-      question: "DESIGN CRAFT & RHYTHM:",
-      answer: "Systematic Figma auto-layout libraries, obsessive typographic hierarchy, and intuitive mental models.",
+      question: "DESIGN PROCESS & CRAFT:",
+      answer: "I start with how people already behave. Sivakasi orders on WhatsApp, so I built the bot first and made the app the upgrade.",
     },
     {
       id: 1,
-      badge: "02. USER PSYCHOLOGY",
+      badge: "02. PSYCHOLOGY",
       promptLabel: "HOW DO YOU SOLVE FRICTION?",
       question: "USER PSYCHOLOGY:",
-      answer: "I study micro-moments of hesitation and remove cognitive clutter until interfaces feel effortless.",
+      answer: "Big-ticket shoppers want a person, not a form. Parla's Show Preview lets them test their camera and see who's available before the call.",
     },
     {
       id: 2,
       badge: "03. DESIGN SYSTEMS",
       promptLabel: "HOW DO YOU SCALE DESIGN?",
       question: "SCALING DESIGN SYSTEMS:",
-      answer: "Atomic component hierarchies, strict semantic tokens, and production parity with code.",
+      answer: "One system across four surfaces: dark landing, light customer app, near-black driver app readable on a bike in daylight, yellow only for the control you must tap.",
     },
     {
       id: 3,
-      badge: "04. MOTION",
-      promptLabel: "HOW DO YOU USE ANIMATION?",
-      question: "INTERACTION & MOTION:",
-      answer: "Subtle, physics-grounded choreography that guides spatial orientation without slowing down work.",
+      badge: "04. AI & TRUST",
+      promptLabel: "HOW DO YOU DESIGN FOR AI?",
+      question: "AI & USER TRUST:",
+      answer: "The festival-pricing agent proposes, the kitchen approves every percent, and a dish rated under 3.0 can't be promoted.",
     },
   ],
 };
@@ -206,13 +206,14 @@ export default function HeroV2() {
             {/* Top text block with balanced editorial breathing room */}
             <div className="flex flex-col justify-center flex-1 px-4 sm:px-6 md:px-8 lg:px-10 py-5 sm:py-6 lg:py-6 gap-3.5 sm:gap-4 lg:gap-5">
               {/* Persona Switcher Bar + Role super-badge */}
-              <div className="flex flex-wrap items-center justify-between gap-2.5">
-                {/* Segmented Persona Switcher */}
-                <motion.div variants={itemVariants} className="flex items-center gap-1.5 sm:gap-2">
-                  <span className="text-[9.5px] font-mono font-bold tracking-widest uppercase text-zinc-500 hidden sm:inline">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-2 sm:mb-3">
+                {/* Prominent Persona Switcher */}
+                <motion.div variants={itemVariants} className="flex items-center gap-2 sm:gap-3">
+                  <span className="text-[10px] sm:text-[11px] font-mono font-black tracking-widest uppercase text-black flex items-center gap-1.5 shrink-0">
+                    <span className="w-2 h-2 bg-[#FF462D] inline-block animate-pulse" />
                     VIEW FOR:
                   </span>
-                  <div className="inline-flex items-center p-0.5 bg-zinc-100 border border-black shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] gap-1">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
                     {PERSONAS.map((persona, pIdx) => {
                       const isSelected = activePersona === pIdx;
                       return (
@@ -223,10 +224,10 @@ export default function HeroV2() {
                             setActivePersona(pIdx);
                             setActivePrompt(0);
                           }}
-                          className={`px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-mono font-black uppercase tracking-wider transition-all cursor-pointer ${
+                          className={`px-3 py-1.5 sm:px-3.5 sm:py-2 text-[10.5px] sm:text-xs font-mono font-black uppercase tracking-wider transition-all cursor-pointer border-2 border-black ${
                             isSelected
-                              ? "bg-black text-white shadow-[1px_1px_0px_0px_rgba(255,70,45,1)]"
-                              : "text-zinc-600 hover:text-black hover:bg-zinc-200"
+                              ? "bg-black text-[#FAED00] shadow-[2.5px_2.5px_0px_0px_rgba(255,70,45,1)] translate-x-[1px] translate-y-[1px]"
+                              : "bg-white text-black hover:bg-[#FAED00]/20 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5"
                           }`}
                         >
                           <span className="sm:hidden">{persona.shortLabel}</span>
@@ -240,7 +241,7 @@ export default function HeroV2() {
                 {/* Role super-badge / editorial kicker */}
                 <motion.div
                   variants={itemVariants}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:py-1 bg-black text-white text-[10px] sm:text-[11px] font-mono font-bold tracking-wider uppercase border border-black shadow-[1.5px_1.5px_0px_0px_rgba(255,70,45,1)] w-fit"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-black text-white text-[10.5px] sm:text-xs font-mono font-bold tracking-wider uppercase border border-black shadow-[2px_2px_0px_0px_rgba(255,70,45,1)] w-fit shrink-0"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#FF462D] animate-pulse" />
                   <span className="text-[#FF462D]">DESIGN ENGINEER</span>
@@ -249,32 +250,32 @@ export default function HeroV2() {
                 </motion.div>
               </div>
 
-              {/* Main Headline Answer Display — locked stable container with zero layout shift */}
+              {/* Main Headline Answer Display — locked stable container with generous editorial breathing room */}
               <motion.div
                 variants={itemVariants}
-                className="relative flex flex-col"
+                className="relative flex flex-col my-2 sm:my-3 lg:my-4"
               >
-                <div className="relative w-full min-h-[85px] sm:min-h-[100px] md:min-h-[110px] lg:min-h-[120px] xl:min-h-[130px] flex items-start overflow-hidden">
+                <div className="relative w-full min-h-[95px] sm:min-h-[110px] md:min-h-[120px] lg:min-h-[130px] flex items-start overflow-hidden">
                   <div
-                    className={`transition-opacity duration-150 ease-out text-lg sm:text-2xl md:text-2xl lg:text-[26px] xl:text-[28px] font-black leading-[1.25] sm:leading-[1.2] tracking-tight uppercase text-black select-none font-sans hero-heading ${
+                    className={`transition-opacity duration-150 ease-out text-base sm:text-xl md:text-2xl lg:text-[23px] xl:text-[25px] font-black leading-[1.32] sm:leading-[1.28] tracking-tight uppercase text-black select-none font-sans hero-heading ${
                       isFading ? "opacity-0" : "opacity-100"
                     }`}
                   >
-                    <span className="text-[#FF462D] block sm:inline mr-2 sm:mr-3">
+                    <span className="text-[#FF462D] block sm:inline mr-2 sm:mr-3 font-mono font-black text-xs sm:text-sm md:text-base tracking-wider">
                       {activePrompts[activePrompt]?.question}
                     </span>
                     <span>{displayedAnswer}</span>
-                    <span className="inline-block w-2 sm:w-2.5 h-[1.1em] bg-black ml-1 align-baseline animate-pulse" />
+                    <span className="inline-block w-2 sm:w-2.5 h-[1em] bg-black ml-1.5 align-baseline animate-pulse" />
                   </div>
                 </div>
 
-                {/* Interactive Question Prompts: Full equal-height wrapped cards */}
-                <div className="flex flex-col gap-1.5 sm:gap-2 mt-2.5 sm:mt-3">
-                  <div className="flex items-center gap-2 text-[9.5px] font-mono font-bold tracking-widest uppercase text-zinc-500">
+                {/* Interactive Question Prompts: Full equal-height wrapped cards with top separator and breathing room */}
+                <div className="flex flex-col gap-2 sm:gap-2.5 mt-4 sm:mt-5 pt-3 sm:pt-4 border-t-2 border-zinc-200">
+                  <div className="flex items-center gap-2 text-[9.5px] sm:text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-500">
                     <span className="w-1.5 h-1.5 bg-[#FF462D] inline-block" />
                     <span>SELECT AN INTERVIEW QUESTION TO ASK:</span>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 items-stretch">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 items-stretch">
                     {activePrompts.map((p, idx) => {
                       const isActive = activePrompt === idx;
                       return (
@@ -282,20 +283,20 @@ export default function HeroV2() {
                           key={p.id}
                           type="button"
                           onClick={() => setActivePrompt(idx)}
-                          className={`text-left p-2 sm:p-2.5 border-2 border-black transition-all cursor-pointer font-mono select-none group flex flex-col justify-between min-h-[60px] sm:min-h-[68px] ${
+                          className={`text-left p-2.5 sm:p-3 border-2 border-black transition-all cursor-pointer font-mono select-none group flex flex-col justify-between min-h-[64px] sm:min-h-[72px] ${
                             isActive
                               ? "bg-black text-white shadow-[3px_3px_0px_0px_rgba(255,70,45,1)] translate-x-[1px] translate-y-[1px]"
                               : "bg-white text-black hover:bg-zinc-50 hover:border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5"
                           }`}
                         >
                           <div
-                            className={`text-[8.5px] sm:text-[9px] font-black tracking-wider uppercase mb-1 shrink-0 ${
+                            className={`text-[8.5px] sm:text-[9.5px] font-black tracking-wider uppercase mb-1 shrink-0 ${
                               isActive ? "text-[#FF462D]" : "text-zinc-500"
                             }`}
                           >
                             {p.badge}
                           </div>
-                          <div className="text-[9.5px] sm:text-[10.5px] font-black tracking-tight leading-snug uppercase break-words">
+                          <div className="text-[10px] sm:text-[11px] font-black tracking-tight leading-snug uppercase break-words">
                             {p.promptLabel}
                           </div>
                         </button>
@@ -306,7 +307,7 @@ export default function HeroV2() {
               </motion.div>
 
               {/* VIEW WORK CTA & Flagship Proof Chip */}
-              <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-0.5">
+              <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2 sm:pt-3">
                 <Link
                   href="#work"
                   onClick={(e) => {
