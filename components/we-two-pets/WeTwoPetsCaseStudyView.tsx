@@ -40,6 +40,7 @@ import {
 import EditorialTrustBento from "./EditorialTrustBento";
 import PetCareGuidesShowcase from "./PetCareGuidesShowcase";
 import WeTwoPetsDesignSystemSection from "./WeTwoPetsDesignSystemSection";
+import WeTwoPetsCodeShowcase from "./WeTwoPetsCodeShowcase";
 import CaseStudyFooterNav from "@/components/CaseStudyFooterNav";
 
 function SectionWindow({
@@ -452,6 +453,26 @@ export default function WeTwoPetsCaseStudyView() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Real Multi-Agent Code Snippets & Architecture */}
+          <div className="pt-2">
+            <div className="flex items-center gap-2 mb-2 font-mono text-[10px] uppercase font-bold tracking-wider text-zinc-500">
+              <span className="w-2 h-2 bg-[#FF462D] inline-block" />
+              <span>PRODUCTION CODEBASE INSPECTION · MULTI-AGENT INGESTION &amp; GOVERNANCE</span>
+            </div>
+            <WeTwoPetsCodeShowcase />
+          </div>
+
+          {/* Hard Business & Regulatory Constraint Callout: The No-Food Policy */}
+          <div className="border-2 border-black bg-[#FAF9F5] p-4 sm:p-5 shadow-[3px_3px_0_0_#000]">
+            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase text-[#FF462D]">
+              <span className="px-2 py-0.5 bg-[#FF462D] text-white text-[10px] font-black">LEGAL CONSTRAINT</span>
+              <span>Why We Two Pets Strictly Excluded Pet Food &amp; Treats</span>
+            </div>
+            <p className="mt-2 text-xs sm:text-sm text-zinc-700 leading-relaxed">
+              Early competitor research revealed that importing animal-origin food into India mandates Sanitary Import Permits (SIP) and mandatory AQCS quarantine inspections. Building a brand on gray-market food imports creates severe liability. By engineering strict keyword vetoes into our ingestion taxonomy, the AI pipeline permanently rejects all consumable food, treats, and animal-origin chews—focusing 100% of our catalog on durable gear, calming furniture, smart enrichment, and travel safety.
+            </p>
           </div>
 
           {/* Codebase Deep-Dive: Scoring Formula & Real-World Guardrails */}

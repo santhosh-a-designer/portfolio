@@ -88,7 +88,7 @@ const timeline = [
 ];
 
 const highlights = [
-  { icon: GraduationCap, label: "B.Tech Information Technology", sub: "Anna University · 2016 – 2020" },
+  { icon: GraduationCap, label: "B.Tech Information Technology", sub: "Loyola-ICAM College of Engineering and Technology · 2016 – 2020" },
   { icon: IdentificationCard, label: "Advanced UX UI Design Certification", sub: "Aspira Design Institute · UX Program" },
 ];
 
