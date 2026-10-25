@@ -1,0 +1,29 @@
+Dear Intileo Hiring Team,
+
+I am writing to express my strong interest in the UI UX Developer position at Intileo Technologies in Chennai. With 6+ years of experience bridging user-centered design, scalable Figma design systems, and practical frontend development, your search for a professional who unites rigorous UX research with practical HTML/CSS implementation is an exact match for my background.
+
+Here is how my experience aligns directly with your core requirements:
+
+1. The "Design + Development" Hybrid:
+Holding a B.Tech in Information Technology, I do not stop at wireframes or static UI. I combine deep Figma craft (design tokens, auto layout, component libraries) with hands-on fluency in HTML5, CSS3, Bootstrap, React.js, Java, and SQL. This ensures that every design I create is technically feasible and bridges the gap between design concepts and production code with zero handoff friction.
+
+2. UX Research, Usability Testing & Data Analytics:
+I have led end-to-end qualitative and quantitative research methodologies—conducting user interviews, user journey mapping, and unmoderated usability testing via Maze. Furthermore, I work with Tableau for order and funnel analytics (featured in my Vidya’s Kitchen case study) to ensure design decisions are grounded in real operational data.
+
+3. International Team Collaboration & Proven Impact:
+At Parla Retail, I worked directly with UK product leadership and our US enterprise retail client, Nebraska Furniture Mart (NFM). I architected the "Show & Sell" interactive video consultation platform and an integrated appointment scheduler, delivering a sales-reported +31% lift in booking completion and -26% drop-off reduction. Communicating design rationale clearly across distributed engineering and business stakeholders is second nature to me.
+
+4. Location & Hybrid Readiness:
+I am permanently based in Chennai and fully aligned with your hybrid model (operating from the office on Tuesday, Wednesday, and Thursday). I welcome your 3-round technical assessment and look forward to walking you through my live products and code.
+
+My interactive portfolio and case studies are live at: https://designbysanthosh.com
+
+Thank you for your time and consideration. I look forward to connecting with your team.
+
+Warm regards,
+
+Santhosh A
+Chennai, India | +91 99412 92729
+santhosh.a.designer@gmail.com
+Portfolio: https://designbysanthosh.com
+LinkedIn: https://linkedin.com/in/santhosh-designer

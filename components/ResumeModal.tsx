@@ -17,7 +17,8 @@ import { useLenis } from "@/components/LenisProvider";
 
 const DEFAULT_FILENAME = "Santhosh-A-Resume";
 const RESUME_PDF_PATH = "/Santhosh-A-Resume.pdf";
-const RESUME_PREVIEW_IMG = "/resume-preview.webp";
+const RESUME_PREVIEW_P1 = "/resume-preview-p1.webp";
+const RESUME_PREVIEW_P2 = "/resume-preview-p2.webp";
 
 function downloadResumePdf() {
   const a = document.createElement("a");
@@ -135,7 +136,7 @@ export default function ResumeModal({
                   id="resume-modal-title"
                   className="text-[11px] sm:text-xs font-black uppercase tracking-wider truncate"
                 >
-                  // CURRICULUM_VITAE / [A4 · 1_PAGE]
+                  // CURRICULUM_VITAE / [A4 · 2_PAGES]
                 </h2>
               </div>
 
@@ -219,28 +220,71 @@ export default function ResumeModal({
                 backgroundSize: "20px 20px",
               }}
             >
-              {/* White A4 Paper Card with 2px Brutalist Border */}
-              <div
-                style={{
-                  width: `${Math.round(620 * (zoomLevel / 100))}px`,
-                  maxWidth: "100%",
-                  transition: "width 0.15s ease-out",
-                }}
-                className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden shrink-0 aspect-[2314/3275] relative w-full"
-              >
-                {!imgError ? (
-                  <Image
-                    src={RESUME_PREVIEW_IMG}
-                    alt="Santhosh A — UX/UI Designer & Developer Resume Preview"
-                    fill
-                    priority
-                    unoptimized
-                    sizes="(max-width: 768px) 100vw, 680px"
-                    className="object-contain object-top"
-                    onError={() => setImgError(true)}
-                  />
-                ) : (
-                  /* Fallback to responsive PDF embed / object if webp fails */
+              {!imgError ? (
+                <>
+                  {/* Page 1 */}
+                  <div
+                    style={{
+                      width: `${Math.round(620 * (zoomLevel / 100))}px`,
+                      maxWidth: "100%",
+                      transition: "width 0.15s ease-out",
+                    }}
+                    className="flex flex-col items-center shrink-0 w-full"
+                  >
+                    <div className="w-full flex items-center justify-between font-mono text-[9.5px] uppercase font-bold text-zinc-600 mb-1 px-1">
+                      <span>// PAGE 01 OF 02</span>
+                      <span>SUMMARY &amp; RECENT EXPERIENCE</span>
+                    </div>
+                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden aspect-[2314/3275] relative w-full">
+                      <Image
+                        src={RESUME_PREVIEW_P1}
+                        alt="Santhosh A — Product Designer & Design Engineer Resume Page 1"
+                        fill
+                        priority
+                        unoptimized
+                        sizes="(max-width: 768px) 100vw, 680px"
+                        className="object-contain object-top"
+                        onError={() => setImgError(true)}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Page 2 */}
+                  <div
+                    style={{
+                      width: `${Math.round(620 * (zoomLevel / 100))}px`,
+                      maxWidth: "100%",
+                      transition: "width 0.15s ease-out",
+                    }}
+                    className="flex flex-col items-center shrink-0 w-full mt-2"
+                  >
+                    <div className="w-full flex items-center justify-between font-mono text-[9.5px] uppercase font-bold text-zinc-600 mb-1 px-1">
+                      <span>// PAGE 02 OF 02</span>
+                      <span>PARLA, INTELLEMO &amp; EDUCATION</span>
+                    </div>
+                    <div className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden aspect-[2314/3275] relative w-full">
+                      <Image
+                        src={RESUME_PREVIEW_P2}
+                        alt="Santhosh A — Product Designer & Design Engineer Resume Page 2"
+                        fill
+                        unoptimized
+                        sizes="(max-width: 768px) 100vw, 680px"
+                        className="object-contain object-top"
+                        onError={() => setImgError(true)}
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : (
+                /* Fallback to responsive PDF embed / object if webp fails */
+                <div
+                  style={{
+                    width: `${Math.round(620 * (zoomLevel / 100))}px`,
+                    maxWidth: "100%",
+                    transition: "width 0.15s ease-out",
+                  }}
+                  className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden shrink-0 aspect-[2314/3275] relative w-full"
+                >
                   <object
                     data={`${RESUME_PDF_PATH}#toolbar=0&navpanes=0&scrollbar=0`}
                     type="application/pdf"
@@ -251,8 +295,8 @@ export default function ResumeModal({
                       <p className="text-[11px] text-zinc-500 mb-4">Click below to download the high-resolution PDF</p>
                     </div>
                   </object>
-                )}
-              </div>
+                </div>
+              )}
             </div>
 
             {/* Modal Footer Bar — Theme Yellow Download Button with safe area padding */}
