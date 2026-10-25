@@ -7,23 +7,22 @@ const SHOWREEL_MP4 = "/case-studies/parla/Irasus.mp4";
 export const IRASUS_UX_SHORT = {
   projectLabel: "Project 2",
   projectTitle: "iRasus",
-  thirdBlockTitle: "Design",
-  tools: "Figma",
+  thirdBlockTitle: "System & Architecture",
+  tools: "Figma · Telemetry UI · Design System",
   duration: "Sept 2024 — Dec 2024",
-  thirdInfoLabel: "Client link",
-  thirdInfoFallback: "— (no public URL for this work)",
+  thirdInfoLabel: "Platform",
+  thirdInfoFallback: "Internal Command Dashboard (B2B SaaS)",
   overview:
-    "AI-powered battery intelligence for global EV fleets and mega-watt stationary storage. We transformed millions of raw, chaotic telemetry data points into an ultra-clean, real-time command dashboard that operators and fleet managers can act on in seconds.",
+    "iRasus provides AI-powered battery telemetry and predictive intelligence for commercial electric vehicle fleets and mega-watt stationary energy storage systems. Fleet operations centers monitor millions of high-frequency sensor streams across distributed batteries in real time.\n\nThe core UX challenge was overcoming severe operator alert fatigue. When monitoring thousands of live battery packs, raw data feeds quickly overwhelm human operators. Our objective was structuring a calm, actionable triage interface that isolates thermal and electrical anomalies in seconds.",
   uxUi:
-    "Designed mission-critical telemetry views: instantaneous pack health triage, geolocated battery thermal maps, and seamless multi-level drill-downs (Fleet ➔ Vehicle ➔ Pack ➔ Cell) to catch thermal anomalies before catastrophic failure.",
+    "Designed a 3-tier progressive disclosure hierarchy allowing operators to transition from broad fleet health to isolated cell diagnostics seamlessly:\n\n• Tier 1 (Fleet Health Triage): High-level operational board grouping vehicles by urgency (Normal, Advisory, Critical) rather than raw sensor figures, allowing instant morning prioritization.\n• Tier 2 (Telemetry Diagnostics): Geolocated thermal curves, charge-discharge cycle overlays, and State of Health (SoH) degradation charts benchmarked against fleet baselines.\n• Tier 3 (Cell-Level Fault Isolation): Deep-dive matrix mapping individual battery cells, enabling engineers to identify abnormal internal resistance and localized overheating before thermal runaway occurs.",
   development:
-    "Engineered a high-density, low-latency Figma design system: pixel-perfect data grids, customizable threshold charts, and dark-mode operational palettes ready for continuous 24/7 industrial monitoring.",
+    "Engineered a high-density, low-latency Figma design system built for continuous 24/7 command operations:\n\n• Command Room Dark Theme: Carefully calibrated WCAG AAA contrast tokens for warning badges to reduce ocular fatigue during extended night shifts.\n• Dense Data Grids: Compact tabular views and customizable threshold filters tested for large multi-monitor command walls down to field diagnostic laptops.\n• Resilient Live Telemetry States: Designed micro-states for delayed sensor packets, hardware disconnect indicators, and timestamp synchronization status.",
   marketingStats: [
     { label: "Batteries tracked", value: "7,000+" },
     { label: "Energy managed", value: "2 GWh" },
-    { label: "Fossil fuel saved", value: "730K ltr/yr" },
-    { label: "CO₂ avoided", value: "1.06K tn/yr" },
     { label: "Buses & vehicles", value: "2,000+" },
+    { label: "Design System", value: "High-Density" },
   ],
   showreel: {
     src: SHOWREEL_MOV,

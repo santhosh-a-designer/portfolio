@@ -6,48 +6,54 @@ const BASE = "/project-snippets/indiaone-atm";
 export const INDIAONE_ATM_UX_SHORT = {
   projectLabel: "Project 3",
   projectTitle: "IndiaOne ATM Manager",
-  thirdBlockTitle: "Design",
-  tools: "Figma · Mobile app (flows & UI)",
+  thirdBlockTitle: "Interaction & System",
+  tools: "Figma · Mobile App UI · Field UX",
   duration: "2024 — 2025",
   thirdInfoLabel: "Access",
-  thirdInfoFallback: "Client-only — no public link",
+  thirdInfoFallback: "Client-only — Enterprise Field App",
   overview:
-    "Replacing messy paper notebooks with a tamper-proof mobile workflow. Field teams manually tracked millions in cash movement, cassette replenishment, and loadmen across rural ATMs with zero visibility. We designed a rapid, mistake-proof digital ledger tailored for high-stakes cash operations.",
+    "IndiaOne ATM is India's largest White Label ATM network, servicing rural and semi-urban tier-3 and tier-4 locations. Field teams historically tracked cash replenishment, cassette loading, and daily machine reconciliation on manual paper registers—leading to miscounts, delayed maintenance, and zero central operational visibility.\n\nThe UX mission was to design an error-proof, tamper-evident mobile operational companion that field personnel could operate with speed and confidence under direct sunlight, dusty outdoor environments, and intermittent rural connectivity.",
   uxUi:
-    "Designed two frictionless doorways: 'Admin' (fleet maps, real-time cassette status, and loadman monitoring) and 'Loadman' (fast denomination logging, bank cross-checks, and instant deposit confirmation). Zero clutter, no deep menus — every action is designed for speed and error prevention under bright sunlight.",
+    "Structured two clean, role-tailored doorways with zero nested navigation:\n\n• Loadman Doorway: Engineered for fast on-site cash cassette loading. Features high-contrast, oversized touch targets for outdoor glare legibility, instant denomination count calculators (₹100, ₹200, ₹500), and a mandatory dual-step confirmation modal that reconciles physical cassette entries against bank dispatch records before locking.\n\n• Admin Doorway: A real-time command dashboard giving cluster managers live fleet cassette statuses, route dispatch schedules, loadman check-ins, and immediate discrepancy alerts. Complex operational data is reduced to high-priority action cards.",
   development:
-    "Built a high-contrast, scalable Figma UI system with rigid touch targets and offline-first mobile states. Handed off complete interaction specifications and component libraries for rapid enterprise deployment.",
+    "Engineered a resilient interaction system tailored for field ergonomics:\n\n• Sunlight Legibility: Strict high-contrast color tokens and 48dp+ tap targets designed for quick operation on budget Android devices.\n• Offline-First State Machine: Built-in local caching ensuring zero data loss when 2G/3G connectivity drops at remote highway kiosks, automatically syncing securely upon reconnection.\n• Error Prevention Architecture: Explicit non-happy path flows covering cash miscount alerts, vault sensor warnings, and supervisor override approvals.",
+  marketingStats: [
+    { label: "Deployment", value: "Tier-3/4 Rural" },
+    { label: "Architecture", value: "Offline-First" },
+    { label: "Primary Roles", value: "Admin & Loadman" },
+    { label: "Design Focus", value: "Error-Tolerant UI" },
+  ],
   showreelVideoPairs: [
     {
-      sectionTitle: "Admin",
+      sectionTitle: "Admin Workflow",
       videos: [
         {
           id: "atm-1",
           label: "Atm-1",
-          caption: "Adding a new loadman",
+          caption: "Adding & assigning a new loadman",
           src: `${BASE}/Atm-1.mp4?v=real-atm-1`,
         },
         {
           id: "atm-2",
           label: "Atm-2",
-          caption: "See who deposited, and in which denominations",
+          caption: "Real-time deposit tracking & denomination audit",
           src: `${BASE}/Atm-2.mp4?v=real-atm-2`,
         },
       ],
     },
     {
-      sectionTitle: "Loadman",
+      sectionTitle: "Loadman Workflow",
       videos: [
         {
           id: "atm-3",
           label: "Atm-3",
-          caption: "Refill denomination inputs before depositing",
+          caption: "High-contrast cash denomination inputs",
           src: `${BASE}/Atm-3.mp4?v=real-atm-3`,
         },
         {
           id: "atm-4",
           label: "Atm-4",
-          caption: "Cross-check with bank values, confirm deposit; admin gets notified",
+          caption: "Bank slip cross-check, confirmation & dispatch notify",
           src: `${BASE}/Atm-4.mp4?v=real-atm-4`,
         },
       ],
