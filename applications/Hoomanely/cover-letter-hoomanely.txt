@@ -1,0 +1,41 @@
+Hoomanely Application Cheat Sheet & Cover Letter
+Role: Senior Product Designer
+Applicant: Santhosh A
+Portfolio: https://designbysanthosh.com
+Email: santhosh.a.designer@gmail.com | Phone: +91 99412 92729
+
+--------------------------------------------------------------------------------
+FIELD-BY-FIELD FORM ENTRIES (FOR HOOMANELY CAREERS PAGE):
+--------------------------------------------------------------------------------
+
+1. FIRST NAME *: Santhosh
+2. LAST NAME *: A
+3. EMAIL ADDRESS *: santhosh.a.designer@gmail.com
+4. PHONE NUMBER *: 9941292729
+5. TOTAL WORK EXPERIENCE (IN YEARS) *: 6
+6. RELEVANT WORK EXPERIENCE (IN YEARS) *: 6
+7. HIGHEST EDUCATIONAL QUALIFICATION *: B.Tech in Information Technology
+8. WORKED ON A PRODUCT SERVING THE US MARKET? *: Yes (Selected US enterprise client: Nebraska Furniture Mart at Parla)
+9. WORKED ON A HARDWARE PRODUCT? *: Yes (Hardware IoT telemetry dashboards for iRasus Technologies & ATM franchise companion UX)
+10. ARE YOU A PET PARENT? *: Yes (or No based on your personal preference)
+11. CURRENT CTC (LPA) *: (Enter your current CTC, e.g. 10 - 12)
+12. EXPECTED CTC (LPA) *: 18 - 22 (or your preferred number)
+13. CURRENT LOCATION *: Chennai
+14. NOTICE PERIOD / EARLIEST JOINING DATE *: Immediate / 15 Days
+15. LINKEDIN PROFILE URL *: https://linkedin.com/in/santhosh-designer
+16. GITHUB LINK: https://github.com/santhosh-a-designer
+17. PORTFOLIO LINK: https://designbysanthosh.com
+18. HAVE YOU DESIGNED AND SHIPPED A NATIVE OR RESPONSIVE MOBILE EXPERIENCE? *: Yes
+19. UPLOAD YOUR CV *: applications/Hoomanely/A_Santhosh_Resume_Hoomanely.pdf
+
+--------------------------------------------------------------------------------
+WHY ARE YOU A GOOD FIT FOR THIS ROLE? * (COPY & PASTE):
+--------------------------------------------------------------------------------
+
+I bring a rare intersection of direct pet ecosystem domain experience and high-consequence hardware telemetry UX:
+
+1. Pet Platform Domain Experience: Through We Two Pets (wetwopets.com), I architected an end-to-end pet care and commerce platform from scratch, designing empathetic discovery flows, transparent order tracking, and high-trust product education tailored specifically for pet parents.
+
+2. Connected Hardware Telemetry & Alert Fatigue Triage: At iRasus Technologies, I designed real-time multi-sensor telemetry dashboards for connected battery systems. I created a 3-tier progressive disclosure model (Fleet Health Triage → Diagnostic Curves → Cell Diagnostics) engineered specifically to eliminate operator alert fatigue and prevent false panic—the exact UX challenge Hoomanely solves when translating raw sensor feeds into calm, actionable pet health signals.
+
+3. Cross-Functional Execution with Leadership: Over 6+ years of design experience, including designing core interactive commerce platforms for US enterprise retail (Nebraska Furniture Mart, achieving +31% booking completion), and possessing a B.Tech in IT with practical React and Supabase knowledge, I bridge the gap between design strategy, hardware engineering, and business growth. I am excited to work directly with Hoomanely's founders to shape the future of continuous pet health monitoring.

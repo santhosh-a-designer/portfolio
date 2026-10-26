@@ -1,0 +1,55 @@
+Cover Letter & Application Pitch — Product Designer II at AiPrise
+Applicant: Santhosh A
+Portfolio: https://designbysanthosh.com
+Email: santhosh.a.designer@gmail.com | Phone: +91 99412 92729
+Location: Chennai, India (Available for Bengaluru on-site)
+
+--------------------------------------------------------------------------------
+APPLICATION COVER LETTER / NOTE:
+--------------------------------------------------------------------------------
+
+Dear AiPrise Hiring Team,
+
+I am writing to express my strong enthusiasm for the Product Designer II role at AiPrise. What immediately stood out to me about your team is your explicit commitment to "systems over screens and clarity over cosmetics"—designing for the reality that in global compliance infrastructure (KYB, KYC, AML, sanctions), the hard part is the information architecture, rule logic, and edge cases, not superficial UI styling.
+
+Over the past 6+ years as a Product Designer and Design Engineer, I have built my practice around tackling data-dense, mission-critical surfaces where usability and trust are non-negotiable:
+
+1. Operational Workflows & Mistake-Proof UI:
+In my UX design work for an ATM franchise operator managing IndiaOne ATM kiosks, I designed a specialized mobile operational app to eliminate manual paper notebook logs. By creating dedicated doorways for the franchise admin and field loadmen, high-contrast denomination calculators, and dual-step bank slip reconciliation modals, I made cash loading and audit tracking mistake-proof for field staff.
+
+2. Complex Data Density & Rule Alerting:
+At iRasus Technologies, I architected high-density industrial telemetry dashboards for EV battery systems (monitoring State of Health, cell voltages, and thermal variations). I structured multi-level rule configurations, severity-based risk flagging, and real-time alert queues—helping operations engineers catch anomalies before hardware failure.
+
+3. End-to-End Enterprise SaaS & Scalable Design Systems:
+From designing an enterprise live consultation and queue-orchestration platform for Parla Retail (driving +31% booking completion and -26% drop-off reduction for US enterprise retail partner Nebraska Furniture Mart) to architecting modular design systems using Figma variables, design tokens, and structured component states, I ensure designs anticipate non-happy paths, network drops, and permission hierarchies.
+
+4. Engineering Empathy & Technical Grounding:
+Holding a B.Tech in Information Technology and possessing practical experience with React.js, Supabase, SQL, and Java, I bridge the gap between product strategy and engineering execution. I speak the same language as software engineers and forward-deployed engineering teams, ensuring designs are technically feasible and resilient in production.
+
+AiPrise is solving one of the most critical challenges in modern fintech—making global compliance feel simple, automated, and dependable across 200+ countries. I would welcome the opportunity to bring my systems thinking, edge-case rigor, and product velocity to the team in Bengaluru.
+
+Thank you for your time and consideration.
+
+Warm regards,
+
+Santhosh A
+Product Designer & Design Engineer
+Portfolio: https://designbysanthosh.com
+LinkedIn: https://linkedin.com/in/santhosh-designer
+Phone: +91 99412 92729
+Email: santhosh.a.designer@gmail.com
+
+--------------------------------------------------------------------------------
+QUICK-COPY SCREENING / SHORT-ANSWER RESPONSES:
+--------------------------------------------------------------------------------
+
+Q1: Why AiPrise?
+"AiPrise tackles one of the most intellectually demanding problems in B2B tech: turning global compliance, multi-source verification (KYB/KYC/AML), and AI risk workflows into calm, intuitive products. I love working on data-dense systems where the focus is 'systems over screens' and where edge cases directly impact customer trust and business velocity."
+
+Q2: Which project in your portfolio best demonstrates your ability to design for complex, data-heavy systems?
+"Two projects stand out:
+1. IndiaOne ATM Field & Replenishment Workflows: Designing dual-role field maintenance vs. cash replenishment flows under strict regulatory and hardware fault conditions, eliminating technician error through clear state isolation and recovery paths.
+2. iRasus Telemetry & Rule Monitoring: Designing real-time battery analytics dashboards with high-density data tables, dynamic threshold rules, and severity-tagged alert queues for operations engineers."
+
+Q3: What is your current work authorization and availability for Bengaluru?
+"I am an Indian citizen based in India, available immediately with full flexibility for an on-site / hybrid role in Bengaluru."

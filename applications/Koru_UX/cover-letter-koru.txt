@@ -1,0 +1,30 @@
+Dear Koru UX Hiring Team,
+
+I am writing to express my strong interest in the Senior UI/UX Designer role (DES-2-082026) at Koru UX Design LLP. Having followed Koru's work as India's premier Enterprise & HealthTech UX agency, I am deeply inspired by your focus on untangling complex enterprise workflows into calm, user-centered digital products. With 6+ years of experience leading end-to-end UX architecture, scalable design systems, and frontend feasibility, I am confident I can make an immediate, high-impact contribution to your client squads.
+
+Here is how my background aligns directly with what you are looking for:
+
+1. Enterprise & Complex Workflow Architecture:
+At Parla Retail, I owned product design for our flagship "Show & Sell" interactive video consultation suite and automated appointment scheduler for US enterprise client Nebraska Furniture Mart (NFM). Navigating complex enterprise scheduling constraints, live WebRTC video, and in-call checkout, our sales team reported a +31% lift in booking completion and a -26% reduction in drop-offs. Additionally, at iRasus Technologies and IndiaOne ATM, I led UI/UX research to distill dense multi-sensor IoT telemetry and hardware diagnostics into glanceable, high-priority alert cards.
+
+2. HealthTech & Telemetry Mental Models:
+Designing high-frequency telemetry dashboards, threshold alerts, and automated scheduling mirrors the exact cognitive load challenges found in HealthTech, remote care monitoring, and clinical decision support. I design with deep empathy for high-stress environments where clarity, speed, and contrast are critical to outcomes.
+
+3. Design Systems, Accessibility & Frontend Bridge:
+I have architected tokenized Figma design systems (variables, auto layout, component states, spacing grids) ensuring multi-platform consistency. Holding a B.Tech in Information Technology, I have practical fluency in HTML, CSS, React, and WCAG 2.1 AA accessibility standards—meaning I design with technical feasibility built-in and speak the same language as engineering squads.
+
+4. Design Mentorship & Team Leadership:
+Mentorship is a core part of my professional identity. Since April 2024, I have served as a UX/UI Mentor at FITA Academy, mentoring over 100+ aspiring designers through design critiques, portfolio reviews, and user research methodologies. I take genuine joy in elevating junior designers and fostering team craft.
+
+My complete case studies, interactive prototypes, and design systems are live at: https://designbysanthosh.com
+
+I would welcome the opportunity to discuss how my enterprise design and design engineering background can support Koru UX’s clients and mission.
+
+Warm regards,
+
+Santhosh A
+Chennai, India (Remote Ready)
++91 99412 92729
+santhosh.a.designer@gmail.com
+Portfolio: https://designbysanthosh.com
+LinkedIn: https://linkedin.com/in/santhosh-designer
