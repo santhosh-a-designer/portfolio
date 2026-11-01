@@ -10,6 +10,7 @@ import { useRef } from "react";
 import ProjectWindowStack, { ProjectItem } from "./ProjectWindowStack";
 import GraphicDesignModal from "./GraphicDesignModal";
 import UxUiShortsModal, { UX_SHORTS_DATA } from "./UxUiShortsModal";
+import RapidAiSprintBlock from "./RapidAiSprintBlock";
 import { POSTER_PROJECTS } from "@/lib/graphicDesignProjects/posterProjects";
 
 const clientLogos = [
@@ -168,6 +169,9 @@ export default function SelectedWorkV2() {
             <span className="uppercase font-bold tracking-wider">STACKING WINDOWS SCROLL ↓</span>
           </div>
         </motion.div>
+
+        {/* ─── 24-Hour Rapid AI Sprint Feature Block (STAR Method) ─── */}
+        <RapidAiSprintBlock />
 
         {/* ─── Dedicated "New Window" Stacking Project Cards ─── */}
         <div className="w-full bg-[#F4F4F0]">
