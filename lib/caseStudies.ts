@@ -1217,17 +1217,19 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         step: "02",
-        title: "Bot, PWA, and payment as one system",
+        title: "Bot, PWA, and payment as one system — design to code with Cursor AI",
         content:
-          "I sketched the bot as the spine for speed-to-order, the PWA as the ‘premium’ face of the same inventory, and Razorpay as the non-negotiable cleanmoney moment. TypeScript and React let me keep types aligned across the surfaces as they evolve—where I leaned into build, not just specs.",
+          "I sketched the bot as the spine for speed-to-order, the PWA as the ‘premium’ face of the same inventory, and Razorpay as the non-negotiable clean-money moment. Then I built it — using Cursor AI to ship the WhatsApp Cloud API webhook handlers, Razorpay payment confirmation events, and Supabase real-time order sync all within the same design sprint. TypeScript and React kept types aligned between the PWA, dashboard, and bot surfaces as they evolved. This was the project where I stopped handing specs to a developer and became the design-engineer in one loop.",
         uxMethods: [
           "Conversational UX",
           "Short, plain-language phrasing in chat",
           "Mobile PWA heuristics (thumb zones, load)",
           "Payment UX patterns (UPI, failure, retry)",
+          "Cursor AI — design-to-code in one sprint",
+          "Webhook + event-driven UX (WhatsApp Cloud API, Razorpay)",
         ],
         outcome:
-          "A coherent plan for two entry points and one kitchen truth, with room to grow without rewriting everything.",
+          "A coherent full-stack system: two customer entry points, one live kitchen dashboard, API events driving every state change — shipped by one designer-engineer in a single sprint.",
         imageSlots: ["Bot flow (future screen recording)", "PWA key screens (replace placeholders)"],
       },
       {

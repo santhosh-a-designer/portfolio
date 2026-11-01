@@ -524,6 +524,80 @@ export default function WeTwoPetsCaseStudyView() {
         <UserFlowDiagram flows={weTwoFlows} />
       </SectionWindow>
 
+      {/* Section 05B: Design Decisions — Why Behind the What */}
+      <SectionWindow num="05b" title="Design Decisions: Why Behind Every Choice">
+        <p className="mb-8 max-w-3xl text-sm leading-relaxed text-zinc-700 sm:text-base">
+          Every constraint in We Two Pets was a design decision — not a technical limitation. Here's the reasoning behind the three biggest calls that shaped the product.
+        </p>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {/* Decision 1 */}
+          <div className="flex flex-col border-2 border-black bg-white shadow-[3px_3px_0_0_#000]">
+            <div className="border-b-2 border-black bg-[#FF462D] px-4 py-3">
+              <p className="font-mono text-[10px] font-black uppercase tracking-widest text-white">Decision 01</p>
+              <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
+                Two human veto votes — not one, not AI alone
+              </h4>
+            </div>
+            <div className="flex flex-1 flex-col p-4">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">User Need</p>
+              <p className="text-xs leading-relaxed text-zinc-700 mb-3">
+                Pet owners buying imported gear for the first time need to trust the curation completely. One approver creates a single point of bias. AI alone creates a single point of hallucination.
+              </p>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
+              <p className="text-xs leading-relaxed text-zinc-700">
+                Two humans must vote &quot;yes&quot; before any product goes live. The AI quality score is advisory — it surfaces candidates, it doesn't publish them. This keeps the human bar the final gate, which is what the brand promise requires.
+              </p>
+            </div>
+          </div>
+
+          {/* Decision 2 */}
+          <div className="flex flex-col border-2 border-black bg-white shadow-[3px_3px_0_0_#000]">
+            <div className="border-b-2 border-black bg-[#0D2E28] px-4 py-3">
+              <p className="font-mono text-[10px] font-black uppercase tracking-widest text-white">Decision 02</p>
+              <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
+                pHash vision check before a product even reaches the desk
+              </h4>
+            </div>
+            <div className="flex flex-1 flex-col p-4">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">Constraint</p>
+              <p className="text-xs leading-relaxed text-zinc-700 mb-3">
+                Indian pet parents lose trust fast if they find the same product cheaper on Amazon.in or HUFT. Title matching failed immediately — the same vest is called a &quot;cooling jacket&quot; on one platform and a &quot;summer coat&quot; on another.
+              </p>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
+              <p className="text-xs leading-relaxed text-zinc-700">
+                Combined perceptual image hashing (pHash) with NLP overlap to catch what titles hide. A hit on any Indian competitor auto-rejects the candidate before a human wastes time reviewing it.
+              </p>
+            </div>
+          </div>
+
+          {/* Decision 3 */}
+          <div className="flex flex-col border-2 border-black bg-white shadow-[3px_3px_0_0_#000]">
+            <div className="border-b-2 border-black bg-black px-4 py-3">
+              <p className="font-mono text-[10px] font-black uppercase tracking-widest text-[#FAED00]">Decision 03</p>
+              <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
+                1-page OTP checkout — no email/password, no redirect to Amazon
+              </h4>
+            </div>
+            <div className="flex flex-1 flex-col p-4">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">User Need</p>
+              <p className="text-xs leading-relaxed text-zinc-700 mb-3">
+                Indian mobile-first shoppers abandon email-password forms. Affiliate redirect to Amazon would have made us a blog with a logo — no order data, no repeat purchase loop, no brand.
+              </p>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
+              <p className="text-xs leading-relaxed text-zinc-700">
+                Built a single-URL checkout flow: cart → phone OTP → Cashfree or COD. Cursor AI + Next.js API routes handled the Cashfree webhook events and OTP verification. We own every order on our domain, which is the whole business model.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <QuoteBlock
+          quote="The AI doesn't publish. Two people vote. A constraint set by the brand promise, not the tech stack — and the architecture follows from that."
+          author="Santhosh A"
+          role="Design Engineer"
+        />
+      </SectionWindow>
+
       {/* Section 06: Authentic UI Component System */}
       <SectionWindow num="06" title="Authentic UI Component Library &amp; States" allowOverflow>
         <div className="space-y-4">
