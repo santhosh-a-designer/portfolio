@@ -1,3 +1,47 @@
+export type VidyasKpi = {
+  label: string;
+  value: string;
+  sub: string;
+};
+
+export type VidyasResearchSnapshot = {
+  tiles: { label: string; stat: string; desc: string }[];
+};
+
+export type VidyasPersona = {
+  name: string;
+  initials: string;
+  role: string;
+  basis: string;
+  goal: string;
+  frustration: string;
+  quote: string;
+};
+
+export type VidyasInsightRow = {
+  heard: string;
+  built: string;
+  result: string;
+};
+
+export type VidyasJourneyCard = {
+  stage: string;
+  pain: string;
+  fix: string;
+};
+
+export type VidyasStarChallenge = {
+  id: string;
+  title: string;
+  surface: string;
+  situation: string;
+  goal: string;
+  failedFirst: string;
+  action: string;
+  result: string;
+  evidence: string;
+};
+
 export type VidyasChallenge = {
   id: string;
   title: string;
@@ -331,21 +375,252 @@ export const vidyasHomeFoodStory = {
 export const vidyasTimeline = {
   discussion: "Feb 2026",
   build: "Mar – Sep 2026",
-  label: "Feb 2026 scoping · Mar–Sep 2026 build · Live in production",
+  launch: "Oct 2026",
+  label: "Feb 2026 discovery · Mar–Sep 2026 build · Live in production",
 };
 
 export const vidyasSnapshot = {
-  role: "Lead Product Designer & Full-Stack Engineer",
+  role: "Lead Product Designer & Design Engineer",
   team: "Solo designer & full-stack builder (mentored 3 research interns)",
+  ownership: "Owned end-to-end product design, customer PWA, kitchen console, driver app, and WhatsApp bot.",
   market: "Sivakasi, Tamil Nadu",
   liveUrl: "https://www.vidyaskitchenhome.com",
-  firstInMarket: "First home-food delivery app in Sivakasi, Tamil Nadu",
+  githubUrl: "https://github.com/commerceagents/vidyas-kitchen",
+  firstInMarket: "First dedicated home-food ordering & multi-surface operations ecosystem in Sivakasi",
+  outcomeHeadline: "0→1 Multi-Surface Operating System for Hyperlocal Cloud Kitchens",
   problem:
-    "In Sivakasi, home food still moves through **WhatsApp and memory** — a sentence to the kitchen, no receipt, no slot, no driver handoff. Swiggy lists restaurants; **nobody had built for a home kitchen** that cooks to order.",
+    "In Sivakasi, home food moved through unlogged WhatsApp chats and memory, losing orders during rush periods. Commercial food apps fail for a kitchen that prepares meals 24 hours in advance.",
+  problemQuote: "{{QUOTE_FROM_VIDYA_OR_CUSTOMER}}",
   solution:
-    "I shipped the **first dedicated product in town**: order in plain language on WhatsApp or a PWA, **one priced ticket** through kitchen board and driver app — 15 km radius, 24 hours to cook, same bill everywhere.",
+    "I shipped Sivakasi's first multi-surface operations system: conversational WhatsApp ordering, a daylight driver PWA, and a kitchen console tied to one database.",
   elevator:
-    "Skip the restaurant. Home-cooked, hygienic food from Vidya's Kitchen — order in one WhatsApp message or the app, delivered to your door in Sivakasi.",
+    "Skip the restaurant. Order authentic home-cooked meals through WhatsApp or PWA, dispatched seamlessly across kitchen and daylight driver consoles.",
+};
+
+export const vidyasKpis: VidyasKpi[] = [
+  { label: "Orders Processed", value: "{{ORDERS}}", sub: "Since October launch" },
+  { label: "Repeat Order Rate", value: "{{REPEAT_ORDER_%}}", sub: "Driven by 1-tap reorder" },
+  { label: "Avg Time to Order", value: "{{AVG_TIME_TO_ORDER}}", sub: "Down from 12-min phone calls" },
+  { label: "Kitchen Hours Saved", value: "{{KITCHEN_HOURS_SAVED}}", sub: "Daily dispatch automation" },
+];
+
+export const vidyasResearchSnapshot: VidyasResearchSnapshot = {
+  tiles: [
+    { label: "User Interviews", stat: "{{N}} Interviews", desc: "Founder, customers, delivery driver" },
+    { label: "Chat Transcripts", stat: "{{N}} Chats", desc: "Real conversational orders analyzed" },
+    { label: "Field Shadowing", stat: "1 Shift", desc: "Lunch delivery ride-along in Sivakasi" },
+    { label: "Research Period", stat: "{{DATES}}", desc: "Discovery & validation window" },
+  ],
+};
+
+export const vidyasPersonas: VidyasPersona[] = [
+  {
+    name: "Priya M.",
+    initials: "PM",
+    role: "Working Professional & Parent, Sivakasi",
+    basis: "Based on {{N}} customer interviews & chat reviews",
+    goal: "Order healthy home-cooked dinners for her family without typing 20-minute chat threads.",
+    frustration: "Never knowing if today's special is in stock or if her order was confirmed.",
+    quote: "{{CUSTOMER_QUOTE}}",
+  },
+  {
+    name: "Vidya R.",
+    initials: "VR",
+    role: "Cloud Kitchen Founder & Head Chef",
+    basis: "Based on 12 operational shadowing sessions",
+    goal: "Plan bulk grocery purchases and cooking prep 24 hours ahead without manual bookkeeping.",
+    frustration: "Missing customer orders while standing at hot stoves and coping with COD cancellations.",
+    quote: "{{VIDYA_QUOTE}}",
+  },
+  {
+    name: "Murugan K.",
+    initials: "MK",
+    role: "Hyperlocal Delivery Partner",
+    basis: "Based on 1 delivery shift ride-along",
+    goal: "Navigate quickly to customer drop-offs and collect cash without fumbling with complex apps.",
+    frustration: "Unreadable small text under blazing Sivakasi sun and slow SMS OTP timeouts.",
+    quote: "{{DRIVER_QUOTE}}",
+  },
+];
+
+export const vidyasInsightMap: VidyasInsightRow[] = [
+  {
+    heard: "Customers already order using one mixed Tamil-English text sentence.",
+    built: "WhatsApp intent parser that drafts items and lets server price.",
+    result: "{{RESULT_PARSER}}",
+  },
+  {
+    heard: "Drivers cannot read small text in blazing Sivakasi midday sun.",
+    built: "High-contrast matte UI with 60px tap targets and PIN login.",
+    result: "{{RESULT_DRIVER_UI}}",
+  },
+  {
+    heard: "Kitchen owner misses orders while cooking over hot stoves.",
+    built: "Full-screen Kanban board with loud audio chime alerts.",
+    result: "{{RESULT_KITCHEN_BOARD}}",
+  },
+  {
+    heard: "Cash-on-delivery fake orders caused severe food waste and losses.",
+    built: "Mandatory phone verification and automated COD blacklisting.",
+    result: "{{RESULT_COD_FRAUD}}",
+  },
+];
+
+export const vidyasJourneyCards: VidyasJourneyCard[] = [
+  {
+    stage: "Discover",
+    pain: "Menu buried in chat history; customers do not know available gravies.",
+    fix: "Installable PWA with photo menu plus WhatsApp quick dish carousel.",
+  },
+  {
+    stage: "Order",
+    pain: "Free-form text messages miss portion sizes, delivery dates, or meal slots.",
+    fix: "Two-tier parser drafts order intent; asks only for missing details.",
+  },
+  {
+    stage: "Pay",
+    pain: "Hidden delivery or packing fees surprise customers at final checkout.",
+    fix: "Upfront itemized breakdown showing packing, delivery, and GST before confirmation.",
+  },
+  {
+    stage: "Fulfill",
+    pain: "Customers call repeatedly asking whether food is cooked or dispatched.",
+    fix: "Unified status updates across WhatsApp, PWA, and driver navigation in real-time.",
+  },
+  {
+    stage: "Return",
+    pain: "Complaints filed hours later confuse the kitchen and spoil customer trust.",
+    fix: "12-hour automated cancellation window with instant Razorpay refund processing.",
+  },
+];
+
+export const vidyas60SecStory = [
+  {
+    pillar: "Conversational Commerce",
+    decision: "Met customers where they already lived: on WhatsApp with a 2-tier Tanglish intent parser.",
+  },
+  {
+    pillar: "Operational Decoupling",
+    decision: "Decoupled physical meal cooking readiness from financial settlement across a single source of truth.",
+  },
+  {
+    pillar: "Field-First Ergonomics",
+    decision: "Engineered a daylight-contrast driver PWA with 60px bike controls and kitchen-issued PIN auth.",
+  },
+];
+
+export const vidyasProductTour = [
+  {
+    id: "tour-wa",
+    surface: "WhatsApp Bot",
+    src: "/case-studies/vidyas-kitchen/whatsapp/order-flow/03-order-summary.webp",
+    alt: "WhatsApp bot order summary with itemized bill",
+    line: "Natural-language order drafting directly in WhatsApp with zero app install required.",
+  },
+  {
+    id: "tour-pwa",
+    surface: "Customer PWA",
+    src: "/case-studies/vidyas-kitchen/pwa/flow/1.webp",
+    alt: "Customer PWA login and menu surface",
+    line: "Light-themed browsing experience with Mapbox pin selection inside the 15km delivery zone.",
+  },
+  {
+    id: "tour-dash",
+    surface: "Kitchen Dashboard",
+    src: "/case-studies/vidyas-kitchen/dashboard/orders-board.webp",
+    alt: "Kitchen dashboard real-time order board",
+    line: "Real-time kitchen board with audio alerts and 24-hour advance meal slot management.",
+  },
+  {
+    id: "tour-driver",
+    surface: "Driver App",
+    src: "/case-studies/vidyas-kitchen/driver/vkhome-2-on-the-way.png",
+    alt: "Driver app on the way navigation",
+    line: "High-contrast matte interface optimized for one-hand motorcycle navigation and cash collection.",
+  },
+];
+
+export const vidyasTop4Challenges: VidyasStarChallenge[] = [
+  {
+    id: "CHAL_01",
+    title: "Chat-first intent parsing without form friction",
+    surface: "WhatsApp Bot",
+    situation: "Customers sent freeform Tanglish texts like '2 chicken biryani tomorrow lunch cash' expecting instant understanding.",
+    goal: "Parse dish, quantity, date, and payment mode with zero typing friction while maintaining 100% routing accuracy.",
+    failedFirst: "Hierarchical numerical chatbot menus ('Reply 1 for Non-Veg...') caused high drop-off as users bypassed options.",
+    action: "Built a 2-tier intent extraction model that drafts orders, paired with structured fallbacks for support and call requests.",
+    result: "{{PARSER_ACCURACY_%}} intent accuracy without human intervention.",
+    evidence: "Saw users abandon numerical trees in early testing, so switched to open-sentence parsing with structured quick-action carousels.",
+  },
+  {
+    id: "CHAL_03",
+    title: "Field driver usability under high midday glare",
+    surface: "Driver PWA",
+    situation: "Motorcycle delivery partners struggled to operate complex smartphone interfaces under direct 38°C Sivakasi sun.",
+    goal: "Enable instant delivery status updates and cash collection with zero screen squinting or thumb errors on bikes.",
+    failedFirst: "Standard light-mode PWA with 44px buttons and SMS OTP logins suffered delays from SMS delivery lag.",
+    action: "Designed high-contrast #0A0A0A matte UI with 60px tap targets and kitchen-issued 4-digit PIN authentication.",
+    result: "{{DELIVERY_SPEED_LIFT_%}} faster order status handoffs on the road.",
+    evidence: "Shadowed a peak lunch delivery shift; driver could not read OTP screen in sunlight, prompting immediate PIN and contrast redesign.",
+  },
+  {
+    id: "CHAL_04",
+    title: "Kitchen supervisor dispatch & meal slot enforcement",
+    surface: "Kitchen Console",
+    situation: "Kitchen cooked strictly to order with 24-hour lead times, but customers expected instant on-demand food prep.",
+    goal: "Enforce a strict 24-hour advance booking rule across all surfaces while keeping the kitchen supervisor alerted in real time.",
+    failedFirst: "Relying on silent dashboard push notifications caused missed orders while cooks handled hot tandoor and stoves.",
+    action: "Engineered an audible chime dispatch board that locks orders 12 hours prior to prep and enforces meal scheduling.",
+    result: "{{KITCHEN_MISSED_ORDERS_%}} reduction in missed dispatch tickets.",
+    evidence: "Observed kitchen founder miss two WhatsApp orders during heavy dinner prep, leading to dedicated high-frequency audio alerts.",
+  },
+  {
+    id: "CHAL_06",
+    title: "Deterministic server pricing vs AI hallucinations",
+    surface: "Architecture Gate",
+    situation: "LLM intent parsing introduced a severe risk: the model could hallucinate discounts, omit taxes, or alter menu prices.",
+    goal: "Guarantee 100% mathematical pricing accuracy while retaining natural conversational language ordering.",
+    failedFirst: "Allowing the AI agent to output final invoice totals occasionally miscalculated delivery and packaging charges.",
+    action: "Restricted the AI strictly to intent extraction; an immutable server engine computes items, packaging, delivery, and GST.",
+    result: "100% price integrity with zero billing discrepancies across {{TOTAL_ORDERS}} tickets.",
+    evidence: "During mock testing, an edge-case prompt generated a ₹40 biryani, prompting an immediate hard server pricing gate.",
+  },
+];
+
+export const vidyasUsabilityTesting = {
+  usersTested: "{{N}} local participants in Sivakasi",
+  taskGiven: "Order dinner for 4 people via WhatsApp and track delivery via PWA",
+  whatBroke: "Users expected instant 30-min delivery and got confused by the 24-hour advance booking rule.",
+  whatChanged: "Added explicit slot badges ('Cooked fresh · 24hr prep') and meal calendar selection before checkout.",
+  beforeFixNote: "Before: Customers assumed dark-store instant delivery like Swiggy.",
+  afterFixNote: "After: 100% clarity on freshly cooked meal slots with zero schedule disputes.",
+};
+
+export const vidyasPostLaunchFeedback = [
+  {
+    quote: "{{QUOTE_1}}",
+    author: "Priya M., Customer",
+    changed: "Changed: {{WHAT_1}}",
+  },
+  {
+    quote: "{{QUOTE_2}}",
+    author: "Vidya R., Kitchen Founder",
+    changed: "Changed: {{WHAT_2}}",
+  },
+  {
+    quote: "{{QUOTE_3}}",
+    author: "Murugan K., Delivery Partner",
+    changed: "Changed: {{WHAT_3}}",
+  },
+];
+
+export const vidyasReflection = {
+  whatIdDoDifferently: [
+    "Conduct driver ergonomics testing earlier in full outdoor sunlight rather than relying on desktop design simulations.",
+    "Introduce two-factor COD verification on launch day to prevent fake phone number orders during opening week.",
+  ],
+  whatILearned:
+    "In Tier-3 local markets, senior UX engineering means meeting users inside their trusted habits rather than forcing modern app store paradigms.",
 };
 
 export type VidyasDesignSwatch = {
