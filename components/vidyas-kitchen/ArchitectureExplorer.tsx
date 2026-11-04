@@ -260,7 +260,7 @@ export default function ArchitectureExplorer({ tree }: Props) {
   const allOpenIds = useMemo(() => collectOpenIds(tree), [tree]);
 
   const [openIds, setOpenIds] = useState<Set<string>>(() => collectOpenIds(tree));
-  const [selectedId, setSelectedId] = useState<string | null>("flow");
+  const [selectedId, setSelectedId] = useState<string | null>("order-transition");
 
   const displayRows = useMemo(() => flattenTree(tree, openIds), [tree, openIds]);
 
@@ -290,7 +290,7 @@ export default function ArchitectureExplorer({ tree }: Props) {
       <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
         <h3 className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 flex items-center gap-2">
           <span className="w-2 h-2 rounded-sm bg-[#3178c6]" />
-          Project structure · conceptual
+          Project structure · Production Repository
         </h3>
         <div className="flex gap-2">
           <button
@@ -343,8 +343,9 @@ export default function ArchitectureExplorer({ tree }: Props) {
           <EditorPanel node={selectedNode} typing={!!selectedId} />
         </div>
 
-        <div className="px-4 py-2 bg-[#FAED00] border-t-2 border-black font-mono text-[10px] font-bold uppercase tracking-wide">
-          Click folders to expand · click files to preview · not the real repo layout
+        <div className="px-4 py-2 bg-[#FAED00] border-t-2 border-black font-mono text-[10px] font-bold uppercase tracking-wide flex flex-wrap items-center justify-between gap-2">
+          <span>Click folders to expand · Click files to inspect production code</span>
+          <span className="text-black/80 font-black">github.com/commerceagents/vidyas-kitchen</span>
         </div>
       </div>
     </div>

@@ -285,8 +285,8 @@ export default function VidyasKitchenCaseStudyView({
       {/* 06 — Stack & architecture */}
       <ScrollReveal>
         <SectionWindow num="06" title="Stack & architecture">
-          <p className="text-sm text-zinc-600 mb-4 max-w-3xl">
-            Client codebase is confidential. The explorer and sync-contract path are portfolio illustrations — not files in the repo. Structure and rules are redacted; no API keys or live order data.
+          <p className="text-sm text-zinc-700 mb-4 max-w-3xl leading-relaxed">
+            Production architecture from the official open-source repository (<a href="https://github.com/commerceagents/vidyas-kitchen" target="_blank" rel="noopener noreferrer" className="font-mono font-bold text-black underline hover:text-[#BD2320]">github.com/commerceagents/vidyas-kitchen</a>). Explore the live code files below: finite state machine transitions, OpenAI cart intent parsers, Meta WhatsApp Cloud API webhooks, and driver phone-lookup authentication.
           </p>
           <StackToolsSkills skills={vidyasSkills} tools={vidyasTools} />
           <ArchitectureExplorer tree={vidyasArchitectureTree} />
