@@ -228,13 +228,13 @@ function EditorPanel({
   const filename = node?.name ?? "welcome.md";
 
   return (
-    <div className="flex flex-col min-h-[280px] bg-[#1e1e1e] border-l border-[#3c3c3c]">
-      <div className="flex items-center gap-1 px-2 py-1.5 bg-[#252526] border-b border-[#3c3c3c] overflow-x-auto">
-        <span className="px-3 py-1 bg-[#1e1e1e] text-[#cccccc] text-[11px] border-t-2 border-[#007acc] whitespace-nowrap">
+    <div className="flex flex-col h-full bg-[#1e1e1e] border-l border-[#3c3c3c] overflow-hidden">
+      <div className="flex items-center gap-1 px-2 py-1.5 bg-[#252526] border-b border-[#3c3c3c] overflow-x-auto shrink-0">
+        <span className="px-3 py-1 bg-[#1e1e1e] text-[#cccccc] text-[11px] border-t-2 border-[#007acc] whitespace-nowrap font-mono font-bold">
           {filename}
         </span>
       </div>
-      <div className="flex-1 p-4 font-mono text-[11px] sm:text-xs leading-relaxed overflow-x-auto">
+      <div className="flex-1 p-4 font-mono text-[11px] sm:text-xs leading-relaxed overflow-y-auto overflow-x-auto touch-pan-y [scrollbar-width:thin] [scrollbar-color:#424242_#1e1e1e]">
         {!node && <p className="text-[#858585]">Select a file in the explorer →</p>}
         {lines.slice(0, lineCount).map((line, i) => (
           <div key={i} className="whitespace-pre-wrap break-words">
@@ -321,12 +321,15 @@ export default function ArchitectureExplorer({ tree }: Props) {
           <span className="ml-2 text-[#cccccc] text-[10px] font-mono">vidyas-kitchen — VS Code</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(220px,38%)_1fr] min-h-[320px]">
-          <div className="bg-[#252526] border-b md:border-b-0 md:border-r border-[#3c3c3c] flex flex-col max-h-[420px]">
-            <p className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#bbbbbb] shrink-0">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(240px,36%)_1fr] h-[460px] md:h-[480px]">
+          <div className="bg-[#252526] border-b md:border-b-0 md:border-r border-[#3c3c3c] flex flex-col h-full overflow-hidden">
+            <p className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#bbbbbb] shrink-0 bg-[#252526] border-b border-[#333]">
               Explorer
             </p>
-            <div className="flex-1 overflow-y-auto py-1 select-none" role="tree">
+            <div 
+              className="flex-1 overflow-y-auto py-2 select-none touch-pan-y [scrollbar-width:thin] [scrollbar-color:#424242_#252526]" 
+              role="tree"
+            >
               {displayRows.map((row) => (
                 <TreeRow
                   key={row.node.id}
