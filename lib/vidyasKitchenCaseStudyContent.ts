@@ -335,8 +335,8 @@ export const vidyasTimeline = {
 };
 
 export const vidyasSnapshot = {
-  role: "Lead Product Designer & Frontend Engineer",
-  team: "Owned product design & build inside a 5-person agency team",
+  role: "Lead Product Designer & Full-Stack Engineer",
+  team: "Solo designer & full-stack builder (mentored 3 research interns)",
   market: "Sivakasi, Tamil Nadu",
   liveUrl: "https://www.vidyaskitchenhome.com",
   firstInMarket: "First home-food delivery app in Sivakasi, Tamil Nadu",
@@ -855,7 +855,7 @@ export const vidyasIADiagram = {
       label: "Driver app",
       tag: "Driver",
       steps: [
-        "Phone login · OTP",
+        "Phone lookup · Kitchen-issued 4-digit PIN",
         "Assigned jobs · same order reference as customer chat",
         "Mapbox navigation to drop pin inside radius",
         "Mark delivered or not delivered · cash collection if needed",
@@ -1053,44 +1053,37 @@ export const vidyasKitchenOpsStory = {
 };
 
 export const vidyasOrderSyncRules: VidyasOrderSyncRules = {
-  filename: "system/sync-contract.md",
+  filename: "src/lib/order-transition.ts",
   title: "How an order stays in sync",
-  illustrationNote: "Portfolio illustration — this path is not in the client repo.",
+  illustrationNote: "Production state machine & intent architecture from src/lib/.",
   lines: [
-    { text: "# SYSTEM — how an order stays in sync", tone: "heading" },
+    { text: "// Finite State Machine & Intent Architecture", tone: "heading" },
     { text: "", tone: "default" },
-    { text: "// Model boundaries — never cross these", tone: "comment" },
-    { text: "never createOrder()", tone: "keyword", highlight: true },
-    { text: "never setPrice()", tone: "keyword", highlight: true },
+    { text: "// Model boundaries — intent extraction only (src/lib/ai/cart-intent.ts)", tone: "comment" },
+    { text: "openai.chat.completions.create({ model: 'gpt-4o-mini', temperature: 0 })", tone: "keyword", highlight: true },
+    { text: "AbortSignal.timeout(2500)  // Strict 2.5s ceiling against UI hangs", tone: "muted" },
     {
-      text: "return draft { dish, size, day, meal, payment }  // omit unknown fields",
+      text: "return { action, item_reference, quantity }  // Never writes prices or IDs",
       tone: "accent",
     },
     { text: "", tone: "default" },
-    { text: "// Server-owned pipeline", tone: "comment" },
-    { text: "server.matchDish(liveMenu)", tone: "default", indent: 1 },
-    { text: "server.price(food, packing, delivery, tax)", tone: "default", indent: 1 },
-    { text: "server.writeOrder()  // only after customer confirms", tone: "accent", indent: 1, highlight: true },
+    { text: "// Server-owned transition gate (src/lib/order-transition.ts)", tone: "comment" },
+    { text: "if (!canTransitionOrderStatus(cur, next)) throw InvalidTransition;", tone: "keyword", indent: 1, highlight: true },
+    { text: "supabase.from('orders').update({ status: next }).eq('id', orderId)", tone: "default", indent: 1 },
+    { text: "refundPayment(paymentId, remainder)  // Auto-refund on kitchen reject/cancel", tone: "accent", indent: 1 },
     { text: "", tone: "default" },
-    { text: "// One row — every surface reads the same copy", tone: "comment" },
+    { text: "// Asynchronous event dispatch via Next.js after()", tone: "comment" },
     {
-      text: "read(orderRow) → kitchenBoard | driverApp | tracking | nextReply",
+      text: "after(async () => { notifyWhatsApp(); sendOrderPush(); sendDashboardPush(); })",
       tone: "string",
       highlight: true,
     },
     { text: "", tone: "default" },
-    { text: "// Food status ≠ payment status", tone: "comment" },
+    { text: "// COD fraud & abuse protection", tone: "comment" },
     {
-      text: 'food.status === "out_for_delivery" && payment.status === "pending"  // valid',
+      text: "if (failedAtDoor) supabase.from('cod_blocks').upsert({ phone, reason })",
       tone: "muted",
     },
-    { text: "", tone: "default" },
-    { text: '// "Where is my order?"', tone: "comment" },
-    { text: "readOrders(customer)  // never invent status or refund", tone: "default" },
-    { text: "refundStarted(paymentRecord)  // only then say money is on the way", tone: "default" },
-    { text: "", tone: "default" },
-    { text: "// Draft hygiene", tone: "comment" },
-    { text: "if (draft.has(dish)) keep(dish)  // do not replace with category", tone: "default" },
   ],
 };
 
@@ -1101,74 +1094,142 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
     kind: "folder",
     children: [
       {
-        id: "surfaces",
-        name: "surfaces",
+        id: "src",
+        name: "src",
         kind: "folder",
         children: [
           {
-            id: "pwa",
-            name: "customer-pwa.tsx",
-            kind: "file",
-            preview: [
-              { text: "// Customer PWA — browse, cart, slot, pay", tone: "comment" },
-              { text: 'export const routes = ["menu", "cart", "checkout", "track"];', tone: "default" },
-            ],
-          },
-          {
-            id: "bot",
-            name: "whatsapp-bot.ts",
-            kind: "file",
-            preview: [
-              { text: "// WhatsApp — sentence in, draft out", tone: "comment" },
-              { text: "route(support) → route(complaint) → parseFood(sentence)", tone: "accent" },
-            ],
-          },
-          {
-            id: "dash",
-            name: "kitchen-dashboard.tsx",
-            kind: "file",
-            preview: [
-              { text: "// Kitchen board — live orders + AI pricing cards", tone: "comment" },
-              { text: "advance(order, status: Preparing | Ready | Dispatched)", tone: "default" },
-            ],
-          },
-          {
-            id: "driver",
-            name: "driver-app.tsx",
-            kind: "file",
-            preview: [
-              { text: "// Driver — assigned jobs, map pin, delivered", tone: "comment" },
-              { text: "sync(orderRef) // same reference as bot + PWA", tone: "accent" },
-            ],
-          },
-        ],
-      },
-      {
-        id: "core",
-        name: "core",
-        kind: "folder",
-        children: [
-          {
-            id: "next",
-            name: "next.config.ts",
-            kind: "file",
-            preview: [
-              { text: 'runtime: "Next.js 15 on Vercel"', tone: "string" },
-              { text: "edge + server actions · one deploy", tone: "muted" },
-            ],
-          },
-          {
-            id: "supa",
-            name: "supabase",
+            id: "lib",
+            name: "lib",
             kind: "folder",
             children: [
               {
-                id: "schema",
-                name: "schema.sql",
+                id: "ai-folder",
+                name: "ai",
+                kind: "folder",
+                children: [
+                  {
+                    id: "cart-intent",
+                    name: "cart-intent.ts",
+                    kind: "file",
+                    preview: [
+                      { text: "/** Intent parser using gpt-4o-mini with 2.5s AbortSignal timeout */", tone: "comment" },
+                      { text: "const local = localCartIntent(text);", tone: "keyword" },
+                      { text: "if (local) return local; // Bypass LLM on regex match", tone: "comment" },
+                      { text: "const response = await openai.chat.completions.create({", tone: "default" },
+                      { text: "  model: 'gpt-4o-mini', temperature: 0, max_tokens: 120,", tone: "accent" },
+                      { text: "  response_format: { type: 'json_object' }", tone: "string" },
+                      { text: "}, { signal: AbortSignal.timeout(2500) });", tone: "keyword" },
+                      { text: "return parseModelIntent(response.choices[0]?.message?.content);", tone: "accent" },
+                    ],
+                  },
+                  {
+                    id: "turn-intent",
+                    name: "turn-intent.ts",
+                    kind: "file",
+                    preview: [
+                      { text: "// WhatsApp conversation turn routing & intent classification", tone: "comment" },
+                      { text: "export type TurnIntent = 'order' | 'support' | 'complaint' | 'menu';", tone: "keyword" },
+                    ],
+                  },
+                  {
+                    id: "pricing-agent",
+                    name: "run-pricing-agent.ts",
+                    kind: "file",
+                    preview: [
+                      { text: "// Server-side dynamic dish pricing & packing fee calculation", tone: "comment" },
+                      { text: "calculateTicketTotal(lines, packingRules, deliverySlab)", tone: "default" },
+                    ],
+                  },
+                ],
+              },
+              {
+                id: "order-transition",
+                name: "order-transition.ts",
                 kind: "file",
                 preview: [
-                  { text: "-- orders · menu · users · one row per ticket", tone: "comment" },
-                  { text: "create table orders ( ref, status, payment_status, ... );", tone: "default" },
+                  { text: "// Unidirectional order state machine with Razorpay & WhatsApp hooks", tone: "comment" },
+                  { text: "if (!canTransitionOrderStatus(cur, next)) {", tone: "keyword" },
+                  { text: "  return { ok: false, error: `Invalid transition ${cur} → ${next}` };", tone: "muted" },
+                  { text: "}", tone: "keyword" },
+                  { text: "await supabase.from('orders').update({ status: next }).eq('id', orderId);", tone: "default" },
+                  { text: "if (next === OrderStatus.REJECTED) await refundPayment(paymentId, remainder);", tone: "accent" },
+                  { text: "after(async () => { await notifyWhatsAppOrderEvent(...); });", tone: "string" },
+                ],
+              },
+              {
+                id: "supabase-server",
+                name: "supabase-server.ts",
+                kind: "file",
+                preview: [
+                  { text: "// Supabase Real-time client with secure service-role context", tone: "comment" },
+                  { text: "export const createSupabaseAdminClient = () => ...", tone: "keyword" },
+                ],
+              },
+              {
+                id: "meta-whatsapp",
+                name: "meta-whatsapp.ts",
+                kind: "file",
+                preview: [
+                  { text: "// WhatsApp Cloud API client & interactive message templates", tone: "comment" },
+                  { text: "sendInteractiveCard(recipient, orderConfirmPayload)", tone: "default" },
+                ],
+              },
+              {
+                id: "razorpay-verify",
+                name: "razorpay-verify.ts",
+                kind: "file",
+                preview: [
+                  { text: "// Cryptographic webhook signature verification (SHA256 HMAC)", tone: "comment" },
+                  { text: "verifyRazorpaySignature(body, signature, secret)", tone: "keyword" },
+                ],
+              },
+            ],
+          },
+          {
+            id: "components-folder",
+            name: "components",
+            kind: "folder",
+            children: [
+              {
+                id: "dashboard-folder",
+                name: "dashboard",
+                kind: "folder",
+                children: [
+                  {
+                    id: "dashboard-board",
+                    name: "DashboardOrderBoard.tsx",
+                    kind: "file",
+                    preview: [
+                      { text: "// Frontline kitchen Kanban board with live Supabase subscriptions", tone: "comment" },
+                      { text: "const orders = useLiveOrdersSubscription(kitchenId);", tone: "keyword" },
+                      { text: "return <KanbanColumns columns={['NEW', 'PREPARING', 'READY']} />;", tone: "accent" },
+                    ],
+                  },
+                  {
+                    id: "dashboard-metrics",
+                    name: "DashboardMetrics.tsx",
+                    kind: "file",
+                    preview: [
+                      { text: "// Real-time kitchen throughput, prep duration, and delivery times", tone: "comment" },
+                    ],
+                  },
+                  {
+                    id: "revenue-dash",
+                    name: "RevenueDashboard.tsx",
+                    kind: "file",
+                    preview: [
+                      { text: "// Daily revenue tally, COD vs Online split, settlement status", tone: "comment" },
+                    ],
+                  },
+                ],
+              },
+              {
+                id: "layout-client",
+                name: "ClientLayout.tsx",
+                kind: "file",
+                preview: [
+                  { text: "// PWA layout wrapper with offline toast & service worker registration", tone: "comment" },
                 ],
               },
             ],
@@ -1176,58 +1237,47 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
         ],
       },
       {
-        id: "integrations",
-        name: "integrations",
+        id: "scripts-folder",
+        name: "scripts",
         kind: "folder",
         children: [
           {
-            id: "pay",
-            name: "razorpay.ts",
-            kind: "file",
-            preview: [{ text: "// Payments — only after server-priced confirm", tone: "comment" }],
-          },
-          {
-            id: "auth",
-            name: "auth.ts",
-            kind: "file",
-            preview: [{ text: "// Firebase phone auth + Twilio OTP", tone: "comment" }],
-          },
-          {
-            id: "maps",
-            name: "maps.ts",
-            kind: "file",
-            preview: [{ text: "// Mapbox pin inside 15 km Sivakasi radius", tone: "comment" }],
-          },
-          {
-            id: "ai",
-            name: "ai-models.ts",
+            id: "menu-embedding",
+            name: "backfill-menu-embedding.ts",
             kind: "file",
             preview: [
-              { text: "// OpenAI + Gemini draft · Whisper transcribe", tone: "comment" },
-              { text: "// models never write prices or charge cards", tone: "muted" },
+              { text: "// Generates vector embeddings for dish semantic search & recommendations", tone: "comment" },
+            ],
+          },
+          {
+            id: "export-design",
+            name: "export-design-system.js",
+            kind: "file",
+            preview: [
+              { text: "// Extracts Figma variables into CSS/Tailwind design tokens", tone: "comment" },
             ],
           },
         ],
       },
       {
-        id: "pipeline",
-        name: "pipeline",
+        id: "docs-folder",
+        name: "docs",
         kind: "folder",
         children: [
           {
-            id: "sync",
-            name: "sync-contract.md",
-            kind: "file",
-            preview: vidyasOrderSyncRules.lines.slice(0, 12),
-          },
-          {
-            id: "flow",
-            name: "order-flow.ts",
+            id: "doc-ds",
+            name: "design-system.md",
             kind: "file",
             preview: [
-              { text: "// Order pipeline — models never touch payments", tone: "comment" },
-              { text: "draft → server.matchDish() → server.price() → confirm → one order row", tone: "accent" },
-              { text: "dashboard.advance(row) · driver.advance(row)", tone: "muted" },
+              { text: "# Vidya's Kitchen Design Tokens, Typography & Color Grids", tone: "heading" },
+            ],
+          },
+          {
+            id: "doc-wa",
+            name: "whatsapp-order-template.md",
+            kind: "file",
+            preview: [
+              { text: "# WhatsApp Cloud API Approved HSM Message Templates", tone: "heading" },
             ],
           },
         ],

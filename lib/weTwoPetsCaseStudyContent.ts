@@ -183,18 +183,18 @@ export const weTwoChallenges: VidyasChallenge[] = [
     whyHard: "Affiliate links are trivial to demo. Direct checkout requires phone OTPs, payment webhooks, Cashfree integration, COD fee logic, and handling the supplier purchase privately in backend ops.",
     triedFirst: "Review-style product listings that deep-linked out to international retail pages.",
     worked: "A seamless single-route checkout: Cart → +91 Phone Code → Delivery Address → Cashfree / COD. Ops receives fulfillment links privately by email; the customer never leaves our site.",
-    outcome: "100% direct customer relationship and brand trust. Zero checkout drop-off to competitors.",
+    outcome: "100% direct customer relationship on our own domain — 500+ global products evaluated and securely processed.",
   },
   {
     id: "02",
     title: "MULTI-MODEL AI FLOW & THE 2-HUMAN VETO GATE",
     surface: "Pet Engine & Sourcing Pipeline",
     stake: "An autonomous AI scraper will inevitably publish duplicates already sold in India, hallucinate safety, or erode margins.",
-    happened: "Nightly spiders crawl global pet design catalogs. Gemini multimodal AI scores items 0–100 (safety, ergonomics, breed fit). Automated image-hashing and NLP cross-check Amazon.in, HUFT, Supertails, and Zigly to auto-reject duplicates. High scores only flag candidates: two human curators must vote before any item goes live.",
+    happened: "Nightly spiders crawl global pet design catalogs across US, UK, Singapore, and China (500+ items ingested). Gemini multimodal AI scores items 0–100 (safety, ergonomics, breed fit). Automated image-hashing and NLP cross-check Amazon.in, HUFT, Supertails, and Zigly to auto-reject duplicates. High scores only flag candidates: two human curators must vote before any item goes live.",
     whyHard: "Titles lie across borders (a 'cooling vest' in the US is a 'summer coat' on HUFT). Foreign SKUs never match Indian barcodes. Landed costs (duty, freight, repacking) must be calculated accurately before publishing.",
     triedFirst: "Matching product IDs and letting AI high scores auto-publish to the storefront.",
     worked: "Multi-layered verification: Perceptual image hashing + token overlap catches hidden duplicates. Human vote desk requires two independent team approvals. Unit economics recalculate on live currency changes.",
-    outcome: "Zero duplicate imports published. 100% curated catalog integrity backed by human judgment.",
+    outcome: "Catalog integrity backed by automated multi-channel veto and dual-human sign-off.",
   },
   {
     id: "03",
@@ -205,7 +205,7 @@ export const weTwoChallenges: VidyasChallenge[] = [
     whyHard: "Standard courier APIs skip the hub or show confusing origin airports. General LLM support bots tend to invent delivery estimates or reference foreign sources.",
     triedFirst: "Generic courier tracking widgets with no hub language, plus an ungrounded web chatbot.",
     worked: "A transparent 4-stage tracking visualizer: Sourcing → Quality Check at Chennai Hub → We Two Branded Packing → Express Carrier Dispatch. Tailz AI uses deterministic order state templates and live catalog access only.",
-    outcome: "Anxiety-free unboxing experience matching the physical box received. Zero AI hallucinations.",
+    outcome: "Anxiety-free unboxing experience matching physical delivery. Tailz grounded strictly in live Supabase orders.",
   },
 ];
 
