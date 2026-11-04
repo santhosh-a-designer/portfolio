@@ -1507,4 +1507,31 @@ export const vidyasHonestOutcomes = [
   "A home kitchen can take a slot order, cook to it, dispatch a driver, and answer “where is my order?” without a marketplace in the middle.",
 ];
 
+export const vidyasWhatILearnedSoFar = [
+  {
+    num: "01",
+    title: "Habit over convention (WhatsApp > App Store)",
+    takeaway: "In Tier-3 local markets, forcing users to download an app and browse multi-level menus creates high abandonment.",
+    detail: "Meeting customers where they already live—in WhatsApp with a natural language intent parser—drove immediate adoption without behavioral friction.",
+  },
+  {
+    num: "02",
+    title: "Field ergonomics under real-world sunlight",
+    takeaway: "Design systems fail if they aren't tested in harsh outdoor environments.",
+    detail: "A driver on a motorcycle in 38°C Sivakasi sun cannot squint at 44px buttons or wait for slow SMS OTPs. High-contrast matte surfaces, 60px tap targets, and kitchen-issued PINs solved this completely.",
+  },
+  {
+    num: "03",
+    title: "Decouple physical operations from digital payments",
+    takeaway: "Physical cooking cycles and financial settlement cycles are independent operational realities.",
+    detail: "In a cook-to-order kitchen, treating Cash on Delivery and online payments as distinct states in the state machine prevented kitchen prep bottlenecks.",
+  },
+  {
+    num: "04",
+    title: "AI drafts intent; deterministic engines price the bill",
+    takeaway: "LLMs excel at unstructured messy chat, but financial calculations must never be left to model inference.",
+    detail: "An immutable server engine computes items, packaging, delivery, and GST. Zero LLM hallucinations on customer charges.",
+  },
+];
+
 export const vidyasDoNotClaim: string[] = [];

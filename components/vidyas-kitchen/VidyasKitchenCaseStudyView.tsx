@@ -8,7 +8,6 @@ import IADiagram from "./IADiagram";
 import UserFlowDiagram from "./UserFlowDiagram";
 import HighlightText from "./HighlightText";
 import ArchitectureExplorer from "./ArchitectureExplorer";
-import OrderSyncRules from "./OrderSyncRules";
 import StackToolsSkills from "./StackToolsSkills";
 import HomeFoodStory from "./HomeFoodStory";
 import PwaStorySection from "./PwaStorySection";
@@ -26,11 +25,11 @@ import {
   vidyasHonestOutcomes,
   vidyasIADiagram,
   vidyasJourney,
-  vidyasOrderSyncRules,
   vidyasSkills,
   vidyasSnapshot,
   vidyasTools,
   vidyasTimeline,
+  vidyasWhatILearnedSoFar,
 } from "@/lib/vidyasKitchenCaseStudyContent";
 
 function SectionWindow({
@@ -290,31 +289,65 @@ export default function VidyasKitchenCaseStudyView({
           </p>
           <StackToolsSkills skills={vidyasSkills} tools={vidyasTools} />
           <ArchitectureExplorer tree={vidyasArchitectureTree} />
-          <OrderSyncRules rules={vidyasOrderSyncRules} />
         </SectionWindow>
       </ScrollReveal>
 
-      {/* 07 — Outcomes */}
+      {/* 07 — What I have learned so far */}
       <ScrollReveal>
-        <SectionWindow num="07" title="What I can stand behind">
-          <ul className="space-y-3">
-            {vidyasHonestOutcomes.map((line) => (
-              <li key={line} className="flex gap-2 text-sm text-zinc-800">
-                <span className="text-[#00C16A] font-black">✓</span>
-                <span>{line}</span>
-              </li>
+        <SectionWindow num="07" title="What I have learned so far">
+          <p className="text-sm text-zinc-600 max-w-3xl mb-6">
+            Key product design, UX ergonomics, and systems architecture takeaways from shipping Vidya&apos;s Kitchen 0→1 in Sivakasi:
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {vidyasWhatILearnedSoFar.map((item) => (
+              <div
+                key={item.num}
+                className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-2"
+              >
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="font-mono text-[10px] font-black uppercase px-1.5 py-0.5 bg-[#BD2320] text-white">
+                      {item.num}
+                    </span>
+                    <h4 className="font-mono text-xs font-black uppercase text-black tracking-wide">
+                      {item.title}
+                    </h4>
+                  </div>
+                  <p className="text-sm font-bold text-zinc-900 leading-snug">
+                    {item.takeaway}
+                  </p>
+                </div>
+                <p className="text-xs text-zinc-600 leading-relaxed pt-2.5 border-t border-zinc-300">
+                  {item.detail}
+                </p>
+              </div>
             ))}
-          </ul>
-          {vidyasDoNotClaim.length > 0 && (
-            <div className="p-4 border-2 border-dashed border-zinc-400 bg-zinc-50 mt-6">
-              <p className="font-mono font-black text-[10px] uppercase text-zinc-500 mb-2">Do not oversell</p>
-              <ul className="space-y-1 text-xs text-zinc-600">
-                {vidyasDoNotClaim.map((line) => (
-                  <li key={line}>· {line}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+          </div>
+
+          <div className="pt-6 border-t-2 border-black">
+            <h4 className="font-mono text-xs font-black uppercase text-zinc-500 mb-4 tracking-wider">
+              Verified Operational Outcomes
+            </h4>
+            <ul className="space-y-3">
+              {vidyasHonestOutcomes.map((line) => (
+                <li key={line} className="flex gap-2 text-sm text-zinc-800">
+                  <span className="text-[#00C16A] font-black">✓</span>
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+            {vidyasDoNotClaim.length > 0 && (
+              <div className="p-4 border-2 border-dashed border-zinc-400 bg-zinc-50 mt-6">
+                <p className="font-mono font-black text-[10px] uppercase text-zinc-500 mb-2">Do not oversell</p>
+                <ul className="space-y-1 text-xs text-zinc-600">
+                  {vidyasDoNotClaim.map((line) => (
+                    <li key={line}>· {line}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </SectionWindow>
       </ScrollReveal>
 
