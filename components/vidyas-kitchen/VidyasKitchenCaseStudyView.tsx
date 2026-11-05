@@ -38,26 +38,37 @@ import {
 function SectionWindow({
   num,
   title,
+  tag,
   children,
   allowOverflow = false,
 }: {
   num: string;
   title: string;
+  tag?: string;
   children: React.ReactNode;
   /** Required for sticky stacked cards — overflow-hidden breaks position:sticky */
   allowOverflow?: boolean;
 }) {
   return (
     <section
-      className={`bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] ${
+      className={`bg-white border-t border-b sm:border border-black/15 sm:border-black/20 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)] ${
         allowOverflow ? "overflow-visible" : "overflow-hidden"
       }`}
     >
-      <div className="h-10 sm:h-11 px-3 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center gap-2 font-mono text-xs select-none">
-        <span className="px-2 py-0.5 bg-[#FF462D] text-white font-bold text-[10px]">{num}</span>
-        <span className="font-bold text-black uppercase tracking-wider truncate">{title}</span>
+      <div className="h-11 px-4 sm:px-8 bg-zinc-50/90 border-b border-black/15 flex items-center justify-between gap-3 font-mono text-xs select-none">
+        <div className="flex items-center gap-2.5 truncate">
+          <span className="w-2 h-2 rounded-full bg-[#BD2320]" />
+          <span className="font-black text-black tracking-widest text-[11px] uppercase">
+            {num} / {title}
+          </span>
+        </div>
+        {tag && (
+          <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest hidden sm:inline">
+            {tag}
+          </span>
+        )}
       </div>
-      <div className="p-4 sm:p-8 md:p-10">{children}</div>
+      <div className="p-5 sm:p-8 md:p-12">{children}</div>
     </section>
   );
 }
@@ -70,8 +81,8 @@ const heroStagger = {
 };
 
 const heroItem = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: openEase } },
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: openEase } },
 };
 
 export default function VidyasKitchenCaseStudyView({
@@ -85,7 +96,7 @@ export default function VidyasKitchenCaseStudyView({
         variants={heroItem}
         initial="hidden"
         animate="show"
-        className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-4 select-none font-mono"
+        className="flex flex-wrap items-center justify-between gap-3 border-b border-black/15 pb-4 select-none font-mono"
       >
         <Link
           href="/#work"
@@ -96,7 +107,7 @@ export default function VidyasKitchenCaseStudyView({
               /* */
             }
           }}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#FF462D] transition-colors group"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#BD2320] transition-colors group"
         >
           <ArrowLeft weight="bold" className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           <span>BACK TO SELECTED WORK</span>
@@ -107,106 +118,129 @@ export default function VidyasKitchenCaseStudyView({
         </div>
       </motion.div>
 
-      {/* Hero — sequenced on open, not waiting for scroll */}
+      {/* Hero — Clean Editorial Newspaper Style */}
       <motion.section
         variants={heroStagger}
         initial="hidden"
         animate="show"
-        className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden"
+        className="bg-white border-t border-b sm:border border-black/15 sm:border-black/20 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)] overflow-hidden"
       >
-          <div className="p-4 sm:p-10 md:p-12 space-y-5 sm:space-y-6 text-center">
-            <motion.div variants={heroItem} className="flex flex-wrap gap-2 justify-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FF462D] text-white border-2 border-black font-mono text-xs font-black uppercase tracking-widest">
-                0→1 · OWNED PRODUCT DESIGN &amp; BUILD (TEAM OF 5)
-              </div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FAED00] text-black border-2 border-black font-mono text-[10px] sm:text-xs font-black uppercase tracking-widest">
-                {vidyasSnapshot.firstInMarket}
-              </div>
-            </motion.div>
-            <motion.h1 variants={heroItem} className="text-[1.7rem] min-[380px]:text-3xl sm:text-5xl font-black uppercase tracking-tight leading-none">
-              Vidya&apos;s Kitchen
+        <div className="p-6 sm:p-10 md:p-14 space-y-8">
+          {/* Header Metadata Pill */}
+          <motion.div variants={heroItem} className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-black/15 font-mono text-xs">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#BD2320]" />
+              <span className="font-black uppercase tracking-wider text-black">
+                CASE STUDY // 0→1 PRODUCT DESIGN &amp; SYSTEMS ARCHITECTURE
+              </span>
+            </div>
+            <span className="px-2.5 py-0.5 bg-[#FAED00] text-black font-black uppercase tracking-wider text-[10px] border border-black/20">
+              {vidyasSnapshot.firstInMarket}
+            </span>
+          </motion.div>
+
+          {/* Main Title & Elevator */}
+          <div className="space-y-4 max-w-4xl">
+            <motion.h1 variants={heroItem} className="text-3xl min-[380px]:text-4xl sm:text-6xl font-black uppercase tracking-tight text-black leading-none flex items-center flex-wrap gap-3">
+              <span>Vidya&apos;s Kitchen</span>
+              <span className="w-3.5 h-3.5 rounded-full bg-[#BD2320] shrink-0" />
             </motion.h1>
-
-            <motion.div variants={heroItem} className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 max-w-4xl mx-auto w-full">
-              <div className="p-4 border-2 border-black bg-zinc-50 text-left lg:text-center min-h-[140px] flex flex-col justify-center">
-                <p className="font-mono text-[10px] font-black uppercase text-[#FF462D] mb-2">The problem</p>
-                <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
-                  <HighlightText text={vidyasSnapshot.problem} />
-                </p>
-              </div>
-              <div className="p-4 border-2 border-black bg-[#FAF9F5] text-left lg:text-center min-h-[140px] flex flex-col justify-center">
-                <p className="font-mono text-[10px] font-black uppercase text-[#00C16A] mb-2">The solution</p>
-                <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
-                  <HighlightText text={vidyasSnapshot.solution} />
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.p variants={heroItem} className="text-sm sm:text-lg font-bold text-zinc-600 max-w-3xl mx-auto leading-snug italic">
+            <motion.p variants={heroItem} className="text-base sm:text-xl font-medium text-zinc-700 leading-snug">
               {vidyasSnapshot.elevator}
             </motion.p>
+          </div>
 
-            <motion.p variants={heroItem} className="mx-auto max-w-2xl text-sm leading-relaxed text-zinc-500">
-              This case study follows one thread: <strong className="text-zinc-800">why Sivakasi is different</strong>
-              {" → "}
-              <strong className="text-zinc-800">how customers order</strong>
-              {" → "}
-              <strong className="text-zinc-800">how the kitchen runs</strong>
-              {" → "}
-              <strong className="text-zinc-800">what we had to decide along the way</strong>.
-            </motion.p>
+          {/* Editorial 2-Column: Problem & Solution Spread */}
+          <motion.div variants={heroItem} className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 pb-4 border-t border-b border-black/15">
+            <div className="space-y-2 md:pr-8 md:border-r border-zinc-200">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[11px] font-black uppercase tracking-wider text-[#BD2320]">
+                  01 / The Local Market Problem
+                </span>
+              </div>
+              <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
+                <HighlightText text={vidyasSnapshot.problem} />
+              </p>
+            </div>
 
-            <motion.div variants={heroItem} className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto w-full font-mono text-xs pt-2">
-              <div className="p-3 border-2 border-black bg-[#FAED00] min-h-[72px] flex flex-col items-center justify-center text-center">
-                <span className="text-[10px] text-black/60 uppercase block mb-1">Timeline</span>
-                <span className="font-black leading-snug">{vidyasTimeline.label}</span>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[11px] font-black uppercase tracking-wider text-emerald-700">
+                  02 / The Multi-Surface Solution
+                </span>
               </div>
-              <div className="p-3 border-2 border-black min-h-[72px] flex flex-col items-center justify-center text-center">
-                <span className="text-[10px] text-zinc-500 uppercase block mb-1">Role</span>
-                <span className="font-black leading-snug">{vidyasSnapshot.role}</span>
-              </div>
-              <div className="p-3 border-2 border-black min-h-[72px] flex flex-col items-center justify-center text-center">
-                <span className="text-[10px] text-zinc-500 uppercase block mb-1">Market</span>
-                <span className="font-black leading-snug">{vidyasSnapshot.market}</span>
-              </div>
+              <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
+                <HighlightText text={vidyasSnapshot.solution} />
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Narrative Index */}
+          <motion.p variants={heroItem} className="text-xs sm:text-sm text-zinc-500 font-mono">
+            This study follows: <strong className="text-black">why Sivakasi is different</strong>
+            {" → "}
+            <strong className="text-black">how customers order</strong>
+            {" → "}
+            <strong className="text-black">how the kitchen runs</strong>
+            {" → "}
+            <strong className="text-black">the 3 critical engineering bottlenecks</strong>.
+          </motion.p>
+
+          {/* Clean Editorial Metadata Strip */}
+          <motion.div variants={heroItem} className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-black/15 font-mono text-xs">
+            <div className="space-y-1">
+              <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Role</span>
+              <span className="font-black text-black text-xs block">{vidyasSnapshot.role}</span>
+            </div>
+            <div className="space-y-1">
+              <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Timeline</span>
+              <span className="font-bold text-zinc-800 text-xs block">{vidyasTimeline.label}</span>
+            </div>
+            <div className="space-y-1">
+              <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Market</span>
+              <span className="font-bold text-zinc-800 text-xs block">{vidyasSnapshot.market}</span>
+            </div>
+            <div>
+              <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold mb-1">Production</span>
               <a
                 href={vidyasSnapshot.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 border-2 border-black bg-black text-white hover:bg-zinc-900 min-h-[72px] flex flex-col items-center justify-center text-center gap-1"
+                className="inline-flex items-center gap-1.5 font-bold uppercase text-[#BD2320] hover:text-black transition-colors"
               >
-                <span className="font-black uppercase">Live site</span>
-                <ArrowUpRight weight="bold" className="w-4 h-4" />
+                <span>Live Site</span>
+                <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />
               </a>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
+        </div>
       </motion.section>
 
       {/* 01 — Why this market needs its own product */}
       <ScrollReveal>
-        <SectionWindow num="01" title="Why generic delivery apps fail here">
+        <SectionWindow num="01" title="Why generic delivery apps fail here" tag="Tier-3 Friction">
           <p className="text-sm text-zinc-600 max-w-3xl mb-6">
-            Before any screen: each stage of the journey — and why a dark-store playbook does not map to home-cooked food in Sivakasi.
+            Before writing a single screen: each stage of the home food journey—and why a dark-store Swiggy playbook fails in Sivakasi.
           </p>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto border-t border-b border-black/15">
             <table className="w-full min-w-[760px] text-left text-xs sm:text-sm border-collapse">
               <thead>
-                <tr className="border-b-2 border-black font-mono uppercase text-[10px] tracking-wider">
-                  <th className="py-2 pr-3">Stage</th>
-                  <th className="py-2 pr-3">Goal</th>
-                  <th className="py-2 pr-3">Pain</th>
-                  <th className="py-2 pr-3">Fix</th>
-                  <th className="py-2">Why not Swiggy?</th>
+                <tr className="border-b border-black/20 font-mono uppercase text-[10px] tracking-wider text-zinc-500">
+                  <th className="py-3 pr-4 font-bold">Stage</th>
+                  <th className="py-3 pr-4 font-bold">Goal</th>
+                  <th className="py-3 pr-4 font-bold">Customer Pain</th>
+                  <th className="py-3 pr-4 font-bold">Our System Fix</th>
+                  <th className="py-3 font-bold">Why Not Swiggy?</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="divide-y divide-zinc-200">
                 {vidyasJourney.map((row) => (
-                  <tr key={row.stage} className="border-b border-zinc-200 align-top">
-                    <td className="py-3 pr-3 font-black text-[#FF462D]">{row.stage}</td>
-                    <td className="py-3 pr-3 text-zinc-800">{row.goal}</td>
-                    <td className="py-3 pr-3 text-zinc-600">{row.pain}</td>
-                    <td className="py-3 pr-3 text-zinc-800">{row.fix}</td>
-                    <td className="py-3 text-zinc-800 bg-[#FAF9F5]">
+                  <tr key={row.stage} className="hover:bg-zinc-50/60 transition-colors align-top">
+                    <td className="py-4 pr-4 font-mono font-black text-[#BD2320] uppercase text-xs">{row.stage}</td>
+                    <td className="py-4 pr-4 text-zinc-900 font-medium">{row.goal}</td>
+                    <td className="py-4 pr-4 text-zinc-600">{row.pain}</td>
+                    <td className="py-4 pr-4 text-zinc-900 font-medium">{row.fix}</td>
+                    <td className="py-4 text-zinc-700 bg-zinc-50/50 pl-3">
                       <HighlightText text={row.sivakasiAngle} />
                     </td>
                   </tr>
@@ -301,51 +335,46 @@ export default function VidyasKitchenCaseStudyView({
 
       {/* 08 — What I have learned so far */}
       <ScrollReveal>
-        <SectionWindow num="08" title="What I have learned so far">
-          <p className="text-sm text-zinc-600 max-w-3xl mb-6">
+        <SectionWindow num="08" title="What I have learned so far" tag="Senior Retrospective">
+          <p className="text-sm text-zinc-600 max-w-3xl mb-8 leading-relaxed">
             Key product design, UX ergonomics, and systems architecture takeaways from shipping Vidya&apos;s Kitchen 0→1 in Sivakasi:
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 pb-8 border-b border-black/15">
             {vidyasWhatILearnedSoFar.map((item) => (
-              <div
-                key={item.num}
-                className="p-5 bg-[#FAF9F5] border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between space-y-2"
-              >
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="font-mono text-[10px] font-black uppercase px-1.5 py-0.5 bg-[#BD2320] text-white">
-                      {item.num}
-                    </span>
-                    <h4 className="font-mono text-xs font-black uppercase text-black tracking-wide">
-                      {item.title}
-                    </h4>
-                  </div>
-                  <p className="text-sm font-bold text-zinc-900 leading-snug">
-                    {item.takeaway}
-                  </p>
+              <div key={item.num} className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-sm font-black text-[#BD2320]">
+                    {item.num} /
+                  </span>
+                  <h4 className="font-mono text-xs sm:text-sm font-black uppercase text-black tracking-wide">
+                    {item.title}
+                  </h4>
                 </div>
-                <p className="text-xs text-zinc-600 leading-relaxed pt-2.5 border-t border-zinc-300">
+                <p className="text-sm font-bold text-zinc-900 leading-snug">
+                  {item.takeaway}
+                </p>
+                <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed pt-1">
                   {item.detail}
                 </p>
               </div>
             ))}
           </div>
 
-          <div className="pt-6 border-t-2 border-black">
-            <h4 className="font-mono text-xs font-black uppercase text-zinc-500 mb-4 tracking-wider">
+          <div className="space-y-4">
+            <h4 className="font-mono text-xs font-black uppercase text-zinc-500 tracking-wider">
               Verified Operational Outcomes
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {vidyasHonestOutcomes.map((line) => (
-                <li key={line} className="flex gap-2 text-sm text-zinc-800">
+                <li key={line} className="flex gap-2.5 text-xs sm:text-sm text-zinc-800">
                   <span className="text-[#00C16A] font-black">✓</span>
                   <span>{line}</span>
                 </li>
               ))}
             </ul>
             {vidyasDoNotClaim.length > 0 && (
-              <div className="p-4 border-2 border-dashed border-zinc-400 bg-zinc-50 mt-6">
+              <div className="p-4 border-l-2 border-zinc-400 bg-zinc-50 mt-6">
                 <p className="font-mono font-black text-[10px] uppercase text-zinc-500 mb-2">Do not oversell</p>
                 <ul className="space-y-1 text-xs text-zinc-600">
                   {vidyasDoNotClaim.map((line) => (
