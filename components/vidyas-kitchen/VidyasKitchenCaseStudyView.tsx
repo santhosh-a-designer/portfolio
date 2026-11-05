@@ -13,7 +13,8 @@ import HomeFoodStory from "./HomeFoodStory";
 import PwaStorySection from "./PwaStorySection";
 import KitchenOpsSection from "./KitchenOpsSection";
 import DesignSystemSection from "./DesignSystemSection";
-import ChallengeWindowStack from "./ChallengeWindowStack";
+import PersonaScenariosSection from "./PersonaScenariosSection";
+import Top3BottlenecksSection from "./Top3BottlenecksSection";
 import ScrollReveal from "./ScrollReveal";
 import CaseStudyFooterNav from "@/components/CaseStudyFooterNav";
 import type { DesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
@@ -25,10 +26,12 @@ import {
   vidyasHonestOutcomes,
   vidyasIADiagram,
   vidyasJourney,
+  vidyasPersonaScenarios,
   vidyasSkills,
   vidyasSnapshot,
   vidyasTools,
   vidyasTimeline,
+  vidyasTop3Bottlenecks,
   vidyasWhatILearnedSoFar,
 } from "@/lib/vidyasKitchenCaseStudyContent";
 
@@ -214,24 +217,41 @@ export default function VidyasKitchenCaseStudyView({
         </SectionWindow>
       </ScrollReveal>
 
-      {/* Act 01 — Customer: WhatsApp */}
+      {/* 02 — Sivakasi field research & ground personas */}
+      <ScrollReveal>
+        <SectionWindow num="02" title="Sivakasi field research & ground personas">
+          <p className="text-sm text-zinc-600 max-w-3xl mb-6">
+            Ground-level friction uncovered during on-site user interviews in Sivakasi—and the explicit <strong>UX decisions</strong> and <strong>technical architecture</strong> engineered to eliminate each failure mode:
+          </p>
+          <PersonaScenariosSection personas={vidyasPersonaScenarios} />
+        </SectionWindow>
+      </ScrollReveal>
+
+      {/* 03 — Top 3 interview bottlenecks & STAR solutions */}
+      <ScrollReveal>
+        <SectionWindow num="03" title="Top 3 bottlenecks & STAR solutions">
+          <Top3BottlenecksSection bottlenecks={vidyasTop3Bottlenecks} />
+        </SectionWindow>
+      </ScrollReveal>
+
+      {/* Product Flow Screens — Customer: WhatsApp */}
       <ScrollReveal>
         <HomeFoodStory />
       </ScrollReveal>
 
-      {/* Act 02 — Customer: PWA */}
+      {/* Product Flow Screens — Customer: PWA */}
       <ScrollReveal>
         <PwaStorySection />
       </ScrollReveal>
 
-      {/* Act 03 — Kitchen & driver */}
+      {/* Product Flow Screens — Operations: Kitchen & driver */}
       <ScrollReveal>
         <KitchenOpsSection />
       </ScrollReveal>
 
-      {/* 02 — How all four surfaces connect */}
+      {/* 04 — How all four surfaces connect */}
       <ScrollReveal noBlur>
-        <SectionWindow num="02" title="Information architecture & user flows">
+        <SectionWindow num="04" title="Information architecture & user flows">
           <p className="text-sm text-zinc-600 max-w-3xl mx-auto mb-8 text-center">
             Four surfaces — PWA, WhatsApp, kitchen dashboard, driver app — branch from one Supabase order record. Scroll to watch each diagram build in.
           </p>
@@ -256,34 +276,21 @@ export default function VidyasKitchenCaseStudyView({
         </SectionWindow>
       </ScrollReveal>
 
-      {/* 03 — Six decisions (no ScrollReveal: transform on ancestor breaks sticky stack) */}
-      <SectionWindow num="03" title="Six problems worth solving" allowOverflow>
-        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <p className="max-w-2xl text-sm text-zinc-600">
-            Each window is one decision — what broke, why it was hard, what we tried, what worked, and the outcome.
-          </p>
-          <p className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-[#FF462D]" />
-            Stacking windows scroll ↓
-          </p>
-        </div>
-        <ChallengeWindowStack challenges={vidyasChallenges} />
-      </SectionWindow>
-
-      {/* 04 — Design system */}
+      {/* 05 — Design system */}
       <ScrollReveal noBlur>
-        <SectionWindow num="04" title="Design system">
+        <SectionWindow num="05" title="Design system">
           <DesignSystemSection pdfMeta={designSystemPdfMeta} />
         </SectionWindow>
       </ScrollReveal>
 
+      {/* 06 — Ops visibility · Tableau */}
       <ScrollReveal>
-        <TableauSection num="05" />
+        <TableauSection num="06" />
       </ScrollReveal>
 
-      {/* 06 — Stack & architecture */}
+      {/* 07 — Stack & architecture */}
       <ScrollReveal>
-        <SectionWindow num="06" title="Stack & architecture">
+        <SectionWindow num="07" title="Stack & architecture">
           <p className="text-sm text-zinc-700 mb-4 max-w-3xl leading-relaxed">
             Production architecture from the official open-source repository (<a href="https://github.com/commerceagents/vidyas-kitchen" target="_blank" rel="noopener noreferrer" className="font-mono font-bold text-black underline hover:text-[#BD2320]">github.com/commerceagents/vidyas-kitchen</a>). Explore the live code files below: finite state machine transitions, OpenAI cart intent parsers, Meta WhatsApp Cloud API webhooks, and driver phone-lookup authentication.
           </p>
@@ -292,9 +299,9 @@ export default function VidyasKitchenCaseStudyView({
         </SectionWindow>
       </ScrollReveal>
 
-      {/* 07 — What I have learned so far */}
+      {/* 08 — What I have learned so far */}
       <ScrollReveal>
-        <SectionWindow num="07" title="What I have learned so far">
+        <SectionWindow num="08" title="What I have learned so far">
           <p className="text-sm text-zinc-600 max-w-3xl mb-6">
             Key product design, UX ergonomics, and systems architecture takeaways from shipping Vidya&apos;s Kitchen 0→1 in Sivakasi:
           </p>

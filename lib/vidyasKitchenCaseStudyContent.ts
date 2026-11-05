@@ -1,3 +1,37 @@
+export type PersonaScenarioOption = {
+  id: string;
+  tag: string;
+  title: string;
+  groundReality: string;
+  whatUxIDid: string;
+  whatTechnicalIDid: string;
+  quote?: string;
+  quoteAuthor?: string;
+};
+
+export type PersonaScenarioCard = {
+  id: string;
+  personaName: string;
+  personaRole: string;
+  personaInitials: string;
+  surfaceTag: string;
+  surfaceName: string;
+  scenarios: PersonaScenarioOption[];
+};
+
+export type TopBottleneckItem = {
+  id: string;
+  num: string;
+  title: string;
+  surface: string;
+  situation: string;
+  task: string;
+  actionUx: string;
+  actionTech: string;
+  result: string;
+  interviewTakeaway: string;
+};
+
 export type VidyasChallenge = {
   id: string;
   title: string;
@@ -1535,3 +1569,163 @@ export const vidyasWhatILearnedSoFar = [
 ];
 
 export const vidyasDoNotClaim: string[] = [];
+
+export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
+  {
+    id: "persona-customer",
+    personaName: "Priya M.",
+    personaRole: "Bank Employee & Working Mother, Sivakasi",
+    personaInitials: "PM",
+    surfaceTag: "WhatsApp Bot & Customer PWA",
+    surfaceName: "Customer Ordering Surfaces",
+    scenarios: [
+      {
+        id: "cust-scen-a",
+        tag: "Scenario 01 · Intent Parsing",
+        title: "The Tanglish Sentence vs Empty Cart Trap",
+        groundReality:
+          "Customers order on WhatsApp while juggling work: '2 chicken biryani naalaiku lunch cash'. Traditional chatbots forced 4-level numerical menus, leading to high drop-offs.",
+        whatUxIDid:
+          "Removed multi-level menus entirely. Designed an open chat experience that parses natural Tanglish text and returns a visual confirmation card with quick-edit size drawers.",
+        whatTechnicalIDid:
+          "Built an OpenAI gpt-4o-mini parser with an AbortSignal timeout of 2.5 seconds. The AI extracts dish and slot, while the server strictly prices food, packing, and GST.",
+        quote:
+          "I don't have time to download apps and add items to a cart. I just want to send one WhatsApp message and know dinner is booked.",
+        quoteAuthor: "Priya M., Sivakasi Customer",
+      },
+      {
+        id: "cust-scen-b",
+        tag: "Scenario 02 · Cook-To-Order",
+        title: "24-Hour Cook-To-Order vs Instant Delivery Expectation",
+        groundReality:
+          "Food delivery apps trained customers to expect instant 30-minute arrival. But Vidya's Kitchen buys fresh country chicken to order, preparing meals 24 hours in advance.",
+        whatUxIDid:
+          "Re-anchored the checkout flow around a prominent 24-Hour Slot Picker (Breakfast, Lunch, Dinner). Reassured customers that food is freshly cooked from scratch.",
+        whatTechnicalIDid:
+          "Engineered an automated 12-hour preparation cutoff gate in Supabase. Built self-serve cancellation with 100% automated Razorpay refund processing.",
+        quote:
+          "Once the app clearly showed the tomorrow lunch slot and explained it's freshly cooked at home, I started pre-ordering every weekend.",
+        quoteAuthor: "Karthik S., Sivakasi Customer",
+      },
+    ],
+  },
+  {
+    id: "persona-driver",
+    personaName: "Murugan K.",
+    personaRole: "Hyperlocal Delivery Partner, Sivakasi",
+    personaInitials: "MK",
+    surfaceTag: "Driver PWA",
+    surfaceName: "Field Logistics Surface",
+    scenarios: [
+      {
+        id: "driver-scen-a",
+        tag: "Scenario 01 · Bike Ergonomics",
+        title: "Eliminating SMS OTP Latency & Midday 38°C Ergonomics",
+        groundReality:
+          "Delivering lunch in 38°C Sivakasi sun with bike gloves and oily hands. Waiting for SMS OTPs caused severe delays due to spotty 2G network coverage.",
+        whatUxIDid:
+          "Eliminated SMS OTP verification entirely. Replaced it with a kitchen-issued 4-digit PIN, oversized 60px bike touch targets, and a single-swipe delivery slider.",
+        whatTechnicalIDid:
+          "Built a dedicated phone-lookup auth endpoint with kitchen admin provisioning. Implemented an offline-tolerant service worker that caches customer drop pins and cash totals.",
+        quote:
+          "In the afternoon sun, waiting for OTP codes on the bike was painful. The 4-digit PIN and big buttons let me deliver with one thumb without removing gloves.",
+        quoteAuthor: "Murugan K., Delivery Partner",
+      },
+    ],
+  },
+  {
+    id: "persona-kitchen",
+    personaName: "Vidya R.",
+    personaRole: "Cloud Kitchen Founder & Head Chef",
+    personaInitials: "VR",
+    surfaceTag: "Kitchen Supervisory Console",
+    surfaceName: "Kitchen Operations Surface",
+    scenarios: [
+      {
+        id: "kitchen-scen-a",
+        tag: "Scenario 01 · Festive Demand",
+        title: "Festival Surge AI Pricing Assistant with 1-Click Human Veto",
+        groundReality:
+          "Diwali and temple festival weeks spike demand 4x. Vidya previously scribbled discounts in chat threads at midnight, miscalculating margins and losing money on raw meat.",
+        whatUxIDid:
+          "Designed a Human-in-the-Loop AI Pricing Card on her dashboard. Rather than an algorithmic black-box, it presents clear cards with explicit 1-click Approve or Dismiss buttons.",
+        whatTechnicalIDid:
+          "Built a nightly 2:00 AM cron job analyzing 7-day dish volume, margins, and repeat rates. Hard-coded a safety gate blocking any dish rated under 3.5 stars from promotional discounts.",
+        quote:
+          "The festival suggestion cards let me review pricing in 10 seconds before bed instead of calculating raw meat margins on paper.",
+        quoteAuthor: "Vidya R., Founder & Head Chef",
+      },
+      {
+        id: "kitchen-scen-b",
+        tag: "Scenario 02 · Stove-Side Ops",
+        title: "Stove-Side Ambient Audio Dispatch & 85dB Chimes",
+        groundReality:
+          "Cooking 15 liters of gravy over commercial open flames with loud exhaust fans running. Silent web push notifications and emails went completely unnoticed.",
+        whatUxIDid:
+          "Created a high-contrast Kanban board readable from 3 meters away. Paired it with synthesized repeating audio chimes that play continuously until acknowledged.",
+        whatTechnicalIDid:
+          "Wired Supabase Realtime WebSocket listeners to HTML5 Web Audio API chimes at maximum gain. Added an acknowledgment timer alerting the supervisor if a ticket sits idle over 5 minutes.",
+        quote:
+          "When I'm at the stove, the loud chime and the big board tell me immediately when a lunch slot is booked without having to wash my hands.",
+        quoteAuthor: "Vidya R., Founder & Head Chef",
+      },
+    ],
+  },
+];
+
+export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
+  {
+    id: "BOTTLE_01",
+    num: "01",
+    title: "The Tanglish Intent Gateway (AI Drafts, Server Prices)",
+    surface: "WhatsApp Bot & Customer PWA",
+    situation:
+      "Sivakasi customers order in free-form Tamil-English sentences. Relying on conversational LLMs introduced severe risks of hallucinated discounts or dropped delivery fees.",
+    task:
+      "Extract unstructured conversational parameters while guaranteeing 100% mathematical pricing integrity and preventing billing bugs.",
+    actionUx:
+      "Designed a conversational flow with zero form friction. The customer texts freely and receives an instant confirmation card with quick-edit portion drawers.",
+    actionTech:
+      "Restricted gpt-4o-mini to extract only dish, quantity, date, and slot with a 2.5s timeout. An immutable server engine calculates menu prices, packaging, delivery, and GST.",
+    result:
+      "100% price integrity across all live orders, cutting order-taking latency from 12-minute phone calls to under 60 seconds.",
+    interviewTakeaway:
+      "AI is exceptional at understanding messy human intent, but financial calculations must always remain strictly deterministic.",
+  },
+  {
+    id: "BOTTLE_02",
+    num: "02",
+    title: "The Meta 24-Hour Expiry & Gift Recipient Delivery Gate",
+    surface: "Meta WhatsApp Cloud API & Twilio",
+    situation:
+      "Meta strictly blocks free-form messages outside a 24-hour window. This broke advance party pre-orders and long-distance gift orders sent from children in Chennai to parents in Sivakasi.",
+    task:
+      "Ensure order dispatch updates reach every customer and gift recipient reliably without violating Meta's strict anti-spam API boundaries.",
+    actionUx:
+      "Gift recipients receive a personalized initial card stating who gifted the meal, paired with a 1-tap tracking link that requires no app install or login.",
+    actionTech:
+      "Architected an automated 3-tier fallback pipeline in src/lib/whatsapp-order-notify.ts: rich cards inside 24 hours, approved Meta Utility HSM templates outside 24 hours, and Twilio SMS fallback.",
+    result:
+      "Zero dropped delivery notifications, enabling seamless long-distance gift ordering for families living outside Sivakasi.",
+    interviewTakeaway:
+      "Real-world enterprise UX requires designing for third-party platform limitations and building resilient automated fallback chains.",
+  },
+  {
+    id: "BOTTLE_03",
+    num: "03",
+    title: "Kitchen Stove-Side Dispatch & Human-in-the-Loop Festival Pricing",
+    surface: "Kitchen Supervisory Console",
+    situation:
+      "The chef missed silent orders while cooking over hot commercial stoves, and manually guessed discounts during 4x holiday demand spikes, miscalculating margins.",
+    task:
+      "Create ambient kitchen awareness so zero orders are missed, and automate holiday pricing decisions safely without handing pricing autonomy to an AI.",
+    actionUx:
+      "Replaced silent notifications with synthesized Web Audio chimes and a 3-meter readable Kanban board. Festival promotions appear as a 1-click Approve or Dismiss card.",
+    actionTech:
+      "Wired Supabase Realtime listeners for ticket pushes. Programmed a nightly cron job analyzing volume and margins, programmatically blocking any dish rated under 3.5 stars from discounts.",
+    result:
+      "Zero missed peak-hour tickets and healthy 28%+ profit margins preserved across high-volume Diwali and temple festival surges.",
+    interviewTakeaway:
+      "Effective AI UX is never autopilot—it augments human operators with context and keeps decision authority strictly with the human-in-the-loop.",
+  },
+];
