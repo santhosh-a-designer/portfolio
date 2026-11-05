@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { Sparkle, Code, ShieldCheck, CheckCircle } from "@phosphor-icons/react";
+import { CheckCircle } from "@phosphor-icons/react";
 import type { TopBottleneckItem } from "@/lib/vidyasKitchenCaseStudyContent";
 
 interface Props {
@@ -10,14 +9,14 @@ interface Props {
 
 export default function Top3BottlenecksSection({ bottlenecks }: Props) {
   return (
-    <div className="space-y-12">
+    <div className="space-y-8">
       <p className="text-xs sm:text-sm text-zinc-600 max-w-3xl leading-relaxed">
         The three hardest engineering and ergonomics bottlenecks encountered while scaling Vidya&apos;s Kitchen in Sivakasi—framed in the <strong>STAR</strong> interview format:
       </p>
 
-      <div className="divide-y divide-black/20 space-y-12">
-        {bottlenecks.map((b, idx) => (
-          <article key={b.id} className={`${idx > 0 ? "pt-10" : ""} space-y-6`}>
+      <div className="divide-y divide-black/15">
+        {bottlenecks.map((b) => (
+          <article key={b.id} className="py-8 first:pt-0 last:pb-0 space-y-5">
             {/* Chapter Header */}
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-3 border-b border-black/15">
               <div className="flex items-center gap-3">
@@ -34,7 +33,7 @@ export default function Top3BottlenecksSection({ bottlenecks }: Props) {
             </div>
 
             {/* Situation & Task Briefing */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 text-xs sm:text-sm">
               <div className="space-y-1 md:pr-6 md:border-r border-zinc-200">
                 <span className="font-mono text-[10px] font-black uppercase text-[#BD2320] block">
                   The Bottleneck (Situation)
@@ -51,7 +50,7 @@ export default function Top3BottlenecksSection({ bottlenecks }: Props) {
             </div>
 
             {/* Actions: UX vs Technical */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-3 border-t border-zinc-200 text-xs sm:text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-3 border-t border-zinc-200 text-xs sm:text-sm">
               <div className="space-y-2 md:pr-6 md:border-r border-zinc-200">
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320]" />

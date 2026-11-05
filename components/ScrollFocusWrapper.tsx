@@ -81,51 +81,13 @@ function ActiveScrollFocusItem({
       : ["start end", "end start"],
   });
 
-  // Calculate blur and opacity mappings: in-focus sweet spot is between 0.35 and 0.65
-  const blurRangeInput = isFirst
-    ? [0, 0.45, 0.82, 1]
-    : isLast
-    ? [0, 0.35, 1]
-    : [0, 0.28, 0.72, 1];
-
-  const blurRangeOutput = isFirst
-    ? [0, 0, maxBlur, maxBlur]
-    : isLast
-    ? [maxBlur, 0, 0]
-    : [maxBlur, 0, 0, maxBlur];
-
-  const opacityRangeInput = isFirst
-    ? [0, 0.45, 0.82, 1]
-    : isLast
-    ? [0, 0.35, 1]
-    : [0, 0.28, 0.72, 1];
-
-  const opacityRangeOutput = isFirst
-    ? [1, 1, minOpacity, minOpacity]
-    : isLast
-    ? [minOpacity, 1, 1]
-    : [minOpacity, 1, 1, minOpacity];
-
-  const rawBlur = useTransform(scrollYProgress, blurRangeInput, blurRangeOutput);
-  const opacity = useTransform(scrollYProgress, opacityRangeInput, opacityRangeOutput);
-
-  // Performance optimization: set filter to "none" when on mobile or in focus (val <= 0.25px)
-  const filter = useTransform(rawBlur, (val) => {
-    if (isMobile || !mounted || val <= 0.25) return "none";
-    return `blur(${val.toFixed(1)}px)`;
-  });
-
   return (
-    <motion.div
+    <div
       ref={containerRef}
       id={id}
-      style={{
-        filter: isMobile ? "none" : (mounted ? filter : "none"),
-        opacity: isMobile ? 1 : (mounted ? opacity : 1),
-      }}
-      className={`w-full ${isMobile ? "" : "transition-[filter,opacity] duration-300 ease-out will-change-[filter,opacity]"} ${className}`}
+      className={`w-full ${className}`}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

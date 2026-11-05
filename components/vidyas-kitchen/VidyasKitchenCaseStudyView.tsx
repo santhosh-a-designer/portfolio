@@ -15,6 +15,7 @@ import KitchenOpsSection from "./KitchenOpsSection";
 import DesignSystemSection from "./DesignSystemSection";
 import PersonaScenariosSection from "./PersonaScenariosSection";
 import Top3BottlenecksSection from "./Top3BottlenecksSection";
+import StickyScrollRail from "./StickyScrollRail";
 import ScrollReveal from "./ScrollReveal";
 import CaseStudyFooterNav from "@/components/CaseStudyFooterNav";
 import type { DesignSystemPdfMeta } from "@/lib/designSystemPdfMeta";
@@ -39,19 +40,22 @@ function SectionWindow({
   num,
   title,
   tag,
+  id,
   children,
   allowOverflow = false,
 }: {
   num: string;
   title: string;
   tag?: string;
+  id?: string;
   children: React.ReactNode;
   /** Required for sticky stacked cards — overflow-hidden breaks position:sticky */
   allowOverflow?: boolean;
 }) {
   return (
     <section
-      className={`bg-white border-t border-b sm:border border-black/15 sm:border-black/20 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)] ${
+      id={id}
+      className={`scroll-mt-20 sm:scroll-mt-24 bg-white border-t border-b sm:border border-black/15 sm:border-black/20 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)] ${
         allowOverflow ? "overflow-visible" : "overflow-hidden"
       }`}
     >
@@ -91,7 +95,10 @@ export default function VidyasKitchenCaseStudyView({
   designSystemPdfMeta: DesignSystemPdfMeta;
 }) {
   return (
-    <main className="max-w-[1240px] mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-28 sm:pb-32 space-y-8 sm:space-y-12 min-w-0">
+    <main className="max-w-[1240px] mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-28 sm:pb-32 space-y-8 sm:space-y-12 min-w-0 relative">
+      {/* Editorial Sticky Side Rail & Reading Progress */}
+      <StickyScrollRail />
+
       <motion.div
         variants={heroItem}
         initial="hidden"
@@ -218,7 +225,7 @@ export default function VidyasKitchenCaseStudyView({
 
       {/* 01 — Why this market needs its own product */}
       <ScrollReveal>
-        <SectionWindow num="01" title="Why generic delivery apps fail here" tag="Tier-3 Friction">
+        <SectionWindow id="reality" num="01" title="The Sivakasi Reality" tag="Tier-3 Friction">
           <p className="text-sm text-zinc-600 max-w-3xl mb-6">
             Before writing a single screen: each stage of the home food journey—and why a dark-store Swiggy playbook fails in Sivakasi.
           </p>
@@ -253,7 +260,7 @@ export default function VidyasKitchenCaseStudyView({
 
       {/* 02 — Sivakasi field research & ground personas */}
       <ScrollReveal>
-        <SectionWindow num="02" title="Sivakasi field research & ground personas">
+        <SectionWindow id="personas" num="02" title="3 Field Personas" tag="Field Scenarios">
           <p className="text-sm text-zinc-600 max-w-3xl mb-6">
             Ground-level friction uncovered during on-site user interviews in Sivakasi—and the explicit <strong>UX decisions</strong> and <strong>technical architecture</strong> engineered to eliminate each failure mode:
           </p>
@@ -263,29 +270,29 @@ export default function VidyasKitchenCaseStudyView({
 
       {/* 03 — Top 3 interview bottlenecks & STAR solutions */}
       <ScrollReveal>
-        <SectionWindow num="03" title="Top 3 bottlenecks & STAR solutions">
+        <SectionWindow id="bottlenecks" num="03" title="Top 3 Bottlenecks" tag="STAR Solutions">
           <Top3BottlenecksSection bottlenecks={vidyasTop3Bottlenecks} />
         </SectionWindow>
       </ScrollReveal>
 
       {/* Product Flow Screens — Customer: WhatsApp */}
       <ScrollReveal>
-        <HomeFoodStory />
+        <HomeFoodStory id="whatsapp" />
       </ScrollReveal>
 
       {/* Product Flow Screens — Customer: PWA */}
       <ScrollReveal>
-        <PwaStorySection />
+        <PwaStorySection id="pwa" />
       </ScrollReveal>
 
       {/* Product Flow Screens — Operations: Kitchen & driver */}
       <ScrollReveal>
-        <KitchenOpsSection />
+        <KitchenOpsSection id="kitchen" />
       </ScrollReveal>
 
       {/* 04 — How all four surfaces connect */}
-      <ScrollReveal noBlur>
-        <SectionWindow num="04" title="Information architecture & user flows">
+      <ScrollReveal>
+        <SectionWindow id="ia" num="04" title="Information Architecture &amp; User Flows">
           <p className="text-sm text-zinc-600 max-w-3xl mx-auto mb-8 text-center">
             Four surfaces — PWA, WhatsApp, kitchen dashboard, driver app — branch from one Supabase order record. Scroll to watch each diagram build in.
           </p>
@@ -311,8 +318,8 @@ export default function VidyasKitchenCaseStudyView({
       </ScrollReveal>
 
       {/* 05 — Design system */}
-      <ScrollReveal noBlur>
-        <SectionWindow num="05" title="Design system">
+      <ScrollReveal>
+        <SectionWindow id="design-system" num="05" title="Design System &amp; Tokens">
           <DesignSystemSection pdfMeta={designSystemPdfMeta} />
         </SectionWindow>
       </ScrollReveal>
@@ -324,7 +331,7 @@ export default function VidyasKitchenCaseStudyView({
 
       {/* 07 — Stack & architecture */}
       <ScrollReveal>
-        <SectionWindow num="07" title="Stack & architecture">
+        <SectionWindow id="architecture" num="07" title="Systems Architecture &amp; Codebase">
           <p className="text-sm text-zinc-700 mb-4 max-w-3xl leading-relaxed">
             Production architecture from the official open-source repository (<a href="https://github.com/commerceagents/vidyas-kitchen" target="_blank" rel="noopener noreferrer" className="font-mono font-bold text-black underline hover:text-[#BD2320]">github.com/commerceagents/vidyas-kitchen</a>). Explore the live code files below: finite state machine transitions, OpenAI cart intent parsers, Meta WhatsApp Cloud API webhooks, and driver phone-lookup authentication.
           </p>
@@ -335,7 +342,7 @@ export default function VidyasKitchenCaseStudyView({
 
       {/* 08 — What I have learned so far */}
       <ScrollReveal>
-        <SectionWindow num="08" title="What I have learned so far" tag="Senior Retrospective">
+        <SectionWindow id="retrospective" num="08" title="What I Have Learned So Far" tag="Senior Retrospective">
           <p className="text-sm text-zinc-600 max-w-3xl mb-8 leading-relaxed">
             Key product design, UX ergonomics, and systems architecture takeaways from shipping Vidya&apos;s Kitchen 0→1 in Sivakasi:
           </p>

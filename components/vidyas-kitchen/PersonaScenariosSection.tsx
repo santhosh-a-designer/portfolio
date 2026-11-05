@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { Sparkle, Code, Quotes, ShieldCheck } from "@phosphor-icons/react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, ArrowRight, User, Bicycle, CookingPot, Quotes } from "@phosphor-icons/react";
 import type { PersonaScenarioCard } from "@/lib/vidyasKitchenCaseStudyContent";
 
 interface Props {
@@ -9,124 +10,207 @@ interface Props {
 }
 
 export default function PersonaScenariosSection({ personas }: Props) {
-  const [activePersonaId, setActivePersonaId] = useState<string>(personas[0]?.id || "persona-customer");
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const currentPersona = personas.find((p) => p.id === activePersonaId) || personas[0];
+  const currentPersona = personas[activeIndex] || personas[0];
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % personas.length);
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev - 1 + personas.length) % personas.length);
+  };
+
+  const getPersonaIcon = (id: string) => {
+    if (id.includes("driver")) return <Bicycle weight="bold" className="w-4 h-4 text-[#BD2320]" />;
+    if (id.includes("kitchen")) return <CookingPot weight="bold" className="w-4 h-4 text-[#BD2320]" />;
+    return <User weight="bold" className="w-4 h-4 text-[#BD2320]" />;
+  };
 
   return (
-    <div className="space-y-8">
-      {/* Editorial Persona Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-black/15 scrollbar-none">
-        {personas.map((p) => {
-          const isActive = p.id === activePersonaId;
-          return (
-            <button
-              key={p.id}
-              type="button"
-              onClick={() => setActivePersonaId(p.id)}
-              className={`flex items-center gap-2.5 px-3 sm:px-4 py-2 font-mono text-xs font-bold uppercase transition-all shrink-0 select-none ${
-                isActive
-                  ? "bg-black text-white"
-                  : "bg-zinc-100 text-zinc-600 hover:text-black hover:bg-zinc-200"
-              }`}
-            >
-              <span
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  isActive ? "bg-[#BD2320]" : "bg-zinc-400"
+    <div className="space-y-6 sm:space-y-8">
+      {/* ─── Top Control Bar: Tab Navigation + Carousel Arrows ─── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-black/15 font-mono">
+        {/* Horizontal Tabs */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+          {personas.map((p, idx) => {
+            const isActive = idx === activeIndex;
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => setActiveIndex(idx)}
+                className={`flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-bold uppercase transition-all shrink-0 cursor-pointer select-none border ${
+                  isActive
+                    ? "bg-black text-white border-black"
+                    : "bg-white text-zinc-600 border-black/15 hover:border-black/40 hover:text-black"
                 }`}
-              />
-              <span>{p.personaName}</span>
-              <span className="text-[10px] opacity-60 hidden sm:inline">({p.surfaceTag})</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Active Persona Editorial Header */}
-      <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-4 border-b border-black/15">
-        <div>
-          <div className="flex items-center gap-3">
-            <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-black font-mono">
-              {currentPersona.personaName}
-            </h3>
-            <span className="px-2 py-0.5 bg-[#BD2320] text-white font-mono text-[10px] font-black uppercase tracking-wider">
-              {currentPersona.surfaceTag}
-            </span>
-          </div>
-          <p className="text-xs sm:text-sm text-zinc-600 font-medium mt-1">{currentPersona.personaRole}</p>
+              >
+                <span
+                  className={`w-2 h-2 rounded-full ${
+                    isActive ? "bg-[#BD2320]" : "bg-zinc-300"
+                  }`}
+                />
+                <span>0{idx + 1} // {p.personaName}</span>
+                <span className="text-[10px] opacity-60 hidden md:inline">({p.personaInitials})</span>
+              </button>
+            );
+          })}
         </div>
-        <span className="font-mono text-[11px] text-zinc-400 uppercase tracking-widest">
-          {currentPersona.scenarios.length} Field Scenarios Unpacked
-        </span>
+
+        {/* Carousel Prev / Next Controls */}
+        <div className="flex items-center gap-2 shrink-0 self-end sm:self-auto">
+          <span className="text-xs font-bold text-zinc-500 mr-2 tracking-wider">
+            0{activeIndex + 1} / 0{personas.length}
+          </span>
+          <button
+            type="button"
+            onClick={handlePrev}
+            aria-label="Previous persona card"
+            className="w-8 h-8 flex items-center justify-center border border-black/20 bg-white hover:bg-black hover:text-white transition-colors cursor-pointer"
+          >
+            <ArrowLeft weight="bold" className="w-3.5 h-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Next persona card"
+            className="w-8 h-8 flex items-center justify-center border border-black/20 bg-white hover:bg-black hover:text-white transition-colors cursor-pointer"
+          >
+            <ArrowRight weight="bold" className="w-3.5 h-3.5" />
+          </button>
+        </div>
       </div>
 
-      {/* Scenarios — Editorial Magazine Style (No nested boxes) */}
-      <div className="space-y-12">
-        {currentPersona.scenarios.map((scen, idx) => (
-          <article key={scen.id} className="space-y-4">
-            {/* Scenario Header Bar */}
-            <div className="flex items-baseline justify-between gap-4 border-b border-black/20 pb-2">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[11px] font-black uppercase text-[#BD2320]">
-                  {scen.tag}
-                </span>
-                <span className="text-zinc-300">/</span>
-                <h4 className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-black">
-                  {scen.title}
-                </h4>
+      {/* ─── 3 Horizontal Stacked Cards (Simon Thai Deck Pattern) ─── */}
+      <div className="relative min-h-[580px] sm:min-h-[500px] md:min-h-[460px] select-none">
+        {/* Layer 3: Farthest Background Card (peek border) */}
+        <div
+          aria-hidden
+          className="absolute inset-0 translate-y-6 sm:translate-y-5 scale-[0.96] bg-zinc-100/70 border border-black/10 rounded-sm pointer-events-none transition-transform duration-300"
+        />
+
+        {/* Layer 2: Middle Background Card (peek border) */}
+        <div
+          aria-hidden
+          className="absolute inset-0 translate-y-3 sm:translate-y-2.5 scale-[0.98] bg-zinc-50 border border-black/15 rounded-sm pointer-events-none transition-transform duration-300"
+        />
+
+        {/* Layer 1: Active Front Card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPersona.id}
+            initial={{ opacity: 0, y: 12, scale: 0.99 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -12, scale: 0.99 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-10 bg-white border border-black/20 shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 sm:p-8 md:p-10 space-y-6"
+          >
+            {/* Persona Header Banner */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-black/15">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-zinc-100 border border-black/15 flex items-center justify-center font-mono font-black text-sm sm:text-base text-black shrink-0">
+                  {currentPersona.personaInitials}
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-black font-mono">
+                      {currentPersona.personaName}
+                    </h3>
+                    <span className="w-2 h-2 rounded-full bg-[#BD2320]" />
+                  </div>
+                  <p className="text-xs sm:text-sm text-zinc-600 font-medium">
+                    {currentPersona.personaRole}
+                  </p>
+                </div>
               </div>
-              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest hidden sm:inline">
-                Sivakasi Ground Friction
+
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-zinc-100 border border-black/15 font-mono text-[10px] font-bold uppercase tracking-wider text-black">
+                  {getPersonaIcon(currentPersona.id)}
+                  <span>{currentPersona.surfaceTag}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Persona Field Scenarios Spread (Clean, bite-sized UX vs Tech takeaways) */}
+            <div className="divide-y divide-zinc-200 space-y-6">
+              {currentPersona.scenarios.map((scen, sIdx) => (
+                <div key={scen.id} className={`${sIdx > 0 ? "pt-6" : ""} space-y-4`}>
+                  {/* Scenario Headline */}
+                  <div className="flex items-baseline justify-between gap-3">
+                    <div className="flex items-center gap-2 font-mono text-xs">
+                      <span className="font-black text-[#BD2320] uppercase">{scen.tag}</span>
+                      <span className="text-zinc-300">/</span>
+                      <h4 className="font-bold text-black uppercase tracking-wide">{scen.title}</h4>
+                    </div>
+                  </div>
+
+                  {/* Ground Friction Context */}
+                  <p className="text-xs sm:text-sm text-zinc-800 leading-relaxed font-sans">
+                    <strong className="font-bold text-black">Ground Reality:</strong> {scen.groundReality}
+                  </p>
+
+                  {/* 2-Column Scannable Takeaways: UX vs Logical Tech */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-1">
+                    {/* Left: What UX I Did */}
+                    <div className="space-y-1.5 p-3.5 bg-zinc-50 border-l-2 border-[#BD2320]">
+                      <div className="flex items-center gap-1.5 text-black font-mono text-[11px] font-black uppercase tracking-wider">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320]" />
+                        <span>What UX I Did</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
+                        {scen.whatUxIDid}
+                      </p>
+                    </div>
+
+                    {/* Right: What Logical Tech I Did */}
+                    <div className="space-y-1.5 p-3.5 bg-zinc-50 border-l-2 border-black">
+                      <div className="flex items-center gap-1.5 text-black font-mono text-[11px] font-black uppercase tracking-wider">
+                        <span className="w-1.5 h-1.5 rounded-full bg-black" />
+                        <span>What Technical I Did</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-mono text-[11px] sm:text-xs">
+                        {scen.whatTechnicalIDid}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Authentic Sivakasi Quote */}
+                  {scen.quote && (
+                    <div className="pt-2">
+                      <blockquote className="flex items-start gap-2 text-xs text-zinc-600 italic">
+                        <Quotes weight="fill" className="w-4 h-4 text-[#BD2320] shrink-0 mt-0.5" />
+                        <div>
+                          <span>“{scen.quote}”</span>
+                          <span className="block mt-0.5 font-mono text-[10px] uppercase font-bold text-zinc-500 not-italic">
+                            — {scen.quoteAuthor}
+                          </span>
+                        </div>
+                      </blockquote>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom Card Footer with Direct Deck Jumper */}
+            <div className="pt-4 border-t border-black/15 flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+              <span className="text-[11px] text-zinc-500 uppercase tracking-wider">
+                Click arrows to cycle through all 3 field roles
               </span>
+              <button
+                type="button"
+                onClick={handleNext}
+                className="inline-flex items-center gap-1.5 font-black uppercase text-black hover:text-[#BD2320] transition-colors cursor-pointer"
+              >
+                <span>NEXT PERSONA</span>
+                <ArrowRight weight="bold" className="w-3.5 h-3.5" />
+              </button>
             </div>
-
-            {/* Sivakasi Ground Reality (Lead paragraph) */}
-            <p className="text-sm sm:text-base text-zinc-800 leading-relaxed max-w-3xl">
-              <strong>Ground Reality:</strong> {scen.groundReality}
-            </p>
-
-            {/* Two-Column Editorial Spread: What UX I Did vs What Technical I Did */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
-              {/* Left Column: UX */}
-              <div className="space-y-2 md:pr-6 md:border-r border-zinc-200">
-                <div className="flex items-center gap-2 text-black">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320]" />
-                  <span className="font-mono text-[11px] font-black uppercase tracking-wider">
-                    What UX I Did (Ergonomics &amp; Flows)
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
-                  {scen.whatUxIDid}
-                </p>
-              </div>
-
-              {/* Right Column: Technical */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 text-black">
-                  <span className="w-1.5 h-1.5 rounded-full bg-black" />
-                  <span className="font-mono text-[11px] font-black uppercase tracking-wider">
-                    What Technical I Did (Architecture &amp; Logic)
-                  </span>
-                </div>
-                <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-mono">
-                  {scen.whatTechnicalIDid}
-                </p>
-              </div>
-            </div>
-
-            {/* Sivakasi Pull Quote */}
-            {scen.quote && (
-              <div className="pt-3 border-t border-dashed border-zinc-200">
-                <blockquote className="border-l-2 border-[#BD2320] pl-3.5 py-0.5 text-xs sm:text-sm text-zinc-800 italic leading-relaxed">
-                  “{scen.quote}”
-                  <span className="block mt-1 font-mono text-[10px] uppercase font-bold text-zinc-500 not-italic">
-                    — {scen.quoteAuthor}
-                  </span>
-                </blockquote>
-              </div>
-            )}
-          </article>
-        ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

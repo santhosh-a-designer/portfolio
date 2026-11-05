@@ -484,21 +484,6 @@ function WindowCard({
   // Sticky top docking offset: 28px per card for stacked window tabs
   const stickyTop = `calc(var(--site-header) + ${index * 28}px)`;
 
-  // Individual card focus range: when subsequent cards stack on top, slightly blur the lower card on desktop only
-  const cardStart = index / total;
-  const cardEnd = (index + 1) / total;
-  const cardCovered = Math.min(1, cardEnd + 0.1);
-
-  const cardBlur = useTransform(
-    scrollYProgress,
-    [0, cardStart, cardEnd, cardCovered],
-    [0, 0, 0, index === total - 1 ? 0 : 3.5]
-  );
-  const cardFilter = useTransform(cardBlur, (val) => {
-    if (isMobile || val <= 0.2) return "none";
-    return `blur(${val.toFixed(1)}px)`;
-  });
-
   return (
     <div
       id={index === 0 ? "project-card-01" : undefined}
@@ -508,11 +493,10 @@ function WindowCard({
         zIndex: index + 10,
       }}
     >
-      <motion.div
-        style={{ filter: isMobile ? "none" : cardFilter }}
+      <div
         className={`w-full h-auto ${
           isVidyasKitchen ? "lg:h-[610px]" : "lg:h-[530px]"
-        } flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative z-10 transition-[filter] duration-200`}
+        } flex flex-col bg-white border-2 border-black shadow-[0px_10px_25px_rgba(0,0,0,0.1),4px_4px_0px_0px_rgba(0,0,0,1)] sm:shadow-[0px_10px_25px_rgba(0,0,0,0.1),6px_6px_0px_0px_rgba(0,0,0,1)] overflow-hidden relative z-10`}
       >
         {/* ─── Browser / Window Titlebar Header ─── */}
         <div className="h-[38px] sm:h-[42px] shrink-0 px-2.5 sm:px-4 bg-[#E2E8F0] border-b-2 border-black flex items-center justify-between font-mono text-xs select-none gap-2">
@@ -729,7 +713,7 @@ function WindowCard({
           </div>
 
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
