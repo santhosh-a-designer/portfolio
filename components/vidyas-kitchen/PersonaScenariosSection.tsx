@@ -9,10 +9,62 @@ interface Props {
   personas: PersonaScenarioCard[];
 }
 
+const PERSONA_THEMES = [
+  {
+    // 01 Priya M. (Customer · Culinary Crimson & Rose)
+    id: "persona-customer",
+    cardBg: "bg-[#FFF6F6]",
+    cardBorder: "border-[#BD2320]/30",
+    accentColor: "#BD2320",
+    tabActiveBg: "bg-[#BD2320] text-white border-[#BD2320]",
+    avatarBg: "bg-[#BD2320] text-white border-[#BD2320]",
+    badgeClass: "bg-[#BD2320] text-white border-[#BD2320]",
+    surfaceTagClass: "bg-white text-zinc-900 border-[#BD2320]/25",
+    uxBoxBorder: "border-[#BD2320]",
+    techBoxBorder: "border-black",
+    quoteAccent: "border-[#BD2320] text-[#BD2320]",
+    peekBg1: "bg-[#FFFBEB] border-amber-300/40", // Murugan
+    peekBg2: "bg-[#F0FDF4] border-emerald-300/40", // Vidya
+  },
+  {
+    // 02 Murugan K. (Driver · Midday Sun Ochre & Amber)
+    id: "persona-driver",
+    cardBg: "bg-[#FFFBEB]",
+    cardBorder: "border-amber-400/40",
+    accentColor: "#D97706",
+    tabActiveBg: "bg-amber-600 text-white border-amber-600",
+    avatarBg: "bg-amber-600 text-white border-amber-600",
+    badgeClass: "bg-amber-600 text-white border-amber-600",
+    surfaceTagClass: "bg-white text-amber-950 border-amber-400/35",
+    uxBoxBorder: "border-amber-500",
+    techBoxBorder: "border-black",
+    quoteAccent: "border-amber-500 text-amber-600",
+    peekBg1: "bg-[#F0FDF4] border-emerald-300/40", // Vidya
+    peekBg2: "bg-[#FFF6F6] border-[#BD2320]/30", // Priya
+  },
+  {
+    // 03 Vidya R. (Kitchen Chef · Banana-Leaf / Stove-Side Emerald)
+    id: "persona-kitchen",
+    cardBg: "bg-[#F0FDF4]",
+    cardBorder: "border-emerald-500/35",
+    accentColor: "#059669",
+    tabActiveBg: "bg-emerald-700 text-white border-emerald-700",
+    avatarBg: "bg-emerald-700 text-white border-emerald-700",
+    badgeClass: "bg-emerald-700 text-white border-emerald-700",
+    surfaceTagClass: "bg-white text-emerald-950 border-emerald-500/30",
+    uxBoxBorder: "border-emerald-600",
+    techBoxBorder: "border-black",
+    quoteAccent: "border-emerald-600 text-emerald-700",
+    peekBg1: "bg-[#FFF6F6] border-[#BD2320]/30", // Priya
+    peekBg2: "bg-[#FFFBEB] border-amber-300/40", // Murugan
+  },
+];
+
 export default function PersonaScenariosSection({ personas }: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const currentPersona = personas[activeIndex] || personas[0];
+  const theme = PERSONA_THEMES[activeIndex] || PERSONA_THEMES[0];
 
   const handleNext = () => {
     setActiveIndex((prev) => (prev + 1) % personas.length);
@@ -23,8 +75,8 @@ export default function PersonaScenariosSection({ personas }: Props) {
   };
 
   const getPersonaIcon = (id: string) => {
-    if (id.includes("driver")) return <Bicycle weight="bold" className="w-4 h-4 text-[#BD2320]" />;
-    if (id.includes("kitchen")) return <CookingPot weight="bold" className="w-4 h-4 text-[#BD2320]" />;
+    if (id.includes("driver")) return <Bicycle weight="bold" className="w-4 h-4 text-amber-600" />;
+    if (id.includes("kitchen")) return <CookingPot weight="bold" className="w-4 h-4 text-emerald-700" />;
     return <User weight="bold" className="w-4 h-4 text-[#BD2320]" />;
   };
 
@@ -32,10 +84,11 @@ export default function PersonaScenariosSection({ personas }: Props) {
     <div className="space-y-6 sm:space-y-8">
       {/* ─── Top Control Bar: Tab Navigation + Carousel Arrows ─── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-black/15 font-mono">
-        {/* Horizontal Tabs */}
+        {/* Horizontal Tabs with Dynamic Color Tints */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           {personas.map((p, idx) => {
             const isActive = idx === activeIndex;
+            const tabTheme = PERSONA_THEMES[idx] || PERSONA_THEMES[0];
             return (
               <button
                 key={p.id}
@@ -43,17 +96,16 @@ export default function PersonaScenariosSection({ personas }: Props) {
                 onClick={() => setActiveIndex(idx)}
                 className={`flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-bold uppercase transition-all shrink-0 cursor-pointer select-none border ${
                   isActive
-                    ? "bg-black text-white border-black"
+                    ? tabTheme.tabActiveBg
                     : "bg-white text-zinc-600 border-black/15 hover:border-black/40 hover:text-black"
                 }`}
               >
                 <span
-                  className={`w-2 h-2 rounded-full ${
-                    isActive ? "bg-[#BD2320]" : "bg-zinc-300"
-                  }`}
+                  className="w-2 h-2 rounded-full transition-colors"
+                  style={{ backgroundColor: isActive ? "#ffffff" : tabTheme.accentColor }}
                 />
                 <span>0{idx + 1} // {p.personaName}</span>
-                <span className="text-[10px] opacity-60 hidden md:inline">({p.personaInitials})</span>
+                <span className="text-[10px] opacity-75 hidden md:inline">({p.personaInitials})</span>
               </button>
             );
           })}
@@ -83,21 +135,21 @@ export default function PersonaScenariosSection({ personas }: Props) {
         </div>
       </div>
 
-      {/* ─── 3 Horizontal Stacked Cards (Simon Thai Deck Pattern) ─── */}
+      {/* ─── 3 Horizontal Stacked Cards with Vibrant Color Layers (Simon Thai Deck Pattern) ─── */}
       <div className="relative min-h-[580px] sm:min-h-[500px] md:min-h-[460px] select-none">
-        {/* Layer 3: Farthest Background Card (peek border) */}
+        {/* Layer 3: Farthest Background Card (colored peek border) */}
         <div
           aria-hidden
-          className="absolute inset-0 translate-y-6 sm:translate-y-5 scale-[0.96] bg-zinc-100/70 border border-black/10 rounded-sm pointer-events-none transition-transform duration-300"
+          className={`absolute inset-0 translate-y-6 sm:translate-y-5 scale-[0.96] ${theme.peekBg2} border rounded-sm pointer-events-none transition-all duration-300 shadow-sm`}
         />
 
-        {/* Layer 2: Middle Background Card (peek border) */}
+        {/* Layer 2: Middle Background Card (colored peek border) */}
         <div
           aria-hidden
-          className="absolute inset-0 translate-y-3 sm:translate-y-2.5 scale-[0.98] bg-zinc-50 border border-black/15 rounded-sm pointer-events-none transition-transform duration-300"
+          className={`absolute inset-0 translate-y-3 sm:translate-y-2.5 scale-[0.98] ${theme.peekBg1} border rounded-sm pointer-events-none transition-all duration-300 shadow-sm`}
         />
 
-        {/* Layer 1: Active Front Card */}
+        {/* Layer 1: Active Front Card with Custom Theme Tint */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPersona.id}
@@ -105,12 +157,12 @@ export default function PersonaScenariosSection({ personas }: Props) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -12, scale: 0.99 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 bg-white border border-black/20 shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 sm:p-8 md:p-10 space-y-6"
+            className={`relative z-10 ${theme.cardBg} border ${theme.cardBorder} shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-6 sm:p-8 md:p-10 space-y-6`}
           >
             {/* Persona Header Banner */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-black/15">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-zinc-100 border border-black/15 flex items-center justify-center font-mono font-black text-sm sm:text-base text-black shrink-0">
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 ${theme.avatarBg} border flex items-center justify-center font-mono font-black text-sm sm:text-base shrink-0 shadow-sm`}>
                   {currentPersona.personaInitials}
                 </div>
                 <div>
@@ -118,7 +170,7 @@ export default function PersonaScenariosSection({ personas }: Props) {
                     <h3 className="text-lg sm:text-xl font-black uppercase tracking-tight text-black font-mono">
                       {currentPersona.personaName}
                     </h3>
-                    <span className="w-2 h-2 rounded-full bg-[#BD2320]" />
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: theme.accentColor }} />
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-600 font-medium">
                     {currentPersona.personaRole}
@@ -127,7 +179,7 @@ export default function PersonaScenariosSection({ personas }: Props) {
               </div>
 
               <div className="flex items-center gap-2 self-start sm:self-auto">
-                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-zinc-100 border border-black/15 font-mono text-[10px] font-bold uppercase tracking-wider text-black">
+                <div className={`flex items-center gap-1.5 px-2.5 py-1 ${theme.surfaceTagClass} border font-mono text-[10px] font-bold uppercase tracking-wider`}>
                   {getPersonaIcon(currentPersona.id)}
                   <span>{currentPersona.surfaceTag}</span>
                 </div>
@@ -135,13 +187,13 @@ export default function PersonaScenariosSection({ personas }: Props) {
             </div>
 
             {/* Persona Field Scenarios Spread (Clean, bite-sized UX vs Tech takeaways) */}
-            <div className="divide-y divide-zinc-200 space-y-6">
+            <div className="divide-y divide-black/10 space-y-6">
               {currentPersona.scenarios.map((scen, sIdx) => (
                 <div key={scen.id} className={`${sIdx > 0 ? "pt-6" : ""} space-y-4`}>
                   {/* Scenario Headline */}
                   <div className="flex items-baseline justify-between gap-3">
                     <div className="flex items-center gap-2 font-mono text-xs">
-                      <span className="font-black text-[#BD2320] uppercase">{scen.tag}</span>
+                      <span className="font-black uppercase" style={{ color: theme.accentColor }}>{scen.tag}</span>
                       <span className="text-zinc-300">/</span>
                       <h4 className="font-bold text-black uppercase tracking-wide">{scen.title}</h4>
                     </div>
@@ -155,9 +207,9 @@ export default function PersonaScenariosSection({ personas }: Props) {
                   {/* 2-Column Scannable Takeaways: UX vs Logical Tech */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-1">
                     {/* Left: What UX I Did */}
-                    <div className="space-y-1.5 p-3.5 bg-zinc-50 border-l-2 border-[#BD2320]">
+                    <div className={`space-y-1.5 p-3.5 bg-white/90 border-l-2 ${theme.uxBoxBorder} shadow-sm`}>
                       <div className="flex items-center gap-1.5 text-black font-mono text-[11px] font-black uppercase tracking-wider">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#BD2320]" />
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.accentColor }} />
                         <span>What UX I Did</span>
                       </div>
                       <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
@@ -166,7 +218,7 @@ export default function PersonaScenariosSection({ personas }: Props) {
                     </div>
 
                     {/* Right: What Logical Tech I Did */}
-                    <div className="space-y-1.5 p-3.5 bg-zinc-50 border-l-2 border-black">
+                    <div className={`space-y-1.5 p-3.5 bg-white/90 border-l-2 ${theme.techBoxBorder} shadow-sm`}>
                       <div className="flex items-center gap-1.5 text-black font-mono text-[11px] font-black uppercase tracking-wider">
                         <span className="w-1.5 h-1.5 rounded-full bg-black" />
                         <span>What Technical I Did</span>
@@ -181,7 +233,7 @@ export default function PersonaScenariosSection({ personas }: Props) {
                   {scen.quote && (
                     <div className="pt-2">
                       <blockquote className="flex items-start gap-2 text-xs text-zinc-600 italic">
-                        <Quotes weight="fill" className="w-4 h-4 text-[#BD2320] shrink-0 mt-0.5" />
+                        <Quotes weight="fill" className={`w-4 h-4 shrink-0 mt-0.5`} style={{ color: theme.accentColor }} />
                         <div>
                           <span>“{scen.quote}”</span>
                           <span className="block mt-0.5 font-mono text-[10px] uppercase font-bold text-zinc-500 not-italic">
@@ -203,7 +255,8 @@ export default function PersonaScenariosSection({ personas }: Props) {
               <button
                 type="button"
                 onClick={handleNext}
-                className="inline-flex items-center gap-1.5 font-black uppercase text-black hover:text-[#BD2320] transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 font-black uppercase text-black hover:opacity-75 transition-opacity cursor-pointer"
+                style={{ color: theme.accentColor }}
               >
                 <span>NEXT PERSONA</span>
                 <ArrowRight weight="bold" className="w-3.5 h-3.5" />

@@ -157,26 +157,28 @@ export default function VidyasKitchenCaseStudyView({
             </motion.p>
           </div>
 
-          {/* Editorial 2-Column: Problem & Solution Spread */}
-          <motion.div variants={heroItem} className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 pb-4 border-t border-b border-black/15">
-            <div className="space-y-2 md:pr-8 md:border-r border-zinc-200">
+          {/* Editorial 2-Column: Problem & Solution Spread with Curated Tints */}
+          <motion.div variants={heroItem} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-2 pb-2">
+            <div className="space-y-2 p-5 sm:p-6 bg-[#FFF6F6] border border-[#BD2320]/20 shadow-sm">
               <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#BD2320]" />
                 <span className="font-mono text-[11px] font-black uppercase tracking-wider text-[#BD2320]">
                   01 / The Local Market Problem
                 </span>
               </div>
-              <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
+              <p className="text-sm sm:text-base text-zinc-800 leading-relaxed font-sans">
                 <HighlightText text={vidyasSnapshot.problem} />
               </p>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 p-5 sm:p-6 bg-[#F0FDF4] border border-emerald-600/20 shadow-sm">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-[11px] font-black uppercase tracking-wider text-emerald-700">
+                <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                <span className="font-mono text-[11px] font-black uppercase tracking-wider text-emerald-800">
                   02 / The Multi-Surface Solution
                 </span>
               </div>
-              <p className="text-sm sm:text-base text-zinc-800 leading-relaxed">
+              <p className="text-sm sm:text-base text-zinc-800 leading-relaxed font-sans">
                 <HighlightText text={vidyasSnapshot.solution} />
               </p>
             </div>

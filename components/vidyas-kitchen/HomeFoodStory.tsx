@@ -8,16 +8,16 @@ export default function HomeFoodStory({ id = "whatsapp" }: { id?: string }) {
   return (
     <section
       id={id}
-      className="scroll-mt-20 sm:scroll-mt-24 overflow-hidden border-t border-b sm:border border-black/15 bg-white sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+      className="scroll-mt-20 sm:scroll-mt-24 overflow-hidden border-t border-b sm:border border-emerald-900/15 bg-[#F4FAF6] sm:shadow-[0_2px_16px_rgba(0,0,0,0.03)]"
     >
-      <div className="flex h-11 select-none items-center justify-between border-b border-black/15 bg-zinc-50/90 px-4 sm:px-8 font-mono text-xs">
+      <div className="flex h-11 select-none items-center justify-between border-b border-emerald-900/15 bg-[#EBF5EE] px-4 sm:px-8 font-mono text-xs">
         <div className="flex items-center gap-2.5 truncate">
-          <span className="w-2 h-2 rounded-full bg-[#BD2320]" />
+          <span className="w-2 h-2 rounded-full bg-emerald-600" />
           <span className="truncate font-black tracking-widest text-[11px] uppercase text-black">
             Customer Surface // Why Home Food · WhatsApp First
           </span>
         </div>
-        <span className="hidden sm:inline text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+        <span className="hidden sm:inline text-[10px] font-bold text-emerald-800 uppercase tracking-widest px-2 py-0.5 bg-white/70 border border-emerald-600/20">
           Sivakasi Conversational Flow
         </span>
       </div>

@@ -8,21 +8,21 @@ export default function KitchenOpsSection({ id = "kitchen" }: { id?: string }) {
   return (
     <section
       id={id}
-      className="scroll-mt-20 sm:scroll-mt-24 overflow-hidden border-t border-b sm:border border-black/15 bg-white sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]"
+      className="scroll-mt-20 sm:scroll-mt-24 overflow-hidden border-t border-b sm:border border-slate-300 bg-[#F8FAFC] sm:shadow-[0_2px_16px_rgba(0,0,0,0.03)]"
     >
-      <div className="flex h-11 select-none items-center justify-between border-b border-black/15 bg-zinc-50/90 px-4 sm:px-8 font-mono text-xs">
+      <div className="flex h-11 select-none items-center justify-between border-b border-slate-200 bg-[#EEF2F6] px-4 sm:px-8 font-mono text-xs">
         <div className="flex items-center gap-2.5 truncate">
-          <span className="w-2 h-2 rounded-full bg-[#BD2320]" />
+          <span className="w-2 h-2 rounded-full bg-slate-800" />
           <span className="truncate font-black tracking-widest text-[11px] uppercase text-black">
             Operations Surface // Kitchen Dashboard &amp; Driver Handoff
           </span>
         </div>
-        <span className="hidden sm:inline text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+        <span className="hidden sm:inline text-[10px] font-bold text-slate-700 uppercase tracking-widest px-2 py-0.5 bg-white/80 border border-slate-300">
           Sivakasi Kitchen &amp; Logistics
         </span>
       </div>
 
-      <div className="bg-white p-6 sm:p-10 md:p-12">
+      <div className="bg-[#F8FAFC] p-6 sm:p-10 md:p-12">
         <div className="mx-auto max-w-2xl text-center pb-8 border-b border-black/15">
           <p className="mb-2 font-mono text-[10px] font-black uppercase tracking-[0.2em] text-[#BD2320]">
             {vidyasKitchenOpsStory.eyebrow}
