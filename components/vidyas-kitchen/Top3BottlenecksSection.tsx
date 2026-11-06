@@ -119,7 +119,7 @@ export default function Top3BottlenecksSection({ bottlenecks }: Props) {
                   <CheckCircle weight="fill" className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-mono text-[10px] font-black uppercase text-emerald-800 block">
-                      Measurable Result
+                      Outcome
                     </span>
                     <p className="text-xs sm:text-sm font-bold text-zinc-900 leading-snug">
                       {b.result}

@@ -399,75 +399,58 @@ export const vidyasSkimCopy = {
   hero: {
     title: "Vidya's Kitchen",
     tagline: "Sivakasi's first home-kitchen ordering system.",
-    kpis: [
-      { value: "4 Surfaces", label: "1 order record" },
-      { value: "15 km", label: "Mapbox radius" },
-      { value: "24h", label: "Advance prep" },
-      { value: "12h", label: "Refund window" },
-    ],
   },
-  beat01: {
-    num: "01",
-    label: "THE PROBLEM",
+  problem: {
     takeaway: "Home food ran on WhatsApp and memory.",
-    body: "Orders were unrecorded chats, calls, and paper slips.",
+    body: "Orders were unrecorded chats and phone calls.",
   },
-  beat02: {
-    num: "02",
-    label: "THE USERS",
-    takeaway: "Three people, three operational needs.",
-    needs: [
-      { role: "Customer", need: "Wants dinner booked in one message." },
-      { role: "Driver", need: "Needs big buttons and PIN on poor signal." },
-      { role: "Chef", need: "Needs hands-free alerts at stove." },
+  decisions: {
+    takeaway: "Three calls that shaped product.",
+    items: [
+      {
+        title: "Order in one sentence",
+        s: "Free text broke rigid bot menus.",
+        t: "Parse text with deterministic bills.",
+        a: "Instant confirmation card in chat.",
+        outcome: "Customers order in one message and see the full bill before confirming.",
+      },
+      {
+        title: "Gifts that reach parents",
+        s: "24h cutoff blocked advance updates.",
+        t: "Reach parents without app logins.",
+        a: "Direct web tracking link via SMS.",
+        outcome: "Parents get live tracking from a link, with no app or login.",
+      },
+      {
+        title: "Alerts for a noisy kitchen",
+        s: "Stove noise drowned out screen alerts.",
+        t: "Notify kitchen hands-free.",
+        a: "Audible chime with manual price veto.",
+        outcome: "The chef hears every new order, and no price change goes live without her approval.",
+      },
     ],
   },
-  beat03: {
-    num: "03",
-    label: "THE DECISIONS",
-    takeaway: "Three calls that shaped the product.",
-    decisions: [
-      { title: "One-sentence order", desc: "Natural language input, deterministic bill." },
-      { title: "Zero-login tracking", desc: "Gift orders reach parents via direct link." },
-      { title: "Stove-side alerts", desc: "Audible chime with kitchen price approval." },
-    ],
-  },
-  beat04: {
-    num: "04",
-    label: "THE PRODUCT",
+  product: {
     takeaway: "WhatsApp, app, kitchen board, driver app. One order.",
     screens: [
-      {
-        surface: "Customer",
-        title: "Confirm Card",
-        src: "/case-studies/vidyas-kitchen/whatsapp/one-message-flow/01-sentence-to-summary.webp",
-        alt: "Customer confirm card",
-      },
-      {
-        surface: "Kitchen",
-        title: "Order Board",
-        src: "/case-studies/vidyas-kitchen/dashboard/orders-board.webp",
-        alt: "Kitchen order board",
-      },
-      {
-        surface: "Driver",
-        title: "Delivery Slider",
-        src: "/case-studies/vidyas-kitchen/driver/04-deliveries-active.webp",
-        alt: "Driver delivery slider",
-      },
+      "/case-studies/vidyas-kitchen/whatsapp/one-message-flow/01-sentence-to-summary.webp",
+      "/case-studies/vidyas-kitchen/dashboard/orders-board.webp",
+      "/case-studies/vidyas-kitchen/driver/04-deliveries-active.webp",
     ],
   },
-  beat05: {
-    num: "05",
-    label: "THE RESULTS",
-    takeaway: "What changed when home food got a system.",
-    results: [
-      { stat: "4 Surfaces", label: "Single order record across all surfaces." },
-      { stat: "15 km / 24h", label: "15 km radius with 24h cook window." },
-      { stat: "12h Window", label: "Automated refund before prep slot." },
-      { stat: "100% Veto", label: "Kitchen approves prices; dishes < 3.0 blocked." },
+  results: {
+    takeaway: "What changed with a system.",
+    items: [
+      { stat: "4 Surfaces", label: "Single order record." },
+      { stat: "15 km / 24h", label: "Cook-to-order window." },
+      { stat: "12h Window", label: "Automated refund." },
+      { stat: "100% Veto", label: "Dishes < 3.0 blocked." },
     ],
-    cta: "Read the full case study",
+    cta: "Read full case study",
+  },
+  learning: {
+    takeaway: "Lessons from shipping 0→1.",
+    lesson: "Chat parses intent; server prices bills; human holds veto.",
   },
 };
 
@@ -1639,8 +1622,8 @@ export const vidyasWhatILearnedSoFar = [
   {
     num: "01",
     title: "Habit over convention (WhatsApp > App Store)",
-    takeaway: "In Tier-3 local markets, forcing users to download an app and browse multi-level menus creates high abandonment.",
-    detail: "Meeting customers where they already live—in WhatsApp with a natural language intent parser—drove immediate adoption without behavioral friction.",
+    takeaway: "In Tier-3 local markets, forcing users to download an app and browse multi-level menus introduces unnecessary friction.",
+    detail: "Meeting customers where they already live—in WhatsApp with a natural language intent parser—fits existing customer habits without behavioral friction.",
   },
   {
     num: "02",
@@ -1672,7 +1655,7 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
     personaInitials: "PM",
     surfaceTag: "WhatsApp Bot & Customer PWA",
     surfaceName: "Customer Ordering Surfaces",
-    goal: "Order wholesome home meals for her family in under 30 seconds between bank meetings.",
+    goal: "Order wholesome home meals for her family between bank meetings without tedious menu navigation.",
     frustration: "Menu-driven chatbots choke on Tanglish sentences like '2 biryani naalaiku lunch'.",
     quote: "I don't have time to download apps and add items to a cart. I just want to send one WhatsApp message and know dinner is booked.",
     quoteAuthor: "Priya M., Sivakasi Customer",
@@ -1769,7 +1752,7 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     actionTech:
       "Restricted OpenAI parser to dish extraction with 2.5s timeout; server strictly computes food prices, packing (₹20), delivery (₹35), and 5% GST.",
     result:
-      "1-tap confirm card replaces multi-level bot menus",
+      "Customers order in one message and see the full bill before confirming.",
     interviewTakeaway:
       "Let customers talk naturally; let deterministic server code calculate prices.",
   },
@@ -1787,7 +1770,7 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     actionTech:
       "Engineered automated 3-tier notification chain: rich templates inside 24 hours, approved Meta Utility HSM outside, and Twilio SMS fallback.",
     result:
-      "Zero-login web tracking link reaches parents without app install",
+      "Parents get live tracking from a link, with no app or login.",
     interviewTakeaway:
       "Real-world UX requires designing for third-party platform limitations with automated fallbacks.",
   },
@@ -1805,7 +1788,7 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     actionTech:
       "Wired Supabase Realtime listeners to HTML5 Web Audio synthesis; nightly cron suggests discounts, programmatically blocking dishes rated under 3.0 stars.",
     result:
-      "Audible stove-side alerts + 1-click human pricing veto",
+      "The chef hears every new order, and no price change goes live without her approval.",
     interviewTakeaway:
       "Effective AI UX augments human decision authority rather than running on opaque autopilot.",
   },
