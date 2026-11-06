@@ -11,14 +11,14 @@ export interface RailSection {
 }
 
 export const CASE_STUDY_SECTIONS: RailSection[] = [
-  { id: "reality", num: "01", title: "Reality", label: "01 // Sivakasi Reality" },
-  { id: "personas", num: "02", title: "Personas", label: "02 // 3 Field Personas" },
-  { id: "bottlenecks", num: "03", title: "Bottlenecks", label: "03 // Top 3 Bottlenecks" },
-  { id: "whatsapp", num: "04", title: "WhatsApp", label: "04 // WhatsApp Ordering" },
-  { id: "pwa", num: "05", title: "PWA Flow", label: "05 // Customer PWA" },
-  { id: "kitchen", num: "06", title: "Kitchen Ops", label: "06 // Kitchen & Driver" },
-  { id: "architecture", num: "07", title: "Architecture", label: "07 // Systems & IA" },
-  { id: "retrospective", num: "08", title: "Retrospective", label: "08 // Retrospective" },
+  { id: "problem", num: "01", title: "Problem", label: "01 // The Problem" },
+  { id: "users", num: "02", title: "Users", label: "02 // The Users" },
+  { id: "journey", num: "03", title: "Journey", label: "03 // The Journey" },
+  { id: "decisions", num: "04", title: "Decisions", label: "04 // The Decisions" },
+  { id: "product", num: "05", title: "Product", label: "05 // The Product" },
+  { id: "results", num: "06", title: "Results", label: "06 // The Results" },
+  { id: "learned", num: "07", title: "Learned", label: "07 // What I Learned" },
+  { id: "engineers", num: "ENG", title: "Engineers", label: "For Engineers" },
 ];
 
 export default function StickyScrollRail() {

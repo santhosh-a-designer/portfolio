@@ -348,7 +348,7 @@ export default function ArchitectureExplorer({ tree }: Props) {
 
         <div className="px-4 py-2 bg-[#FAED00] border-t-2 border-black font-mono text-[10px] font-bold uppercase tracking-wide flex flex-wrap items-center justify-between gap-2">
           <span>Click folders to expand · Click files to inspect production code</span>
-          <span className="text-black/80 font-black">github.com/commerceagents/vidyas-kitchen</span>
+          <span className="text-black/80 font-black">[TODO: Repo Link Pending Client Permission]</span>
         </div>
       </div>
     </div>

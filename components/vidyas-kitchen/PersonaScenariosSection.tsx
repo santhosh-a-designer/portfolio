@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, User, Bicycle, CookingPot, Quotes } from "@phosphor-icons/react";
+import { ArrowLeft, ArrowRight, User, Bicycle, CookingPot, Quotes, Target, WarningCircle } from "@phosphor-icons/react";
 import type { PersonaScenarioCard } from "@/lib/vidyasKitchenCaseStudyContent";
 
 interface Props {
@@ -14,49 +14,46 @@ const PERSONA_THEMES = [
     // 01 Priya M. (Customer · Culinary Crimson & Rose)
     id: "persona-customer",
     cardBg: "bg-[#FFF6F6]",
-    cardBorder: "border-[#BD2320]/30",
+    cardBorder: "border-[#BD2320]/25",
     accentColor: "#BD2320",
     tabActiveBg: "bg-[#BD2320] text-white border-[#BD2320]",
     avatarBg: "bg-[#BD2320] text-white border-[#BD2320]",
-    badgeClass: "bg-[#BD2320] text-white border-[#BD2320]",
     surfaceTagClass: "bg-white text-zinc-900 border-[#BD2320]/25",
     uxBoxBorder: "border-[#BD2320]",
     techBoxBorder: "border-black",
     quoteAccent: "border-[#BD2320] text-[#BD2320]",
-    peekBg1: "bg-[#FFFBEB] border-amber-300/40", // Murugan
-    peekBg2: "bg-[#F0FDF4] border-emerald-300/40", // Vidya
+    peekBg1: "bg-[#FFFBEB] border-amber-300/40",
+    peekBg2: "bg-[#F0FDF4] border-emerald-300/40",
   },
   {
     // 02 Murugan K. (Driver · Midday Sun Ochre & Amber)
     id: "persona-driver",
     cardBg: "bg-[#FFFBEB]",
-    cardBorder: "border-amber-400/40",
+    cardBorder: "border-amber-400/35",
     accentColor: "#D97706",
     tabActiveBg: "bg-amber-600 text-white border-amber-600",
     avatarBg: "bg-amber-600 text-white border-amber-600",
-    badgeClass: "bg-amber-600 text-white border-amber-600",
-    surfaceTagClass: "bg-white text-amber-950 border-amber-400/35",
+    surfaceTagClass: "bg-white text-amber-950 border-amber-400/30",
     uxBoxBorder: "border-amber-500",
     techBoxBorder: "border-black",
     quoteAccent: "border-amber-500 text-amber-600",
-    peekBg1: "bg-[#F0FDF4] border-emerald-300/40", // Vidya
-    peekBg2: "bg-[#FFF6F6] border-[#BD2320]/30", // Priya
+    peekBg1: "bg-[#F0FDF4] border-emerald-300/40",
+    peekBg2: "bg-[#FFF6F6] border-[#BD2320]/25",
   },
   {
     // 03 Vidya R. (Kitchen Chef · Banana-Leaf / Stove-Side Emerald)
     id: "persona-kitchen",
     cardBg: "bg-[#F0FDF4]",
-    cardBorder: "border-emerald-500/35",
+    cardBorder: "border-emerald-500/30",
     accentColor: "#059669",
     tabActiveBg: "bg-emerald-700 text-white border-emerald-700",
     avatarBg: "bg-emerald-700 text-white border-emerald-700",
-    badgeClass: "bg-emerald-700 text-white border-emerald-700",
-    surfaceTagClass: "bg-white text-emerald-950 border-emerald-500/30",
+    surfaceTagClass: "bg-white text-emerald-950 border-emerald-500/25",
     uxBoxBorder: "border-emerald-600",
     techBoxBorder: "border-black",
     quoteAccent: "border-emerald-600 text-emerald-700",
-    peekBg1: "bg-[#FFF6F6] border-[#BD2320]/30", // Priya
-    peekBg2: "bg-[#FFFBEB] border-amber-300/40", // Murugan
+    peekBg1: "bg-[#FFF6F6] border-[#BD2320]/25",
+    peekBg2: "bg-[#FFFBEB] border-amber-300/40",
   },
 ];
 
@@ -84,7 +81,7 @@ export default function PersonaScenariosSection({ personas }: Props) {
     <div className="space-y-6 sm:space-y-8">
       {/* ─── Top Control Bar: Tab Navigation + Carousel Arrows ─── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-black/15 font-mono">
-        {/* Horizontal Tabs with Dynamic Color Tints */}
+        {/* Horizontal Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
           {personas.map((p, idx) => {
             const isActive = idx === activeIndex;
@@ -135,21 +132,21 @@ export default function PersonaScenariosSection({ personas }: Props) {
         </div>
       </div>
 
-      {/* ─── 3 Horizontal Stacked Cards with Vibrant Color Layers (Simon Thai Deck Pattern) ─── */}
-      <div className="relative min-h-[580px] sm:min-h-[500px] md:min-h-[460px] select-none">
-        {/* Layer 3: Farthest Background Card (colored peek border) */}
+      {/* ─── 3 Horizontal Stacked Cards (Simon Thai Deck Pattern) ─── */}
+      <div className="relative min-h-[520px] sm:min-h-[460px] select-none">
+        {/* Layer 3: Farthest Background Card */}
         <div
           aria-hidden
           className={`absolute inset-0 translate-y-6 sm:translate-y-5 scale-[0.96] ${theme.peekBg2} border rounded-sm pointer-events-none transition-all duration-300 shadow-sm`}
         />
 
-        {/* Layer 2: Middle Background Card (colored peek border) */}
+        {/* Layer 2: Middle Background Card */}
         <div
           aria-hidden
           className={`absolute inset-0 translate-y-3 sm:translate-y-2.5 scale-[0.98] ${theme.peekBg1} border rounded-sm pointer-events-none transition-all duration-300 shadow-sm`}
         />
 
-        {/* Layer 1: Active Front Card with Custom Theme Tint */}
+        {/* Layer 1: Active Front Card */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPersona.id}
@@ -178,7 +175,10 @@ export default function PersonaScenariosSection({ personas }: Props) {
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 self-start sm:self-auto">
+              <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                <span className="px-2 py-1 bg-white border border-black/15 font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-600">
+                  {"Based on {{INTERVIEWS_COUNT: 18}} interviews"}
+                </span>
                 <div className={`flex items-center gap-1.5 px-2.5 py-1 ${theme.surfaceTagClass} border font-mono text-[10px] font-bold uppercase tracking-wider`}>
                   {getPersonaIcon(currentPersona.id)}
                   <span>{currentPersona.surfaceTag}</span>
@@ -186,65 +186,44 @@ export default function PersonaScenariosSection({ personas }: Props) {
               </div>
             </div>
 
-            {/* Persona Field Scenarios Spread (Clean, bite-sized UX vs Tech takeaways) */}
-            <div className="divide-y divide-black/10 space-y-6">
-              {currentPersona.scenarios.map((scen, sIdx) => (
-                <div key={scen.id} className={`${sIdx > 0 ? "pt-6" : ""} space-y-4`}>
-                  {/* Scenario Headline */}
-                  <div className="flex items-baseline justify-between gap-3">
-                    <div className="flex items-center gap-2 font-mono text-xs">
-                      <span className="font-black uppercase" style={{ color: theme.accentColor }}>{scen.tag}</span>
-                      <span className="text-zinc-300">/</span>
-                      <h4 className="font-bold text-black uppercase tracking-wide">{scen.title}</h4>
-                    </div>
-                  </div>
-
-                  {/* Ground Friction Context */}
-                  <p className="text-xs sm:text-sm text-zinc-800 leading-relaxed font-sans">
-                    <strong className="font-bold text-black">Ground Reality:</strong> {scen.groundReality}
-                  </p>
-
-                  {/* 2-Column Scannable Takeaways: UX vs Logical Tech */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 pt-1">
-                    {/* Left: What UX I Did */}
-                    <div className={`space-y-1.5 p-3.5 bg-white/90 border-l-2 ${theme.uxBoxBorder} shadow-sm`}>
-                      <div className="flex items-center gap-1.5 text-black font-mono text-[11px] font-black uppercase tracking-wider">
-                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.accentColor }} />
-                        <span>What UX I Did</span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
-                        {scen.whatUxIDid}
-                      </p>
-                    </div>
-
-                    {/* Right: What Logical Tech I Did */}
-                    <div className={`space-y-1.5 p-3.5 bg-white/90 border-l-2 ${theme.techBoxBorder} shadow-sm`}>
-                      <div className="flex items-center gap-1.5 text-black font-mono text-[11px] font-black uppercase tracking-wider">
-                        <span className="w-1.5 h-1.5 rounded-full bg-black" />
-                        <span>What Technical I Did</span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-mono text-[11px] sm:text-xs">
-                        {scen.whatTechnicalIDid}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Authentic Sivakasi Quote */}
-                  {scen.quote && (
-                    <div className="pt-2">
-                      <blockquote className="flex items-start gap-2 text-xs text-zinc-600 italic">
-                        <Quotes weight="fill" className={`w-4 h-4 shrink-0 mt-0.5`} style={{ color: theme.accentColor }} />
-                        <div>
-                          <span>“{scen.quote}”</span>
-                          <span className="block mt-0.5 font-mono text-[10px] uppercase font-bold text-zinc-500 not-italic">
-                            — {scen.quoteAuthor}
-                          </span>
-                        </div>
-                      </blockquote>
-                    </div>
-                  )}
+            {/* Persona Goal vs Frustration Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              {/* Goal */}
+              <div className="space-y-1.5 p-4 bg-white/90 border border-black/10 shadow-sm">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] font-black uppercase tracking-wider text-black">
+                  <Target weight="bold" className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Primary Goal</span>
                 </div>
-              ))}
+                <p className="text-xs sm:text-sm text-zinc-800 leading-relaxed">
+                  {currentPersona.goal}
+                </p>
+              </div>
+
+              {/* Frustration */}
+              <div className="space-y-1.5 p-4 bg-white/90 border border-black/10 shadow-sm">
+                <div className="flex items-center gap-1.5 font-mono text-[11px] font-black uppercase tracking-wider text-black">
+                  <WarningCircle weight="bold" className="w-3.5 h-3.5 text-[#BD2320]" />
+                  <span>Core Frustration</span>
+                </div>
+                <p className="text-xs sm:text-sm text-zinc-800 leading-relaxed">
+                  {currentPersona.frustration}
+                </p>
+              </div>
+            </div>
+
+            {/* Authentic Real Quote (Strictly Attributed) */}
+            <div className="p-4 bg-white/95 border-l-4 shadow-sm" style={{ borderColor: theme.accentColor }}>
+              <blockquote className="flex items-start gap-3">
+                <Quotes weight="fill" className="w-5 h-5 shrink-0 mt-0.5" style={{ color: theme.accentColor }} />
+                <div className="space-y-1">
+                  <p className="text-xs sm:text-sm text-zinc-800 italic font-medium leading-relaxed">
+                    “{currentPersona.quote}”
+                  </p>
+                  <cite className="block font-mono text-[10px] uppercase font-bold text-zinc-500 not-italic">
+                    — {currentPersona.quoteAuthor}
+                  </cite>
+                </div>
+              </blockquote>
             </div>
 
             {/* Bottom Card Footer with Direct Deck Jumper */}
