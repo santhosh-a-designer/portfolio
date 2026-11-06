@@ -126,7 +126,7 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
             <Cube size={16} weight="bold" className="text-zinc-700" />
             <div>
               <span className="text-zinc-500 block">MIN TOUCH TARGET</span>
-              <span className="font-black text-black">48px - 56px</span>
+              <span className="font-black text-black">48px (56px driver)</span>
             </div>
           </div>
           <div className="flex items-center gap-2">

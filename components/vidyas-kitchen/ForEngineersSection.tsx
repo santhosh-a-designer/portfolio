@@ -72,14 +72,15 @@ export default function ForEngineersSection({ designSystemPdfMeta }: Props) {
             className="overflow-hidden border-t border-zinc-800 bg-zinc-950/80"
           >
             <div className="p-6 sm:p-10 md:p-12 space-y-16">
-              {/* Repository Access Flag (Hidden pending client permission) */}
-              <div className="p-4 sm:p-5 bg-zinc-900 border border-amber-500/40 font-mono text-xs space-y-2">
-                <div className="flex items-center gap-2 text-amber-400 font-bold uppercase text-[11px] tracking-wider">
-                  <ShieldCheck weight="bold" className="w-4 h-4" />
-                  <span>Client Permission Guard</span>
+              {/* Architecture Spec Excerpts Disclosure */}
+              {/* TODO: Add public repository link once client permission is confirmed */}
+              <div className="p-4 sm:p-5 bg-zinc-900 border border-zinc-800 font-mono text-xs space-y-2">
+                <div className="flex items-center gap-2 text-zinc-300 font-bold uppercase text-[11px] tracking-wider">
+                  <ShieldCheck weight="bold" className="w-4 h-4 text-[#BD2320]" />
+                  <span>Architecture Excerpts &amp; Engineering Specification</span>
                 </div>
-                <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
-                  [TODO: Public Repository Link Pending Client Permission] — Full codebase includes finite state machine controllers, Meta Cloud API webhook signature verifiers, and Razorpay webhook handlers. Direct link hidden until client authorization is confirmed.
+                <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+                  Key modules shown below are redacted architectural excerpts from the production codebase, illustrating finite state machine controllers, Meta Cloud API webhook signatures, and stove-side ambient alert synthesis.
                 </p>
               </div>
 
@@ -88,7 +89,7 @@ export default function ForEngineersSection({ designSystemPdfMeta }: Props) {
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-3 border-b border-zinc-800 font-mono">
                   <h4 className="text-sm sm:text-base font-black uppercase text-white tracking-wide flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#BD2320]" />
-                    <span>01 // Production Code Explorer &amp; State Transitions</span>
+                    <span>01 // Redacted Architecture Excerpts &amp; State Transitions</span>
                   </h4>
                   <span className="text-[10px] text-zinc-500 uppercase tracking-widest">
                     Next.js 15 Server Actions + Supabase

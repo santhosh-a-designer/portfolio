@@ -290,20 +290,20 @@ export default function ArchitectureExplorer({ tree }: Props) {
       <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
         <h3 className="font-mono text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 flex items-center gap-2">
           <span className="w-2 h-2 rounded-sm bg-[#3178c6]" />
-          Project structure · Production Repository
+          Project structure · Redacted excerpts
         </h3>
         <div className="flex gap-2">
           <button
             type="button"
             onClick={expandAll}
-            className="px-2.5 py-1 bg-white border-2 border-black font-mono text-[10px] font-black uppercase tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FAED00] transition-colors"
+            className="px-2.5 py-1 bg-zinc-100 hover:bg-[#FAED00] text-black border-2 border-black font-mono text-[10px] font-black uppercase tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-colors cursor-pointer"
           >
             Expand all
           </button>
           <button
             type="button"
             onClick={collapseAll}
-            className="px-2.5 py-1 bg-white border-2 border-black font-mono text-[10px] font-black uppercase tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-[#FAED00] transition-colors"
+            className="px-2.5 py-1 bg-zinc-100 hover:bg-[#FAED00] text-black border-2 border-black font-mono text-[10px] font-black uppercase tracking-wider shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-colors cursor-pointer"
           >
             Collapse all
           </button>
@@ -347,8 +347,8 @@ export default function ArchitectureExplorer({ tree }: Props) {
         </div>
 
         <div className="px-4 py-2 bg-[#FAED00] border-t-2 border-black font-mono text-[10px] font-bold uppercase tracking-wide flex flex-wrap items-center justify-between gap-2">
-          <span>Click folders to expand · Click files to inspect production code</span>
-          <span className="text-black/80 font-black">[TODO: Repo Link Pending Client Permission]</span>
+          <span>Click folders to expand · Click files to inspect architecture excerpts</span>
+          {/* TODO: Repo link pending client permission */}
         </div>
       </div>
     </div>

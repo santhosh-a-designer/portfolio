@@ -291,15 +291,15 @@ export default function VidyasDesignSystemModal({
                             <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
                               <div className="flex items-center justify-between">
                                 <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                  [01. LOCATION DELIVERY PILL · H: 44PX · RADIUS: 999PX]
+                                  [01. LOCATION DELIVERY PILL · H: 48PX · RADIUS: 999PX]
                                 </span>
                                 <span className="text-[9px] font-mono font-bold text-[#BD2320]">
-                                  WCAG 2.1 AAA
+                                  CUSTOMER SURFACE
                                 </span>
                               </div>
                               <div
                                 style={{
-                                  height: 44,
+                                  height: 48,
                                   borderRadius: 999,
                                   background: "#FFFFFF",
                                   border: "1px solid rgba(0,0,0,0.06)",
@@ -337,11 +337,11 @@ export default function VidyasDesignSystemModal({
                             {/* Component 2: Category Segmented Filter Tabs */}
                             <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
                               <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                [02. CATEGORY FILTER TABS · TRACK H: 44PX · TAB H: 36PX · RADIUS: 999PX]
+                                [02. CATEGORY FILTER TABS · TRACK H: 48PX · TAB H: 40PX · RADIUS: 999PX]
                               </span>
                               <div
                                 style={{
-                                  height: 44,
+                                  height: 48,
                                   borderRadius: 999,
                                   background: "#FFFFFF",
                                   border: "1px solid rgba(0,0,0,0.05)",
@@ -614,7 +614,7 @@ export default function VidyasDesignSystemModal({
                             {/* Component 6: Size Variant Selection Drawer & 52px Primary CTA */}
                             <div className="p-4 bg-[#F5F5F7] border border-black flex flex-col gap-2">
                               <span className="text-[10px] font-mono font-bold text-zinc-500 uppercase">
-                                [06. SIZE DRAWER · 52×52PX WELL · 44PX STEPPER · 52PX CTA]
+                                [06. SIZE DRAWER · 52×52PX WELL · 48PX STEPPER · 52PX CTA]
                               </span>
                               <div
                                 style={{

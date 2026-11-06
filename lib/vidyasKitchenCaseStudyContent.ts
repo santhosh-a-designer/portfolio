@@ -375,7 +375,7 @@ export const vidyasTimeline = {
 
 export const vidyasSnapshot = {
   role: "Lead Product Designer & Design Engineer",
-  team: "Team of 5 (1 Lead Product Designer & Design Engineer, 1 Founder & Head Chef, 3 Field Research Interns)",
+  team: "Team of 5 (1 Lead Product Designer & Design Engineer, 1 Founder & Head Chef, 3 Kitchen Operations Staff)",
   owned: "0→1 UX architecture, PWA design & engineering, WhatsApp conversational commerce engine, kitchen supervisory board, and driver handoff app.",
   market: "Sivakasi, Tamil Nadu",
   liveUrl: "https://www.vidyaskitchenhome.com",
@@ -387,11 +387,12 @@ export const vidyasSnapshot = {
   elevator:
     "Skip the restaurant. Home-cooked, hygienic food from Vidya's Kitchen — order in one WhatsApp message or the app, delivered to your door in Sivakasi.",
   kpis: [
-    { value: "{{ORDERS}}", label: "Monthly Delivered Meals", change: "+142% vs phone orders" },
-    { value: "{{REPEAT_%}}", label: "Weekly Repeat Rate", change: "4.2× restaurant benchmark" },
-    { value: "{{TIME_TO_ORDER}}", label: "Time To Order", change: "was 12-minute phone call" },
-    { value: "{{MISSED_TICKETS}}", label: "Missed Kitchen Tickets", change: "100% ambient audio catch" },
+    { value: "4 Surfaces", label: "Connected Touchpoints", change: "1 order record across all" },
+    { value: "15 km", label: "Delivery Radius", change: "Strict Mapbox pin boundary" },
+    { value: "24h", label: "Cook-to-Order Window", change: "Advance batch scheduling" },
+    { value: "12h", label: "Customer Cancel Window", change: "Automated refund before prep" },
   ],
+  realQuote: null as { quote: string; author: string } | null,
 };
 
 export type VidyasDesignSwatch = {
@@ -495,7 +496,7 @@ export const vidyasDesignSystem = {
       meta: {
         icons: "Phosphor",
         radius: "16–28 cards · 20 primary",
-        touch: "56px primary",
+        touch: "48px minimum",
         source: "design-system.pdf · C.* tokens",
       },
       swatches: [
@@ -550,7 +551,7 @@ export const vidyasDesignSystem = {
       meta: {
         icons: "Lucide",
         radius: "14 control · 16 card",
-        touch: "60px reach / swipe",
+        touch: "56px driver reach / swipe",
         source: "design-system.pdf · D.* tokens",
       },
       swatches: [
@@ -614,7 +615,7 @@ export const vidyasDesignSystem = {
       meta: {
         icons: "Lucide",
         radius: "12 nav · 16 tiles",
-        touch: "44px rows",
+        touch: "48px dashboard controls",
         source: "design-system.pdf · dashboard literals",
       },
       swatches: [
@@ -998,7 +999,7 @@ export const vidyasFlows = [
 
 /** Kitchen-side story — dashboard + driver only (customer surfaces live above) */
 export const vidyasKitchenOpsStory = {
-  eyebrow: "Act 03 · After the order confirms",
+  eyebrow: "Operations · After the order confirms",
   headline: "Kitchen dashboard & driver handoff",
   intro:
     "WhatsApp and the PWA get the customer to **Confirm** — then the same **order row** hits the kitchen board, gets assigned, and goes out on the road. No duplicate entry, no phone calls to the driver.",
@@ -1205,6 +1206,7 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     name: "festival-pricing.ts",
                     kind: "file",
                     preview: [
+                      { text: "// [Illustrative excerpt · Proprietary logic simplified for portfolio]", tone: "comment" },
                       { text: "'use server';", tone: "keyword" },
                       { text: "import { createServerSupabase } from '@/lib/supabase-server';", tone: "default" },
                       { text: "import { guardDashboardAction } from '@/lib/dashboard-auth';", tone: "default" },
@@ -1213,6 +1215,9 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                       { text: "export async function saveFestivalPricing(payload: FestivalUpsertPayload) {", tone: "keyword" },
                       { text: "  await guardDashboardAction(); // Enforce manager role", tone: "accent" },
                       { text: "  const supabase = createServerSupabase();", tone: "default" },
+                      { text: "", tone: "default" },
+                      { text: "  // Programmatically disallow discounts for dishes rated under 3.0", tone: "comment" },
+                      { text: "  if (payload.rating < 3.0) throw new Error('RATING_UNDER_3_CANNOT_BE_PROMOTED');", tone: "accent" },
                       { text: "", tone: "default" },
                       { text: "  // Apply discount override across festival dish presets", tone: "comment" },
                       { text: "  const discount = roundToDiscountPreset(payload.discount_override);", tone: "default" },
@@ -1232,6 +1237,7 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                 name: "order-transition.ts",
                 kind: "file",
                 preview: [
+                  { text: "// [Illustrative excerpt · State machine controller simplified for portfolio]", tone: "comment" },
                   { text: "import { after } from 'next/server';", tone: "keyword" },
                   { text: "import { canTransitionOrderStatus, OrderStatus, PaymentStatus } from '@/lib/order-status';", tone: "default" },
                   { text: "import { notifyWhatsAppOrderEvent } from '@/lib/whatsapp-order-notify';", tone: "default" },
@@ -1240,7 +1246,7 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                   { text: "export async function transitionOrderStatus(orderId: string, next: OrderStatus) {", tone: "keyword" },
                   { text: "  const { cur } = await fetchOrderStatus(orderId);", tone: "default" },
                   { text: "  if (!canTransitionOrderStatus(cur, next)) {", tone: "keyword" },
-                  { text: "    return { ok: false, error:  };", tone: "muted" },
+                  { text: "    return { ok: false, error: 'INVALID_TRANSITION' };", tone: "muted" },
                   { text: "  }", tone: "keyword" },
                   { text: "", tone: "default" },
                   { text: "  await supabase.from('orders').update({ status: next }).eq('id', orderId);", tone: "accent" },
@@ -1510,12 +1516,12 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
               { text: "# Vidya's Kitchen Design Tokens & Physical Geometry Specs", tone: "heading" },
               { text: "", tone: "default" },
               { text: "## Measured Component Primitives (Source of Truth)", tone: "comment" },
-              { text: "- s-btn: 220x56px, radius 20px, font 15px/800 (PWA Primary)", tone: "accent" },
+              { text: "- s-btn: 48px minimum touch height, radius 20px (Customer PWA Primary)", tone: "accent" },
               { text: "- s-size: 108x72px, radius 16px, font 15px/800 (500g/1kg Drawer)", tone: "accent" },
-              { text: "- s-otp: 48x56px, radius 16px, font 26px/800 (Phone Auth)", tone: "accent" },
-              { text: "- s-reach: 280x60px, radius 14px, font 16px/800 (Driver Bike Reach)", tone: "string" },
-              { text: "- s-swipe: 280x60px, radius 14px, font 15px/800 (Delivery Slider)", tone: "string" },
-              { text: "- s-yellow: 125x44px, radius 12px, font 14px/700 (Kitchen Confirm)", tone: "heading" },
+              { text: "- s-otp: 48x48px minimum, radius 16px, font 26px/800 (Phone Auth)", tone: "accent" },
+              { text: "- s-reach: 280x56px, radius 14px, font 16px/800 (Driver Bike Reach)", tone: "string" },
+              { text: "- s-swipe: 280x56px, radius 14px, font 15px/800 (Delivery Slider)", tone: "string" },
+              { text: "- s-yellow: 48px touch height, radius 12px, font 14px/700 (Kitchen Confirm)", tone: "heading" },
               { text: "", tone: "default" },
               { text: "## Environmental Color Tokens", tone: "comment" },
               { text: "- Customer PWA: #F5F5F7 ground, #BD2320 primary red, #22C55E success", tone: "default" },
@@ -1564,7 +1570,7 @@ export const vidyasWhatILearnedSoFar = [
     num: "02",
     title: "Field ergonomics under real-world sunlight",
     takeaway: "Design systems fail if they aren't tested in harsh outdoor environments.",
-    detail: "Customer PWA and Dashboard use 48px accessible targets; the Driver PWA uses 56px bike touch targets and kitchen PINs for 38°C daylight riding.",
+    detail: "Customer PWA and Dashboard use 48px minimum touch targets; the Driver PWA uses 56px bike touch targets and kitchen PINs for 38°C daylight riding.",
   },
   {
     num: "03",
@@ -1576,7 +1582,7 @@ export const vidyasWhatILearnedSoFar = [
     num: "04",
     title: "AI drafts intent; deterministic engines price the bill",
     takeaway: "LLMs excel at unstructured messy chat, but financial calculations must never be left to model inference.",
-    detail: "An immutable server engine computes items, packaging, delivery, and GST. Zero LLM hallucinations on customer charges.",
+    detail: "An immutable server engine computes items, packaging, delivery, and GST. Pricing rules remain fully deterministic.",
   },
 ];
 
@@ -1594,7 +1600,7 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
     frustration: "Menu-driven chatbots choke on Tanglish sentences like '2 biryani naalaiku lunch'.",
     quote: "I don't have time to download apps and add items to a cart. I just want to send one WhatsApp message and know dinner is booked.",
     quoteAuthor: "Priya M., Sivakasi Customer",
-    interviewTag: "Based on {{INTERVIEWS_COUNT}} on-site customer and driver interviews",
+    interviewTag: "Customer field discovery · Sivakasi on-site",
     scenarios: [
       {
         id: "cust-scen-a",
@@ -1623,7 +1629,7 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
     frustration: "Waiting for SMS OTP codes in spotty 2G coverage while wearing bike gloves caused severe delays.",
     quote: "In the afternoon sun, waiting for OTP codes on the bike was painful. The 4-digit PIN and 56px buttons let me deliver with one thumb without removing gloves.",
     quoteAuthor: "Murugan K., Delivery Partner",
-    interviewTag: "Based on {{INTERVIEWS_COUNT}} on-site customer and driver interviews",
+    interviewTag: "Driver logistics field discovery · Sivakasi on-site",
     scenarios: [
       {
         id: "driver-scen-a",
@@ -1649,17 +1655,17 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
     surfaceTag: "Kitchen Supervisory Console",
     surfaceName: "Kitchen Operations Surface",
     goal: "Cook authentic homestyle food to order without missing peak-hour orders or losing profit margins.",
-    frustration: "Silent push notifications were drowned out by 85dB stove sizzle; manual holiday discounts lost money.",
+    frustration: "Silent push notifications were drowned out by stove sizzle and exhaust fans; manual holiday discounts risked losing money.",
     quote: "When I'm at the stove, the loud chime and the big board tell me immediately when a lunch slot is booked without having to wash my hands.",
     quoteAuthor: "Vidya R., Founder & Head Chef",
-    interviewTag: "Based on {{INTERVIEWS_COUNT}} on-site customer and driver interviews",
+    interviewTag: "Kitchen operations field discovery · Sivakasi on-site",
     scenarios: [
       {
         id: "kitchen-scen-a",
         tag: "Scenario 01 · Festive Demand",
         title: "Festival Surge AI Pricing Assistant with 1-Click Human Veto",
         groundReality:
-          "Diwali and temple festival weeks spike demand 4x. Vidya previously scribbled discounts in chat threads at midnight, miscalculating margins and losing money on raw meat.",
+          "Diwali and temple festival weeks spike demand. Vidya previously scribbled discounts in chat threads at midnight, miscalculating margins and losing money on raw meat.",
         whatUxIDid:
           "Designed a Human-in-the-Loop AI Pricing Card on her dashboard. Rather than an algorithmic black-box, it presents clear cards with explicit 1-click Approve or Dismiss buttons.",
         whatTechnicalIDid:
@@ -1681,13 +1687,13 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     situation:
       "Customers typed free-form Tamil-English sentences into WhatsApp. Rigid chatbots broke on normal conversational phrasing, causing high drop-off.",
     task:
-      "Enable 1-sentence conversational ordering without manual back-and-forth menus while guaranteeing 100% price integrity.",
+      "Enable 1-sentence conversational ordering without manual back-and-forth menus while ensuring deterministic server pricing.",
     actionUx:
       "Designed open text chat returning an instant visual confirmation card with portion drawers and single-tap checkout.",
     actionTech:
-      "Restricted OpenAI parser to dish extraction with 2.5s timeout; server strictly computes prices, packing, and GST.",
+      "Restricted OpenAI parser to dish extraction with 2.5s timeout; server strictly computes food prices, packing (₹20), delivery (₹35), and 5% GST.",
     result:
-      "{{AVG_ORDER_TIME}} average order time",
+      "1-tap confirm card replaces multi-level bot menus",
     interviewTakeaway:
       "Let customers talk naturally; let deterministic server code calculate prices.",
   },
@@ -1705,7 +1711,7 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     actionTech:
       "Engineered automated 3-tier notification chain: rich templates inside 24 hours, approved Meta Utility HSM outside, and Twilio SMS fallback.",
     result:
-      "{{GIFT_ORDERS_COUNT}} gift orders delivered",
+      "Zero-login web tracking link reaches parents without app install",
     interviewTakeaway:
       "Real-world UX requires designing for third-party platform limitations with automated fallbacks.",
   },
@@ -1715,15 +1721,15 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     title: "ALERTS FOR A KITCHEN YOU CAN'T LOOK AT",
     surface: "Kitchen Supervisory Console",
     situation:
-      "Loud stove sizzle and exhaust fans drowned out silent order push notifications, while holiday discounts caused margin loss.",
+      "Stove sizzle and exhaust fans drowned out silent order push notifications, while manual holiday discounts risked margin loss.",
     task:
-      "Guarantee zero missed tickets during peak meal prep and automate festival discounts without losing profit margins.",
+      "Ensure audible order alerts during peak meal prep and automate festival discounts without losing profit margins.",
     actionUx:
-      "Built a 3-meter readable Kanban board paired with looping 85dB synthesized chimes and 1-click human pricing approval cards.",
+      "Built a 3-meter readable Kanban board paired with repeating synthesized audio chimes and 1-click human pricing approval cards.",
     actionTech:
       "Wired Supabase Realtime listeners to HTML5 Web Audio synthesis; nightly cron suggests discounts, programmatically blocking dishes rated under 3.0 stars.",
     result:
-      "{{MISSED_TICKETS_METRIC}} missed tickets",
+      "Audible stove-side alerts + 1-click human pricing veto",
     interviewTakeaway:
       "Effective AI UX augments human decision authority rather than running on opaque autopilot.",
   },

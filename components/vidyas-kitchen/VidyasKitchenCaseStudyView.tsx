@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, CheckCircle } from "@phosphor-icons/react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import HighlightText from "./HighlightText";
 import HomeFoodStory from "./HomeFoodStory";
 import PwaStorySection from "./PwaStorySection";
@@ -33,7 +33,7 @@ function OutlineFillTitle({ title }: { title: string }) {
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, ease: openEase }}
       style={{ WebkitTextStroke: "1.5px #000000" }}
-      className="font-black uppercase tracking-tighter leading-[0.88] select-none text-[clamp(44px,7.5vw,92px)]"
+      className="font-black uppercase tracking-tighter leading-[0.88] select-none text-[clamp(48px,7.5vw,92px)]"
     >
       {title}
     </motion.h2>
@@ -72,13 +72,41 @@ export default function VidyasKitchenCaseStudyView({
 }) {
   const [skimMode, setSkimMode] = useState(false);
 
+  // Sync Skim Mode with URL query param ?mode=60s and document data-mode
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const is60s = params.get("mode") === "60s";
+      if (is60s) {
+        setSkimMode(true);
+        document.documentElement.setAttribute("data-mode", "60s");
+      } else {
+        document.documentElement.setAttribute("data-mode", "full");
+      }
+    }
+  }, []);
+
+  const handleSkimToggle = (mode: boolean) => {
+    setSkimMode(mode);
+    if (typeof window !== "undefined") {
+      document.documentElement.setAttribute("data-mode", mode ? "60s" : "full");
+      const url = new URL(window.location.href);
+      if (mode) {
+        url.searchParams.set("mode", "60s");
+      } else {
+        url.searchParams.delete("mode");
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
   return (
-    <main className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-8 pb-28 sm:pb-32 space-y-16 sm:space-y-24 min-w-0 relative">
+    <main className="w-full min-w-0 overflow-x-clip pb-28 sm:pb-32 bg-[#FAFAFA] relative">
       {/* Editorial Sticky Side Rail & Reading Progress */}
       <StickyScrollRail />
 
       {/* ─── Top Control Strip: Back link + Skim Mode Switch ─── */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-black/15 pb-4 select-none font-mono">
+      <div className="w-full px-[clamp(20px,4vw,64px)] pt-4 pb-4 flex flex-wrap items-center justify-between gap-4 border-b border-black/15 select-none font-mono bg-[#FAFAFA]">
         <Link
           href="/#work"
           onClick={() => {
@@ -98,7 +126,7 @@ export default function VidyasKitchenCaseStudyView({
         <div className="flex items-center gap-2 p-1 bg-zinc-100 border border-black/15 text-xs">
           <button
             type="button"
-            onClick={() => setSkimMode(false)}
+            onClick={() => handleSkimToggle(false)}
             className={`px-3 py-1 font-bold uppercase transition-all cursor-pointer ${
               !skimMode ? "bg-black text-white shadow-sm" : "text-zinc-600 hover:text-black"
             }`}
@@ -107,7 +135,7 @@ export default function VidyasKitchenCaseStudyView({
           </button>
           <button
             type="button"
-            onClick={() => setSkimMode(true)}
+            onClick={() => handleSkimToggle(true)}
             className={`flex items-center gap-1.5 px-3 py-1 font-bold uppercase transition-all cursor-pointer ${
               skimMode ? "bg-[#BD2320] text-white shadow-sm" : "text-zinc-600 hover:text-black"
             }`}
@@ -118,8 +146,33 @@ export default function VidyasKitchenCaseStudyView({
         </div>
       </div>
 
+      {/* ─── Skim Mode Active Banner ─── */}
+      <AnimatePresence>
+        {skimMode && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="w-full bg-[#BD2320] text-white px-[clamp(20px,4vw,64px)] py-2.5 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-between gap-4 select-none sticky top-0 z-30 shadow-md"
+          >
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+              <span>⚡ Skim mode active: 4 deep-dive sections collapsed for a 60-second read</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleSkimToggle(false)}
+              className="px-2.5 py-0.5 bg-white text-black font-black uppercase text-[10px] hover:bg-zinc-100 transition-colors cursor-pointer shrink-0"
+            >
+              Show Full Story
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ─── HERO: Swiss Editorial Display ─── */}
-      <section className="bg-white border-t border-b sm:border border-black/15 p-6 sm:p-10 md:p-14 space-y-10 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+      <section className="w-full px-[clamp(20px,4vw,64px)] py-10 sm:py-14 md:py-16 bg-white border-b border-black/15 space-y-8 sm:space-y-10">
         {/* Header Metadata Pill */}
         <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-black/15 font-mono text-xs">
           <div className="flex items-center gap-2">
@@ -172,14 +225,14 @@ export default function VidyasKitchenCaseStudyView({
           </div>
         </div>
 
-        {/* KPI Strip: Big Numbers on Hairlines */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-2 font-mono">
+        {/* KPI Strip: 4 Equal Columns, Big Numbers on Hairlines (clamp + whitespace-nowrap) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4 border-t border-black/15 font-mono">
           {vidyasSnapshot.kpis.map((kpi, idx) => (
-            <div key={idx} className="space-y-1 border-l-2 border-black/15 pl-4">
-              <span className="text-3xl sm:text-4xl md:text-5xl font-black text-black tracking-tight block">
+            <div key={idx} className="space-y-1 border-l-2 border-black/15 pl-3 sm:pl-4 min-w-0">
+              <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                 {kpi.value}
               </span>
-              <span className="text-[11px] font-bold uppercase text-zinc-700 block">
+              <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block">
                 {kpi.label}
               </span>
               <span className="text-[10px] text-[#BD2320] font-black uppercase tracking-wider block">
@@ -191,7 +244,7 @@ export default function VidyasKitchenCaseStudyView({
       </section>
 
       {/* ─── 01 THE PROBLEM ─── */}
-      <section id="problem" className="scroll-mt-24 border-t border-b sm:border border-black/15 bg-white p-6 sm:p-10 md:p-14 space-y-10 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+      <section id="problem" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-5 lg:sticky lg:top-24">
             <SectionHeader
@@ -201,14 +254,14 @@ export default function VidyasKitchenCaseStudyView({
             />
           </div>
 
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-8 max-w-[70ch]">
             <div className="space-y-4 text-base sm:text-lg text-zinc-800 leading-relaxed font-sans">
               <p>
                 <HighlightText text={vidyasSnapshot.problem} />
               </p>
               <div className="p-4 sm:p-5 bg-zinc-50 border-l-2 border-[#BD2320]">
                 <p className="font-mono text-xs sm:text-sm font-bold text-zinc-900 leading-relaxed">
-                  The Swiggy playbook fails in Sivakasi: home kitchens buy fresh ingredients to order and cook in 24-hour batch cycles. A restaurant marketplace cannot enforce preparation cutoffs or cook-to-order slots.
+                  The generic marketplace model chokes in Sivakasi: home kitchens buy fresh ingredients to order and cook in 24-hour batch cycles. Restaurant apps cannot enforce preparation cutoffs or cook-to-order slots.
                 </p>
               </div>
             </div>
@@ -229,7 +282,7 @@ export default function VidyasKitchenCaseStudyView({
       </section>
 
       {/* ─── 02 THE USERS ─── */}
-      <section id="users" className="scroll-mt-24 border-t border-b sm:border border-black/15 bg-white p-6 sm:p-10 md:p-14 space-y-10 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+      <section id="users" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-5 lg:sticky lg:top-24">
             <SectionHeader
@@ -246,7 +299,7 @@ export default function VidyasKitchenCaseStudyView({
       </section>
 
       {/* ─── 03 THE JOURNEY ─── */}
-      <section id="journey" className="scroll-mt-24 border-t border-b sm:border border-black/15 bg-white p-6 sm:p-10 md:p-14 space-y-10 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+      <section id="journey" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-5 lg:sticky lg:top-24">
             <SectionHeader
@@ -286,7 +339,7 @@ export default function VidyasKitchenCaseStudyView({
       </section>
 
       {/* ─── 04 THE DECISIONS ─── */}
-      <section id="decisions" className="scroll-mt-24 border-t border-b sm:border border-black/15 bg-white p-6 sm:p-10 md:p-14 space-y-10 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+      <section id="decisions" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-5 lg:sticky lg:top-24">
             <SectionHeader
@@ -303,8 +356,8 @@ export default function VidyasKitchenCaseStudyView({
       </section>
 
       {/* ─── 05 THE PRODUCT ─── */}
-      <section id="product" className="scroll-mt-24 space-y-8">
-        <div className="bg-white border-t border-b sm:border border-black/15 p-6 sm:p-10 md:p-14">
+      <section id="product" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-12">
+        <div>
           <SectionHeader
             eyebrow="05 — THE PRODUCT"
             title="THE PRODUCT"
@@ -323,71 +376,97 @@ export default function VidyasKitchenCaseStudyView({
       </section>
 
       {/* ─── 06 THE RESULTS ─── */}
-      <section id="results" className="scroll-mt-24 border-t border-b sm:border border-black/15 bg-white p-6 sm:p-10 md:p-14 space-y-10 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+      <section id="results" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          <div className="lg:col-span-5 lg:sticky lg:top-24">
+          <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6">
             <SectionHeader
               eyebrow="06 — THE RESULTS"
               title="THE RESULTS"
-              takeaway="{{what changed}}"
+              takeaway="What changed when home food got a system."
             />
+
+            {/* Real Quote Container: only renders if a real verified quote is provided */}
+            {vidyasSnapshot.realQuote && (
+              <div className="p-5 bg-zinc-50 border-l-2 border-[#BD2320]">
+                <blockquote className="font-serif italic text-base sm:text-lg text-zinc-900 leading-snug">
+                  “{vidyasSnapshot.realQuote.quote}”
+                </blockquote>
+                <cite className="block font-mono text-[10px] uppercase font-bold text-zinc-500 mt-2 not-italic">
+                  — {vidyasSnapshot.realQuote.author}
+                </cite>
+              </div>
+            )}
           </div>
 
           <div className="lg:col-span-7">
-            {/* Results Block Styled Like Editorial Template */}
+            {/* Results Block: Hairlines with Big Number + Label & plain copy beside it */}
             <div className="border-t border-b border-black/20 divide-y divide-black/15 font-mono">
-              <div className="py-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-                <div className="text-5xl sm:text-7xl font-black text-black tracking-tighter">
-                  +142%
+              <div className="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-black tracking-tighter whitespace-nowrap shrink-0">
+                  4 Surfaces
                 </div>
-                <div className="text-left sm:text-right sm:max-w-xs space-y-1">
+                <div className="md:max-w-md space-y-1">
                   <span className="text-xs font-black uppercase tracking-wider text-[#BD2320] block">
-                    Digital Channel Shift
+                    One Shared Order Record
                   </span>
                   <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                    Shifted order volume from unrecorded phone calls and lost chat threads to structured digital checkout.
+                    WhatsApp bot, customer PWA, kitchen board, and driver app all sync to a single Supabase order state machine.
                   </p>
                 </div>
               </div>
 
-              <div className="py-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-                <div className="text-5xl sm:text-7xl font-black text-black tracking-tighter">
-                  4.2×
+              <div className="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-black tracking-tighter whitespace-nowrap shrink-0">
+                  15 km / 24h
                 </div>
-                <div className="text-left sm:text-right sm:max-w-xs space-y-1">
+                <div className="md:max-w-md space-y-1">
                   <span className="text-xs font-black uppercase tracking-wider text-[#BD2320] block">
-                    Weekly Repeat Frequency
+                    Geodesic Radius &amp; Cook Window
                   </span>
                   <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                    Higher recurring meal orders vs restaurant delivery marketplaces due to 24-hour cook-to-order reliability.
+                    Mapbox pin boundary enforced at checkout with 24-hour advance slot scheduling for batch cooking.
                   </p>
                 </div>
               </div>
 
-              <div className="py-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-                <div className="text-5xl sm:text-7xl font-black text-black tracking-tighter">
-                  &lt; 60s
+              <div className="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-black tracking-tighter whitespace-nowrap shrink-0">
+                  12h Window
                 </div>
-                <div className="text-left sm:text-right sm:max-w-xs space-y-1">
+                <div className="md:max-w-md space-y-1">
                   <span className="text-xs font-black uppercase tracking-wider text-[#BD2320] block">
-                    Average Order Time
+                    Fair Cancellation &amp; Automated Refund
                   </span>
                   <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                    Single-sentence Tanglish conversational ordering cut order completion from 12-minute phone calls.
+                    Customer cancellation permitted up to 12 hours prior to prep slot; trigger-based Razorpay refund dispatches automatically.
                   </p>
                 </div>
               </div>
 
-              <div className="py-6 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-                <div className="text-5xl sm:text-7xl font-black text-black tracking-tighter">
-                  0
+              <div className="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-black tracking-tighter whitespace-nowrap shrink-0">
+                  100% Veto
                 </div>
-                <div className="text-left sm:text-right sm:max-w-xs space-y-1">
+                <div className="md:max-w-md space-y-1">
                   <span className="text-xs font-black uppercase tracking-wider text-[#BD2320] block">
-                    Missed Meal Prep Slots
+                    Human-in-the-Loop AI Pricing
                   </span>
                   <p className="text-xs text-zinc-600 font-sans leading-relaxed">
-                    Synthesized 85dB repeating stove-side chimes prevented silent notification drops during lunch rush.
+                    Nightly pricing suggestions require explicit 1-click kitchen approval; dishes rated under 3.0 are programmatically blocked from promotion.
+                  </p>
+                </div>
+              </div>
+
+              <div className="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-black tracking-tighter whitespace-nowrap shrink-0">
+                  1-Tap Reorder
+                </div>
+                <div className="md:max-w-md space-y-1">
+                  <span className="text-xs font-black uppercase tracking-wider text-[#BD2320] block">
+                    Quick Reorder Intent Flow
+                  </span>
+                  <p className="text-xs text-zinc-600 font-sans leading-relaxed">
+                    Returning customers reorder saved items in a single sentence or tap, bypassing multi-level restaurant category trees.
                   </p>
                 </div>
               </div>
@@ -397,7 +476,7 @@ export default function VidyasKitchenCaseStudyView({
       </section>
 
       {/* ─── 07 WHAT I LEARNED ─── */}
-      <section id="learned" className="scroll-mt-24 border-t border-b sm:border border-black/15 bg-white p-6 sm:p-10 md:p-14 space-y-10 sm:shadow-[0_2px_12px_rgba(0,0,0,0.03)]">
+      <section id="learned" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-5 lg:sticky lg:top-24">
             <SectionHeader
@@ -407,7 +486,7 @@ export default function VidyasKitchenCaseStudyView({
             />
           </div>
 
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-8 max-w-[70ch]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8 border-b border-black/15">
               {vidyasWhatILearnedSoFar.map((item) => (
                 <div key={item.num} className="space-y-2">
@@ -447,25 +526,29 @@ export default function VidyasKitchenCaseStudyView({
       </section>
 
       {/* ─── FOR ENGINEERS: Collapsed Accordion Drawer ─── */}
-      <ForEngineersSection designSystemPdfMeta={designSystemPdfMeta} />
+      <div className="w-full px-[clamp(20px,4vw,64px)]">
+        <ForEngineersSection designSystemPdfMeta={designSystemPdfMeta} />
+      </div>
 
       {/* Footer Navigation */}
-      <CaseStudyFooterNav
-        currentTitle="Vidya's Kitchen · Real-Time Home Food Delivery PWA"
-        currentSubtitle="Designed & Engineered by Santhosh A · Sivakasi's First Home-Kitchen Ordering System"
-        prev={{
-          company: "We Two Pets · India",
-          project: "We Two Pets Commerce",
-          summary: "An Indian D2C store for international dog & cat gear, powered by an autonomous AI sourcing engine and 2-human approval desk.",
-          href: "/case-studies/we-two-pets",
-        }}
-        next={{
-          company: "Parla Retail · Video Commerce",
-          project: "Show & Sell Assisted Selling",
-          summary: "Bridging retail e-commerce and instant human trust via 1-click scheduling, video consultation, and in-call checkout.",
-          href: "/case-studies/parla-show-and-sell",
-        }}
-      />
+      <div className="w-full px-[clamp(20px,4vw,64px)] pt-12">
+        <CaseStudyFooterNav
+          currentTitle="Vidya's Kitchen · Real-Time Home Food Delivery PWA"
+          currentSubtitle="Designed & Engineered by Santhosh A · Sivakasi's First Home-Kitchen Ordering System"
+          prev={{
+            company: "We Two Pets · India",
+            project: "We Two Pets Commerce",
+            summary: "An Indian D2C store for international dog & cat gear, powered by an autonomous AI sourcing engine and 2-human approval desk.",
+            href: "/case-studies/we-two-pets",
+          }}
+          next={{
+            company: "Parla Retail · Video Commerce",
+            project: "Show & Sell Assisted Selling",
+            summary: "Bridging retail e-commerce and instant human trust via 1-click scheduling, video consultation, and in-call checkout.",
+            href: "/case-studies/parla-show-and-sell",
+          }}
+        />
+      </div>
     </main>
   );
 }

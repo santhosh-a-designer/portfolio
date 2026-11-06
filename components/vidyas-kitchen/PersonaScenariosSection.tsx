@@ -177,7 +177,7 @@ export default function PersonaScenariosSection({ personas }: Props) {
 
               <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
                 <span className="px-2 py-1 bg-white border border-black/15 font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-600">
-                  {"Based on {{INTERVIEWS_COUNT: 18}} interviews"}
+                  {currentPersona.interviewTag || "Field discovery · Sivakasi on-site"}
                 </span>
                 <div className={`flex items-center gap-1.5 px-2.5 py-1 ${theme.surfaceTagClass} border font-mono text-[10px] font-bold uppercase tracking-wider`}>
                   {getPersonaIcon(currentPersona.id)}
