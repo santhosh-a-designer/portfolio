@@ -395,6 +395,82 @@ export const vidyasSnapshot = {
   realQuote: null as { quote: string; author: string } | null,
 };
 
+export const vidyasSkimCopy = {
+  hero: {
+    title: "Vidya's Kitchen",
+    tagline: "Sivakasi's first home-kitchen ordering system.",
+    kpis: [
+      { value: "4 Surfaces", label: "1 order record" },
+      { value: "15 km", label: "Mapbox radius" },
+      { value: "24h", label: "Advance prep" },
+      { value: "12h", label: "Refund window" },
+    ],
+  },
+  beat01: {
+    num: "01",
+    label: "THE PROBLEM",
+    takeaway: "Home food ran on WhatsApp and memory.",
+    body: "Orders were unrecorded chats, calls, and paper slips.",
+  },
+  beat02: {
+    num: "02",
+    label: "THE USERS",
+    takeaway: "Three people, three operational needs.",
+    needs: [
+      { role: "Customer", need: "Wants dinner booked in one message." },
+      { role: "Driver", need: "Needs big buttons and PIN on poor signal." },
+      { role: "Chef", need: "Needs hands-free alerts at stove." },
+    ],
+  },
+  beat03: {
+    num: "03",
+    label: "THE DECISIONS",
+    takeaway: "Three calls that shaped the product.",
+    decisions: [
+      { title: "One-sentence order", desc: "Natural language input, deterministic bill." },
+      { title: "Zero-login tracking", desc: "Gift orders reach parents via direct link." },
+      { title: "Stove-side alerts", desc: "Audible chime with kitchen price approval." },
+    ],
+  },
+  beat04: {
+    num: "04",
+    label: "THE PRODUCT",
+    takeaway: "WhatsApp, app, kitchen board, driver app. One order.",
+    screens: [
+      {
+        surface: "Customer",
+        title: "Confirm Card",
+        src: "/case-studies/vidyas-kitchen/whatsapp/one-message-flow/01-sentence-to-summary.webp",
+        alt: "Customer confirm card",
+      },
+      {
+        surface: "Kitchen",
+        title: "Order Board",
+        src: "/case-studies/vidyas-kitchen/dashboard/orders-board.webp",
+        alt: "Kitchen order board",
+      },
+      {
+        surface: "Driver",
+        title: "Delivery Slider",
+        src: "/case-studies/vidyas-kitchen/driver/04-deliveries-active.webp",
+        alt: "Driver delivery slider",
+      },
+    ],
+  },
+  beat05: {
+    num: "05",
+    label: "THE RESULTS",
+    takeaway: "What changed when home food got a system.",
+    results: [
+      { stat: "4 Surfaces", label: "Single order record across all surfaces." },
+      { stat: "15 km / 24h", label: "15 km radius with 24h cook window." },
+      { stat: "12h Window", label: "Automated refund before prep slot." },
+      { stat: "100% Veto", label: "Kitchen approves prices; dishes < 3.0 blocked." },
+    ],
+    cta: "Read the full case study",
+  },
+};
+
 export type VidyasDesignSwatch = {
   token: string;
   hex: string;
