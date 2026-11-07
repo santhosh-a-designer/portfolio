@@ -74,9 +74,14 @@ export default function VidyasSkimReel({ onExpandFullStory }: Props) {
               <span className="text-xl sm:text-2xl md:text-3xl font-black text-black tracking-tight block leading-none whitespace-nowrap">
                 {kpi.value}
               </span>
-              <span className="text-[10px] sm:text-[11px] font-bold uppercase text-zinc-600 block">
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase text-zinc-600 block leading-tight">
                 {kpi.label}
               </span>
+              {kpi.change ? (
+                <span className="text-[9px] text-[#BD2320] font-black uppercase tracking-wider block">
+                  {kpi.change}
+                </span>
+              ) : null}
             </div>
           ))}
         </div>
