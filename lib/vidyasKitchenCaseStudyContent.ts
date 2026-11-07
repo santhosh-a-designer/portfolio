@@ -388,9 +388,9 @@ export const vidyasSnapshot = {
     "Skip the restaurant. Home-cooked, hygienic food from Vidya's Kitchen — order in one WhatsApp message or the app, delivered to your door in Sivakasi.",
   kpis: [
     { value: "4 Surfaces", label: "0→1 Full-Stack System", change: "Designed & built by me" },
-    { value: "40% Faster", label: "Order Processing Latency", change: "One-sentence chat vs phone calls" },
-    { value: "0 Logins", label: "Frictionless Gift Tracking", change: "Direct web links for parents" },
-    { value: "1-Tap", label: "Quick Reorder Intent", change: "Bypasses multi-level menus" },
+    { value: "40% Faster", label: "Order Processing Speed", change: "1-Sentence Chat vs Phone Calls" },
+    { value: "0 Logins", label: "Frictionless Gift Tracking", change: "Direct Live Web Links via SMS" },
+    { value: "1-Tap", label: "Quick Reorder Intent", change: "Bypasses Multi-Level Menus" },
   ],
   realQuote: null as { quote: string; author: string } | null,
 };

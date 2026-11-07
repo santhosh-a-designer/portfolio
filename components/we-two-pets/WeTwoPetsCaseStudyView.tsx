@@ -300,77 +300,116 @@ export default function WeTwoPetsCaseStudyView() {
               </p>
             </div>
 
-            {/* Metadata Strip */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4 pb-4 border-t border-b border-black/15 font-mono text-xs">
-              <div className="space-y-1">
-                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Role</span>
-                <span className="font-black text-black text-xs block">Sole Designer &amp; Full-Stack Builder</span>
-              </div>
-              <div className="space-y-1 md:col-span-2">
-                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Team &amp; Ownership</span>
-                <span className="font-bold text-zinc-800 text-xs block">2 Founders · Brand, Autonomous Agents, Curation Desk &amp; Storefront</span>
-                <span className="text-[11px] text-zinc-600 block">Designed &amp; built the multi-model sourcing engine &amp; 1-page checkout</span>
-              </div>
-              <div>
-                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold mb-1.5">Production</span>
-                <a
-                  href="https://www.wetwopets.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#059669] hover:bg-black text-white font-mono text-xs font-black uppercase tracking-wider transition-all shadow-sm border border-black/15 group"
-                >
-                  <span>wetwopets.com</span>
-                  <ArrowUpRight weight="bold" className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+            {/* ─── HIGHLIGHTED METADATA STRIP: Role, Team & Ownership ─── */}
+            <div className="border border-black/20 bg-zinc-50/80 p-5 sm:p-7 shadow-sm">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start font-mono">
+                {/* 1. ROLE */}
+                <div className="lg:col-span-4 space-y-2 border-b lg:border-b-0 lg:border-r border-black/15 pb-5 lg:pb-0 lg:pr-6">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#059669]" />
+                    <span className="text-xs font-black uppercase tracking-widest text-[#059669]">
+                      ROLE &amp; RESPONSIBILITY
+                    </span>
+                  </div>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-black text-black leading-tight tracking-tight">
+                    Sole Designer &amp; Full-Stack Builder
+                  </h3>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-black/15 text-xs font-black text-zinc-900 shadow-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#059669]" />
+                    <span>0→1 Brand &amp; Multi-Agent Pipeline Architect</span>
+                  </div>
+                </div>
+
+                {/* 2. TEAM & OWNERSHIP */}
+                <div className="lg:col-span-5 space-y-2.5 border-b lg:border-b-0 lg:border-r border-black/15 pb-5 lg:pb-0 lg:pr-6">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#059669]" />
+                    <span className="text-xs font-black uppercase tracking-widest text-[#059669]">
+                      TEAM COMPOSITION &amp; SCOPE OWNED
+                    </span>
+                  </div>
+                  <p className="text-sm sm:text-base font-black text-zinc-950 leading-snug">
+                    2 Founders · Brand, Autonomous Agents, Curation Desk &amp; Storefront
+                  </p>
+                  <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed pt-1">
+                    <strong className="font-mono font-black text-zinc-900">End-to-End Scope: </strong>
+                    Engineered the multi-agent sourcing pipeline (Trend, Scraper, Catalog), 2-human margin approval desk, 1-page OTP checkout, and Chennai fulfillment hub.
+                  </p>
+                </div>
+
+                {/* 3. PRODUCTION & VERIFICATION */}
+                <div className="lg:col-span-3 space-y-3 flex flex-col justify-between h-full">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
+                      <span className="text-xs font-black uppercase tracking-widest text-zinc-800">
+                        VERIFIED PRODUCTION
+                      </span>
+                    </div>
+                    <span className="text-xs text-zinc-500 font-medium block">
+                      Live in New Delhi &amp; Chennai Hub
+                    </span>
+                  </div>
+
+                  <a
+                    href="https://www.wetwopets.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-between gap-2 px-4 py-3 bg-[#059669] hover:bg-black text-white font-mono text-xs sm:text-sm font-black uppercase tracking-wider transition-all shadow-md border border-black/20 group cursor-pointer"
+                  >
+                    <span>wetwopets.com</span>
+                    <ArrowUpRight weight="bold" className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* KPI Strip: 4 Equal Columns, Big Numbers on Hairlines with Green accents */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4 border-t border-black/15 font-mono">
-              <div className="space-y-1 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
+              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
                 <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                   3 Agents
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   Autonomous Sourcing
                 </span>
-                <span className="text-[10px] text-[#059669] font-black uppercase tracking-wider block">
+                <span className="text-[11px] sm:text-xs text-[#059669] font-black uppercase tracking-wider block">
                   Trend, Scraper, &amp; Catalog
                 </span>
               </div>
 
-              <div className="space-y-1 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
+              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
                 <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                   2-Human Desk
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   Approval Threshold
                 </span>
-                <span className="text-[10px] text-[#0D2E28] font-black uppercase tracking-wider block">
+                <span className="text-[11px] sm:text-xs text-[#0D2E28] font-black uppercase tracking-wider block">
                   Double human margin veto
                 </span>
               </div>
 
-              <div className="space-y-1 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
+              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
                 <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                   0 Drift
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   Brand Protection
                 </span>
-                <span className="text-[10px] text-[#059669] font-black uppercase tracking-wider block">
+                <span className="text-[11px] sm:text-xs text-[#059669] font-black uppercase tracking-wider block">
                   Zero junk product slip-through
                 </span>
               </div>
 
-              <div className="space-y-1 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
+              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
                 <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                   38+ Guides
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   SEO Trust Engine
                 </span>
-                <span className="text-[10px] text-[#0D2E28] font-black uppercase tracking-wider block">
+                <span className="text-[11px] sm:text-xs text-[#0D2E28] font-black uppercase tracking-wider block">
                   Organic pet care authority
                 </span>
               </div>

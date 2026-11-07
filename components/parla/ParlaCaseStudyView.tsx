@@ -466,77 +466,116 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
               </p>
             </div>
 
-            {/* Metadata Strip */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4 pb-4 border-t border-b border-black/15 font-mono text-xs">
-              <div className="space-y-1">
-                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Role</span>
-                <span className="font-black text-black text-xs block">{study.role}</span>
-              </div>
-              <div className="space-y-1 md:col-span-2">
-                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Team &amp; Ownership</span>
-                <span className="font-bold text-zinc-800 text-xs block">3 Product Roles · Storefront, Scheduler &amp; Video Desk</span>
-                <span className="text-[11px] text-zinc-600 block">Designed &amp; engineered the 0→1 WebRTC assisted commerce flow</span>
-              </div>
-              <div>
-                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold mb-1.5">Production</span>
-                <a
-                  href="https://parlaretail.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#1976D2] hover:bg-black text-white font-mono text-xs font-black uppercase tracking-wider transition-all shadow-sm border border-black/15 group"
-                >
-                  <span>parlaretail.com</span>
-                  <ArrowUpRight weight="bold" className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
+            {/* ─── HIGHLIGHTED METADATA STRIP: Role, Team & Ownership ─── */}
+            <div className="border border-black/20 bg-zinc-50/80 p-5 sm:p-7 shadow-sm">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start font-mono">
+                {/* 1. ROLE */}
+                <div className="lg:col-span-4 space-y-2 border-b lg:border-b-0 lg:border-r border-black/15 pb-5 lg:pb-0 lg:pr-6">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#1976D2]" />
+                    <span className="text-xs font-black uppercase tracking-widest text-[#1976D2]">
+                      ROLE &amp; RESPONSIBILITY
+                    </span>
+                  </div>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-black text-black leading-tight tracking-tight">
+                    {study.role}
+                  </h3>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-black/15 text-xs font-black text-zinc-900 shadow-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EC4899]" />
+                    <span>0→1 Assisted Commerce Platform Architect</span>
+                  </div>
+                </div>
+
+                {/* 2. TEAM & OWNERSHIP */}
+                <div className="lg:col-span-5 space-y-2.5 border-b lg:border-b-0 lg:border-r border-black/15 pb-5 lg:pb-0 lg:pr-6">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#1976D2]" />
+                    <span className="text-xs font-black uppercase tracking-widest text-[#1976D2]">
+                      TEAM COMPOSITION &amp; SCOPE OWNED
+                    </span>
+                  </div>
+                  <p className="text-sm sm:text-base font-black text-zinc-950 leading-snug">
+                    3 Product Roles · Storefront CTA, Scheduler &amp; In-Call Video Desk
+                  </p>
+                  <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed pt-1">
+                    <strong className="font-mono font-black text-zinc-900">End-to-End Scope: </strong>
+                    Designed &amp; engineered the 0→1 WebRTC assisted commerce flow, scheduler comparison engine, in-call QR scanner, and showroom CRM desk.
+                  </p>
+                </div>
+
+                {/* 3. PRODUCTION & VERIFICATION */}
+                <div className="lg:col-span-3 space-y-3 flex flex-col justify-between h-full">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse" />
+                      <span className="text-xs font-black uppercase tracking-widest text-zinc-800">
+                        VERIFIED PRODUCTION
+                      </span>
+                    </div>
+                    <span className="text-xs text-zinc-500 font-medium block">
+                      US Enterprise Retail Rollout
+                    </span>
+                  </div>
+
+                  <a
+                    href="https://parlaretail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-between gap-2 px-4 py-3 bg-[#1976D2] hover:bg-black text-white font-mono text-xs sm:text-sm font-black uppercase tracking-wider transition-all shadow-md border border-black/20 group cursor-pointer"
+                  >
+                    <span>parlaretail.com</span>
+                    <ArrowUpRight weight="bold" className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* KPI Strip: 4 Equal Columns, Big Numbers on Hairlines with Blue/Pink accents */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4 border-t border-black/15 font-mono">
-              <div className="space-y-1 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
+              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
                 <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                   1-Click
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   Instant Video Call
                 </span>
-                <span className="text-[10px] text-[#EC4899] font-black uppercase tracking-wider block">
+                <span className="text-[11px] sm:text-xs text-[#EC4899] font-black uppercase tracking-wider block">
                   Zero app install needed
                 </span>
               </div>
 
-              <div className="space-y-1 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
+              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
                 <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                   3 Roles
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   Unified Architecture
                 </span>
-                <span className="text-[10px] text-[#1976D2] font-black uppercase tracking-wider block">
+                <span className="text-[11px] sm:text-xs text-[#1976D2] font-black uppercase tracking-wider block">
                   Customer, staff, &amp; admin
                 </span>
               </div>
 
-              <div className="space-y-1 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
+              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
                 <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                   100% Web
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   In-Store QR Flow
                 </span>
-                <span className="text-[10px] text-[#EC4899] font-black uppercase tracking-wider block">
+                <span className="text-[11px] sm:text-xs text-[#EC4899] font-black uppercase tracking-wider block">
                   WebRTC in mobile browser
                 </span>
               </div>
 
-              <div className="space-y-1 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
+              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
                 <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                   Live Basket
                 </span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   Synchronized Cart
                 </span>
-                <span className="text-[10px] text-[#1976D2] font-black uppercase tracking-wider block">
+                <span className="text-[11px] sm:text-xs text-[#1976D2] font-black uppercase tracking-wider block">
                   Staff adds, shopper pays
                 </span>
               </div>
