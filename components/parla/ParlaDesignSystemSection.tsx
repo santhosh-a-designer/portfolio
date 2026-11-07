@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Montserrat } from "next/font/google";
 import {
   ArrowSquareOut,
   Check,
@@ -14,11 +13,10 @@ import {
   FileCode,
 } from "@phosphor-icons/react";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
+/** Scoped font fallback to resolve Vercel Turbopack Next.js 16 build issue */
+const montserrat = {
+  className: "font-sans",
+};
 
 export default function ParlaDesignSystemSection() {
   const [copiedColor, setCopiedColor] = useState<string | null>(null);
