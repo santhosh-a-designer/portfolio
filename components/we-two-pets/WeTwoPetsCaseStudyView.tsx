@@ -1,37 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
-  ArrowSquareOut,
-  Sparkle,
+  ArrowUpRight,
   Cpu,
   CheckCircle,
   ShieldCheck,
-  Robot,
   Users,
-  Eye,
-  MagnifyingGlass,
-  Tag,
-  ArrowsClockwise,
 } from "@phosphor-icons/react";
 import ChallengeWindowStack from "@/components/vidyas-kitchen/ChallengeWindowStack";
 import IADiagram from "@/components/vidyas-kitchen/IADiagram";
 import StackToolsSkills from "@/components/vidyas-kitchen/StackToolsSkills";
 import UserFlowDiagram from "@/components/vidyas-kitchen/UserFlowDiagram";
 import {
-  weTwoAgents,
   weTwoChallenges,
-  weTwoColors,
-  weTwoFeedback,
   weTwoFlows,
   weTwoIA,
   weTwoJourney,
   weTwoPrinciples,
   weTwoResearch,
-  weTwoScrape,
   weTwoSkills,
   weTwoTools,
   weTwoAIFlow,
@@ -41,31 +32,53 @@ import EditorialTrustBento from "./EditorialTrustBento";
 import PetCareGuidesShowcase from "./PetCareGuidesShowcase";
 import WeTwoPetsDesignSystemSection from "./WeTwoPetsDesignSystemSection";
 import WeTwoPetsCodeShowcase from "./WeTwoPetsCodeShowcase";
+import WeTwoPetsSkimReel from "./WeTwoPetsSkimReel";
 import CaseStudyFooterNav from "@/components/CaseStudyFooterNav";
 
-function SectionWindow({
-  num,
+const openEase = [0.22, 1, 0.36, 1] as const;
+
+function OutlineFillTitle({ title }: { title: string }) {
+  return (
+    <motion.h2
+      initial={{ color: "transparent" }}
+      whileInView={{ color: "#000000" }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, ease: openEase }}
+      style={{ WebkitTextStroke: "1.5px #000000" }}
+      className="font-black uppercase tracking-tighter leading-[0.88] select-none text-[clamp(44px,7vw,88px)]"
+    >
+      {title}
+    </motion.h2>
+  );
+}
+
+function SectionHeader({
+  eyebrow,
   title,
-  children,
-  allowOverflow = false,
+  takeaway,
+  accentColor = "#059669",
 }: {
-  num: string;
+  eyebrow: string;
   title: string;
-  children: React.ReactNode;
-  allowOverflow?: boolean;
+  takeaway: string;
+  accentColor?: string;
 }) {
   return (
-    <section
-      className={`border-2 border-black bg-white shadow-[4px_4px_0_0_#000] sm:shadow-[6px_6px_0_0_#000] ${
-        allowOverflow ? "overflow-visible" : "overflow-hidden"
-      }`}
-    >
-      <div className="flex h-10 items-center gap-2 border-b-2 border-black bg-[#E2E8F0] px-3 font-mono text-xs select-none sm:h-11 sm:px-4">
-        <span className="bg-[#FF462D] px-2 py-0.5 text-[10px] font-bold text-white">{num}</span>
-        <span className="truncate font-bold uppercase tracking-wider text-black">{title}</span>
+    <div className="space-y-3">
+      <div className="flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full" style={{ backgroundColor: accentColor }} />
+        <span
+          className="font-mono text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em]"
+          style={{ color: accentColor }}
+        >
+          {eyebrow}
+        </span>
       </div>
-      <div className="p-4 sm:p-8 md:p-10">{children}</div>
-    </section>
+      <OutlineFillTitle title={title} />
+      <p className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 leading-snug">
+        “{takeaway}”
+      </p>
+    </div>
   );
 }
 
@@ -79,7 +92,7 @@ function QuoteBlock({
   role?: string;
 }) {
   return (
-    <div className="relative border-l-4 border-[#0D2E28] bg-[#FAF9F5] p-4 sm:p-5 my-6 shadow-[2px_2px_0_0_#000]">
+    <div className="relative border-l-4 border-[#059669] bg-zinc-50 p-4 sm:p-5 my-6">
       <span className="font-serif text-3xl sm:text-4xl leading-none text-zinc-300 select-none block -mb-2">“</span>
       <p className="font-serif text-sm sm:text-base italic leading-relaxed text-zinc-800 font-medium">
         {quote}
@@ -106,15 +119,18 @@ function Shot({
   caption: string;
 }) {
   return (
-    <figure className="flex min-w-0 flex-col border-2 border-black bg-[#FAF9F5]">
-      <figcaption className="border-b-2 border-black bg-[#FAED00] px-3 py-2 font-mono text-[10px] font-black uppercase tracking-wider">
-        {label}
+    <figure className="flex min-w-0 flex-col border border-black/15 bg-white">
+      <figcaption className="border-b border-black/15 bg-zinc-100 px-3 py-2 font-mono text-[10px] font-black uppercase tracking-wider flex items-center justify-between">
+        <span className="text-black">{label}</span>
+        <span className="w-1.5 h-1.5 rounded-full bg-[#059669]" />
       </figcaption>
-      <div className="relative aspect-[1440/900] bg-[#F3EEE4]">
+      <div className="relative aspect-[1440/900] bg-zinc-100">
         <Image
           src={src}
           alt={alt}
           fill
+          priority
+          loading="eager"
           className="object-cover object-top"
           sizes="(max-width: 768px) 100vw, 560px"
         />
@@ -152,10 +168,40 @@ const shots = [
 ] as const;
 
 export default function WeTwoPetsCaseStudyView() {
+  const [skimMode, setSkimMode] = useState(false);
+
+  // Sync Skim Mode with URL query param ?mode=60s and document data-mode
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const is60s = params.get("mode") === "60s";
+      if (is60s) {
+        setSkimMode(true);
+        document.documentElement.setAttribute("data-mode", "60s");
+      } else {
+        document.documentElement.setAttribute("data-mode", "full");
+      }
+    }
+  }, []);
+
+  const handleSkimToggle = (mode: boolean) => {
+    setSkimMode(mode);
+    if (typeof window !== "undefined") {
+      document.documentElement.setAttribute("data-mode", mode ? "60s" : "full");
+      const url = new URL(window.location.href);
+      if (mode) {
+        url.searchParams.set("mode", "60s");
+      } else {
+        url.searchParams.delete("mode");
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
   return (
-    <main className="mx-auto min-w-0 max-w-[1240px] space-y-8 px-3 pb-28 pt-4 sm:space-y-12 sm:px-6 sm:pb-32 sm:pt-6 md:pt-8 lg:px-8">
-      {/* Top Breadcrumb Navigation */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-4 font-mono select-none">
+    <main className="w-full min-w-0 overflow-x-clip pb-28 sm:pb-32 bg-[#FAFAFA] relative">
+      {/* ─── Top Control Strip: Back link + Skim Mode Switch ─── */}
+      <div className="w-full px-[clamp(20px,4vw,64px)] pt-4 pb-4 flex flex-wrap items-center justify-between gap-4 border-b border-black/15 select-none font-mono bg-[#FAFAFA]">
         <Link
           href="/#work"
           onClick={() => {
@@ -165,519 +211,644 @@ export default function WeTwoPetsCaseStudyView() {
               /* */
             }
           }}
-          className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-black hover:text-[#FF462D] sm:text-sm"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm font-black uppercase tracking-wider text-black hover:text-[#059669] transition-colors group"
         >
-          <ArrowLeft weight="bold" className="h-4 w-4" />
-          Back to selected work
+          <ArrowLeft weight="bold" className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span>BACK TO SELECTED WORK</span>
         </Link>
-        <a
-          href="https://www.wetwopets.com/"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:text-black sm:text-xs"
-        >
-          wetwopets.com
-          <ArrowSquareOut weight="bold" className="h-3.5 w-3.5" />
-        </a>
+
+        {/* 60-Second Skim Mode Switch */}
+        <div className="flex items-center gap-2 p-1 bg-zinc-100 border border-black/15 text-xs">
+          <button
+            type="button"
+            onClick={() => handleSkimToggle(false)}
+            className={`px-3 py-1 font-bold uppercase transition-all cursor-pointer ${
+              !skimMode ? "bg-black text-white shadow-sm" : "text-zinc-600 hover:text-black"
+            }`}
+          >
+            Full Story
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSkimToggle(true)}
+            className={`flex items-center gap-1.5 px-3 py-1 font-bold uppercase transition-all cursor-pointer ${
+              skimMode ? "bg-[#059669] text-white shadow-sm" : "text-zinc-600 hover:text-black"
+            }`}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            <span>60s Skim Mode</span>
+          </button>
+        </div>
       </div>
 
-      {/* Case Study Hero Header & STAR Executive Summary */}
-      <section className="overflow-hidden border-2 border-black bg-white shadow-[4px_4px_0_0_#000] sm:shadow-[6px_6px_0_0_#000]">
-        <div className="space-y-5 p-4 text-center sm:space-y-6 sm:p-10 md:p-12">
-          <div className="flex flex-wrap justify-center gap-2">
-            <span className="inline-flex border-2 border-black bg-[#FF462D] px-3 py-1 font-mono text-xs font-black uppercase tracking-widest text-white">
-              0→1 · Design &amp; Engineering
-            </span>
-            <span className="inline-flex border-2 border-black bg-[#0D2E28] px-3 py-1 font-mono text-xs font-black uppercase tracking-widest text-white">
-              AI-Powered Agentic Commerce
-            </span>
-            <span className="inline-flex border-2 border-black bg-[#FAED00] px-3 py-1 font-mono text-[10px] font-black uppercase tracking-widest sm:text-xs text-black">
-              We Two Pets · India
-            </span>
-          </div>
-
-          <h1 className="text-[1.7rem] font-black uppercase leading-none tracking-tight min-[380px]:text-3xl sm:text-5xl font-serif text-[#0D2E28]">
-            We Two Pets
-          </h1>
-
-          <p className="mx-auto max-w-3xl text-sm font-bold italic leading-snug text-zinc-600 sm:text-lg">
-            An intentional Indian D2C brand for international dog &amp; cat gear — powered by an autonomous multimodal AI sourcing engine, verified by two human curators, and fulfilled through a dedicated Chennai hub.
-          </p>
-
-          {/* Key Metric Highlights */}
-          <div className="mx-auto grid w-full max-w-4xl grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div className="border-2 border-black bg-[#FAF9F5] p-3 text-center shadow-[2px_2px_0_0_#000]">
-              <div className="flex items-center justify-center gap-1.5 text-[#0D2E28]">
-                <CheckCircle size={18} weight="fill" />
-                <span className="font-mono text-xs font-black uppercase tracking-wider">100% Direct Checkout</span>
-              </div>
-              <p className="mt-1 text-[11px] text-zinc-600 font-medium">Bypassed affiliate links to own customer orders end-to-end</p>
-            </div>
-            <div className="border-2 border-black bg-[#FAF9F5] p-3 text-center shadow-[2px_2px_0_0_#000]">
-              <div className="flex items-center justify-center gap-1.5 text-[#0D2E28]">
-                <ShieldCheck size={18} weight="fill" />
-                <span className="font-mono text-xs font-black uppercase tracking-wider">0 Duplicate Imports</span>
-              </div>
-              <p className="mt-1 text-[11px] text-zinc-600 font-medium">Vision hashing &amp; NLP auto-reject items already in India</p>
-            </div>
-            <div className="border-2 border-black bg-[#FAF9F5] p-3 text-center shadow-[2px_2px_0_0_#000]">
-              <div className="flex items-center justify-center gap-1.5 text-[#0D2E28]">
-                <Users size={18} weight="fill" />
-                <span className="font-mono text-xs font-black uppercase tracking-wider">2-Human Veto Gate</span>
-              </div>
-              <p className="mt-1 text-[11px] text-zinc-600 font-medium">AI scores candidates; two humans must vote before launch</p>
-            </div>
-          </div>
-
-          {/* STAR Methodology Breakdown Bento */}
-          <div className="mx-auto grid w-full max-w-4xl grid-cols-1 gap-3 sm:grid-cols-2 text-left pt-2">
-            <div className="border-2 border-black bg-zinc-50 p-4 sm:p-5 flex flex-col justify-between">
-              <div>
-                <span className="inline-block bg-[#FF462D] text-white px-2 py-0.5 font-mono text-[10px] font-black uppercase tracking-widest">
-                  S · SITUATION
-                </span>
-                <h4 className="mt-2 font-serif text-base font-bold text-zinc-900 leading-snug">
-                  Fragmented Indian Pet Market &amp; Affiliate Dropshipping Trap
-                </h4>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-700">
-                  Indian pet parents seeking high-end international gear face generic, noisy marketplaces saturated with mass-produced items. Buying from overseas meant 30-day delivery waits, customs duty surprises, and zero brand accountability.
-                </p>
-              </div>
-              <p className="mt-3 font-mono text-[11px] font-bold text-[#FF462D]">
-                Challenge: How to deliver curated global pet gear under a trusted Indian brand?
-              </p>
-            </div>
-
-            <div className="border-2 border-black bg-[#FAF9F5] p-4 sm:p-5 flex flex-col justify-between">
-              <div>
-                <span className="inline-block bg-[#0D2E28] text-white px-2 py-0.5 font-mono text-[10px] font-black uppercase tracking-widest">
-                  T · TASK
-                </span>
-                <h4 className="mt-2 font-serif text-base font-bold text-zinc-900 leading-snug">
-                  Full-Stack D2C Brand, AI Sourcing &amp; Transparent Hub
-                </h4>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-700">
-                  Build an editorial e-commerce platform that takes payments directly on our domain, crawls international boutique catalogs nightly via AI, verifies unique gaps against Indian competitors, and fulfills through our Chennai hub.
-                </p>
-              </div>
-              <p className="mt-3 font-mono text-[11px] font-bold text-[#0D2E28]">
-                Mandate: Own the order, filter noise with AI, and mandate human approvals.
-              </p>
-            </div>
-
-            <div className="border-2 border-black bg-[#FAF9F5] p-4 sm:p-5 flex flex-col justify-between">
-              <div>
-                <span className="inline-block bg-[#1976D2] text-white px-2 py-0.5 font-mono text-[10px] font-black uppercase tracking-widest">
-                  A · ACTION
-                </span>
-                <h4 className="mt-2 font-serif text-base font-bold text-zinc-900 leading-snug">
-                  Next.js Storefront, 1-Page Checkout &amp; Multi-Model Engine
-                </h4>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-700">
-                  Shipped a 1-page phone OTP checkout (Cashfree &amp; COD). Engineered Pet Engine: Gemini multimodal vision generates 0–100 quality scores; pHash vision checks Amazon.in/HUFT; 2 curators vote on private desk; cron personalizes Paws Plus recommendations.
-                </p>
-              </div>
-              <p className="mt-3 font-mono text-[11px] font-bold text-[#1976D2]">
-                Craft: Deep Forest design system, Tailz support assistant, and unboxing hub.
-              </p>
-            </div>
-
-            <div className="border-2 border-black bg-[#FAED00]/25 p-4 sm:p-5 flex flex-col justify-between">
-              <div>
-                <span className="inline-block bg-black text-[#FAED00] px-2 py-0.5 font-mono text-[10px] font-black uppercase tracking-widest">
-                  R · RESULT
-                </span>
-                <h4 className="mt-2 font-serif text-base font-bold text-zinc-900 leading-snug">
-                  100% Brand Ownership &amp; Zero Duplicate Catalog
-                </h4>
-                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-zinc-700">
-                  Zero checkout leakage to third-party marketplaces. A 100% human-vetted catalog where every product is an authentic import. Launched the Paws Plus membership tier offering AI-tailored weekly drops and member benefits.
-                </p>
-              </div>
-              <p className="mt-3 font-mono text-[11px] font-bold text-black">
-                Outcome: A production D2C experience trusted by modern pet families across India.
-              </p>
-            </div>
-          </div>
-
-          <QuoteBlock
-            quote="The job was never to build a cute pet shop. It was to own the order, filter out the noise with multimodal AI, and make sure every single product earns its place through two human votes."
-            author="Santhosh A"
-            role="Product Designer & Full-Stack Builder"
-          />
-
-          <div className="mx-auto grid w-full max-w-4xl grid-cols-2 gap-2 font-mono text-xs md:grid-cols-4 sm:gap-3">
-            <div className="flex min-h-[72px] flex-col items-center justify-center border-2 border-black bg-[#FAED00] p-3 text-center">
-              <span className="mb-1 block text-[10px] uppercase text-black/60">Category</span>
-              <span className="font-black leading-snug">Dog &amp; Cat Gear</span>
-            </div>
-            <div className="flex min-h-[72px] flex-col items-center justify-center border-2 border-black p-3 text-center">
-              <span className="mb-1 block text-[10px] uppercase text-zinc-500">Exclusions</span>
-              <span className="font-black leading-snug">Food &amp; Consumables</span>
-            </div>
-            <div className="flex min-h-[72px] flex-col items-center justify-center border-2 border-black p-3 text-center">
-              <span className="mb-1 block text-[10px] uppercase text-zinc-500">Role</span>
-              <span className="font-black leading-snug">Design &amp; Engineering</span>
-            </div>
-            <a
-              href="https://www.wetwopets.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="flex min-h-[72px] flex-col items-center justify-center border-2 border-black bg-black p-3 text-center text-white hover:bg-zinc-900"
-            >
-              <span className="font-black uppercase">Live Site</span>
-              <ArrowSquareOut weight="bold" className="mt-1 h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 01: Why a Marketplace Was Not the Product */}
-      <SectionWindow num="01" title="Customer Journey: Why a Template Fails">
-        <p className="mb-6 max-w-3xl text-sm leading-relaxed text-zinc-700 sm:text-base">
-          The job was never to install a Shopify template. Generic e-commerce themes assume every SKU in a supplier CSV is sellable and push checkout to Amazon. We engineered an intentional journey where each stage safeguards trust.
-        </p>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[760px] border-collapse text-left text-xs sm:text-sm">
-            <thead>
-              <tr className="border-b-2 border-black font-mono text-[10px] uppercase tracking-wider">
-                <th className="py-2 pr-3">Stage</th>
-                <th className="py-2 pr-3">Goal</th>
-                <th className="py-2 pr-3">Pain Point</th>
-                <th className="py-2 pr-3">What Shipped</th>
-                <th className="py-2">Why a Generic Template Fails</th>
-              </tr>
-            </thead>
-            <tbody>
-              {weTwoJourney.map((row) => (
-                <tr key={row.stage} className="border-b border-zinc-200 align-top">
-                  <td className="py-3 pr-3 font-black text-[#FF462D]">{row.stage}</td>
-                  <td className="py-3 pr-3 text-zinc-800">{row.goal}</td>
-                  <td className="py-3 pr-3 text-zinc-600">{row.pain}</td>
-                  <td className="py-3 pr-3 text-zinc-800">{row.shipped}</td>
-                  <td className="bg-[#FAF9F5] py-3 font-semibold text-zinc-800">{row.why}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </SectionWindow>
-
-      {/* Section 02: Storefront Walkthrough & Editorial Modules */}
-      <SectionWindow num="02" title="The Storefront: High-Contrast Editorial Commerce">
-        <p className="mb-6 max-w-3xl text-sm leading-relaxed text-zinc-700 sm:text-base">
-          The live storefront is built on warm ivory tones, serif hierarchy, and deep forest contrast. We intentionally excluded pet food to bypass regulatory gray zones, focusing strictly on functional gear, calming routines, and curated pet lifestyle items.
-        </p>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          {shots.map((shot) => (
-            <Shot key={shot.src} {...shot} />
-          ))}
-        </div>
-
-        {/* Live Storefront Modules */}
-        <div className="mt-10 space-y-10 border-t-2 border-black/15 pt-8">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="font-mono text-[10px] font-black uppercase tracking-wider bg-[#0D2E28] text-white px-2 py-0.5 border border-black">
-                LIVE STORE MODULE 01
-              </span>
-              <span className="font-mono text-xs font-bold text-zinc-500 uppercase tracking-wider">
-                Editorial Trust Architecture &amp; Social Proof Bento
-              </span>
-            </div>
-            <EditorialTrustBento />
-          </div>
-
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="font-mono text-[10px] font-black uppercase tracking-wider bg-[#FF462D] text-white px-2 py-0.5 border border-black">
-                LIVE STORE MODULE 02
-              </span>
-              <span className="font-mono text-xs font-bold text-zinc-500 uppercase tracking-wider">
-                Content Strategy · Pet Care Guides (&quot;Know Before You Buy&quot;)
-              </span>
-            </div>
-            <PetCareGuidesShowcase />
-          </div>
-        </div>
-      </SectionWindow>
-
-      {/* Section 03: The Three Core Design & Engineering Challenges */}
-      <SectionWindow num="03" title="The Three Core Challenges" allowOverflow>
-        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <p className="max-w-2xl text-sm text-zinc-600">
-            Three critical problems defined the product: owning the order directly, engineering a multi-model AI sourcing engine with a human veto gate, and establishing Chennai fulfillment transparency.
-          </p>
-          <p className="flex shrink-0 items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-500">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-[#FF462D]" />
-            Stacking windows scroll ↓
-          </p>
-        </div>
-        <ChallengeWindowStack challenges={weTwoChallenges} />
-      </SectionWindow>
-
-      {/* Section 04: The Multi-Model AI Architecture & Flow */}
-      <SectionWindow num="04" title="How the AI Flow Works: Global Crawl to Tailz Assistant">
-        <div className="space-y-6">
-          <p className="max-w-3xl text-sm leading-relaxed text-zinc-700 sm:text-base">
-            AI is not a buzzword in We Two Pets; it is an autonomous operational pipeline. The engine handles global multi-region crawls, runs multimodal computer vision against Indian competitors, and delivers personalized recommendation feeds for Paws Plus members.
-          </p>
-
-          {/* AI Pipeline 6-Phase Flow Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {weTwoAIFlow.map((item) => (
-              <div
-                key={item.step}
-                className="border-2 border-black bg-white p-4 sm:p-5 flex flex-col justify-between shadow-[3px_3px_0_0_#000]"
-              >
-                <div>
-                  <div className="flex items-center justify-between border-b border-zinc-100 pb-2 mb-3">
-                    <span className="font-mono text-[10px] font-black uppercase text-[#FF462D]">
-                      STAGE {item.step}
-                    </span>
-                    <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase">
-                      {item.phase}
-                    </span>
-                  </div>
-                  <h4 className="font-serif text-base font-bold text-[#0D2E28] leading-tight">
-                    {item.title}
-                  </h4>
-                  <p className="mt-2 text-xs leading-relaxed text-zinc-600 font-medium">
-                    {item.desc}
-                  </p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-dashed border-zinc-200">
-                  <p className="font-mono text-[10px] text-zinc-500">
-                    <strong className="text-zinc-800">Stack:</strong> {item.tech}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Real Multi-Agent Code Snippets & Architecture */}
-          <div className="pt-2">
-            <div className="flex items-center gap-2 mb-2 font-mono text-[10px] uppercase font-bold tracking-wider text-zinc-500">
-              <span className="w-2 h-2 bg-[#FF462D] inline-block" />
-              <span>PRODUCTION CODEBASE INSPECTION · MULTI-AGENT INGESTION &amp; GOVERNANCE</span>
-            </div>
-            <WeTwoPetsCodeShowcase />
-          </div>
-
-          {/* Hard Business & Regulatory Constraint Callout: The No-Food Policy */}
-          <div className="border-2 border-black bg-[#FAF9F5] p-4 sm:p-5 shadow-[3px_3px_0_0_#000]">
-            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase text-[#FF462D]">
-              <span className="px-2 py-0.5 bg-[#FF462D] text-white text-[10px] font-black">LEGAL CONSTRAINT</span>
-              <span>Why We Two Pets Strictly Excluded Pet Food &amp; Treats</span>
-            </div>
-            <p className="mt-2 text-xs sm:text-sm text-zinc-700 leading-relaxed">
-              Early competitor research revealed that importing animal-origin food into India mandates Sanitary Import Permits (SIP) and mandatory AQCS quarantine inspections. Building a brand on gray-market food imports creates severe liability. By engineering strict keyword vetoes into our ingestion taxonomy, the AI pipeline permanently rejects all consumable food, treats, and animal-origin chews—focusing 100% of our catalog on durable gear, calming furniture, smart enrichment, and travel safety.
-            </p>
-          </div>
-
-          {/* Codebase Deep-Dive: Scoring Formula & Real-World Guardrails */}
-          <div className="border-2 border-black bg-[#FAF9F5] p-5 sm:p-6 shadow-[3px_3px_0_0_#000]">
-            <div className="flex items-center gap-2 mb-3">
-              <Cpu size={20} className="text-[#0D2E28]" />
-              <h4 className="font-serif text-lg font-bold text-[#0D2E28]">
-                From the Code: Personalization &amp; Recommendation Engine (api/cron/recommendations)
-              </h4>
-            </div>
-            <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed max-w-3xl">
-              We inspect member preferences in Supabase (<code className="bg-zinc-200 px-1 py-0.5 text-black font-mono text-[11px]">pet_type</code>, <code className="bg-zinc-200 px-1 py-0.5 text-black font-mono text-[11px]">pet_size</code>, <code className="bg-zinc-200 px-1 py-0.5 text-black font-mono text-[11px]">budget_range</code>) and correlate them with real-time user intent signals to calculate an authentic recommendation score:
-            </p>
-
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs">
-              <div className="bg-white border border-black p-3">
-                <span className="text-[10px] text-zinc-500 uppercase block">Interest Match</span>
-                <span className="font-bold text-[#0D2E28] text-sm">+0.30</span>
-                <p className="text-[10px] text-zinc-500 mt-1 font-sans">Category aligns with pet parent preference tags</p>
-              </div>
-              <div className="bg-white border border-black p-3">
-                <span className="text-[10px] text-zinc-500 uppercase block">High Intent Signals</span>
-                <span className="font-bold text-[#0D2E28] text-sm">+0.25</span>
-                <p className="text-[10px] text-zinc-500 mt-1 font-sans">Abandoned in cart or active in member wishlist</p>
-              </div>
-              <div className="bg-white border border-black p-3">
-                <span className="text-[10px] text-zinc-500 uppercase block">AI Quality Score</span>
-                <span className="font-bold text-[#0D2E28] text-sm">+0.10</span>
-                <p className="text-[10px] text-zinc-500 mt-1 font-sans">Weighted against Gemini multimodal visual inspection</p>
-              </div>
-              <div className="bg-white border border-black p-3">
-                <span className="text-[10px] text-zinc-500 uppercase block">Hard Anti-Loop Veto</span>
-                <span className="font-bold text-[#FF462D] text-sm">-1.00</span>
-                <p className="text-[10px] text-zinc-500 mt-1 font-sans">Purchased items never repeated in member feeds</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </SectionWindow>
-
-      {/* Section 05: Information Architecture & User Flows */}
-      <SectionWindow num="05" title="Information Architecture &amp; User Flows">
-        <p className="mx-auto mb-8 max-w-3xl text-center text-sm leading-relaxed text-zinc-600">
-          Four surfaces share one central truth. The shop only displays what has achieved live status. The AI engine can suggest and evaluate. The curation desk signs off. Tailz provides grounded conversational support.
-        </p>
-        <h3 className="mb-3 text-center font-mono text-xs font-black uppercase tracking-wider">Information architecture</h3>
-        <IADiagram root="One live catalog" subtitle="Pending items are invisible to public storefront" columns={weTwoIA} />
-        <h3 className="mb-3 mt-8 text-center font-mono text-xs font-black uppercase tracking-wider">User flows</h3>
-        <UserFlowDiagram flows={weTwoFlows} />
-      </SectionWindow>
-
-      {/* Section 05B: Design Decisions — Why Behind the What */}
-      <SectionWindow num="05b" title="Design Decisions: Why Behind Every Choice">
-        <p className="mb-8 max-w-3xl text-sm leading-relaxed text-zinc-700 sm:text-base">
-          Every constraint in We Two Pets was a design decision — not a technical limitation. Here's the reasoning behind the three biggest calls that shaped the product.
-        </p>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {/* Decision 1 */}
-          <div className="flex flex-col border-2 border-black bg-white shadow-[3px_3px_0_0_#000]">
-            <div className="border-b-2 border-black bg-[#FF462D] px-4 py-3">
-              <p className="font-mono text-[10px] font-black uppercase tracking-widest text-white">Decision 01</p>
-              <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
-                Two human veto votes — not one, not AI alone
-              </h4>
-            </div>
-            <div className="flex flex-1 flex-col p-4">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">User Need</p>
-              <p className="text-xs leading-relaxed text-zinc-700 mb-3">
-                Pet owners buying imported gear for the first time need to trust the curation completely. One approver creates a single point of bias. AI alone creates a single point of hallucination.
-              </p>
-              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
-              <p className="text-xs leading-relaxed text-zinc-700">
-                Two humans must vote &quot;yes&quot; before any product goes live. The AI quality score is advisory — it surfaces candidates, it doesn't publish them. This keeps the human bar the final gate, which is what the brand promise requires.
-              </p>
-            </div>
-          </div>
-
-          {/* Decision 2 */}
-          <div className="flex flex-col border-2 border-black bg-white shadow-[3px_3px_0_0_#000]">
-            <div className="border-b-2 border-black bg-[#0D2E28] px-4 py-3">
-              <p className="font-mono text-[10px] font-black uppercase tracking-widest text-white">Decision 02</p>
-              <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
-                pHash vision check before a product even reaches the desk
-              </h4>
-            </div>
-            <div className="flex flex-1 flex-col p-4">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">Constraint</p>
-              <p className="text-xs leading-relaxed text-zinc-700 mb-3">
-                Indian pet parents lose trust fast if they find the same product cheaper on Amazon.in or HUFT. Title matching failed immediately — the same vest is called a &quot;cooling jacket&quot; on one platform and a &quot;summer coat&quot; on another.
-              </p>
-              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
-              <p className="text-xs leading-relaxed text-zinc-700">
-                Combined perceptual image hashing (pHash) with NLP overlap to catch what titles hide. A hit on any Indian competitor auto-rejects the candidate before a human wastes time reviewing it.
-              </p>
-            </div>
-          </div>
-
-          {/* Decision 3 */}
-          <div className="flex flex-col border-2 border-black bg-white shadow-[3px_3px_0_0_#000]">
-            <div className="border-b-2 border-black bg-black px-4 py-3">
-              <p className="font-mono text-[10px] font-black uppercase tracking-widest text-[#FAED00]">Decision 03</p>
-              <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
-                1-page OTP checkout — no email/password, no redirect to Amazon
-              </h4>
-            </div>
-            <div className="flex flex-1 flex-col p-4">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">User Need</p>
-              <p className="text-xs leading-relaxed text-zinc-700 mb-3">
-                Indian mobile-first shoppers abandon email-password forms. Affiliate redirect to Amazon would have made us a blog with a logo — no order data, no repeat purchase loop, no brand.
-              </p>
-              <p className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
-              <p className="text-xs leading-relaxed text-zinc-700">
-                Built a single-URL checkout flow: cart → phone OTP → Cashfree or COD. Cursor AI + Next.js API routes handled the Cashfree webhook events and OTP verification. We own every order on our domain, which is the whole business model.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <QuoteBlock
-          quote="The AI doesn't publish. Two people vote. A constraint set by the brand promise, not the tech stack — and the architecture follows from that."
-          author="Santhosh A"
-          role="Design Engineer"
-        />
-      </SectionWindow>
-
-      {/* Section 06: Authentic UI Component System */}
-      <SectionWindow num="06" title="Authentic UI Component Library &amp; States" allowOverflow>
-        <div className="space-y-4">
-          <p className="max-w-3xl text-sm leading-relaxed text-zinc-700 sm:text-base">
-            Every component in We Two Pets is engineered with intentional restraint: zero rounded corners, crisp 1px borders, deep forest palettes, and high-readability typography. Explore the live interactive foundations below:
-          </p>
-          <WeTwoPetsDesignSystemSection />
-        </div>
-      </SectionWindow>
-
-      {/* Section 07: Tech Stack and Principles */}
-      <SectionWindow num="07" title="Technology Stack &amp; Architectural Principles">
-        <p className="mb-6 max-w-3xl text-sm leading-relaxed text-zinc-700">
-          Storefront on Next.js with Tailwind CSS. Database, auth, and real-time queues on Supabase. AI pipeline running on FastAPI with Gemini. Payment via Cashfree &amp; COD. Shipping logistics via Shiprocket and transactional alerts via Resend.
-        </p>
-        <StackToolsSkills skills={weTwoSkills} tools={weTwoTools} />
-
-        <div className="mt-8 grid gap-3 md:grid-cols-3">
-          {weTwoPrinciples.map((principle) => (
-            <p key={principle} className="border-2 border-black bg-[#FAF9F5] p-4 text-sm font-semibold leading-relaxed text-zinc-800 shadow-[2px_2px_0_0_#000]">
-              {principle}
-            </p>
-          ))}
-        </div>
-
-        <div className="mt-8 pt-5 border-t-2 border-black flex items-center justify-end">
-          <a
-            href="https://wetwopets.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-3.5 bg-black hover:bg-zinc-800 text-white font-mono font-bold text-xs uppercase tracking-wider shadow-[3px_3px_0_0_#000] transition-colors flex items-center justify-center gap-2"
+      {/* ─── Skim Mode Active Banner ─── */}
+      <AnimatePresence>
+        {skimMode && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="w-full bg-[#0D2E28] text-white px-[clamp(20px,4vw,64px)] py-2.5 font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-between gap-4 select-none sticky top-0 z-30 shadow-md"
           >
-            <ArrowSquareOut size={16} weight="bold" />
-            <span>VISIT LIVE STORE (WETWOPETS.COM)</span>
-          </a>
-        </div>
-      </SectionWindow>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#059669] animate-pulse" />
+              <span>⚡ 60s Skim Reel Active: One-line story beats + key screens</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleSkimToggle(false)}
+              className="px-2.5 py-0.5 bg-white text-black font-black uppercase text-[10px] hover:bg-zinc-100 transition-colors cursor-pointer shrink-0"
+            >
+              Show Full Story
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Section 08: What I Stand Behind */}
-      <SectionWindow num="08" title="What I Stand Behind (Honest Product Scope)">
-        <ul className="space-y-3">
-          {[
-            "Customers check out directly on wetwopets.com. They are never bounced to foreign affiliate dropshipping pages.",
-            "AI agents write strictly to staging queues. Two human approvals are required before any listing goes live.",
-            "Consumable pet foods and treats are excluded to prevent regulatory compliance compromises.",
-            "Order tracking explicitly clarifies the Chennai Quality Hub step and custom unboxing timeline.",
-            "Tailz AI assistant is strictly bound to the live database, preventing price hallucinations.",
-          ].map((line) => (
-            <li key={line} className="border-l-4 border-[#FF462D] pl-3 text-sm font-semibold leading-relaxed text-zinc-800">
-              {line}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-6 border-2 border-dashed border-zinc-400 bg-zinc-50 p-4">
-          <p className="mb-2 font-mono text-[10px] font-black uppercase text-zinc-500">Documented Scope Boundaries</p>
-          <ul className="space-y-1 text-xs font-semibold text-zinc-600">
-            <li>· Pageviews and conversion rates are proprietary and kept private.</li>
-            <li>· Catalog sizes are intentionally restrained to maintain 100% human-verified quality.</li>
-            <li>· No ungrounded LLM customer chat: conversational responses are tied strictly to active orders.</li>
-          </ul>
-        </div>
-      </SectionWindow>
+      {/* ─── RENDER EITHER DEDICATED 6-BEAT SKIM REEL OR FULL STORY ─── */}
+      {skimMode ? (
+        <WeTwoPetsSkimReel onExpandFullStory={() => handleSkimToggle(false)} />
+      ) : (
+        <div className="w-full space-y-0">
+          {/* ─── HERO: Swiss Editorial Display ─── */}
+          <section className="w-full px-[clamp(20px,4vw,64px)] py-10 sm:py-14 md:py-16 bg-white border-b border-black/15 space-y-8 sm:space-y-10">
+            {/* Header Metadata Pill */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-black/15 font-mono text-xs">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#059669]" />
+                <span className="font-black uppercase tracking-wider text-black">
+                  CASE STUDY // 0→1 E-COMMERCE &amp; MULTI-AGENT PIPELINE
+                </span>
+              </div>
+              <span className="px-2.5 py-0.5 bg-[#0D2E28] text-white font-black uppercase tracking-wider text-[10px] border border-black/10">
+                Delhi Luxury Pet Commerce
+              </span>
+            </div>
 
-      {/* Case Study Footer Navigation */}
-      <CaseStudyFooterNav
-        currentTitle="We Two Pets · Intentional Pet Care Commerce"
-        currentSubtitle="Designed & Built by Santhosh A · 0→1 Editorial D2C Brand & AI Sourcing Engine"
-        prev={{
-          company: "Parla Retail · Video Commerce",
-          project: "Show & Sell Assisted Selling",
-          summary: "Bridging retail e-commerce and instant human trust via 1-click scheduling, video consultation, and in-call checkout.",
-          href: "/case-studies/parla-show-and-sell",
-        }}
-        next={{
-          company: "Sivakasi Town · D2C PWA",
-          project: "Vidya's Kitchen PWA",
-          summary: "First-ever home food delivery app in Sivakasi — PWA, kitchen dashboard, driver app, real-time WhatsApp dispatch.",
-          href: "/case-studies/vidyas-kitchen-pwa",
-        }}
-      />
+            {/* Title with Handwritten Cursive Accent */}
+            <div className="space-y-4 max-w-4xl">
+              <h1 className="text-4xl min-[380px]:text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-black leading-[0.9] flex items-baseline flex-wrap gap-2">
+                <span>We Two Pets</span>
+                <span className="font-serif italic lowercase text-2xl sm:text-4xl md:text-5xl text-[#059669] font-normal tracking-normal select-none">
+                  delhi luxury
+                </span>
+                <span className="w-3.5 h-3.5 rounded-full bg-[#059669] shrink-0" />
+              </h1>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-900 leading-snug">
+                “0→1 pet commerce for India: an editorial store, an autonomous sourcing engine, and a 2-human veto desk.”
+              </p>
+            </div>
+
+            {/* Metadata Strip */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 pt-4 pb-4 border-t border-b border-black/15 font-mono text-xs">
+              <div className="space-y-1">
+                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Role</span>
+                <span className="font-black text-black text-xs block">Sole Designer &amp; Full-Stack Builder</span>
+              </div>
+              <div className="space-y-1 md:col-span-2">
+                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold">Team &amp; Ownership</span>
+                <span className="font-bold text-zinc-800 text-xs block">2 Founders · Brand, Autonomous Agents, Curation Desk &amp; Storefront</span>
+                <span className="text-[11px] text-zinc-600 block">Designed &amp; built the multi-model sourcing engine &amp; 1-page checkout</span>
+              </div>
+              <div>
+                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold mb-1.5">Production</span>
+                <a
+                  href="https://www.wetwopets.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#059669] hover:bg-black text-white font-mono text-xs font-black uppercase tracking-wider transition-all shadow-sm border border-black/15 group"
+                >
+                  <span>wetwopets.com</span>
+                  <ArrowUpRight weight="bold" className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </div>
+            </div>
+
+            {/* KPI Strip: 4 Equal Columns, Big Numbers on Hairlines with Green accents */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4 border-t border-black/15 font-mono">
+              <div className="space-y-1 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
+                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+                  3 Agents
+                </span>
+                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                  Autonomous Sourcing
+                </span>
+                <span className="text-[10px] text-[#059669] font-black uppercase tracking-wider block">
+                  Trend, Scraper, &amp; Catalog
+                </span>
+              </div>
+
+              <div className="space-y-1 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
+                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+                  2-Human Desk
+                </span>
+                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                  Approval Threshold
+                </span>
+                <span className="text-[10px] text-[#0D2E28] font-black uppercase tracking-wider block">
+                  Double human margin veto
+                </span>
+              </div>
+
+              <div className="space-y-1 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
+                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+                  0 Drift
+                </span>
+                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                  Brand Protection
+                </span>
+                <span className="text-[10px] text-[#059669] font-black uppercase tracking-wider block">
+                  Zero junk product slip-through
+                </span>
+              </div>
+
+              <div className="space-y-1 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
+                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+                  38+ Guides
+                </span>
+                <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
+                  SEO Trust Engine
+                </span>
+                <span className="text-[10px] text-[#0D2E28] font-black uppercase tracking-wider block">
+                  Organic pet care authority
+                </span>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 01 THE JOURNEY ─── */}
+          <section id="journey" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="01 — THE JOURNEY"
+                  title="THE JOURNEY"
+                  takeaway="Why generic templates fail Indian pet commerce."
+                  accentColor="#059669"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-6">
+                <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-sans">
+                  The job was never to install a Shopify template. Generic e-commerce themes assume every SKU in a supplier CSV is sellable and push checkout to Amazon. We engineered an intentional journey where each stage safeguards trust.
+                </p>
+
+                <QuoteBlock quote="Indian pet retail already looks like an orange marketplace full of knockoffs. Our mandate was an editorial home where only human-vetted products exist." />
+
+                <div className="overflow-x-auto border-t border-b border-black/15">
+                  <table className="w-full min-w-[720px] text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                      <tr className="border-b border-black/20 font-mono uppercase text-[10px] tracking-wider text-zinc-500">
+                        <th className="py-3 pr-3 font-bold">Stage</th>
+                        <th className="py-3 pr-3 font-bold">Goal</th>
+                        <th className="py-3 pr-3 font-bold">Pain Point</th>
+                        <th className="py-3 pr-3 font-bold">What Shipped</th>
+                        <th className="py-3 font-bold">Why a Template Fails</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-zinc-200">
+                      {weTwoJourney.map((row) => (
+                        <tr key={row.stage} className="hover:bg-zinc-50/60 transition-colors align-top">
+                          <td className="py-4 pr-3 font-mono font-black text-[#059669] uppercase text-xs">{row.stage}</td>
+                          <td className="py-4 pr-3 text-zinc-800 font-medium">{row.goal}</td>
+                          <td className="py-4 pr-3 text-zinc-600">{row.pain}</td>
+                          <td className="py-4 pr-3 text-zinc-800 font-medium">{row.shipped}</td>
+                          <td className="py-4 text-zinc-700 bg-zinc-50/40 pl-3">{row.why}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 02 THE STOREFRONT ─── */}
+          <section id="storefront" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="02 — THE STOREFRONT"
+                  title="STOREFRONT"
+                  takeaway="High-contrast editorial commerce with zero marketplace clutter."
+                  accentColor="#0D2E28"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-8">
+                <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-sans">
+                  The live storefront is built on warm ivory tones, serif hierarchy, and deep forest contrast. We intentionally excluded pet food to bypass regulatory gray zones, focusing strictly on functional gear, calming routines, and curated pet lifestyle items.
+                </p>
+
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {shots.map((shot) => (
+                    <Shot key={shot.src} {...shot} />
+                  ))}
+                </div>
+
+                {/* Live Storefront Modules */}
+                <div className="space-y-8 pt-4 border-t border-black/15">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#059669]" />
+                      <span className="font-mono text-xs font-black uppercase tracking-wider text-[#059669]">
+                        LIVE STORE MODULE 01 · TRUST ARCHITECTURE
+                      </span>
+                    </div>
+                    <EditorialTrustBento />
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#0D2E28]" />
+                      <span className="font-mono text-xs font-black uppercase tracking-wider text-[#0D2E28]">
+                        LIVE STORE MODULE 02 · PET CARE GUIDES (&quot;KNOW BEFORE YOU BUY&quot;)
+                      </span>
+                    </div>
+                    <PetCareGuidesShowcase />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 03 THE 3 CHALLENGES ─── */}
+          <section id="challenges" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="03 — THE CHALLENGES"
+                  title="CHALLENGES"
+                  takeaway="Three friction points solved with intentional architecture."
+                  accentColor="#059669"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-6">
+                <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-sans">
+                  Three critical problems defined the product: owning the order directly, engineering a multi-model AI sourcing engine with a human veto gate, and establishing Chennai fulfillment transparency.
+                </p>
+
+                <ChallengeWindowStack challenges={weTwoChallenges} />
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 04 THE AI PIPELINE ─── */}
+          <section id="ai-pipeline" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="04 — THE AI PIPELINE"
+                  title="THE AI ENGINE"
+                  takeaway="Global crawl to Gemini multimodal scoring and human veto."
+                  accentColor="#0D2E28"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-8">
+                <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-sans">
+                  AI is an autonomous operational pipeline at We Two Pets. The engine handles global multi-region crawls, runs multimodal computer vision against Indian competitors, and delivers personalized recommendation feeds for Paws Plus members.
+                </p>
+
+                {/* AI Pipeline 6-Phase Flow Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {weTwoAIFlow.map((item) => (
+                    <div
+                      key={item.step}
+                      className="border border-black/15 bg-zinc-50 p-4 sm:p-5 flex flex-col justify-between hover:bg-white transition-colors"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between border-b border-zinc-200 pb-2 mb-3">
+                          <span className="font-mono text-[10px] font-black uppercase text-[#059669]">
+                            STAGE {item.step}
+                          </span>
+                          <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase">
+                            {item.phase}
+                          </span>
+                        </div>
+                        <h4 className="font-serif text-base font-bold text-[#0D2E28] leading-tight">
+                          {item.title}
+                        </h4>
+                        <p className="mt-2 text-xs leading-relaxed text-zinc-600 font-medium">
+                          {item.desc}
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-dashed border-zinc-200">
+                        <p className="font-mono text-[10px] text-zinc-500">
+                          <strong className="text-zinc-800">Stack:</strong> {item.tech}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Real Multi-Agent Code Snippets & Architecture */}
+                <div className="pt-2">
+                  <div className="flex items-center gap-2 mb-2 font-mono text-[10px] uppercase font-bold tracking-wider text-zinc-500">
+                    <span className="w-2 h-2 bg-[#059669] inline-block" />
+                    <span>PRODUCTION CODEBASE INSPECTION · MULTI-AGENT INGESTION &amp; GOVERNANCE</span>
+                  </div>
+                  <WeTwoPetsCodeShowcase />
+                </div>
+
+                {/* Legal & Regulatory Constraint: The No-Food Policy */}
+                <div className="border border-black/15 bg-zinc-50 p-4 sm:p-5 space-y-2">
+                  <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase text-[#0D2E28]">
+                    <span className="px-2 py-0.5 bg-[#0D2E28] text-white text-[10px] font-black">LEGAL CONSTRAINT</span>
+                    <span>Why We Two Pets Strictly Excluded Pet Food &amp; Treats</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
+                    Importing animal-origin food into India mandates Sanitary Import Permits (SIP) and mandatory AQCS quarantine inspections. Building a brand on gray-market food imports creates severe liability. By engineering strict keyword vetoes into our ingestion taxonomy, the AI pipeline permanently rejects all consumable food, treats, and animal-origin chews—focusing 100% of our catalog on durable gear, calming furniture, smart enrichment, and travel safety.
+                  </p>
+                </div>
+
+                {/* Codebase Deep-Dive: Scoring Formula */}
+                <div className="border border-black/15 bg-zinc-50 p-5 sm:p-6 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <Cpu size={20} className="text-[#059669]" />
+                    <h4 className="font-serif text-lg font-bold text-[#0D2E28]">
+                      From the Code: Personalization &amp; Recommendation Engine (api/cron/recommendations)
+                    </h4>
+                  </div>
+                  <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
+                    We inspect member preferences in Supabase (<code className="bg-zinc-200 px-1 py-0.5 text-black font-mono text-[11px]">pet_type</code>, <code className="bg-zinc-200 px-1 py-0.5 text-black font-mono text-[11px]">pet_size</code>, <code className="bg-zinc-200 px-1 py-0.5 text-black font-mono text-[11px]">budget_range</code>) and correlate them with real-time user intent signals to calculate an authentic recommendation score:
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs">
+                    <div className="bg-white border border-black/15 p-3">
+                      <span className="text-[10px] text-zinc-500 uppercase block">Interest Match</span>
+                      <span className="font-bold text-[#059669] text-sm">+0.30</span>
+                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Category aligns with pet parent preference tags</p>
+                    </div>
+                    <div className="bg-white border border-black/15 p-3">
+                      <span className="text-[10px] text-zinc-500 uppercase block">High Intent Signals</span>
+                      <span className="font-bold text-[#059669] text-sm">+0.25</span>
+                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Abandoned in cart or active in member wishlist</p>
+                    </div>
+                    <div className="bg-white border border-black/15 p-3">
+                      <span className="text-[10px] text-zinc-500 uppercase block">AI Quality Score</span>
+                      <span className="font-bold text-[#059669] text-sm">+0.10</span>
+                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Weighted against Gemini multimodal inspection</p>
+                    </div>
+                    <div className="bg-white border border-black/15 p-3">
+                      <span className="text-[10px] text-zinc-500 uppercase block">Hard Anti-Loop Veto</span>
+                      <span className="font-bold text-[#0D2E28] text-sm">-1.00</span>
+                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Purchased items never repeated in member feeds</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 05 IA & USER FLOWS ─── */}
+          <section id="ia-and-flows" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="05 — ARCHITECTURE"
+                  title="ARCHITECTURE"
+                  takeaway="Clean separation between customer storefront and ops approval desk."
+                  accentColor="#059669"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-8">
+                <p className="text-sm sm:text-base text-zinc-700 leading-relaxed">
+                  Four surfaces share one central truth. The shop only displays what has achieved live status. The AI engine can suggest and evaluate. The curation desk signs off. Tailz provides grounded conversational support.
+                </p>
+
+                <div className="space-y-4">
+                  <h3 className="font-mono text-xs font-black uppercase tracking-wider text-black">
+                    Information Architecture
+                  </h3>
+                  <IADiagram root="One live catalog" subtitle="Pending items are invisible to public storefront" columns={weTwoIA} />
+                </div>
+
+                <div className="space-y-4 pt-4 border-t border-black/15">
+                  <h3 className="font-mono text-xs font-black uppercase tracking-wider text-black">
+                    User Flows
+                  </h3>
+                  <UserFlowDiagram flows={weTwoFlows} />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 06 DESIGN DECISIONS ─── */}
+          <section id="decisions" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="06 — THE DECISIONS"
+                  title="THE DECISIONS"
+                  takeaway="Why behind every choice: brand promises as engineering constraints."
+                  accentColor="#0D2E28"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-6">
+                <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-sans">
+                  Every constraint in We Two Pets was a design decision — not a technical limitation. Here&apos;s the reasoning behind the three biggest calls that shaped the product.
+                </p>
+
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                  {/* Decision 1 */}
+                  <div className="flex flex-col border border-black/15 bg-zinc-50">
+                    <div className="border-b border-black/15 bg-[#059669] px-4 py-3">
+                      <p className="font-mono text-[10px] font-black uppercase tracking-widest text-white">Decision 01</p>
+                      <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
+                        Two human veto votes — not one, not AI alone
+                      </h4>
+                    </div>
+                    <div className="flex flex-1 flex-col p-4 space-y-3">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-1">User Need</p>
+                        <p className="text-xs leading-relaxed text-zinc-700">
+                          Pet owners buying imported gear need to trust curation completely. One approver creates a single point of bias; AI alone creates hallucinations.
+                        </p>
+                      </div>
+                      <div className="pt-2 border-t border-black/10">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
+                        <p className="text-xs leading-relaxed text-zinc-700">
+                          Two humans must vote &quot;yes&quot; before any product goes live. The AI quality score surfaces candidates, but never publishes.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Decision 2 */}
+                  <div className="flex flex-col border border-black/15 bg-zinc-50">
+                    <div className="border-b border-black/15 bg-[#0D2E28] px-4 py-3">
+                      <p className="font-mono text-[10px] font-black uppercase tracking-widest text-white">Decision 02</p>
+                      <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
+                        pHash vision check before human review
+                      </h4>
+                    </div>
+                    <div className="flex flex-1 flex-col p-4 space-y-3">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-1">Constraint</p>
+                        <p className="text-xs leading-relaxed text-zinc-700">
+                          Indian pet parents lose trust fast if they find the same product cheaper on Amazon.in or HUFT. Title matching failed because suppliers rename items.
+                        </p>
+                      </div>
+                      <div className="pt-2 border-t border-black/10">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
+                        <p className="text-xs leading-relaxed text-zinc-700">
+                          Combined perceptual image hashing (pHash) with NLP overlap. Competitor hits auto-reject candidates before humans review them.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Decision 3 */}
+                  <div className="flex flex-col border border-black/15 bg-zinc-50">
+                    <div className="border-b border-black/15 bg-black px-4 py-3">
+                      <p className="font-mono text-[10px] font-black uppercase tracking-widest text-white">Decision 03</p>
+                      <h4 className="mt-1 font-serif text-base font-bold leading-snug text-white">
+                        1-page OTP checkout on our domain
+                      </h4>
+                    </div>
+                    <div className="flex flex-1 flex-col p-4 space-y-3">
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-1">User Need</p>
+                        <p className="text-xs leading-relaxed text-zinc-700">
+                          Indian mobile shoppers abandon email forms. Affiliate redirects to Amazon would have made us a blog with a logo.
+                        </p>
+                      </div>
+                      <div className="pt-2 border-t border-black/10">
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
+                        <p className="text-xs leading-relaxed text-zinc-700">
+                          Single-URL checkout: cart → phone OTP → Cashfree or COD. We own every order on wetwopets.com, protecting repeat purchase loops.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <QuoteBlock
+                  quote="The AI doesn't publish. Two people vote. A constraint set by the brand promise, not the tech stack — and the architecture follows from that."
+                  author="Santhosh A"
+                  role="Design Engineer"
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 07 DESIGN SYSTEM ─── */}
+          <section id="design-system" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="07 — DESIGN SYSTEM"
+                  title="DESIGN SYSTEM"
+                  takeaway="Deep Forest tokens, editorial typography, and component states."
+                  accentColor="#059669"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-4">
+                <p className="text-sm leading-relaxed text-zinc-700 sm:text-base">
+                  Every component in We Two Pets is engineered with intentional restraint: zero rounded corners, crisp 1px borders, deep forest palettes, and high-readability typography. Explore the live interactive foundations below:
+                </p>
+                <WeTwoPetsDesignSystemSection />
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 08 CODE & TECH STACK ─── */}
+          <section id="tech-stack" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="08 — TECH STACK"
+                  title="TECH STACK"
+                  takeaway="Next.js App Router, Supabase queues, and Gemini multimodal vision."
+                  accentColor="#0D2E28"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-6">
+                <p className="text-sm sm:text-base leading-relaxed text-zinc-700">
+                  Storefront on Next.js with Tailwind CSS. Database, auth, and real-time queues on Supabase. AI pipeline running on FastAPI with Gemini. Payment via Cashfree &amp; COD. Shipping logistics via Shiprocket and transactional alerts via Resend.
+                </p>
+
+                <StackToolsSkills skills={weTwoSkills} tools={weTwoTools} />
+
+                <div className="grid gap-3 md:grid-cols-3 pt-2">
+                  {weTwoPrinciples.map((principle) => (
+                    <p key={principle} className="border border-black/15 bg-zinc-50 p-4 text-xs sm:text-sm font-semibold leading-relaxed text-zinc-800">
+                      {principle}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* ─── 09 VERIFIED OUTCOMES ─── */}
+          <section id="outcomes" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-5 lg:sticky lg:top-24">
+                <SectionHeader
+                  eyebrow="09 — OUTCOMES"
+                  title="THE RESULTS"
+                  takeaway="100% direct checkout, zero duplicate imports, and brand trust."
+                  accentColor="#059669"
+                />
+              </div>
+
+              <div className="lg:col-span-7 space-y-6">
+                <ul className="space-y-2.5">
+                  {[
+                    "Customers check out directly on wetwopets.com. They are never bounced to foreign affiliate dropshipping pages.",
+                    "AI agents write strictly to staging queues. Two human approvals are required before any listing goes live.",
+                    "Consumable pet foods and treats are excluded to prevent regulatory compliance compromises.",
+                    "Order tracking explicitly clarifies the Chennai Quality Hub step and custom unboxing timeline.",
+                    "Tailz AI assistant is strictly bound to the live database, preventing price hallucinations.",
+                  ].map((line) => (
+                    <li key={line} className="flex gap-2.5 text-xs sm:text-sm text-zinc-800 bg-zinc-50 p-3 border-l-2 border-[#059669]">
+                      <CheckCircle weight="fill" className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="border border-dashed border-zinc-400 bg-zinc-50 p-4 space-y-2">
+                  <p className="font-mono text-[10px] font-black uppercase text-zinc-500">Documented Scope Boundaries</p>
+                  <ul className="space-y-1 text-xs font-semibold text-zinc-600">
+                    <li>· Pageviews and conversion rates are proprietary and kept private.</li>
+                    <li>· Catalog sizes are intentionally restrained to maintain 100% human-verified quality.</li>
+                    <li>· No ungrounded LLM customer chat: conversational responses are tied strictly to active orders.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {/* Footer Navigation */}
+      <div className="w-full px-[clamp(20px,4vw,64px)] pt-12">
+        <CaseStudyFooterNav
+          currentTitle="We Two Pets · Intentional Pet Care Commerce"
+          currentSubtitle="Designed & Built by Santhosh A · 0→1 Editorial D2C Brand & AI Sourcing Engine"
+          prev={{
+            company: "Parla Retail · Video Commerce",
+            project: "Show & Sell Assisted Selling",
+            summary: "Bridging retail e-commerce and instant human trust via 1-click scheduling, video consultation, and in-call checkout.",
+            href: "/case-studies/parla-show-and-sell",
+          }}
+          next={{
+            company: "Sivakasi Town · D2C PWA",
+            project: "Vidya's Kitchen PWA",
+            summary: "First-ever home food delivery app in Sivakasi — PWA, kitchen dashboard, driver app, real-time WhatsApp dispatch.",
+            href: "/case-studies/vidyas-kitchen-pwa",
+          }}
+        />
+      </div>
     </main>
   );
 }
