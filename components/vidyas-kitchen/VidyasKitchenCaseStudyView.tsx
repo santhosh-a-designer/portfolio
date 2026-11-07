@@ -193,7 +193,7 @@ export default function VidyasKitchenCaseStudyView({
               <h1 className="text-4xl min-[380px]:text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-black leading-[0.9] flex items-baseline flex-wrap gap-2">
                 <span>Vidya&apos;s Kitchen</span>
                 <span className="font-serif italic lowercase text-2xl sm:text-4xl md:text-5xl text-[#BD2320] font-normal tracking-normal select-none">
-                  sivakasi
+                  home kitchen
                 </span>
                 <span className="w-3.5 h-3.5 rounded-full bg-[#BD2320] shrink-0" />
               </h1>
@@ -267,10 +267,10 @@ export default function VidyasKitchenCaseStudyView({
             </div>
 
             {/* KPI Strip: 4 Equal Columns, Big Numbers on Hairlines */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4 border-t border-black/15 font-mono">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-5 border-t border-black/15 font-mono">
               {vidyasSnapshot.kpis.map((kpi, idx) => (
-                <div key={idx} className="space-y-1.5 border-l-2 border-black/20 pl-3 sm:pl-4 min-w-0">
-                  <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+                <div key={idx} className="space-y-1.5 border-l-2 border-black/20 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                  <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
                     {kpi.value}
                   </span>
                   <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">

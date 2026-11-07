@@ -531,9 +531,9 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
             </div>
 
             {/* KPI Strip: 4 Equal Columns, Big Numbers on Hairlines with Blue/Pink accents */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4 border-t border-black/15 font-mono">
-              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
-                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-5 border-t border-black/15 font-mono">
+              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
                   1-Click
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
@@ -544,8 +544,8 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
                 </span>
               </div>
 
-              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
-                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
                   3 Roles
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
@@ -556,8 +556,8 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
                 </span>
               </div>
 
-              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
-                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
                   100% Web
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
@@ -568,9 +568,9 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
                 </span>
               </div>
 
-              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0">
-                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
-                  Live Basket
+              <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
+                  Live Cart
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   Synchronized Cart

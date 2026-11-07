@@ -282,7 +282,7 @@ export default function WeTwoPetsCaseStudyView() {
                 </span>
               </div>
               <span className="px-2.5 py-0.5 bg-[#0D2E28] text-white font-black uppercase tracking-wider text-[10px] border border-black/10">
-                Delhi Luxury Pet Commerce
+                Curated Pet Commerce
               </span>
             </div>
 
@@ -291,7 +291,7 @@ export default function WeTwoPetsCaseStudyView() {
               <h1 className="text-4xl min-[380px]:text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-black leading-[0.9] flex items-baseline flex-wrap gap-2">
                 <span>We Two Pets</span>
                 <span className="font-serif italic lowercase text-2xl sm:text-4xl md:text-5xl text-[#059669] font-normal tracking-normal select-none">
-                  delhi luxury
+                  curated pet gear
                 </span>
                 <span className="w-3.5 h-3.5 rounded-full bg-[#059669] shrink-0" />
               </h1>
@@ -365,9 +365,9 @@ export default function WeTwoPetsCaseStudyView() {
             </div>
 
             {/* KPI Strip: 4 Equal Columns, Big Numbers on Hairlines with Green accents */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-4 border-t border-black/15 font-mono">
-              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
-                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 pt-5 border-t border-black/15 font-mono">
+              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
                   3 Agents
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
@@ -378,20 +378,20 @@ export default function WeTwoPetsCaseStudyView() {
                 </span>
               </div>
 
-              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
-                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
-                  2-Human Desk
+              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
+                  2 Humans
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
-                  Approval Threshold
+                  Human Veto Desk
                 </span>
                 <span className="text-[11px] sm:text-xs text-[#0D2E28] font-black uppercase tracking-wider block">
-                  Double human margin veto
+                  Double margin approval
                 </span>
               </div>
 
-              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
-                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
                   0 Drift
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
@@ -402,8 +402,8 @@ export default function WeTwoPetsCaseStudyView() {
                 </span>
               </div>
 
-              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0">
-                <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
+              <div className="space-y-1.5 border-l-2 border-[#059669]/40 pl-3 sm:pl-4 min-w-0 overflow-hidden">
+                <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
                   38+ Guides
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">

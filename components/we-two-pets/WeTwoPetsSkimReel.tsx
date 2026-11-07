@@ -9,7 +9,7 @@ interface Props {
 
 const WE_TWO_KPIS = [
   { value: "3 Agents", label: "Autonomous Sourcing", highlight: "Trend, Scraper, & Catalog" },
-  { value: "2-Human Desk", label: "Approval Threshold", highlight: "Double human margin veto" },
+  { value: "2 Humans", label: "Human Veto Desk", highlight: "Double margin approval" },
   { value: "0 Drift", label: "Brand Protection", highlight: "Zero junk product slip-through" },
   { value: "38+ Guides", label: "SEO Trust Engine", highlight: "Organic pet care authority" },
 ];
@@ -28,7 +28,7 @@ export default function WeTwoPetsSkimReel({ onExpandFullStory }: Props) {
           </div>
           <div className="flex items-center gap-2">
             <span className="px-2 py-0.5 bg-[#0D2E28] text-white font-black uppercase tracking-wider text-[9px]">
-              Delhi Luxury Pet Commerce
+              Curated Pet Commerce
             </span>
             <a
               href="https://www.wetwopets.com/"
@@ -45,7 +45,7 @@ export default function WeTwoPetsSkimReel({ onExpandFullStory }: Props) {
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight text-black leading-[0.9] flex items-baseline flex-wrap gap-2">
             <span>We Two Pets</span>
             <span className="font-serif italic lowercase text-2xl sm:text-4xl text-[#059669] font-normal tracking-normal select-none">
-              delhi luxury
+              curated pet gear
             </span>
             <span className="w-3 h-3 rounded-full bg-[#059669] shrink-0" />
           </h1>
