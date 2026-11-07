@@ -43,9 +43,19 @@ export default function VidyasSkimReel({ onExpandFullStory }: Props) {
               CASE STUDY // 60-SECOND EXECUTIVE REEL
             </span>
           </div>
-          <span className="px-2 py-0.5 bg-[#FAED00] text-black font-black uppercase tracking-wider text-[9px] border border-black/20">
-            {vidyasSnapshot.firstInMarket}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-0.5 bg-[#FAED00] text-black font-black uppercase tracking-wider text-[9px] border border-black/20">
+              {vidyasSnapshot.firstInMarket}
+            </span>
+            <a
+              href={vidyasSnapshot.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#BD2320] hover:bg-black text-white font-mono text-[10px] font-black uppercase tracking-wider transition-colors shadow-sm"
+            >
+              <span>Live Site ↗</span>
+            </a>
+          </div>
         </div>
 
         <div className="space-y-1.5 max-w-3xl">
@@ -213,7 +223,7 @@ export default function VidyasSkimReel({ onExpandFullStory }: Props) {
             href={vidyasSnapshot.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase text-zinc-600 hover:text-black transition-colors"
+            className="inline-flex items-center gap-1.5 px-4 py-3 border border-black/20 hover:border-black bg-zinc-50 hover:bg-black text-black hover:text-white font-mono text-xs font-black uppercase tracking-wider transition-colors shadow-sm"
           >
             <span>Live site · vidyaskitchenhome.com</span>
             <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />

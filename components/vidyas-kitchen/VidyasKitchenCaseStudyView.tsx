@@ -214,15 +214,15 @@ export default function VidyasKitchenCaseStudyView({
                 <span className="text-[11px] text-zinc-600 block">{vidyasSnapshot.owned}</span>
               </div>
               <div>
-                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold mb-1">Production</span>
+                <span className="text-[10px] text-zinc-400 uppercase tracking-widest block font-bold mb-1.5">Production</span>
                 <a
                   href={vidyasSnapshot.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-bold uppercase text-[#BD2320] hover:text-black transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#BD2320] hover:bg-black text-white font-mono text-xs font-black uppercase tracking-wider transition-all shadow-sm border border-black/15 group"
                 >
                   <span>vidyaskitchenhome.com</span>
-                  <ArrowUpRight weight="bold" className="w-3.5 h-3.5" />
+                  <ArrowUpRight weight="bold" className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </a>
               </div>
             </div>
@@ -234,12 +234,14 @@ export default function VidyasKitchenCaseStudyView({
                   <span className="text-[clamp(28px,3.8vw,56px)] font-black text-black tracking-tight block leading-none whitespace-nowrap">
                     {kpi.value}
                   </span>
-                  <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block">
+                  <span className="text-[11px] sm:text-xs font-bold uppercase text-zinc-700 block leading-snug">
                     {kpi.label}
                   </span>
-                  <span className="text-[10px] text-[#BD2320] font-black uppercase tracking-wider block">
-                    {kpi.change}
-                  </span>
+                  {kpi.change ? (
+                    <span className="text-[10px] text-[#BD2320] font-black uppercase tracking-wider block">
+                      {kpi.change}
+                    </span>
+                  ) : null}
                 </div>
               ))}
             </div>
