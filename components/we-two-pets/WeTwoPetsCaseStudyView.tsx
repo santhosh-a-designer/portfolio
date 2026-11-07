@@ -25,13 +25,13 @@ import {
   weTwoResearch,
   weTwoSkills,
   weTwoTools,
-  weTwoAIFlow,
 } from "@/lib/weTwoPetsCaseStudyContent";
 
 import EditorialTrustBento from "./EditorialTrustBento";
 import PetCareGuidesShowcase from "./PetCareGuidesShowcase";
 import WeTwoPetsDesignSystemSection from "./WeTwoPetsDesignSystemSection";
 import WeTwoPetsCodeShowcase from "./WeTwoPetsCodeShowcase";
+import WeTwoPetsAgentScroller from "./WeTwoPetsAgentScroller";
 import WeTwoPetsSkimReel from "./WeTwoPetsSkimReel";
 import CaseStudyFooterNav from "@/components/CaseStudyFooterNav";
 
@@ -534,54 +534,44 @@ export default function WeTwoPetsCaseStudyView() {
             </div>
           </section>
 
-          {/* ─── 04 THE AI PIPELINE ─── */}
+          {/* ─── 04 AI AGENT SYSTEM // 6 AUTONOMOUS AGENTS ─── */}
           <section id="ai-pipeline" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
+            <div className="space-y-3 max-w-4xl">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#059669]" />
+                <span className="font-mono text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-[#059669]">
+                  04 — AI AGENT SYSTEM
+                </span>
+              </div>
+              <OutlineFillTitle title="6 AI AGENTS" />
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 leading-snug">
+                “How 6 specialized autonomous agents crawl, score, protect margins, and support customers.”
+              </p>
+              <p className="text-base sm:text-lg text-zinc-700 font-sans leading-relaxed pt-1">
+                Rather than treating AI as a generic novelty chatbot, We Two Pets runs an end-to-end multi-agent pipeline. Six specialized agents handle global boutique discovery, multimodal material analysis, marketplace anti-duplication, landed-cost margin calculations, two-human gatekeeping, and grounded customer WhatsApp guidance.
+              </p>
+            </div>
+
+            {/* Scroll-spy Split View: Left sticky directory + Right What We Built & How It Works */}
+            <WeTwoPetsAgentScroller />
+          </section>
+
+          {/* ─── 05 PRODUCTION CODEBASE & CONTRACTS ─── */}
+          <section id="code-production" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-zinc-50 space-y-8 sm:space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-5 lg:sticky lg:top-24">
                 <SectionHeader
-                  eyebrow="04 — THE AI PIPELINE"
-                  title="THE AI ENGINE"
-                  takeaway="Global crawl to Gemini multimodal scoring and human veto."
-                  accentColor="#0D2E28"
+                  eyebrow="05 — PRODUCTION CODEBASE"
+                  title="FROM THE CODE"
+                  takeaway="Real Python &amp; TypeScript contracts, strict JSON schemas, and margin formulas."
+                  accentColor="#059669"
                 />
               </div>
 
               <div className="lg:col-span-7 space-y-8">
                 <p className="text-base sm:text-lg text-zinc-800 leading-relaxed font-sans">
-                  AI is an autonomous operational pipeline at We Two Pets. The engine handles global multi-region crawls, runs multimodal computer vision against Indian competitors, and delivers personalized recommendation feeds for Paws Plus members.
+                  The difference between a prototype and a production agentic system is defensive engineering: cascading fallbacks on 503 timeouts, typed JSON validation schemas, deterministic deduplication hashing, and mathematical margin floors that block pricing errors.
                 </p>
-
-                {/* AI Pipeline 6-Phase Flow Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {weTwoAIFlow.map((item) => (
-                    <div
-                      key={item.step}
-                      className="border border-black/15 bg-zinc-50 p-4 sm:p-5 flex flex-col justify-between hover:bg-white transition-colors"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between border-b border-zinc-200 pb-2 mb-3">
-                          <span className="font-mono text-[10px] font-black uppercase text-[#059669]">
-                            STAGE {item.step}
-                          </span>
-                          <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase">
-                            {item.phase}
-                          </span>
-                        </div>
-                        <h4 className="font-serif text-base font-bold text-[#0D2E28] leading-tight">
-                          {item.title}
-                        </h4>
-                        <p className="mt-2 text-xs leading-relaxed text-zinc-600 font-medium">
-                          {item.desc}
-                        </p>
-                      </div>
-                      <div className="mt-4 pt-3 border-t border-dashed border-zinc-200">
-                        <p className="font-mono text-[10px] text-zinc-500">
-                          <strong className="text-zinc-800">Stack:</strong> {item.tech}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
 
                 {/* Real Multi-Agent Code Snippets & Architecture */}
                 <div className="pt-2">
@@ -593,7 +583,7 @@ export default function WeTwoPetsCaseStudyView() {
                 </div>
 
                 {/* Legal & Regulatory Constraint: The No-Food Policy */}
-                <div className="border border-black/15 bg-zinc-50 p-4 sm:p-5 space-y-2">
+                <div className="border border-black/15 bg-white p-4 sm:p-5 space-y-2">
                   <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase text-[#0D2E28]">
                     <span className="px-2 py-0.5 bg-[#0D2E28] text-white text-[10px] font-black">LEGAL CONSTRAINT</span>
                     <span>Why We Two Pets Strictly Excluded Pet Food &amp; Treats</span>
@@ -604,7 +594,7 @@ export default function WeTwoPetsCaseStudyView() {
                 </div>
 
                 {/* Codebase Deep-Dive: Scoring Formula */}
-                <div className="border border-black/15 bg-zinc-50 p-5 sm:p-6 space-y-4">
+                <div className="border border-black/15 bg-white p-5 sm:p-6 space-y-4">
                   <div className="flex items-center gap-2">
                     <Cpu size={20} className="text-[#059669]" />
                     <h4 className="font-serif text-lg font-bold text-[#0D2E28]">
@@ -616,22 +606,22 @@ export default function WeTwoPetsCaseStudyView() {
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 font-mono text-xs">
-                    <div className="bg-white border border-black/15 p-3">
+                    <div className="bg-zinc-50 border border-black/15 p-3">
                       <span className="text-[10px] text-zinc-500 uppercase block">Interest Match</span>
                       <span className="font-bold text-[#059669] text-sm">+0.30</span>
                       <p className="text-[10px] text-zinc-500 mt-1 font-sans">Category aligns with pet parent preference tags</p>
                     </div>
-                    <div className="bg-white border border-black/15 p-3">
+                    <div className="bg-zinc-50 border border-black/15 p-3">
                       <span className="text-[10px] text-zinc-500 uppercase block">High Intent Signals</span>
                       <span className="font-bold text-[#059669] text-sm">+0.25</span>
                       <p className="text-[10px] text-zinc-500 mt-1 font-sans">Abandoned in cart or active in member wishlist</p>
                     </div>
-                    <div className="bg-white border border-black/15 p-3">
+                    <div className="bg-zinc-50 border border-black/15 p-3">
                       <span className="text-[10px] text-zinc-500 uppercase block">AI Quality Score</span>
                       <span className="font-bold text-[#059669] text-sm">+0.10</span>
                       <p className="text-[10px] text-zinc-500 mt-1 font-sans">Weighted against Gemini multimodal inspection</p>
                     </div>
-                    <div className="bg-white border border-black/15 p-3">
+                    <div className="bg-zinc-50 border border-black/15 p-3">
                       <span className="text-[10px] text-zinc-500 uppercase block">Hard Anti-Loop Veto</span>
                       <span className="font-bold text-[#0D2E28] text-sm">-1.00</span>
                       <p className="text-[10px] text-zinc-500 mt-1 font-sans">Purchased items never repeated in member feeds</p>
@@ -642,12 +632,12 @@ export default function WeTwoPetsCaseStudyView() {
             </div>
           </section>
 
-          {/* ─── 05 IA & USER FLOWS ─── */}
+          {/* ─── 06 IA & USER FLOWS ─── */}
           <section id="ia-and-flows" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-5 lg:sticky lg:top-24">
                 <SectionHeader
-                  eyebrow="05 — ARCHITECTURE"
+                  eyebrow="06 — ARCHITECTURE"
                   title="ARCHITECTURE"
                   takeaway="Clean separation between customer storefront and ops approval desk."
                   accentColor="#059669"
@@ -676,12 +666,12 @@ export default function WeTwoPetsCaseStudyView() {
             </div>
           </section>
 
-          {/* ─── 06 DESIGN DECISIONS ─── */}
+          {/* ─── 07 DESIGN DECISIONS ─── */}
           <section id="decisions" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-5 lg:sticky lg:top-24">
                 <SectionHeader
-                  eyebrow="06 — THE DECISIONS"
+                  eyebrow="07 — THE DECISIONS"
                   title="THE DECISIONS"
                   takeaway="Why behind every choice: brand promises as engineering constraints."
                   accentColor="#0D2E28"
@@ -776,12 +766,12 @@ export default function WeTwoPetsCaseStudyView() {
             </div>
           </section>
 
-          {/* ─── 07 DESIGN SYSTEM ─── */}
+          {/* ─── 08 DESIGN SYSTEM ─── */}
           <section id="design-system" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-5 lg:sticky lg:top-24">
                 <SectionHeader
-                  eyebrow="07 — DESIGN SYSTEM"
+                  eyebrow="08 — DESIGN SYSTEM"
                   title="DESIGN SYSTEM"
                   takeaway="Deep Forest tokens, editorial typography, and component states."
                   accentColor="#059669"
@@ -797,12 +787,12 @@ export default function WeTwoPetsCaseStudyView() {
             </div>
           </section>
 
-          {/* ─── 08 CODE & TECH STACK ─── */}
+          {/* ─── 09 CODE & TECH STACK ─── */}
           <section id="tech-stack" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-5 lg:sticky lg:top-24">
                 <SectionHeader
-                  eyebrow="08 — TECH STACK"
+                  eyebrow="09 — TECH STACK"
                   title="TECH STACK"
                   takeaway="Next.js App Router, Supabase queues, and Gemini multimodal vision."
                   accentColor="#0D2E28"
@@ -827,12 +817,12 @@ export default function WeTwoPetsCaseStudyView() {
             </div>
           </section>
 
-          {/* ─── 09 VERIFIED OUTCOMES ─── */}
+          {/* ─── 10 VERIFIED OUTCOMES ─── */}
           <section id="outcomes" className="w-full scroll-mt-24 px-[clamp(20px,4vw,64px)] py-12 sm:py-16 md:py-20 border-b border-black/15 bg-white space-y-8 sm:space-y-10">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               <div className="lg:col-span-5 lg:sticky lg:top-24">
                 <SectionHeader
-                  eyebrow="09 — OUTCOMES"
+                  eyebrow="10 — OUTCOMES"
                   title="THE RESULTS"
                   takeaway="100% direct checkout, zero duplicate imports, and brand trust."
                   accentColor="#059669"
