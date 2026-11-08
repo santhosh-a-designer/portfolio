@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Globe,
   Cpu,
@@ -8,215 +9,215 @@ import {
   CurrencyInr,
   UsersThree,
   ChatCircleDots,
-  ArrowRight,
   CheckCircle,
   Terminal,
+  ArrowRight,
 } from "@phosphor-icons/react";
 
-export type AgentItem = {
+export type AgentInfo = {
   id: string;
   step: string;
+  index: number;
   name: string;
-  shortName: string;
   category: string;
   role: string;
-  tagline: string;
   icon: typeof Globe;
+  tagline: string;
   whatWeBuilt: string;
   howItWorks: Array<{
-    stepNum: string;
+    num: string;
     title: string;
-    desc: string;
+    detail: string;
   }>;
   stack: string;
   safeguard: string;
 };
 
-export const WE_TWO_AGENTS: AgentItem[] = [
+export const WE_TWO_AGENTS: AgentInfo[] = [
   {
-    id: "agent-sourcing",
+    id: "agent-sourcing-spider",
     step: "01",
+    index: 0,
     name: "Sourcing Spider",
-    shortName: "Spider",
     category: "AUTONOMOUS DISCOVERY",
-    role: "Nightly Multi-Region Discovery Crawler",
-    tagline: "Crawls curated global pet boutiques across 4 continents nightly.",
+    role: "Nightly Multi-Region Crawler",
     icon: Globe,
+    tagline: "Crawls curated global pet boutiques across 4 continents nightly.",
     whatWeBuilt:
-      "Headless Playwright spiders scouting curated pet boutiques across the US, UK, Europe, and Japan. Normalizes foreign catalogs and currencies into a quarantined staging queue with zero direct storefront access.",
+      "Asynchronous crawlers that scout boutique pet manufacturers across the US, UK, and Japan nightly, normalizing foreign multi-currency catalogs into an isolated staging database.",
     howItWorks: [
       {
-        stepNum: "01",
-        title: "Nightly Trigger",
-        desc: "02:00 AM IST scheduled cron dispatches headless crawlers across global boutique supplier domains.",
+        num: "1",
+        title: "Nightly Cron Trigger",
+        detail: "FastAPI headless worker launches across boutique supplier domains at 02:00 AM IST.",
       },
       {
-        stepNum: "02",
-        title: "Spec & FX Extraction",
-        desc: "Parses high-res photography, materials, weight brackets, and multi-currency pricing (USD, EUR, GBP, JPY).",
+        num: "2",
+        title: "DOM & Currency Extraction",
+        detail: "Extracts imagery, materials, dimensions, and converts foreign prices (USD, EUR, JPY) to base FX.",
       },
       {
-        stepNum: "03",
-        title: "Quarantine Queue",
-        desc: "Inserts records into Supabase staging queue with status 'crawled'. Storefront completely ignores pending items.",
+        num: "3",
+        title: "Quarantine Staging Commit",
+        detail: "Writes raw records to private staging tables with zero access to public storefront.",
       },
     ],
-    stack: "FastAPI · Playwright · Python · Supabase",
-    safeguard: "Quarantined Staging: Zero auto-publishing to live storefront.",
+    stack: "FastAPI · Playwright · Supabase Staging Queue",
+    safeguard: "Zero Auto-Publish: Staging queue isolation prevents unvetted crawl data from going live.",
   },
   {
-    id: "agent-gemini",
+    id: "agent-gemini-critic",
     step: "02",
+    index: 1,
     name: "Gemini Vision Critic",
-    shortName: "Gemini",
     category: "MULTIMODAL INGESTION",
-    role: "Material & Safety Quality Scorer",
-    tagline: "Analyzes build materials, ergonomic design, and safety from photography.",
+    role: "Computer Vision & Quality Scorer",
     icon: Cpu,
+    tagline: "Analyzes build materials, ergonomic design, and safety from photography.",
     whatWeBuilt:
-      "Cascading multi-model LLM inspection (Gemini 2.5 Flash → 2.0 → 1.5) governed by strict Pydantic JSON contracts. Inspects multi-angle photography to detect genuine ballistic nylon versus brittle plastic and audits foreign review sentiments.",
+      "A cascading multi-model LLM engine (Gemini 2.5 Flash → 2.0 → 1.5) that inspects product photography for fabric durability and audits reviews for safety risks.",
     howItWorks: [
       {
-        stepNum: "01",
-        title: "Vision Inspection",
-        desc: "Sends multi-angle photos to Gemini Vision to detect stitch density, fastener hardware, and fabric durability.",
+        num: "1",
+        title: "Multimodal Photography Scan",
+        detail: "Sends multi-angle photos to Gemini Vision to detect fabric density, alloys, and stitching quality.",
       },
       {
-        stepNum: "02",
-        title: "Review Sentiment Audit",
-        desc: "Scans foreign customer reviews, penalizing recurring mentions of seam failure, chemical odor, or sizing drift.",
+        num: "2",
+        title: "Customer Review Audit",
+        detail: "Audits foreign customer reviews, penalizing products with recurring seam tears or chemical odors.",
       },
       {
-        stepNum: "03",
-        title: "Typed Contract",
-        desc: "Emits strict JSON with 0–100 quality score, pet size brackets, and seasonal suitability tags.",
+        num: "3",
+        title: "Strict Pydantic Contract",
+        detail: "Outputs typed JSON containing 0–100 quality score, pet size brackets, and seasonal tags.",
       },
     ],
-    stack: "Gemini 2.5 Flash · Pydantic · Python",
-    safeguard: "Schema Strictness: Invalid JSON shapes or timeouts trigger instant cascade or drop.",
+    stack: "Gemini 2.5/2.0 Flash · Pydantic · Python",
+    safeguard: "Schema Strictness: Any LLM response failing the JSON schema is dropped immediately.",
   },
   {
-    id: "agent-veto",
+    id: "agent-marketplace-veto",
     step: "03",
+    index: 2,
     name: "Marketplace Veto",
-    shortName: "Veto",
     category: "ANTI-DUPLICATE GUARD",
-    role: "11-Store Indian Competitor Cross-Check",
-    tagline: "Cross-checks 11 Indian marketplaces to guarantee 100% exclusive gear.",
+    role: "India Market Cross-Reference",
     icon: ShieldCheck,
+    tagline: "Cross-checks 11 Indian marketplaces for 100% catalog exclusivity.",
     whatWeBuilt:
-      "Automated exclusivity engine cross-referencing candidates against 11 Indian marketplaces (Amazon.in, Flipkart, HUFT, Supertails, Zigly). Guarantees We Two Pets never stocks generic mass-market knockoffs.",
+      "A computer vision and fuzzy-matching engine cross-checking candidates against 11 Indian marketplaces (Amazon.in, Flipkart, HUFT, Supertails) to block generic knockoffs.",
     howItWorks: [
       {
-        stepNum: "01",
-        title: "Perceptual Image Hash",
-        desc: "Generates 64-bit perceptual hashes (pHash) capturing structural image geometry regardless of crop or watermark.",
+        num: "1",
+        title: "64-Bit Perceptual Hashing",
+        detail: "Generates pHash fingerprints of candidate images to detect identical items despite watermarks.",
       },
       {
-        stepNum: "02",
+        num: "2",
         title: "Concurrent 11-Store Sweep",
-        desc: "Queries competitor search APIs and catalog indices using fuzzy title n-grams and brand lookups.",
+        detail: "Queries domestic catalog indices and APIs using fuzzy keyword n-grams and barcodes.",
       },
       {
-        stepNum: "03",
-        title: "Hard Exclusivity Veto",
-        desc: "Hamming distance ≤ 6 or title overlap > 85% marks candidate 'rejected_domestic_duplicate'.",
+        num: "3",
+        title: "Instant Hard Veto",
+        detail: "Auto-rejects candidates if Hamming distance ≤ 6 or title similarity exceeds 85%.",
       },
     ],
     stack: "pHash Image Hashing · Fuzzy NLP · Competitor APIs",
-    safeguard: "Exclusivity Gate: Domestic hits are rejected before humans even review them.",
+    safeguard: "100% Exclusivity: Generic mass-market knockoffs are permanently pruned before review.",
   },
   {
-    id: "agent-pricing",
+    id: "agent-pricing-engine",
     step: "04",
-    name: "Pricing Engine",
-    shortName: "Pricing",
+    index: 3,
+    name: "Landed-Cost Pricing",
     category: "FINANCIAL GOVERNANCE",
-    role: "Dynamic Margin & Festival Calendar Guard",
-    tagline: "Calculates true landed costs in INR and enforces gross margin floors.",
+    role: "Dynamic Margin & Festival Guard",
     icon: CurrencyInr,
+    tagline: "Calculates true landed costs in INR and enforces gross margin floors.",
     whatWeBuilt:
-      "Automated pricing engine that converts foreign wholesale costs into profitable INR retail prices. Factors in live forex rates, air freight per kilogram, customs duties, and Chennai unboxing QC, while flexing with Indian festival demand.",
+      "An automated financial calculation engine converting foreign unit costs into profitable INR prices, factoring in freight, customs duty, and Indian festival promotions.",
     howItWorks: [
       {
-        stepNum: "01",
-        title: "Landed Cost Formula",
-        desc: "Derives true landed cost in INR: Supplier Cost × FX + Air Freight + Customs (18% GST) + Hub QC.",
+        num: "1",
+        title: "True Landed Cost Formula",
+        detail: "Derives landed cost factoring real-time forex, weight-bracket air freight, and 18% GST.",
       },
       {
-        stepNum: "02",
-        title: "Festival Demand Tuning",
-        desc: "Modulates markup based on an active Indian calendar (e.g. Diwali promo: 0.92×, Monsoon gear: 1.05×).",
+        num: "2",
+        title: "Festival Demand Modifier",
+        detail: "Flexes markups with an active cultural calendar (e.g. Diwali volume promo, Monsoon surge).",
       },
       {
-        stepNum: "03",
-        title: "Margin Guard Floor",
-        desc: "Mathematical floor guarantees prices never drop below the minimum gross margin threshold.",
+        num: "3",
+        title: "Mathematical Margin Floor",
+        detail: "Guarantees final price never drops below gross margin threshold, rounding to clean endings (₹2,499).",
       },
     ],
-    stack: "Python · Live FX Exchange API · India Festival Rules",
-    safeguard: "Margin Floor: Mathematical constraint guarantees unit profitability.",
+    stack: "Python · Live FX Exchange API · India Festival Calendar",
+    safeguard: "Margin Guard Floor: Mathematical constraint prevents pricing below unit profitability.",
   },
   {
-    id: "agent-curation",
+    id: "agent-curation-desk",
     step: "05",
-    name: "Curation Desk",
-    shortName: "Curation",
+    index: 4,
+    name: "Two-Human Curation",
     category: "HUMAN-IN-THE-LOOP",
-    role: "Dual-Key Human Approval Gate",
-    tagline: "Every SKU requires 2 independent human sign-offs before live launch.",
+    role: "Dual-Curator Veto Gate",
     icon: UsersThree,
+    tagline: "Every SKU requires 2 independent human sign-offs before live launch.",
     whatWeBuilt:
-      "High-density private review desk where automated AI recommendations must pass two independent human sign-offs. Even a 98/100 Gemini score remains completely invisible until both curators approve aesthetics, freight dimensions, and margin.",
+      "A dual-curator review desk where automated AI recommendations must receive two human approvals before any product appears on wetwopets.com.",
     howItWorks: [
       {
-        stepNum: "01",
-        title: "Ranked Staging Queue",
-        desc: "Curators view prioritized batches sorted by Gemini quality score, computed margin %, and exclusivity.",
+        num: "1",
+        title: "Ranked Review Queue",
+        detail: "Curators view prioritized batches sorted by AI score, detected materials, and computed margin %.",
       },
       {
-        stepNum: "02",
-        title: "Dual Human Sign-Off",
-        desc: "Curator 1 evaluates tactile curation and brand fit; Curator 2 checks supplier reliability and packaging.",
+        num: "2",
+        title: "Independent Sign-Off",
+        detail: "Curator 1 verifies aesthetic curation; Curator 2 verifies freight dimensions and margin feasibility.",
       },
       {
-        stepNum: "03",
-        title: "Live Storefront Release",
-        desc: "Only when both votes are affirmative does Supabase atomically update product status to 'live'.",
+        num: "3",
+        title: "Atomic Catalog Promotion",
+        detail: "Product status flips to 'live' in Supabase only when vote count equals 2.",
       },
     ],
-    stack: "Next.js 16 · Supabase RLS · Dual-Key Logic",
-    safeguard: "0% Autonomous Drift: Humans hold 100% publication control over every SKU.",
+    stack: "Next.js 16 · Supabase RLS · Dual-Key Approval Logic",
+    safeguard: "0% Autonomous Drift: AI only suggests and filters; humans hold 100% publication control.",
   },
   {
-    id: "agent-tailz",
+    id: "agent-tailz-assistant",
     step: "06",
+    index: 5,
     name: "Tailz WhatsApp Agent",
-    shortName: "Tailz",
     category: "CONVERSATIONAL COMMERCE",
-    role: "Grounded Mobile Support & 1-Tap Reorder",
-    tagline: "WhatsApp assistant grounded exclusively in live orders and published catalog.",
+    role: "Grounded Support & Reorder",
     icon: ChatCircleDots,
+    tagline: "WhatsApp assistant grounded in live orders and published catalog.",
     whatWeBuilt:
-      "WhatsApp commerce assistant grounded strictly in live Supabase order webhooks and the published catalog. Built for mobile shoppers to track parcels, clarify sizing, and reorder in under 300 characters without hallucinatory output.",
+      "A conversational commerce assistant operating on WhatsApp Business API, answering delivery questions, sizing queries, and reorders in under 300 characters.",
     howItWorks: [
       {
-        stepNum: "01",
-        title: "WhatsApp Message Ingestion",
-        desc: "Customer asks for order status (e.g. 'Where is my parcel?') or size advice on WhatsApp.",
+        num: "1",
+        title: "WhatsApp Webhook Trigger",
+        detail: "Ingests incoming customer messages via WhatsApp Cloud API webhook listener.",
       },
       {
-        stepNum: "02",
-        title: "Database Context Match",
-        desc: "Resolves customer phone number against Supabase order records and pet breed profile.",
+        num: "2",
+        title: "Grounded Database Lookup",
+        detail: "Queries Supabase for customer phone number to retrieve active order state or live catalog items.",
       },
       {
-        stepNum: "03",
-        title: "Action Card Response",
-        desc: "Delivers concise response with live courier tracking link or verified size recommendation card.",
+        num: "3",
+        title: "Instant Action Card",
+        detail: "Sends concise message with live tracking link or 1-tap Cashfree checkout card without hallucination.",
       },
     ],
-    stack: "Next.js /api/chat · WhatsApp Cloud API · Supabase Webhooks",
+    stack: "Next.js /api/chat · WhatsApp Cloud API · Supabase Orders",
     safeguard: "Grounded Context: Cannot browse the open web or invent delivery timelines.",
   },
 ];
@@ -225,6 +226,28 @@ export default function WeTwoPetsAgentScroller() {
   const [activeIdx, setActiveIdx] = useState(0);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+  // Update active index based on scroll position using getBoundingClientRect
+  useEffect(() => {
+    const handleScroll = () => {
+      const triggerY = window.innerHeight * 0.5; // middle of viewport
+      let currentIdx = 0;
+
+      cardRefs.current.forEach((el, idx) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= triggerY) {
+          currentIdx = idx;
+        }
+      });
+
+      setActiveIdx(currentIdx);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const activeAgent = WE_TWO_AGENTS[activeIdx] || WE_TWO_AGENTS[0];
   const ActiveIcon = activeAgent.icon;
 
@@ -232,7 +255,7 @@ export default function WeTwoPetsAgentScroller() {
     setActiveIdx(idx);
     const target = cardRefs.current[idx];
     if (target) {
-      const topOffset = 120;
+      const topOffset = 110;
       const elementPosition = target.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - topOffset;
       window.scrollTo({
@@ -242,96 +265,86 @@ export default function WeTwoPetsAgentScroller() {
     }
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 280;
-
-      cardRefs.current.forEach((el, idx) => {
-        if (!el) return;
-        const top = el.offsetTop;
-        const height = el.offsetHeight;
-
-        if (scrollPosition >= top && scrollPosition < top + height) {
-          setActiveIdx(idx);
-        }
-      });
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div className="w-full">
-      {/* ─── DESKTOP SCROLLYTELLING SPLIT VIEW (≥ 1024px) ─── */}
+      {/* ─── DESKTOP SCROLLYTELLING (Sticky Left Title + Scrolling Right Cards) ─── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-        {/* ─── LEFT: PINNED STICKY TITLE (Changes smoothly as user scrolls) ─── */}
-        <div className="hidden lg:block lg:col-span-5 lg:sticky lg:top-28 space-y-6">
-          {/* Agent Category & Counter */}
-          <div className="space-y-2 border-b border-black/15 pb-4 font-mono">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-black uppercase tracking-widest text-[#059669]">
-                {activeAgent.category}
-              </span>
-              <span className="text-zinc-400 font-bold">
-                {activeAgent.step} / 06
+        {/* ─── LEFT: Sticky Title (Pinned in place, changes on scroll) ─── */}
+        <div className="hidden lg:block lg:col-span-5 lg:sticky lg:top-28 space-y-6 font-mono">
+          <div className="space-y-4">
+            {/* Step Counter & Category Pill */}
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#059669] animate-pulse" />
+              <span className="text-xs font-black uppercase tracking-widest text-[#059669]">
+                AGENT {activeAgent.step} OF 06 // {activeAgent.category}
               </span>
             </div>
 
-            {/* Dynamic Sticky Agent Name */}
-            <div className="space-y-1.5 pt-1 transition-all duration-300">
-              <div className="flex items-center gap-2.5">
-                <ActiveIcon size={26} className="text-[#059669] shrink-0" />
-                <h3 className="text-3xl sm:text-4xl font-black uppercase text-black tracking-tight leading-none">
+            {/* Dynamic Sticky Title with Morphing Transition */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeAgent.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.22, ease: "easeOut" }}
+                className="space-y-3"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-4xl sm:text-5xl font-black text-black">
+                    {activeAgent.step}
+                  </span>
+                  <ActiveIcon size={36} weight="bold" className="text-[#059669]" />
+                </div>
+
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase tracking-tight text-black leading-[0.95]">
                   {activeAgent.name}
                 </h3>
+
+                <p className="text-sm font-sans text-zinc-600 font-medium leading-relaxed pt-1">
+                  “{activeAgent.tagline}”
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Pipeline Step Tracker Pills */}
+            <div className="pt-4 border-t border-black/15">
+              <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 block mb-2">
+                MULTI-AGENT PIPELINE PROGRESS
+              </span>
+              <div className="grid grid-cols-6 gap-1.5">
+                {WE_TWO_AGENTS.map((agent, idx) => {
+                  const isActive = activeIdx === idx;
+                  return (
+                    <button
+                      key={agent.id}
+                      type="button"
+                      onClick={() => scrollToAgent(idx)}
+                      className={`py-1.5 px-1 text-center font-mono text-xs font-black transition-all cursor-pointer border ${
+                        isActive
+                          ? "bg-[#0D2E28] text-[#059669] border-[#0D2E28] shadow-xs"
+                          : "bg-white text-zinc-400 border-black/15 hover:border-black/40 hover:text-black"
+                      }`}
+                    >
+                      {agent.step}
+                    </button>
+                  );
+                })}
               </div>
-              <p className="font-mono text-xs font-bold text-zinc-500 uppercase tracking-wide">
-                {activeAgent.role}
-              </p>
             </div>
-          </div>
 
-          {/* Dynamic One-Line Tagline */}
-          <div className="border-l-2 border-[#059669] pl-3 py-1">
-            <p className="font-serif text-base italic text-zinc-700 leading-snug">
-              “{activeAgent.tagline}”
-            </p>
-          </div>
-
-          {/* Quick-Jump Step Indicators */}
-          <div className="space-y-2 pt-2">
-            <span className="font-mono text-[10px] font-black uppercase tracking-widest text-zinc-400 block">
-              PIPELINE PROGRESSION
-            </span>
-            <div className="grid grid-cols-6 gap-1.5 font-mono">
-              {WE_TWO_AGENTS.map((agent, idx) => {
-                const isActive = activeIdx === idx;
-                return (
-                  <button
-                    key={agent.id}
-                    type="button"
-                    onClick={() => scrollToAgent(idx)}
-                    className={`py-2 px-1 text-center border text-[11px] font-black transition-all cursor-pointer ${
-                      isActive
-                        ? "bg-[#0D2E28] text-[#059669] border-[#0D2E28] shadow-xs"
-                        : "bg-white text-zinc-500 border-black/15 hover:border-black/40 hover:text-black"
-                    }`}
-                    title={agent.name}
-                  >
-                    {agent.step}
-                  </button>
-                );
-              })}
+            {/* Verification Note */}
+            <div className="p-3 bg-zinc-50 border border-black/10 text-[11px] font-sans text-zinc-600">
+              <strong className="font-mono font-bold text-black block mb-0.5">
+                Autonomous with Human Gate:
+              </strong>
+              Each agent operates independently within strict contract boundaries. No product ever reaches the storefront without dual curator approval.
             </div>
-            <p className="font-mono text-[10px] text-zinc-400 leading-tight">
-              Scrolls down naturally or click 01–06 to jump.
-            </p>
           </div>
         </div>
 
-        {/* ─── RIGHT: LEAN, BITE-SIZED AGENT CARDS ─── */}
-        <div className="lg:col-span-7 space-y-12 sm:space-y-16">
+        {/* ─── RIGHT: Concise, Short Agent Cards (Scrolls naturally) ─── */}
+        <div className="lg:col-span-7 space-y-10 sm:space-y-14">
           {WE_TWO_AGENTS.map((agent, idx) => {
             const Icon = agent.icon;
             const isActive = activeIdx === idx;
@@ -343,77 +356,69 @@ export default function WeTwoPetsAgentScroller() {
                 ref={(el) => {
                   cardRefs.current[idx] = el;
                 }}
-                className={`scroll-mt-28 border bg-white transition-all ${
-                  isActive
-                    ? "border-black shadow-md ring-1 ring-black/10"
-                    : "border-black/20 shadow-xs"
+                className={`border bg-white transition-all scroll-mt-28 ${
+                  isActive ? "border-black shadow-md" : "border-black/20 shadow-xs"
                 }`}
               >
-                {/* ─── MOBILE STICKY PUSH HEADER (< 1024px) ─── */}
-                {/* Pinned to top of phone screen; pushed out when next agent arrives */}
-                <div className="lg:hidden sticky top-14 z-20 bg-white/95 backdrop-blur border-b border-black/15 px-4 py-2.5 flex items-center justify-between font-mono shadow-xs">
+                {/* ─── Mobile Sticky Push Header (Option 1) ─── */}
+                <div className="lg:hidden sticky top-14 z-10 bg-white/95 backdrop-blur border-b border-black/15 p-3 sm:p-4 flex items-center justify-between font-mono">
                   <div className="flex items-center gap-2 min-w-0">
-                    <span className="px-1.5 py-0.5 bg-[#0D2E28] text-white text-[10px] font-black shrink-0">
+                    <span className="px-2 py-0.5 bg-[#0D2E28] text-white font-black text-xs shrink-0">
                       {agent.step}
                     </span>
                     <Icon size={16} className="text-[#059669] shrink-0" />
-                    <span className="text-xs font-black uppercase text-black truncate">
+                    <span className="text-xs sm:text-sm font-black uppercase text-black truncate">
                       {agent.name}
                     </span>
                   </div>
-                  <span className="text-[10px] font-black text-[#059669] uppercase tracking-wider shrink-0">
-                    {agent.step} / 06
+                  <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-wider shrink-0">
+                    {agent.category}
                   </span>
                 </div>
 
-                {/* Desktop Card Header Bar */}
-                <div className="hidden lg:flex items-center justify-between p-4 border-b border-black/10 bg-zinc-50/80 font-mono text-xs">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 bg-[#0D2E28] text-white font-black text-[11px]">
-                      STAGE {agent.step}
+                {/* Card Content: Concise & Bite-Sized */}
+                <div className="p-5 sm:p-7 space-y-5 sm:space-y-6">
+                  {/* Desktop Card Header Tag */}
+                  <div className="hidden lg:flex items-center justify-between pb-3 border-b border-black/10 font-mono text-xs">
+                    <span className="text-zinc-500 font-bold uppercase">
+                      ROLE // {agent.role}
                     </span>
-                    <span className="font-black uppercase text-black">
-                      {agent.name}
+                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-emerald-50 text-emerald-800 text-[10px] font-black uppercase tracking-wider border border-emerald-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#059669] animate-pulse" />
+                      Active Engine
                     </span>
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#059669] flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#059669] animate-pulse" />
-                    Active Pipeline
-                  </span>
-                </div>
 
-                {/* Card Body: Punchy & Concise */}
-                <div className="p-5 sm:p-6 space-y-5">
                   {/* 1. What We Built (1-2 sentences) */}
                   <div className="space-y-1.5">
                     <span className="font-mono text-[10px] font-black uppercase tracking-wider text-[#059669] block">
                       WHAT WE BUILT
                     </span>
-                    <p className="text-sm sm:text-base font-sans text-zinc-900 leading-relaxed font-medium">
+                    <p className="text-sm sm:text-base text-zinc-900 font-sans leading-relaxed font-medium">
                       {agent.whatWeBuilt}
                     </p>
                   </div>
 
-                  {/* 2. How It Works (3 clear bullet steps) */}
-                  <div className="space-y-2 pt-2 border-t border-black/10 font-mono">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-zinc-500 block">
+                  {/* 2. How It Works (3 quick bullet steps) */}
+                  <div className="space-y-2.5 pt-1">
+                    <span className="font-mono text-[10px] font-black uppercase tracking-wider text-black block">
                       HOW IT WORKS
                     </span>
                     <div className="space-y-2">
-                      {agent.howItWorks.map((hw) => (
+                      {agent.howItWorks.map((item) => (
                         <div
-                          key={hw.stepNum}
-                          className="flex items-start gap-2.5 bg-zinc-50 p-2.5 sm:p-3 border-l-2 border-[#059669]"
+                          key={item.num}
+                          className="flex items-start gap-3 bg-zinc-50 p-3 border border-black/10 text-xs"
                         >
-                          <span className="text-xs font-black text-[#059669] shrink-0 mt-0.5">
-                            {hw.stepNum}.
+                          <span className="w-5 h-5 rounded-full bg-[#0D2E28] text-white font-mono font-black text-[10px] flex items-center justify-center shrink-0 mt-0.5">
+                            {item.num}
                           </span>
-                          <div className="text-xs space-y-0.5">
-                            <strong className="text-black uppercase block tracking-wide">
-                              {hw.title}
+                          <div className="space-y-0.5 min-w-0">
+                            <strong className="font-mono text-[11px] font-bold text-black uppercase block">
+                              {item.title}
                             </strong>
                             <p className="text-zinc-600 font-sans leading-snug">
-                              {hw.desc}
+                              {item.detail}
                             </p>
                           </div>
                         </div>
@@ -421,14 +426,15 @@ export default function WeTwoPetsAgentScroller() {
                     </div>
                   </div>
 
-                  {/* 3. Tech Stack & Safeguard Footnote */}
-                  <div className="pt-3 border-t border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 font-mono text-[11px]">
-                    <div className="text-zinc-600">
-                      <strong className="text-black">Stack: </strong>
+                  {/* 3. Footer Meta (Stack + Safeguard) */}
+                  <div className="pt-3 border-t border-black/10 font-mono text-[11px] space-y-1.5">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-zinc-600">
+                      <strong className="text-black uppercase">Stack:</strong>
                       <span>{agent.stack}</span>
                     </div>
-                    <div className="text-[#059669] font-bold">
-                      <span>✓ {agent.safeguard}</span>
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-zinc-600">
+                      <strong className="text-[#059669] uppercase">Safeguard:</strong>
+                      <span>{agent.safeguard}</span>
                     </div>
                   </div>
                 </div>
