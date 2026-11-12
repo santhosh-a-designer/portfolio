@@ -21,19 +21,19 @@ interface ExperienceItem {
 const experiences: ExperienceItem[] = [
   {
     num: "01",
-    role: "CO-FOUNDER & DESIGN ENGINEER",
+    role: "PRODUCT DESIGN DEVELOPMENT ENGINEER",
     company: "COMMERCE AGENTS",
-    period: "2025 – PRESENT",
-    location: "GLOBAL / REMOTE",
+    period: "OCT 2025 – AUG 2026",
+    location: "CHENNAI, INDIA / REMOTE",
     isHighlight: true,
     isCurrent: true,
-    description: "Co-founded and led a team of 5 (3 interns, 1 client-acquisition consultant); owned product design, UX and frontend engineering.",
+    description: "Owned end-to-end product design, UX architecture, and frontend engineering across production web applications and design systems.",
     highlights: [
-      "Vidya's Kitchen: Designed & shipped Sivakasi's first food ordering PWA and automated kitchen ops with 0% marketplace commission vs. delivery-app fees",
-      "We Two Pets: Architected editorial pet platform (wetwopets.com) with autonomous AI gap engine & human verification",
-      "iRasus & IndiaOne ATM: Built EV pack telemetry and dual-role rural ATM replenishment apps reducing downtime",
+      "Vidya's Kitchen: Designed & shipped production web ordering platform with 1-tap reordering and 0% marketplace commission built with code and AI",
+      "We Two Pets: Architected editorial pet platform (wetwopets.com) with autonomous 6-agent AI product curation pipeline",
+      "iRasus & IndiaOne ATM: Built real-time EV battery telemetry dashboards and rural ATM replenishment management consoles",
     ],
-    skills: ["0→1 Product UX", "Next.js", "Design Systems", "AI Workflows", "TypeScript", "Tailwind CSS"],
+    skills: ["Product Engineering", "Next.js", "Design Systems", "AI Workflows", "TypeScript", "Tailwind CSS"],
   },
   {
     num: "02",
