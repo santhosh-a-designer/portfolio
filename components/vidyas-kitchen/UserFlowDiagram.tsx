@@ -196,7 +196,8 @@ export default function UserFlowDiagram({ flows }: Props) {
 
       <div
         key={replayKey}
-        className="overflow-x-auto border-2 border-black bg-[#FAF9F5] p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:p-4"
+        data-lenis-prevent="true"
+        className="overflow-x-auto border-2 border-black bg-[#FAF9F5] p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] sm:p-4 touch-pan-x"
         style={{
           opacity: entered ? 1 : 0,
           transform: entered ? "translateY(0)" : "translateY(8px)",

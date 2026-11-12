@@ -228,13 +228,16 @@ function EditorPanel({
   const filename = node?.name ?? "welcome.md";
 
   return (
-    <div className="flex flex-col min-h-0 h-full bg-[#1e1e1e] border-l border-[#3c3c3c] overflow-hidden">
-      <div className="flex items-center gap-1 px-2 py-1.5 bg-[#252526] border-b border-[#3c3c3c] overflow-x-auto shrink-0">
+    <div className="flex flex-col min-h-0 h-full bg-[#1e1e1e] border-l border-[#3c3c3c] overflow-hidden" data-lenis-prevent="true">
+      <div className="flex items-center gap-1 px-2 py-1.5 bg-[#252526] border-b border-[#3c3c3c] overflow-x-auto shrink-0" data-lenis-prevent="true">
         <span className="px-3 py-1 bg-[#1e1e1e] text-[#cccccc] text-[11px] border-t-2 border-[#007acc] whitespace-nowrap font-mono font-bold">
           {filename}
         </span>
       </div>
-      <div className="flex-1 min-h-0 p-4 font-mono text-[11px] sm:text-xs leading-relaxed overflow-y-auto overflow-x-auto touch-pan-y [scrollbar-width:thin] [scrollbar-color:#555_#1e1e1e]">
+      <div 
+        data-lenis-prevent="true"
+        className="flex-1 min-h-0 p-4 font-mono text-[11px] sm:text-xs leading-relaxed overflow-y-auto overflow-x-auto touch-pan-y overscroll-contain [scrollbar-width:thin] [scrollbar-color:#555_#1e1e1e] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-[#1e1e1e] [&::-webkit-scrollbar-thumb]:bg-[#4a4a4a] hover:[&::-webkit-scrollbar-thumb]:bg-[#666] [&::-webkit-scrollbar-thumb]:rounded"
+      >
         {!node && <p className="text-[#858585]">Select a file in the explorer →</p>}
         {lines.slice(0, lineCount).map((line, i) => (
           <div key={i} className="whitespace-pre-wrap break-words">
@@ -312,6 +315,7 @@ export default function ArchitectureExplorer({ tree }: Props) {
 
       <div
         ref={ref}
+        data-lenis-prevent="true"
         className="rounded border-2 border-black overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
       >
         <div className="flex items-center gap-2 px-3 py-2 bg-[#323233] border-b border-[#3c3c3c]">
@@ -322,12 +326,13 @@ export default function ArchitectureExplorer({ tree }: Props) {
         </div>
 
         <div className="grid grid-cols-1 grid-rows-[220px_1fr] md:grid-rows-1 md:grid-cols-[minmax(240px,36%)_1fr] min-h-0 h-[520px] md:h-[480px]">
-          <div className="bg-[#252526] border-b md:border-b-0 md:border-r border-[#3c3c3c] flex flex-col min-h-0 h-full overflow-hidden">
+          <div className="bg-[#252526] border-b md:border-b-0 md:border-r border-[#3c3c3c] flex flex-col min-h-0 h-full overflow-hidden" data-lenis-prevent="true">
             <p className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#bbbbbb] shrink-0 bg-[#252526] border-b border-[#333]">
               Explorer
             </p>
             <div 
-              className="flex-1 min-h-0 overflow-y-auto py-2 touch-pan-y overscroll-contain select-none [scrollbar-width:thin] [scrollbar-color:#666_#252526]" 
+              data-lenis-prevent="true"
+              className="flex-1 min-h-0 overflow-y-auto py-2 touch-pan-y overscroll-contain select-none [scrollbar-width:thin] [scrollbar-color:#666_#252526] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-[#252526] [&::-webkit-scrollbar-thumb]:bg-[#555] hover:[&::-webkit-scrollbar-thumb]:bg-[#777] [&::-webkit-scrollbar-thumb]:rounded" 
               role="tree"
             >
               {displayRows.map((row) => (
