@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function ForEngineersSection({ designSystemPdfMeta }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <section id="engineers" className="scroll-mt-24 border-t border-b sm:border border-black/20 bg-zinc-900 text-white select-none">

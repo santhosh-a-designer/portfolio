@@ -218,7 +218,7 @@ export default function OrderSyncRules({ rules }: Props) {
           })}
         </div>
 
-        <div className="px-4 py-2 bg-[#FAED00] border-t-2 border-black font-mono text-[10px] font-bold uppercase tracking-wide space-y-1">
+        <div className="px-4 py-2 bg-[#FAED00] text-black border-t-2 border-black font-mono text-[10px] font-bold uppercase tracking-wide space-y-1">
           <p>{rules.illustrationNote}</p>
           <p className="text-zinc-700 normal-case font-normal">
             Four KEY marks: never create an order · never set a price · write only after confirm · one row for every surface
