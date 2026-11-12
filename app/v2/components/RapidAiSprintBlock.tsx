@@ -65,7 +65,7 @@ export default function RapidAiSprintBlock() {
             <div className="text-[11px] text-white/80 uppercase tracking-wider">AI Prompt Toolchain</div>
           </div>
           <div className="p-3 bg-black/30 border border-white/20 backdrop-blur-sm">
-            <div className="text-xl sm:text-2xl font-black text-[#FAED00] leading-none mb-1">100% Pan-India</div>
+            <div className="text-xl sm:text-2xl font-black text-[#FAED00] leading-none mb-1">Pan-India</div>
             <div className="text-[11px] text-white/80 uppercase tracking-wider">AWS Initiative Live</div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function RapidAiSprintBlock() {
                 [T] TASK
               </div>
               <p className="text-xs sm:text-[13px] font-sans text-zinc-800 leading-relaxed">
-                Overhaul the outdated layout into a modern, mobile-first admissions portal. Strip friction from multi-step registration forms, guarantee lightning-fast load times for low-bandwidth learners, and deploy without missing the 1-day launch window.
+                Overhaul the outdated layout into a modern, mobile-first admissions portal. Strip friction from multi-step registration forms, ensure fast load times for low-bandwidth learners, and deploy without missing the 1-day launch window.
               </p>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function RapidAiSprintBlock() {
                 [R] RESULT
               </div>
               <p className="text-xs sm:text-[13px] font-sans text-zinc-800 leading-relaxed">
-                Launched within 24 hours at <strong>cultusedu.com/aws-restart</strong>. The streamlined admissions funnel successfully captured <strong>10,000+ student applications across India</strong> with zero downtime or transaction drop-offs.
+                Launched within 24 hours at <strong>cultusedu.com/aws-restart</strong>. The streamlined admissions funnel successfully captured <strong>10,000+ student applications across India</strong> with high uptime and stable submission flow.
               </p>
             </div>
           </div>

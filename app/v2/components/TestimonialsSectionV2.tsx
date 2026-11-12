@@ -168,7 +168,7 @@ export default function TestimonialsSectionV2() {
               TRUSTED BY ENGINEERING MANAGERS, PRODUCT LEADERS &amp; JUNIOR DESIGNERS ALIKE.
             </span>
             <span className="font-mono text-[11px] text-[#FAED00] font-black uppercase tracking-wider">
-              100% RECOMMENDATION RATE
+              VERIFIED RECOMMENDATIONS
             </span>
           </div>
         </div>

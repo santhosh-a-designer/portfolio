@@ -151,7 +151,7 @@ const shots = [
     src: "/case-studies/we-two-pets/shop.jpg",
     alt: "We Two Pets shop grid with exclusive-import badges and rupee prices.",
     label: "Shop",
-    caption: "A short grid. Exclusive imports are marked on the card. Anything still pending never reaches this page.",
+    caption: "A short grid. Exclusive imports are marked on the card. Anything still pending does not reach this page.",
   },
   {
     src: "/case-studies/we-two-pets/product.jpg",
@@ -281,20 +281,30 @@ export default function WeTwoPetsCaseStudyView() {
                   CASE STUDY // 0→1 E-COMMERCE &amp; MULTI-AGENT PIPELINE
                 </span>
               </div>
-              <span className="px-2.5 py-0.5 bg-[#0D2E28] text-white font-black uppercase tracking-wider text-[10px] border border-black/10">
-                Curated Pet Commerce
-              </span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="px-2.5 py-0.5 bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold uppercase tracking-wider text-[10px]">
+                  Live. In marketing phase, not yet widely launched.
+                </span>
+                <span className="px-2.5 py-0.5 bg-[#0D2E28] text-white font-black uppercase tracking-wider text-[10px] border border-black/10">
+                  Curated Pet Commerce
+                </span>
+              </div>
             </div>
 
             {/* Title with Handwritten Cursive Accent */}
             <div className="space-y-4 max-w-4xl">
-              <h1 className="text-4xl min-[380px]:text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-black leading-[0.9] flex items-baseline flex-wrap gap-2">
-                <span>We Two Pets</span>
-                <span className="font-serif italic lowercase text-2xl sm:text-4xl md:text-5xl text-[#059669] font-normal tracking-normal select-none">
-                  curated pet gear
-                </span>
-                <span className="w-3.5 h-3.5 rounded-full bg-[#059669] shrink-0" />
-              </h1>
+              <div className="space-y-1">
+                <h1 className="text-4xl min-[380px]:text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tight text-black leading-[0.9] flex items-baseline flex-wrap gap-2">
+                  <span>We Two Pets</span>
+                  <span className="font-serif italic lowercase text-2xl sm:text-4xl md:text-5xl text-[#059669] font-normal tracking-normal select-none">
+                    curated pet gear
+                  </span>
+                  <span className="w-3.5 h-3.5 rounded-full bg-[#059669] shrink-0" />
+                </h1>
+                <p className="text-xs sm:text-sm font-mono font-bold text-[#059669] uppercase tracking-wider pt-1">
+                  Showcase: how I built six AI agents.
+                </p>
+              </div>
               <p className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-900 leading-snug">
                 “0→1 pet commerce for India: an editorial store, an autonomous sourcing engine, and a 2-human veto desk.”
               </p>
@@ -318,6 +328,9 @@ export default function WeTwoPetsCaseStudyView() {
                     <span className="w-1.5 h-1.5 rounded-full bg-[#059669]" />
                     <span>0→1 Brand &amp; Multi-Agent Pipeline Architect</span>
                   </div>
+                  <p className="text-xs text-zinc-600 font-sans font-medium mt-1">
+                    Designed in Figma. Built with AI-assisted engineering.
+                  </p>
                 </div>
 
                 {/* 2. TEAM & OWNERSHIP */}
@@ -398,7 +411,7 @@ export default function WeTwoPetsCaseStudyView() {
                   Brand Protection
                 </span>
                 <span className="text-[11px] sm:text-xs text-[#059669] font-black uppercase tracking-wider block">
-                  Zero junk product slip-through
+                  Strict quality curation gate
                 </span>
               </div>
 
@@ -470,7 +483,7 @@ export default function WeTwoPetsCaseStudyView() {
                 <SectionHeader
                   eyebrow="02 — THE STOREFRONT"
                   title="STOREFRONT"
-                  takeaway="High-contrast editorial commerce with zero marketplace clutter."
+                  takeaway="High-contrast editorial commerce without marketplace clutter."
                   accentColor="#0D2E28"
                 />
               </div>
@@ -589,7 +602,7 @@ export default function WeTwoPetsCaseStudyView() {
                     <span>Why We Two Pets Strictly Excluded Pet Food &amp; Treats</span>
                   </div>
                   <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed">
-                    Importing animal-origin food into India mandates Sanitary Import Permits (SIP) and mandatory AQCS quarantine inspections. Building a brand on gray-market food imports creates severe liability. By engineering strict keyword vetoes into our ingestion taxonomy, the AI pipeline permanently rejects all consumable food, treats, and animal-origin chews—focusing 100% of our catalog on durable gear, calming furniture, smart enrichment, and travel safety.
+                    Importing animal-origin food into India mandates Sanitary Import Permits (SIP) and mandatory AQCS quarantine inspections. Building a brand on gray-market food imports creates severe liability. By engineering strict keyword vetoes into our ingestion taxonomy, the AI pipeline permanently rejects all consumable food, treats, and animal-origin chews—focusing our catalog entirely on durable gear, calming furniture, smart enrichment, and travel safety.
                   </p>
                 </div>
 
@@ -624,7 +637,7 @@ export default function WeTwoPetsCaseStudyView() {
                     <div className="bg-zinc-50 border border-black/15 p-3">
                       <span className="text-[10px] text-zinc-500 uppercase block">Hard Anti-Loop Veto</span>
                       <span className="font-bold text-[#0D2E28] text-sm">-1.00</span>
-                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Purchased items never repeated in member feeds</p>
+                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Purchased items filtered from member recommendation feeds</p>
                     </div>
                   </div>
                 </div>
@@ -702,7 +715,7 @@ export default function WeTwoPetsCaseStudyView() {
                       <div className="pt-2 border-t border-black/10">
                         <p className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 mb-1">The Call</p>
                         <p className="text-xs leading-relaxed text-zinc-700">
-                          Two humans must vote &quot;yes&quot; before any product goes live. The AI quality score surfaces candidates, but never publishes.
+                          Two humans must vote &quot;yes&quot; before any product goes live. The AI quality score surfaces candidates; only humans can publish.
                         </p>
                       </div>
                     </div>
@@ -824,7 +837,7 @@ export default function WeTwoPetsCaseStudyView() {
                 <SectionHeader
                   eyebrow="10 — OUTCOMES"
                   title="THE RESULTS"
-                  takeaway="100% direct checkout, zero duplicate imports, and brand trust."
+                  takeaway="Direct checkout, duplicate checks via image hashing and title matching, and brand trust."
                   accentColor="#059669"
                 />
               </div>
@@ -832,11 +845,11 @@ export default function WeTwoPetsCaseStudyView() {
               <div className="lg:col-span-7 space-y-6">
                 <ul className="space-y-2.5">
                   {[
-                    "Customers check out directly on wetwopets.com. They are never bounced to foreign affiliate dropshipping pages.",
+                    "Customers check out directly on wetwopets.com without redirects to foreign affiliate dropshipping pages.",
                     "AI agents write strictly to staging queues. Two human approvals are required before any listing goes live.",
                     "Consumable pet foods and treats are excluded to prevent regulatory compliance compromises.",
                     "Order tracking explicitly clarifies the Chennai Quality Hub step and custom unboxing timeline.",
-                    "Tailz AI assistant is strictly bound to the live database, preventing price hallucinations.",
+                    "Tailz AI assistant: answers grounded in live order and catalog data; every listing needs 2 human approvals.",
                   ].map((line) => (
                     <li key={line} className="flex gap-2.5 text-xs sm:text-sm text-zinc-800 bg-zinc-50 p-3 border-l-2 border-[#059669]">
                       <CheckCircle weight="fill" className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
@@ -849,7 +862,7 @@ export default function WeTwoPetsCaseStudyView() {
                   <p className="font-mono text-[10px] font-black uppercase text-zinc-500">Documented Scope Boundaries</p>
                   <ul className="space-y-1 text-xs font-semibold text-zinc-600">
                     <li>· Pageviews and conversion rates are proprietary and kept private.</li>
-                    <li>· Catalog sizes are intentionally restrained to maintain 100% human-verified quality.</li>
+                    <li>· Catalog sizes are intentionally restrained to maintain human-verified quality.</li>
                     <li>· No ungrounded LLM customer chat: conversational responses are tied strictly to active orders.</li>
                   </ul>
                 </div>

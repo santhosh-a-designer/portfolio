@@ -1055,7 +1055,7 @@ export default function VidyasDesignSystemModal({
                                       ? "bg-blue-100 text-blue-800 border border-blue-300"
                                       : "bg-amber-100 text-amber-800 border border-amber-300"
                                   }`}>
-                                    {grade.includes("AAA") ? "WCAG AAA" : grade.includes("AA") ? "WCAG AA" : "BRAND ACCENT"}
+                                    {grade.includes("AAA") ? "WCAG AA+" : grade.includes("AA") ? "WCAG AA" : "BRAND ACCENT"}
                                   </span>
                                 </div>
                               </button>

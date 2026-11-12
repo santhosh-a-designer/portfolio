@@ -278,8 +278,12 @@ export default function ServicesAndFooterV2() {
                         ENGINEERING<br />PRODUCT<br />EXPERIENCES.
                       </h2>
 
-                      <p className="text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-black/90 leading-relaxed max-w-lg mb-4 sm:mb-6 font-sans">
+                      <p className="text-[11px] sm:text-xs md:text-sm font-bold uppercase tracking-wider text-black/90 leading-relaxed max-w-lg mb-3 sm:mb-4 font-sans">
                         BRIDGING END-TO-END PRODUCT DESIGN, INTERACTION ARCHITECTURE, AND PRODUCTION-READY FRONTEND CODE FOR VENTURES &amp; ENTERPRISES.
+                      </p>
+
+                      <p className="text-[10px] sm:text-[11px] md:text-xs font-mono font-bold text-zinc-900 leading-relaxed max-w-lg mb-4 sm:mb-6 border-l-2 border-black pl-2 sm:pl-3 bg-black/5 py-1">
+                        Design systems, reusable components, responsive and accessible UI, usability testing, AI-assisted frontend engineering, workflow-heavy B2B products.
                       </p>
                     </div>
 

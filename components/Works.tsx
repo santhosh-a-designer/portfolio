@@ -73,7 +73,7 @@ const projects: Project[] = [
       { value: "TS", label: "Stack" },
     ],
     icon: DeviceMobile,
-    accentColor: "#CC1C1C",
+    accentColor: "#BD2320",
     status: "in-progress",
     slug: "vidyas-kitchen-pwa",
   },

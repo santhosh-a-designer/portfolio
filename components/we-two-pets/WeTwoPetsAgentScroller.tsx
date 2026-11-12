@@ -35,11 +35,11 @@ export type AgentInfo = {
 
 export const WE_TWO_AGENTS: AgentInfo[] = [
   {
-    id: "agent-sourcing-spider",
+    id: "agent-hunter",
     step: "01",
     index: 0,
-    name: "Sourcing Spider",
-    category: "AUTONOMOUS DISCOVERY",
+    name: "Hunter",
+    category: "AUTONOMOUS SOURCING",
     role: "Nightly Multi-Region Crawler",
     icon: Globe,
     tagline: "Crawls curated global pet boutiques across 4 continents nightly.",
@@ -59,54 +59,85 @@ export const WE_TWO_AGENTS: AgentInfo[] = [
       {
         num: "3",
         title: "Quarantine Staging Commit",
-        detail: "Writes raw records to private staging tables with zero access to public storefront.",
+        detail: "Writes raw records to private staging tables with no direct access to public storefront.",
       },
     ],
     stack: "FastAPI · Playwright · Supabase Staging Queue",
-    safeguard: "Zero Auto-Publish: Staging queue isolation prevents unvetted crawl data from going live.",
+    safeguard: "Staging Queue Isolation: Prevents unvetted crawl data from reaching the live storefront.",
   },
   {
-    id: "agent-gemini-critic",
+    id: "agent-discovery",
     step: "02",
     index: 1,
-    name: "Gemini Vision Critic",
-    category: "MULTIMODAL INGESTION",
-    role: "Computer Vision & Quality Scorer",
+    name: "Discovery Agent",
+    category: "CATALOG INGESTION",
+    role: "Trend Discovery & Spec Normalizer",
     icon: Cpu,
-    tagline: "Analyzes build materials, ergonomic design, and safety from photography.",
+    tagline: "Normalizes foreign multi-currency specs and imagery into staging.",
     whatWeBuilt:
-      "A cascading multi-model LLM engine (Gemini 2.5 Flash → 2.0 → 1.5) that inspects product photography for fabric durability and audits reviews for safety risks.",
+      "Ingestion worker extracting product dimensions, fabric specifications, weight brackets, and high-resolution media from discovered boutique catalogs.",
     howItWorks: [
       {
         num: "1",
-        title: "Multimodal Photography Scan",
-        detail: "Sends multi-angle photos to Gemini Vision to detect fabric density, alloys, and stitching quality.",
+        title: "Catalog Ingestion Queue",
+        detail: "Pulls newly scraped items from quarantine staging for schema validation and taxonomy mapping.",
       },
       {
         num: "2",
-        title: "Customer Review Audit",
-        detail: "Audits foreign customer reviews, penalizing products with recurring seam tears or chemical odors.",
+        title: "Pydantic Schema Parsing",
+        detail: "Enforces strict type safety across sizing, breed compatibility, and material compositions.",
       },
       {
         num: "3",
-        title: "Strict Pydantic Contract",
-        detail: "Outputs typed JSON containing 0–100 quality score, pet size brackets, and seasonal tags.",
+        title: "Candidate Packaging",
+        detail: "Prepares structured payload ready for multimodal quality analysis and anti-duplicate checks.",
       },
     ],
-    stack: "Gemini 2.5/2.0 Flash · Pydantic · Python",
-    safeguard: "Schema Strictness: Any LLM response failing the JSON schema is dropped immediately.",
+    stack: "Python · Pydantic · Supabase Tables",
+    safeguard: "Schema Strictness: Any raw import failing schema validation is dropped immediately.",
   },
   {
-    id: "agent-marketplace-veto",
+    id: "agent-international-hunter",
     step: "03",
     index: 2,
-    name: "Marketplace Veto",
-    category: "ANTI-DUPLICATE GUARD",
-    role: "India Market Cross-Reference",
-    icon: ShieldCheck,
-    tagline: "Cross-checks 11 Indian marketplaces for 100% catalog exclusivity.",
+    name: "International Hunter",
+    category: "GLOBAL BOUTIQUE SCOUT",
+    role: "Artisanal Manufacturer Scout",
+    icon: Globe,
+    tagline: "Scouts boutique manufacturers across the US, UK, and Japan.",
     whatWeBuilt:
-      "A computer vision and fuzzy-matching engine cross-checking candidates against 11 Indian marketplaces (Amazon.in, Flipkart, HUFT, Supertails) to block generic knockoffs.",
+      "Targeted crawler focused specifically on design-forward overseas brands not distributed in South Asia, filtering out generic wholesale aggregator listings.",
+    howItWorks: [
+      {
+        num: "1",
+        title: "Artisanal Brand Domain Registry",
+        detail: "Maintains a curated seed list of 80+ independent pet design studios in Japan, UK, and North America.",
+      },
+      {
+        num: "2",
+        title: "Anti-Wholesale Heuristics",
+        detail: "Detects and discards bulk marketplace listings, dropship patterns, and non-certified workshops.",
+      },
+      {
+        num: "3",
+        title: "Export Logistics Pre-Check",
+        detail: "Verifies parcel weight and shipping dimensions against air courier cargo restrictions.",
+      },
+    ],
+    stack: "Headless Browser Automation · Domain Heuristics · Forex API",
+    safeguard: "Boutique Filter: Prioritizes independent artisanal brands over mass commercial suppliers.",
+  },
+  {
+    id: "agent-gap-compare",
+    step: "04",
+    index: 3,
+    name: "Gap Compare",
+    category: "INDIA-AVAILABILITY VETO",
+    role: "Marketplace Gap & Exclusivity Filter",
+    icon: ShieldCheck,
+    tagline: "Cross-checks 11 Indian marketplaces for product exclusivity.",
+    whatWeBuilt:
+      "A computer vision and fuzzy-matching engine cross-checking candidates against 11 Indian marketplaces (Amazon.in, Flipkart, HUFT, Supertails) to block items already sold locally.",
     howItWorks: [
       {
         num: "1",
@@ -124,16 +155,47 @@ export const WE_TWO_AGENTS: AgentInfo[] = [
         detail: "Auto-rejects candidates if Hamming distance ≤ 6 or title similarity exceeds 85%.",
       },
     ],
-    stack: "pHash Image Hashing · Fuzzy NLP · Competitor APIs",
-    safeguard: "100% Exclusivity: Generic mass-market knockoffs are permanently pruned before review.",
+    stack: "pHash Image Hashing · Fuzzy NLP · Domestic Marketplace APIs",
+    safeguard: "Exclusivity Check: Duplicate checks via image hashing and title matching prune items before review.",
   },
   {
-    id: "agent-pricing-engine",
-    step: "04",
-    index: 3,
-    name: "Landed-Cost Pricing",
+    id: "agent-verification",
+    step: "05",
+    index: 4,
+    name: "Verification Agent",
+    category: "MULTIMODAL SCORING",
+    role: "Gemini 2.x Flash Quality Critic",
+    icon: Cpu,
+    tagline: "Analyzes build materials, ergonomic design, and safety from photography.",
+    whatWeBuilt:
+      "Gemini 2.x Flash (multimodal scoring) engine that inspects product photography for build materials, dimensions, and audits reviews for safety risks.",
+    howItWorks: [
+      {
+        num: "1",
+        title: "Multimodal Photography Scan",
+        detail: "Sends multi-angle photos to Gemini 2.x Flash to detect fabric density, alloys, and stitching quality.",
+      },
+      {
+        num: "2",
+        title: "Customer Review Audit",
+        detail: "Audits foreign customer reviews, penalizing products with recurring seam tears or chemical odors.",
+      },
+      {
+        num: "3",
+        title: "Strict Pydantic Contract",
+        detail: "Outputs typed JSON containing 0–100 quality score, pet size brackets, and seasonal tags.",
+      },
+    ],
+    stack: "Gemini 2.x Flash (multimodal scoring) · Pydantic · Python",
+    safeguard: "Human Review Hand-off: The AI vote does not count and a person presses launch; every listing needs 2 human approvals.",
+  },
+  {
+    id: "agent-margin-guard",
+    step: "06",
+    index: 5,
+    name: "Margin Guard",
     category: "FINANCIAL GOVERNANCE",
-    role: "Dynamic Margin & Festival Guard",
+    role: "Landed-Cost & Margin Floor Calculator",
     icon: CurrencyInr,
     tagline: "Calculates true landed costs in INR and enforces gross margin floors.",
     whatWeBuilt:
@@ -152,73 +214,11 @@ export const WE_TWO_AGENTS: AgentInfo[] = [
       {
         num: "3",
         title: "Mathematical Margin Floor",
-        detail: "Guarantees final price never drops below gross margin threshold, rounding to clean endings (₹2,499).",
+        detail: "Enforces that the computed price remains above the gross margin floor, rounding to clean endings (₹2,499).",
       },
     ],
     stack: "Python · Live FX Exchange API · India Festival Calendar",
     safeguard: "Margin Guard Floor: Mathematical constraint prevents pricing below unit profitability.",
-  },
-  {
-    id: "agent-curation-desk",
-    step: "05",
-    index: 4,
-    name: "Two-Human Curation",
-    category: "HUMAN-IN-THE-LOOP",
-    role: "Dual-Curator Veto Gate",
-    icon: UsersThree,
-    tagline: "Every SKU requires 2 independent human sign-offs before live launch.",
-    whatWeBuilt:
-      "A dual-curator review desk where automated AI recommendations must receive two human approvals before any product appears on wetwopets.com.",
-    howItWorks: [
-      {
-        num: "1",
-        title: "Ranked Review Queue",
-        detail: "Curators view prioritized batches sorted by AI score, detected materials, and computed margin %.",
-      },
-      {
-        num: "2",
-        title: "Independent Sign-Off",
-        detail: "Curator 1 verifies aesthetic curation; Curator 2 verifies freight dimensions and margin feasibility.",
-      },
-      {
-        num: "3",
-        title: "Atomic Catalog Promotion",
-        detail: "Product status flips to 'live' in Supabase only when vote count equals 2.",
-      },
-    ],
-    stack: "Next.js 16 · Supabase RLS · Dual-Key Approval Logic",
-    safeguard: "0% Autonomous Drift: AI only suggests and filters; humans hold 100% publication control.",
-  },
-  {
-    id: "agent-tailz-assistant",
-    step: "06",
-    index: 5,
-    name: "Tailz WhatsApp Agent",
-    category: "CONVERSATIONAL COMMERCE",
-    role: "Grounded Support & Reorder",
-    icon: ChatCircleDots,
-    tagline: "WhatsApp assistant grounded in live orders and published catalog.",
-    whatWeBuilt:
-      "A conversational commerce assistant operating on WhatsApp Business API, answering delivery questions, sizing queries, and reorders in under 300 characters.",
-    howItWorks: [
-      {
-        num: "1",
-        title: "WhatsApp Webhook Trigger",
-        detail: "Ingests incoming customer messages via WhatsApp Cloud API webhook listener.",
-      },
-      {
-        num: "2",
-        title: "Grounded Database Lookup",
-        detail: "Queries Supabase for customer phone number to retrieve active order state or live catalog items.",
-      },
-      {
-        num: "3",
-        title: "Instant Action Card",
-        detail: "Sends concise message with live tracking link or 1-tap Cashfree checkout card without hallucination.",
-      },
-    ],
-    stack: "Next.js /api/chat · WhatsApp Cloud API · Supabase Orders",
-    safeguard: "Grounded Context: Cannot browse the open web or invent delivery timelines.",
   },
 ];
 
@@ -441,6 +441,16 @@ export default function WeTwoPetsAgentScroller() {
               </div>
             );
           })}
+
+          {/* Planned Agents Roadmap Note */}
+          <div className="p-4 sm:p-5 border-2 border-dashed border-emerald-600/40 bg-emerald-50/50 font-mono text-xs space-y-1.5 mt-6">
+            <span className="text-[#059669] font-black uppercase tracking-wider block text-[10px]">
+              AGENT ROADMAP // PLANNED EXTENSIONS
+            </span>
+            <p className="text-zinc-800 font-sans leading-relaxed">
+              <strong>Broker</strong> and <strong>Oracle</strong> are planned for automated international air-freight consolidation and dynamic vendor supplier negotiations. Tailz support API and conversational agent are built; web widget not yet mounted on the storefront.
+            </p>
+          </div>
         </div>
       </div>
     </div>

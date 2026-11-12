@@ -28,7 +28,7 @@ export default function EditorialTrustBento() {
       {/* Prototype / Spec Disclaimer Bar */}
       <div className="bg-[#FAF9F5] border-b border-black/10 px-4 py-1 flex items-center justify-between text-[9px] font-mono uppercase text-zinc-500 select-none">
         <span>// UI Spec &amp; Design System Bento Canvas</span>
-        <span className="font-bold text-zinc-700">[Sample Storefront Copy / Prototype Spec]</span>
+        <span className="font-bold text-zinc-700">[Illustrative storefront copy]</span>
       </div>
 
       {/* Bento Grid Canvas */}
@@ -44,7 +44,7 @@ export default function EditorialTrustBento() {
                 1,200+
               </p>
               <p className="text-sm font-semibold text-zinc-700 mt-1">Happy families</p>
-              <span className="text-[9px] font-mono text-zinc-400 block mt-1 uppercase">[Design prototype sample copy]</span>
+              <span className="text-[9px] font-mono text-zinc-400 block mt-1 uppercase">[Illustrative storefront copy]</span>
             </div>
             <p className="font-serif italic text-xs text-zinc-500 mt-6 pt-3 border-t border-black/10">
               “Pets and people, thriving together.”
@@ -63,7 +63,7 @@ export default function EditorialTrustBento() {
                 4.5
               </p>
               <p className="text-xs text-zinc-300 mt-1">Average rating</p>
-              <span className="text-[9px] font-mono text-emerald-300/70 block mt-1 uppercase">[Storefront prototype spec]</span>
+              <span className="text-[9px] font-mono text-emerald-300/70 block mt-1 uppercase">[Illustrative storefront copy]</span>
             </div>
 
             {/* Golden Retriever Image with bone */}
@@ -79,8 +79,9 @@ export default function EditorialTrustBento() {
             <div className="relative z-10 mt-6">
               <p className="font-serif italic text-xs text-white">Every product tested</p>
               <span className="font-mono text-[9px] font-black tracking-widest uppercase text-emerald-400 block mt-0.5">
-                100% VET-REVIEWED
+                VET-REVIEWED
               </span>
+              <span className="text-[8px] font-mono text-emerald-300/70 block uppercase mt-0.5">[Illustrative storefront copy]</span>
               <div className="w-28 h-1 bg-emerald-500/30 rounded-full mt-1.5 overflow-hidden">
                 <div className="w-full h-full bg-emerald-400" />
               </div>
@@ -103,8 +104,9 @@ export default function EditorialTrustBento() {
               <p>Not one more than necessary.</p>
               <p>Not one less than exceptional.</p>
               <p className="font-sans text-[11px] text-zinc-400 pt-1 font-normal">
-                Every product was tested for a minimum of 30 days before listing.
+                Every product tested before listing.
               </p>
+              <span className="text-[8px] font-mono text-zinc-400 block uppercase">[Illustrative storefront copy]</span>
             </div>
           </div>
 
@@ -175,6 +177,7 @@ export default function EditorialTrustBento() {
                 <ShieldCheck size={16} className="text-emerald-700 shrink-0" weight="bold" />
               </div>
             </div>
+            <div className="px-3 pb-1 text-[8px] font-mono text-zinc-400 uppercase">[Illustrative storefront copy]</div>
 
             {/* Pug peeking over dark ledge */}
             <div className="relative h-24 sm:h-28 w-full bg-[#0D2E28] flex items-end justify-center select-none">

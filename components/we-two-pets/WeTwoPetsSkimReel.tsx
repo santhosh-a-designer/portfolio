@@ -10,7 +10,7 @@ interface Props {
 const WE_TWO_KPIS = [
   { value: "3 Agents", label: "Autonomous Sourcing", highlight: "Trend, Scraper, & Catalog" },
   { value: "2 Humans", label: "Human Veto Desk", highlight: "Double margin approval" },
-  { value: "0 Drift", label: "Brand Protection", highlight: "Zero junk product slip-through" },
+  { value: "0 Drift", label: "Brand Protection", highlight: "Strict quality curation gate" },
   { value: "38+ Guides", label: "SEO Trust Engine", highlight: "Organic pet care authority" },
 ];
 
@@ -162,7 +162,7 @@ export default function WeTwoPetsSkimReel({ onExpandFullStory }: Props) {
                     Outcome
                   </span>
                   <p className="text-xs font-bold text-zinc-900 leading-snug">
-                    Zero duplicate imports or low-quality items ever reach the live customer catalog.
+                    Duplicate checks via image hashing and title matching ensure catalog exclusivity; answers are grounded in live order and catalog data, and every listing needs 2 human approvals.
                   </p>
                 </div>
               </div>
@@ -196,7 +196,7 @@ export default function WeTwoPetsSkimReel({ onExpandFullStory }: Props) {
                     Outcome
                   </span>
                   <p className="text-xs font-bold text-zinc-900 leading-snug">
-                    Customers pay directly on wetwopets.com with zero checkout hops to third-party sites.
+                    Customers pay directly on wetwopets.com without checkout redirects to third-party sites.
                   </p>
                 </div>
               </div>
@@ -289,18 +289,18 @@ export default function WeTwoPetsSkimReel({ onExpandFullStory }: Props) {
         <div className="border-t border-b border-black/20 divide-y divide-black/15 font-mono">
           <div className="py-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-2">
             <span className="text-lg sm:text-xl font-black text-black tracking-tight whitespace-nowrap">
-              100% Direct Checkout
+              Direct Checkout
             </span>
             <span className="text-xs text-zinc-600 font-sans sm:text-right">
-              Zero affiliate leakage to Amazon or Flipkart; orders processed on domain.
+              Direct on-domain checkout without third-party affiliate redirects.
             </span>
           </div>
           <div className="py-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-2">
             <span className="text-lg sm:text-xl font-black text-black tracking-tight whitespace-nowrap">
-              0 Duplicate Imports
+              Duplicate Curation Gate
             </span>
             <span className="text-xs text-zinc-600 font-sans sm:text-right">
-              Vision hashing auto-rejects items already sold by Indian retailers.
+              Duplicate checks via image hashing and title matching filter existing retailer items.
             </span>
           </div>
           <div className="py-3 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 sm:gap-2">

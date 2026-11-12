@@ -499,7 +499,7 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
                   </p>
                   <p className="text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed pt-1">
                     <strong className="font-mono font-black text-zinc-900">End-to-End Scope: </strong>
-                    Designed &amp; engineered the 0→1 WebRTC assisted commerce flow, scheduler comparison engine, in-call QR scanner, and showroom CRM desk.
+                    Designed the scheduler, CTA, in-call checkout and admin flows in Figma; engineers built WebRTC and CRM.
                   </p>
                 </div>
 
@@ -540,7 +540,7 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
                   Instant Video Call
                 </span>
                 <span className="text-[11px] sm:text-xs text-[#EC4899] font-black uppercase tracking-wider block">
-                  Zero app install needed
+                  No app install needed
                 </span>
               </div>
 
@@ -558,13 +558,13 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
 
               <div className="space-y-1.5 border-l-2 border-[#1976D2]/30 pl-3 sm:pl-4 min-w-0 overflow-hidden">
                 <span className="text-[clamp(22px,2.5vw,42px)] font-black text-black tracking-tight block leading-tight truncate">
-                  100% Web
+                  Browser-Based
                 </span>
                 <span className="text-xs sm:text-[13px] font-black uppercase text-zinc-900 block leading-snug tracking-wide">
                   In-Store QR Flow
                 </span>
                 <span className="text-[11px] sm:text-xs text-[#EC4899] font-black uppercase tracking-wider block">
-                  WebRTC in mobile browser
+                  Direct in mobile browser
                 </span>
               </div>
 
@@ -1196,16 +1196,19 @@ export default function ParlaCaseStudyView({ study }: ParlaCaseStudyViewProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div className="border border-black/15 bg-zinc-50 p-4 text-center">
                     <span className="font-mono text-3xl sm:text-4xl font-black text-[#1976D2] block">+31%</span>
+                    <span className="text-[10px] font-mono text-zinc-500 block italic mt-1">directional, not independently audited</span>
                     <span className="font-mono text-[10px] font-black uppercase text-zinc-800 tracking-wider mt-1 block">Booking Completion Lift</span>
                     <p className="text-xs text-zinc-600 mt-1">vs early wireframe path across identical traffic</p>
                   </div>
                   <div className="border border-black/15 bg-zinc-50 p-4 text-center">
                     <span className="font-mono text-3xl sm:text-4xl font-black text-[#EC4899] block">−26%</span>
+                    <span className="text-[10px] font-mono text-zinc-500 block italic mt-1">directional, not independently audited</span>
                     <span className="font-mono text-[10px] font-black uppercase text-zinc-800 tracking-wider mt-1 block">Drop-off Reduction</span>
                     <p className="text-xs text-zinc-600 mt-1">at the service selection step post-rollout</p>
                   </div>
                   <div className="border border-black/15 bg-zinc-50 p-4 text-center">
                     <span className="font-mono text-3xl sm:text-4xl font-black text-black block">1.8×</span>
+                    <span className="text-[10px] font-mono text-zinc-500 block italic mt-1">directional, not independently audited</span>
                     <span className="font-mono text-[10px] font-black uppercase text-zinc-800 tracking-wider mt-1 block">Mobile Velocity</span>
                     <p className="text-xs text-zinc-600 mt-1">touch-first session completion on mobile</p>
                   </div>

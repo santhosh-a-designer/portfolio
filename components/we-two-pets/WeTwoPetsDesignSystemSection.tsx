@@ -350,7 +350,7 @@ export default function WeTwoPetsDesignSystemSection() {
                 <span className="block font-mono text-[9px] mt-1 text-zinc-500">Cart</span>
               </div>
             </div>
-            <p className="text-[11px] text-zinc-600">Direct, borderless linear icons with zero clutter.</p>
+            <p className="text-[11px] text-zinc-600">Direct, borderless linear icons with minimal clutter.</p>
           </div>
 
           {/* Group 2: Value Prop Icons */}

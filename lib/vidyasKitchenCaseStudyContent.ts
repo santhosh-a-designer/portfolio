@@ -293,7 +293,7 @@ export const vidyasHomeFoodStory = {
         highlights: [
           { id: "one-shot", label: "One sentence → full bill" },
           { id: "first", label: "Not menu trees · not forms" },
-          { id: "quick", label: "Quick Reorder · zero typing" },
+          { id: "quick", label: "Quick Reorder · 1 tap" },
           { id: "confirm", label: "Server-priced · Confirm to book" },
         ],
         screens: [
@@ -443,8 +443,8 @@ export const vidyasSkimCopy = {
     items: [
       { stat: "4 Surfaces", label: "Single order record." },
       { stat: "15 km / 24h", label: "Cook-to-order window." },
-      { stat: "12h Window", label: "Automated refund." },
-      { stat: "100% Veto", label: "Dishes < 3.0 blocked." },
+      { stat: "12h Window", label: "Cancelling before cutoff triggers automated Razorpay refund." },
+      { stat: "Human Veto", label: "Dishes < 3.5 get no discount; < 3.0 flagged." },
     ],
     cta: "Read full case study",
   },
@@ -496,7 +496,7 @@ export const vidyasDesignSystem = {
       id: "landing",
       tabLabel: "Landing",
       caption:
-        "Dark canvas, one action — WhatsApp green owns the CTA; brand red on the wordmark is the marketing accent (#CC1C1C in case study artifacts).",
+        "Dark canvas, one action — WhatsApp green owns the CTA; primary red (#BD2320) on the wordmark is the brand marketing accent.",
       meta: {
         icons: "Logo mark · no app icon set",
         radius: "12–16 on card · circle logo",
@@ -505,13 +505,13 @@ export const vidyasDesignSystem = {
       },
       swatches: [
         {
-          token: "Landing brand red",
-          hex: "#CC1C1C",
+          token: "Landing primary red",
+          hex: "#BD2320",
           onHex: "#1A1A1A",
-          fgHex: "#CC1C1C",
+          fgHex: "#BD2320",
           fontSize: 24,
           fontWeight: 800,
-          source: "caseStudies.ts · landing artifact",
+          source: "caseStudies.ts · primary brand token",
         },
         {
           token: "Dark canvas",
@@ -1275,8 +1275,9 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                       { text: "  await guardDashboardAction(); // Enforce manager role", tone: "accent" },
                       { text: "  const supabase = createServerSupabase();", tone: "default" },
                       { text: "", tone: "default" },
-                      { text: "  // Programmatically disallow discounts for dishes rated under 3.0", tone: "comment" },
-                      { text: "  if (payload.rating < 3.0) throw new Error('RATING_UNDER_3_CANNOT_BE_PROMOTED');", tone: "accent" },
+                      { text: "  // A dish rated below 3.5 gets no demand discount; below 3.0 is flagged for a quality review instead", tone: "comment" },
+                      { text: "  if (payload.rating < 3.5) payload.discount_override = 0; // No demand discount", tone: "accent" },
+                      { text: "  if (payload.rating < 3.0) throw new Error('FLAGGED_FOR_QUALITY_REVIEW');", tone: "accent" },
                       { text: "", tone: "default" },
                       { text: "  // Apply discount override across festival dish presets", tone: "comment" },
                       { text: "  const discount = roundToDiscountPreset(payload.discount_override);", tone: "default" },
@@ -1544,7 +1545,7 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
             name: "generate-catalog-csv.ts",
             kind: "file",
             preview: [
-              { text: "/** Regenerates whatsapp-catalog-products.csv to ensure zero price drift */", tone: "comment" },
+              { text: "/** Regenerates whatsapp-catalog-products.csv to maintain synchronized pricing */", tone: "comment" },
               { text: "import { writeFileSync } from 'node:fs';", tone: "keyword" },
               { text: "import { MENU_BY_CATEGORY } from '../src/components/ui/mobile/mobileMenuData';", tone: "default" },
               { text: "", tone: "default" },
@@ -1651,15 +1652,15 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
   {
     id: "persona-customer",
     personaName: "Priya M.",
-    personaRole: "Bank Employee & Working Mother, Sivakasi",
+    personaRole: "Bank Employee & Working Mother, Sivakasi (Composite Persona)",
     personaInitials: "PM",
     surfaceTag: "WhatsApp Bot & Customer PWA",
     surfaceName: "Customer Ordering Surfaces",
     goal: "Order wholesome home meals for her family between bank meetings without tedious menu navigation.",
     frustration: "Menu-driven chatbots choke on Tanglish sentences like '2 biryani naalaiku lunch'.",
     quote: "I don't have time to download apps and add items to a cart. I just want to send one WhatsApp message and know dinner is booked.",
-    quoteAuthor: "Priya M., Sivakasi Customer",
-    interviewTag: "Customer field discovery · Sivakasi on-site",
+    quoteAuthor: "Priya M. (Composite user persona)",
+    interviewTag: "Customer discovery archetype · Sivakasi on-site (Composite persona)",
     scenarios: [
       {
         id: "cust-scen-a",
@@ -1673,22 +1674,22 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
           "Built an OpenAI gpt-4o-mini parser with an AbortSignal timeout of 2.5 seconds. The AI extracts dish and slot, while the server strictly prices food, packing, and GST.",
         quote:
           "I don't have time to download apps and add items to a cart. I just want to send one WhatsApp message and know dinner is booked.",
-        quoteAuthor: "Priya M., Sivakasi Customer",
+        quoteAuthor: "Priya M. (Composite user persona)",
       },
     ],
   },
   {
     id: "persona-driver",
     personaName: "Murugan K.",
-    personaRole: "Hyperlocal Delivery Partner, Sivakasi",
+    personaRole: "Hyperlocal Delivery Partner, Sivakasi (Composite Persona)",
     personaInitials: "MK",
     surfaceTag: "Driver PWA",
     surfaceName: "Field Logistics Surface",
     goal: "Deliver lunch bags swiftly in 38°C Sivakasi midday heat without missing delivery slots.",
     frustration: "Waiting for SMS OTP codes in spotty 2G coverage while wearing bike gloves caused severe delays.",
     quote: "In the afternoon sun, waiting for OTP codes on the bike was painful. The 4-digit PIN and 56px buttons let me deliver with one thumb without removing gloves.",
-    quoteAuthor: "Murugan K., Delivery Partner",
-    interviewTag: "Driver logistics field discovery · Sivakasi on-site",
+    quoteAuthor: "Murugan K. (Composite driver persona)",
+    interviewTag: "Driver logistics field discovery (Composite persona)",
     scenarios: [
       {
         id: "driver-scen-a",
@@ -1702,7 +1703,7 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
           "Built a dedicated phone-lookup auth endpoint with kitchen admin provisioning. Implemented an offline-tolerant service worker that caches customer drop pins and cash totals.",
         quote:
           "In the afternoon sun, waiting for OTP codes on the bike was painful. The 4-digit PIN and 56px buttons let me deliver with one thumb without removing gloves.",
-        quoteAuthor: "Murugan K., Delivery Partner",
+        quoteAuthor: "Murugan K. (Composite driver persona)",
       },
     ],
   },
@@ -1728,7 +1729,7 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
         whatUxIDid:
           "Designed a Human-in-the-Loop AI Pricing Card on her dashboard. Rather than an algorithmic black-box, it presents clear cards with explicit 1-click Approve or Dismiss buttons.",
         whatTechnicalIDid:
-          "Built a nightly 2:00 AM cron job analyzing 7-day dish volume, margins, and repeat rates. Hard-coded a safety gate blocking any dish rated under 3.0 stars from promotional discounts.",
+          "Built a nightly 2:00 AM cron job analyzing 7-day dish volume, margins, and repeat rates. Hard-coded safety gates: a dish rated below 3.5 gets no demand discount; below 3.0 is flagged for a quality review instead.",
         quote:
           "The festival suggestion cards let me review pricing in 10 seconds before bed instead of calculating raw meat margins on paper.",
         quoteAuthor: "Vidya R., Founder & Head Chef",
@@ -1746,13 +1747,13 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     situation:
       "Customers typed free-form Tamil-English sentences into WhatsApp. Rigid chatbots broke on normal conversational phrasing, causing high drop-off.",
     task:
-      "Enable 1-sentence conversational ordering without manual back-and-forth menus while ensuring deterministic server pricing.",
+      "Enable 1-sentence conversational ordering without manual back-and-forth menus. Prices are computed by a deterministic server engine; the model never sets amounts.",
     actionUx:
       "Designed open text chat returning an instant visual confirmation card with portion drawers and single-tap checkout.",
     actionTech:
       "Restricted OpenAI parser to dish extraction with 2.5s timeout; server strictly computes food prices, packing (₹20), delivery (₹35), and 5% GST.",
     result:
-      "Customers order in one message and see the full bill before confirming.",
+      "Aim: a full order in under a minute. Customers order in one message and see the full bill before confirming.",
     interviewTakeaway:
       "Let customers talk naturally; let deterministic server code calculate prices.",
   },
@@ -1764,9 +1765,9 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     situation:
       "Children in Chennai ordering meals for parents in Sivakasi were blocked by Meta's strict 24-hour message expiration window.",
     task:
-      "Deliver advance pre-order and gift order status updates to elderly parents without requiring app installs or logins.",
+      "Three-tier fallback so notifications still arrive outside Meta's 24h window, without requiring app installs or logins.",
     actionUx:
-      "Crafted personalized recipient gift cards paired with a 1-tap live web tracking link requiring zero login.",
+      "Crafted personalized recipient gift cards paired with a 1-tap live web tracking link requiring no login.",
     actionTech:
       "Engineered automated 3-tier notification chain: rich templates inside 24 hours, approved Meta Utility HSM outside, and Twilio SMS fallback.",
     result:
@@ -1782,11 +1783,11 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
     situation:
       "Stove sizzle and exhaust fans drowned out silent order push notifications, while manual holiday discounts risked margin loss.",
     task:
-      "Ensure audible order alerts during peak meal prep and automate festival discounts without losing profit margins.",
+      "Audible alerts and a realtime board built so tickets aren't missed; the pricing agent enforces margin and rating guards.",
     actionUx:
       "Built a 3-meter readable Kanban board paired with repeating synthesized audio chimes and 1-click human pricing approval cards.",
     actionTech:
-      "Wired Supabase Realtime listeners to HTML5 Web Audio synthesis; nightly cron suggests discounts, programmatically blocking dishes rated under 3.0 stars.",
+      "Wired Supabase Realtime listeners to HTML5 Web Audio synthesis; nightly cron suggests discounts: a dish rated below 3.5 gets no demand discount; below 3.0 is flagged for a quality review instead.",
     result:
       "The chef hears every new order, and no price change goes live without her approval.",
     interviewTakeaway:

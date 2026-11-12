@@ -146,7 +146,7 @@ export const POSTER_PROJECTS: GraphicDesignPosterProject[] = [
     projectTitle: "BowlBae",
     tagline: "Subscription bowl menu pamphlet & packaging sticker",
     overview:
-      "Full print identity for BowlBae's fresh fruit, egg, sprout, and protein subscriptions. Designed a dual-sided marketing pamphlet: Front spotlights tiered subscription plans (Mini, Classic, Prime, Elite) with weekly and monthly pricing, while the Back details curated box compositions and daily freshness guarantees. Accompanied by a circular die-cut delivery container sticker.",
+      "Full print identity for BowlBae's fresh fruit, egg, sprout, and protein subscriptions. Designed a dual-sided marketing pamphlet: Front spotlights tiered subscription plans (Mini, Classic, Prime, Elite) with weekly and monthly pricing, while the Back details curated box compositions and daily freshness standards. Accompanied by a circular die-cut delivery container sticker.",
     imagePairTitle: "Menu pamphlet — front & back",
     beforeAfter: {
       oldSrc: "/graphic-design/new-works/BowlBae_Pamphlet_Front_High.webp",

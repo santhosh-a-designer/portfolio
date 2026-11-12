@@ -34,10 +34,10 @@ const SNIPPETS: SnippetTab[] = [
     language: "python",
     icon: Cpu,
     architectureSummary:
-      "Production LLM calls fail on 503s or quota spikes. We engineered a cascading fallback array (Gemini 2.5 Flash → 2.0 Flash → 1.5 Flash) with strict JSON contracts, extracting typed scores (0–100), pros/cons, and target pet categories.",
+      "Production LLM calls fail on 503s or quota spikes. We engineered Gemini 2.x Flash (multimodal scoring) with strict JSON contracts, extracting typed scores (0–100), pros/cons, and target pet categories.",
     keyCallouts: [
       { label: "Resilience", text: "Tries next model candidate if timeout or 503 occurs." },
-      { label: "Zero Hallucination UI", text: "Forces exact typed JSON keys; invalid shapes are dropped." },
+      { label: "Schema-Grounded UI", text: "Forces exact typed JSON keys; invalid shapes are dropped." },
       { label: "Critic Layer", text: "Separates nominal score from real-world usage review score." },
     ],
     code: `# Multi-model fallback: if 2.5 Flash times out or hits 503, cascade gracefully
@@ -134,7 +134,7 @@ def check_single_store(product_title: str, brand: str, store_url: str) -> dict:
     architectureSummary:
       "We strictly blocked the AI from auto-publishing products to wetwopets.com. Ingestion agents write to STAGING or PENDING; a product row is only promoted to LIVE after two distinct human managers sign off on margin and quality.",
     keyCallouts: [
-      { label: "Zero Self-Publishing", text: "AI score is advisory; only human credentials can flip status." },
+      { label: "Strict Human Launch Gate", text: "AI score is advisory; only human credentials can flip status." },
       { label: "Dual Signature", text: "Requires two distinct manager IDs to eliminate single-curator bias." },
       { label: "Audit Ledger", text: "Timestamped audit trail logged in manager_votes before Launch Pad activation." },
     ],

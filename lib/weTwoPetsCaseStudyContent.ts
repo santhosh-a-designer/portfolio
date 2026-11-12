@@ -179,11 +179,11 @@ export const weTwoChallenges: VidyasChallenge[] = [
     title: "OWN THE ORDER (BYPASSING THE AFFILIATE TRAP)",
     surface: "1-Page Checkout & Phone Auth",
     stake: "If the customer pays Amazon or an overseas supplier, we are just an affiliate review blog with a logo.",
-    happened: "Early advice suggested affiliate links for foreign goods. We locked in 100% direct brand ownership: cart, +91 phone-code authentication, Cashfree UPI, and Cash on Delivery on our own domain (wetwopets.com).",
+    happened: "Early advice suggested affiliate links for foreign goods. We locked in direct brand ownership: cart, +91 phone-code authentication, Cashfree UPI, and Cash on Delivery on our own domain (wetwopets.com).",
     whyHard: "Affiliate links are trivial to demo. Direct checkout requires phone OTPs, payment webhooks, Cashfree integration, COD fee logic, and handling the supplier purchase privately in backend ops.",
     triedFirst: "Review-style product listings that deep-linked out to international retail pages.",
-    worked: "A seamless single-route checkout: Cart → +91 Phone Code → Delivery Address → Cashfree / COD. Ops receives fulfillment links privately by email; the customer never leaves our site.",
-    outcome: "100% direct customer relationship on our own domain — 500+ global products evaluated and securely processed.",
+    worked: "A seamless single-route checkout: Cart → +91 Phone Code → Delivery Address → Cashfree / COD. Ops receives fulfillment links privately by email; the customer does not leave our site.",
+    outcome: "Direct customer relationship on our own domain — 500+ global products evaluated and securely processed.",
   },
   {
     id: "02",
@@ -249,7 +249,7 @@ export const weTwoAIFlow = [
     step: "06",
     phase: "Grounded Support Assistant",
     title: "Tailz Conversational Agent",
-    desc: "Customer-facing support bot grounded exclusively in live order events, hub status, and the published catalog. Never hallucinates foreign suppliers.",
+    desc: "Customer-facing support bot grounded exclusively in live order events, hub status, and the published catalog. Does not reference foreign suppliers.",
     tech: "Next.js /api/chat · Grounded Context · Order Webhooks",
   },
 ];
@@ -287,7 +287,7 @@ export const weTwoAgents = [
   { name: "Domestic hunter", job: "Nightly pass on Amazon.in. Suggests a price and a verdict. Pings the team." },
   { name: "International hunter", job: "Foreign listings land as staging, marked for the gap check." },
   { name: "Gap engine", job: "No model. Fuzzy title, brand, category, image hash. Gaps become pending." },
-  { name: "India checker", job: "If India already sells it, the row never reaches the shop." },
+  { name: "India checker", job: "If India already sells it, the row does not reach the shop." },
   { name: "Verification", job: "Rechecks the source. Dead or out of stock can pause a live product. It cannot publish." },
   { name: "Pricing", job: "Landed cost, a multiplier, a calendar, and a margin floor. A wild move can text the team." },
   { name: "Tailz", job: "Answers WhatsApp from the live catalog and the order in front of it. It does not browse the web." },
@@ -324,5 +324,5 @@ export const weTwoColors = [
 export const weTwoPrinciples = [
   "Editorial first. A serif on a cream field. Marketplace chrome stays off the home page.",
   "Customer copy and ops copy are different sentences. Quality check on the order page. The source link only in the ops email.",
-  "Live, or it does not exist. A scraped row is not a product. The shop never sees pending.",
+  "Live, or it does not exist. A scraped row is not a product. The shop does not see pending.",
 ];

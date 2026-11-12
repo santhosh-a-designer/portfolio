@@ -220,6 +220,9 @@ export default function VidyasKitchenCaseStudyView({
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
                     <span>0→1 Sole Product Designer &amp; Design Engineer</span>
                   </div>
+                  <p className="text-xs text-zinc-600 font-sans font-medium mt-1">
+                    Designed in Figma. Built with AI-assisted engineering.
+                  </p>
                 </div>
 
                 {/* 2. TEAM & OWNERSHIP */}
@@ -476,7 +479,7 @@ export default function VidyasKitchenCaseStudyView({
                         Frictionless Gift Tracking · Direct Live Web Links via SMS
                       </span>
                       <p className="text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed">
-                        Solves Meta&apos;s 24h cutoff with automated fallback so elderly parents need zero accounts or app installs.
+                        Solves Meta&apos;s 24h cutoff with automated fallback so elderly parents need no accounts or app installs.
                       </p>
                     </div>
                   </div>
@@ -511,14 +514,14 @@ export default function VidyasKitchenCaseStudyView({
 
                   <div className="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
                     <div className="text-4xl sm:text-5xl md:text-6xl font-black text-black tracking-tighter whitespace-nowrap shrink-0">
-                      100% Veto
+                      Human Veto
                     </div>
                     <div className="md:max-w-md space-y-1">
                       <span className="text-xs font-black uppercase tracking-wider text-[#BD2320] block">
                         Human-in-the-Loop AI Pricing
                       </span>
                       <p className="text-xs sm:text-sm text-zinc-600 font-sans leading-relaxed">
-                        Nightly pricing suggestions require explicit 1-click kitchen approval; dishes rated under 3.0 are programmatically blocked from promotion.
+                        Nightly pricing suggestions require explicit 1-click kitchen approval. A dish rated below 3.5 gets no demand discount; below 3.0 is flagged for a quality review instead.
                       </p>
                     </div>
                   </div>

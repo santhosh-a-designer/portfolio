@@ -21,7 +21,7 @@ const fadeUp = {
 
 /** Order: experience → client markets → delivery volume → people → product reach */
 const STATS = [
-  { id: "years", kind: "number" as const, target: 5, suffix: "+", label: "Years" },
+  { id: "years", kind: "number" as const, target: 6, suffix: "+", label: "Years" },
   { id: "markets", kind: "text" as const, final: "US · UK", label: "Clients" },
   { id: "projects", kind: "number" as const, target: 10, suffix: "+", label: "Projects" },
   { id: "mentored", kind: "number" as const, target: 100, suffix: "+", label: "Mentored" },

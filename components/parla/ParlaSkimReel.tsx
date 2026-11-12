@@ -8,9 +8,9 @@ interface Props {
 }
 
 const PARLA_KPIS = [
-  { value: "1-Click", label: "Instant Video Call", highlight: "Zero app install needed" },
+  { value: "1-Click", label: "Instant Video Call", highlight: "No app install needed" },
   { value: "3 Roles", label: "Unified Architecture", highlight: "Customer, staff, & admin" },
-  { value: "100% Web", label: "In-Store QR Flow", highlight: "WebRTC in mobile browser" },
+  { value: "Browser-Based", label: "In-Store QR Flow", highlight: "Direct in mobile browser" },
   { value: "Live Basket", label: "Synchronized Cart", highlight: "Staff adds, shopper pays" },
 ];
 

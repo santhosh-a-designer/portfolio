@@ -427,7 +427,7 @@ export const caseStudies: CaseStudy[] = [
       },
       designSystem: {
         blurb:
-          "Light-mode professional surface. Parla’s admin is built for retail floor teams who need clarity at a glance — white canvas, teal brand identity, sky-blue for scheduling actions, and hot pink exclusively for the Show & Sell entry point so it’s never missed.",
+          "Light-mode professional surface. Parla’s admin is built for retail floor teams who need clarity at a glance — white canvas, teal brand identity, sky-blue for scheduling actions, and hot pink exclusively for the Show & Sell entry point so it stands out clearly.",
         colors: [
           { name: "Parla teal", hex: "#2DC8E8", use: "Brand logo, primary navigation identity" },
           { name: "Sky blue", hex: "#1976D2", use: "Primary CTA buttons, Create Appointment, active tabs" },
@@ -447,7 +447,7 @@ export const caseStudies: CaseStudy[] = [
         principles: [
           "Light-mode trust — retail floor teams expect a professional, familiar interface, not a dark-mode product tool",
           "Colour hierarchy = action type — teal is brand, blue is schedule, pink is sell; the palette teaches the workflow",
-          "Context always visible — CRM panel stays docked beside the chat thread so reps never lose customer history mid-call",
+          "Context always visible — CRM panel stays docked beside the chat thread so reps maintain customer history mid-call",
         ],
       },
     },
@@ -630,7 +630,7 @@ export const caseStudies: CaseStudy[] = [
     situation:
       "At FITA, attendance sheets went missing, numbers got disputed, and students forgot to mark leave. As a mentor myself, I was living in the gap—no single honest record, no fair way to track what I was owed. Spreadsheets and group chats couldn't scale.",
     task:
-      "Build one system: a bot-fed mentor dashboard, a student progress view, and automations that run themselves. Attendance everyone trusts, earnings always visible, and a Gmail handoff on completion—zero extra admin.",
+      "Build one system: a bot-fed mentor dashboard, a student progress view, and automations that run themselves. Attendance everyone trusts, earnings always visible, and a Gmail handoff on completion—minimal manual admin.",
     actions: [
       "Mapped three real roles—coordinators, mentors, students—and traced the pain from assignment → class → mark → pay.",
       "Mentor dashboard: roster, batch timeline, total earned vs expected, attendance (manual + batch-end lock).",
@@ -1087,7 +1087,7 @@ export const caseStudies: CaseStudy[] = [
         weaknesses: [
           "Single-kitchen supply: peak slots and quality consistency are the real caps.",
           "Ongoing need for content (reels, posts) to feed the top of the funnel.",
-          "PWA and dashboard still moving toward 100% feature-complete.",
+          "PWA and dashboard still moving toward full feature completion.",
         ],
         opportunities: [
           "Double down on video-led dishes and limited batches to create urgency.",
@@ -1122,7 +1122,7 @@ export const caseStudies: CaseStudy[] = [
         blurb:
           "Minimal dark landing built around a single action. The brand red commands attention, WhatsApp green owns the CTA, and food photography does all the heavy lifting — the UI deliberately disappears so the food and the order button are all anyone sees.",
         colors: [
-          { name: "Brand red", hex: "#CC1C1C", use: "Brand name, logo accent circle, primary identity" },
+          { name: "Brand red", hex: "#BD2320", use: "Brand name, logo accent circle, primary identity" },
           { name: "Dark canvas", hex: "#1a1a1a", use: "Page background and centre landing card surface" },
           { name: "WhatsApp green", hex: "#25D366", use: "'Order with Vidya Bot' CTA — native WhatsApp trust colour" },
           { name: "Pure white", hex: "#FFFFFF", use: "All body copy, 'WELCOME TO' eyebrow, footer links" },
@@ -1263,7 +1263,7 @@ export const caseStudies: CaseStudy[] = [
     toolsAndLanguages: "Figma (NDA/Confidential) · Vite RSC · TypeScript · React · Tailwind CSS · AI Agent Orchestration",
     role: "Lead Product Designer & Frontend Architect",
     situation:
-      "Traditional K-12 STEM education in India over-indexes on rote memorization and passive screen time, leaving students unable to apply physics and math to the physical world. Schools were fatigued by shallow, one-day robotics workshops with zero learning retention, while parents had no visible evidence of conceptual growth beyond test marks.",
+      "Traditional K-12 STEM education in India over-indexes on rote memorization and passive screen time, leaving students unable to apply physics and math to the physical world. Schools were fatigued by shallow, one-day robotics workshops with poor learning retention, while parents had no visible evidence of conceptual growth beyond test marks.",
     task:
       "Lead 0-to-1 product strategy, pedagogical framework UX, brand design system, and frontend engineering for Makeon. Deliver a high-credibility institutional web platform, a repeatable 7-stage session methodology ('The Build Loop'), and architect the Phase 2 AI-agent studio layer.",
     actions: [
@@ -1271,13 +1271,13 @@ export const caseStudies: CaseStudy[] = [
       "Architected a dual-audience conversion engine cleanly bifurcating school/centre institutional decision-makers from individual parent inquiries.",
       "Designed the complete 'Blueprint Engineering' visual identity and design system utilizing Geist & Geist Mono with high-contrast metadata hierarchy.",
       "Formulated the Builder Portfolio documentation model, enabling students to log formulas, test metrics, and failure points as verifiable proof of learning.",
-      "Developed and deployed the production platform using Vite with React Server Components (RSC), delivering sub-second page loads and zero layout shift.",
+      "Developed and deployed the production platform using Vite with React Server Components (RSC), delivering sub-second page loads and minimal layout shift.",
       "Structured the Phase 2 AI Agent Roadmap, designing multimodal vision build-diagnostics and Socratic mentor co-pilots to protect student struggle.",
     ],
     results: [
       "500+ student builds documented and verified across Chennai partner schools and studio cohorts.",
       "38% measured improvement in concept retention and technical problem-solving articulation vs traditional lecture formats.",
-      "Seamless institutional onboarding across 4 structured age pathways (Foundation Ages 5–7 to Applied Engineering Grades 9–12) with 100% facilitator rubric adoption.",
+      "Seamless institutional onboarding across 4 structured age pathways (Foundation Ages 5–7 to Applied Engineering Grades 9–12) with consistent facilitator rubric adoption.",
       "Live high-speed production release at makeon.build with instantaneous server-side rendering and high-intent institutional conversion pipelines.",
     ],
     learnings: [
@@ -1314,7 +1314,7 @@ export const caseStudies: CaseStudy[] = [
             "Equip science faculty with structured session rubrics without adding teaching overhead",
           ],
           pains: [
-            "One-off robotics workshops leave zero lasting conceptual retention",
+            "One-off robotics workshops leave minimal lasting conceptual retention",
             "Teachers lack time to design hands-on physics challenges from scratch",
             "Generic commercial kits end up neglected in storage closets after one term",
           ],
@@ -1332,7 +1332,7 @@ export const caseStudies: CaseStudy[] = [
           pains: [
             "Overwhelmed by gamified apps that pretend to teach coding without real depth",
             "Frustrated by the total lack of feedback from typical weekend tuition classes",
-            "Too much passive screen time with zero tactile creative output",
+            "Too much passive screen time with no tactile creative output",
           ],
         },
       ],
@@ -1363,7 +1363,7 @@ export const caseStudies: CaseStudy[] = [
           userGoal: "Scale Makeon as a repeatable weekly lab without burdening existing faculty",
           painPoint: "Complex teacher training and ambiguous material logistics stall adoption",
           uxIntervention: "Engineered the 5-Step Institution Studio adoption roadmap with complete facilitator kits",
-          impact: "Partner centres integrate Makeon into regular timetables with zero friction",
+          impact: "Partner centres integrate Makeon into regular timetables with minimal friction",
         },
         {
           stage: "05. AI-Augmented Studio",

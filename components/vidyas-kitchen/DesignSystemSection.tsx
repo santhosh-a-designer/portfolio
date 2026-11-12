@@ -61,7 +61,7 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
               OUTFIT FONT
             </span>
             <span className="px-2.5 py-1 bg-[#00C16A]/15 border border-[#00C16A] font-mono text-[10px] font-black uppercase text-emerald-800">
-              WCAG AAA / AA
+              TARGETS WCAG AA
             </span>
           </div>
         </div>
@@ -133,10 +133,14 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
             <Sparkle size={16} weight="fill" className="text-[#00C16A]" />
             <div>
               <span className="text-zinc-500 block">CONTRAST</span>
-              <span className="font-black text-black">AA/AAA Compliant</span>
+              <span className="font-black text-black">Targets WCAG AA</span>
             </div>
           </div>
         </div>
+
+        <p className="text-[11px] font-mono text-zinc-500 mb-6">
+          Targets WCAG AA. Known gaps are documented in the design-system report.
+        </p>
 
         {/* Interactive Action Bar */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-4 border-t-2 border-black">
