@@ -164,6 +164,39 @@ export default function DesignSystemSection({ pdfMeta }: Props) {
           </a>
         </div>
       </div>
+
+      {/* Figma Screen Architecture & Representation Archive */}
+      <div className="border-2 border-black bg-white p-5 sm:p-7 shadow-[4px_4px_0_0_#000] sm:shadow-[6px_6px_0_0_#000] space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-3 border-b-2 border-black font-mono">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 bg-[#BD2320]" />
+            <h4 className="text-sm sm:text-base font-black uppercase tracking-tight text-black">
+              Figma Canvas &amp; Screen Architecture
+            </h4>
+          </div>
+          <span className="text-[10px] uppercase font-bold tracking-wider text-zinc-600 px-2 py-0.5 bg-zinc-100 border border-black/20">
+            Representation Archive
+          </span>
+        </div>
+
+        <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-sans">
+          I don&apos;t have access to the original Vidya&apos;s Kitchen live environment; these are some of the main screens which I took directly from my Figma workspace for representation purposes across the Customer PWA, Kitchen Dashboard, and Driver App.
+        </p>
+
+        <figure className="border-2 border-black bg-zinc-100 overflow-hidden shadow-[3px_3px_0_0_#000]">
+          <Image
+            src="/case-studies/vidyas-kitchen/figma-screens-overview.jpg"
+            alt="Vidya's Kitchen Figma Master Canvas showing Customer PWA, Dashboard UI, and Driver App screens"
+            width={1024}
+            height={619}
+            className="w-full h-auto object-contain block"
+            loading="lazy"
+          />
+          <figcaption className="px-3 py-2 border-t-2 border-black bg-[#E2E8F0] font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-zinc-600 text-center">
+            Figma Workspace Canvas · PWA, Dashboard, and Driver App screens (for representation purposes)
+          </figcaption>
+        </figure>
+      </div>
     </div>
   );
 }
