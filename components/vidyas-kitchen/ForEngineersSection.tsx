@@ -80,7 +80,7 @@ export default function ForEngineersSection({ designSystemPdfMeta }: Props) {
                   <span>Architecture Excerpts &amp; Engineering Specification</span>
                 </div>
                 <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed">
-                  Key modules shown below are redacted architectural excerpts from the production codebase, illustrating finite state machine controllers, Meta Cloud API webhook signatures, and stove-side ambient alert synthesis.
+                  Key modules shown below are architectural excerpts from the production codebase matching the 3 core decisions: conversation turn routing, AI draft intent parsing, checkout validation rules, and Meta WhatsApp notification fallbacks.
                 </p>
               </div>
 
@@ -95,7 +95,7 @@ export default function ForEngineersSection({ designSystemPdfMeta }: Props) {
                     NEXT.JS 15 ROUTE HANDLERS + SUPABASE
                   </span>
                 </div>
-                <ArchitectureExplorer tree={vidyasArchitectureTree} windowTitle="vidyas-kitchen — VS Code" defaultSelectedId="order-status" />
+                <ArchitectureExplorer tree={vidyasArchitectureTree} windowTitle="vidyas-kitchen — VS Code" defaultSelectedId="whatsapp-turn" />
               </div>
 
               {/* Sub-section 2: Stack & Tools */}

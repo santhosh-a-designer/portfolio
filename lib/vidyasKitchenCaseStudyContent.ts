@@ -30,11 +30,12 @@ export type TopBottleneckItem = {
   title: string;
   surface: string;
   situation: string;
-  task: string;
-  actionUx: string;
-  actionTech: string;
-  result: string;
-  interviewTakeaway: string;
+  productGoal: string;
+  uxDecision: string;
+  uiDesign: string;
+  codeDecision: string;
+  outcome: string;
+  seniorTakeaway: string;
 };
 
 export type VidyasChallenge = {
@@ -411,24 +412,24 @@ export const vidyasSkimCopy = {
     items: [
       {
         title: "Order in one sentence",
-        s: "Free text broke rigid bot menus.",
-        t: "Parse text with deterministic bills.",
-        a: "Instant confirmation card in chat.",
+        s: "Regulars wanted the same food again.",
+        t: "Reorder in one message.",
+        a: "One sentence in, one card out.",
         outcome: "Customers order in one message and verify bills before confirming.",
       },
       {
-        title: "Gifts that reach parents",
-        s: "24h cutoff blocked advance updates.",
-        t: "Reach parents without app logins.",
-        a: "Direct web tracking link via SMS.",
-        outcome: "Parents track live via web link without app or login.",
+        title: "The 24-hour rule",
+        s: "Home cooking cannot be instant.",
+        t: "Order today, eat fresh on chosen day.",
+        a: "Date picker greys out invalid days.",
+        outcome: "Customers cannot book slots the kitchen cannot meet.",
       },
       {
-        title: "Alerts for a noisy kitchen",
-        s: "Stove noise drowned out screen alerts.",
-        t: "Notify kitchen hands-free.",
-        a: "Audible chime with manual price veto.",
-        outcome: "Audible alerts for new orders; human approves every price change.",
+        title: "Order for someone in Sivakasi",
+        s: "Buyer may be in Chennai or travelling.",
+        t: "Deliver in Sivakasi without silent drops.",
+        a: "Validate pin; WhatsApp and SMS fallback.",
+        outcome: "A buyer anywhere can order for Sivakasi and receive updates.",
       },
     ],
   },
@@ -1207,6 +1208,239 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
         "kind": "folder",
         "children": [
           {
+            "id": "src-app",
+            "name": "app",
+            "kind": "folder",
+            "children": [
+              {
+                "id": "src-app-api",
+                "name": "api",
+                "kind": "folder",
+                "children": [
+                  {
+                    "id": "src-app-api-orders",
+                    "name": "orders",
+                    "kind": "folder",
+                    "children": [
+                      {
+                        "id": "src-app-api-orders-checkout",
+                        "name": "checkout",
+                        "kind": "folder",
+                        "children": [
+                          {
+                            "id": "orders-checkout",
+                            "name": "route.ts",
+                            "kind": "file",
+                            "caption": "trimmed from src/app/api/orders/checkout/route.ts:73-100, 155-157, 181-195",
+                            "whyItMatters": "Server re-checks 24h notice, 6 AM–6 PM window, 15 km zone, and computes cancellationDeadline = slot minus 12h.",
+                            "preview": [
+                              {
+                                "text": "    // Delivery zone: Sivakasi 15 km radius",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "    if (deliveryLat == null || deliveryLng == null || !isInsideDeliveryZone(deliveryLat, deliveryLng)) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "      return NextResponse.json(",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "        { error: `Pin a drop-off in ${DELIVERY_ZONE.name}. We only deliver there.` },",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "        { status: 400 },",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      );",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    // Ordering window rule: 6 AM to 6 PM only",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "    if (!isOrderingWindowOpen()) {",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "      return NextResponse.json({ error: \"Ordering is open 6 AM – 6 PM. Come back tomorrow!\" }, { status: 400 });",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "    }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    if (!isValidIstYmd(deliveryDate)) {",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "      return NextResponse.json({ error: \"Choose a valid delivery date.\" }, { status: 400 });",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "    }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    if (!isValidSlotKind(deliverySlotRaw)) {",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "      return NextResponse.json({ error: \"Choose breakfast, lunch, or dinner.\" }, { status: 400 });",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "    }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    // 24-hour advance notice rule enforced server-side",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "    const slotStartIso = slotStartIsoFor(deliveryDate, deliverySlotRaw);",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    if (!isSlotBookable(slotStartIso)) {",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "      return NextResponse.json(",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "        { error: \"That slot needs at least 24 hours notice. Pick another date or meal time.\" },",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "        { status: 400 },",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      );",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    // Deterministic bill: food subtotal + Rs 20 packing + Rs 35 delivery + 5% GST",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "    const { computedTotal: grandTotal } = computeOrderBreakdownFromItemSubtotal(itemTotal - discount, {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "      deliveryPromo,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    });",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    // cancellationDeadline = slot minus 12h; cancelling before it triggers an automated Razorpay refund",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "    const cancellationDeadline = new Date(new Date(slotStartIso).getTime() - 12 * 60 * 60 * 1000).toISOString();",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    const { data: order, error: orderErr } = await supabase",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "      .from(\"orders\")",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "      .insert({",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "        phone_number: phone,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "        delivery_address: deliveryAddress,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "        delivery_slot: deliverySlotRaw,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "        total_amount: grandTotal,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "        payment_method: paymentMethod,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "        cancellation_deadline: cancellationDeadline,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "        cancellable: true,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      })",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      .select()",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      .single();",
+                                "tone": "default"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
             "id": "lib",
             "name": "lib",
             "kind": "folder",
@@ -1217,122 +1451,122 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                 "kind": "folder",
                 "children": [
                   {
-                    "id": "cart-intent",
-                    "name": "cart-intent.ts",
+                    "id": "ai-agent",
+                    "name": "agent.ts",
                     "kind": "file",
-                    "caption": "trimmed from src/lib/ai/cart-intent.ts:15-64",
-                    "whyItMatters": "AI drafts intent and fails safe.",
+                    "caption": "trimmed from src/lib/ai/agent.ts:429-433, 1036-1065",
+                    "whyItMatters": "The AI only drafts the order (2.5s timeout, falls back); the server computes prices and the model never sets amounts.",
                     "preview": [
                       {
-                        "text": "const UNCLEAR: CartIntent = { action: \"unclear\", item_reference: \"\", quantity: null };",
-                        "tone": "keyword"
+                        "text": "/**",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": " * Conversational ordering goes through propose-and-confirm: the model",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": " * emits a structured draft via the `propose_order` tool, the server prices",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": " * and validates it (src/lib/ai/order-proposal.ts), and the row is written by",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": " * the webhook only after the customer taps Confirm order.",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": " */",
+                        "tone": "comment"
                       },
                       {
                         "text": "",
                         "tone": "default"
                       },
                       {
-                        "text": "export async function resolveCartIntent(text: string, cart: CartItem[]): Promise<CartIntent> {",
+                        "text": "// Tool declaration passed to gpt-4o-mini:",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": "{",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  type: \"function\",",
                         "tone": "keyword"
                       },
                       {
-                        "text": "  const local = localCartIntent(text);",
+                        "text": "  function: {",
                         "tone": "keyword"
                       },
                       {
-                        "text": "  if (local) return local;",
-                        "tone": "accent"
+                        "text": "    name: \"propose_order\",",
+                        "tone": "string"
                       },
                       {
-                        "text": "  if (!looksLikeCartEdit(text) || cart.length === 0) return UNCLEAR;",
-                        "tone": "accent"
-                      },
-                      {
-                        "text": "  if (!process.env.OPENAI_API_KEY) return UNCLEAR;",
-                        "tone": "accent"
-                      },
-                      {
-                        "text": "",
+                        "text": "    description:",
                         "tone": "default"
                       },
                       {
-                        "text": "  try {",
+                        "text": "      \"Hand the server a draft order to price and show the customer for confirmation. Never creates an order. Omit anything the customer has not told you.\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "    parameters: {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "      type: \"object\",",
                         "tone": "keyword"
                       },
                       {
-                        "text": "    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });",
+                        "text": "      properties: {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "        items: {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "          type: \"array\",",
                         "tone": "keyword"
                       },
                       {
-                        "text": "    const response = await openai.chat.completions.create(",
+                        "text": "          description: \"Dishes asked for, in the customer's own words.\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "          items: {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "            type: \"object\",",
                         "tone": "keyword"
                       },
                       {
-                        "text": "      {",
+                        "text": "            properties: {",
                         "tone": "default"
                       },
                       {
-                        "text": "        model: \"gpt-4o-mini\",",
+                        "text": "              dish: { type: \"string\" },",
                         "tone": "string"
                       },
                       {
-                        "text": "        temperature: 0,",
+                        "text": "              size: { type: \"string\", description: \"500gm or 1kg, if stated.\" },",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "              quantity: { type: \"number\" },",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "            },",
                         "tone": "default"
                       },
                       {
-                        "text": "        max_tokens: 120,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "        response_format: { type: \"json_object\" },",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "        messages: [",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "          {",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "            role: \"system\",",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "            content: [",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "              \"You are an intent parser for a food-order cart.\",",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "              \"Given the user's message and the current cart, output ONLY a JSON object.\",",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "              'Shape: {\"action\":\"add_item|remove_item|update_qty|clear_cart|checkout|ask_menu|ask_status|unclear\",\"item_reference\":\"string\",\"quantity\":number|null}',",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "              \"item_reference is the raw words they used for the dish, copied from their message. Never invent a dish.\",",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "              \"Never output a new cart, prices, or item ids.\",",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "              \"If the dish they mean is not clearly in the cart or the message, action is unclear.\",",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "              \"quantity is null unless they asked to change how many.\",",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "            ].join(\"\\n\"),",
+                        "text": "            required: [\"dish\"],",
                         "tone": "string"
                       },
                       {
@@ -1340,160 +1574,43 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                         "tone": "default"
                       },
                       {
-                        "text": "          {",
+                        "text": "        },",
                         "tone": "default"
                       },
                       {
-                        "text": "            role: \"user\",",
+                        "text": "        date: { type: \"string\", description: \"The day in the customer's own words, such as tomorrow or Thursday.\" },",
                         "tone": "string"
                       },
                       {
-                        "text": "            content: JSON.stringify({",
-                        "tone": "default"
+                        "text": "        time: { type: \"string\", description: \"Time of day, as said: 8pm, evening.\" },",
+                        "tone": "string"
                       },
                       {
-                        "text": "              message: text,",
-                        "tone": "default"
+                        "text": "        address: { type: \"string\" },",
+                        "tone": "string"
                       },
                       {
-                        "text": "              cart: cart.map((line) => ({",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "                name: line.name,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "                variant: line.variant,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "                quantity: line.quantity,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "              })),",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "            }),",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "          },",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "        ],",
-                        "tone": "default"
+                        "text": "        payment: { type: \"string\", description: \"online or cod, if stated.\" },",
+                        "tone": "string"
                       },
                       {
                         "text": "      },",
                         "tone": "default"
                       },
                       {
-                        "text": "      { signal: AbortSignal.timeout(2500) },",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    );",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    return parseModelIntent(response.choices[0]?.message?.content || \"\");",
-                        "tone": "accent"
-                      },
-                      {
-                        "text": "  } catch (err) {",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    console.error(\"[cart intent]\", err);",
+                        "text": "      required: [\"items\"],",
                         "tone": "string"
                       },
                       {
-                        "text": "    return UNCLEAR;",
-                        "tone": "accent"
+                        "text": "    },",
+                        "tone": "default"
                       },
                       {
-                        "text": "  }",
+                        "text": "  },",
                         "tone": "default"
                       },
                       {
                         "text": "}",
-                        "tone": "default"
-                      }
-                    ]
-                  },
-                  {
-                    "id": "pricing-agent",
-                    "name": "pricing-agent.config.ts",
-                    "kind": "file",
-                    "caption": "trimmed from src/lib/ai/pricing-agent.config.ts:12-45 & pricing-rules.ts:74-97",
-                    "whyItMatters": "The pricing agent's rating guard and lift thresholds are tunable and humans approve every change.",
-                    "preview": [
-                      {
-                        "text": "// From pricing-agent.config.ts:",
-                        "tone": "comment"
-                      },
-                      {
-                        "text": "export const PRICING_AGENT_THRESHOLDS = {",
-                        "tone": "keyword"
-                      },
-                      {
-                        "text": "  festivalLeadDays: 7,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  defaultFestivalPct: 20,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  lowSellerWindowDays: 7,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  lowSellerMaxOrders7d: 3,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  /** Rating at or above this can take a demand discount. Below 3.0 is a quality flag instead. */",
-                        "tone": "comment"
-                      },
-                      {
-                        "text": "  lowSellerMinRating: 3.5,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  minOrdersForTrend: 3,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  declineDropRatio: 0.3,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  /** rating under this is a quality flag. The card cannot apply a discount. */",
-                        "tone": "comment"
-                      },
-                      {
-                        "text": "  qualityRatingBelow: 3.0,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  weakLift: 1.2,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  strongLift: 2,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  liftStepPct: 5,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "} as const;",
                         "tone": "default"
                       },
                       {
@@ -1501,162 +1618,34 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                         "tone": "default"
                       },
                       {
-                        "text": "// ...",
+                        "text": "// Server-side deterministic pricing: food, 5% GST, Rs 20 packing, Rs 35 delivery.",
                         "tone": "comment"
                       },
                       {
-                        "text": "// From pricing-rules.ts:",
+                        "text": "// The model never sets amounts.",
                         "tone": "comment"
-                      },
-                      {
-                        "text": "export function qualityReviewRule(dish: DishPerformance, config: AgentConfig): PricingDecision | null {",
-                        "tone": "keyword"
-                      },
-                      {
-                        "text": "  if (dish.ratingCount < 1 || dish.avgRating == null) return null;",
-                        "tone": "accent"
-                      },
-                      {
-                        "text": "  if (dish.avgRating >= config.qualityRatingBelow) return null;",
-                        "tone": "accent"
-                      },
-                      {
-                        "text": "  const tone = dish.sentiment === \"unknown\" ? \"\" : ` Recent reviews look ${dish.sentiment}.`;",
-                        "tone": "keyword"
-                      },
-                      {
-                        "text": "  return {",
-                        "tone": "accent"
-                      },
-                      {
-                        "text": "    dishId: dish.dishId,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    dishName: dish.dishName,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    decisionType: \"quality_review\",",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "    oldDiscount: null,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    newDiscount: 0,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    reasoning: `Low rating — discount may not help, check reviews. ${dish.avgRating}/5 from ${dish.ratingCount} review${dish.ratingCount === 1 ? \"\" : \"s\"}.${tone}`,",
-                        "tone": "string"
-                      },
-                      {
-                        "text": "    autoApply: false,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    brief: {",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "      orders7d: dish.totalOrders,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "      orders30d: 0,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "      rating: dish.avgRating,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "      reviewCount: dish.ratingCount,",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "    },",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "  };",
-                        "tone": "default"
-                      },
-                      {
-                        "text": "}",
-                        "tone": "default"
                       }
                     ]
                   }
                 ]
               },
               {
-                "id": "order-status",
-                "name": "order-status.ts",
+                "id": "whatsapp-turn",
+                "name": "whatsapp-turn.ts",
                 "kind": "file",
-                "caption": "trimmed from src/lib/order-status.ts:35-48, 100-105",
-                "whyItMatters": "The state machine rules.",
+                "caption": "trimmed from src/lib/whatsapp-turn.ts:17-19, 159-195, 201-237",
+                "whyItMatters": "Local rules classify the message first (classifyTurn); after 3 interruptions it hands over to a person.",
                 "preview": [
                   {
-                    "text": "// ...",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": "/** Allowed monotonic transitions (kitchen / driver / payment). */",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": "const EDGES: Record<string, string[]> = {",
+                    "text": "export const INTERRUPT_ESCALATE_AT = 3;",
                     "tone": "keyword"
                   },
                   {
-                    "text": "  [OrderStatus.PENDING_PAYMENT]: [OrderStatus.PAID, OrderStatus.CANCELLED],",
-                    "tone": "default"
+                    "text": "export const VK_INTERRUPT_PREFIX = \"__vk_interrupt__:\";",
+                    "tone": "keyword"
                   },
                   {
-                    "text": "  [OrderStatus.PAID]: [OrderStatus.CONFIRMED, OrderStatus.CANCELLED, OrderStatus.REJECTED],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  [OrderStatus.CONFIRMED]: [OrderStatus.PREPARING, OrderStatus.CANCELLED],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  [OrderStatus.PREPARING]: [OrderStatus.READY, OrderStatus.CANCELLED],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  [OrderStatus.READY]: [OrderStatus.OUT_FOR_DELIVERY],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  [OrderStatus.OUT_FOR_DELIVERY]: [OrderStatus.DELIVERED, OrderStatus.UNDELIVERED],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  [OrderStatus.DELIVERED]: [],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  // Kitchen can still settle an undelivered order afterwards",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": "  [OrderStatus.UNDELIVERED]: [OrderStatus.DELIVERED, OrderStatus.CANCELLED],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  [OrderStatus.CANCELLED]: [],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  [OrderStatus.REJECTED]: [],",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "};",
+                    "text": "",
                     "tone": "default"
                   },
                   {
@@ -1664,92 +1653,15 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     "tone": "comment"
                   },
                   {
-                    "text": "export function canTransitionOrderStatus(from: string, to: string): boolean {",
+                    "text": "export function classifyTurn(text: string, state: SessionState): TurnClassification {",
                     "tone": "keyword"
                   },
                   {
-                    "text": "  const f = normalizeOrderStatus(from);",
+                    "text": "  const raw = String(text || \"\").trim();",
                     "tone": "keyword"
                   },
                   {
-                    "text": "  const t = normalizeOrderStatus(to);",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  const next = EDGES[f];",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  return Array.isArray(next) && next.includes(t);",
-                    "tone": "accent"
-                  },
-                  {
-                    "text": "}",
-                    "tone": "default"
-                  }
-                ]
-              },
-              {
-                "id": "order-transition",
-                "name": "order-transition.ts",
-                "kind": "file",
-                "caption": "trimmed from src/lib/order-transition.ts:37-171",
-                "whyItMatters": "validate -> update -> refund on reject/cancel -> notify without breaking the transition.",
-                "preview": [
-                  {
-                    "text": "export async function transitionOrderStatusInDb(",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  supabase: SupabaseClient,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  orderId: string,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  newStatus: string,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  options: TransitionOptions = {},",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "): Promise<TransitionResult> {",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  const notifyCustomer = options.notifyCustomer !== false;",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  const { data: row, error: fetchErr } = await supabase",
-                    "tone": "accent"
-                  },
-                  {
-                    "text": "    .from(\"orders\")",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "    .select(ORDER_NOTIFY_COLUMNS)",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "    .eq(\"id\", orderId)",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "    .single();",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  if (fetchErr || !row) return { ok: false, error: \"Order not found\" };",
+                    "text": "  if (!raw) return blank(\"unclear\");",
                     "tone": "accent"
                   },
                   {
@@ -1757,107 +1669,11 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     "tone": "default"
                   },
                   {
-                    "text": "  const cur = normalizeOrderStatus(String(row.status));",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  const next = normalizeOrderStatus(newStatus);",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  if (!canTransitionOrderStatus(cur, next)) {",
+                    "text": "  if (COMPLAINT_RE.test(raw)) return blank(\"complaint\");",
                     "tone": "accent"
                   },
                   {
-                    "text": "    return { ok: false, error: `Invalid transition ${cur} → ${next}` };",
-                    "tone": "accent"
-                  },
-                  {
-                    "text": "  }",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  const upFields: Record<string, any> = {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    status: next,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "    updated_at: new Date().toISOString(),",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  };",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  const paymentMethod = String((row as { payment_method?: string | null }).payment_method || \"\").toLowerCase();",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  const isCod = paymentMethod === \"cod\";",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  if (next === OrderStatus.CANCELLED || next === OrderStatus.REJECTED) {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    upFields.refund_status = isCod ? null : \"initiated\";",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "    upFields.cancellable = false;",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  }",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  // ...",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": "  const { error: upErr } = await supabase",
-                    "tone": "accent"
-                  },
-                  {
-                    "text": "    .from(\"orders\")",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "    .update(upFields)",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "    .eq(\"id\", orderId);",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  if (upErr) return { ok: false, error: upErr.message };",
+                    "text": "  if (CANCEL_RE.test(raw) && !REMOVE_WORD.test(raw)) return blank(\"cancel_order\");",
                     "tone": "accent"
                   },
                   {
@@ -1865,179 +1681,23 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     "tone": "default"
                   },
                   {
-                    "text": "  let refundStatus: string | null = null;",
+                    "text": "  const scoped = planScopedCartEdit(raw);",
                     "tone": "keyword"
                   },
                   {
-                    "text": "  if (next === OrderStatus.REJECTED || next === OrderStatus.CANCELLED) {",
+                    "text": "  if (scoped) {",
                     "tone": "keyword"
                   },
                   {
-                    "text": "    const paymentId = (row as { payment_id?: string | null }).payment_id;",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    const totalAmount = (row as { total_amount?: number | null }).total_amount;",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    const paymentStatus = String((row as { payment_status?: string | null }).payment_status || \"\");",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    const priorStatus = String((row as { refund_status?: string | null }).refund_status || \"\");",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    const priorAmount = Number((row as { refund_amount?: number | null }).refund_amount) || 0;",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "    if (isCod || !paymentId || paymentStatus !== PaymentStatus.PAID) {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "      if (priorStatus !== \"refunded\") {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "        await supabase.from(\"orders\").update({ refund_status: null }).eq(\"id\", orderId);",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "      }",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "    } else if (totalAmount != null && totalAmount > 0) {",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "      const remainder = refundableRemainder(Number(totalAmount), priorStatus, priorAmount);",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "      if (remainder > 0) {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "        const refResult = await refundPayment(",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "          paymentId,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "          remainder,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "          next === OrderStatus.CANCELLED ? \"customer_cancel\" : \"kitchen_reject\",",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "        );",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "        await supabase",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "          .from(\"orders\")",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "          .update({",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "            refund_status: refResult.ok ? \"refunded\" : \"refund_failed\",",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "            refund_amount: refResult.ok ? Math.round((already + remainder) * 100) / 100 : totalAmount,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "            refund_id: refResult.ok ? refResult.refundId : null,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "          })",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "          .eq(\"id\", orderId);",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "        refundStatus = refResult.ok ? \"refunded\" : \"refund_failed\";",
-                    "tone": "string"
-                  },
-                  {
-                    "text": "      }",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "    }",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  }",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  if (!notifyCustomer) return { ok: true };",
+                    "text": "    return blank(\"remove_item\", {",
                     "tone": "accent"
                   },
                   {
-                    "text": "",
+                    "text": "      item_reference: scoped.itemReference || null,",
                     "tone": "default"
                   },
                   {
-                    "text": "  try {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    await notifyWhatsAppOrderEvent({",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "      id: row.id as string,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "      order_number: (row as { order_number?: number | null }).order_number ?? null,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "      status: next,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "      phone_number: row.phone_number as string | null,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "      delivery_slot: row.delivery_slot as string | null,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "      // ...",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": "      refund_status: refundStatus,",
+                    "text": "      quantity: scoped.keep?.quantity ?? null,",
                     "tone": "default"
                   },
                   {
@@ -2045,12 +1705,80 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     "tone": "default"
                   },
                   {
-                    "text": "  } catch (e) {",
+                    "text": "  }",
                     "tone": "default"
                   },
                   {
-                    "text": "    console.error(\"[order-transition] WhatsApp notify failed\", e);",
-                    "tone": "string"
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  const local = localCartIntent(raw);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  if (local?.action === \"remove_item\" || local?.action === \"update_qty\" || local?.action === \"clear_cart\") {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    const intent: TurnIntent = local.action === \"clear_cart\" ? \"edit_cart\" : local.action === \"update_qty\" ? \"edit_cart\" : \"remove_item\";",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    return blank(intent, { item_reference: local.item_reference || null, quantity: local.quantity });",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (local?.action === \"checkout\") return blank(\"checkout\");",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (MENU_RE.test(raw)) return blank(\"ask_menu\");",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  if (asksAboutExistingOrder(raw)) return blank(\"ask_status\");",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  if (ADD_RE.test(raw) && !REMOVE_WORD.test(raw)) return blank(\"add_item\");",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  const answered = isPendingState(state) ? directAnswer(state, raw) : null;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  if (answered) {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    return blank(\"answer_pending_question\", {",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "      matches_pending_state: true,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "      extracted_value: answered,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    });",
+                    "tone": "default"
                   },
                   {
                     "text": "  }",
@@ -2061,44 +1789,11 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     "tone": "default"
                   },
                   {
-                    "text": "  return { ok: true };",
+                    "text": "  if (SMALL_TALK_RE.test(raw)) return blank(\"small_talk\");",
                     "tone": "accent"
                   },
                   {
-                    "text": "}",
-                    "tone": "default"
-                  }
-                ]
-              },
-              {
-                "id": "order-pricing",
-                "name": "order-pricing.ts",
-                "kind": "file",
-                "caption": "trimmed from src/lib/order-pricing.ts:4-7, 24-47",
-                "whyItMatters": "The server computes the bill, the model never does.",
-                "preview": [
-                  {
-                    "text": "export const ORDER_PACKAGING_INR = 20;",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "export const ORDER_DELIVERY_INR = 35;",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "export const ORDER_GST_RATE = 0.05;",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "// ...",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": "export function orderItemsSubtotal(items: OrderLineItem[]): number {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  return items.reduce((s, it) => s + (Number(it.unit_price) || 0) * (Number(it.quantity) || 0), 0);",
+                    "text": "  return blank(\"unclear\");",
                     "tone": "accent"
                   },
                   {
@@ -2110,19 +1805,43 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     "tone": "default"
                   },
                   {
-                    "text": "function effectiveDeliveryFee(itemsSubtotal: number, promo?: DeliveryPromoSettings | null): number {",
+                    "text": "export function routeTurn(",
                     "tone": "keyword"
                   },
                   {
-                    "text": "  if (!promo?.active || itemsSubtotal < promo.minOrderInr) return ORDER_DELIVERY_INR;",
+                    "text": "  _state: SessionState,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  classification: TurnClassification,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  interruptedCount: number,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "): RouteDecision {",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (classification.intent === \"complaint\") return { action: \"complaint\", nextInterruptCount: 0 };",
                     "tone": "accent"
                   },
                   {
-                    "text": "  return Math.max(0, ORDER_DELIVERY_INR - Math.min(Math.round(promo.discountInr), ORDER_DELIVERY_INR));",
+                    "text": "  if (classification.intent === \"cancel_order\") return { action: \"cancel\", nextInterruptCount: 0 };",
                     "tone": "accent"
                   },
                   {
-                    "text": "}",
+                    "text": "  if (classification.matches_pending_state || classification.intent === \"answer_pending_question\") {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    return { action: \"accept_answer\", nextInterruptCount: 0 };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  }",
                     "tone": "default"
                   },
                   {
@@ -2130,63 +1849,87 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     "tone": "default"
                   },
                   {
-                    "text": "export function computeOrderBreakdownFromItemSubtotal(",
+                    "text": "  const next = interruptedCount + 1;",
                     "tone": "keyword"
                   },
                   {
-                    "text": "  itemsSubtotal: number,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  opts?: OrderFeeOptions,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "): OrderFeeBreakdown {",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  const delivery = effectiveDeliveryFee(itemsSubtotal, opts?.deliveryPromo);",
+                    "text": "  if (next >= INTERRUPT_ESCALATE_AT) {",
                     "tone": "keyword"
                   },
                   {
-                    "text": "  const gst = Math.round(itemsSubtotal * ORDER_GST_RATE);",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  const computedTotal =",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    Math.round((itemsSubtotal + ORDER_PACKAGING_INR + delivery + gst) * 100) / 100;",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  return {",
+                    "text": "    return { action: \"escalate\", nextInterruptCount: next };",
                     "tone": "accent"
                   },
                   {
-                    "text": "    itemsSubtotal,",
+                    "text": "  }",
                     "tone": "default"
                   },
                   {
-                    "text": "    packaging: ORDER_PACKAGING_INR,",
+                    "text": "",
                     "tone": "default"
                   },
                   {
-                    "text": "    delivery,",
+                    "text": "  switch (classification.intent) {",
                     "tone": "default"
                   },
                   {
-                    "text": "    gst,",
+                    "text": "    case \"edit_cart\":",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    case \"remove_item\":",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    case \"add_item\":",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      return { action: \"mutate_cart_then_reask\", nextInterruptCount: next };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    case \"ask_menu\":",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      return { action: \"answer_menu_then_reask\", nextInterruptCount: next };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    case \"ask_status\":",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      return { action: \"answer_status_then_reask\", nextInterruptCount: next };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    case \"checkout\":",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    case \"small_talk\":",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      return { action: \"reask\", nextInterruptCount: next };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    case \"unclear\":",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    default:",
                     "tone": "default"
                   },
                   {
-                    "text": "    computedTotal,",
-                    "tone": "default"
+                    "text": "      return { action: \"clarify\", nextInterruptCount: next };",
+                    "tone": "accent"
                   },
                   {
-                    "text": "  };",
+                    "text": "  }",
                     "tone": "default"
                   },
                   {
@@ -2200,7 +1943,7 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                 "name": "whatsapp-order-notify.ts",
                 "kind": "file",
                 "caption": "trimmed from src/lib/whatsapp-order-notify.ts:83-103, 536-538, 641-653",
-                "whyItMatters": "Designing around Meta's 24h window.",
+                "whyItMatters": "Meta 24h window -> approved template -> Twilio SMS fallback (hasOpenServiceWindow) so updates never drop.",
                 "preview": [
                   {
                     "text": "/**",
@@ -2383,123 +2126,6 @@ export const vidyasArchitectureTree: VidyasArchNode[] = [
                     "tone": "default"
                   }
                 ]
-              },
-              {
-                "id": "razorpay-verify",
-                "name": "razorpay-verify.ts",
-                "kind": "file",
-                "caption": "trimmed from src/lib/razorpay-verify.ts:1-28",
-                "whyItMatters": "Payment trust.",
-                "preview": [
-                  {
-                    "text": "import { createHmac, timingSafeEqual } from \"crypto\";",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "function hmacSha256Hex(data: string, key: string): string {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  return createHmac(\"sha256\", key).update(data, \"utf8\").digest(\"hex\");",
-                    "tone": "accent"
-                  },
-                  {
-                    "text": "}",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "/**",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": " * Verifies a Razorpay webhook signature.",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": " *",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": " * Razorpay signs the raw request body with HMAC-SHA256 using the webhook",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": " * secret. The resulting hex digest must match the X-Razorpay-Signature header.",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": " *",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": " * Uses constant-time comparison to prevent timing attacks.",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": " */",
-                    "tone": "comment"
-                  },
-                  {
-                    "text": "export function verifyWebhookSignature(",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  rawBody: string,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  signature: string,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  secret: string,",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "): boolean {",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "  if (!signature) return false;",
-                    "tone": "accent"
-                  },
-                  {
-                    "text": "  const expected = hmacSha256Hex(rawBody, secret);",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "  try {",
-                    "tone": "keyword"
-                  },
-                  {
-                    "text": "    return timingSafeEqual(Buffer.from(expected, \"hex\"), Buffer.from(signature, \"hex\"));",
-                    "tone": "accent"
-                  },
-                  {
-                    "text": "  } catch {",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "    return false;",
-                    "tone": "accent"
-                  },
-                  {
-                    "text": "  }",
-                    "tone": "default"
-                  },
-                  {
-                    "text": "}",
-                    "tone": "default"
-                  }
-                ]
               }
             ]
           }
@@ -2564,7 +2190,7 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
         tag: "Scenario 01 · Intent Parsing",
         title: "The Tanglish Sentence vs Empty Cart Trap",
         groundReality:
-          "Customers order on WhatsApp while juggling work: '2 chicken biryani naalaiku lunch cash'. Traditional chatbots forced 4-level numerical menus, leading to high drop-offs.",
+          "Customers order on WhatsApp while juggling work: '2 chicken biryani naalaiku lunch cash'. Traditional chatbots forced 4-level numerical menus, making reordering slow.",
         whatUxIDid:
           "Removed multi-level menus entirely. Designed an open chat experience that parses natural Tanglish text and returns a visual confirmation card with quick-edit size drawers.",
         whatTechnicalIDid:
@@ -2613,7 +2239,7 @@ export const vidyasPersonaScenarios: PersonaScenarioCard[] = [
     surfaceName: "Kitchen Operations Surface",
     goal: "Cook authentic homestyle food to order without missing peak-hour orders or losing profit margins.",
     frustration: "Silent push notifications were drowned out by stove sizzle and exhaust fans; manual holiday discounts risked losing money.",
-    quote: "When I'm at the stove, the loud chime and the big board tell me immediately when a lunch slot is booked without having to wash my hands.",
+    quote: "When I'm at the stove, the loud notification and the big board tell me immediately when a lunch slot is booked without having to wash my hands.",
     quoteAuthor: "Vidya R., Founder & Head Chef",
     interviewTag: "Kitchen operations field discovery · Sivakasi on-site",
     scenarios: [
@@ -2639,55 +2265,61 @@ export const vidyasTop3Bottlenecks: TopBottleneckItem[] = [
   {
     id: "BOTTLE_01",
     num: "01",
-    title: "ORDER IN ONE SENTENCE",
-    surface: "WhatsApp Bot & Customer PWA",
+    title: "ORDER IN ONE SENTENCE (quick reordering)",
+    surface: "WHATSAPP BOT & CUSTOMER PWA",
     situation:
-      "Customers typed free-form Tamil-English sentences into WhatsApp. Rigid chatbots broke on normal conversational phrasing, causing high drop-off.",
-    task:
-      "Enable 1-sentence conversational ordering without manual back-and-forth menus. Prices are computed by a deterministic server engine; the model never sets amounts.",
-    actionUx:
-      "Designed open text chat returning an instant visual confirmation card with portion drawers and single-tap checkout.",
-    actionTech:
-      "Restricted OpenAI parser to dish extraction with 2.5s timeout; server strictly computes food prices, packing (₹20), delivery (₹35), and 5% GST.",
-    result:
-      "Aim: a full order in under a minute. Customers order in one message and see the full bill before confirming.",
-    interviewTakeaway:
-      "Let customers talk naturally; let deterministic server code calculate prices.",
+      "Regulars wanted the same food again. Menus and step-by-step questions were slow, and normal Tamil-English phrasing broke rigid chatbots.",
+    productGoal:
+      "Let a customer reorder in one message, like \"same as last time, 2 sambar rice\", and see the full bill before confirming.",
+    uxDecision:
+      "People already know what they want, so skip the menu. One sentence in, one confirmation card out. Interrupting is allowed: asking for the menu mid-order gets an answer, then the bot asks the pending question again. After 3 interruptions it hands over to a person.",
+    uiDesign:
+      "A single confirmation card showing dishes, portion drawer, itemised bill and one tap to confirm. A \"same / change\" choice for repeat orders.",
+    codeDecision:
+      "Local rules classify the message first (classifyTurn). The AI only drafts the order (2.5s timeout, falls back to asking again). The server computes prices: food, 5% GST, Rs 20 packing, Rs 35 delivery. The model never sets amounts.",
+    outcome:
+      "A customer can reorder in one message and sees the full bill before confirming.",
+    seniorTakeaway:
+      "Let customers talk naturally; let server code calculate prices.",
   },
   {
     id: "BOTTLE_02",
     num: "02",
-    title: "GIFT ORDERS THAT REACH PARENTS",
-    surface: "Meta WhatsApp Cloud API & Twilio",
+    title: "THE 24-HOUR RULE",
+    surface: "CHECKOUT & ORDER RULES",
     situation:
-      "Children in Chennai ordering meals for parents in Sivakasi were blocked by Meta's strict 24-hour message expiration window.",
-    task:
-      "Three-tier fallback so notifications still arrive outside Meta's 24h window, without requiring app installs or logins.",
-    actionUx:
-      "Crafted personalized recipient gift cards paired with a 1-tap live web tracking link requiring no login.",
-    actionTech:
-      "Engineered automated 3-tier notification chain: rich templates inside 24 hours, approved Meta Utility HSM outside, and Twilio SMS fallback.",
-    result:
-      "Parents get live tracking from a link, with no app or login.",
-    interviewTakeaway:
-      "Real-world UX requires designing for third-party platform limitations with automated fallbacks.",
+      "Home cooking cannot be instant. Same-day orders would over-promise to customers and overload the kitchen.",
+    productGoal:
+      "Make the wait a promise: order today, eat fresh on the chosen day.",
+    uxDecision:
+      "Show only valid days and meals (breakfast, lunch, dinner). The rule is explained before the customer hits an error. The cancellation deadline is visible on the confirmation card.",
+    uiDesign:
+      "Date and slot picker where invalid days are greyed out with a short reason (\"needs 24h notice\"). Helper text: orders open 6 AM to 6 PM.",
+    codeDecision:
+      "The server re-checks the 24h notice and the ordering window at checkout, so the UI is never the only guard. cancellationDeadline = slot minus 12h; cancelling before it triggers an automated Razorpay refund.",
+    outcome:
+      "Customers can never book a slot the kitchen cannot meet, and early cancellations refund automatically.",
+    seniorTakeaway:
+      "The UI guides, the server enforces.",
   },
   {
     id: "BOTTLE_03",
     num: "03",
-    title: "ALERTS FOR A KITCHEN YOU CAN'T LOOK AT",
-    surface: "Kitchen Supervisory Console",
+    title: "ORDER FOR SOMEONE IN SIVAKASI, FROM ANYWHERE",
+    surface: "DELIVERY ZONE & NOTIFICATIONS",
     situation:
-      "Stove sizzle and exhaust fans drowned out silent order push notifications, while manual holiday discounts risked margin loss.",
-    task:
-      "Audible alerts and a realtime board built so tickets aren't missed; the pricing agent enforces margin and rating guards.",
-    actionUx:
-      "Built a 3-meter readable Kanban board paired with repeating synthesized audio chimes and 1-click human pricing approval cards.",
-    actionTech:
-      "Wired Supabase Realtime listeners to HTML5 Web Audio synthesis; nightly cron suggests discounts: a dish rated below 3.5 gets no demand discount; below 3.0 is flagged for a quality review instead.",
-    result:
-      "The chef hears every new order, and no price change goes live without her approval.",
-    interviewTakeaway:
-      "Effective AI UX augments human decision authority rather than running on opaque autopilot.",
+      "The kitchen serves only Sivakasi, but the buyer may be in Chennai or travelling, ordering for a friend or family.",
+    productGoal:
+      "Let the buyer and the delivery location be different, without failed payments or silent order updates.",
+    uxDecision:
+      "Design around the delivery address, not where the buyer is. An address outside the zone gets a friendly message before payment, not after.",
+    uiDesign:
+      "Pick the address by map pin, so no local street knowledge is needed. Out-of-zone pins show \"We deliver within Sivakasi only\". Pay online or COD (with a cap).",
+    codeDecision:
+      "Checkout validates the delivery pin inside the 15 km radius. Order updates go via WhatsApp inside Meta's 24h window, then an approved template, then Twilio SMS fallback (hasOpenServiceWindow).",
+    outcome:
+      "A buyer anywhere can order for Sivakasi, pay, and still receive updates after Meta's 24h window closes.",
+    seniorTakeaway:
+      "Real-world UX means designing around platform limits with automated fallbacks.",
   },
 ];

@@ -57,9 +57,6 @@ export default function TableauSection({ num = "05" }: { num?: string }) {
               </li>
             ))}
           </ul>
-          <span className="inline-block px-2.5 py-1 bg-[#FAED00] border-2 border-black font-mono text-[10px] font-black uppercase tracking-wide shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-            Tableau · Supabase-fed exports
-          </span>
         </div>
 
         <figure className="min-w-0 border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] overflow-hidden">
