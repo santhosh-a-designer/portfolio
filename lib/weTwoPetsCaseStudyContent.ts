@@ -1,4 +1,4 @@
-import type { FlowDiagramData, IASurfaceColumn, VidyasChallenge, VidyasStackItem } from "@/lib/vidyasKitchenCaseStudyContent";
+import type { FlowDiagramData, IASurfaceColumn, VidyasChallenge, VidyasStackItem, VidyasArchNode } from "@/lib/vidyasKitchenCaseStudyContent";
 
 export const weTwoJourney = [
   {
@@ -325,4 +325,940 @@ export const weTwoPrinciples = [
   "Editorial first. A serif on a cream field. Marketplace chrome stays off the home page.",
   "Customer copy and ops copy are different sentences. Quality check on the order page. The source link only in the ops email.",
   "Live, or it does not exist. A scraped row is not a product. The shop does not see pending.",
+];
+
+export const weTwoArchitectureTree: VidyasArchNode[] = [
+  {
+    "id": "wtp-root",
+    "name": "wetwopets",
+    "kind": "folder",
+    "children": [
+      {
+        "id": "wtp-backend",
+        "name": "backend",
+        "kind": "folder",
+        "children": [
+          {
+            "id": "wtp-image-analyzer",
+            "name": "image_analyzer.py",
+            "kind": "file",
+            "caption": "trimmed from backend/image_analyzer.py:67-91",
+            "whyItMatters": "Duplicate detection with pHash.",
+            "preview": [
+              {
+                "text": "# ── Perceptual Hash (Duplicate Detection) ─────────────────────────────────────",
+                "tone": "comment"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "def get_image_hash(img: Image.Image) -> str:",
+                "tone": "keyword"
+              },
+              {
+                "text": "    \"\"\"",
+                "tone": "comment"
+              },
+              {
+                "text": "    Generate perceptual hash for duplicate detection.",
+                "tone": "default"
+              },
+              {
+                "text": "    Similar images produce similar hashes.",
+                "tone": "default"
+              },
+              {
+                "text": "    \"\"\"",
+                "tone": "comment"
+              },
+              {
+                "text": "    try:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        phash = imagehash.phash(img, hash_size=HASH_SIZE)",
+                "tone": "default"
+              },
+              {
+                "text": "        return str(phash)",
+                "tone": "accent"
+              },
+              {
+                "text": "    except Exception as e:",
+                "tone": "accent"
+              },
+              {
+                "text": "        print(f\"[Image] Hash error: {e}\")",
+                "tone": "string"
+              },
+              {
+                "text": "        return None",
+                "tone": "accent"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "def hash_distance(hash1: str, hash2: str) -> int:",
+                "tone": "keyword"
+              },
+              {
+                "text": "    \"\"\"",
+                "tone": "comment"
+              },
+              {
+                "text": "    Calculate Hamming distance between two hashes.",
+                "tone": "default"
+              },
+              {
+                "text": "    0 = identical, <5 = very similar, >10 = different",
+                "tone": "default"
+              },
+              {
+                "text": "    \"\"\"",
+                "tone": "comment"
+              },
+              {
+                "text": "    try:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        h1 = imagehash.hex_to_hash(hash1)",
+                "tone": "default"
+              },
+              {
+                "text": "        h2 = imagehash.hex_to_hash(hash2)",
+                "tone": "default"
+              },
+              {
+                "text": "        return h1 - h2",
+                "tone": "accent"
+              },
+              {
+                "text": "    except:",
+                "tone": "accent"
+              },
+              {
+                "text": "        return 999  # Error = treat as different",
+                "tone": "accent"
+              }
+            ]
+          },
+          {
+            "id": "wtp-india-checker",
+            "name": "india_checker.py",
+            "kind": "file",
+            "caption": "trimmed from backend/india_checker.py:135-140, 277-370",
+            "whyItMatters": "The India-availability veto.",
+            "preview": [
+              {
+                "text": "def _similarity(a: str, b: str) -> float:",
+                "tone": "keyword"
+              },
+              {
+                "text": "    na, nb = _normalize(a), _normalize(b)",
+                "tone": "default"
+              },
+              {
+                "text": "    if not na or not nb:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        return 0.0",
+                "tone": "accent"
+              },
+              {
+                "text": "    return SequenceMatcher(None, na, nb).ratio()",
+                "tone": "accent"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "# ...",
+                "tone": "comment"
+              },
+              {
+                "text": "async def check_product_in_india(product: dict) -> dict:",
+                "tone": "keyword"
+              },
+              {
+                "text": "    title = product.get(\"title\", \"\")",
+                "tone": "string"
+              },
+              {
+                "text": "    brand = product.get(\"brand\", \"\")",
+                "tone": "string"
+              },
+              {
+                "text": "    keywords = _extract_keywords(title, brand)",
+                "tone": "default"
+              },
+              {
+                "text": "    # ...",
+                "tone": "comment"
+              },
+              {
+                "text": "    # Search Indian marketplaces (Amazon.in, Flipkart, Ubuy, Shopify stores)",
+                "tone": "comment"
+              },
+              {
+                "text": "    matches = []",
+                "tone": "default"
+              },
+              {
+                "text": "    best_sim = 0.0",
+                "tone": "default"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "    for r in all_results:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        sim = _similarity(title, r[\"title\"])",
+                "tone": "string"
+              },
+              {
+                "text": "        if brand and brand.lower() in r[\"title\"].lower():",
+                "tone": "keyword"
+              },
+              {
+                "text": "            sim = min(1.0, sim + BRAND_MATCH_BOOST)",
+                "tone": "default"
+              },
+              {
+                "text": "        if sim > best_sim:",
+                "tone": "keyword"
+              },
+              {
+                "text": "            best_sim = sim",
+                "tone": "default"
+              },
+              {
+                "text": "        if sim >= SIMILARITY_THRESHOLD:",
+                "tone": "keyword"
+              },
+              {
+                "text": "            matches.append({",
+                "tone": "default"
+              },
+              {
+                "text": "                \"source\": r[\"source\"],",
+                "tone": "string"
+              },
+              {
+                "text": "                \"title\": r[\"title\"],",
+                "tone": "string"
+              },
+              {
+                "text": "                \"price\": r.get(\"price\", \"\"),",
+                "tone": "string"
+              },
+              {
+                "text": "                \"similarity\": round(sim * 100, 1),",
+                "tone": "string"
+              },
+              {
+                "text": "            })",
+                "tone": "default"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "    found = len(matches) > 0",
+                "tone": "default"
+              },
+              {
+                "text": "    # ...",
+                "tone": "comment"
+              },
+              {
+                "text": "    return {",
+                "tone": "accent"
+              },
+              {
+                "text": "        \"found_in_india\": found,",
+                "tone": "string"
+              },
+              {
+                "text": "        \"matches\": matches,",
+                "tone": "string"
+              },
+              {
+                "text": "        \"details\": details,",
+                "tone": "string"
+              },
+              {
+                "text": "    }",
+                "tone": "default"
+              }
+            ]
+          },
+          {
+            "id": "wtp-pricing",
+            "name": "pricing.py",
+            "kind": "file",
+            "caption": "trimmed from backend/pricing.py:133-171",
+            "whyItMatters": "Margin guard from landed cost.",
+            "preview": [
+              {
+                "text": "# ─── Landed cost + margin math ────────────────────────────────────────────────",
+                "tone": "comment"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "def landed_cost_inr(unit_cost: float, currency: str, cfg: dict) -> Optional[float]:",
+                "tone": "keyword"
+              },
+              {
+                "text": "    \"\"\"source price -> INR -> + duty -> + fees -> + freight + repack.\"\"\"",
+                "tone": "comment"
+              },
+              {
+                "text": "    rate = _fx_inr(cfg[\"fx\"], currency)",
+                "tone": "string"
+              },
+              {
+                "text": "    if rate is None or unit_cost is None:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        return None",
+                "tone": "accent"
+              },
+              {
+                "text": "    source_inr = float(unit_cost) * rate",
+                "tone": "default"
+              },
+              {
+                "text": "    with_duty = source_inr * (1 + cfg[\"duty_pct\"] / 100.0)",
+                "tone": "string"
+              },
+              {
+                "text": "    with_fees = with_duty * (1 + cfg[\"fee_pct\"] / 100.0)",
+                "tone": "string"
+              },
+              {
+                "text": "    return round(with_fees + cfg[\"freight_inr\"] + cfg[\"repack_inr\"], 2)",
+                "tone": "accent"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "def min_sell_inr(landed: float, cfg: dict) -> Optional[float]:",
+                "tone": "keyword"
+              },
+              {
+                "text": "    \"\"\"Lowest price that still clears the margin floor.\"\"\"",
+                "tone": "comment"
+              },
+              {
+                "text": "    if landed is None:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        return None",
+                "tone": "accent"
+              },
+              {
+                "text": "    floor = cfg[\"margin_floor_pct\"] / 100.0",
+                "tone": "string"
+              },
+              {
+                "text": "    if floor >= 1:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        return None",
+                "tone": "accent"
+              },
+              {
+                "text": "    return round(landed / (1 - floor), 2)",
+                "tone": "accent"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "def recommended_sell_inr(landed: float, cfg: dict) -> Optional[int]:",
+                "tone": "keyword"
+              },
+              {
+                "text": "    \"\"\"Clean price at the target margin (used for repricing / verification).\"\"\"",
+                "tone": "comment"
+              },
+              {
+                "text": "    if landed is None:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        return None",
+                "tone": "accent"
+              },
+              {
+                "text": "    target = cfg[\"target_margin_pct\"] / 100.0",
+                "tone": "string"
+              },
+              {
+                "text": "    if target >= 1:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        return None",
+                "tone": "accent"
+              },
+              {
+                "text": "    return _round_clean(landed / (1 - target))",
+                "tone": "accent"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "",
+                "tone": "default"
+              },
+              {
+                "text": "def compute_sell_price(unit_cost: float, currency: str, cfg: Optional[dict] = None) -> dict:",
+                "tone": "keyword"
+              },
+              {
+                "text": "    \"\"\"Canonical wetwopets price for an item — cost-derived, profit-safe.\"\"\"",
+                "tone": "comment"
+              },
+              {
+                "text": "    cfg = cfg or get_pricing_config()",
+                "tone": "default"
+              },
+              {
+                "text": "    landed = landed_cost_inr(unit_cost, currency, cfg)",
+                "tone": "default"
+              },
+              {
+                "text": "    if landed is None:",
+                "tone": "keyword"
+              },
+              {
+                "text": "        return {\"sell_inr\": None, \"landed_cost_inr\": None, \"margin_pct\": None, \"ok\": False}",
+                "tone": "accent"
+              },
+              {
+                "text": "    # ...",
+                "tone": "comment"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "wtp-frontend",
+        "name": "frontend",
+        "kind": "folder",
+        "children": [
+          {
+            "id": "wtp-frontend-app",
+            "name": "app",
+            "kind": "folder",
+            "children": [
+              {
+                "id": "wtp-frontend-api",
+                "name": "api",
+                "kind": "folder",
+                "children": [
+                  {
+                    "id": "wtp-frontend-vote",
+                    "name": "vote",
+                    "kind": "folder",
+                    "children": [
+                      {
+                        "id": "wtp-vote",
+                        "name": "route.ts",
+                        "kind": "file",
+                        "caption": "trimmed from frontend/app/api/vote/route.ts:43-56",
+                        "whyItMatters": "The AI vote is excluded and 2 human approvals are required.",
+                        "preview": [
+                          {
+                            "text": "function buildTally(votes: { vote: string }[]): VoteTally {",
+                            "tone": "keyword"
+                          },
+                          {
+                            "text": "  const human    = votes.filter((v) => v.vote !== 'AI')",
+                            "tone": "keyword"
+                          },
+                          {
+                            "text": "  const approve  = human.filter((v) => v.vote === 'APPROVE').length",
+                            "tone": "keyword"
+                          },
+                          {
+                            "text": "  const reject   = human.filter((v) => v.vote === 'REJECT').length",
+                            "tone": "keyword"
+                          },
+                          {
+                            "text": "  const waitlist = human.filter((v) => v.vote === 'WAITLIST').length",
+                            "tone": "keyword"
+                          },
+                          {
+                            "text": "  return {",
+                            "tone": "accent"
+                          },
+                          {
+                            "text": "    approve,",
+                            "tone": "default"
+                          },
+                          {
+                            "text": "    reject,",
+                            "tone": "default"
+                          },
+                          {
+                            "text": "    waitlist,",
+                            "tone": "default"
+                          },
+                          {
+                            "text": "    total: human.length,",
+                            "tone": "default"
+                          },
+                          {
+                            "text": "    ready_for_approval:  approve  >= 2,",
+                            "tone": "default"
+                          },
+                          {
+                            "text": "    ready_for_rejection: reject   >= 2,",
+                            "tone": "default"
+                          },
+                          {
+                            "text": "  }",
+                            "tone": "default"
+                          },
+                          {
+                            "text": "}",
+                            "tone": "default"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "wtp-storefront",
+        "name": "storefront",
+        "kind": "folder",
+        "children": [
+          {
+            "id": "wtp-storefront-app",
+            "name": "app",
+            "kind": "folder",
+            "children": [
+              {
+                "id": "wtp-storefront-api",
+                "name": "api",
+                "kind": "folder",
+                "children": [
+                  {
+                    "id": "wtp-storefront-cron",
+                    "name": "cron",
+                    "kind": "folder",
+                    "children": [
+                      {
+                        "id": "wtp-storefront-recs",
+                        "name": "recommendations",
+                        "kind": "folder",
+                        "children": [
+                          {
+                            "id": "wtp-recs",
+                            "name": "route.ts",
+                            "kind": "file",
+                            "caption": "trimmed from storefront/app/api/cron/recommendations/route.ts:62-126",
+                            "whyItMatters": "Product recommendation scoring with real preference weights and vetoes.",
+                            "preview": [
+                              {
+                                "text": "function scoreProduct(",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "  product: ProductRow,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  prefs: PrefRow | null,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  viewedIds: Set<string>,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  cartedIds: Set<string>,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  purchasedIds: Set<string>,",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "): { score: number; reason: string } {",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  let score = 0",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "  const reasons: string[] = []",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  if (purchasedIds.has(product.id)) return { score: -1, reason: 'already purchased' }",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  // Interest match (category to interests mapping)",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "  if (prefs?.interests?.length) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    const cat = product.category.toLowerCase()",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    for (const interest of prefs.interests) {",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      if (cat.includes(interest.toLowerCase().split(' ')[0])) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "        score += 0.3",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "        reasons.push(`Matches your interest in ${interest}`)",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "        break",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  // Pet family match",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "  if (prefs?.pet_type?.length && product.pet_family) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    const pf = product.pet_family.toLowerCase()",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    if (prefs.pet_type.some((t) => pf.includes(t.toLowerCase()))) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "      score += 0.2",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      reasons.push(`For your ${prefs.pet_type.join(' & ')}`)",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "    }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  // Budget fit",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "  const price = getDisplayPrice(product as Parameters<typeof getDisplayPrice>[0]).inr",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "  const max = budgetMax(prefs?.budget_range ?? null)",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "  if (price <= max) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    score += 0.1",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  } else {",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    score -= 0.2",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  // Viewed but not bought = showed interest",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "  if (viewedIds.has(product.id) && !cartedIds.has(product.id)) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    score += 0.15",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    reasons.push('You viewed this recently')",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "  }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  // Carted but not purchased = high intent",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "  if (cartedIds.has(product.id)) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    score += 0.25",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    reasons.push('Still in your wishlist')",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "  }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  // Exclusive import bonus (members love exclusives)",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "  if (product.is_international) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    score += 0.1",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    reasons.push('Exclusive import')",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "  }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  // AI quality score",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "  if (product.ai_score != null) {",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    score += (product.ai_score / 100) * 0.1",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "  return {",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "    score: Math.min(1, Math.max(0, score)),",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    reason: reasons[0] || 'Recommended for you',",
+                                "tone": "string"
+                              },
+                              {
+                                "text": "  }",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "}",
+                                "tone": "default"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "wtp-storefront-payment",
+                    "name": "payment",
+                    "kind": "folder",
+                    "children": [
+                      {
+                        "id": "wtp-storefront-create-order",
+                        "name": "create-order",
+                        "kind": "folder",
+                        "children": [
+                          {
+                            "id": "wtp-create-order",
+                            "name": "route.ts",
+                            "kind": "file",
+                            "caption": "trimmed from storefront/app/api/payment/create-order/route.ts:22-31",
+                            "whyItMatters": "The client never sets the price.",
+                            "preview": [
+                              {
+                                "text": "    // Authoritative total — recomputed from the DB, never trusted from the client.",
+                                "tone": "comment"
+                              },
+                              {
+                                "text": "    const lineInputs: CartLineInput[] = Array.isArray(items)",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "      ? items.map((i: { id: string; qty: number }) => ({ id: i.id, qty: i.qty }))",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "      : []",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    const authedUserForPricing = await getStorefrontUser()",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "    const priced = await priceOrderFromDb(lineInputs, tier, 'online', authedUserForPricing?.id ?? null)",
+                                "tone": "keyword"
+                              },
+                              {
+                                "text": "",
+                                "tone": "default"
+                              },
+                              {
+                                "text": "    if (!priced.ok || priced.total < 1) {",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "      return NextResponse.json({ error: priced.error || 'Invalid order' }, { status: 400 })",
+                                "tone": "accent"
+                              },
+                              {
+                                "text": "    }",
+                                "tone": "default"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ];

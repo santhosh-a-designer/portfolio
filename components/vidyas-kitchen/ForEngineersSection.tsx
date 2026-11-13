@@ -89,13 +89,13 @@ export default function ForEngineersSection({ designSystemPdfMeta }: Props) {
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-3 border-b border-zinc-800 font-mono">
                   <h4 className="text-sm sm:text-base font-black uppercase text-white tracking-wide flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-[#BD2320]" />
-                    <span>01 // Redacted Architecture Excerpts &amp; State Transitions</span>
+                    <span>01 // Architecture Excerpts &amp; State Transitions</span>
                   </h4>
-                  <span className="text-[10px] text-zinc-500 uppercase tracking-widest">
-                    Next.js 15 Server Actions + Supabase
+                  <span className="text-[10px] text-zinc-500 uppercase tracking-widest font-mono">
+                    NEXT.JS 15 ROUTE HANDLERS + SUPABASE
                   </span>
                 </div>
-                <ArchitectureExplorer tree={vidyasArchitectureTree} />
+                <ArchitectureExplorer tree={vidyasArchitectureTree} windowTitle="vidyas-kitchen — VS Code" defaultSelectedId="order-status" />
               </div>
 
               {/* Sub-section 2: Stack & Tools */}

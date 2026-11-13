@@ -229,11 +229,22 @@ function EditorPanel({
 
   return (
     <div className="flex flex-col min-h-0 h-full bg-[#1e1e1e] border-l border-[#3c3c3c] overflow-hidden" data-lenis-prevent="true">
-      <div className="flex items-center gap-1 px-2 py-1.5 bg-[#252526] border-b border-[#3c3c3c] overflow-x-auto shrink-0" data-lenis-prevent="true">
+      <div className="flex items-center justify-between gap-2 px-3 py-1.5 bg-[#252526] border-b border-[#3c3c3c] overflow-x-auto shrink-0" data-lenis-prevent="true">
         <span className="px-3 py-1 bg-[#1e1e1e] text-[#cccccc] text-[11px] border-t-2 border-[#007acc] whitespace-nowrap font-mono font-bold">
           {filename}
         </span>
+        {node?.caption && (
+          <span className="text-[10px] font-mono text-zinc-400 truncate pr-2">
+            {node.caption}
+          </span>
+        )}
       </div>
+      {node?.whyItMatters && (
+        <div className="px-4 py-2 bg-[#2d2d30] border-b border-[#3c3c3c] text-[11px] font-mono text-zinc-300">
+          <span className="text-[#4EC9B0] font-bold">Why: </span>
+          <span>{node.whyItMatters}</span>
+        </div>
+      )}
       <div 
         data-lenis-prevent="true"
         className="flex-1 min-h-0 p-4 font-mono text-[11px] sm:text-xs leading-relaxed overflow-y-auto overflow-x-auto touch-pan-y overscroll-contain [scrollbar-width:thin] [scrollbar-color:#555_#1e1e1e] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-[#1e1e1e] [&::-webkit-scrollbar-thumb]:bg-[#4a4a4a] hover:[&::-webkit-scrollbar-thumb]:bg-[#666] [&::-webkit-scrollbar-thumb]:rounded"
@@ -255,15 +266,29 @@ function EditorPanel({
 
 type Props = {
   tree: VidyasArchNode[];
+  windowTitle?: string;
+  defaultSelectedId?: string;
 };
 
-export default function ArchitectureExplorer({ tree }: Props) {
+export default function ArchitectureExplorer({ tree, windowTitle, defaultSelectedId }: Props) {
   const root = tree[0];
   const ref = useRef<HTMLDivElement>(null);
   const allOpenIds = useMemo(() => collectOpenIds(tree), [tree]);
 
   const [openIds, setOpenIds] = useState<Set<string>>(() => collectOpenIds(tree));
-  const [selectedId, setSelectedId] = useState<string | null>("order-transition");
+  const [selectedId, setSelectedId] = useState<string | null>(() => {
+    if (defaultSelectedId) return defaultSelectedId;
+    // Find first file in tree
+    const findFirstFile = (node: VidyasArchNode): string | null => {
+      if (node.kind === "file") return node.id;
+      for (const child of node.children ?? []) {
+        const found = findFirstFile(child);
+        if (found) return found;
+      }
+      return null;
+    };
+    return findFirstFile(tree[0]) ?? "order-status";
+  });
 
   const displayRows = useMemo(() => flattenTree(tree, openIds), [tree, openIds]);
 
@@ -322,7 +347,7 @@ export default function ArchitectureExplorer({ tree }: Props) {
           <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
           <span className="w-2.5 h-2.5 rounded-full bg-[#28CA42]" />
-          <span className="ml-2 text-[#cccccc] text-[10px] font-mono">vidyas-kitchen — VS Code</span>
+          <span className="ml-2 text-[#cccccc] text-[10px] font-mono">{windowTitle || "vidyas-kitchen — VS Code"}</span>
         </div>
 
         <div className="grid grid-cols-1 grid-rows-[220px_1fr] md:grid-rows-1 md:grid-cols-[minmax(240px,36%)_1fr] min-h-0 h-[520px] md:h-[480px]">

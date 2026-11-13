@@ -25,12 +25,13 @@ import {
   weTwoResearch,
   weTwoSkills,
   weTwoTools,
+  weTwoArchitectureTree,
 } from "@/lib/weTwoPetsCaseStudyContent";
+import ArchitectureExplorer from "@/components/vidyas-kitchen/ArchitectureExplorer";
 
 import EditorialTrustBento from "./EditorialTrustBento";
 import PetCareGuidesShowcase from "./PetCareGuidesShowcase";
 import WeTwoPetsDesignSystemSection from "./WeTwoPetsDesignSystemSection";
-import WeTwoPetsCodeShowcase from "./WeTwoPetsCodeShowcase";
 import WeTwoPetsAgentScroller from "./WeTwoPetsAgentScroller";
 import WeTwoPetsSkimReel from "./WeTwoPetsSkimReel";
 import CaseStudyFooterNav from "@/components/CaseStudyFooterNav";
@@ -588,11 +589,20 @@ export default function WeTwoPetsCaseStudyView() {
 
                 {/* Real Multi-Agent Code Snippets & Architecture */}
                 <div className="pt-2">
-                  <div className="flex items-center gap-2 mb-2 font-mono text-[10px] uppercase font-bold tracking-wider text-zinc-500">
-                    <span className="w-2 h-2 bg-[#059669] inline-block" />
-                    <span>PRODUCTION CODEBASE INSPECTION · MULTI-AGENT INGESTION &amp; GOVERNANCE</span>
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 pb-3 mb-3 border-b border-zinc-200 font-mono">
+                    <div className="flex items-center gap-2 text-zinc-800 font-bold uppercase text-[11px] tracking-wider">
+                      <span className="w-2 h-2 rounded-full bg-[#059669]" />
+                      <span>01 // PRODUCTION MULTI-AGENT INGESTION &amp; GOVERNANCE</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
+                      NEXT.JS + FASTAPI + SUPABASE
+                    </span>
                   </div>
-                  <WeTwoPetsCodeShowcase />
+                  <ArchitectureExplorer
+                    tree={weTwoArchitectureTree}
+                    windowTitle="wetwopets — VS Code"
+                    defaultSelectedId="wtp-vote"
+                  />
                 </div>
 
                 {/* Legal & Regulatory Constraint: The No-Food Policy */}
@@ -625,14 +635,14 @@ export default function WeTwoPetsCaseStudyView() {
                       <p className="text-[10px] text-zinc-500 mt-1 font-sans">Category aligns with pet parent preference tags</p>
                     </div>
                     <div className="bg-zinc-50 border border-black/15 p-3">
-                      <span className="text-[10px] text-zinc-500 uppercase block">High Intent Signals</span>
-                      <span className="font-bold text-[#059669] text-sm">+0.25</span>
-                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Abandoned in cart or active in member wishlist</p>
+                      <span className="text-[10px] text-zinc-500 uppercase block">Pet Family Match</span>
+                      <span className="font-bold text-[#059669] text-sm">+0.20</span>
+                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Specific match against member pet type (dog/cat)</p>
                     </div>
                     <div className="bg-zinc-50 border border-black/15 p-3">
-                      <span className="text-[10px] text-zinc-500 uppercase block">AI Quality Score</span>
-                      <span className="font-bold text-[#059669] text-sm">+0.10</span>
-                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Weighted against Gemini multimodal inspection</p>
+                      <span className="text-[10px] text-zinc-500 uppercase block">High Intent Signals</span>
+                      <span className="font-bold text-[#059669] text-sm">+0.25</span>
+                      <p className="text-[10px] text-zinc-500 mt-1 font-sans">Active in cart or wishlist (+0.15 if viewed)</p>
                     </div>
                     <div className="bg-zinc-50 border border-black/15 p-3">
                       <span className="text-[10px] text-zinc-500 uppercase block">Hard Anti-Loop Veto</span>

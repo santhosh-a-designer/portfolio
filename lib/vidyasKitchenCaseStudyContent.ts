@@ -98,6 +98,8 @@ export type VidyasArchNode = {
   kind: "folder" | "file";
   children?: VidyasArchNode[];
   preview?: VidyasTerminalLine[];
+  caption?: string;
+  whyItMatters?: string;
 };
 
 export type IASurfaceColumn = {
@@ -1195,421 +1197,1316 @@ export const vidyasOrderSyncRules: VidyasOrderSyncRules = {
 
 export const vidyasArchitectureTree: VidyasArchNode[] = [
   {
-    id: "root",
-    name: "vidyas-kitchen",
-    kind: "folder",
-    children: [
+    "id": "root",
+    "name": "vidyas-kitchen",
+    "kind": "folder",
+    "children": [
       {
-        id: "src",
-        name: "src",
-        kind: "folder",
-        children: [
+        "id": "src",
+        "name": "src",
+        "kind": "folder",
+        "children": [
           {
-            id: "lib",
-            name: "lib",
-            kind: "folder",
-            children: [
+            "id": "lib",
+            "name": "lib",
+            "kind": "folder",
+            "children": [
               {
-                id: "ai-folder",
-                name: "ai",
-                kind: "folder",
-                children: [
+                "id": "ai-folder",
+                "name": "ai",
+                "kind": "folder",
+                "children": [
                   {
-                    id: "cart-intent",
-                    name: "cart-intent.ts",
-                    kind: "file",
-                    preview: [
-                      { text: "/** Intent parser using gpt-4o-mini with 2.5s AbortSignal timeout */", tone: "comment" },
-                      { text: "import OpenAI from 'openai';", tone: "keyword" },
-                      { text: "import type { CartItem } from '../whatsapp-cart';", tone: "default" },
-                      { text: "import { localCartIntent, looksLikeCartEdit, parseModelIntent, type CartIntent } from '../whatsapp-cart-ops';", tone: "default" },
-                      { text: "", tone: "default" },
-                      { text: "const UNCLEAR: CartIntent = { action: 'unclear', item_reference: '', quantity: null };", tone: "accent" },
-                      { text: "", tone: "default" },
-                      { text: "export async function resolveCartIntent(text: string, cart: CartItem[]): Promise<CartIntent> {", tone: "keyword" },
-                      { text: "  const local = localCartIntent(text);", tone: "default" },
-                      { text: "  if (local) return local; // Bypass LLM on exact regex matches", tone: "comment" },
-                      { text: "  if (!looksLikeCartEdit(text) || cart.length === 0) return UNCLEAR;", tone: "muted" },
-                      { text: "", tone: "default" },
-                      { text: "  const openai = new OpenAI();", tone: "default" },
-                      { text: "  const response = await openai.chat.completions.create({", tone: "keyword" },
-                      { text: "    model: 'gpt-4o-mini', temperature: 0, max_tokens: 120,", tone: "accent" },
-                      { text: "    response_format: { type: 'json_object' }", tone: "string" },
-                      { text: "  }, { signal: AbortSignal.timeout(2500) });", tone: "keyword" },
-                      { text: "  return parseModelIntent(response.choices[0]?.message?.content);", tone: "accent" },
-                      { text: "}", tone: "keyword" },
-                    ],
+                    "id": "cart-intent",
+                    "name": "cart-intent.ts",
+                    "kind": "file",
+                    "caption": "trimmed from src/lib/ai/cart-intent.ts:15-64",
+                    "whyItMatters": "AI drafts intent and fails safe.",
+                    "preview": [
+                      {
+                        "text": "const UNCLEAR: CartIntent = { action: \"unclear\", item_reference: \"\", quantity: null };",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "export async function resolveCartIntent(text: string, cart: CartItem[]): Promise<CartIntent> {",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "  const local = localCartIntent(text);",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "  if (local) return local;",
+                        "tone": "accent"
+                      },
+                      {
+                        "text": "  if (!looksLikeCartEdit(text) || cart.length === 0) return UNCLEAR;",
+                        "tone": "accent"
+                      },
+                      {
+                        "text": "  if (!process.env.OPENAI_API_KEY) return UNCLEAR;",
+                        "tone": "accent"
+                      },
+                      {
+                        "text": "",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  try {",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "    const response = await openai.chat.completions.create(",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "      {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "        model: \"gpt-4o-mini\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "        temperature: 0,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "        max_tokens: 120,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "        response_format: { type: \"json_object\" },",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "        messages: [",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "          {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "            role: \"system\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "            content: [",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "              \"You are an intent parser for a food-order cart.\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "              \"Given the user's message and the current cart, output ONLY a JSON object.\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "              'Shape: {\"action\":\"add_item|remove_item|update_qty|clear_cart|checkout|ask_menu|ask_status|unclear\",\"item_reference\":\"string\",\"quantity\":number|null}',",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "              \"item_reference is the raw words they used for the dish, copied from their message. Never invent a dish.\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "              \"Never output a new cart, prices, or item ids.\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "              \"If the dish they mean is not clearly in the cart or the message, action is unclear.\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "              \"quantity is null unless they asked to change how many.\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "            ].join(\"\\n\"),",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "          },",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "          {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "            role: \"user\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "            content: JSON.stringify({",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "              message: text,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "              cart: cart.map((line) => ({",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "                name: line.name,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "                variant: line.variant,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "                quantity: line.quantity,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "              })),",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "            }),",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "          },",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "        ],",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "      },",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "      { signal: AbortSignal.timeout(2500) },",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    );",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    return parseModelIntent(response.choices[0]?.message?.content || \"\");",
+                        "tone": "accent"
+                      },
+                      {
+                        "text": "  } catch (err) {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    console.error(\"[cart intent]\", err);",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "    return UNCLEAR;",
+                        "tone": "accent"
+                      },
+                      {
+                        "text": "  }",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "}",
+                        "tone": "default"
+                      }
+                    ]
                   },
                   {
-                    id: "turn-intent",
-                    name: "whatsapp-turn.ts",
-                    kind: "file",
-                    preview: [
-                      { text: "/** Multi-turn conversation state router for Meta WhatsApp */", tone: "comment" },
-                      { text: "export const INTERRUPT_ESCALATE_AT = 3;", tone: "keyword" },
-                      { text: "export const VK_INTERRUPT_PREFIX = '__vk_interrupt__:';", tone: "string" },
-                      { text: "", tone: "default" },
-                      { text: "export async function classifyTurn(message: string, session: SessionState) {", tone: "keyword" },
-                      { text: "  // Prioritize active order flow cancellation & support requests", tone: "comment" },
-                      { text: "  if (isSupportTrigger(message)) return { type: 'SUPPORT_HANDOFF' };", tone: "accent" },
-                      { text: "  if (isComplaintQuery(message)) return { type: 'FILE_COMPLAINT', ref: session.lastOrder };", tone: "accent" },
-                      { text: "", tone: "default" },
-                      { text: "  // Fallback to one-sentence cart intent parser", tone: "comment" },
-                      { text: "  const intent = await resolveCartIntent(message, session.draftCart);", tone: "default" },
-                      { text: "  return { type: 'CART_MUTATION', payload: intent };", tone: "string" },
-                      { text: "}", tone: "keyword" },
-                    ],
+                    "id": "pricing-agent",
+                    "name": "pricing-agent.config.ts",
+                    "kind": "file",
+                    "caption": "trimmed from src/lib/ai/pricing-agent.config.ts:12-45 & pricing-rules.ts:74-97",
+                    "whyItMatters": "The pricing agent's rating guard and lift thresholds are tunable and humans approve every change.",
+                    "preview": [
+                      {
+                        "text": "// From pricing-agent.config.ts:",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": "export const PRICING_AGENT_THRESHOLDS = {",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "  festivalLeadDays: 7,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  defaultFestivalPct: 20,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  lowSellerWindowDays: 7,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  lowSellerMaxOrders7d: 3,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  /** Rating at or above this can take a demand discount. Below 3.0 is a quality flag instead. */",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": "  lowSellerMinRating: 3.5,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  minOrdersForTrend: 3,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  declineDropRatio: 0.3,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  /** rating under this is a quality flag. The card cannot apply a discount. */",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": "  qualityRatingBelow: 3.0,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  weakLift: 1.2,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  strongLift: 2,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  liftStepPct: 5,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "} as const;",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "// ...",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": "// From pricing-rules.ts:",
+                        "tone": "comment"
+                      },
+                      {
+                        "text": "export function qualityReviewRule(dish: DishPerformance, config: AgentConfig): PricingDecision | null {",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "  if (dish.ratingCount < 1 || dish.avgRating == null) return null;",
+                        "tone": "accent"
+                      },
+                      {
+                        "text": "  if (dish.avgRating >= config.qualityRatingBelow) return null;",
+                        "tone": "accent"
+                      },
+                      {
+                        "text": "  const tone = dish.sentiment === \"unknown\" ? \"\" : ` Recent reviews look ${dish.sentiment}.`;",
+                        "tone": "keyword"
+                      },
+                      {
+                        "text": "  return {",
+                        "tone": "accent"
+                      },
+                      {
+                        "text": "    dishId: dish.dishId,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    dishName: dish.dishName,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    decisionType: \"quality_review\",",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "    oldDiscount: null,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    newDiscount: 0,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    reasoning: `Low rating — discount may not help, check reviews. ${dish.avgRating}/5 from ${dish.ratingCount} review${dish.ratingCount === 1 ? \"\" : \"s\"}.${tone}`,",
+                        "tone": "string"
+                      },
+                      {
+                        "text": "    autoApply: false,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    brief: {",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "      orders7d: dish.totalOrders,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "      orders30d: 0,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "      rating: dish.avgRating,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "      reviewCount: dish.ratingCount,",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "    },",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "  };",
+                        "tone": "default"
+                      },
+                      {
+                        "text": "}",
+                        "tone": "default"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "order-status",
+                "name": "order-status.ts",
+                "kind": "file",
+                "caption": "trimmed from src/lib/order-status.ts:35-48, 100-105",
+                "whyItMatters": "The state machine rules.",
+                "preview": [
+                  {
+                    "text": "// ...",
+                    "tone": "comment"
                   },
                   {
-                    id: "pricing-agent",
-                    name: "festival-pricing.ts",
-                    kind: "file",
-                    preview: [
-                      { text: "// [Illustrative excerpt · Proprietary logic simplified for portfolio]", tone: "comment" },
-                      { text: "'use server';", tone: "keyword" },
-                      { text: "import { createServerSupabase } from '@/lib/supabase-server';", tone: "default" },
-                      { text: "import { guardDashboardAction } from '@/lib/dashboard-auth';", tone: "default" },
-                      { text: "import { roundToDiscountPreset } from '@/lib/menu/discount-presets';", tone: "default" },
-                      { text: "", tone: "default" },
-                      { text: "export async function saveFestivalPricing(payload: FestivalUpsertPayload) {", tone: "keyword" },
-                      { text: "  await guardDashboardAction(); // Enforce manager role", tone: "accent" },
-                      { text: "  const supabase = createServerSupabase();", tone: "default" },
-                      { text: "", tone: "default" },
-                      { text: "  // A dish rated below 3.5 gets no demand discount; below 3.0 is flagged for a quality review instead", tone: "comment" },
-                      { text: "  if (payload.rating < 3.5) payload.discount_override = 0; // No demand discount", tone: "accent" },
-                      { text: "  if (payload.rating < 3.0) throw new Error('FLAGGED_FOR_QUALITY_REVIEW');", tone: "accent" },
-                      { text: "", tone: "default" },
-                      { text: "  // Apply discount override across festival dish presets", tone: "comment" },
-                      { text: "  const discount = roundToDiscountPreset(payload.discount_override);", tone: "default" },
-                      { text: "  await supabase.from('festival_campaigns').upsert({", tone: "keyword" },
-                      { text: "    id: payload.id,", tone: "string" },
-                      { text: "    discount_pct: discount,", tone: "accent" },
-                      { text: "    active: payload.active", tone: "default" },
-                      { text: "  });", tone: "keyword" },
-                      { text: "  revalidatePath('/dashboard');", tone: "muted" },
-                      { text: "}", tone: "keyword" },
-                    ],
-                  },
-                ],
-              },
-              {
-                id: "order-transition",
-                name: "order-transition.ts",
-                kind: "file",
-                preview: [
-                  { text: "// [Illustrative excerpt · State machine controller simplified for portfolio]", tone: "comment" },
-                  { text: "import { after } from 'next/server';", tone: "keyword" },
-                  { text: "import { canTransitionOrderStatus, OrderStatus, PaymentStatus } from '@/lib/order-status';", tone: "default" },
-                  { text: "import { notifyWhatsAppOrderEvent } from '@/lib/whatsapp-order-notify';", tone: "default" },
-                  { text: "import { refundPayment } from '@/lib/payments';", tone: "default" },
-                  { text: "", tone: "default" },
-                  { text: "export async function transitionOrderStatus(orderId: string, next: OrderStatus) {", tone: "keyword" },
-                  { text: "  const { cur } = await fetchOrderStatus(orderId);", tone: "default" },
-                  { text: "  if (!canTransitionOrderStatus(cur, next)) {", tone: "keyword" },
-                  { text: "    return { ok: false, error: 'INVALID_TRANSITION' };", tone: "muted" },
-                  { text: "  }", tone: "keyword" },
-                  { text: "", tone: "default" },
-                  { text: "  await supabase.from('orders').update({ status: next }).eq('id', orderId);", tone: "accent" },
-                  { text: "  if (next === OrderStatus.REJECTED) await refundPayment(orderId);", tone: "accent" },
-                  { text: "", tone: "default" },
-                  { text: "  // Asynchronously dispatch multi-channel push & WhatsApp HSM updates", tone: "comment" },
-                  { text: "  after(async () => {", tone: "keyword" },
-                  { text: "    await notifyWhatsAppOrderEvent(orderId, next);", tone: "string" },
-                  { text: "    await sendDashboardPushNotifications(orderId, next);", tone: "string" },
-                  { text: "  });", tone: "keyword" },
-                  { text: "  return { ok: true };", tone: "accent" },
-                  { text: "}", tone: "keyword" },
-                ],
-              },
-              {
-                id: "supabase-server",
-                name: "supabase-server.ts",
-                kind: "file",
-                preview: [
-                  { text: "import { createClient } from '@supabase/supabase-js';", tone: "keyword" },
-                  { text: "", tone: "default" },
-                  { text: "export function createServerSupabase() {", tone: "keyword" },
-                  { text: "  return createClient(", tone: "default" },
-                  { text: "    process.env.NEXT_PUBLIC_SUPABASE_URL!,", tone: "string" },
-                  { text: "    process.env.SUPABASE_SERVICE_ROLE_KEY!, // Bypasses RLS for secure server actions", tone: "accent" },
-                  { text: "    {", tone: "default" },
-                  { text: "      auth: { persistSession: false },", tone: "muted" },
-                  { text: "      global: { headers: { 'x-application-name': 'vidyas-kitchen-engine' } }", tone: "string" },
-                  { text: "    }", tone: "default" },
-                  { text: "  );", tone: "default" },
-                  { text: "}", tone: "keyword" },
-                ],
-              },
-              {
-                id: "driver-auth",
-                name: "driver-auth.ts",
-                kind: "file",
-                preview: [
-                  { text: "import { NextResponse } from 'next/server';", tone: "keyword" },
-                  { text: "import { signSessionToken, timingSafeHexEqual } from '@/lib/app-session';", tone: "default" },
-                  { text: "", tone: "default" },
-                  { text: "export const DRIVER_COOKIE = 'vk_driver_session';", tone: "string" },
-                  { text: "const DRIVER_SESSION = { cookieName: DRIVER_COOKIE, maxAgeSeconds: 60 * 60 * 24 * 14 };", tone: "muted" },
-                  { text: "", tone: "default" },
-                  { text: "export async function verifyDriverPin(phone: string, pin: string) {", tone: "keyword" },
-                  { text: "  const supabase = createServerSupabase();", tone: "default" },
-                  { text: "  const { data: driver } = await supabase.from('drivers').select('*').eq('phone', phone).single();", tone: "default" },
-                  { text: "  if (!driver || !timingSafeHexEqual(driver.pin_hash, hash(pin))) return { ok: false };", tone: "accent" },
-                  { text: "", tone: "default" },
-                  { text: "  const token = await signSessionToken({ id: driver.id, name: driver.name });", tone: "keyword" },
-                  { text: "  return { ok: true, token, driverName: driver.name };", tone: "accent" },
-                  { text: "}", tone: "keyword" },
-                ],
-              },
-              {
-                id: "meta-whatsapp",
-                name: "meta-whatsapp.ts",
-                kind: "file",
-                preview: [
-                  { text: "/** Meta WhatsApp Cloud API v23.0 client */", tone: "comment" },
-                  { text: "const GRAPH_API_VERSION = 'v23.0';", tone: "string" },
-                  { text: "const GRAPH_API_URL = ;", tone: "string" },
-                  { text: "", tone: "default" },
-                  { text: "export async function sendInteractiveOrderCard(recipientPhone: string, order: OrderSummary) {", tone: "keyword" },
-                  { text: "  const payload = {", tone: "default" },
-                  { text: "    messaging_product: 'whatsapp',", tone: "string" },
-                  { text: "    to: recipientPhone,", tone: "default" },
-                  { text: "    type: 'interactive',", tone: "string" },
-                  { text: "    interactive: {", tone: "default" },
-                  { text: "      type: 'button',", tone: "string" },
-                  { text: "      header: { type: 'text', text:  },", tone: "string" },
-                  { text: "      body: { text:  },", tone: "accent" },
-                  { text: "      action: { buttons: [{ type: 'reply', reply: { id: 'track_order', title: 'Track on map' } }] }", tone: "default" },
-                  { text: "    }", tone: "default" },
-                  { text: "  };", tone: "default" },
-                  { text: "  return postMetaMessage(payload);", tone: "accent" },
-                  { text: "}", tone: "keyword" },
-                ],
-              },
-              {
-                id: "razorpay-verify",
-                name: "razorpay-verify.ts",
-                kind: "file",
-                preview: [
-                  { text: "import { createHmac, timingSafeEqual } from 'crypto';", tone: "keyword" },
-                  { text: "", tone: "default" },
-                  { text: "/** Constant-time HMAC SHA256 webhook signature verification */", tone: "comment" },
-                  { text: "export function verifyWebhookSignature(rawBody: string, signature: string, secret: string): boolean {", tone: "keyword" },
-                  { text: "  if (!signature || !secret) return false;", tone: "muted" },
-                  { text: "  const expected = createHmac('sha256', secret).update(rawBody, 'utf8').digest('hex');", tone: "accent" },
-                  { text: "  const a = Buffer.from(signature, 'utf8');", tone: "default" },
-                  { text: "  const b = Buffer.from(expected, 'utf8');", tone: "default" },
-                  { text: "  return a.length === b.length && timingSafeEqual(a, b); // Mitigate timing attacks", tone: "keyword" },
-                  { text: "}", tone: "keyword" },
-                ],
-              },
-            ],
-          },
-          {
-            id: "components-folder",
-            name: "components",
-            kind: "folder",
-            children: [
-              {
-                id: "dashboard-folder",
-                name: "dashboard",
-                kind: "folder",
-                children: [
-                  {
-                    id: "dashboard-board",
-                    name: "DashboardOrderBoard.tsx",
-                    kind: "file",
-                    preview: [
-                      { text: "'use client';", tone: "keyword" },
-                      { text: "import { useLiveOrdersSubscription } from '@/hooks/useLiveOrders';", tone: "default" },
-                      { text: "import { transitionOrderStatus } from '@/app/actions/order-transition';", tone: "default" },
-                      { text: "", tone: "default" },
-                      { text: "export function DashboardOrderBoard({ initialOrders }: Props) {", tone: "keyword" },
-                      { text: "  const orders = useLiveOrdersSubscription(initialOrders);", tone: "accent" },
-                      { text: "", tone: "default" },
-                      { text: "  return (", tone: "default" },
-                      { text: "    <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 p-4'>", tone: "string" },
-                      { text: "      <KanbanColumn title='New Orders' count={orders.new.length} orders={orders.new} />", tone: "accent" },
-                      { text: "      <KanbanColumn title='Preparing' count={orders.prep.length} orders={orders.prep} />", tone: "accent" },
-                      { text: "      <KanbanColumn title='Ready' count={orders.ready.length} orders={orders.ready} />", tone: "accent" },
-                      { text: "      <KanbanColumn title='Dispatched' count={orders.dispatched.length} orders={orders.dispatched} />", tone: "accent" },
-                      { text: "    </div>", tone: "string" },
-                      { text: "  );", tone: "default" },
-                      { text: "}", tone: "keyword" },
-                    ],
+                    "text": "/** Allowed monotonic transitions (kitchen / driver / payment). */",
+                    "tone": "comment"
                   },
                   {
-                    id: "dashboard-metrics",
-                    name: "DashboardMetrics.tsx",
-                    kind: "file",
-                    preview: [
-                      { text: "'use client';", tone: "keyword" },
-                      { text: "import { Clock, ChefHat, CheckCircle2, Truck } from 'lucide-react';", tone: "default" },
-                      { text: "", tone: "default" },
-                      { text: "export function DashboardMetrics({ orders, loading }: Props) {", tone: "keyword" },
-                      { text: "  const newCount = orders.filter((o) => o.status === 'new').length;", tone: "accent" },
-                      { text: "  const prepCount = orders.filter((o) => o.status === 'preparing').length;", tone: "accent" },
-                      { text: "  const dispatchedCount = orders.filter((o) => o.status === 'dispatched').length;", tone: "accent" },
-                      { text: "", tone: "default" },
-                      { text: "  return (", tone: "default" },
-                      { text: "    <div className='grid grid-cols-3 gap-3 bg-[#111] p-3 rounded-lg'>", tone: "string" },
-                      { text: "      <MetricTile icon={Clock} label='Incoming' value={newCount} />", tone: "default" },
-                      { text: "      <MetricTile icon={ChefHat} label='On Stove' value={prepCount} />", tone: "default" },
-                      { text: "      <MetricTile icon={Truck} label='On Route' value={dispatchedCount} />", tone: "default" },
-                      { text: "    </div>", tone: "string" },
-                      { text: "  );", tone: "default" },
-                      { text: "}", tone: "keyword" },
-                    ],
+                    "text": "const EDGES: Record<string, string[]> = {",
+                    "tone": "keyword"
                   },
                   {
-                    id: "revenue-dash",
-                    name: "RevenueDashboard.tsx",
-                    kind: "file",
-                    preview: [
-                      { text: "'use client';", tone: "keyword" },
-                      { text: "import { computeRevenueDayStats, computeYearlySalesBars } from '@/lib/dashboard/revenue-stats';", tone: "default" },
-                      { text: "", tone: "default" },
-                      { text: "export function RevenueDashboard({ orders, activeMonth }: Props) {", tone: "keyword" },
-                      { text: "  const stats = useMemo(() => computeRevenueDayStats(orders, activeMonth), [orders, activeMonth]);", tone: "accent" },
-                      { text: "", tone: "default" },
-                      { text: "  return (", tone: "default" },
-                      { text: "    <div className='bg-[#0d0d0d] p-6 text-white rounded-xl border border-zinc-800'>", tone: "string" },
-                      { text: "      <h2 className='text-xl font-bold font-outfit'>Month Total: ₹{stats.monthlyGross}</h2>", tone: "accent" },
-                      { text: "      <div className='flex gap-4 mt-2 font-mono text-sm text-zinc-400'>", tone: "string" },
-                      { text: "        <span>Online (Razorpay): ₹{stats.onlineTotal}</span>", tone: "default" },
-                      { text: "        <span>Cash on Delivery: ₹{stats.codTotal}</span>", tone: "default" },
-                      { text: "      </div>", tone: "string" },
-                      { text: "    </div>", tone: "string" },
-                      { text: "  );", tone: "default" },
-                      { text: "}", tone: "keyword" },
-                    ],
+                    "text": "  [OrderStatus.PENDING_PAYMENT]: [OrderStatus.PAID, OrderStatus.CANCELLED],",
+                    "tone": "default"
                   },
-                ],
+                  {
+                    "text": "  [OrderStatus.PAID]: [OrderStatus.CONFIRMED, OrderStatus.CANCELLED, OrderStatus.REJECTED],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  [OrderStatus.CONFIRMED]: [OrderStatus.PREPARING, OrderStatus.CANCELLED],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  [OrderStatus.PREPARING]: [OrderStatus.READY, OrderStatus.CANCELLED],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  [OrderStatus.READY]: [OrderStatus.OUT_FOR_DELIVERY],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  [OrderStatus.OUT_FOR_DELIVERY]: [OrderStatus.DELIVERED, OrderStatus.UNDELIVERED],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  [OrderStatus.DELIVERED]: [],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  // Kitchen can still settle an undelivered order afterwards",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "  [OrderStatus.UNDELIVERED]: [OrderStatus.DELIVERED, OrderStatus.CANCELLED],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  [OrderStatus.CANCELLED]: [],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  [OrderStatus.REJECTED]: [],",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "};",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "// ...",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "export function canTransitionOrderStatus(from: string, to: string): boolean {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const f = normalizeOrderStatus(from);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const t = normalizeOrderStatus(to);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const next = EDGES[f];",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  return Array.isArray(next) && next.includes(t);",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  }
+                ]
               },
               {
-                id: "layout-client",
-                name: "ClientLayout.tsx",
-                kind: "file",
-                preview: [
-                  { text: "'use client';", tone: "keyword" },
-                  { text: "import { usePathname } from 'next/navigation';", tone: "default" },
-                  { text: "import { SmoothScroll } from '@/components/effects/SmoothScroll';", tone: "default" },
-                  { text: "import '@/lib/pwa-install'; // Registers PWA Service Worker & custom install banner", tone: "comment" },
-                  { text: "", tone: "default" },
-                  { text: "export function ClientLayout({ children }: { children: React.ReactNode }) {", tone: "keyword" },
-                  { text: "  const pathname = usePathname();", tone: "default" },
-                  { text: "  // Bypasses smooth scrolling on operational consoles to ensure crisp pointer events", tone: "comment" },
-                  { text: "  if (pathname?.startsWith('/dashboard') || pathname?.startsWith('/driver')) {", tone: "accent" },
-                  { text: "    return <>{children}</>;", tone: "default" },
-                  { text: "  }", tone: "keyword" },
-                  { text: "  return <SmoothScroll>{children}</SmoothScroll>;", tone: "accent" },
-                  { text: "}", tone: "keyword" },
-                ],
+                "id": "order-transition",
+                "name": "order-transition.ts",
+                "kind": "file",
+                "caption": "trimmed from src/lib/order-transition.ts:37-171",
+                "whyItMatters": "validate -> update -> refund on reject/cancel -> notify without breaking the transition.",
+                "preview": [
+                  {
+                    "text": "export async function transitionOrderStatusInDb(",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  supabase: SupabaseClient,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  orderId: string,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  newStatus: string,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  options: TransitionOptions = {},",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "): Promise<TransitionResult> {",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  const notifyCustomer = options.notifyCustomer !== false;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const { data: row, error: fetchErr } = await supabase",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    .from(\"orders\")",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    .select(ORDER_NOTIFY_COLUMNS)",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    .eq(\"id\", orderId)",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    .single();",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (fetchErr || !row) return { ok: false, error: \"Order not found\" };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  const cur = normalizeOrderStatus(String(row.status));",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const next = normalizeOrderStatus(newStatus);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (!canTransitionOrderStatus(cur, next)) {",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    return { ok: false, error: `Invalid transition ${cur} → ${next}` };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  const upFields: Record<string, any> = {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    status: next,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    updated_at: new Date().toISOString(),",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  };",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  const paymentMethod = String((row as { payment_method?: string | null }).payment_method || \"\").toLowerCase();",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const isCod = paymentMethod === \"cod\";",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (next === OrderStatus.CANCELLED || next === OrderStatus.REJECTED) {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    upFields.refund_status = isCod ? null : \"initiated\";",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    upFields.cancellable = false;",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  // ...",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "  const { error: upErr } = await supabase",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    .from(\"orders\")",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    .update(upFields)",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    .eq(\"id\", orderId);",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (upErr) return { ok: false, error: upErr.message };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  let refundStatus: string | null = null;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  if (next === OrderStatus.REJECTED || next === OrderStatus.CANCELLED) {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    const paymentId = (row as { payment_id?: string | null }).payment_id;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    const totalAmount = (row as { total_amount?: number | null }).total_amount;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    const paymentStatus = String((row as { payment_status?: string | null }).payment_status || \"\");",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    const priorStatus = String((row as { refund_status?: string | null }).refund_status || \"\");",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    const priorAmount = Number((row as { refund_amount?: number | null }).refund_amount) || 0;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    if (isCod || !paymentId || paymentStatus !== PaymentStatus.PAID) {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "      if (priorStatus !== \"refunded\") {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "        await supabase.from(\"orders\").update({ refund_status: null }).eq(\"id\", orderId);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "      }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    } else if (totalAmount != null && totalAmount > 0) {",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "      const remainder = refundableRemainder(Number(totalAmount), priorStatus, priorAmount);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "      if (remainder > 0) {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "        const refResult = await refundPayment(",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "          paymentId,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "          remainder,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "          next === OrderStatus.CANCELLED ? \"customer_cancel\" : \"kitchen_reject\",",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "        );",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "        await supabase",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "          .from(\"orders\")",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "          .update({",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "            refund_status: refResult.ok ? \"refunded\" : \"refund_failed\",",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "            refund_amount: refResult.ok ? Math.round((already + remainder) * 100) / 100 : totalAmount,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "            refund_id: refResult.ok ? refResult.refundId : null,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "          })",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "          .eq(\"id\", orderId);",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "        refundStatus = refResult.ok ? \"refunded\" : \"refund_failed\";",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (!notifyCustomer) return { ok: true };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  try {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    await notifyWhatsAppOrderEvent({",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "      id: row.id as string,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "      order_number: (row as { order_number?: number | null }).order_number ?? null,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "      status: next,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "      phone_number: row.phone_number as string | null,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "      delivery_slot: row.delivery_slot as string | null,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "      // ...",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "      refund_status: refundStatus,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    });",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  } catch (e) {",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    console.error(\"[order-transition] WhatsApp notify failed\", e);",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "  }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  return { ok: true };",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  }
+                ]
               },
-            ],
-          },
-        ],
-      },
-      {
-        id: "scripts-folder",
-        name: "scripts",
-        kind: "folder",
-        children: [
-          {
-            id: "menu-embedding",
-            name: "backfill-menu-embeddings.ts",
-            kind: "file",
-            preview: [
-              { text: "/** One-time vector embedding fill for dish semantic matching */", tone: "comment" },
-              { text: "import { backfillMenuEmbeddings, matchMenuProbe } from '../src/lib/menu/embeddings';", tone: "default" },
-              { text: "", tone: "default" },
-              { text: "async function main() {", tone: "keyword" },
-              { text: "  if (!process.env.OPENAI_API_KEY || !process.env.SUPABASE_SERVICE_ROLE_KEY) {", tone: "keyword" },
-              { text: "    console.log('Skipped: Server environment keys required');", tone: "muted" },
-              { text: "    return;", tone: "keyword" },
-              { text: "  }", tone: "default" },
-              { text: "  const result = await backfillMenuEmbeddings();", tone: "accent" },
-              { text: '  console.log(`Updated ${result.updated} dishes, ${result.phrases} customer aliases`);', tone: "string" },
-              { text: "", tone: "default" },
-              { text: "  // Verification probe test: matches colloquial query to menu row", tone: "comment" },
-              { text: "  const hits = await matchMenuProbe('chikn curry', 5);", tone: "keyword" },
-              { text: "  for (const hit of hits) {", tone: "default" },
-              { text: '    console.log(`Probe hit: ${hit.name} (similarity: ${hit.similarity.toFixed(3)})`);', tone: "accent" },
-              { text: "  }", tone: "default" },
-              { text: "}", tone: "keyword" },
-              { text: "main().catch(console.error);", tone: "muted" },
-            ],
-          },
-          {
-            id: "generate-csv",
-            name: "generate-catalog-csv.ts",
-            kind: "file",
-            preview: [
-              { text: "/** Regenerates whatsapp-catalog-products.csv to maintain synchronized pricing */", tone: "comment" },
-              { text: "import { writeFileSync } from 'node:fs';", tone: "keyword" },
-              { text: "import { MENU_BY_CATEGORY } from '../src/components/ui/mobile/mobileMenuData';", tone: "default" },
-              { text: "", tone: "default" },
-              { text: "export function syncWhatsAppCatalog() {", tone: "keyword" },
-              { text: "  const rows = ['id,title,description,availability,condition,price,link,brand'];", tone: "string" },
-              { text: "  for (const category of MENU_BY_CATEGORY) {", tone: "keyword" },
-              { text: "    for (const item of category.items) {", tone: "default" },
-              { text: "      // Formats exact INR prices matching live PWA checkout rules", tone: "comment" },
-              { text: '      rows.push(`${item.id},${item.name},${item.desc},in stock,new,${item.price} INR`);', tone: "accent" },
-              { text: "    }", tone: "default" },
-              { text: "  }", tone: "keyword" },
-              { text: "  writeFileSync('whatsapp-catalog-products.csv', rows.join('\n'));", tone: "string" },
-              { text: "}", tone: "keyword" },
-            ],
-          },
-        ],
-      },
-      {
-        id: "docs-folder",
-        name: "docs",
-        kind: "folder",
-        children: [
-          {
-            id: "doc-ds",
-            name: "design-system.md",
-            kind: "file",
-            preview: [
-              { text: "# Vidya's Kitchen Design Tokens & Physical Geometry Specs", tone: "heading" },
-              { text: "", tone: "default" },
-              { text: "## Measured Component Primitives (Source of Truth)", tone: "comment" },
-              { text: "- s-btn: 48px minimum touch height, radius 20px (Customer PWA Primary)", tone: "accent" },
-              { text: "- s-size: 108x72px, radius 16px, font 15px/800 (500g/1kg Drawer)", tone: "accent" },
-              { text: "- s-otp: 48x48px minimum, radius 16px, font 26px/800 (Phone Auth)", tone: "accent" },
-              { text: "- s-reach: 280x56px, radius 14px, font 16px/800 (Driver Bike Reach)", tone: "string" },
-              { text: "- s-swipe: 280x56px, radius 14px, font 15px/800 (Delivery Slider)", tone: "string" },
-              { text: "- s-yellow: 48px touch height, radius 12px, font 14px/700 (Kitchen Confirm)", tone: "heading" },
-              { text: "", tone: "default" },
-              { text: "## Environmental Color Tokens", tone: "comment" },
-              { text: "- Customer PWA: #F5F5F7 ground, #BD2320 primary red, #22C55E success", tone: "default" },
-              { text: "- Driver App: #0A0A0A matte dark, #E84040 daylight-high-vis, #34D469 safe", tone: "default" },
-              { text: "- Kitchen Board: #0D0D0D OLED black, #F5E32D active yellow alert", tone: "default" },
-            ],
-          },
-          {
-            id: "doc-wa",
-            name: "whatsapp-order-templates.md",
-            kind: "file",
-            preview: [
-              { text: "# WhatsApp 24-Hour Customer Service Window & Template Architecture", tone: "heading" },
-              { text: "", tone: "default" },
-              { text: "## Why Utility HSM Templates are Mandatory:", tone: "comment" },
-              { text: "Order updates reach users outside WhatsApp's 24-hour window:", tone: "default" },
-              { text: "1. App customers who order on PWA and never chatted with bot", tone: "muted" },
-              { text: "2. Gift recipients in Sivakasi who never messaged the kitchen", tone: "muted" },
-              { text: "", tone: "default" },
-              { text: "Outside 24h, Meta rejects freeform messages with code 400.", tone: "keyword" },
-              { text: "Fallback sequence implemented in src/lib/meta-whatsapp.ts:", tone: "comment" },
-              { text: "Rich interactive card -> Approved Utility HSM template -> SMS fallback", tone: "accent" },
-            ],
-          },
-        ],
-      },
-    ],
-  },
+              {
+                "id": "order-pricing",
+                "name": "order-pricing.ts",
+                "kind": "file",
+                "caption": "trimmed from src/lib/order-pricing.ts:4-7, 24-47",
+                "whyItMatters": "The server computes the bill, the model never does.",
+                "preview": [
+                  {
+                    "text": "export const ORDER_PACKAGING_INR = 20;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "export const ORDER_DELIVERY_INR = 35;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "export const ORDER_GST_RATE = 0.05;",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "// ...",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "export function orderItemsSubtotal(items: OrderLineItem[]): number {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  return items.reduce((s, it) => s + (Number(it.unit_price) || 0) * (Number(it.quantity) || 0), 0);",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "function effectiveDeliveryFee(itemsSubtotal: number, promo?: DeliveryPromoSettings | null): number {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  if (!promo?.active || itemsSubtotal < promo.minOrderInr) return ORDER_DELIVERY_INR;",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  return Math.max(0, ORDER_DELIVERY_INR - Math.min(Math.round(promo.discountInr), ORDER_DELIVERY_INR));",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "export function computeOrderBreakdownFromItemSubtotal(",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  itemsSubtotal: number,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  opts?: OrderFeeOptions,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "): OrderFeeBreakdown {",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  const delivery = effectiveDeliveryFee(itemsSubtotal, opts?.deliveryPromo);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const gst = Math.round(itemsSubtotal * ORDER_GST_RATE);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const computedTotal =",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    Math.round((itemsSubtotal + ORDER_PACKAGING_INR + delivery + gst) * 100) / 100;",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  return {",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    itemsSubtotal,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    packaging: ORDER_PACKAGING_INR,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    delivery,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    gst,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    computedTotal,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  };",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  }
+                ]
+              },
+              {
+                "id": "whatsapp-notify",
+                "name": "whatsapp-order-notify.ts",
+                "kind": "file",
+                "caption": "trimmed from src/lib/whatsapp-order-notify.ts:83-103, 536-538, 641-653",
+                "whyItMatters": "Designing around Meta's 24h window.",
+                "preview": [
+                  {
+                    "text": "/**",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " * Meta only delivers a free-form card inside 24 hours of the customer's last",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " * reply. An app order never opens that window, and Meta can still answer 200",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " * and then drop the card. The approved template is what actually arrives.",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " */",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "async function hasOpenServiceWindow(to: string): Promise<boolean> {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const digits = to.replace(/\\D/g, \"\");",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  const keys = [digits, digits.slice(-10)].filter((v, i, a) => v && a.indexOf(v) === i);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  try {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    const supabase = createServerSupabase();",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    const { data, error } = await supabase",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "      .from(\"whatsapp_messages\")",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      .select(\"created_at\")",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      .eq(\"direction\", \"in\")",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      .in(\"phone\", keys)",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      .order(\"created_at\", { ascending: false })",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "      .limit(1)",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "      .maybeSingle();",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    if (error || !data?.created_at) return false;",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    const at = Date.parse(String(data.created_at));",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    if (!Number.isFinite(at)) return false;",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "    return Date.now() - at < 23 * 60 * 60 * 1000;",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  } catch {",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    return false;",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "// ...",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "// Branching in notifyWhatsAppOrderEvent:",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "if (!(await hasOpenServiceWindow(to))) {",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  const sent = await sendOrderUpdateTemplate(to, {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    name: await displayNameForPhone(order.phone_number, \"there\"),",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    ref: short,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    line: lineFor(stage),",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    slot: bill.slotLine || \"See the app for your slot\",",
+                    "tone": "string"
+                  },
+                  {
+                    "text": "    url: trackUrl,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  });",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (sent) return;",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "// ...",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "// Fallback when WhatsApp delivery fails:",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "if (!delivered) {",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  await sendSms(recPhone, smsBody);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  }
+                ]
+              },
+              {
+                "id": "razorpay-verify",
+                "name": "razorpay-verify.ts",
+                "kind": "file",
+                "caption": "trimmed from src/lib/razorpay-verify.ts:1-28",
+                "whyItMatters": "Payment trust.",
+                "preview": [
+                  {
+                    "text": "import { createHmac, timingSafeEqual } from \"crypto\";",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "function hmacSha256Hex(data: string, key: string): string {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  return createHmac(\"sha256\", key).update(data, \"utf8\").digest(\"hex\");",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "/**",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " * Verifies a Razorpay webhook signature.",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " *",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " * Razorpay signs the raw request body with HMAC-SHA256 using the webhook",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " * secret. The resulting hex digest must match the X-Razorpay-Signature header.",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " *",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " * Uses constant-time comparison to prevent timing attacks.",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": " */",
+                    "tone": "comment"
+                  },
+                  {
+                    "text": "export function verifyWebhookSignature(",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  rawBody: string,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  signature: string,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  secret: string,",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "): boolean {",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "  if (!signature) return false;",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  const expected = hmacSha256Hex(rawBody, secret);",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "  try {",
+                    "tone": "keyword"
+                  },
+                  {
+                    "text": "    return timingSafeEqual(Buffer.from(expected, \"hex\"), Buffer.from(signature, \"hex\"));",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  } catch {",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "    return false;",
+                    "tone": "accent"
+                  },
+                  {
+                    "text": "  }",
+                    "tone": "default"
+                  },
+                  {
+                    "text": "}",
+                    "tone": "default"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ];
 
 export const vidyasHonestOutcomes = [
